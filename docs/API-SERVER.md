@@ -20,7 +20,7 @@ alias cba='curl -sS -H "Authorization: Bearer $TOKEN"'
 
 ## 1. Mises à jour des apps
 
-### Publier un APK (admin, aussi utilisé par `.github/workflows/release.yml`)
+### Publier un APK (admin ; appelé par `tools/release/publish-apk.sh` depuis le Mac du propriétaire ; `.github/workflows/release.yml` est un build de contrôle qui ne publie rien)
 
 `POST /api/v1/admin/releases` (multipart) :
 

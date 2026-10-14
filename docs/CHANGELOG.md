@@ -1,106 +1,151 @@
 # Journal des modifications de CastBridge
 
 Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) ; numérotation [SemVer](https://semver.org/lang/fr/) avec le suffixe `-beta` (règles : `docs/RELEASES.md`, `docs/coordination/VERSIONING-DEVOPS-2026-10-02.md`).
-Trois produits livrés ont chacun leur numéro : **CastBridge-TV** (`tv-<version>`), **CastBridge** téléphone (`phone-<version>`), **CastBridge Propriétaire** (`owner-<version>`, jamais distribué). Le serveur (`backend/`, `pom.xml` 1.0.0) n'a pas encore de numéro de version propre (proposition : lignes `server.*` dans `version.properties`).
+Trois produits livrés ont chacun leur numéro : **CastBridge-TV** (`tv-<version>`), **CastBridge** téléphone (`phone-<version>`), **CastBridge Propriétaire** (`owner-<version>`, jamais distribué). Le serveur (`backend/`, `pom.xml` 1.2.5 et lignes `server.*` de `version.properties`) a son propre numéro, étiqueté `server-<version>` ; le service de jeu `server-play` a ses étiquettes `server-play-<version>` (hors `version.properties`).
 
 > **Comment ce journal a été reconstruit, et sa limite.** Aucun tag git n'existait au 2026-10-02 : la correspondance version / commit est reconstituée à partir de l'historique premier-parent de `integration/agents` (`git log --first-parent`) et de l'historique de `version.properties` (`git log -p -- version.properties`). Le contenu de chaque entrée vient **uniquement des sujets de commits** (rien n'est inventé) et peut être **approximatif** : les APK ont parfois été construits avant le commit qui pose leur numéro, et plusieurs numéros n'ont jamais été commités (voir « Numéros sans commit »). Avant le 2026-10-01 (création de `version.properties`, commit `0ff64ed`), les numéros ne sont connus que par les sujets de commits et `docs/HANDOFF.md` : ils sont listés sans promesse de tag. Le plan d'étiquetage prouvable est produit par `tools/release/tag-plan.sh`.
 >
-> Les tags `tv-…`, `phone-…`, `owner-…` listés ci-dessous sont **proposés** (aucun n'est créé à la date de ce document).
+> Les étiquettes (`tv-…`, `phone-…`, `owner-…`, `server-…`, `server-play-…`) sont posées depuis le 2026-10-02 ; celles qui manquent encore : `bash tools/release/tag-plan.sh`.
 
 ## [Non publié]
 
-Travail du 2026-10-02 présent dans l'arbre de travail de `integration/agents` (82 fichiers modifiés et environ 100 non suivis au moment de la rédaction), **non commité** : il n'appartient à aucune version numérotée. `version.properties` annonce encore TV 0.14.17-beta / téléphone 1.2.29-beta : un APK construit depuis cet arbre porterait ces numéros avec un contenu différent du commit `faf8636`. **Commiter puis incrémenter avant tout nouveau build distribué.**
-
-### Rangement réel par catégorie et par fichier (`integration/agents`, non validé sur TV)
-- Les fichiers reçus par la CastBridge-TV sont rangés à la réception dans de vrais dossiers (`Films`, `Séries/<Titre>/Saison NN`, `Musique`, `Photos`, `Captures`, `Documents`, `Archives`, `Cours`, `Famille`, `À trier`) sous un nom propre, sur la mémoire interne et sur la clé (`Download/CastBridge/Bibliotheque/…`) : `Filing`/`FiledIndex` (`core/tv`), `FileStore.fileInto`. Jamais d'écrasement (numéro ajouté), chemins sûrs, FAT32 respecté, installateurs et paquets laissés à plat, reprise et « même nom, même taille » inchangés (le nom d'origine reste reconnu), API compatible (champs `folder`, `finalName`, `origin` ajoutés).
-- Action « Ranger ma bibliothèque » : plan (`GET /api/library/organize`) puis application (`POST /api/library/organize/apply`) pour les fichiers déjà reçus à plat ; refusée avec un profil enfant, jamais sur un fichier protégé ; entrée dans la Bibliothèque de la TV du téléphone.
-- Le quota et l'éviction comptent aussi les fichiers rangés ; `routeGuard` ferme la connexion après un refus d'envoi (corps non lu).
-- Tests : `FilingTest` (15), `FilingServerTest` (17). Voir `docs/STORAGE.md` § 10 et `docs/LIBRARY-AGENT.md` § 17.
-
-### Activation, essai, production
-- Fenêtre d'activation, droit de plafond d'usage, essai toujours borné, règles clé d'essai / clé de production : durcissements dans `core/owner` (`Activation`, `Keys`, `FeatureGate`, `TrialPolicy`), console Propriétaire (`ownerlib`), outil de bureau et miroirs Java/Python (vecteurs de test étendus dans `tools/activation/verify_vectors.py`).
-- `version.properties` : nouvelle clé `lock.graceDays` (30 par défaut, 0 après activation du parc : décision D1 du propriétaire, `docs/TRIAL-EDITION.md` § 16).
-- Écran d'activation de la TV (`ActivationActivity`, `ActivationCenter`, `PolicyHub`, `TvService`) et manifestes.
-
-### Locations et lots
-- Coffre de location, file de livraison, magasin de lots de la TV (`RentalVault`, `DeliveryQueue`, `TvLotStore`) et leurs tests (`RentalTest`, `LotsTvTest`).
-- Conception de la boutique (téléphone + TV), des locations gérées en ligne par le serveur, des jetons virtuels du Quiz et du paiement en espèces : `docs/coordination/DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` et cahiers `sonnet-w4-*` / `sonnet-w5-*` (**en conception, rien de construit**).
-- Conceptions : enveloppe de location, mode dégradé en fin de clé, vente sur le terrain (`DESIGN-W4-*`).
-
-### Lots Langues : serveur et tuyaux de téléchargement (branche `claude/langues-lots-pipelines`, non validé sur TV)
-- Serveur : fonction `langues` acceptée de bout en bout (`LangLotValidator`, catalogue signé filtrable, messages « learn », « quiz » ou « langues »), Apprendre et Quiz inchangés, sans migration.
-- `tools/langues/publish_lots.py` : construit et publie les 46 lots libres (simulation par défaut, `--apply`, jeton dans `CASTBRIDGE_ADMIN_TOKEN`, idempotent).
-- Téléphone : liste des leçons du serveur, téléchargement lot par lot, contrôle du contenu avant rangement (`LotSync` `check`), envoi à la TV par la route existante.
-- TV : bouton « Mettre à jour les lots Langues » (`TvLotFetcher`, `SecureHttpLotRemote`), seulement sur demande et avec Internet. Voir `docs/LOTS.md` § 12, `docs/LANGUES.md` § 15.
-
-### Langues
-- Lots de langues a0 (japonais, chinois : `famille`, `nombres`, `salut`, versions fr et en), `zh-a0-salut-fr` enrichi, `content/langues/embedded.txt` et `lots.json`.
-- 66 fichiers audio du propriétaire dans `content/langues-media/` : **non suivis, à ne jamais committer dans le dépôt de code** (contenu lourd : dépôt privé `castbridge-content`).
-
-### Contenus libres (CC BY-SA)
-- Archive des contenus libres téléchargeable même sans activation : outil `tools/free-content`, `core/free`, route serveur (`FreeContentController`), export TV (`FreeContentExport`), écran téléphone (`FreeContentScreen`), `docs/FREE-CONTENT.md`.
-
-### Sécurité et audit
-- Durcissement de la TV : `core/tv/Security.kt`, `ReceiverServer`, `Storage`, `TvSshServer`, règles de sauvegarde Android (`backup_rules`, `data_extraction_rules`) et tests (`TvHardeningTest`, `SecurityTest`, `ClockRollbackTest`, `TrialRoutesTest`, `GraceMigrationTest`).
-- Conception de la protection de la TV (déploiement TV uniquement, anti-rétro-ingénierie, étiquettes éthiques) : `PROTECTION-TV-FABLE-2026-10-02.md`, cahiers `protect-01` à `protect-09`.
-- Audits : `AUDIT-PROJET-2026-10-02.md`, `AUDIT-CONTENU-APPRENDRE-2026-10-02.md`, recommandations Fable.
-
-### Serveur
-- `BundleCatalogController` (import du catalogue de lots signé), `TelemetryService`, `DeviceService`, `WireActivation`, `EnvelopeVerifier`, `application.yml`, `backup.sh`, `backend/README.md` (+71 lignes), tests associés (`BundleCatalogApiTest`, `TelemetryApiTest`, `DevicesApiTest`, `RentalVectorsTest`, `FreeContentApiTest`).
-- Exploitation : `ops/monitoring/`, `ops/first-run/check-server.sh`, `docs/DEPLOIEMENT-PREMIERE-EXPERIENCE.md`.
-
-### Intégration continue et outillage de versions
-- `.github/workflows/android.yml`, `release.yml` (modifiés), `tools.yml` (nouveau, non suivi), `.gitignore`.
-- Documents : `docs/RELEASES.md`, ce journal, `docs/coordination/VERSIONING-DEVOPS-2026-10-02.md` ; outils `tools/release/check_versions.py`, `tag-plan.sh`, `deploy-server.sh` et leurs tests (`tools/tests/test_release_tools.py`).
+Travail de la branche `claude/tv-install-sig-locked` et revue de cohérence du 2026-10-14 (CI, docs de versions, ordre des voies d'activation dans le guide, textes de l'écran d'activation, état « grâce » exposé au téléphone, tests Python des outils) ; rien n'est construit en APK depuis TV 0.14.49 / téléphone 1.2.56.
 
 ## CastBridge-TV
 
-### Numéros sans commit
+### [0.14.49-beta] (code 124 ; verrouillée 125) : 2026-10-11
+- clé de la console du S21+ (kid 3447e186…) ajoutée aux clés de confiance
+
+### [0.14.48-beta] (code 122 ; verrouillée 123) : 2026-10-11
+- la demande d'appareil d'une TV verrouillée porte install_sig= sans dépendre de WalletHub.init
+- détail : `git log tv-0.14.47-beta..tv-0.14.48-beta`
+
+### [0.14.47-beta] (code 120 ; verrouillée 121) : 2026-10-07
+- activation par Bluetooth sans appairage (CPace sur le code), I-4
+- CastBridge-TV 0.14.47-beta (code 120 ; verrouillée 121) et CastBridge 1.2.54-beta (code 84) : Bluetooth sans appairage authentifié par le code, I-4
+- act-bt : activer la TV par Bluetooth SANS appairage, authentifié par le code (CPace, AES-GCM) ; I-4 / R-49
+
+### [0.14.46-beta] (code 118 ; verrouillée 119) : 2026-10-07
+- activation par code, relais, jeux, ouverture à distance, clé USB, correctifs d'audit
+- détail : `git log tv-0.14.34-beta..tv-0.14.46-beta`
+
+### [0.14.34-beta] (code 94 ; verrouillée 95) : 2026-10-04
+- pastilles, code PIN, Quiz en ligne corrigé, logo
+- détail : `git log tv-0.14.33-beta..tv-0.14.34-beta`
+
+### [0.14.33-beta] (code 92 ; verrouillée 93) : 2026-10-04
+- accueil en groupes, logo Cameroun et MBOKO
+- feat(tv): accueil en boutons de groupe qui ouvrent une grille (Médias, Apprendre, Jeux et jetons, Téléphones et réseau, Administration) ; logo TV compact sans MBOKO à l'accueil
+- détail : `git log tv-0.14.32-beta..tv-0.14.33-beta`
+
+### [0.14.32-beta] (code 90 ; verrouillée 91) : 2026-10-04
+- portefeuille, Quiz en ligne, options multimédia, diffusion YouTube
+- détail : `git log tv-0.14.31-beta..tv-0.14.32-beta`
+
+### [0.14.31-beta] (code 88 ; verrouillée 89) : 2026-10-04
+- options multimédia du lecteur
+- détail : `git log tv-0.14.30-beta..tv-0.14.31-beta`
+
+### [0.14.30-beta] (code 86 ; verrouillée 87) : 2026-10-04
+- barre de boutons, légende des icônes, diagnostic
+- feat(tv): barre de commandes à l'écran pour télécommande de base, diagnostic d'affichage 6 s sans touche, icônes du lecteur toutes libellées et légende
+- détail : `git log tv-0.14.29-beta..tv-0.14.30-beta`
+
+### [0.14.29-beta] (code 84 ; verrouillée 85) : 2026-10-04
+- Remplir l'écran par défaut
+- détail : `git log tv-0.14.28-beta..tv-0.14.29-beta`
+
+### [0.14.28-beta] (code 82 ; verrouillée 83) : 2026-10-04
+- détail : `git log tv-0.14.27-beta..tv-0.14.28-beta`
+
+### [0.14.27-beta] (code 80 ; verrouillée 81) : 2026-10-03
+- fix(transfert): audit R-17 : bloc interrompu = 503, réponse anticipée lue, détecteur par catégorie et par octets, vidage borné et assaini
+- détail : `git log tv-0.14.26-beta..tv-0.14.27-beta`
+
+### [0.14.26-beta] (code 78 ; verrouillée 79) : 2026-10-03
+- fix(lecture): image figée pendant une copie avec son fluide, icône de copie dans le lecteur (R-16)
+
+### [0.14.25-beta] (code 76 ; verrouillée 77) : 2026-10-03
+- détail : `git log tv-0.14.24-beta..tv-0.14.25-beta`
+
+### [0.14.24-beta] (code 74 ; verrouillée 75) : 2026-10-03
+- Quiz embarqué : toutes les questions (217 494), réservables par question
+- fix(quiz): compact fixed-width level cards in a wrapped D-pad grid; only questions are reservable
+
+### [0.14.23-beta] (code 72 ; verrouillée 73) : 2026-10-03
+- sélecteur de niveaux du Quiz fondé sur le contenu réel
+- Incrémentation TV 0.14.23-beta (code 72) pour la variante verrouillée (code 73).
+- feat(quiz): every free level is filled in the TV level picker (review questions playable, SIL and Form 4 aliases)
+
+### [0.14.22-beta] (code 70 ; verrouillée 71) : 2026-10-03
+- accueil et Quiz fluides, signalétique, Quiz embarqué
+- détail : `git log tv-0.14.21-beta..tv-0.14.22-beta`
+
+### [0.14.21-beta] (code 68 ; verrouillée 69) : 2026-10-02
+- progression de réception, lecture prioritaire pendant une copie, clé d'installation des locations, bouton lots Langues
+- détail : `git log tv-0.14.20-beta..tv-0.14.21-beta`
+
+### [0.14.20-beta] (code 66 ; verrouillée 67) : 2026-10-02
+- receive-progress fix
+- détail : `git log tv-0.14.19-beta..tv-0.14.20-beta`
+
+### [0.14.19-beta] (code 64 ; verrouillée 65) : 2026-10-02
+- Version bumps: TV 0.14.19-beta (code 64→locked 65), phone 1.2.31-beta (code 61)
+- feat(tv): rangement réel par catégorie à la réception (Films, Séries/Titre/Saison, Musique…), index des noms d'origine, « Ranger ma bibliothèque » (plan puis application)
+- détail : `git log tv-0.14.18-beta..tv-0.14.19-beta`
+
+### [0.14.18-beta] (code 62 ; verrouillée 63) : 2026-10-02
+- chore(langues): générateur des packs A0 pilotes (gen_a0_pilot.py)
+- détail : `git log tv-0.14.17-beta..tv-0.14.18-beta`
+
+### Numéros sans commit / sans étiquette
 Les numéros **0.14.12 et 0.14.13** n'ont jamais été posés dans `version.properties` par un commit (leurs codes exacts ne sont pas prouvables : ils sont entre 51 et 53) : `0.14.12-test` est un build d'essai documenté dans `docs/HANDOFF.md`, à ne jamais publier. Le saut de 0.14.11 (code 49) à 0.14.14 (code 54) est donc normal. Les numéros **0.13.4 à 0.14.5** (et téléphone **1.2.6 à 1.2.18**) correspondent à la vague de fusions du 2026-10-01 : aucun commit ne les nomme.
 
+Versions sans étiquette : TV 0.14.35 à 0.14.45 ; téléphone 1.2.32, 1.2.33 et 1.2.44 à 1.2.52 : voir `git log -p -- version.properties` et docs/HANDOFF.md § 0.
+
 ### [0.14.17-beta] (code 60 ; verrouillée 0.14.17-beta-verrouillee, code 61) : 2026-10-02
-Tag proposé `tv-0.14.17-beta` sur `faf8636`.
+Étiquette `tv-0.14.17-beta` sur `faf8636`.
 - Ajouté : client TV du tunnel d'assistance à distance (écran des conditions, enrôlement, SSH inverse direct ou par la passerelle du téléphone, liste d'experts) ; brouillon `CONDITIONS-ASSISTANCE-A-DISTANCE`.
 - Modifié : aria2 désactivé dans l'édition d'essai.
 
 ### [0.14.16-beta] (code 58 ; verrouillée 59) : 2026-10-02
-Tag proposé `tv-0.14.16-beta` sur `ea0d28c`.
+Étiquette `tv-0.14.16-beta` sur `ea0d28c`.
 - Sécurité : correctifs d'audit (grâce en date absolue, fichiers d'état écrits de façon atomique, droits refusés par défaut, retour d'horloge détecté avec temps monotone, plafond d'essai implicite, liste blanche de routes en essai, BT/USB/SSH fermés en essai).
 - Modifié : clé de production = durée seule, licence automatique, aucun droit obligatoire ; import du catalogue de lots signé depuis le serveur ; tunnel d'administration à distance (côté serveur, désactivé par défaut) et signature de la liste d'experts.
 
 ### [0.14.15-beta] (code 56 ; verrouillée 57) : 2026-10-02
-Tag proposé `tv-0.14.15-beta` sur `1c26a11`.
+Étiquette `tv-0.14.15-beta` sur `1c26a11`.
 - Ajouté : politiques de production dans les outils Propriétaire (durée de clé au choix, durée de location fixée par le serveur par lot, 30 jours par défaut, lots choisis dans le catalogue) ; passage essai vers production depuis l'application téléphone ; contenu de base pour chaque classe et matière (mode classe).
 
 ### [0.14.14-beta] (code 54 ; verrouillée 55) : 2026-10-02
-Tag proposé `tv-0.14.14-beta` sur `17a79f2` (regroupe aussi les commits intermédiaires depuis 0.14.11, numéros 0.14.12 et 0.14.13 jamais commités).
+Étiquette `tv-0.14.14-beta` sur `17a79f2` (regroupe aussi les commits intermédiaires depuis 0.14.11, numéros 0.14.12 et 0.14.13 jamais commités).
 - Ajouté : droit de plafond d'usage (`usage|duree|from|to`), fenêtre unique de 12 h pour les lots d'essai, restrictions de l'édition d'essai (streaming et Sudoku seulement), badge de clé permanent sur chaque écran, écran de passage essai vers production, verrouillage à l'expiration ; module Langues sur la TV (tuile, consommateur, démarrage) ; locations de lots livrées depuis le téléphone ; bandeau de la page d'administration de la TV ; contenu nursery, tle-a, droit-l3 (+ lots).
 - Ajouté (commits intermédiaires) : locations branchées sur la TV (coffre, grand livre, balayage `RentalHub`, routes `/api/rental`, `/api/activation/install` par PIN seul et `/request`, toutes les activations acceptées conservées) ; consommateur Apprendre enregistré dans le magasin de lots, outillage de test de location prouvé sur émulateur ; champ du code d'appareil de la console qui garde le curseur.
 - Corrigé : deux figures de leçon ramenées sous le budget de 8 Ko ; 7 roues Python (75 Mo) retirées des sources Kotlin.
 
 ### [0.14.11-beta] (code 49 ; verrouillée 50) : 2026-10-02
-Tag proposé `tv-0.14.11-beta` sur `e40173a`.
+Étiquette `tv-0.14.11-beta` sur `e40173a`.
 - Ajouté : `SUPER_UNLIMITED` (la clé du super administrateur signe le droit `super` : lit et déverrouille tout, locations permanentes ; les comptes temporaires et illimités continuent d'expirer et de supprimer les locations), miroirs Java et Python.
 - Fusionné : `naming-patterns`, `rental-lots` (les locations gardent leurs dates, fenêtre d'installation toujours 48 h), `media-pipeline`, `deferred-orders`, `activation-tools`.
 
 ### [0.14.10-beta] (code 47 ; verrouillée 48) : 2026-10-01
-Tag proposé `tv-0.14.10-beta` sur `ce052c8`.
+Étiquette `tv-0.14.10-beta` sur `ce052c8`.
 - Modifié : l'accueil de la TV montre ce qui arrive même quand le nom existe déjà complet ; serveur aligné sur le format commun `cbx1` (fenêtre de 48 h en heures, pas de licence permanente par la clé serveur).
 
 ### [0.14.9-beta] (code 45 ; verrouillée 46) : 2026-10-01
-Tag proposé `tv-0.14.9-beta` sur `88b3035`.
+Étiquette `tv-0.14.9-beta` sur `88b3035`.
 - Modifié : licence d'usage permanente (achat du lot « tout », `ISSUE_UNLIMITED` seulement) remplace la fenêtre d'installation illimitée ; fenêtre de 48 h pour tout le monde ; vecteurs et vérificateur Python à jour.
 
 ### [0.14.8-beta] (code 43 ; verrouillée 44) : 2026-10-01
-Tag proposé `tv-0.14.8-beta` sur `e6825e7`.
+Étiquette `tv-0.14.8-beta` sur `e6825e7`.
 - Modifié : codes d'activation avec fenêtre d'installation de 48 h depuis la création (appliquée par l'émetteur et la TV), clés illimitées réservées au super administrateur, clé compacte v2 en heures ; vecteurs régénérés, recoupement Python 125/125.
 
 ### [0.14.7-beta] (code 41 ; verrouillée 42) : 2026-10-01
-Tag proposé `tv-0.14.7-beta` sur `86ad3f2`.
+Étiquette `tv-0.14.7-beta` sur `86ad3f2`.
 - Corrigé : l'écran d'activation demande toutes les permissions Bluetooth (annonce) pour que les services démarrent.
 
 ### [0.14.6-beta] (code 39 ; verrouillée 40) : 2026-10-01
-Tag proposé `tv-0.14.6-beta` sur `0ff64ed` (première version de `version.properties`).
+Étiquette `tv-0.14.6-beta` sur `0ff64ed` (première version de `version.properties`).
 - Ajouté : source unique des versions ; variante verrouillée (code +1, suffixe `-verrouillee`).
 - Contenu cumulé depuis 0.13.2 (fusions du 2026-10-01, versions intermédiaires non nommées) : verrou d'activation de la TV (interrupteur de compilation, clés publiques de confiance hors dépôt, grâce pour les installations mises à jour, écran d'activation avec fichier USB ou clé saisie) ; canal Bluetooth propriétaire (la TV reçoit les demandes d'appareil et accepte les activations même verrouillée ; la clé est seulement « posée » et le propriétaire valide) ; `GET /api/activation` ; écran d'activation affichant la version et l'état du canal ; entrée super administrateur locale (barrière bcrypt injectée à la compilation hors dépôt, essais limités, geste caché) ; CastBridge Dev (SSH par clé seule + `cbdev install/uninstall/start/status`) ; lots, télécommande intelligente, animations réseau, onglet parental, validation bêta, télécommande Bluetooth seule, tunnel Bluetooth, enveloppe générique ; contenus Apprendre et Quiz (primaire, collège, lycée, anglophone, technique/supérieur) ; clé USB (marque, modèle, série, débit) dans les écrans de stockage ; classeur de séries (Titre/Saison).
 
@@ -116,69 +161,215 @@ Numéros cités par les sujets de commits (aucun n'est dans `version.properties`
 
 ## CastBridge (téléphone)
 
+### [1.2.56-beta] (code 86) : 2026-10-09
+- « Lire » et « Copier et lire » ouvrent CastBridge-TV si elle n'est pas devant
+- Téléphone 1.2.56-beta (code 86)
+- détail : `git log phone-1.2.55-beta..phone-1.2.56-beta`
+
+### [1.2.55-beta] (code 85) : 2026-10-07
+- partage de la demande d'appareil en texte seul (WhatsApp), QR séparé
+- CastBridge 1.2.55-beta (code 85) : partage de la demande d'appareil corrigé (WhatsApp) ; gradle-lock.sh exécutable
+- act-fix-2 : « Partager la demande » envoie le texte seul, « Partager le code QR » est un bouton à part (R-50, WhatsApp abandonne le texte d'un partage image)
+- détail : `git log phone-1.2.54-beta..phone-1.2.55-beta`
+
+### [1.2.54-beta] (code 84) : 2026-10-07
+- voie Bluetooth sans appairage dans Activer la TV, I-4
+- CastBridge-TV 0.14.47-beta (code 120 ; verrouillée 121) et CastBridge 1.2.54-beta (code 84) : Bluetooth sans appairage authentifié par le code, I-4
+- act-bt : activer la TV par Bluetooth SANS appairage, authentifié par le code (CPace, AES-GCM) ; I-4 / R-49
+
+### [1.2.53-beta] (code 83) : 2026-10-07
+- Activer la TV par le seul code, Ouvrir sur la TV, relais automatique, correctifs d'audit
+- détail : `git log phone-1.2.43-beta..phone-1.2.53-beta`
+
+### [1.2.43-beta] (code 73) : 2026-10-04
+- refus expliqués, demande d'appareil, échecs de copie, logo
+- détail : `git log phone-1.2.42-beta..phone-1.2.43-beta`
+
+### [1.2.42-beta] (code 72) : 2026-10-04
+- saisie directe du code PIN
+- détail : `git log phone-1.2.41-beta..phone-1.2.42-beta`
+
+### [1.2.41-beta] (code 71) : 2026-10-04
+- détail : `git log phone-1.2.40-beta..phone-1.2.41-beta`
+
+### [1.2.40-beta] (code 70) : 2026-10-03
+- fix(transfert): audit R-17 : bloc interrompu = 503, réponse anticipée lue, détecteur par catégorie et par octets, vidage borné et assaini
+- détail : `git log phone-1.2.39-beta..phone-1.2.40-beta`
+
+### [1.2.39-beta] (code 69) : 2026-10-03
+- détail : `git log phone-1.2.38-beta..phone-1.2.39-beta`
+
+### [1.2.38-beta] (code 68) : 2026-10-03
+- code PIN mémorisé par TV, bascule Bluetooth, signalétique, ergonomie
+- détail : `git log phone-1.2.37-beta..phone-1.2.38-beta`
+
+### [1.2.37-beta] (code 67) : 2026-10-03
+- Copier et lire pendant la copie, file d'attente de copie unique et persistante (R-08, R-09), envoi des lots de Langues par lot (R-07)
+- bump(version): CastBridge phone 1.2.37-beta (versionCode 67)
+- fix(file-copie): réserves de la seconde relecture R-09 (réservation périmée, limite de durée, annulation par génération)
+- détail : `git log phone-1.2.36-beta..phone-1.2.37-beta`
+
+### [1.2.36-beta] (code 66) : 2026-10-03
+- Copier et lire, la TV démarre la lecture pendant la copie (copie ordonnée)
+- chore(versions): téléphone 1.2.36-beta (66)
+- fix(copier-et-lire): la TV démarre la lecture pendant la copie (R-08)
+
+### [1.2.35-beta] (code 65) : 2026-10-02
+- bouton Envoyer à la TV par lot de Langues, Télécharger et envoyer, lots téléchargés à la main livrés à la TV
+- chore(versions): téléphone 1.2.35-beta (65)
+- fix(langues): envoyer à la TV un lot téléchargé à la main (R-07) : lots épinglés livrés par le bouton global, bouton par carte, « Télécharger et envoyer »
+
+### [1.2.34-beta] (code 64) : 2026-10-02
+- Copier sur la TV et lire (Ouvrir avec), clés de PIN tolérantes, lecture prioritaire pendant une copie
+- détail : `git log phone-1.2.31-beta..phone-1.2.34-beta`
+
+### [1.2.31-beta] (code 61) : 2026-10-02
+- Version bumps: TV 0.14.19-beta (code 64→locked 65), phone 1.2.31-beta (code 61)
+- feat(tv): rangement réel par catégorie à la réception (Films, Séries/Titre/Saison, Musique…), index des noms d'origine, « Ranger ma bibliothèque » (plan puis application)
+- détail : `git log phone-1.2.30-beta..phone-1.2.31-beta`
+
+### [1.2.30-beta] (code 60) : 2026-10-02
+- chore(langues): générateur des packs A0 pilotes (gen_a0_pilot.py)
+- détail : `git log phone-1.2.29-beta..phone-1.2.30-beta`
+
 ### [1.2.29-beta] (code 59) : 2026-10-02
-Tag proposé `phone-1.2.29-beta` sur `faf8636`. Synchronisée avec le tunnel d'assistance à distance de la TV 0.14.17 (passerelle du téléphone).
+Étiquette `phone-1.2.29-beta` sur `faf8636`. Synchronisée avec le tunnel d'assistance à distance de la TV 0.14.17 (passerelle du téléphone).
+
+- détail : `git log phone-1.2.28-beta..phone-1.2.29-beta`
 
 ### [1.2.28-beta] (code 58) : 2026-10-02
-Tag proposé `phone-1.2.28-beta` sur `ea0d28c`. Envoi de la clé par Wi-Fi ; import du catalogue de lots signé ; correctifs d'audit.
+Étiquette `phone-1.2.28-beta` sur `ea0d28c`. Envoi de la clé par Wi-Fi ; import du catalogue de lots signé ; correctifs d'audit.
+
+- détail : `git log phone-1.2.27-beta..phone-1.2.28-beta`
 
 ### [1.2.27-beta] (code 57) : 2026-10-02
-Tag proposé `phone-1.2.27-beta` sur `1c26a11`. Passage essai vers production depuis l'application ; politiques de production.
+Étiquette `phone-1.2.27-beta` sur `1c26a11`. Passage essai vers production depuis l'application ; politiques de production.
+
+- détail : `git log phone-1.2.26-beta..phone-1.2.27-beta`
 
 ### [1.2.26-beta] (code 56) : 2026-10-02
-Tag proposé `phone-1.2.26-beta` sur `17a79f2` (le code saute de 35 à 56 : builds intermédiaires jamais commités). Planification Langues ; livraison des lots loués depuis le téléphone.
+Étiquette `phone-1.2.26-beta` sur `17a79f2` (le code saute de 35 à 56 : builds intermédiaires jamais commités). Planification Langues ; livraison des lots loués depuis le téléphone.
+
+- détail : `git log phone-1.2.25-beta..phone-1.2.26-beta`
 
 ### [1.2.25-beta] (code 35) : 2026-10-02
-Tag proposé `phone-1.2.25-beta` sur `b92998e`. Ne copie jamais un fichier que la TV détient déjà complet (même nom et même taille).
+Étiquette `phone-1.2.25-beta` sur `b92998e`. Ne copie jamais un fichier que la TV détient déjà complet (même nom et même taille).
+
+- détail : `git log phone-1.2.24-beta..phone-1.2.25-beta`
 
 ### [1.2.24-beta] (code 34) : 2026-10-02
-Tag proposé `phone-1.2.24-beta` sur `e40173a`. `SUPER_UNLIMITED` (voir TV 0.14.11).
+Étiquette `phone-1.2.24-beta` sur `e40173a`. `SUPER_UNLIMITED` (voir TV 0.14.11).
+
+- détail : `git log phone-1.2.23-beta..phone-1.2.24-beta`
 
 ### [1.2.23-beta] (code 33) : 2026-10-01
-Tag proposé `phone-1.2.23-beta` sur `ce052c8`. Bandeau de copie sous la barre du lecteur, pourcentage dans les notifications de transfert.
+Étiquette `phone-1.2.23-beta` sur `ce052c8`. Bandeau de copie sous la barre du lecteur, pourcentage dans les notifications de transfert.
+
+- détail : `git log phone-1.2.22-beta..phone-1.2.23-beta`
 
 ### [1.2.22-beta] (code 32) à [1.2.21-beta] (code 31) : 2026-10-01
-Tags proposés `phone-1.2.22-beta` (`88b3035`) et `phone-1.2.21-beta` (`e6825e7`). Codes d'activation : fenêtre de 48 h, licence d'usage permanente (voir TV 0.14.8 et 0.14.9).
+Étiquettes `phone-1.2.22-beta` (`88b3035`) et `phone-1.2.21-beta` (`e6825e7`). Codes d'activation : fenêtre de 48 h, licence d'usage permanente (voir TV 0.14.8 et 0.14.9).
+
+- détail : `git log phone-1.2.20-beta..phone-1.2.22-beta`
 
 ### [1.2.20-beta] (code 30) : 2026-10-01
-Tag proposé `phone-1.2.20-beta` sur `86ad3f2`. Récupération automatique d'une TV déjà appairée après une réinstallation.
+Étiquette `phone-1.2.20-beta` sur `86ad3f2`. Récupération automatique d'une TV déjà appairée après une réinstallation.
+
+- détail : `git log phone-1.2.19-beta..phone-1.2.20-beta`
 
 ### [1.2.19-beta] (code 29) : 2026-10-01
-Tag proposé `phone-1.2.19-beta` sur `0ff64ed`. « Activer la TV » montre l'état d'activation propre de la TV ; ouverture de l'écran « Activer la TV » (clé collée, TV appairée, envoi par Bluetooth) avec appairage automatique ; contenus et fonctions fusionnés le 2026-10-01 (file de copie ou déplacement en arrière-plan, sélecteur multi-fichiers, « Ouvrir avec », progression de copie pendant la diffusion, classeur de séries).
+Étiquette `phone-1.2.19-beta` sur `0ff64ed`. « Activer la TV » montre l'état d'activation propre de la TV ; ouverture de l'écran « Activer la TV » (clé collée, TV appairée, envoi par Bluetooth) avec appairage automatique ; contenus et fonctions fusionnés le 2026-10-01 (file de copie ou déplacement en arrière-plan, sélecteur multi-fichiers, « Ouvrir avec », progression de copie pendant la diffusion, classeur de séries).
+
+- détail : étiquette précédente absente (numéros antérieurs non étiquetés) : `git log phone-1.2.19-beta`
 
 ### [1.2.x] : 1.2-beta à 1.2.5-beta, 2026-10-01
 Numéros cités par les sujets de commits, aucun dans `version.properties` : 1.2-beta (code 10, `2d6446f`), 1.2.1-beta (11, `a3bfc56`), 1.2.2-beta (12, `285f593` : carte « introuvable » stable et « Réassocier » en un geste), 1.2.3-beta (13, `23e9257` : écran parental avec le jeton du téléphone de confiance), 1.2.4-beta (14, `a6cc6b0` : correctif d'un plantage de la télécommande), 1.2.5-beta (15, branche `claude/plug-and-play-robust`).
+
+- détail : aucune étiquette pour ces numéros : `git log -p -- version.properties`
 
 ### Versions antérieures
 0.7 (échecs, téléchargements), 0.9 (télécommande), 1.0-beta (Apprendre), 1.1-beta (code 9), 1.1.1-beta (adresse serveur officielle masquée).
 
 ## CastBridge Propriétaire (console des activations)
 
+### [0.2.4] (code 6) : 2026-10-02
+- chore(langues): générateur des packs A0 pilotes (gen_a0_pilot.py)
+- détail : `git log owner-0.2.3..owner-0.2.4`
+
 ### [0.2.3] (code 5) : 2026-10-02
-Tag proposé `owner-0.2.3` sur `faf8636`.
+Étiquette `owner-0.2.3` sur `faf8636`.
+
+- détail : `git log owner-0.2.2..owner-0.2.3`
 
 ### [0.2.2] (code 4) : 2026-10-02
-Tag proposé `owner-0.2.2` sur `ea0d28c`. Clé de production = durée seule ; envoi de clé par Wi-Fi ; import du catalogue signé ; signature de la liste d'experts.
+Étiquette `owner-0.2.2` sur `ea0d28c`. Clé de production = durée seule ; envoi de clé par Wi-Fi ; import du catalogue signé ; signature de la liste d'experts.
+
+- détail : `git log owner-0.2.1..owner-0.2.2`
 
 ### [0.2.1] (code 3) : 2026-10-02
-Tag proposé `owner-0.2.1` sur `1c26a11`. Durée de clé au choix, durée de location fixée par le serveur par lot, lots choisis dans le catalogue.
+Étiquette `owner-0.2.1` sur `1c26a11`. Durée de clé au choix, durée de location fixée par le serveur par lot, lots choisis dans le catalogue.
+
+- détail : `git log owner-0.2.0..owner-0.2.1`
 
 ### [0.2.0] (code 2) : 2026-10-02
-Tag proposé `owner-0.2.0` sur `e40173a`. Droit `SUPER_UNLIMITED`.
+Étiquette `owner-0.2.0` sur `e40173a`. Droit `SUPER_UNLIMITED`.
+
+- détail : `git log owner-0.1.0..owner-0.2.0`
 
 ### [0.1.0] (code 1) : 2026-10-01
-Tag proposé `owner-0.1.0` sur `0ff64ed`. Console du téléphone propriétaire (coffre, garde de déverrouillage, verrouillage automatique, émission d'activation, clé publique, journal chaîné), outil `castbridge-owner` en ligne de commande, bibliothèque partagée `:ownerlib`, entrée super administrateur locale.
+Étiquette `owner-0.1.0` sur `0ff64ed`. Console du téléphone propriétaire (coffre, garde de déverrouillage, verrouillage automatique, émission d'activation, clé publique, journal chaîné), outil `castbridge-owner` en ligne de commande, bibliothèque partagée `:ownerlib`, entrée super administrateur locale.
+
+- détail : étiquette précédente absente (numéros antérieurs non étiquetés) : `git log owner-0.1.0`
 
 ## Serveur (`backend/`, pom 1.2.5)
 
 ### [1.2.5] (code 9) : 2026-10-07
-Étiquette `server-1.2.5` (à poser par l'orchestrateur ; aucun déploiement fait).
+Étiquette `server-1.2.5` ; en service depuis le 2026-10-07 (docs/HANDOFF.md § 0).
 - **Adresses stables de téléchargement** : `GET|HEAD /dl/{app}/latest.apk` répond `302` vers `/dl/{app}/{fichier}` de la dernière version **stable, non retirée, à 100 % de déploiement** (plus haute `versionCode`) ; sans `abi`, une TV prend `armeabi-v7a`, puis `universal`, puis `arm64-v8a`, un téléphone `universal` ; `?abi=` choisit cette architecture puis `universal` ; `Cache-Control: no-store`, `X-Content-SHA256`, `X-CastBridge-Version` ; `404` en français sans version. Le nom `latest.apk` ne peut pas être un fichier publié (tous commencent par `castbridge-`) : la route `/dl/{app}/{fichier}` est inchangée.
 - **Page publique `GET /telecharger`** (et `/telecharger/`) : « Télécharger CastBridge », version, date, taille, SHA-256, bouton et code QR (SVG en ligne, générateur `QrSvg` existant) pour CastBridge-TV et CastBridge, lignes d'installation sur la TV, lien vers `/guide/` ; HTML construit en Java sans Thymeleaf, aucun script ; même chaîne de sécurité, même CSP et même cache que `/guide/` ; ne révèle ni versions retirées ni canaux non stables.
 - Limite de débit par IP étendue à `/telecharger`, et **correction d'un contournement qui existait déjà** pour `/api`, `/dl` et `/guide` : le filtre lisait l'URI brute, donc `/%64l/…`, `/%61pi/…` ou `/%67uide/` (une lettre encodée en `%XX`, que Spring décode et sert) passaient sans limite. Le chemin est lu décodé (`UrlPathHelper`), comme le voient les contrôleurs. Aucune route modifiée.
 - Procédure : `tools/release/publish-apk.sh` (publication par une commande, jeton lu dans le conteneur ; notes avec espaces, apostrophes et `$` transmises intactes : `ssh` recolle ses arguments, le serveur coupait les notes au premier mot), `docs/RELEASES.md` § 8, `docs/API-SERVER.md` § 1.
 - Tests : `DownloadLinksTest`, `DownloadLinksRateLimitTest`, `DownloadPageTest`, `QrSvgTest` (`backend/src/test/java/castbridge/server/updates/`).
 
+### [1.2.4] (code 8) : 2026-10-07
+- route publique /guide/ (guide utilisateur) ; révocation de poste datée >= émission (correctif)
+- détail : `git log server-1.2.3..server-1.2.4`
+
+### [1.2.3] (code 7) : 2026-10-06
+- quotas de licence fermés
+- serveur 1.2.3 : quotas de postes fermés (pas d'augmentation, un poste libéré ne passe pas à un autre appareil)
+
+### [1.2.2] (code 6) : 2026-10-06
+- V67 (plafond de transferts 0), chemins de transfert fermés, release des ordres sans interblocage
+- serveur 1.2.2 : V67 plafond de transferts à 0, chemins de transfert fermés, OrderService.release sans interblocage
+- Licences : transferts et réattribution de poste fermés (aucun poste ne change de TV)
+- détail : `git log server-1.2.1..server-1.2.2`
+
+### [1.2.1] (code 5) : 2026-10-05
+- suivi des activations (V63 éteint), enregistrement automatique des licences (V64 à V66), interrupteur du registrar
+- détail : `git log server-1.2.0..server-1.2.1`
+
+### [1.2.0] (code 4) : 2026-10-04
+- portefeuille V62
+- détail : `git log server-1.1.1..server-1.2.0`
+
+### [1.1.1] (code 3) : 2026-10-02
+- chore(server): version 1.1.1 (support langues : LangLangValidator, outil de publication)
+- fix(core): correctifs d'audit des fonctions pures d'état W14-05 (chemin de confiance par jeton, PinFallback, clés multi-IP, cible d'activation, file d'envois)
+- détail : `git log server-1.1.0..server-1.1.1`
+
+### [1.1.0] (code 2) : 2026-10-02
+- licences, tunnel (éteint par défaut), catalogue de bouquets signé, archive libre publique, hygiène ; migrations V4 à V61 (additives)
+
 ### Jalons antérieurs aux versions numérotées (`server-<version>`, `docs/RELEASES.md` § 13)
 
 Jalons tirés de l'historique : module de gestion des licences (désactivé par défaut) fusionné le 2026-10-01 puis aligné sur `cbx1` ; fenêtre d'installation de 48 h ; service d'ordres différés ; locations (règles de dates, vecteurs) ; correctif de l'adresse `/admin/` ; tunnel d'administration à distance côté serveur (désactivé par défaut) ; WireGuard ouvert sans pair. Le serveur de production n'a pas de révision traçable avant le premier déploiement par `tools/release/deploy-server.sh` (« révision initiale inconnue »).
+
+## Service de jeu en ligne (`server-play`, castbridge-play)
+
+### [0.1.1] : 2026-10-04
+- castbridge-play 0.1.1 (staging privé, correctifs des audits)
+- détail : `git log server-play-0.1.0..server-play-0.1.1`
+
+### [0.1.0] : 2026-10-03
+- castbridge-play 0.1.0 (staging privé)

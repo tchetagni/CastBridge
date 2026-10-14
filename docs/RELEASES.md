@@ -100,14 +100,9 @@ gradle :receiver:assembleRelease \
 - [ ] **`:sshd:test` vert** : tests du serveur SSH de la TV
 - [ ] **Backend `mvn test` vert** (si modification) : tests du serveur
 
-### Tests instables connus (à relancer si échec)
+### Tests instables connus
 
-Les trois tests suivants échouent occasionnellement mais ne sont pas bloquants si relancés :
-- `TvSshServerTest.unknownKeyIsRefusedAndAddressGetsLocked`
-- `TrustTest.onlyTrustedPhonesGetTokensAndRevocationKillsThem`
-- `ChessRelayTest.availabilityProbe`
-
-**Action** : relancer le test en question avant de conclure à une régression.
+Aucun test instable connu depuis le correctif w15-07 (fusion `7da821a9`, 2026-10-02). En cas d'échec, lire `docs/agent-reports/sonnet-w15-07.md` avant de conclure à une régression ; ne pas relancer à l'aveugle.
 
 ### Validations additionnelles
 
@@ -155,8 +150,8 @@ $G :receiver:assembleRelease
 $G :sender:assembleRelease
 
 # Chemins de sortie :
-# TV:      android/receiver/build/outputs/apk/release/receiver-armeabi-v7a-release.apk
-# Téléphone: android/sender/build/outputs/apk/release/sender-release.apk
+# TV:      android/receiver/build/outputs/apk/release/receiver-armeabi-v7a-release-unsigned.apk
+# Téléphone: android/sender/build/outputs/apk/release/sender-release-unsigned.apk
 ```
 
 ### Build avec verrou (production)
@@ -165,8 +160,8 @@ $G :sender:assembleRelease
 # Variante verrouillée (TV uniquement, pour production)
 $G :receiver:assembleRelease -PrequireActivation=true
 # Chemins de sortie :
-# TV verrouillée: android/receiver/build/outputs/apk/release/receiver-armeabi-v7a-release.apk
-# (le code et le nom du fichier reflètent -PrequireActivation=true)
+# TV verrouillée: android/receiver/build/outputs/apk/release/receiver-armeabi-v7a-release-unsigned.apk
+# (le code de version et le nom de version reflètent -PrequireActivation=true : +1 au code, suffixe « -verrouillee » ; le nom du fichier ne change pas)
 ```
 
 ### Chemins de sortie standards
@@ -174,11 +169,15 @@ $G :receiver:assembleRelease -PrequireActivation=true
 | App | Variant | Path |
 |-----|---------|------|
 | CastBridge-TV | Debug | `android/receiver/build/outputs/apk/debug/receiver-armeabi-v7a-debug.apk` |
-| CastBridge-TV | Release | `android/receiver/build/outputs/apk/release/receiver-armeabi-v7a-release.apk` |
+| CastBridge-TV | Release | `android/receiver/build/outputs/apk/release/receiver-armeabi-v7a-release-unsigned.apk` |
 | CastBridge | Debug | `android/sender/build/outputs/apk/debug/sender-debug.apk` |
-| CastBridge | Release | `android/sender/build/outputs/apk/release/sender-release.apk` |
+| CastBridge | Release | `android/sender/build/outputs/apk/release/sender-release-unsigned.apk` |
+
+Les APK `release` sortent non signés de Gradle (aucun `signingConfig` dans les `build.gradle.kts`) : la signature est décrite au § 6.
 
 ## 6. Signature
+
+Gradle produit `…-release-unsigned.apk` (§ 5) ; les commandes ci-dessous nomment le fichier APRÈS signature, par exemple `~/CastBridge-release/SIGNED/CastBridge-TV-<version>-verrouillee-armeabi-v7a.apk` (docs/HANDOFF.md).
 
 ### ⚠ Clé réellement utilisée par les applications installées (correction du 2026-10-02)
 
@@ -332,25 +331,101 @@ La page `/telecharger` (et `/telecharger/`) se met à jour toute seule à chaque
 
 ## 9. Journal des versions
 
-Tableau reconstruit à partir de l'historique de `version.properties` (`git log -p -- version.properties`) ; le détail par version est dans `docs/CHANGELOG.md`. Aucun tag n'existait au 2026-10-02 : les commits sont ceux qui ont introduit le numéro (voir `bash tools/release/tag-plan.sh`). Le dépôt date du 2026-09-29 et `version.properties` du 2026-10-01 : toute date antérieure serait fausse.
+Tableau reconstruit mécaniquement à partir de l'historique premier-parent de `version.properties` (`git log --first-parent -p -- version.properties`) : une ligne par changement de `tv.versionName`, `phone.versionName`, `owner.versionName` ou `server.versionName`, avec le `versionCode` du même commit (pour la TV, celui de la variante sans verrou ; la verrouillée a +1). Le détail par version est dans `docs/CHANGELOG.md`. Des étiquettes existent depuis le 2026-10-02 (`git tag -l 'tv-*' 'phone-*' 'owner-*' 'server-*'`) ; les versions non étiquetées sont celles listées par `bash tools/release/tag-plan.sh`. Le dépôt date du 2026-09-29 et `version.properties` du 2026-10-01 : toute date antérieure serait fausse.
 
-| Application | Version | Code | Date | Commit | Notes |
-|---|---|---|---|---|---|
-| CastBridge-TV | 0.14.6-beta | 39 | 2026-10-01 | `0ff64ed` | Première version de `version.properties` |
-| CastBridge-TV | 0.14.11-beta | 49 | 2026-10-02 | `e40173a` | `SUPER_UNLIMITED` |
-| CastBridge-TV | 0.14.14-beta | 54 | 2026-10-02 | `17a79f2` | Essai / production, Langues ; 0.14.12 et 0.14.13 jamais commitées |
-| CastBridge-TV | 0.14.15-beta | 56 | 2026-10-02 | `1c26a11` | Politiques de production |
-| CastBridge-TV | 0.14.16-beta | 58 | 2026-10-02 | `ea0d28c` | Correctifs d'audit |
-| **CastBridge-TV** | **0.14.17-beta** | **60** | **2026-10-02** | `faf8636` | **Tunnel d'assistance (courant)** |
-| CastBridge | 1.2.19-beta | 29 | 2026-10-01 | `0ff64ed` | Première version de `version.properties` |
-| CastBridge | 1.2.25-beta | 35 | 2026-10-02 | `b92998e` | Jamais recopier un fichier déjà complet sur la TV |
-| CastBridge | 1.2.27-beta | 57 | 2026-10-02 | `1c26a11` | Synchronisée avec TV 0.14.15 (le code saute de 35 à 56 en 1.2.26) |
-| **CastBridge** | **1.2.29-beta** | **59** | **2026-10-02** | `faf8636` | **Synchronisée avec TV 0.14.17 (courant)** |
-| CastBridge Propriétaire | 0.1.0 | 1 | 2026-10-01 | `0ff64ed` | Console des activations |
-| CastBridge Propriétaire | 0.2.1 | 3 | 2026-10-02 | `1c26a11` | Durées de clé au choix |
-| **CastBridge Propriétaire** | **0.2.3** | **5** | **2026-10-02** | `faf8636` | **Courant** |
-
-> Attention : `version.properties` contient une modification non commitée (clé `lock.graceDays`) et l'arbre de travail contient d'autres travaux non commités du 2026-10-02 : un APK construit maintenant porterait « 0.14.17-beta » avec un contenu différent de `faf8636`. Commiter puis incrémenter avant tout nouveau build distribué.
+| Application | Version | Code | Date | Commit |
+|---|---|---|---|---|
+| CastBridge-TV | 0.14.6-beta | 39 | 2026-10-01 | `0ff64edc` |
+| CastBridge-TV | 0.14.7-beta | 41 | 2026-10-01 | `86ad3f21` |
+| CastBridge-TV | 0.14.8-beta | 43 | 2026-10-01 | `e6825e76` |
+| CastBridge-TV | 0.14.9-beta | 45 | 2026-10-01 | `88b3035b` |
+| CastBridge-TV | 0.14.10-beta | 47 | 2026-10-01 | `ce052c8a` |
+| CastBridge-TV | 0.14.11-beta | 49 | 2026-10-02 | `e40173a5` |
+| CastBridge-TV | 0.14.14-beta | 54 | 2026-10-02 | `17a79f27` |
+| CastBridge-TV | 0.14.15-beta | 56 | 2026-10-02 | `1c26a114` |
+| CastBridge-TV | 0.14.16-beta | 58 | 2026-10-02 | `ea0d28cc` |
+| CastBridge-TV | 0.14.17-beta | 60 | 2026-10-02 | `faf86366` |
+| CastBridge-TV | 0.14.18-beta | 62 | 2026-10-02 | `c81fa23a` |
+| CastBridge-TV | 0.14.19-beta | 64 | 2026-10-02 | `d137b966` |
+| CastBridge-TV | 0.14.20-beta | 66 | 2026-10-02 | `b5f6ed5b` |
+| CastBridge-TV | 0.14.21-beta | 68 | 2026-10-02 | `7803b705` |
+| CastBridge-TV | 0.14.22-beta | 69 | 2026-10-03 | `2dc05ea5` |
+| CastBridge-TV | 0.14.26-beta | 78 | 2026-10-03 | `43e1c10b` |
+| CastBridge-TV | 0.14.27-beta | 80 | 2026-10-03 | `d26c1ff7` |
+| CastBridge-TV | 0.14.28-beta | 82 | 2026-10-04 | `e0d20299` |
+| CastBridge-TV | 0.14.29-beta | 84 | 2026-10-04 | `db246a25` |
+| CastBridge-TV | 0.14.30-beta | 86 | 2026-10-04 | `2cfbd2ff` |
+| CastBridge-TV | 0.14.31-beta | 88 | 2026-10-04 | `1f8937e6` |
+| CastBridge-TV | 0.14.32-beta | 90 | 2026-10-04 | `1c6e87e4` |
+| CastBridge-TV | 0.14.33-beta | 92 | 2026-10-04 | `132a46b6` |
+| CastBridge-TV | 0.14.34-beta | 94 | 2026-10-04 | `4b884064` |
+| CastBridge-TV | 0.14.35-beta | 96 | 2026-10-04 | `a62aa023` |
+| CastBridge-TV | 0.14.36-beta | 98 | 2026-10-04 | `c24e9b6f` |
+| CastBridge-TV | 0.14.37-beta | 100 | 2026-10-04 | `2d6eb0c8` |
+| CastBridge-TV | 0.14.38-beta | 102 | 2026-10-06 | `2807b6c8` |
+| CastBridge-TV | 0.14.39-beta | 104 | 2026-10-06 | `c0332cb2` |
+| CastBridge-TV | 0.14.40-beta | 106 | 2026-10-06 | `fff21176` |
+| CastBridge-TV | 0.14.41-beta | 108 | 2026-10-06 | `4914ece3` |
+| CastBridge-TV | 0.14.42-beta | 110 | 2026-10-06 | `7b9ac69f` |
+| CastBridge-TV | 0.14.43-beta | 112 | 2026-10-06 | `3d36dbfd` |
+| CastBridge-TV | 0.14.44-beta | 114 | 2026-10-07 | `c5590e40` |
+| CastBridge-TV | 0.14.45-beta | 116 | 2026-10-07 | `e837a8f2` |
+| CastBridge-TV | 0.14.46-beta | 118 | 2026-10-07 | `404d5808` |
+| CastBridge-TV | 0.14.47-beta | 120 | 2026-10-07 | `9a1d2ae6` |
+| CastBridge-TV | 0.14.48-beta | 122 | 2026-10-11 | `687b8e09` |
+| **CastBridge-TV** | **0.14.49-beta** (courant) | **124** | **2026-10-11** | **`b70645c6`** |
+| CastBridge | 1.2.19-beta | 29 | 2026-10-01 | `0ff64edc` |
+| CastBridge | 1.2.20-beta | 30 | 2026-10-01 | `86ad3f21` |
+| CastBridge | 1.2.21-beta | 31 | 2026-10-01 | `e6825e76` |
+| CastBridge | 1.2.22-beta | 32 | 2026-10-01 | `88b3035b` |
+| CastBridge | 1.2.23-beta | 33 | 2026-10-01 | `ce052c8a` |
+| CastBridge | 1.2.24-beta | 34 | 2026-10-02 | `e40173a5` |
+| CastBridge | 1.2.25-beta | 35 | 2026-10-02 | `b92998e2` |
+| CastBridge | 1.2.26-beta | 56 | 2026-10-02 | `17a79f27` |
+| CastBridge | 1.2.27-beta | 57 | 2026-10-02 | `1c26a114` |
+| CastBridge | 1.2.28-beta | 58 | 2026-10-02 | `ea0d28cc` |
+| CastBridge | 1.2.29-beta | 59 | 2026-10-02 | `faf86366` |
+| CastBridge | 1.2.30-beta | 60 | 2026-10-02 | `c81fa23a` |
+| CastBridge | 1.2.31-beta | 61 | 2026-10-02 | `d137b966` |
+| CastBridge | 1.2.32-beta | 62 | 2026-10-02 | `2c07510e` |
+| CastBridge | 1.2.33-beta | 63 | 2026-10-02 | `c24ad099` |
+| CastBridge | 1.2.34-beta | 64 | 2026-10-02 | `7803b705` |
+| CastBridge | 1.2.35-beta | 65 | 2026-10-02 | `2e20cf47` |
+| CastBridge | 1.2.36-beta | 66 | 2026-10-03 | `9e1c9425` |
+| CastBridge | 1.2.37-beta | 67 | 2026-10-03 | `c8be0e96` |
+| CastBridge | 1.2.38-beta | 68 | 2026-10-03 | `2dc05ea5` |
+| CastBridge | 1.2.39-beta | 69 | 2026-10-03 | `43e1c10b` |
+| CastBridge | 1.2.40-beta | 70 | 2026-10-03 | `d26c1ff7` |
+| CastBridge | 1.2.41-beta | 71 | 2026-10-04 | `e0d20299` |
+| CastBridge | 1.2.42-beta | 72 | 2026-10-04 | `3ca29fe5` |
+| CastBridge | 1.2.43-beta | 73 | 2026-10-04 | `4b884064` |
+| CastBridge | 1.2.44-beta | 74 | 2026-10-05 | `30adb551` |
+| CastBridge | 1.2.45-beta | 75 | 2026-10-06 | `5cb50967` |
+| CastBridge | 1.2.46-beta | 76 | 2026-10-06 | `2807b6c8` |
+| CastBridge | 1.2.47-beta | 77 | 2026-10-06 | `c0332cb2` |
+| CastBridge | 1.2.48-beta | 78 | 2026-10-06 | `fff21176` |
+| CastBridge | 1.2.49-beta | 79 | 2026-10-06 | `4914ece3` |
+| CastBridge | 1.2.50-beta | 80 | 2026-10-06 | `3d36dbfd` |
+| CastBridge | 1.2.51-beta | 81 | 2026-10-07 | `0e54a9bf` |
+| CastBridge | 1.2.52-beta | 82 | 2026-10-07 | `c5590e40` |
+| CastBridge | 1.2.53-beta | 83 | 2026-10-07 | `9751a8d2` |
+| CastBridge | 1.2.54-beta | 84 | 2026-10-07 | `9a1d2ae6` |
+| CastBridge | 1.2.55-beta | 85 | 2026-10-07 | `bad92156` |
+| **CastBridge** | **1.2.56-beta** (courant) | **86** | **2026-10-09** | **`c733fc6d`** |
+| CastBridge Propriétaire | 0.1.0 | 1 | 2026-10-01 | `0ff64edc` |
+| CastBridge Propriétaire | 0.2.0 | 2 | 2026-10-02 | `e40173a5` |
+| CastBridge Propriétaire | 0.2.1 | 3 | 2026-10-02 | `1c26a114` |
+| CastBridge Propriétaire | 0.2.2 | 4 | 2026-10-02 | `ea0d28cc` |
+| CastBridge Propriétaire | 0.2.3 | 5 | 2026-10-02 | `faf86366` |
+| **CastBridge Propriétaire** | **0.2.4** (courant) | **6** | **2026-10-02** | **`c81fa23a`** |
+| Serveur | 1.1.0 | 2 | 2026-10-02 | `c81fa23a` |
+| Serveur | 1.1.1 | 3 | 2026-10-02 | `de562215` |
+| Serveur | 1.2.0 | 4 | 2026-10-04 | `0947db17` |
+| Serveur | 1.2.1 | 5 | 2026-10-04 | `0e407bc7` |
+| Serveur | 1.2.2 | 6 | 2026-10-06 | `90bb91ac` |
+| Serveur | 1.2.3 | 7 | 2026-10-06 | `df631911` |
+| Serveur | 1.2.4 | 8 | 2026-10-07 | `afed6a30` |
+| **Serveur** | **1.2.5** (courant) | **9** | **2026-10-07** | **`f790a4e9`** |
 
 ## 10. Retour arrière
 
