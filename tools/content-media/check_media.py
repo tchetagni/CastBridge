@@ -5,6 +5,15 @@ matches its sha256 and size, respects the budget of its kind, has its accessibil
 Budgets: figure <= 8 KB, animation <= 40 KB, image <= 120 KB and <= 1280 px (WebP), audio <= 200 KB per 30 s (Opus),
 clip <= 15 MB and <= 30 s (480p H.264/WebM, with a poster). Provenance: original, generated or CC0 only.
 Usage: check_media.py [--content DIR]      exit 1 on any error
+
+« Média présent mais non déclaré » (choix du 2026-10-14) : la règle de docs/MEDIA-POLICY.md vise les médias du DÉPÔT. Un média que git IGNORE n'en fait pas partie et n'est
+pas « non déclaré » : ce sont les copies locales du propriétaire (par exemple `content/langues-media/`, règle de `.gitignore` « jamais dans le dépôt de code, ils vont dans
+castbridge-content »). Les audio des Langues ne relèvent d'ailleurs pas de MEDIA-MANIFEST.json (lots Apprendre et Quiz) : ils sont déclarés par le `media.json` du lot texte
+(`content/langues/<paquet>/media.json`, suivi par git), les fichiers vivant dans le lot média jumeau (docs/LANGUES.md § 4.1 ; manifeste de provenance de
+docs/MEDIA-PIPELINE.md § 5, produit et conservé dans castbridge-content). Le dépôt, c'est ce que `git add -A` y mettrait : fichiers suivis + non suivis non ignorés, lus en un seul
+appel `git ls-files --cached --others --exclude-standard`. Un média non suivi ET non ignoré reste donc refusé s'il n'est pas déclaré. Seul ce balayage « non déclaré » est limité à la
+vue de git ; un média DÉCLARÉ est toujours contrôlé (présence, empreinte, budgets) là où il se trouve sur le disque. Repli sur le parcours complet (comportement d'avant) sans git,
+hors de tout dépôt ou si le dossier est lui-même ignoré : voir `lotlib.git_ignore_filter`.
 """
 import argparse, hashlib, json, math, os, re, struct, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -176,13 +185,14 @@ def check(content):
     for owner, m in refs:
         if m not in ids:
             errors.append("%s référence le média %s absent du manifeste" % (owner, m))
-    # media files that nobody declared
+    # media files that nobody declared (hors copies locales que git ignore : elles ne sont pas dans le dépôt)
+    ignored = L.git_ignore_filter(content)
     for root, _, files in os.walk(content):
         for fn in files:
             p = os.path.join(root, fn)
             rel = os.path.relpath(p, content).replace(os.sep, "/")
             k = L.media_kind(p)
-            if k in ("image", "audio", "clip") and rel not in declared:
+            if k in ("image", "audio", "clip") and rel not in declared and not ignored(rel):
                 errors.append("%s: média non déclaré dans MEDIA-MANIFEST.json" % rel)
     return errors
 

@@ -2,7 +2,7 @@
 
 Règle du propriétaire (2026-10-03) : « publie sur le serveur, 30 % réservé ».
 
-- 93 lots (`content/quiz/lots/catalog-lots.json`). RÉSERVÉ = niveaux L1, L2, L3 et Tle : 25 lots (≈ 27 % des lots, 28 % des questions).
+- 119 lots (`content/quiz/lots/catalog-lots.json`). RÉSERVÉ = niveaux L1, L2, L3 et Tle : 51 lots (≈ 43 % des lots, 33 % des questions).
   LIBRE = les 68 autres (publics, téléchargeables).
 - `content/quiz/families.json` liste `quiz:<scope>` en `free` / `reserved` ; il est produit par
   `python3 tools/quiz/publish_lots.py --write-families` (déterministe) et commité. Inconnu = non publié (échec fermé).

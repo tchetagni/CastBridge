@@ -143,6 +143,10 @@ N4 est défini là où le standard mondial est crédible et mesurable aujourd'hu
 
 **Rattacher l'existant.** `python3 tools/content-map/map_existing.py` propose, **sans rien modifier**, `skill`, `level` et `lot` pour chaque leçon et paquet de quiz existants → `content/graph/mapping/existing.json` (56 des 70 leçons ont une proposition ; confiance high/medium/low). Les agents de contenu relisent puis ajoutent les champs.
 
+- **Couverture du graphe au 2026-10-14 : 82,5 % des leçons** (2 094 sur 2 537 ont une compétence proposée par `map_existing.py`, contre 1 543 avant le rattachement de `histoire-geo`, `physics` et `chemistry` à `lotlib.SUBJECT_DOMAIN`, et 56 sur 70 au départ) ; 94,7 % sur les 27 familles couvertes (une famille = préfixe du pack avant le premier `-`).
+- **Familles non couvertes** (moins de 70 % de leurs leçons ; 13 familles, contre 23 avant le rattachement) : `droit`, `licence`, `sup`, `vie`, `nursery`, `maternelle`, `ps`, `ms`, `gs`, `class1`, `class2`, `class3`, `sil` ; causes mesurées sur les 443 leçons sans proposition : domaines droit, économie et philosophie absents du graphe (182), fenêtre d'années des compétences N1 vide (229 : petite enfance 139, CP et début de primaire 90), titres sans mot commun avec une compétence (32).
+- Le test `tools/tests/test_content_tools.py` les liste (`GRAPH_UNCOVERED_FAMILIES`, **cliquet**) : une nouvelle famille sous 70 % le fait échouer, une famille qui repasse à 70 % doit être retirée de la liste.
+
 ## 5. Champs additifs des leçons, exercices et questions (optionnels, ignorés par les anciens lecteurs)
 
 | Champ | Où | Sens |

@@ -9,6 +9,13 @@ import build_free_archive as B  # noqa: E402
 
 NOW = "2026-10-02T12:00:00Z"
 
+# Les tests « dépôt réel » construisent l'archive avec les audio du lot média jumeau, `content/langues-media/` : un dossier que `.gitignore` EXCLUT du dépôt de code
+# (« jamais dans le dépôt de code, ils vont dans castbridge-content »). Sans lui (CI, clone propre) l'outil refuse de construire l'archive (« fichier introuvable dans le lot
+# média jumeau ») : c'est son comportement voulu, pas un échec. Ces tests tournent donc sur le poste du propriétaire et dans castbridge-content ; le reste de la suite
+# couvre le même code avec un faux dépôt.
+needs_twin_media = unittest.skipUnless(os.path.isdir(os.path.join(REPO, "content", "langues-media")),
+                                       "content/langues-media/ absent (ignoré par git, vit dans castbridge-content) : l'archive du dépôt réel ne peut pas se construire")
+
 
 def write(p, data):
     os.makedirs(os.path.dirname(p), exist_ok=True)
@@ -206,6 +213,7 @@ class FreeContentTest(unittest.TestCase):
         self.assertEqual(P("CC BY 4.0")["kind"], "other")
         self.assertEqual(P(None)["kind"], "none")
 
+    @needs_twin_media
     def test_real_repo_dry_run(self):
         out, err = io.StringIO(), io.StringIO()
         code = B.main(["--repo", REPO, "--dry-run"], out, err)
@@ -213,6 +221,7 @@ class FreeContentTest(unittest.TestCase):
         self.assertIn("Résumé :", out.getvalue())
         self.assertIn("zh-a0-salut-fr", out.getvalue())
 
+    @needs_twin_media
     def test_real_repo_license_text_verbatim(self):
         """Verify that the real repository reports licenseTextVerbatim=True now that the license file is present."""
         out, err = io.StringIO(), io.StringIO()

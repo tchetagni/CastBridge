@@ -180,20 +180,35 @@ class QuizPublishTest(unittest.TestCase):
 
 
 class RealFamiliesTest(unittest.TestCase):
-    """families.json commité = règle appliquée au vrai catalogue ; chaque lot dans exactement une liste (échec fermé)."""
+    """families.json commité = règle appliquée au vrai catalogue ; chaque lot dans exactement une liste (échec fermé).
+
+    Aucun effectif n'est figé : le catalogue grandit avec les lots reconstruits (93 puis 119 avec les 26 filières du supérieur). On vérifie la RÈGLE
+    (chaque lot dans exactement une liste, union = catalogue, niveau réservé ⇔ liste réservée, fichier = dérivation déterministe du catalogue) ; le seul
+    garde-fou chiffré est un plancher (le catalogue ne rétrécit pas). Le nombre de lots et la répartition sont LUS du catalogue et écrits dans le message
+    de chaque échec. Remède habituel d'un lot nouveau : `python3 tools/quiz/publish_lots.py --write-families` (puis commiter families.json)."""
+
+    MIN_LOTS = 93   # plancher historique (2026-10-03) : le catalogue ne fait que croître
 
     def test_every_lot_in_exactly_one_list(self):
         lots_dir = os.path.join(REPO, "content", "quiz", "lots")
+        families_path = os.path.join(REPO, "content", "quiz", "families.json")
         cat = P.read_catalog(lots_dir)
-        free, res = P.load_families(os.path.join(REPO, "content", "quiz", "families.json"))
-        self.assertEqual(93, len(cat))
-        for e in cat:
-            k = "quiz:" + e["scope"]
-            self.assertEqual(1, (k in free) + (k in res), k)
-            self.assertEqual(e["level"] in P.RESERVED_LEVELS, k in res, k)
-        self.assertEqual({"quiz:" + e["scope"] for e in cat}, free | res)
-        self.assertEqual((68, 25), (len(free), len(res)))
-        self.assertEqual(P.derive_families(cat), json.load(open(os.path.join(REPO, "content", "quiz", "families.json"))))
+        free, res = P.load_families(families_path)      # lève Fail si un lot est dans les DEUX listes
+        keys = ["quiz:" + e["scope"] for e in cat]
+        reserved_by_rule = sum(1 for e in cat if e.get("level") in P.RESERVED_LEVELS)
+        bilan = ("catalogue : %d lots dont %d de niveau réservé ; families.json : %d libres + %d réservés ; "
+                 "remède : python3 tools/quiz/publish_lots.py --write-families" % (len(cat), reserved_by_rule, len(free), len(res)))
+        self.assertGreaterEqual(len(cat), self.MIN_LOTS, bilan)
+        self.assertEqual(len(keys), len(set(keys)), "scope en double dans le catalogue ; " + bilan)
+        in_no_list = sorted(k for k in keys if k not in free and k not in res)
+        if in_no_list:
+            self.fail("%d lot(s) dans AUCUNE liste (inconnu = non publié) : %s ; %s" % (len(in_no_list), ", ".join(in_no_list), bilan))
+        misplaced = sorted(k for e, k in zip(cat, keys) if (e.get("level") in P.RESERVED_LEVELS) != (k in res))
+        if misplaced:
+            self.fail("niveau réservé ⇔ liste réservée violé pour %d lot(s) : %s ; %s" % (len(misplaced), ", ".join(misplaced), bilan))
+        self.assertEqual(set(keys), free | res, bilan)
+        with open(families_path, encoding="utf-8") as f:
+            self.assertEqual(P.derive_families(cat), json.load(f), bilan)
 
 
 if __name__ == "__main__":
