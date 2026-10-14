@@ -25,17 +25,17 @@ Le coordinateur ajoute une ligne `ORDRE n …` qui pointe vers un cahier. Rien n
 
 ## Flux CI
 
-Trois workflows exécutent les tests et les vérifications de l'intégration :
+Trois workflows exécutent les tests et les vérifications de l'intégration (`backend.yml` et `activation-desktop.yml` existent aussi et ne sont pas décrits ici) :
 
-- **tools.yml** : (`on: push, pull_request, workflow_dispatch` ; `concurrency` par ref ; `timeout: 20 min`) Python 3.12 + FFmpeg ; jobs :
+- **tools.yml** : (`on: push, pull_request, workflow_dispatch` ; `concurrency` par ref ; `timeout-minutes: 20` sur chaque job) Python 3.12 + FFmpeg ; jobs :
   - `python-tools` : `python3 -m unittest discover` sur `tools/tests`, `tools/trial-edition`, `tools/anim` ; tests de contenu (`content-validation`, `media-pipeline/tests`)
-  - `quiz-bank` : tests du quiz-bank et `quizbank.py check` (filtre de chemins `tools/quiz-bank/**, content/quiz/**`)
+  - `quiz-bank` : tests du quiz-bank et `quizbank.py check`
   - `vectors` : vérification des vecteurs d'activation (dépend de `cryptography`)
-  - `content-checks` : budgets de contenu et vérifications d'essai (filtre de chemins `content/**, tools/content-budget/**, tools/trial-edition/**`)
+  - `content-checks` : budgets de contenu (`content_budget.py`, `langues_budget.py`) ; vérifications d'essai : `trial_edition.py select` écrit le manifeste dans un fichier temporaire, puis `check` vérifie ce fichier (le dépôt ne contient pas `content/TRIAL-MANIFEST.json`)
 
-- **android.yml** : (`on: push, workflow_dispatch` ; `timeout: 30 min`) Gradle + tests : `:core:test :sshd:test :core:checkStarterBudget assembleDebug` ; artefacts : APK + rapports de tests
+- **android.yml** : (`on: push, workflow_dispatch` ; `timeout-minutes: 30` sur le job `apk`) Gradle + tests : `:core:test :sshd:test :core:checkStarterBudget assembleDebug` ; artefacts : APK + rapports de tests
 
-- **release.yml** : (`on: workflow_dispatch` seulement) Build unsigned release APKs (`-PrequireActivation=true`) ; la signature et la publication se font sur le Mac du propriétaire (docs/RELEASES.md) ; artefacts nommés `NON-VERROUILLEE-NE-PAS-DISTRIBUER`.
+- **release.yml** : (`on: workflow_dispatch` seulement) **build de contrôle** de la variante verrouillée (`-PrequireActivation=true`) avec une clé de confiance FACTICE écrite pendant le job (`-PtrustedKeysFile`, jetable) : APK non signés, inutilisables en production et à ne jamais distribuer ; artefact `castbridge-release-apks-NON-SIGNEES-CLE-FACTICE-NE-PAS-DISTRIBUER`. La vraie construction et la signature se font sur le Mac du propriétaire (docs/RELEASES.md).
 
 Pour relancer un workflow : Actions > workflows > Run workflow > Branch/Ref.
 

@@ -11,17 +11,17 @@ concurrency:
   group: ${{ github.ref }}
   cancel-in-progress: true
 
-timeout-minutes: 20
-
 jobs:
   python-tools:
     runs-on: ubuntu-24.04
+    timeout-minutes: 20   # se pose par job : à la RACINE d'un workflow, GitHub rejette le fichier
     strategy:
       fail-fast: false
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
+      - run: pip install -r tools/requirements-dev.txt   # `cryptography` : test_signature_verifies (tools/tests) signe puis vérifie un catalogue de lots
       - run: sudo apt-get install -y ffmpeg
       - run: python3 -m unittest discover -s tools/tests
       - run: python3 -m unittest discover -s tools/trial-edition
@@ -31,6 +31,7 @@ jobs:
 
   quiz-bank:
     runs-on: ubuntu-24.04
+    timeout-minutes: 20
     strategy:
       fail-fast: false
     steps:
@@ -42,6 +43,7 @@ jobs:
 
   vectors:
     runs-on: ubuntu-24.04
+    timeout-minutes: 20
     strategy:
       fail-fast: false
     steps:
@@ -53,6 +55,7 @@ jobs:
 
   content-checks:
     runs-on: ubuntu-24.04
+    timeout-minutes: 20
     strategy:
       fail-fast: false
     steps:
@@ -60,6 +63,8 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
       - run: python3 tools/content-budget/content_budget.py --quiet
-      - run: python3 tools/content-budget/langues_budget.py
-      - run: python3 tools/trial-edition/trial_edition.py check --only learn,quiz
-        continue-on-error: true
+      - run: python3 tools/content-budget/langues_budget.py --plan   # sans argument l'outil affiche son aide et sort en code 2 ; --plan vérifie la cohérence de content/langues/budget.json
+      # content/TRIAL-MANIFEST.json n'est pas commité (c'est un produit de `select`) : on le génère dans un dossier temporaire du runner, puis on vérifie qu'il est
+      # reproductible. `select` échoue si une règle de l'essai n'est plus tenue (plafond de 100 Mo, sous-catégorie vide, plancher, lot d'essai trop gros).
+      - run: python3 tools/trial-edition/trial_edition.py select --out "$RUNNER_TEMP/TRIAL-MANIFEST.json" --only learn,quiz
+      - run: python3 tools/trial-edition/trial_edition.py check --manifest "$RUNNER_TEMP/TRIAL-MANIFEST.json" --only learn,quiz

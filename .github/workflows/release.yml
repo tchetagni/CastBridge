@@ -1,5 +1,6 @@
-# Builds release APKs (unsigned, build only).
-# La signature et la publication se font sur le Mac du propriétaire (docs/RELEASES.md).
+# Build de CONTRÔLE (release, variante verrouillée) : APK NON SIGNÉS, construits avec une clé de confiance
+# JETABLE écrite pendant le job (sa clé privée n'existe nulle part) : aucun de ces APK ne peut activer une TV.
+# Ne jamais les distribuer. La vraie construction et la signature se font sur le Mac du propriétaire (docs/RELEASES.md).
 name: Release APKs (build only)
 on: workflow_dispatch
 
@@ -21,8 +22,11 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with: { gradle-version: 8.14.3 }
 
-      - name: Build unsigned release APKs
-        run: cd android && gradle --stacktrace :core:test :receiver:assembleRelease :sender:assembleRelease -PrequireActivation=true
+      - name: Clé de confiance factice (build de contrôle seulement, personne ne peut activer cet APK)
+        run: printf 'kid=0000000000000000 pub=%s scopes=ISSUE_TRIAL\n' "$(openssl rand -base64 32)" > "$RUNNER_TEMP/ci-trusted-keys.txt"
+
+      - name: Build de contrôle (APK release non signés, variante verrouillée, clé factice)
+        run: cd android && gradle --stacktrace :core:test :receiver:assembleRelease :sender:assembleRelease -PrequireActivation=true -PtrustedKeysFile="$RUNNER_TEMP/ci-trusted-keys.txt"
 
       - name: Copy APKs to output
         run: |
@@ -33,5 +37,5 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: castbridge-release-apks-NON-VERROUILLEE-NE-PAS-DISTRIBUER
+          name: castbridge-release-apks-NON-SIGNEES-CLE-FACTICE-NE-PAS-DISTRIBUER
           path: out/*.apk
