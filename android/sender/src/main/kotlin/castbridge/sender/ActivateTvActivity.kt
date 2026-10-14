@@ -70,9 +70,11 @@ class ActivationViewModel(app: Application) : AndroidViewModel(app) {
 }
 
 /**
- * « Activer la TV » (docs/coordination/DESIGN-ACTIVATION-SIMPLE-2026-10-07.md) : UN champ, « Code affiché sur la TV » (6 chiffres). Une fois saisi, le téléphone cherche la TV tout seul, dans l'ordre :
- * réseau local, groupe Wi-Fi Direct dérivé du code (sans quitter l'app ni perdre les données mobiles), Bluetooth ; il lit la demande d'appareil de la TV, aide à obtenir la clé (console
- * propriétaire, clé collée ou trouvée dans le presse-papiers, fichier) puis l'installe, avec le même résultat que sur la TV. Les décisions sont dans `core` ([ActivationRoutePlan],
+ * « Activer la TV » (docs/coordination/DESIGN-ACTIVATION-SIMPLE-2026-10-07.md) : UN champ, « Code affiché sur la TV » (6 chiffres). Une fois saisi, le téléphone cherche la TV tout seul, dans l'ordre de
+ * [ActivationRoutePlan] (une voie impossible est sautée avec sa cause) : 1. réseau local (mDNS `locked=1`, 10 s) ; 2. Bluetooth SANS appairage (annonce BLE `…0008`, PAKE sur le code, 25 s) ; 3. réseau de la TV
+ * (groupe Wi-Fi Direct dérivé du code, sans quitter l'app ni perdre les données mobiles, 50 s) ; 4. Bluetooth appairé (anciennes TV seulement, 20 s, 90 s si un appairage est à valider). Il lit la demande
+ * d'appareil de la TV, aide à obtenir la clé (console propriétaire, clé collée ou trouvée dans le presse-papiers, fichier) puis l'installe, avec le même résultat que sur la TV.
+ * Les états (verrouillée, grâce, essai, production) et les voies selon l'état : docs/ACTIVATION-ETATS-ET-VOIES.md. Les décisions sont dans `core` ([ActivationRoutePlan],
  * [KeyAcquisition]), l'exécution dans [ActivationDriver] ; cet écran dessine et relaie les gestes. Rien de secret ici : la clé est signée et liée à UNE TV, la TV la vérifie elle-même.
  */
 class ActivateTvActivity : ComponentActivity() {
@@ -213,7 +215,9 @@ class ActivateTvActivity : ComponentActivity() {
             while (true) {
                 val r = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) { runCatching { org.json.JSONObject(TvClient(base, s.credential).raw("GET", "/api/activation")) } }
                 r.onSuccess { j ->
-                    val info = ActivationScreenState.Info(j.optBoolean("required"), j.optBoolean("locked"), j.optBoolean("trial"), j.optString("label"), if (j.isNull("usageEndsAt")) null else j.optLong("usageEndsAt"))
+                    // `grace` / `graceUntil`: a CastBridge-TV of 0.14.49 or before does not say them (absent = not in grace, the reading it always had). `trial` is true in grace too: grace is read first.
+                    val info = ActivationScreenState.Info(j.optBoolean("required"), j.optBoolean("locked"), j.optBoolean("trial"), j.optString("label"), if (j.isNull("usageEndsAt")) null else j.optLong("usageEndsAt"),
+                        j.optBoolean("grace"), if (j.isNull("graceUntil")) null else j.optLong("graceUntil"))
                     tvView = ActivationScreenState.view(info, null, System.currentTimeMillis())
                 }.onFailure { tvView = null }
                 kotlinx.coroutines.delay(4_000)

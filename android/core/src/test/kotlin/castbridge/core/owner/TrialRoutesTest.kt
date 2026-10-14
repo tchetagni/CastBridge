@@ -20,7 +20,7 @@ class TrialRoutesTest {
         "/api/activation", "/api/activation/install", "/api/activation/request", "/api/rental", "/api/rental/install", "/api/lots", "/api/lots/upload", "/api/lots/install",
         "/api/learn", "/api/learn/open", "/api/sudoku", "/api/sudoku/open", "/api/games", "/api/games/open", "/api/bluetooth", "/api/bluetooth/tunnel", "/api/bluetooth/tunnel/enable",
         "/api/connections", "/api/server/me",
-        "/api/restart", "/api/net", "/api/background", "/api/autostart", "/api/overlay-permission", "/api/bluetooth/discoverable", "/api/bluetooth/tunnel/disable",
+        "/api/restart", "/api/net", "/api/relay", "/api/background", "/api/autostart", "/api/overlay-permission", "/api/bluetooth/discoverable", "/api/bluetooth/tunnel/disable",
         "/api/gateway", "/api/gateway/test", "/api/gateway/speed", "/api/gateway/diag", "/api/content/reports", "/api/content/reports/ack",
         "/api/store", "/api/store/catalog", "/api/lots/part", "/api/lots/priority", "/api/lots/remove", "/api/rental/sweep", "/api/rental/usage", "/api/player/prev",
         "/api/player/audio", "/api/player/subtitle", "/api/player/subdelay", "/api/player/audiodelay", "/api/player/subsize", "/api/player/rate", "/api/player/aspect",
@@ -45,7 +45,7 @@ class TrialRoutesTest {
         "/api/folders/rename", "/api/library/watched", "/api/playlist", "/api/ssh/disable", "/api/ssh/key/remove",
         "/api/storage/check", "/api/have", "/api/storage/move/cancel", "/api/storage/open-settings", "/api/storage/rescan", "/api/trash/empty", "/api/trash/purge", "/api/trash/restore",
         "/api/transfer/begin", "/api/transfer/chunk", "/api/transfer/state", "/api/transfer/finish", "/api/transfer/abort",
-        "/api/server/check-update", "/api/server/quiz-sync", "/api/chess", "/api/chess/open", "/quiz", "/quiz/api/join", "/chess", "/chess/api/state", "/stream/film.mp4", "/stream/",
+        "/api/server/check-update", "/api/server/quiz-sync", "/api/chess", "/api/chess/open", "/api/games/room", "/api/games/journals", "/quiz", "/quiz/api/join", "/chess", "/chess/api/state", "/stream/film.mp4", "/stream/",
         "/api/store/requests", "/api/store/requests/ack", "/api/store/request", "/api/activation/install-key/reset", "/api/player/subfile", "/api/learn/packs/import", "/api/learn/packs/install", "/api/new-future-route", "/api/hello/../ssh", "/api//ssh", "/api/%73sh", "/admin", "/api")
 
     @Test fun routeTable() {

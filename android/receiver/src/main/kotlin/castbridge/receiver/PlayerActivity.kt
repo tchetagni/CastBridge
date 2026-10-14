@@ -624,7 +624,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         val wdOn = prefs.getBool("wd_enabled", false)
         val sshOn = ssh?.running == true
         val upgrade = if (ActivationCenter.trial()) listOf(
-            tile(castbridge.core.owner.TrialPolicy.UPGRADE_TILE, R.drawable.ic_cb_cle_usb, castbridge.core.owner.TrialPolicy.UPGRADE_LABEL, "Version d'essai : demandez la clé de production avec le code de cette TV.", "Essai", true, homeId = castbridge.core.owner.TrialPolicy.UPGRADE_TILE) {
+            tile(castbridge.core.owner.TrialPolicy.UPGRADE_TILE, R.drawable.ic_cb_cle_usb, castbridge.core.owner.TrialPolicy.UPGRADE_LABEL, "Demandez la clé de production avec CastBridge › Activer la TV : il lit la demande complète de cette TV.", "Essai", true, homeId = castbridge.core.owner.TrialPolicy.UPGRADE_TILE) {
                 startActivity(Intent(this, ActivationActivity::class.java).putExtra(ActivationActivity.EXTRA_UPGRADE, true))
             }) else emptyList()
         // « ◎ Jetons » (W22-07a) : la carte du portefeuille de cette TV ; elle existe dès l'activation (même avant la première synchronisation : « en attente »), cachée si le service est indisponible

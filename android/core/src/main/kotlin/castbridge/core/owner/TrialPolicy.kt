@@ -13,7 +13,8 @@ object TrialPolicy {
     const val UPGRADE_TILE = "upgrade"
     const val UPGRADE_LABEL = "Passer en production"
     const val UPGRADE_TITLE = "Passer en version complète"
-    const val UPGRADE_EXPLAIN = "Pour passer en version complète, donnez le code d'appareil ci-dessous (ou la demande complète) à CastBridge : une clé de production vous sera remise. L'essai continue de fonctionner jusqu'à l'activation de cette clé."
+    /** R-48: the device code alone does not let the issuer make a key, so this text never asks for « le code d'appareil ». The complete request is read by CastBridge › Activer la TV and is also shown on this screen. */
+    const val UPGRADE_EXPLAIN = "Pour passer en version complète, demandez une clé de production avec CastBridge › Activer la TV sur le téléphone : il lit la demande d'appareil complète de la TV (elle est aussi affichée sur cet écran). Une clé de production vous sera remise. L'essai continue de fonctionner jusqu'à l'activation de cette clé."
     const val FULL_VERSION = "Version complète"
     /** Games of the « Jeux » hub reachable in the trial. */
     val GAMES: Set<String> = setOf("sudoku")
@@ -29,7 +30,8 @@ object TrialPolicy {
      * the Sudoku, and the connection helpers. Never: files, library, storage, folders, trash, downloads, uploads, transfers, USB, SSH, APK installs, screenshots, quiz, chess.
      */
     private val EXACT = setOf("/", "/api/hello", "/api/info", "/api/sysinfo", "/api/playurl", "/api/pause", "/api/resume", "/api/stop", "/api/seek", "/api/volume", "/api/restart",
-        "/api/connections", "/api/net", "/api/background", "/api/autostart", "/api/overlay-permission", "/api/bluetooth", "/api/bluetooth/discoverable",
+        // relay-R1 : /api/relay = vérité réseau unique de la TV (lecture seule), comme /api/net et /api/gateway ; l'essai a besoin du tuyau Internet du téléphone pour ses lots.
+        "/api/connections", "/api/net", "/api/relay", "/api/background", "/api/autostart", "/api/overlay-permission", "/api/bluetooth", "/api/bluetooth/discoverable",
         "/api/activation", "/api/tv/device-request", "/api/tv/open", "/api/rental", "/api/lots", "/api/store", "/api/store/catalog", "/api/learn", "/api/sudoku", "/api/games", "/api/games/open", "/api/parental",
         "/api/server", "/api/server/me", "/api/server/url", "/api/server/contact")
     private val PREFIXES = listOf("/api/activation", "/api/rental", "/api/lots", "/api/store", "/api/learn", "/api/sudoku", "/api/player", "/api/remote", "/api/bluetooth/tunnel", "/api/gateway",

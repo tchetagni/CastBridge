@@ -192,21 +192,18 @@ object LockedTexts {
      */
     const val REQUEST = "Code d'appareil (il identifie cette TV ; la clé se demande avec CastBridge › Activer la TV sur le téléphone, qui lit la demande complète de la TV)"
     const val NOTICE_TITLE = "Avis d'usage"
+    /**
+     * The usage notice. Like [REQUEST] (R-48) it must not say that the device code alone gets a key: the text before said « communiquez le code d'appareil affiché à CastBridge : une clé d'activation
+     * vous sera remise », FALSE. The key is asked for with CastBridge › Activer la TV on the phone, which reads the TV's COMPLETE device request. The legal sentence stays the owner's to validate.
+     */
     const val NOTICE = "CastBridge peut être installé librement, mais son usage est soumis à l'autorisation du propriétaire. " +
-        "Pour l'utiliser, communiquez le code d'appareil affiché à CastBridge : une clé d'activation vous sera remise. " +
+        "Pour l'utiliser, demandez une clé d'activation avec CastBridge › Activer la TV sur le téléphone (il lit la demande d'appareil complète de la TV) ; une clé d'activation vous sera remise. " +
         "[Texte à valider par le propriétaire : il ne constitue pas un avis juridique.]"
     const val WAYS = "La demande d'appareil complète de la TV (pas seulement son code) se donne à CastBridge : le téléphone la lit tout seul avec « Activer la TV », ou le fichier device-request.txt."
-    /** The three real ways to give the key to the TV (activation screen), short on purpose; see docs/TV-ACTIVATION-CLE-USB.md. */
-    val KEY_WAYS = listOf(
-        "1. Le plus simple : sur le téléphone, CastBridge > « Activer la TV ». Par le Wi-Fi si la TV et le téléphone sont sur le même réseau (code de connexion ci-dessous), sinon par Bluetooth, qui marche sur tous les boîtiers.",
-        "2. Ou « Choisir le fichier d'activation » : n'importe quel fichier texte qui contient la clé, à n'importe quelle ligne. Le fichier « activation » (ou activation.txt) déposé dans Android/data/castbridge.receiver/files de la clé est lu tout seul. Dans Download, seulement si « Accès à tous les fichiers » est donné à CastBridge-TV.",
-        "3. Ou collez la clé dans le champ ci-dessous.")
     const val SEARCHING = "Recherche…"
     const val KEY_FOUND = "Clé trouvée : vérification…"
     const val PHONE_CARRIER = "Ce téléphone peut recevoir une clé d'activation pour votre TV et la lui remettre par Bluetooth, sans rien débloquer pour lui-même."
     const val GRACE = "Votre appareil était déjà installé : il continue de fonctionner pendant la période de grâce. La clé se demande avec CastBridge › Activer la TV, sur le téléphone."
 
-    /** The text the phone shares (WhatsApp, SMS, e-mail) with the device code. */
-    fun shareMessage(code: String, subject: Subject) =
-        "Code d'appareil CastBridge (${if (subject == Subject.TV) "TV" else "téléphone"}) : $code\nMerci de me transmettre la clé d'activation."
+    // The phone shares the COMPLETE device request, never the bare code (R-48): see ShareRequestPlan (« Partager la demande ») and ActivationScreenState.requestShare.
 }

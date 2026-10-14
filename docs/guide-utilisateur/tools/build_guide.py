@@ -497,11 +497,12 @@ def build_body():
                          "Il dit « TV trouvée », avec le nom de la TV.",
                          "Comparez le code d'appareil avec celui de la TV."]) +
                      say("Le téléphone dit", "« TV trouvée : &lt;nom de la TV&gt; · code d'appareil ABCD-… »")),
-                card("Le téléphone essaie trois chemins",
+                card("Le téléphone essaie quatre chemins",
                      ns(["Réseau local : la TV et le téléphone sont sur le même Wi-Fi.",
+                         "Bluetooth sans appairage : aucun appairage, le code suffit.",
                          "Réseau de la TV : le téléphone rejoint le réseau qu'elle crée.",
-                         "Bluetooth : le recours qui marche sur tous les boîtiers."]) +
-                     nt("Temps limite de chaque chemin : 10 s, 50 s, 20 s.", "Un appairage Bluetooth à valider peut allonger l'attente.")),
+                         "Bluetooth appairé : pour les anciennes TV seulement."]) +
+                     nt("Temps limite par chemin : 10 s, 25 s, 50 s, 20 s.", "Un appairage Bluetooth à valider peut allonger l'attente.")),
                 card("Pendant ce temps",
                      bl(["Votre Internet mobile reste actif.",
                          "Wi-Fi du téléphone éteint : le Bluetooth commence tout de suite.",
@@ -562,6 +563,7 @@ def build_body():
             card("TV ou téléphone plus anciens",
                  bl(["TV 0.14.43 et téléphone récent : réseau local ou Bluetooth.",
                      "Le téléphone dit alors de mettre la TV à jour.",
+                     "Le Bluetooth sans appairage demande TV 0.14.47 et téléphone 1.2.54.",
                      "TV récente et téléphone ancien : scannez le QR code.",
                      "Puis ouvrez « Activer la TV » comme avant."])),
         ]),
@@ -1085,7 +1087,7 @@ def build_body():
     pb_act = (
         h3("Activer la TV avec le code", "probleme-activation") +
         qas([
-            qa("Le téléphone dit", "« La TV n'a pas pu être jointe avec ce code. » (une ligne par chemin : réseau local, réseau de la TV, Bluetooth)",
+            qa("Le téléphone dit", "« La TV n'a pas pu être jointe avec ce code. » (une ligne par chemin : réseau local, Bluetooth sans appairage, réseau de la TV, Bluetooth appairé)",
                "Relisez les 6 chiffres, puis réessayez.", "Cochez les conditions sur la TV.", "Gardez la TV sur son écran d'activation."),
             qa("Le téléphone dit", "« Réseau de la TV introuvable. Si la TV affiche « Le téléphone n'est pas sur ce Wi-Fi ? », appuyez sur OK sur la TV, puis « Réessayer ». »",
                "Sur la TV, appuyez sur OK sur cette ligne.", "Puis touchez « Réessayer » sur le téléphone."),
@@ -1282,7 +1284,7 @@ def main():
             '<nav class="toc" aria-label="Sommaire">%s</nav>%s'
             '<footer>Les captures viennent d\'un émulateur avec des vidéos de test et des codes masqués. Les dessins sont signalés. '
             'Un cadre en pointillés marque une illustration qui manque encore.<br>'
-            'Version du guide : 2026-10-07 · CastBridge 1.2.53 · CastBridge-TV 0.14.45 (captures de CastBridge 1.2.50 et CastBridge-TV 0.14.43)</footer></div></body></html>'
+            'Version du guide : 2026-10-14 · CastBridge 1.2.56 · CastBridge-TV 0.14.49 (captures de CastBridge 1.2.50 et CastBridge-TV 0.14.43)</footer></div></body></html>'
             % (CSS, "".join(css_imgs), DEFS, nav, body))
     open(OUTFILE, "w", encoding="utf-8").write(html)
     # numéros d'étapes dans annotations.json

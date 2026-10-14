@@ -249,18 +249,23 @@ class FeatureGateTest {
     }
 
     @Test fun lockedScreenTexts() {
-        assertContains(LockedTexts.shareMessage(code, Subject.TV), code); assertContains(LockedTexts.NOTICE, "à valider par le propriétaire")
+        assertContains(LockedTexts.NOTICE, "à valider par le propriétaire")
+        // R-48 : l'avis d'usage disait « communiquez le code d'appareil affiché à CastBridge : une clé d'activation vous sera remise », FAUX (le code seul ne permet pas d'émettre une clé)
+        assertFalse("communiquez le code d'appareil" in LockedTexts.NOTICE.lowercase(), LockedTexts.NOTICE)
+        assertContains(LockedTexts.NOTICE, "Activer la TV"); assertContains(LockedTexts.NOTICE, "demande d'appareil")
     }
 
     @Test fun theCodeUnderTheDeviceCodeSaysWhatItIsAndHowTheKeyIsAskedFor() {
         // propriétaire bloqué : le texte disait « fournissez ce code d'appareil à CastBridge pour obtenir votre clé », FAUX : l'émetteur exige les empreintes de facteurs (le code n'en est que le haché,
         // ActivationIssuer l. 104-105) ; la clé se demande avec CastBridge › Activer la TV sur le téléphone, qui lit la demande complète de la TV
         assertEquals("Code d'appareil (il identifie cette TV ; la clé se demande avec CastBridge › Activer la TV sur le téléphone, qui lit la demande complète de la TV)", LockedTexts.REQUEST)
-        for (t in listOf(LockedTexts.REQUEST, LockedTexts.WAYS, LockedTexts.GRACE)) {
+        for (t in listOf(LockedTexts.REQUEST, LockedTexts.WAYS, LockedTexts.GRACE, LockedTexts.NOTICE, TrialPolicy.UPGRADE_EXPLAIN)) {
             val low = t.lowercase()
             for (false_claim in listOf("fournissez", "envoyer le code", "envoyez le code", "communiquez le code", "donnez le code", "obtenir votre clé")) assertFalse(false_claim in low, "« $false_claim » dans « $t »")
         }
         assertContains(LockedTexts.WAYS, "demande d'appareil"); assertContains(LockedTexts.GRACE, "Activer la TV")
+        // « Passer en production » : la même vérité (la clé de production se demande avec la demande COMPLÈTE, lue par « Activer la TV » ou affichée sur l'écran), l'essai continue jusqu'à l'activation
+        assertContains(TrialPolicy.UPGRADE_EXPLAIN, "Activer la TV"); assertContains(TrialPolicy.UPGRADE_EXPLAIN, "demande d'appareil complète"); assertContains(TrialPolicy.UPGRADE_EXPLAIN, "L'essai continue de fonctionner jusqu'à l'activation de cette clé")
     }
 }
 
