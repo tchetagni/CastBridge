@@ -162,7 +162,7 @@ object ParentalHub {
             "quiz" in l -> Category.GAMES
             "adresse de la page web" in l -> Category.ADMIN
             "bibliothèque" in l -> null
-            l.startsWith("bluetooth") || l.startsWith("wi-fi direct") || l.startsWith("usb") || l.startsWith("stockage") ||
+            l.startsWith("notifications") || l.startsWith("bluetooth") || l.startsWith("wi-fi direct") || l.startsWith("usb") || l.startsWith("stockage") ||
                 "démarrer avec la tv" in l || "lecture à distance" in l || l.startsWith("mises à jour") || l.startsWith("confidentialité") ||
                 l.startsWith("connexion au serveur") || "développeur" in l || "importer les vidéos" in l || "choisir un dossier" in l ||
                 "où ranger" in l || "re-détecter" in l || "réglages de stockage" in l || "annuler l'import" in l || "rendre la tv visible" in l -> Category.SETTINGS
