@@ -32,6 +32,13 @@ data class PlayerState(val state: String = "idle", val name: String? = null, val
                        val videoDistress: Int = 0)
 
 /**
+ * A copy the TV holds only in part: a `<nom>.part` with its size sidecar `<nom>.meta`, [name] being the name its volume stores it under (what the listing shows). [live] = a writer is on it
+ * (a single-stream upload running, a multi-connection session open, a progress item running, or a write in the last [ReceiverServer.PART_BUSY_MS]); false = nobody writes any more: the copy
+ * only waits for its orphan sweep (24 h, 7 days on a key) or for its owner to cancel it ([ReceiverServer.cancelReception], R-51).
+ */
+data class PartialCopy(val name: String, val received: Long, val total: Long, val live: Boolean)
+
+/**
  * CastBridge TV HTTP API (port 8765). Videos are uploaded whole, resumably, into one of the storage volumes of [volumes]
  * (internal storage, a USB drive's app folder, a folder chosen through the system picker) so playback no longer depends on
  * the phone or the network. See docs/NEXT-preload.md and docs/STORAGE.md.
@@ -177,7 +184,12 @@ class ReceiverServer(
 
     // ---- « Préparer le retrait de la clé USB » (docs/STORAGE.md § « Clé USB mal éjectée : ce que la TV peut et ne peut pas faire », « Retrait sûr ») ----
     /** A single-stream upload that writes to a volume right now; [received] = bytes of the file there, this request included. */
-    private class PutInfo(val volumeId: String, val name: String, val total: Long, val received: java.util.concurrent.atomic.AtomicLong)
+    private class PutInfo(val volumeId: String, val name: String, val total: Long, val received: java.util.concurrent.atomic.AtomicLong) {
+        /** The owner cancelled this copy on the TV (R-51, [cancelReception]): the upload stops at its next read, deletes its files and answers 400. */
+        @Volatile var cancelled = false
+    }
+    /** Thrown inside an upload that was cancelled on the TV, to leave its write loop through the same exits as any other stop (streams closed, then the files go). */
+    private class CancelledOnTv : IOException("cancelled on tv")
     private val puts = java.util.concurrent.ConcurrentHashMap<String, PutInfo>()
     /** Volumes being prepared for removal: true = the copies running are cut at their next block (STOP), false = they finish, nothing new starts (DRAIN). */
     private val fences = java.util.concurrent.ConcurrentHashMap<String, Boolean>()
@@ -654,7 +666,7 @@ class ReceiverServer(
 
     override fun serve(session: IHTTPSession): Response {
         val s = CountingSession(session)
-        earlyReject.remove(); rejectCode.remove()
+        earlyReject.remove(); rejectCode.remove(); refusedUnread.remove()
         val r = try {
             route(s)
         } catch (e: NeedsForeground) {
@@ -663,7 +675,7 @@ class ReceiverServer(
         } catch (e: Exception) {
             json(Response.Status.INTERNAL_ERROR, """{"error":${q(e.message ?: e.javaClass.simpleName)}}""")
         }
-        return try { afterRoute(s, r) } finally { earlyReject.remove(); rejectCode.remove() }
+        return try { afterRoute(s, r) } finally { earlyReject.remove(); rejectCode.remove(); refusedUnread.remove() }
     }
 
     // ---- R-17: a refused request must never leave its body unread (the phone would see a reset, « Broken pipe », not the status) ----
@@ -685,6 +697,8 @@ class ReceiverServer(
     private val earlyReject = ThreadLocal<Boolean?>()
     /** Short code of why the request was refused (no secret): the TV log and `/api/info` say it. */
     private val rejectCode = ThreadLocal<String?>()
+    /** Set by a handler that refuses an authenticated upload WITHOUT reading its body (the copy was cancelled on the TV, R-51): [afterRoute] then reads and drops that body after the status went out, like for the transfer API. */
+    private val refusedUnread = ThreadLocal<Boolean?>()
     private fun early(code: String, r: Response): Response { earlyReject.set(true); rejectCode.set(code); return r }
 
     private class Rejection(val atMs: Long, val route: String, val status: Int, val code: String)
@@ -695,18 +709,22 @@ class ReceiverServer(
         recentRejections.joinToString(",", "[", "]") { """{"t":${it.atMs},"route":${q(it.route)},"status":${it.status},"code":${q(it.code)}}""" }
     }
 
+    /** Notes a refusal in the ring of `/api/info` and in the TV log: [route] is already cut and filtered (no file name, no line injection), [code] has no secret. */
+    private fun noteRejection(route: String, status: Int, code: String) {
+        val rej = Rejection(System.currentTimeMillis(), route, status, code)
+        synchronized(recentRejections) { recentRejections.addLast(rej); while (recentRejections.size > 5) recentRejections.removeFirst() }
+        runCatching { onLog("refus ${rej.route} ${rej.status} ${rej.code}") }
+    }
+
     private fun afterRoute(s: CountingSession, r: Response): Response {
         val st = r.status.requestStatus
         val early = earlyReject.get() == true
         val xfer = s.uri.startsWith("/api/transfer/")
+        val unread = refusedUnread.get() == true          // R-51: an upload refused before its body was read (already noted by whoever refused it)
         val withBody = s.method == Method.PUT || s.method == Method.POST
         // only requests that carry a body count (scanners' GETs must not fill the ring), and the logged route is cut and filtered (no file name, no line injection)
-        if (withBody && st !in 200..299 && st != 429 && (early || xfer)) {
-            val rej = Rejection(System.currentTimeMillis(), safeRoute(s.method.name, s.uri), st, rejectCode.get() ?: "refused")
-            synchronized(recentRejections) { recentRejections.addLast(rej); while (recentRejections.size > 5) recentRejections.removeFirst() }
-            runCatching { onLog("refus ${rej.route} ${rej.status} ${rej.code}") }
-        }
-        if (!withBody || !(early || xfer)) return r
+        if (withBody && st !in 200..299 && st != 429 && (early || xfer)) noteRejection(safeRoute(s.method.name, s.uri), st, rejectCode.get() ?: "refused")
+        if (!withBody || !(early || xfer || unread)) return r
         val rest = (s.headers["content-length"]?.toLongOrNull() ?: 0L) - s.consumed
         if (rest <= 0) return r
         if (st in 200..299) {
@@ -807,7 +825,7 @@ class ReceiverServer(
             path == "/api/part" -> named(p) { name ->
                 val size = p["size"]?.toLongOrNull()?.takeIf { it > 0 }
                 if (findFinalOrOrigin(name, size) == null && findPart(name) == null) volumes.missingOwner(name)?.let { return@named removed() }
-                ok(if (size != null) sizeChecked(partJsonFor(name, size)) else partJson(name))
+                ok(withCancelCode(name, if (size != null) sizeChecked(partJsonFor(name, size)) else partJson(name)))
             }
             path == "/api/sysinfo" -> sysinfo()
             path == "/api/library" && s.method == Method.GET -> ok(libraryJson())
@@ -894,12 +912,13 @@ class ReceiverServer(
                 if (partBusy(name)) return@named json(Response.Status.CONFLICT, """{"error":"busy","code":"BUSY","name":${q(name)}}""")
                 synchronized(FileLocks.of(LOCK_ROOT, name)) {
                     if (partBusy(name)) return@named json(Response.Status.CONFLICT, """{"error":"busy","code":"BUSY","name":${q(name)}}""")
-                    volumes.volumes().forEach { v ->
-                        val st = volumes.store(v); val n = v.storedName(name)
-                        st.deletePart(n); (st as? FileStore)?.let { Meta.delete(it.dir, n) }; volumes.forgetPart(v, n)
-                    }
-                    volumes.forgetMissing(name); meters.remove(name); invalidate()
+                    dropPartial(name)
                 }
+                ok(partJson(name))
+            }
+            // R-51: the owner's cancel of a copy held in part (live or interrupted), same guards as /api/reset (PIN or token); the TV's own MENU calls cancelReception directly
+            path == "/api/reception/cancel" -> named(p) { name ->
+                if (!cancelReception(name)) return@named json(Response.Status.NOT_FOUND, """{"error":"not found"}""")
                 ok(partJson(name))
             }
             path == "/api/delete" -> named(p) { name ->
@@ -1024,6 +1043,7 @@ class ReceiverServer(
         val offset = p["offset"]?.toLongOrNull() ?: return bad("offset required")
         val total = p["total"]?.toLongOrNull()?.takeIf { it > 0 } ?: return bad("total required")
         val len = s.headers["content-length"]?.toLongOrNull() ?: return bad("content-length required")
+        if (cancelledOnTv(name)) return tvCancelledPut()          // R-51: the owner cancelled this copy on the TV a moment ago
         val target = p["target"]?.takeIf { it.isNotEmpty() } ?: cfg.target
         if (!StoragePolicy.isValidTarget(target, volumes.volumes() + volumes.missingVolumes())) return bad("bad target")
         if (p["filing"] == "0") noFiling += name.lowercase() else noFiling -= name.lowercase()     // R-13: the phone's « classer dans des dossiers » option, per send
@@ -1032,6 +1052,7 @@ class ReceiverServer(
         if (findFinal(name)?.let { it.size != total } == true) return nameTaken(name, total)
         synchronized(FileLocks.of(LOCK_ROOT, name)) {
             if (moving(name)) return json(Response.Status.CONFLICT, """{"error":"moving"}""")
+            if (cancelledOnTv(name)) return tvCancelledPut()          // the same test under the lock (the mark may have been laid while this request waited for it)
             // Same test again under the lock (a final may have appeared since): a partial copy never goes on next to a finished homonym of another size.
             if (finals(name).any { it.size != total }) return nameTaken(name, total)
             var owner = findPart(name)
@@ -1073,11 +1094,14 @@ class ReceiverServer(
             val fileStore = st as? FileStore
             val lock = if (fileStore != null) FileLocks.of(fileStore.dir, o.name) else Any()
             val pid = "put:" + name.lowercase()
-            progress.begin(pid, name, total, castbridge.core.xfer.TransferProgress.Transport.WIFI, if (progress.isRunning(pid)) null else sourceOf(s), cur)
             val put = PutInfo(v.id, name, total, java.util.concurrent.atomic.AtomicLong(cur)).also { puts[pid] = it }
+            // R-51: registered FIRST, the mark is read AFTER; cancelReception lays the mark FIRST and reads the uploads AFTER: one of the two always sees the other, so no copy escapes a cancel
+            if (cancelledOnTv(name)) put.cancelled = true
+            if (!put.cancelled) progress.begin(pid, name, total, castbridge.core.xfer.TransferProgress.Transport.WIFI, if (progress.isRunning(pid)) null else sourceOf(s), cur)
             try { synchronized(lock) {
                 // Append as bytes arrive: whatever reached the disk before a network cut or a pulled drive is kept for resume.
                 try {
+                    if (put.cancelled) throw CancelledOnTv()
                     fileStore?.let { Meta.write(it.dir, o.name, total) }   // lets /stream/ announce the final size before the last byte arrives
                     val meter = meters.getOrPut(name) { RateMeter() }
                     val input = s.inputStream
@@ -1105,6 +1129,7 @@ class ReceiverServer(
                         }
                         try {
                             while (left > 0) {
+                                if (put.cancelled) throw CancelledOnTv()                 // R-51: the owner cancelled it on the TV; what arrived is dropped with the files
                                 if (!volumes.alive(v)) throw DiskError(IOException("volume removed"))
                                 if (fences[v.id] == true) { flush(); throw DiskError(IOException(HELD)) }          // « Préparer le retrait » : what arrived is kept, the phone resumes when the key is back
                                 val r = input.read(buf, fill, minOf((buf.size - fill).toLong(), left, rx.readCap().toLong()).toInt())
@@ -1114,7 +1139,8 @@ class ReceiverServer(
                                 rx.onBytes(r)                        // priority and rate of « la lecture d'abord » (no-op at rest)
                                 if (fill == buf.size) flush()
                             }
-                        } catch (e: DiskError) { throw e } catch (e: IOException) {
+                        } catch (e: DiskError) { throw e } catch (e: CancelledOnTv) { throw e } catch (e: IOException) {
+                            if (put.cancelled) throw CancelledOnTv()     // the connection broke after the owner cancelled: nothing to keep
                             flush()                                  // the network dropped: keep what arrived, the phone resumes from there
                             // an fsync spaced out because of playback is owed to what arrived: done as soon as playback stops
                             if (v.kind == VolumeKind.REMOVABLE && sinceSync > 0 && rx.decision.on)
@@ -1141,12 +1167,16 @@ class ReceiverServer(
                     } else {
                         progress.interrupted(pid)             // the stream ended short (clean close): the phone resumes, the sweep does not have to wait for it
                     }
+                } catch (e: CancelledOnTv) {
+                    return cancelledPut(pid, name)
                 } catch (e: DiskError) {
+                    if (put.cancelled) return cancelledPut(pid, name)
                     if (e.message == HELD) { progress.interrupted(pid, "clé en cours de retrait : la copie reprendra au retour de la clé"); return held() }
                     if (!volumes.alive(v)) noteCut(v.id, name)
                     progress.fail(pid, diskReason(v, e))
                     return diskFailure(v, e)
                 } catch (e: IOException) {
+                    if (put.cancelled) return cancelledPut(pid, name)
                     progress.interrupted(pid)                 // the network dropped: the phone resumes from what arrived
                     throw e
                 }
@@ -1177,6 +1207,7 @@ class ReceiverServer(
         val m = try { castbridge.core.xfer.Manifest(name, size, bs).also { require(bs <= 16 shl 20) } } catch (e: IllegalArgumentException) { return bad("bad blockSize") }
         val target = p["target"]?.takeIf { it.isNotEmpty() } ?: cfg.target
         if (!StoragePolicy.isValidTarget(target, volumes.volumes() + volumes.missingVolumes())) return bad("bad target")
+        if (p["discard"] != "1" && cancelledOnTv(name)) return tvCancelledBegin()          // R-51: the owner cancelled this copy on the TV a moment ago (the bench's « network alone » run is not a copy)
         if (p["discard"] != "1") { if (p["filing"] == "0") noFiling += name.lowercase() else noFiling -= name.lowercase() }      // R-13, per send
         // A finish of this name is reading the file back under the per-name lock (minutes for a big file): never park an HTTP thread behind it (8 of
         // them and /stream/ and /api/info starve). The phone treats 5xx of begin as « resume » and waits retryMs. Looked up by id AND by name.
@@ -1196,6 +1227,8 @@ class ReceiverServer(
                         if (!r.s.assembler.discard) {
                             val pid = "x:" + m.id
                             progress.begin(pid, name, size, castbridge.core.xfer.TransferProgress.Transport.WIFI_MULTI, if (progress.isRunning(pid)) null else sourceOf(s), transfers.receivedBytes(r.s))
+                            // R-51: the session exists, THEN the mark is read (cancelReception lays the mark, then looks for the sessions): a cancel that came between is not lost
+                            if (cancelledOnTv(name)) { transfers.discard(m.id); progress.abort(pid, TV_CANCEL_REASON); return tvCancelledBegin() }
                         }
                         ok(transfers.stateJson(r.s))
                     }
@@ -1558,8 +1591,118 @@ class ReceiverServer(
         return Storage.quota(st.dir, cfg, used, volumes.free(v), v.kind)
     }
 
-    /** Files being received right now: (name, received bytes, final size). */
-    fun receiving(): List<Triple<String, Long, Long>> = listing().partials
+    /**
+     * Every copy the TV holds in part (a `.part` with its size sidecar, on any volume), each with whether a writer is on it right now (R-51). The listing is the cached one (at most
+     * [TvProfile.infoCacheMs] old); [PartialCopy.live] is asked afresh at each call.
+     */
+    fun partials(): List<PartialCopy> = listing().partials.map { (n, got, total) -> PartialCopy(n, got, total, liveCopy(n)) }
+
+    /** Files being received right now: (name, received bytes, final size). Only the LIVE copies (R-51): a `.part` nobody writes any more is a [stalledCopies], not a reception. */
+    fun receiving(): List<Triple<String, Long, Long>> = partials().filter { it.live }.map { Triple(it.name, it.received, it.total) }
+
+    /** The copies the TV still holds but nobody writes any more (the phone left, the link broke for good): they stay until their owner cancels them ([cancelReception]) or the orphan sweep takes them. */
+    fun stalledCopies(): List<PartialCopy> = partials().filter { !it.live }
+
+    /** A progress item of this name runs (any path), a multi-connection session of it is open, or its `.part` was written in the last [PART_BUSY_MS]. */
+    private fun liveCopy(name: String): Boolean =
+        progress.isRunningWhere { sameName(it, name) } || transfers.idsWhere { sameName(it, name) }.isNotEmpty() || partBusy(name)
+
+    /**
+     * Two spellings of ONE copy: the name the phone sent and the name the volume stored it under (a FAT/exFAT drive changes `:` or `?`, see [NameRules]; the listing and the MENU show the
+     * stored one). The stored name maps to itself on its volume, so either spelling meets the other.
+     */
+    private fun sameName(a: String, b: String): Boolean =
+        a.equals(b, ignoreCase = true) || volumes.volumes().any { v -> v.storedName(a).equals(v.storedName(b), ignoreCase = true) }
+
+    /** A copy the owner cancelled on the TV (R-51): its name is refused until [untilMs] on the clock [cancelClock]. */
+    private class TvCancel(val name: String, val untilMs: Long)
+    private val tvCancels = ArrayList<TvCancel>()
+    /** (tests) The clock of the refusal window. */
+    @Volatile internal var cancelClock: () -> Long = System::currentTimeMillis
+    /** (tests) How long [cancelReception] waits for an upload that is writing to leave. */
+    @Volatile internal var cancelWaitMs: Long = CANCEL_WAIT_MS
+
+    /** The owner cancelled a copy of this name on the TV less than [TV_CANCEL_REFUSE_MS] ago. */
+    private fun cancelledOnTv(name: String): Boolean {
+        val now = cancelClock()
+        return synchronized(tvCancels) { tvCancels.removeAll { it.untilMs <= now }; tvCancels.any { sameName(it.name, name) } }
+    }
+
+    /**
+     * R-51 — the owner cancels a copy from the TV. [name] is the name the listing shows (the stored one) or the one the phone sent. It stops what is writing the copy (a single-stream upload
+     * at its next read, a multi-connection session at once), removes the `.part` and its `.meta` on every volume, ends its progress items (ABORTED, with [reason]) and refuses that name for
+     * [TV_CANCEL_REFUSE_MS] — 400 on `PUT /upload/`, 409 on `POST /api/transfer/begin`, `code` in `GET /api/part`, all [TV_CANCELLED_CODE] — so that the phone, which resumes by itself,
+     * does not bring it back and reads why. A « Déplacer » running with that name is cancelled like `POST /api/storage/move/cancel` (its partial copy is kept). A finished file is never touched,
+     * nor a multi-connection copy whose last check is reading the file back (complete, it ends in seconds). True = something was stopped or removed. May wait a few seconds ([cancelWaitMs]): never call it on the main thread.
+     */
+    fun cancelReception(name: String, reason: String = TV_CANCEL_REASON): Boolean {
+        val n = safeName(name) ?: return false
+        moveJob?.takeIf { it.state == "running" && sameName(it.name, n) }?.let { it.cancelled = true; return true }
+        // FIRST the mark, THEN the uploads and sessions: an upload or a begin that registers after the mark sees it right after it registered, one that registered before is found below
+        val mark = TvCancel(n, cancelClock() + TV_CANCEL_REFUSE_MS)
+        synchronized(tvCancels) { tvCancels += mark }
+        val ids = transfers.idsWhere { sameName(it, n) }
+        // a multi-connection copy whose last check is reading the file back is COMPLETE: it ends in seconds as a received file (and the read-back holds the lock of the name): nothing to cancel
+        if (ids.any { transfers.session(it)?.finishing == true }) { synchronized(tvCancels) { tvCancels.remove(mark) }; return false }
+        var acted = false
+        // uploads writing it now: flagged, each stops at its next read, deletes its own files and answers 400
+        val writing = puts.values.filter { sameName(it.name, n) }
+        for (w in writing) w.cancelled = true
+        if (writing.isNotEmpty()) acted = true
+        // multi-connection sessions: the session and its bytes go at once (a chunk still in flight meets « unknown transfer » or « transfer closed »: the phone begins again and is refused)
+        for (id in ids) { transfers.discard(id); progress.abort("x:$id", reason); acted = true }
+        // the progress items of that name, whatever the path (classic, Bluetooth), end on the screen at once
+        if (progress.abortWhere(reason) { sameName(it, n) } > 0) acted = true
+        // the TV player reads the growing copy ("Copier et lire"): it stops, as for /api/delete
+        growingName?.let { g -> if (sameName(g, n) && isPlaying(g)) { runCatching { player.stop() }; growingName = null } }
+        // an upload that is writing leaves within a read (a few ms); one blocked on a dead connection is given a moment, then its own end deletes the files
+        val until = System.nanoTime() + cancelWaitMs * 1_000_000
+        while (puts.values.any { sameName(it.name, n) } && System.nanoTime() < until) {
+            try { Thread.sleep(20) } catch (e: InterruptedException) { Thread.currentThread().interrupt(); break }
+        }
+        if (volumes.missingOwner(n) != null) acted = true               // the partial copy sits on a key that is away: the phone stops waiting for it
+        if (puts.values.none { sameName(it.name, n) }) synchronized(FileLocks.of(LOCK_ROOT, n)) { if (dropPartial(n)) acted = true }
+        if (!acted) synchronized(tvCancels) { tvCancels.remove(mark) }       // nothing was there: this call leaves no refusal behind (an earlier one, if any, stays)
+        invalidate()
+        return acted
+    }
+
+    /** Removes the partial copy of [name] from every volume: the steps of `POST /api/reset`, shared with [cancelReception]. True if a `.part` or its size sidecar was there. Under the lock of the name. */
+    private fun dropPartial(name: String): Boolean {
+        var found = false
+        volumes.volumes().forEach { v ->
+            val st = volumes.store(v); val n = v.storedName(name)
+            val fs = st as? FileStore
+            if (st.partSize(n) > 0 || (fs != null && (File(fs.dir, fs.diskName(n) + Storage.PART).exists() || Meta.file(fs.dir, n).exists()))) found = true
+            st.deletePart(n); fs?.let { Meta.delete(it.dir, n) }; volumes.forgetPart(v, n)
+        }
+        volumes.forgetMissing(name); meters.remove(name); invalidate()
+        return found
+    }
+
+    /** 400 body (PUT) and 409 body (begin) of a refused name, and the `code` that `GET /api/part` adds: ONE text for the three. */
+    private fun tvCancelledJson(): String = """{"error":"cancelled on tv","code":"$TV_CANCELLED_CODE","message":${q(TV_CANCELLED_MESSAGE)}}"""
+
+    /** `GET /api/part` during the window: the usual answer plus `"code":"TV_CANCELLED"` (a finished file, or another code already there, is left as it is). */
+    private fun withCancelCode(name: String, answer: String): String =
+        if (!answer.contains("\"code\":") && !answer.contains("\"done\":true") && cancelledOnTv(name)) answer.dropLast(1) + ""","code":"$TV_CANCELLED_CODE"}""" else answer
+
+    /** 400: the owner cancelled this copy on the TV a moment ago. Final for the phone (a 400 is not retried and its `message` is shown). The body is read and dropped after the status went out (R-17). */
+    private fun tvCancelledPut(): Response {
+        refusedUnread.set(true)
+        noteRejection("PUT /upload", 400, "tv-cancelled")
+        return json(Response.Status.BAD_REQUEST, tvCancelledJson())
+    }
+
+    /** 409 on `POST /api/transfer/begin` (no body to read): the phone's multi-connection transfer takes any code but 200 and 5xx for a final refusal and shows `message`. */
+    private fun tvCancelledBegin(): Response { rejectCode.set("tv-cancelled"); return json(Response.Status.CONFLICT, tvCancelledJson()) }
+
+    /** An upload was stopped, or met the mark, because its copy was cancelled on the TV: its files go, its item ends, the phone reads the refusal. Called under the lock of the name. */
+    private fun cancelledPut(pid: String, name: String): Response {
+        dropPartial(name)
+        progress.abort(pid, TV_CANCEL_REASON)
+        return tvCancelledPut()
+    }
 
     /** Finished files (newest first) with what the library screens need: thumbnail, duration, resume position, volume. */
     fun libraryItems(): List<LibraryItem> {
@@ -2027,6 +2170,15 @@ class ReceiverServer(
         val BODY_OPTIONAL: Set<String> = setOf("/api/tv/open")
         /** A partial copy written less than this long ago (or being written) is busy: /api/reset refuses to drop it. */
         const val PART_BUSY_MS = 60_000L
+        /** After the owner cancels a copy on the TV, that name is refused this long (R-51): the phone resumes by itself and must not bring the copy back at once. */
+        const val TV_CANCEL_REFUSE_MS = 10 * 60_000L
+        /** Why the reception progress says the copy ended (« Réception interrompue : annulée sur la TV »). */
+        const val TV_CANCEL_REASON = "annulée sur la TV"
+        /** `code` of the refusal (400 on `PUT /upload/`, 409 on `POST /api/transfer/begin`, field of `GET /api/part`) and the French sentence the phone shows its owner. ONE text. */
+        const val TV_CANCELLED_CODE = "TV_CANCELLED"
+        const val TV_CANCELLED_MESSAGE = "Copie annulée sur la TV : renvoyez-la dans quelques minutes si c'était une erreur."
+        /** [ReceiverServer.cancelReception] waits this long for an upload that is writing to leave (it stops at its next read). */
+        private const val CANCEL_WAIT_MS = 3_000L
         /** Longest a /stream/ reader waits for a byte while the copy is still alive (then the player's http-reconnect takes over). */
         const val STREAM_MAX_WAIT_MS = 120_000L
         /** Once the copy is dead (see [PART_BUSY_MS]) a waiting reader gets its error after this long. */

@@ -132,6 +132,23 @@ class TransferProgress(
     fun fail(id: String, reason: String) = end(id, Phase.FAILED, reason, null)
     fun abort(id: String, reason: String? = null) = end(id, Phase.ABORTED, reason, null)
 
+    /**
+     * Ends (ABORTED, with [reason]) every transfer still RUNNING whose file name satisfies [match], whatever path receives it: the classic `put:`, the multivoie `x:`, the Bluetooth `bt:`
+     * (« annuler la copie » on the TV, R-51). A transfer already ended is left alone. [match] is asked outside the lock. Returns how many were ended.
+     */
+    fun abortWhere(reason: String? = null, match: (String) -> Boolean): Int {
+        val running = synchronized(this) { live.values.map { it.item.id to it.item.name } }
+        var n = 0
+        for ((id, name) in running) if (match(name) && isRunning(id)) { abort(id, reason); n++ }
+        return n
+    }
+
+    /** [abortWhere] for one file name, whatever its case. */
+    fun abortByName(name: String, reason: String? = null): Int = abortWhere(reason) { it.equals(name, ignoreCase = true) }
+
+    /** True while a transfer whose file name satisfies [match] is running (any path); [match] is asked outside the lock. */
+    fun isRunningWhere(match: (String) -> Boolean): Boolean = synchronized(this) { live.values.map { it.item.name } }.any(match)
+
     private fun end(id: String, phase: Phase, reason: String?, finalName: String?) {
         val item = synchronized(this) {
             val l = live.remove(id) ?: return

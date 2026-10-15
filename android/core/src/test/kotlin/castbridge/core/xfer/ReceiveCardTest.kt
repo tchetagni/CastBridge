@@ -3,6 +3,7 @@ package castbridge.core.xfer
 import castbridge.core.xfer.TransferProgress.Transport
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
@@ -74,4 +75,57 @@ class ReceiveCardTest {
         p.begin("a", "Film_Name.2020.1080p.mkv", 100, Transport.WIFI, null, 10)
         assertEquals(castbridge.core.tv.LibraryLogic.title("Film_Name.2020.1080p.mkv"), ReceiveCards.of(p.shown()).single().name)
     }
+
+    // ---- R-51 : « Une copie interrompue sur la TV n'est pas annulable » (2026-10-14) ----
+
+    private fun stalledLine(stalled: List<Triple<String, Long, Long>>, partials: List<Triple<String, Long, Long>> = emptyList()) =
+        ReceiveCards.headline(ReceiveCards.of(p.shown(), partials, true, stalled))
+
+    @Test fun r51_aStalledCopyIsSaidInterruptedAndTellsHowToCancelIt() {
+        val cards = ReceiveCards.of(p.shown(), emptyList(), true, listOf(Triple("Film_Name.mkv", 42L, 100L)))
+        val c = cards.single()
+        assertEquals(listOf("Film Name", 42L, 100L, "interrompu"), listOf(c.name, c.received, c.total, c.state))
+        assertEquals("⏸ Copie interrompue : Film Name (42 %) · MENU > Copie : annuler", c.line)
+        assertEquals("⏸ Copie interrompue : Film Name (42 %) · MENU > Copie : annuler", ReceiveCards.headline(cards))
+        // the pre-fix chip said « Réception de … » for it, for hours
+        assertFalse(c.line.contains("Réception"), c.line)
+    }
+
+    @Test fun r51_stalledCardsComeAfterTheRunningOnesAndAreCountedInTheHeadline() {
+        p.begin("a", "a.mp4", 100, Transport.WIFI, null, 50)
+        val cards = ReceiveCards.of(p.shown(), listOf(Triple("b.mp4", 10L, 100L)), true, listOf(Triple("c.mp4", 30L, 100L)))
+        assertEquals(listOf("en cours", "en cours", "interrompu"), cards.map { it.state })
+        assertEquals(listOf("a", "b", "c"), cards.map { it.name })
+        assertEquals("⬇ Réception de a : 50 % · Wi-Fi  (+2 autres)", ReceiveCards.headline(cards))
+    }
+
+    @Test fun r51_aStalledCopyIsNeverListedTwiceNorBesideALiveOrJustEndedItemOfTheSameName() {
+        p.begin("put:clip.mp4", "Clip.MP4", 100, Transport.WIFI, null, 40)
+        val running = ReceiveCards.of(p.shown(), emptyList(), true, listOf(Triple("clip.mp4", 40L, 100L)))
+        assertEquals(1, running.size, "the live item of the same name (any case) hides the stalled one"); assertEquals("en cours", running.single().state)
+        p.abort("put:clip.mp4", "plus de nouvelles du téléphone")
+        val ended = ReceiveCards.of(p.shown(), emptyList(), true, listOf(Triple("clip.mp4", 40L, 100L)))
+        assertEquals(listOf("interrompu"), ended.map { it.state })
+        assertTrue(ended.single().line.startsWith("Réception interrompue : plus de nouvelles du téléphone"), "the 8 s end line, not a second card: ${ended.single().line}")
+        t += 9_000
+        assertEquals("⏸ Copie interrompue : clip (40 %) · MENU > Copie : annuler", stalledLine(listOf(Triple("clip.mp4", 40L, 100L))), "then the stalled card takes over")
+        // the same name on two volumes is one card
+        assertEquals(1, ReceiveCards.of(emptyList(), emptyList(), true, listOf(Triple("x.mp4", 1L, 10L), Triple("X.mp4", 2L, 10L))).size)
+        // and never next to the live fallback of the same name
+        assertEquals(1, ReceiveCards.of(emptyList(), listOf(Triple("y.mp4", 5L, 10L)), true, listOf(Triple("y.mp4", 5L, 10L))).size)
+    }
+
+    @Test fun r51_nothingStalledChangesNothing() {
+        assertNull(stalledLine(emptyList())); assertEquals("Prêt à recevoir", ReceiveCards.ready(true))
+        p.begin("a", "a.mp4", 100, Transport.WIFI, null, 50)
+        assertEquals("⬇ Réception de a : 50 % · Wi-Fi", stalledLine(emptyList()))
+    }
+
+    @Test fun r51_theMenuLineNamesTheCopyItsPercentAndWhetherItIsAliveOrInterrupted() {
+        assertEquals("Copie : annuler « Film Name » (42 %, interrompue)", ReceiveCards.cancelLine("Film_Name.mkv", 42, 100, live = false))
+        assertEquals("Copie : annuler « Film Name » (42 %, en cours)", ReceiveCards.cancelLine("Film_Name.mkv", 42, 100, live = true))
+        assertEquals("Copie : annuler « a » (0 %, interrompue)", ReceiveCards.cancelLine("a.mp4", 0, 0, live = false), "an unknown size never divides by zero")
+        assertEquals("Copie : annuler « a » (100 %, en cours)", ReceiveCards.cancelLine("a.mp4", 150, 100, live = true), "never above 100 %")
+    }
 }
+

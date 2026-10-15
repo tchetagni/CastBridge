@@ -156,6 +156,7 @@ object ParentalHub {
     fun categoryOfLabel(label: String): Category? {
         val l = label.lowercase()
         return when {
+            l.startsWith("copie") -> Category.SETTINGS          // « Copie : annuler « titre » (42 %, interrompue) » (R-51) : d'abord, le titre du fichier peut contenir « internet », « quiz »…
             "ssh" in l -> Category.SSH
             "internet" in l || "tester" in l -> Category.INTERNET
             "téléchargements" in l -> Category.DOWNLOADS

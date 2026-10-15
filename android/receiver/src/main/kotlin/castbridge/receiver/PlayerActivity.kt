@@ -522,7 +522,11 @@ class PlayerActivity : Activity(), TvService.Screen {
         override fun status(): Triple<String, String, String?> {
             val s = server
             // ONE source for every path (Wi-Fi, Wi-Fi multivoie, Bluetooth), held by the service (independent of the HTTP server): castbridge.core.xfer.ReceiveCards
-            val cards = castbridge.core.xfer.ReceiveCards.of(svc?.reception?.shown().orEmpty(), s?.receiving().orEmpty(), s != null)
+            // R-51: the copies the TV holds in part are read ONCE: the live ones are a reception, the others are « interrompue » (MENU > « Copie : annuler »)
+            val parts = s?.partials().orEmpty()
+            partialsSeen = parts
+            val cards = castbridge.core.xfer.ReceiveCards.of(svc?.reception?.shown().orEmpty(), parts.filter { it.live }.map { Triple(it.name, it.received, it.total) }, s != null,
+                parts.filter { !it.live }.map { Triple(it.name, it.received, it.total) })
             // a transfer in progress tells more than anything; otherwise, on a trial / grace TV, the line of a USB key that carries an activation (UsbActivationWatch: only when a file « activation » was really seen)
             // + the state of the USB keys as Android says it (docs/STORAGE.md): « Ne retirez pas la clé : copie en cours » in front of a reception to a key, « vérification par Android… patientez », the guide of an unreadable key
             return Triple(castbridge.core.xfer.ReceiveCards.ready(s != null), ParentalHub.shownPin(pin), UsbVolumeWatch.chipLine(castbridge.core.xfer.ReceiveCards.headline(cards), UsbActivationWatch.homeLine()))
@@ -662,7 +666,7 @@ class PlayerActivity : Activity(), TvService.Screen {
                 if (RemoteAccessibilityService.instance != null) "Toute la TV" else "CastBridge", RemoteAccessibilityService.instance != null) {
                 startActivity(Intent(this, RemoteSetupActivity::class.java))
             },
-            tile("receive", R.drawable.ic_cb_recevoir_du_telephone, "Recevoir du téléphone", "Envoyer une vidéo depuis l'app CastBridge du téléphone.", "Code ${ParentalHub.shownPin(pin)}", true) { homeApi().openHelp() },
+            tile("receive", R.drawable.ic_cb_recevoir_du_telephone, "Recevoir du téléphone", "Envoyer une vidéo depuis l'app CastBridge du téléphone.", "Code ${ParentalHub.shownPin(pin)}", true) { receiveMenu() },
             tile("usb", R.drawable.ic_cb_cle_usb, "Clé USB", "Importer des vidéos d'une clé, ou y ranger les nouvelles.",
                 if (drives.isEmpty()) UsbVolumeWatch.tileStatus() ?: "Aucune clé" else drives.joinToString { "${it.label} · ${it.free / (1L shl 30)} Go libres" }, drives.isNotEmpty()) {
                 choose("Clé USB", (if (UsbVolumeWatch.attention() != null) listOf<Pair<String, () -> Unit>>(castbridge.core.tv.UsbVolumeState.GUIDE_LABEL to { showUsbGuide() }) else emptyList()) + listOf<Pair<String, () -> Unit>>(
@@ -712,6 +716,7 @@ class PlayerActivity : Activity(), TvService.Screen {
     private fun showSettings() {
         if (!ParentalHub.allow(this, castbridge.core.parental.Category.SETTINGS)) return
         val s = svc ?: return
+        refreshPartials()
         val ip = TvService.localIp()
         val labels = mapOf("0-storage" to "Stockage", "1-bt" to "Bluetooth", "2-wd" to "Wi-Fi Direct (sans box)", "3-usb" to "Import depuis une clé",
             "4-ssh" to "Administration à distance (SSH)", "4-ssh-bt" to "SSH par Bluetooth", "4-api-bt" to "API par Bluetooth", "5-update" to "Installation d'applications",
@@ -816,11 +821,58 @@ class PlayerActivity : Activity(), TvService.Screen {
             .setNegativeButton("Fermer", null).show()
     }
 
+    // ---- R-51 : annuler depuis la TV une copie reçue en partie (vivante ou interrompue) ----
+
+    /**
+     * Les copies que la TV garde en partie, lues HORS du fil principal (lister les volumes touche la clé USB, et le panneau du MENU est reconstruit à chaque changement d'état) : les lignes
+     * « Copie : annuler » du MENU et de la tuile « Recevoir du téléphone » les lisent d'ici. Rafraîchi par l'accueil (toutes les 4 s) et par [refreshPartials].
+     */
+    @Volatile private var partialsSeen: List<castbridge.core.tv.PartialCopy> = emptyList()
+
+    /** Relit les copies en partie dans le fil de stockage ; si l'ensemble (noms, vivante ou non) a changé et que le panneau du MENU est ouvert, il est reconstruit une fois. */
+    private fun refreshPartials() = bgRun {
+        val now = runCatching { server?.partials().orEmpty() }.getOrDefault(emptyList())
+        val changed = now.map { it.name to it.live } != partialsSeen.map { it.name to it.live }
+        partialsSeen = now
+        if (changed) main.post { if (settingsPanel?.visible == true) showSettings() }
+    }
+
+    /** Une ligne « Copie : annuler « titre » (42 %, interrompue) » par copie en partie (un nom une seule fois, même sur deux volumes) ; chacune demande confirmation. */
+    private fun copyCancelItems(parts: List<castbridge.core.tv.PartialCopy>): List<Pair<String, () -> Unit>> =
+        parts.distinctBy { it.name.lowercase() }.map { p -> castbridge.core.xfer.ReceiveCards.cancelLine(p.name, p.received, p.total, p.live) to { confirmCancelCopy(p) } }
+
+    /** Confirmation où la réponse sans danger (« Non, la garder ») est présélectionnée, comme celle de la barre d'icônes ; « Oui » annule en arrière-plan (la TV peut attendre quelques secondes un envoi en cours). */
+    private fun confirmCancelCopy(p: castbridge.core.tv.PartialCopy) {
+        val title = castbridge.core.tv.LibraryLogic.title(p.name)
+        val pct = castbridge.core.xfer.ReceiveCards.percent(p.received, p.total)
+        AlertDialog.Builder(this).setTitle("Annuler la copie « $title » ?")
+            .setMessage("$pct % déjà reçus. Ce qui est reçu sera effacé : le téléphone devra renvoyer le fichier en entier, et ne pourra pas le faire avant quelques minutes." +
+                (if (p.live) "\n\nCette copie est en cours : elle sera arrêtée." else ""))
+            .setPositiveButton("Oui, annuler la copie") { _, _ ->
+                bgRun {
+                    val done = runCatching { server?.cancelReception(p.name) == true }.getOrDefault(false)
+                    main.post { flash(if (done) "Copie annulée : $title" else "Rien à annuler"); refreshPartials() }
+                }
+            }
+            .setNegativeButton("Non, la garder", null).create().also { d -> d.setOnShowListener { d.getButton(AlertDialog.BUTTON_NEGATIVE)?.requestFocus() } }.show()
+    }
+
+    /** La tuile « Recevoir du téléphone » : comment envoyer et, s'il y a des copies en partie, chacune annulable ; sinon l'aide seule, comme avant. */
+    private fun receiveMenu() = bgRun {
+        val parts = runCatching { server?.partials().orEmpty() }.getOrDefault(emptyList())
+        partialsSeen = parts
+        main.post {
+            if (parts.isEmpty()) homeApi().openHelp()
+            else choose("Recevoir du téléphone", listOf<Pair<String, () -> Unit>>("Comment envoyer depuis le téléphone" to { homeApi().openHelp() }) + copyCancelItems(parts))
+        }
+    }
+
     private fun menuItems(): List<Pair<String, () -> Unit>> {
         val s = svc ?: return emptyList()
         val usb = s.usb; val ssh = s.ssh
         val items = mutableListOf<Pair<String, () -> Unit>>()
         if (current == null) items += "Toute la bibliothèque" to { showLibrary() }
+        items += copyCancelItems(partialsSeen)          // R-51 : « Copie : annuler « Film » (42 %, interrompue) », seulement quand la TV garde une copie en partie
         items += "Quiz culture générale (jouer avec les téléphones)" to { startActivity(Intent(this, QuizActivity::class.java)) }
         items += (if (castbridge.receiver.quiz.PlayHub.flagOn(this)) "Quiz en ligne : activé (désactiver)" else "Quiz en ligne : désactivé (activer)") to {
             val on = !castbridge.receiver.quiz.PlayHub.flagOn(this)

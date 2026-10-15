@@ -107,7 +107,7 @@ class TvService : Service(), Device {
     var pin = ""; private set
     /** « Générer un nouveau PIN » (écran « Code PIN de la TV ») : règles, écriture, garde et service mis à jour ensemble ; journal « PIN régénéré » sans valeur. */
     val pinRegenerator by lazy { castbridge.core.tv.pin.PinRegenerator(prefs.pinStore(), guard, { Log.i(TAG, it) }, { pin = it }, System::currentTimeMillis) }
-    /** Une copie venant d'un téléphone est en cours (tous chemins) : le code ne change pas pendant ce temps. */
+    /** Une copie venant d'un téléphone est en cours (tous chemins) : le code ne change pas pendant ce temps. VIVANTE seulement (R-51) : une copie interrompue que plus personne n'écrit ne retient plus le code. */
     fun transferInProgress(): Boolean = reception.active().isNotEmpty() || server?.receiving().orEmpty().isNotEmpty()
     var server: ReceiverServer? = null; private set
     /** What the TV is receiving, from every path. Owned here, not by the HTTP server: a Bluetooth copy shows even if the port was taken. */

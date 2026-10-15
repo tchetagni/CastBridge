@@ -99,6 +99,9 @@ persistée dans les préférences de la TV (`storage_target`) et rejouée au dé
   Copie par flux de 64 Ko dans `<nom>.part` **sur la cible**, reprend un `.part` de déplacement précédent si sa taille annoncée correspond, ne renomme qu'à la taille exacte, revérifie la taille finale et **ne supprime la source qu'ensuite**.
   Annulable (`POST /api/storage/move/cancel`, le `.part` est gardé pour reprise). État dans `/api/storage` -> `move`. Le marquage « lu » suit le fichier. Un seul déplacement à la fois. Pas de progression détaillée au-delà de `done/total`.
 - **`.part` orphelins** nettoyés par volume au démarrage et au retour d'un volume : 24 h pour l'interne, **7 jours** pour une clé (une clé absente quelques jours ne doit pas perdre ses envois reprenables).
+  Ils n'attendent pas ce délai pour être **vus** ni **annulés** (R-51) : une copie que plus personne n'écrit (aucun envoi ni session de ce nom, aucune écriture depuis 60 s) est dite « interrompue » sur l'accueil de la TV
+  (« ⏸ Copie interrompue : X (42 %) · MENU > Copie : annuler ») et ne retient plus le code de la TV ; MENU > « Copie : annuler » (ou `POST /api/reception/cancel?name=`) efface `.part` et `.meta` sur tous les volumes
+  et refuse le même nom 10 min pour que le téléphone ne la rapporte pas aussitôt (`docs/TRANSFER.md` § 12). Le balayage ne sert plus que de filet.
 - Le Bluetooth et l'import USB (MENU > USB) écrivent toujours dans la mémoire interne (limite documentée, hors périmètre de cette branche).
 
 ## 6. Retrait à chaud
