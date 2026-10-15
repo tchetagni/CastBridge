@@ -93,6 +93,8 @@ class TransferHost(
     /** A `finish` of [name] is reading the file back right now, whatever session object (block size) started it. */
     fun finishingName(name: String): Boolean = sessions.values.any { it.finishing && it.manifest.name == name }
     fun hasName(name: String): Boolean = sessions.values.any { it.manifest.name == name }
+    /** Ids of the sessions whose file name satisfies [match] (the bench's discard sessions are not copies): « annuler la copie » on the TV finds a transfer by its name (R-51). */
+    fun idsWhere(match: (String) -> Boolean): List<String> = sessions.values.filter { !it.assembler.discard && match(it.manifest.name) }.map { it.manifest.id }
 
     /** True if one more block of [blockBytes] may be taken now (back-pressure). */
     fun mayAccept(blockBytes: Long): Boolean {

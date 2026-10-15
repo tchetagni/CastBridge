@@ -97,5 +97,35 @@ class TransferProgressTest {
         assertEquals("Échec de la réception : code refusé · film", events.last().screenLine())
     }
 
+    // ---- R-51 : annuler une copie depuis la TV, quel que soit le chemin qui la reçoit ----
+
+    @Test fun r51_abortByNameEndsEveryRunningItemOfThatNameWhateverThePathAndTheCase() {
+        p.begin("put:film.mp4", "Film.MP4", 1000, Transport.WIFI, "Galaxy", 300)
+        p.begin("x:7", "film.mp4", 1000, Transport.WIFI_MULTI, null, 100)
+        p.sink("AA:BB", "Pixel").progress("FILM.mp4", 200, 1000)          // Bluetooth id: bt:AA:BB:film.mp4
+        p.begin("put:other.mp4", "other.mp4", 1000, Transport.WIFI, null, 10)
+        p.begin("put:done.mp4", "film.mp4", 10, Transport.WIFI, null); p.finish("put:done.mp4")            // already ended: left alone
+        val before = events.size
+        assertEquals(3, p.abortByName("film.mp4", "annulée sur la TV"))
+        assertEquals(listOf("put:other.mp4"), p.active().map { it.id }, "only the other file is still running")
+        val ended = events.drop(before)
+        assertEquals(3, ended.size)
+        assertTrue(ended.all { it.phase == Phase.ABORTED && it.message == "annulée sur la TV" }, ended.toString())
+        assertEquals(setOf("put:film.mp4", "x:7", "bt:AA:BB:film.mp4"), ended.map { it.id }.toSet())
+        assertEquals("Réception interrompue : annulée sur la TV", ended.first().endLine())
+        // a late chunk, the end of the Bluetooth connection or a second call change nothing
+        val n = events.size
+        p.advance("x:7", 500); p.finish("x:7"); p.fail("put:film.mp4", "x"); assertEquals(0, p.abortByName("film.mp4", "encore")); assertEquals(0, p.abortByName("inconnu.mp4"))
+        assertEquals(n, events.size)
+        assertEquals(Phase.DONE, events.first { it.id == "put:done.mp4" && it.phase == Phase.DONE }.phase, "the finished copy keeps its end")
+    }
+
+    @Test fun r51_abortWhereTakesAnyRuleOfSameness() {
+        p.begin("put:a", "Spider-Man_ No Way Home~ab12cd.mp4", 100, Transport.WIFI, null, 10)
+        p.begin("put:b", "other.mp4", 100, Transport.WIFI, null, 10)
+        assertEquals(1, p.abortWhere("annulée") { it.startsWith("Spider-Man") })
+        assertEquals(listOf("put:b"), p.active().map { it.id })
+    }
+
     private fun TransferProgress.sink(peer: String, name: String) = Sink(peer, name)
 }

@@ -43,9 +43,10 @@ Les noms de fichiers sont sans `/`, `\`, ni `.part` final, 200 caractères max. 
 | `GET /api/sysinfo` | infos appareil | `{"model","android","ip","battery":%\|null,"charging":bool\|null,"uptime":ms,"app","volume":0-100\|null,"pssMb","memAvailMb","memTotalMb","lowMemory"}` |
 | `POST /api/volume?pct=0..100` | volume média de la TV | comme `sysinfo` |
 | `POST /api/restart` | redémarre **l'app** (pas la TV) | `{"restarting":true}` |
-| `GET /api/part?name=` | octets déjà reçus d'un envoi | `{"name","length","done":bool}` |
+| `GET /api/part?name=` | octets déjà reçus d'un envoi | `{"name","length","done":bool[,"code":"NAME_TAKEN"\|"PART_OTHER"\|"TV_CANCELLED"]}` (`TV_CANCELLED` : copie annulée sur la TV, ce nom est refusé 10 min) |
 | `PUT /upload/<nom>?offset=N&total=T[&target=auto\|internal\|<idVolume>]` | ajoute les octets `[N,T)` (corps = octets restants, `Content-Length` obligatoire) ; `target` choisit le volume de **ce** transfert (au premier octet ; sinon le réglage de la TV) | `{"name","length","done"}` |
 | `POST /api/reset?name=` | efface le `.part` | idem `part` |
+| `POST /api/reception/cancel?name=` | **annule une copie reçue en partie** (vivante ou interrompue ; `name` = celui du téléphone ou celui que montre la liste) : arrête l'envoi en cours, ferme sa session multivoie, efface `.part` et `.meta` sur tous les volumes et **refuse le même nom pendant 10 min** (`PUT /upload/` → `400`, `POST /api/transfer/begin` → `409`, `GET /api/part` → `code`, tous `TV_CANCELLED` avec un `message` français que le téléphone montre). Mêmes gardes que `reset` (PIN ou jeton), mais **sans** son refus « occupé » : c'est ce que fait la ligne « Copie : annuler » du MENU de la TV (R-51, `docs/TRANSFER.md` § 12) | idem `part` ; `404 {"error":"not found"}` s'il n'y avait rien à annuler |
 | `POST /api/play?name=&pos=ms` | lit un fichier ; s'il est encore en cours d'envoi, démarre en flux dès que assez de données sont arrivées (sinon `409 {"error":"buffering","received","needed","size"}`) | comme `info` |
 | `POST /api/playurl?url=&title=&pos=ms` | lit un lien `http(s)` sans rien stocker (« Lire en direct » du lecteur du téléphone : le petit serveur du téléphone ou un lien web) ; `400` pour tout autre schéma | comme `info` |
 | `GET\|HEAD /stream/<nom>` | le fichier (ou le `.part` en cours) avec `Range` 206/416, `Content-Length` = taille **finale** ; lit bloquant jusqu'à l'arrivée des octets manquants (coupure propre après 30 s) | octets |
@@ -176,7 +177,7 @@ Les noms de fichiers sont sans `/`, `\`, ni `.part` final, 200 caractères max. 
 ### Écran d'accueil (TV) et accueil du téléphone
 
 - **TV, accueil façon « lanceur média »** : fond flouté tiré de la miniature de la vidéo sélectionnée (réduite une fois à 48x27 px puis étirée : flou sans calcul par image), qui dérive lentement ;
-  horloge ; petit bandeau « ● Prêt à recevoir · code 83•••• » (OK dessus : code complet pendant 10 s ; pendant un envoi : « Réception de Film : 45 % ») ; rangées
+  horloge ; petit bandeau « ● Prêt à recevoir · code 83•••• » (OK dessus : code complet pendant 10 s ; pendant un envoi : « Réception de Film : 45 % » ; une copie reçue en partie que plus personne n'écrit : « ⏸ Copie interrompue : Film (45 %) · MENU > Copie : annuler », R-51) ; rangées
   « Reprendre », « Récemment ajoutés », « Sur la clé USB », « Toutes les vidéos », « Autres fichiers », puis tuiles « Toute la bibliothèque », « Connexion &
   réglages », « Aide ». La carte qui a le focus grossit avec un halo bleu et le texte au-dessus des rangées la décrit (reprendre à…, durée, clé ou TV). Fondus entre
   l'accueil, la bibliothèque et la lecture. RETOUR sur l'accueil quitte l'écran (le service continue).
@@ -277,6 +278,12 @@ tail -c +$((OFF+1)) "$F" | tv -X PUT --data-binary @- -H "Content-Type: applicat
 Si la connexion tombe, relancer les mêmes commandes : l'envoi repart de `length`. Le fichier apparaît sous son nom
 définitif quand `length == total`. Un `409` signifie que l'offset envoyé n'est pas celui de la TV : reprendre à
 `length`. Le même `.part` peut être repris par le canal Bluetooth ou par la page web.
+
+**Annuler une copie depuis la TV (R-51).** Une copie reçue en partie dont plus personne n'écrit n'attend pas le balayage des orphelins (24 h, 7 jours sur clé) : l'accueil de la TV dit « ⏸ Copie interrompue : <titre> (42 %) · MENU > Copie : annuler »
+(et ne retient plus le code de la TV), et **MENU > « Copie : annuler « <titre> » (42 %, interrompue) »** (la tuile « Recevoir du téléphone » les propose aussi, après « Comment envoyer depuis le téléphone ») l'efface après confirmation
+(« Non, la garder » est présélectionné). Une copie encore en cours y figure aussi, « (42 %, en cours) » : elle est arrêtée. Par l'API : `POST /api/reception/cancel?name=` (et non `reset`, qui refuse tant que le `.part` a été écrit il y a moins de 60 s).
+Le même nom est ensuite refusé 10 minutes, pour que le téléphone, qui reprend tout seul, ne rapporte pas la copie : `400 TV_CANCELLED` sur le `PUT`, `409` sur `begin`, avec « Copie annulée sur la TV : renvoyez-la dans quelques minutes si c'était une erreur. » ;
+passé ce délai la même copie repart de zéro. Le contrôle parental range ces lignes sous « réglages ». Détail, états et limites : `docs/TRANSFER.md` § 12.
 
 Commandes courantes :
 

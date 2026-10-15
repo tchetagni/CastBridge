@@ -102,3 +102,49 @@ Reprise : si l'ouverture échoue (SecurityException, fichier absent, fournisseur
 `<queries>` (Android 11+, visibilité des paquets) : inutile ici. Tant que le droit existe, l'URI donne l'accès au fournisseur sans le déclarer ; une fois le droit mort, `<queries>` ne rendrait pas le droit de lire, seulement la visibilité du paquet. Aucun `<queries>` n'est donc ajouté pour Telegram (le bloc existant ne sert qu'aux applications de télécommande).
 
 Non mesuré : tout ce chapitre sur appareil (voir P-76).
+
+## 12. Annulation côté TV : une copie interrompue s'annule depuis la TV (R-51, 2026-10-14)
+
+Constaté (TV 0.14.49-beta, téléphone 1.2.56-beta) : « Une copie interrompue sur la TV n'est pas annulable ». Une copie reçue en partie (`<nom>.part` + `<nom>.meta`) dont le téléphone était parti restait annoncée « Réception de X : 42 % » sur l'accueil pendant des heures (jusqu'au balayage des orphelins : 24 h, 7 jours sur une clé), faisait refuser « Générer un nouveau PIN » (« Une copie est en cours… ») et n'avait aucune commande sur la TV : seul le téléphone pouvait l'abandonner (`/api/transfer/abort`), et `/api/reset` refuse tant que le `.part` a moins de 60 s. Cause et preuves : ligne R-51 de `docs/REGRESSIONS.md`. Aucun changement de protocole : un champ OPTIONNEL (`code`) et une route nouvelle ; une TV 0.14.49 et un téléphone 1.2.56 restent compatibles.
+
+**Les trois états d'une copie reçue en partie** (`ReceiverServer.partials()` → `PartialCopy(name, received, total, live)`) :
+
+| État | Quand | Sur la TV |
+|---|---|---|
+| **vivante** | un item de progression de ce nom tourne (téléphone connecté, ou coupé depuis moins de 90 s : `TransferProgress` le garde 90 s), OU une session multivoie de ce nom est ouverte, OU le `.part` a été écrit dans les 60 dernières secondes (`PART_BUSY_MS`) | `receiving()` la liste ; puce de l'accueil « ⬇ Réception de X : 42 % » ; elle retient le code de la TV (`TvService.transferInProgress`) |
+| **interrompue** | aucun des trois | `stalledCopies()` la liste ; puce « ⏸ Copie interrompue : X (42 %) · MENU > Copie : annuler » ; elle ne retient plus le code ; elle reste (balayage 24 h / 7 j) jusqu'à son annulation |
+| **annulée** | le propriétaire l'a annulée sur la TV | disparue ; son nom est refusé 10 min (ci-dessous) |
+
+**`ReceiverServer.cancelReception(name, reason = "annulée sur la TV")`** (`name` = le nom que montre la liste, rangé par le volume, ou celui qu'a envoyé le téléphone : `sameName` les rapproche par `StorageVolume.storedName`, une clé FAT/exFAT change `:` ou `?`). Dans cet ordre :
+
+1. pose la **marque de refus** du nom (avant tout, pour qu'un téléphone qui reprend à cet instant soit refusé) ;
+2. un envoi monoflux (`PUT /upload/`) qui écrit : son drapeau `cancelled` est levé ; il le lit à chaque lecture du corps, s'arrête (flux fermés), **efface lui-même** `.part` et `.meta` et répond 400 ; un envoi bloqué sur une connexion morte est attendu 3 s au plus (`cancelWaitMs`), puis c'est sa propre sortie (au plus 15 s : délai de lecture de la TV) qui efface ;
+3. une session multivoie de ce nom : `TransferHost.discard` (session et octets `.cbx/<id>.data` effacés) ; un chunk encore en vol rencontre « transfert inconnu » / « transfert fermé » (le téléphone refait `begin` et est refusé). Si la **relecture finale** d'une session de ce nom tourne, la copie est COMPLÈTE : elle se termine en quelques secondes comme un fichier reçu (et sa relecture tient le verrou du nom), il n'y a rien à annuler — `cancelReception` ne touche à rien, renvoie faux et ne laisse aucun refus ;
+4. les items de progression de ce nom, quel que soit le chemin (`put:`, `x:`, `bt:`), passent à ABORTED « annulée sur la TV » (`TransferProgress.abortWhere`) ;
+5. `.part` et `.meta` sont effacés sur **tous** les volumes, `forgetPart`, `forgetMissing`, `meters.remove`, `invalidate()` : les mêmes gestes que `POST /api/reset`, qui les partage maintenant (`dropPartial`) et garde son refus 409 `BUSY` ;
+6. un « Déplacer » en cours de ce nom est annulé comme `POST /api/storage/move/cancel` (sa copie partielle est gardée ; l'annuler une seconde fois l'efface) ; la lecture d'un fichier qui grandit (« Copier et lire ») est arrêtée.
+
+Renvoie vrai si quelque chose a été arrêté ou retiré. Sinon (rien à annuler) elle ne laisse **aucun** refus derrière elle ; un fichier fini n'est jamais touché.
+
+**Fenêtre de refus** : `TV_CANCEL_REFUSE_MS` = 10 min (horloge `cancelClock`, injectable), même nom sans la casse. Le texte est UN : `TV_CANCELLED_MESSAGE`.
+
+| Requête du téléphone | Réponse pendant la fenêtre |
+|---|---|
+| `PUT /upload/<nom>` | **400** `{"error":"cancelled on tv","code":"TV_CANCELLED","message":"Copie annulée sur la TV : renvoyez-la dans quelques minutes si c'était une erreur."}` — un 400 est FINAL pour le téléphone (`ResumableUpload.run` : comme 401/413/507) et son `message` est montré au propriétaire ; un 409 « inconnu » l'aurait fait attendre et réessayer sans fin. Le corps non lu est lu et jeté après le statut, borné à 17 Mio / 2 s (R-17, `refusedUnread`) |
+| `POST /api/transfer/begin` | **409** même corps ; `HttpTransferApi.begin` : tout code autre que 200, 503 « verifying » et 5xx est un refus final avec `message`. Le `begin` du banc (`discard=1`, « réseau seul ») n'est jamais refusé |
+| `GET /api/part?name=` | 200 comme avant + `"code":"TV_CANCELLED"` (un fichier fini, ou un code `NAME_TAKEN` / `PART_OTHER`, reste tel quel). Le téléphone 1.2.56 ignore ce code ; un téléphone futur peut s'arrêter ici, sans envoyer un octet |
+
+Un envoi ou un `begin` qui se glisse entre la marque et la recherche des envois est vu des deux côtés : l'envoi s'enregistre PUIS lit la marque, l'annulation pose la marque PUIS lit les envois (même chose pour les sessions).
+
+**Route** `POST /api/reception/cancel?name=` : mêmes gardes que `/api/reset` (PIN ou jeton ; fermée en édition d'essai, hors liste blanche), répond comme `GET /api/part` (200) ou `404 {"error":"not found"}` s'il n'y avait rien à annuler. La TV, elle, n'appelle pas la route : `cancelReception` directement.
+
+**Sur la TV** : la puce de l'accueil (ci-dessus) ; **MENU** (panneau « Connexion & réglages »), première ligne après « Toute la bibliothèque » : une ligne par copie en partie « Copie : annuler « Film » (42 %, interrompue) » (ou « …, en cours ») ; la tuile « Recevoir du téléphone » ouvre « Comment envoyer depuis le téléphone » puis ces lignes quand il y en a, l'aide seule sinon. Chaque ligne demande confirmation (« Non, la garder » présélectionné) puis annule en arrière-plan (fil de stockage) : bandeau « Copie annulée : Film » ou « Rien à annuler ». Le contrôle parental range ces lignes sous « réglages » (`ParentalHub.categoryOfLabel` : tout libellé qui commence par « copie », avant tout autre test : un titre peut contenir « internet » ou « quiz »). Les lignes du MENU viennent d'un cache (`PlayerActivity.partialsSeen`) rafraîchi par l'accueil (toutes les 4 s) et, hors du fil principal, à chaque construction du panneau ; la tuile « Recevoir du téléphone » lit la liste hors du fil principal au moment du clic.
+
+**Limites connues, non corrigées ici**
+
+- **Risque, non mesuré** : un téléphone 1.2.56 qui envoie un gros fichier d'UN seul flux (`PUT /upload/` : « Copier et lire ») écrit son corps sans lire la réponse en route (R-17 : l'exception d'écriture est prise pour une coupure). La TV répond 400, puis lit et jette jusqu'à 17 Mio pendant 2 s (`refusedUnread`) : pour un corps plus gros, le téléphone peut ne voir que « Broken pipe », attendre et réessayer jusqu'à la fin de la fenêtre (puis la copie repart de zéro). Prouvé en JVM : un envoi refusé de 6 Mio lit bien son 400, et le client monoflux réel (`ResumableUpload`) s'arrête sur le texte de la TV quand le corps tient. La voie multivoie lit toujours le message (`begin` n'a pas de corps). Suite côté téléphone, si P-93 le montre utile : lire `code` de `GET /api/part` et s'arrêter avec le texte avant le premier octet.
+- L'état d'une session multivoie fermée par inactivité (10 min, `closeIdle`) reste sur disque sans nom : il est balayé par `PartAssembler.sweep` ; une session ouverte à l'annulation, elle, est effacée avec ses octets.
+- Le Bluetooth écrit un `.part` SANS `.meta` : il n'est pas listé, donc pas dans le MENU ; l'annulation par nom (route) arrête son item de progression et efface le `.part`, pas la liaison en cours.
+- Rien de ceci n'est mesuré sur la TV réelle (GaiaOS 32 bits, clé exFAT) : voir P-93.
+
+Tests : `TvCancelReceptionServerTest` (16 tests sur la vraie `ReceiverServer` : états, annulation sur tous les volumes, item ABORTED, refus 400 / 409, code de `/api/part`, fin de la fenêtre à la milliseconde, gros corps lu jusqu'au statut, route et PIN, envoi vivant arrêté en cours de corps, nom changé par une clé FAT, et les DEUX clients réels du téléphone, `ResumableUpload` et `TransferClient` — ce dernier annulé avant puis EN COURS de copie — qui finissent sur la phrase de la TV sans boucle), `ReceiveCardTest` (carte « interrompu »), `TransferProgressTest` (`abortWhere` / `abortByName`), `TrialRoutesTest` (route classée fermée en essai).
