@@ -275,7 +275,8 @@ fun TvHome(onAdvanced: () -> Unit, onBluetooth: () -> Unit = onAdvanced) {
         val btAvg = if (btActive && btSent != null) (System.currentTimeMillis() - btFrom.first).let { dt ->
             if (dt > 3_000 && btSent > btFrom.second) (btSent - btFrom.second) * 1000 / dt else 0L } else 0L
         val shownAvg = if (btActive) btAvg else avg
-        AnimatedVisibility(u is UploadService.State.Uploading || u is UploadService.State.Waiting || btActive, enter = expandVertically() + fadeIn(), exit = shrinkVertically() + fadeOut()) {
+        val sendCardShown = u is UploadService.State.Uploading || u is UploadService.State.Waiting || btActive
+        AnimatedVisibility(sendCardShown, enter = expandVertically() + fadeIn(), exit = shrinkVertically() + fadeOut()) {
             val (sent, total, name, waiting) = when {
                 u is UploadService.State.Uploading -> listOf(u.sent, u.total, u.job.fileName, null)
                 u is UploadService.State.Waiting -> listOf(u.sent, u.total, u.job.fileName, u.reason)
@@ -287,6 +288,7 @@ fun TvHome(onAdvanced: () -> Unit, onBluetooth: () -> Unit = onAdvanced) {
             sent as Long; total as Long
             ElevatedCard(Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    NotificationHintRow()           // R-52 : Android jette les notifications de CastBridge ⇒ le dire ici, avec « Autoriser » (rien quand tout va bien)
                     Text("Envoi vers la TV", style = MaterialTheme.typography.labelLarge, color = cs.primary)
                     Text(name as String, style = MaterialTheme.typography.titleMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)
                     Text("${sent * 100 / total.coerceAtLeast(1)} %", fontSize = 44.sp, fontWeight = FontWeight.Bold)
@@ -301,7 +303,7 @@ fun TvHome(onAdvanced: () -> Unit, onBluetooth: () -> Unit = onAdvanced) {
         (u as? UploadService.State.Failed)?.let { Text(it.reason, style = MaterialTheme.typography.bodyMedium, color = cs.error) }
 
         // Queue of the files waiting to be sent (several files, « Ouvrir avec », « Copier et lire », …): one at a time, cancel one by one, retry a failure.
-        TransferQueueCard()
+        TransferQueueCard(showNotificationHint = !sendCardShown)      // R-52 : le même texte une seule fois à l'écran (la carte d'envoi le porte quand elle est là)
         TextButton(onClick = { RecentCopiesActivity.open(ctx) }) { Text("Dernières copies") }
 
         // Series in « Titre / Saison » folders (virtual: nothing moves), automatic after each send, or on demand with a confirmation and an undo
@@ -532,7 +534,7 @@ private fun FirstConnection(tvs: List<Tv>, onRetry: () -> Unit, onAdvanced: () -
  * and why the queue is not moving when it is not (another upload, Android refusing a background start).
  */
 @Composable
-fun TransferQueueCard() {
+fun TransferQueueCard(showNotificationHint: Boolean = true) {
     val ctx = LocalContext.current
     val cs = MaterialTheme.colorScheme
     val queue by TransferQueue.items.collectAsState()
@@ -545,6 +547,7 @@ fun TransferQueueCard() {
     AnimatedVisibility(shownQueue.isNotEmpty()) {
         ElevatedCard(Modifier.fillMaxWidth()) {
             Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                if (showNotificationHint) NotificationHintRow()           // R-52 : Android jette les notifications de CastBridge ⇒ le dire, avec « Autoriser »
                 val waiting = shownQueue.count { it.status == castbridge.core.tv.QueueStatus.WAITING }
                 Text("File d'attente des envois" + if (waiting > 0) " · $waiting en attente" else "", style = MaterialTheme.typography.labelLarge, color = cs.primary)
                 note?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant) }

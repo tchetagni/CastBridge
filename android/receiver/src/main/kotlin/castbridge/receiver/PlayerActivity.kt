@@ -19,6 +19,7 @@ import android.view.KeyEvent
 import android.view.View
 import android.widget.TextView
 import castbridge.core.tv.LibraryProvider
+import castbridge.core.tv.NotificationAccessPolicy
 import castbridge.core.tv.PlayerCommand
 import castbridge.core.tv.PlayerParams
 import castbridge.core.tv.PlayerState
@@ -788,7 +789,12 @@ class PlayerActivity : Activity(), TvService.Screen {
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        NotificationAccess.noteAnswer(TvPrefs(this), permissions, grantResults)      // R-52 : un « refusé » d'Android pour les notifications est retenu, du dialogue groupé du lancement comme de la ligne du MENU
         if (requestCode == REQ_PERMS) svc?.onPermissionsReady()
+        if (requestCode == REQ_NOTIF && grantResults.isNotEmpty()) {
+            flash(if (grantResults[0] == PackageManager.PERMISSION_GRANTED) NotificationAccessPolicy.GRANTED else NotificationAccessPolicy.REFUSED)
+            if (settingsPanel?.visible == true) showSettings()                      // la ligne « Notifications » disparaît du panneau ouvert quand c'est accordé
+        }
         if (requestCode == REQ_WD) {
             if (grantResults.firstOrNull() == PackageManager.PERMISSION_GRANTED) { prefs.putBool("wd_enabled", true); svc?.wd?.start() }
             else svc?.setStatus("2-wd", "Wi-Fi Direct : permission refusée (désactivé)")
@@ -803,6 +809,21 @@ class PlayerActivity : Activity(), TvService.Screen {
             prefs.putBool("wd_enabled", true); g.start()
         } else runCatching { requestPermissions(arrayOf(g.permission()), REQ_WD) }
     }
+
+    /**
+     * R-52 (« les copies ne signalent plus en notification ») : la ligne « Notifications » du MENU. Ce qu'elle fait est décidé à l'APPUI (la liste est construite une fois) par la règle pure
+     * [NotificationAccessPolicy] : redemander l'autorisation SEULE (Android ne montre son dialogue qu'une dernière fois après un refus), sinon ouvrir le réglage des notifications de l'app.
+     */
+    private fun fixNotifications() {
+        val allowed = svc?.notificationsAllowed() == true
+        when (NotificationAccess.action(this, TvPrefs(this), allowed)) {
+            NotificationAccessPolicy.Action.ASK -> runCatching { requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), REQ_NOTIF) }.onFailure { openNotificationSettings() }
+            NotificationAccessPolicy.Action.OPEN_SETTINGS -> openNotificationSettings()
+            NotificationAccessPolicy.Action.NONE -> flash(if (allowed) NotificationAccessPolicy.GRANTED else NotificationAccessPolicy.SETTINGS_UNAVAILABLE)
+        }
+    }
+
+    private fun openNotificationSettings() { if (!NotificationAccess.openSettings(this)) flash(NotificationAccessPolicy.SETTINGS_UNAVAILABLE) }
 
     // ---- MENU key: extra options that need a dialog ----
 
@@ -820,6 +841,8 @@ class PlayerActivity : Activity(), TvService.Screen {
         val s = svc ?: return emptyList()
         val usb = s.usb; val ssh = s.ssh
         val items = mutableListOf<Pair<String, () -> Unit>>()
+        // R-52 : tant qu'Android jette les notifications de CastBridge-TV (copies reçues, demandes du téléphone), la ligne qui les rend est la PREMIÈRE du MENU
+        if (!s.notificationsAllowed()) items += NotificationAccessPolicy.LINE to { fixNotifications() }
         if (current == null) items += "Toute la bibliothèque" to { showLibrary() }
         items += "Quiz culture générale (jouer avec les téléphones)" to { startActivity(Intent(this, QuizActivity::class.java)) }
         items += (if (castbridge.receiver.quiz.PlayHub.flagOn(this)) "Quiz en ligne : activé (désactiver)" else "Quiz en ligne : désactivé (activer)") to {
@@ -1530,6 +1553,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         private const val REQ_WD = 11
         private const val REQ_TREE = 12
         private const val REQ_STORAGE_TREE = 13
+        private const val REQ_NOTIF = 14                      // POST_NOTIFICATIONS demandée SEULE (ligne « Notifications » du MENU), pas groupée avec le Bluetooth
         /** Keys that open the library from the waiting screen (remotes differ: any of these). */
         private val LIBRARY_KEYS = setOf(KeyEvent.KEYCODE_GUIDE, KeyEvent.KEYCODE_BOOKMARK, KeyEvent.KEYCODE_PROG_BLUE,
             KeyEvent.KEYCODE_MEDIA_TOP_MENU, KeyEvent.KEYCODE_TV_CONTENTS_MENU, KeyEvent.KEYCODE_ALL_APPS)

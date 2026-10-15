@@ -43,6 +43,7 @@ import castbridge.core.tv.Device
 import castbridge.core.tv.LaunchPolicy
 import castbridge.core.tv.LibraryProvider
 import castbridge.core.tv.NeedsForeground
+import castbridge.core.tv.NotificationAccessPolicy
 import castbridge.core.tv.PinGuard
 import castbridge.core.tv.Player
 import castbridge.core.tv.PlayerCommand
@@ -917,8 +918,12 @@ class TvService : Service(), Device {
             screen?.transfersChanged()
             if (!item.ended && !sweeping) { sweeping = true; main.postDelayed(sweepTick, 30_000) }
             showReception(item)
+            announceOnScreen(item)
         }
     }
+
+    /** R-52 : les transferts (par [castbridge.core.xfer.TransferProgress.Item.seq]) déjà annoncés par un bandeau à l'écran. Fil principal seulement ; borné par [NotificationAccessPolicy.firstAnnouncement]. */
+    private val announcedOnScreen = LinkedHashSet<Int>()
 
     private fun showReception(item: castbridge.core.xfer.TransferProgress.Item) {
         runCatching {
@@ -942,8 +947,25 @@ class TvService : Service(), Device {
         }.onFailure { Log.w(TAG, "reception notification: ${it.javaClass.simpleName}") }   // POST_NOTIFICATIONS refused (Android 13+): the screen still shows it
     }
 
+    /**
+     * R-52 : le premier événement d'un transfert est AUSSI dit à l'écran (bandeau « ⬇ Réception de … »), car Android jette la notification quand POST_NOTIFICATIONS est refusée ; jamais par-dessus une
+     * vidéo qui joue. Notifications coupées : l'avertissement est dit UNE fois par lancement de l'app, après le premier bandeau (le bandeau ne montre qu'un texte à la fois, 3 s).
+     */
+    private fun announceOnScreen(item: castbridge.core.xfer.TransferProgress.Item) {
+        if (!NotificationAccessPolicy.firstAnnouncement(item.seq, announcedOnScreen)) return
+        if (screen?.shown != true) return                                    // personne devant la TV : la notification (si Android la laisse passer) est seule
+        val st = playerBridge.state().state
+        if (st == "playing" || st == "buffering") return                      // une vidéo joue : pas de bandeau sur l'image
+        notice(item.screenLine())
+        if (!notificationsOffWarned && !notificationsAllowed()) {
+            notificationsOffWarned = true
+            main.postDelayed({ notice(NotificationAccessPolicy.OFF_NOTICE) }, OFF_NOTICE_DELAY_MS)
+        }
+    }
+
     private fun canUseFullScreen(): Boolean = Build.VERSION.SDK_INT < 34 || runCatching { getSystemService(NotificationManager::class.java).canUseFullScreenIntent() }.getOrDefault(false)
-    private fun notificationsAllowed(): Boolean = runCatching { getSystemService(NotificationManager::class.java).areNotificationsEnabled() }.getOrDefault(false)
+    /** Android laisse-t-il CastBridge-TV notifier (POST_NOTIFICATIONS accordée et notifications non coupées) ? Lu par le MENU (ligne « Notifications ») et par GET /api/background. */
+    fun notificationsAllowed(): Boolean = runCatching { getSystemService(NotificationManager::class.java).areNotificationsEnabled() }.getOrDefault(false)
     fun overlayAllowed(): Boolean = Build.VERSION.SDK_INT < 23 || runCatching { Settings.canDrawOverlays(this) }.getOrDefault(false)
 
     private fun launchState() = LaunchPolicy.State(screen?.shown == true, overlayAllowed(), canUseFullScreen(), notificationsAllowed(), Build.VERSION.SDK_INT)
@@ -1383,6 +1405,10 @@ class TvService : Service(), Device {
         /** The activation group outlives a short absence of the activation screen (a file picker of its own, the Bluetooth dialog, a rotation) by this long, then is given back. */
         private const val ACTIVATION_GROUP_GRACE_MS = 20_000L
         private const val NOTIF_LAUNCH = 2
+        /** R-52 : « Notifications désactivées… » n'est dit qu'UNE fois par lancement de l'app (le processus), pas à chaque redémarrage du service. */
+        @Volatile private var notificationsOffWarned = false
+        /** Ce délai suit un bandeau (3 s + 0,25 s de fondu) : l'avertissement paraît après lui, sans le recouvrir. */
+        private const val OFF_NOTICE_DELAY_MS = 3_500L
         @Volatile var running: TvService? = null; private set
 
         /** Heure (elapsedRealtime) de création du service vivant, et pourquoi il a démarré (BOOT, REPLACED, WATCHDOG, TASK_REMOVED ; null = ouverture normale). */

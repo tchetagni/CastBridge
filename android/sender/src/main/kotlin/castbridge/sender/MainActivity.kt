@@ -193,7 +193,7 @@ class MainActivity : ComponentActivity() {
         var dur by remember { mutableStateOf(0L) }
         var showPlayer by remember { mutableStateOf(false) }
 
-        val notifPerm = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {}
+        val notifPerm = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { granted -> if (!granted) PhoneNotificationState.noteDenied(this@MainActivity) }      // R-52 : le refus est retenu (bouton « Autoriser » des copies)
         val picker = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
             if (uri != null) {
                 runCatching { contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION) }
