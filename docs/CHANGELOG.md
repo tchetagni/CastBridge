@@ -9,9 +9,19 @@ Trois produits livrés ont chacun leur numéro : **CastBridge-TV** (`tv-<version
 
 ## [Non publié]
 
-Travail de la branche `claude/tv-install-sig-locked` et revue de cohérence du 2026-10-14 (CI, docs de versions, ordre des voies d'activation dans le guide, textes de l'écran d'activation, état « grâce » exposé au téléphone, tests Python des outils) ; rien n'est construit en APK depuis TV 0.14.49 / téléphone 1.2.56.
+Deux correctifs en cours (rien n'est encore construit en APK ni essayé sur appareil), visés pour **CastBridge-TV 0.14.51 et CastBridge 1.2.58** :
+- **R-51, copie interrompue sur la TV non annulable** : annulation depuis le MENU de la TV ; les fichiers partiels périmés s'affichent « interrompue » ; la reprise depuis le téléphone est refusée pendant 10 minutes, avec un message ; nouvelle route `POST /api/reception/cancel`
+- **R-52, notifications** : « les copies ne signalent plus en notification » (constaté le 2026-10-15 sur le S21+, Android 14 : la permission `POST_NOTIFICATIONS` était absente ; la TV, aussi sous Android 14, est probablement dans le même cas) ; une ligne du MENU de la TV (« Notifications : désactivées… autoriser »), un bandeau « Autoriser » sur le téléphone, règles pures testées
 
 ## CastBridge-TV
+
+### [0.14.50-beta] (code 126 ; verrouillée 127) : 2026-10-15
+- l'état « grâce » est exposé au téléphone : `GET /api/activation` dit aussi `grace` et `graceUntil` (ms UTC ; `false` et `null` hors grâce), parce que `trial` est vrai en grâce (installation antérieure au verrou, jusqu'au 2026-11-01) et que le téléphone prenait alors la TV pour une version d'essai
+- textes R-48 corrigés : l'avis d'usage de l'écran verrouillé (`LockedTexts.NOTICE`), l'écran « Passer en version complète » (`TrialPolicy.UPGRADE_EXPLAIN`) et la tuile « Passer en production » de l'accueil ne demandent plus de communiquer le code d'appareil (le code seul ne permet pas d'émettre une clé) : la clé se demande avec CastBridge › Activer la TV, qui lit la demande d'appareil complète
+- routes de l'édition d'essai classées : `/api/relay` (vérité réseau unique de la TV, lecture seule) devient ouverte, comme `/api/net` ; `/api/games/room` et `/api/games/journals` restent fermées, désormais couvertes par `TrialRoutesTest`
+- code mort retiré de `LockedTexts` : `KEY_WAYS` et `shareMessage` (textes périmés, plus appelés)
+- dans le dépôt, sans effet sur l'APK : CI (`timeout-minutes` dans les jobs, build de contrôle verrouillé à clé jetable, `tools.yml`), outils Python (194 tests verts), docs de versions, guide utilisateur (ordre réel des quatre voies d'activation)
+- détail : `git log tv-0.14.49-beta..tv-0.14.50-beta`
 
 ### [0.14.49-beta] (code 124 ; verrouillée 125) : 2026-10-11
 - clé de la console du S21+ (kid 3447e186…) ajoutée aux clés de confiance
@@ -160,6 +170,12 @@ Numéros cités par les sujets de commits (aucun n'est dans `version.properties`
 0.4.2 et 0.4.3 (passerelle Internet Bluetooth, diagnostics), 0.7 (échecs, téléchargements aria2), 0.7.1 (lecteur du téléphone), 0.8 (télécommande du téléphone), 0.9 (Apprendre), 0.9.1 (code 19), 0.11 (code 20, chemin de mise à jour propre), 0.11.1 (code 21, correctif JSON de `/api/library`), 0.12.0 (code 22), 0.12.1 (code 23, adresse serveur officielle masquée).
 
 ## CastBridge (téléphone)
+
+### [1.2.57-beta] (code 87) : 2026-10-15
+- « Activer la TV » lit `grace` et `graceUntil` dans `GET /api/activation` (`ActivationScreenState.Kind.GRACE`) : une TV en période de grâce s'affiche « TV en période de grâce : activation à fournir », avec « Jusqu'au JJ/MM/AAAA (restant : N jours) » et ce qu'il reste à faire, au lieu de « Cette TV est en version d'essai » ; une TV qui ne dit pas `grace` (CastBridge-TV 0.14.49 et avant) se lit comme avant
+- console du propriétaire (variante superadmin) : l'avis « Cette TV n'envoie pas sa clé de signature d'installation » nomme les vraies versions concernées (TV d'avant 0.14.37, ou 0.14.47 et moins encore verrouillée) et demande la mise à jour en 0.14.48 ou plus, au lieu de « 0.14.37 ou plus » (`ConsoleInstallKey`, corrigé avec la TV 0.14.48)
+- commentaire de code d'`ActivateTvActivity` : l'ordre réel des quatre voies (réseau local 10 s, Bluetooth sans appairage 25 s, réseau de la TV 50 s, Bluetooth appairé 20 s, ou 90 s si un appairage est à valider)
+- détail : `git log phone-1.2.56-beta..phone-1.2.57-beta`
 
 ### [1.2.56-beta] (code 86) : 2026-10-09
 - « Lire » et « Copier et lire » ouvrent CastBridge-TV si elle n'est pas devant
