@@ -323,6 +323,7 @@ URL_TV = "https://bridge.sti-cm.com/dl/tv/latest.apk"
 URL_PHONE = "https://bridge.sti-cm.com/dl/phone/latest.apk"
 VERS = "TV 0.14.45 ou plus récente · téléphone 1.2.53 ou plus récent"     # nouveautés du 2026-10-07
 VERS_TV = "TV 0.14.45 ou plus récente"
+VERS_COPIES = "TV 0.14.51 ou plus récente · téléphone 1.2.58 ou plus récent"      # nouveautés du 2026-10-15 : copie interrompue annulable (R-51), notifications (R-52)
 
 # l'ordre fait la numérotation (« 7 Internet »…) ; les identifiants (ancres) ne changent jamais
 SECTIONS = [("materiel", "Matériel"), ("installer", "Installer"), ("relier", "Relier"), ("envoyer", "Envoyer"),
@@ -1110,6 +1111,15 @@ def build_body():
                "Demandez une clé préparée par l'agent, ou utilisez le téléphone."),
         ]))
     pb_autres = (
+        h3("Copies et notifications", "probleme-copies", VERS_COPIES) +
+        qas([
+            qa("La TV dit", "« ⏸ Copie interrompue : &lt;titre&gt; (42 %) · MENU &gt; Copie : annuler »",
+               "Dans MENU, choisissez « Copie : annuler », puis confirmez."),
+            qa("La TV dit", "« Notifications : désactivées sur cette TV — autoriser (copies reçues, demandes du téléphone) »",
+               "C'est la première ligne de MENU : appuyez sur OK."),
+            qa("Le téléphone dit", "« Notifications désactivées pour CastBridge : la progression des copies n'apparaît pas dans la barre. »",
+               "Touchez « Autoriser », puis activez les notifications."),
+        ]) +
         h3("Clé USB", "probleme-usb") +
         qas([
             qa("La TV dit", "« … vérification par Android … patientez »", "Patientez, sans retirer la clé.", "Voir la " + xref("usb", "La clé USB") + "."),
@@ -1284,7 +1294,7 @@ def main():
             '<nav class="toc" aria-label="Sommaire">%s</nav>%s'
             '<footer>Les captures viennent d\'un émulateur avec des vidéos de test et des codes masqués. Les dessins sont signalés. '
             'Un cadre en pointillés marque une illustration qui manque encore.<br>'
-            'Version du guide : 2026-10-15 · CastBridge 1.2.57 · CastBridge-TV 0.14.50 (captures de CastBridge 1.2.50 et CastBridge-TV 0.14.43)</footer></div></body></html>'
+            'Version du guide : 2026-10-15 · CastBridge 1.2.58 · CastBridge-TV 0.14.51 (captures de CastBridge 1.2.50 et CastBridge-TV 0.14.43)</footer></div></body></html>'
             % (CSS, "".join(css_imgs), DEFS, nav, body))
     open(OUTFILE, "w", encoding="utf-8").write(html)
     # numéros d'étapes dans annotations.json

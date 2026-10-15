@@ -374,7 +374,8 @@ Tableau reconstruit mécaniquement à partir de l'historique premier-parent de `
 | CastBridge-TV | 0.14.47-beta | 120 | 2026-10-07 | `9a1d2ae6` |
 | CastBridge-TV | 0.14.48-beta | 122 | 2026-10-11 | `687b8e09` |
 | CastBridge-TV | 0.14.49-beta | 124 | 2026-10-11 | `b70645c6` |
-| **CastBridge-TV** | **0.14.50-beta** (courant) | **126** | **2026-10-15** | **891ba1df** |
+| CastBridge-TV | 0.14.50-beta | 126 | 2026-10-15 | `891ba1df` |
+| **CastBridge-TV** | **0.14.51-beta** (courant) | **128** | **2026-10-15** | **cb83f5ff** |
 | CastBridge | 1.2.19-beta | 29 | 2026-10-01 | `0ff64edc` |
 | CastBridge | 1.2.20-beta | 30 | 2026-10-01 | `86ad3f21` |
 | CastBridge | 1.2.21-beta | 31 | 2026-10-01 | `e6825e76` |
@@ -413,7 +414,8 @@ Tableau reconstruit mécaniquement à partir de l'historique premier-parent de `
 | CastBridge | 1.2.54-beta | 84 | 2026-10-07 | `9a1d2ae6` |
 | CastBridge | 1.2.55-beta | 85 | 2026-10-07 | `bad92156` |
 | CastBridge | 1.2.56-beta | 86 | 2026-10-09 | `c733fc6d` |
-| **CastBridge** | **1.2.57-beta** (courant) | **87** | **2026-10-15** | **891ba1df** |
+| CastBridge | 1.2.57-beta | 87 | 2026-10-15 | `891ba1df` |
+| **CastBridge** | **1.2.58-beta** (courant) | **88** | **2026-10-15** | **cb83f5ff** |
 | CastBridge Propriétaire | 0.1.0 | 1 | 2026-10-01 | `0ff64edc` |
 | CastBridge Propriétaire | 0.2.0 | 2 | 2026-10-02 | `e40173a5` |
 | CastBridge Propriétaire | 0.2.1 | 3 | 2026-10-02 | `1c26a114` |
