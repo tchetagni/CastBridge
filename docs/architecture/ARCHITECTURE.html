@@ -1,0 +1,845 @@
+<title>Architecture CastBridge</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Semi+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  /* Concept : dossier technique de régie TV. Une seule gouttière, texte à gauche sur une colonne de lecture, tableaux et schémas à pleine largeur. Trois familles de couleur : téléphone vert, TV ambre, serveur ardoise. */
+  --bg: #F2F5F3;
+  --surface: #FFFFFF;
+  --surface-2: #E7EEEA;
+  --fg: #11201B;
+  --fg-muted: #43544D;
+  --line: #CAD5D0;
+  --line-strong: #7D8F87;
+  --accent: #0A6A4B;
+  --accent-soft: #D3ECE1;
+  --tv: #885600;
+  --tv-soft: #FAE8B9;
+  --srv: #2D5776;
+  --srv-soft: #D9E6F0;
+  --alert: #A3281C;
+  --alert-soft: #F6D9D4;
+  --focus: #1457C4;
+
+  --font-head: "Barlow Semi Condensed", "Arial Narrow", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Barlow", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --step--1: 0.8125rem;
+  --step-0: 1rem;
+  --step-1: 1.1875rem;
+  --measure: 68ch;
+  --radius: 6px;
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0C1721;
+    --surface: #132230;
+    --surface-2: #1A2D3D;
+    --fg: #E5EEF3;
+    --fg-muted: #A3B6C2;
+    --line: #274052;
+    --line-strong: #56707F;
+    --accent: #4FD0A0;
+    --accent-soft: #123A30;
+    --tv: #F2BA52;
+    --tv-soft: #3B2D0E;
+    --srv: #8FBBE0;
+    --srv-soft: #17314A;
+    --alert: #F5958A;
+    --alert-soft: #45201C;
+    --focus: #8DB8FF;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+    --bg: #0C1721;
+    --surface: #132230;
+    --surface-2: #1A2D3D;
+    --fg: #E5EEF3;
+    --fg-muted: #A3B6C2;
+    --line: #274052;
+    --line-strong: #56707F;
+    --accent: #4FD0A0;
+    --accent-soft: #123A30;
+    --tv: #F2BA52;
+    --tv-soft: #3B2D0E;
+    --srv: #8FBBE0;
+    --srv-soft: #17314A;
+    --alert: #F5958A;
+    --alert-soft: #45201C;
+    --focus: #8DB8FF;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.55;
+  font-variant-numeric: tabular-nums;
+}
+.page {
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  padding-block: clamp(1.25rem, 3vw, 2.5rem) 3rem;
+}
+a { color: var(--accent); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+h1, h2, h3, h4 { margin: 0; font-family: var(--font-head); font-weight: 600; line-height: 1.12; text-wrap: balance; }
+h1 { font-size: clamp(2.5rem, 1.4rem + 4.6vw, 4rem); font-weight: 700; line-height: 1.02; letter-spacing: -0.01em; }
+h2 { font-size: clamp(1.625rem, 1.2rem + 1.6vw, 2.25rem); font-weight: 700; }
+h3 { font-size: 1.5rem; font-weight: 700; }
+h4 { font-size: 1.25rem; font-weight: 700; }
+p, ul, ol, dl, dd, figure { margin: 0; }
+ul, ol { padding: 0; }
+p { max-width: var(--measure); text-wrap: pretty; }
+code {
+  font: 400 0.875em/1.4 var(--font-mono);
+  background: var(--surface-2);
+  border-radius: 3px;
+  padding: 0.08em 0.35em;
+  overflow-wrap: anywhere;
+}
+.note { font-size: var(--step--1); color: var(--fg-muted); }
+
+/* En-tête */
+.masthead { display: grid; gap: 1rem; padding-bottom: 1.5rem; }
+.kicker { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; font: 600 0.75rem/1 var(--font-head); letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-muted); }
+.stamp { font: 500 0.8125rem/1 var(--font-mono); letter-spacing: 0.02em; text-transform: none; color: var(--fg); border: 1px solid var(--line-strong); border-radius: 3px; padding: 0.35rem 0.5rem; }
+.subtitle { font: 600 1.5rem/1.2 var(--font-head); color: var(--fg-muted); }
+.lead { font-size: var(--step-1); line-height: 1.5; max-width: 46rem; }
+.facts { display: grid; gap: 1rem 2rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); padding-top: 1.25rem; border-top: 1px solid var(--line); }
+.facts > div { display: grid; gap: 0.2rem; align-content: start; min-width: 0; }
+.facts dt, .card-foot dt, .toc-title { font: 600 0.75rem/1.2 var(--font-head); letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-muted); }
+.facts dd { font-weight: 500; }
+.mire { display: grid; grid-template-columns: repeat(7, 1fr); height: 0.5rem; margin-top: 0.5rem; }
+
+/* Page : sommaire et colonne de lecture */
+.layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2rem 3.5rem; padding-top: 1.5rem; }
+.toc { display: grid; gap: 0.5rem; align-content: start; min-width: 0; padding-top: 0.75rem; border-top: 2px solid var(--fg); }
+.toc ol { list-style: none; display: grid; gap: 0.1rem 1rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 9.5rem), 1fr)); }
+.toc a { display: flex; align-items: baseline; gap: 0.5rem; padding-block: 0.3rem; color: var(--fg); text-decoration: none; }
+.toc a:hover { color: var(--accent); text-decoration: underline; }
+.toc .n { flex: none; min-width: 2.25rem; font: 500 0.8125rem var(--font-mono); color: var(--fg-muted); }
+@media (min-width: 64rem) {
+  .layout { grid-template-columns: 14rem minmax(0, 1fr); align-items: start; }
+  .toc { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 1.25rem); }
+  .toc ol { grid-template-columns: minmax(0, 1fr); }
+}
+main { display: grid; gap: 4rem; min-width: 0; }
+.sec { display: grid; gap: 1.5rem; min-width: 0; scroll-margin-top: 1rem; }
+.sec > * { min-width: 0; }
+.sec-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 0.9rem; padding-top: 0.75rem; border-top: 2px solid var(--fg); }
+.sec-head .n { font: 500 0.9375rem var(--font-mono); color: var(--fg-muted); }
+.sub { display: grid; gap: 0.9rem; min-width: 0; }
+.sub > * { min-width: 0; }
+
+/* Schémas et tableaux : seuls blocs qui peuvent déborder, chacun dans son conteneur */
+figure { display: grid; gap: 0.6rem; min-width: 0; }
+figcaption { max-width: var(--measure); font-size: var(--step--1); color: var(--fg-muted); }
+.diagram, .scroll { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.diagram > pre.mermaid { margin: 0; padding: 1rem; font: 400 0.8125rem/1.5 var(--font-mono); color: var(--fg); background: none; white-space: pre; }
+.diagram pre.mermaid svg { display: block; margin-inline: auto; min-width: var(--dmin, 28rem); height: auto; }
+.diagram .nodeLabel, .diagram .edgeLabel, .diagram .label, .diagram .cluster-label, .diagram .nodeLabel p, .diagram .edgeLabel p { color: var(--fg) !important; }
+.diagram .edgeLabel, .diagram .edgeLabel p { background-color: var(--surface) !important; }
+.diagram .edgeLabel rect { fill: var(--surface) !important; opacity: 1 !important; }
+.diagram svg text, .diagram svg tspan { fill: var(--fg) !important; }
+table { width: 100%; min-width: 36rem; border-collapse: collapse; font-size: 0.9375rem; line-height: 1.45; }
+th, td { text-align: left; vertical-align: top; padding: 0.65rem 0.9rem; border-bottom: 1px solid var(--line); }
+thead th { font: 600 0.75rem/1.2 var(--font-head); letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-muted); background: var(--surface-2); white-space: nowrap; }
+tbody th { font-weight: 500; white-space: nowrap; }
+tbody tr:last-child > * { border-bottom: 0; }
+th code { background: none; padding: 0; font-weight: 500; }
+td.num, th.num { text-align: right; }
+
+/* Cartes produits */
+.cards { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17.5rem), 1fr)); }
+.card { display: grid; grid-template-rows: auto auto 1fr auto; gap: 0.6rem; min-width: 0; padding: 1.1rem 1.15rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.card p:not(.fam) { font-size: 0.9375rem; }
+.fam { display: flex; align-items: center; gap: 0.45rem; font: 600 0.75rem/1.2 var(--font-head); letter-spacing: 0.1em; text-transform: uppercase; color: var(--fam, var(--fg-muted)); }
+.fam::before { content: ""; flex: none; width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--fam, var(--line-strong)); }
+.fam-phone { --fam: var(--accent); }
+.fam-tv { --fam: var(--tv); }
+.fam-srv { --fam: var(--srv); }
+.fam-tool { --fam: var(--fg-muted); }
+.card-foot { display: grid; gap: 0.5rem; padding-top: 0.75rem; border-top: 1px solid var(--line); }
+.card-foot > div { display: grid; grid-template-columns: 4.25rem minmax(0, 1fr); gap: 0.5rem; align-items: baseline; }
+.card-foot dt { font-size: 0.6875rem; }
+.card-foot dd { font-size: 0.875rem; }
+@media (min-width: 48rem) { .card-foot { min-height: 7.25rem; } }
+#protocoles tbody td:nth-child(2) { white-space: nowrap; }
+
+/* Listes */
+.marks { list-style: none; display: grid; gap: 0.5rem; }
+.marks li { position: relative; padding-left: 1.1rem; min-width: 0; }
+.marks li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 0.45rem; height: 0.45rem; background: var(--accent); }
+.marks--cols { gap: 0.6rem 2.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); }
+.steps { list-style: none; display: grid; gap: 0.75rem; counter-reset: step; }
+.steps li { display: grid; grid-template-columns: 1.75rem minmax(0, 1fr); gap: 0.75rem; align-items: start; counter-increment: step; }
+.steps li::before { content: counter(step); display: grid; place-items: center; width: 1.75rem; height: 1.75rem; font: 600 0.875rem var(--font-mono); color: var(--fg); border: 1px solid var(--line-strong); border-radius: 50%; }
+.tag { display: inline-block; padding: 0.05rem 0.4rem; font: 500 0.8125rem/1.35 var(--font-mono); white-space: nowrap; background: var(--surface-2); border: 1px solid var(--line); border-radius: 3px; }
+.tag--r { background: var(--alert-soft); color: var(--alert); border-color: transparent; }
+.tag--p { background: var(--accent-soft); color: var(--accent); border-color: transparent; }
+.tag--d { background: var(--tv-soft); color: var(--tv); border-color: transparent; }
+
+/* Principe du cœur */
+.layers { display: grid; overflow: hidden; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.layer { display: grid; grid-template-columns: 10rem minmax(0, 1fr); gap: 1rem; padding: 1rem 1.15rem; border-bottom: 1px solid var(--line); }
+.layer:last-child { border-bottom: 0; }
+.layer--core { background: var(--accent-soft); }
+.layer--os { background: var(--surface-2); }
+.layer h4 { font-size: 1.125rem; }
+.layer .mod { display: block; margin-top: 0.15rem; font: 500 0.8125rem var(--font-mono); color: var(--fg-muted); }
+.layer p { font-size: 0.9375rem; }
+@media (max-width: 34rem) { .layer { grid-template-columns: minmax(0, 1fr); gap: 0.35rem; } }
+.panel { padding: 1.1rem 1.25rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.bars { list-style: none; display: grid; gap: 0.45rem 3rem; }
+.bar-row { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr) 2rem; align-items: center; gap: 0.6rem; }
+.bar-name { font: 500 0.8125rem var(--font-mono); overflow-wrap: anywhere; }
+.bar-track { height: 0.8rem; background: var(--surface-2); border-radius: 2px; overflow: hidden; }
+.bar-fill { display: block; height: 100%; width: calc(var(--n) / 73 * 100%); background: var(--accent); }
+.bar-n { text-align: right; font-size: 0.9375rem; font-weight: 600; }
+@media (min-width: 46rem) {
+  .bars { grid-auto-flow: column; grid-template-rows: repeat(15, auto); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* CastBridge-TV et téléphone */
+.statusbar { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0.6rem; background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius); }
+.statusbar li { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.3rem 0.75rem; font-size: 0.875rem; font-weight: 500; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; }
+.statusbar li::before { content: ""; width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--accent); }
+.tiles { list-style: none; display: grid; gap: 0.6rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 40rem) { .tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.tile { display: grid; align-content: space-between; gap: 0.35rem; min-height: 4.5rem; min-width: 0; padding: 0.7rem 0.8rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.tile b { font: 600 1rem/1.15 var(--font-head); }
+.tile span { font-size: 0.8125rem; line-height: 1.3; color: var(--fg-muted); }
+.groups { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); }
+.group { display: grid; gap: 0.9rem; align-content: start; min-width: 0; padding: 1.1rem 1.25rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.group h3 { font-size: 1.25rem; }
+.parts { display: grid; gap: 0.75rem; }
+.parts > div { display: grid; gap: 0.15rem; min-width: 0; }
+.parts dt { font: 500 0.8125rem/1.35 var(--font-mono); color: var(--accent); overflow-wrap: anywhere; }
+.parts dd { font-size: 0.9375rem; }
+
+/* Flux, conventions, documents */
+.flow { display: grid; gap: 1rem; min-width: 0; padding-top: 1.25rem; border-top: 1px solid var(--line); }
+.flow > * { min-width: 0; }
+.conv { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); }
+.conv > article { display: grid; gap: 0.65rem; align-content: start; min-width: 0; padding: 1rem 1.1rem; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.conv p { font-size: 0.9375rem; }
+.conv ul { list-style: none; display: grid; gap: 0.4rem; font-size: 0.9375rem; }
+.conv li { display: grid; grid-template-columns: 3.4rem minmax(0, 1fr); gap: 0.5rem; align-items: baseline; }
+.docs { display: grid; gap: 0.75rem 2.5rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); }
+.docs > div { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: 0.6rem; align-items: baseline; min-width: 0; padding-bottom: 0.75rem; border-bottom: 1px solid var(--line); }
+.docs dt { font: 500 0.8125rem/1.4 var(--font-mono); overflow-wrap: anywhere; }
+.docs dd { font-size: 0.9375rem; }
+@media (max-width: 30rem) { .docs > div { grid-template-columns: minmax(0, 1fr); gap: 0.15rem; } }
+footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--line); font-size: 0.875rem; color: var(--fg-muted); }
+</style>
+
+<div class="page" lang="fr">
+
+<header class="masthead">
+  <p class="kicker"><span>Dossier technique</span><span class="stamp">2026-10-18</span></p>
+  <h1>Architecture CastBridge</h1>
+  <p class="subtitle">État du dépôt au 18 octobre 2026</p>
+  <p class="lead">CastBridge relie le téléphone à la télévision, pour le Cameroun et l’Afrique francophone. Cette page décrit les applications, les modules du dépôt, les protocoles et trois flux de bout en bout.</p>
+  <dl class="facts">
+    <div><dt>Propriétaire</dt><dd>Esaie Tchetagni Ngassa</dd></div>
+    <div><dt>TV de référence</dt><dd>GaiaOS 32&nbsp;bits, 720p (armeabi-v7a)</dd></div>
+    <div><dt>Cibles</dt><dd>Toutes les TV et tous les boîtiers Android, API&nbsp;26 et plus, en 32 et 64&nbsp;bits</dd></div>
+  </dl>
+  <div class="mire" aria-hidden="true"><i style="background: var(--fg)"></i><i style="background: var(--accent)"></i><i style="background: var(--tv)"></i><i style="background: var(--srv)"></i><i style="background: var(--alert)"></i><i style="background: var(--line-strong)"></i><i style="background: var(--surface-2)"></i></div>
+</header>
+
+<div class="layout">
+
+<nav class="toc" aria-label="Sur cette page">
+  <p class="toc-title">Sur cette page</p>
+  <ol>
+    <li><a href="#vue"><span class="n">§&nbsp;1</span>Vue d’ensemble</a></li>
+    <li><a href="#depot"><span class="n">§&nbsp;2</span>Dépôt et modules</a></li>
+    <li><a href="#coeur"><span class="n">§&nbsp;3</span>Le cœur par paquets</a></li>
+    <li><a href="#tv"><span class="n">§&nbsp;4</span>CastBridge-TV</a></li>
+    <li><a href="#telephone"><span class="n">§&nbsp;5</span>CastBridge (téléphone)</a></li>
+    <li><a href="#protocoles"><span class="n">§&nbsp;6</span>Protocoles et ports</a></li>
+    <li><a href="#flux"><span class="n">§&nbsp;7</span>Trois flux</a></li>
+    <li><a href="#serveur"><span class="n">§&nbsp;8</span>Serveur</a></li>
+    <li><a href="#versions"><span class="n">§&nbsp;9</span>Versions, outillage et documentation</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- §1 -->
+<section class="sec" id="vue" aria-labelledby="h-vue">
+  <div class="sec-head"><span class="n" aria-hidden="true">§&nbsp;1</span><h2 id="h-vue">Vue d’ensemble</h2></div>
+  <p>Trois acteurs forment le système. Le téléphone envoie des fichiers et commande la TV. La TV reçoit, lit et héberge les écrans de jeu et d’apprentissage. Le serveur tient les activations, les licences et les contenus.</p>
+  <p>Entre le téléphone et la TV, trois voies se relaient par priorité&nbsp;: le réseau local, puis le Wi-Fi Direct, puis le Bluetooth. Les ports et les formats sont au <a href="#protocoles">§&nbsp;6</a>.</p>
+  <figure>
+    <div class="diagram" style="--dmin: 52rem" tabindex="0" role="region" aria-label="Schéma d'ensemble : téléphone, TV, serveur et leurs liaisons">
+<pre class="mermaid">
+flowchart LR
+  YT(["Appli YouTube du téléphone"]):::ext
+  PH["CastBridge, téléphone Android"]:::phone
+  MAC(["Mac de développement"]):::ext
+  TV["CastBridge-TV, TV ou boîtier Android"]:::tv
+  DL(["TV tierce DLNA"]):::ext
+  SV["CastBridge serveur, bridge.sti-cm.com"]:::srv
+  PH -->|"voie 1 : LAN"| TV
+  PH -->|"voie 2 : Wi-Fi Direct"| TV
+  PH -->|"voie 3 : Bluetooth"| TV
+  PH -->|"HTTPS"| SV
+  TV -->|"HTTPS"| SV
+  PH -.->|"DLNA"| DL
+  YT -.->|"DIAL"| TV
+  MAC -.->|"SSH 2222, 2223"| TV
+  classDef phone fill:#2A9D7728,stroke:#2A9D77,stroke-width:2px
+  classDef tv fill:#C27F0A28,stroke:#C27F0A,stroke-width:2px
+  classDef srv fill:#4C84B428,stroke:#4C84B4,stroke-width:2px
+  classDef ext fill:#7F8F991F,stroke:#7F8F99,stroke-width:1.5px,stroke-dasharray:4 3
+  linkStyle 0,1,2 stroke:#2A9D77,stroke-width:2.5px
+</pre>
+    </div>
+    <figcaption>Le téléphone joint la TV par trois voies classées par priorité (traits verts). Le téléphone et la TV joignent aussi le serveur en HTTPS. Vert&nbsp;: téléphone. Ambre&nbsp;: TV. Bleu-gris&nbsp;: serveur. Pointillé&nbsp;: éléments extérieurs à CastBridge.</figcaption>
+  </figure>
+
+  <div class="sub">
+    <h3>Les six produits</h3>
+    <div class="cards">
+      <article class="card fam-phone">
+        <p class="fam">Téléphone Android</p>
+        <h4>CastBridge</h4>
+        <p>L’application du téléphone. Elle trouve la TV, lui envoie des fichiers, la commande et donne accès à Quiz, Échecs, Apprendre, Langues et Portefeuille.</p>
+        <dl class="card-foot">
+          <div><dt>Version</dt><dd><strong>1.2.58-beta</strong> (code&nbsp;88). La 1.2.59 est en préparation.</dd></div>
+          <div><dt>Source</dt><dd><code>:sender</code>, 107&nbsp;fichiers, Jetpack Compose</dd></div>
+        </dl>
+      </article>
+      <article class="card fam-tv">
+        <p class="fam">TV et boîtiers Android</p>
+        <h4>CastBridge-TV</h4>
+        <p>L’application de la télévision. Elle reçoit les fichiers, lit les vidéos et héberge l’API, les jeux et les contenus embarqués.</p>
+        <dl class="card-foot">
+          <div><dt>Version</dt><dd><strong>0.14.53-beta</strong> (code&nbsp;132, verrouillée&nbsp;133)</dd></div>
+          <div><dt>Source</dt><dd><code>:receiver</code>, 102&nbsp;fichiers, API&nbsp;26 et plus</dd></div>
+        </dl>
+      </article>
+      <article class="card fam-srv">
+        <p class="fam">Serveur</p>
+        <h4>CastBridge serveur</h4>
+        <p>Le serveur de bridge.sti-cm.com. Il gère les activations, les licences, les lots, les quiz, les mises à jour, le guide et le jeu en ligne.</p>
+        <dl class="card-foot">
+          <div><dt>Version</dt><dd><strong>1.2.5</strong> (code&nbsp;9)</dd></div>
+          <div><dt>Source</dt><dd><code>backend/</code>, Java&nbsp;21 et Spring Boot&nbsp;3</dd></div>
+        </dl>
+      </article>
+      <article class="card fam-tool">
+        <p class="fam">Outil interne</p>
+        <h4>CastBridge Propriétaire</h4>
+        <p>La console des activations du propriétaire. Elle n’est jamais publiée.</p>
+        <dl class="card-foot">
+          <div><dt>Version</dt><dd><strong>0.2.4</strong></dd></div>
+          <div><dt>Source</dt><dd><code>:owner</code> et <code>:ownerlib</code></dd></div>
+        </dl>
+      </article>
+      <article class="card fam-tool">
+        <p class="fam">Outil interne</p>
+        <h4>CastBridge Dev</h4>
+        <p>L’outil de développement&nbsp;: SSH sur le port 2223 et installation d’APK. Il n’est jamais distribué.</p>
+        <dl class="card-foot">
+          <div><dt>Version</dt><dd><strong>0.1.0</strong></dd></div>
+          <div><dt>Source</dt><dd><code>:devbridge</code></dd></div>
+        </dl>
+      </article>
+      <article class="card fam-tv">
+        <p class="fam">TV LG webOS, prototype</p>
+        <h4>CastBridge-TV Web</h4>
+        <p>Le prototype pour les TV LG webOS. Une application web et un service Node.js&nbsp;: mDNS, HTTP 8765 et pont Luna.</p>
+        <dl class="card-foot">
+          <div><dt>Version</dt><dd><strong>0.1.0-beta</strong></dd></div>
+          <div><dt>Source</dt><dd><code>webos/castbridge-tv-web/</code>, branche <code>claude/webos-tv-web</code></dd></div>
+        </dl>
+      </article>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Règles produit qui orientent le code</h3>
+    <ul class="marks marks--cols">
+      <li>Sur la TV, la lecture passe d’abord.</li>
+      <li>Aucune icône n’apparaît sans libellé.</li>
+      <li>Le téléphone sert de relais fiable et discret.</li>
+      <li>Seules les versions verrouillées de la TV sont construites (<code>-PrequireActivation=true</code>).</li>
+      <li>L’édition d’essai pèse 100&nbsp;Mo et couvre toutes les sous-catégories.</li>
+      <li>La phase d’essai dure jusqu’au 31 décembre 2026. La production démarre en 2027.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- §2 -->
+<section class="sec" id="depot" aria-labelledby="h-depot">
+  <div class="sec-head"><span class="n" aria-hidden="true">§&nbsp;2</span><h2 id="h-depot">Dépôt et modules</h2></div>
+  <p>Le dépôt réunit les applications Android, le serveur, le contenu et la documentation. Le fichier <code>version.properties</code>, à la racine, fixe les versions de tous les produits.</p>
+
+  <div class="sub">
+    <h3>Dossiers</h3>
+    <div class="scroll" tabindex="0" role="region" aria-label="Tableau des dossiers du dépôt">
+      <table>
+        <caption class="sr-only">Dossiers du dépôt</caption>
+        <thead><tr><th scope="col">Dossier</th><th scope="col">Contenu</th></tr></thead>
+        <tbody>
+          <tr><th scope="row"><code>android/</code></th><td>Build Gradle 8.14.3 en Kotlin. Il réunit le cœur, les applications et leurs modules (tableau suivant).</td></tr>
+          <tr><th scope="row"><code>backend/</code></th><td>Serveur de production&nbsp;: Java 21, Spring Boot 3, MySQL 8.4, Docker. 237&nbsp;fichiers Java, 45&nbsp;contrôleurs. Artefact castbridge-server 1.2.5.</td></tr>
+          <tr><th scope="row"><code>server/</code></th><td>Ancien serveur Python (<code>castbridge_server.py</code>) et ses tests.</td></tr>
+          <tr><th scope="row"><code>server-play/</code></th><td>Service de jeu en ligne, en Docker. Module Gradle <code>:server-play</code>.</td></tr>
+          <tr><th scope="row"><code>ops/</code></th><td>Mise en service (first-run), supervision (monitoring) et tunnel.</td></tr>
+          <tr><th scope="row"><code>content/</code></th><td>Packs Apprendre, packs Langues et banques de Quiz.</td></tr>
+          <tr><th scope="row"><code>branding/</code></th><td>Charte graphique.</td></tr>
+          <tr><th scope="row"><code>docs/</code></th><td>Environ 80&nbsp;documents (voir le <a href="#versions">§&nbsp;9</a>).</td></tr>
+          <tr><th scope="row"><code>tools/</code></th><td>Outils de livraison, de contenu et de test (voir le <a href="#versions">§&nbsp;9</a>). Contient aussi <code>tools/activation-desktop</code>.</td></tr>
+          <tr><th scope="row"><code>webos/castbridge-tv-web/</code></th><td>CastBridge-TV Web&nbsp;: application web et service Node.js (mDNS, HTTP 8765, pont Luna).</td></tr>
+          <tr><th scope="row"><code>version.properties</code></th><td>Source unique des versions.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Modules Gradle</h3>
+    <div class="scroll" tabindex="0" role="region" aria-label="Tableau des modules Gradle">
+      <table>
+        <caption class="sr-only">Modules Gradle</caption>
+        <thead><tr><th scope="col">Module</th><th scope="col">Emplacement</th><th scope="col">Rôle</th></tr></thead>
+        <tbody>
+          <tr><th scope="row"><code>:core</code></th><td><code>android/</code></td><td>Cœur en Kotlin JVM pur&nbsp;: 574&nbsp;fichiers, aucun import Android, NanoHTTPD 2.3.1 et bcrypt 0.10.2. 5&nbsp;868 tests JVM.</td></tr>
+          <tr><th scope="row"><code>:sshd</code></th><td><code>android/</code></td><td>Serveur SSH (Apache MINA SSHD) pour l’administration à distance.</td></tr>
+          <tr><th scope="row"><code>:sender</code></th><td><code>android/</code></td><td>Application CastBridge, pour le téléphone. 107&nbsp;fichiers, Jetpack Compose.</td></tr>
+          <tr><th scope="row"><code>:receiver</code></th><td><code>android/</code></td><td>Application CastBridge-TV. 102&nbsp;fichiers.</td></tr>
+          <tr><th scope="row"><code>:owner</code>, <code>:ownerlib</code></th><td><code>android/</code></td><td>CastBridge Propriétaire, la console des activations.</td></tr>
+          <tr><th scope="row"><code>:devbridge</code></th><td><code>android/</code></td><td>CastBridge Dev&nbsp;: SSH sur le port 2223 et installation.</td></tr>
+          <tr><th scope="row"><code>:activation-desktop</code></th><td><code>tools/activation-desktop</code></td><td>Outil d’activation de bureau.</td></tr>
+          <tr><th scope="row"><code>:server-play</code></th><td><code>server-play/</code></td><td>Service de jeu en ligne.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Le build Gradle d’<code>android/</code> compile aussi les deux modules rangés ailleurs&nbsp;: <code>tools/activation-desktop</code> et <code>server-play/</code>.</p>
+  </div>
+</section>
+
+<!-- §3 -->
+<section class="sec" id="coeur" aria-labelledby="h-coeur">
+  <div class="sec-head"><span class="n" aria-hidden="true">§&nbsp;3</span><h2 id="h-coeur">Le cœur par paquets</h2></div>
+  <p>Le module <code>:core</code> est du Kotlin JVM pur et ne contient aucun import Android. Toute décision y prend la forme d’une règle pure, testée sur la JVM. Les modules Android ne font que des effets&nbsp;: ils lisent l’état, demandent la décision à <code>:core</code>, puis agissent.</p>
+
+  <div class="layers" role="group" aria-label="Trois couches : décisions, effets, Android">
+    <div class="layer layer--core">
+      <div><h4>Décisions</h4><span class="mod">module&nbsp;:core</span></div>
+      <p>Kotlin JVM pur, 574&nbsp;fichiers, 5&nbsp;868 tests JVM. Dépendances&nbsp;: NanoHTTPD 2.3.1 et bcrypt 0.10.2. Les règles décident de la route d’un envoi, de l’activation, du quiz, du portefeuille.</p>
+    </div>
+    <div class="layer">
+      <div><h4>Effets</h4><span class="mod">les deux applications</span></div>
+      <p>CastBridge (<code>:sender</code>, 107&nbsp;fichiers) et CastBridge-TV (<code>:receiver</code>, 102&nbsp;fichiers). Elles appellent les règles, puis pilotent le réseau, le Bluetooth, le stockage et l’écran.</p>
+    </div>
+    <div class="layer layer--os">
+      <div><h4>Android</h4><span class="mod">système</span></div>
+      <p>Services, Wi-Fi, Bluetooth, stockage et affichage.</p>
+    </div>
+  </div>
+  <p class="note">Exemple&nbsp;: <code>core/link/BulkRoute</code> décide du gros envoi. <code>AutoWifiDirect</code>, dans CastBridge, applique la décision côté téléphone.</p>
+
+  <div class="sub">
+    <h3>Fichiers par paquet</h3>
+    <div class="panel">
+      <ul class="bars" role="list" aria-label="Nombre de fichiers par paquet de castbridge.core">
+        <li class="bar-row" style="--n: 73"><span class="bar-name">tv</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-n">73</span></li>
+        <li class="bar-row" style="--n: 51"><span class="bar-name">quiz</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-n">51</span></li>
+        <li class="bar-row" style="--n: 47"><span class="bar-name">owner</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-n">47</span></li>
+        <li class="bar-row" style="--n: 40"><span class="bar-name">lots</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-n">40</span></li>
+        <li class="bar-row" style="--n: 32"><span class="bar-name">trust</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-n">32</span></li>
+        <li class="bar-row" style="--n: 31"><span class="bar-name">wallet</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-n">31</span></li>
+        <li class="bar-row" style="--n: 27"><span class="bar-name">library</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-n">27</span></li>
+        <li class="bar-row" style="--n: 26"><span class="bar-name">learn</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-n">26</span></li>
+        <li class="bar-row" style="--n: 25"><span class="bar-name">remote</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-n">25</span></li>
+        <li class="bar-row" style="--n: 23"><span class="bar-name">xfer</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-n">23</span></li>
+        <li class="bar-row" style="--n: 23"><span class="bar-name">parental</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-n">23</span></li>
+        <li class="bar-row" style="--n: 16"><span class="bar-name">chess</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-n">16</span></li>
+        <li class="bar-row" style="--n: 12"><span class="bar-name">games</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-n">12</span></li>
+        <li class="bar-row" style="--n: 11"><span class="bar-name">tunnel</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-n">11</span></li>
+        <li class="bar-row" style="--n: 11"><span class="bar-name">store</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-n">11</span></li>
+        <li class="bar-row" style="--n: 10"><span class="bar-name">dl</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-n">10</span></li>
+        <li class="bar-row" style="--n: 9"><span class="bar-name">connect</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-n">9</span></li>
+        <li class="bar-row" style="--n: 8"><span class="bar-name">ux</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-n">8</span></li>
+        <li class="bar-row" style="--n: 8"><span class="bar-name">relay</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-n">8</span></li>
+        <li class="bar-row" style="--n: 8"><span class="bar-name">policy</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-n">8</span></li>
+        <li class="bar-row" style="--n: 7"><span class="bar-name">link</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-n">7</span></li>
+        <li class="bar-row" style="--n: 7"><span class="bar-name">btact</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-n">7</span></li>
+        <li class="bar-row" style="--n: 6"><span class="bar-name">tokens</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-n">6</span></li>
+        <li class="bar-row" style="--n: 6"><span class="bar-name">langues</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-n">6</span></li>
+        <li class="bar-row" style="--n: 6"><span class="bar-name">free</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-n">6</span></li>
+        <li class="bar-row" style="--n: 6"><span class="bar-name">content</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-n">6</span></li>
+        <li class="bar-row" style="--n: 5"><span class="bar-name">update</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-n">5</span></li>
+        <li class="bar-row" style="--n: 5"><span class="bar-name">gateway</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-n">5</span></li>
+        <li class="bar-row" style="--n: 5"><span class="bar-name">curriculum</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-n">5</span></li>
+        <li class="bar-row" style="--n: 4"><span class="bar-name">ssh</span><span class="bar-track" aria-hidden="true"><span class="bar-fill"></span></span><span class="bar-n">4</span></li>
+      </ul>
+    </div>
+    <p class="note">Chaque barre compte les fichiers d’un paquet de <code>castbridge.core</code>, sur une échelle commune qui s’arrête à 73. Douze autres paquets complètent la liste&nbsp;: brand, cast, crypto, device, net, sales, status, sudoku, telemetry, transcode, upnp et util.</p>
+  </div>
+</section>
+
+<!-- §4 -->
+<section class="sec" id="tv" aria-labelledby="h-tv">
+  <div class="sec-head"><span class="n" aria-hidden="true">§&nbsp;4</span><h2 id="h-tv">CastBridge-TV</h2></div>
+  <p>CastBridge-TV tourne sur les TV et les boîtiers Android (API&nbsp;26 et plus, 32 et 64&nbsp;bits). La TV de référence est une GaiaOS en 720p, armeabi-v7a. Le module <code>:receiver</code> compte 102&nbsp;fichiers.</p>
+
+  <div class="sub">
+    <h3>TvService et ses composants</h3>
+    <p>Un service d’arrière-plan, <code>TvService</code>, porte les serveurs et les annonces de la TV.</p>
+    <div class="scroll" tabindex="0" role="region" aria-label="Tableau des composants portés par TvService">
+      <table>
+        <caption class="sr-only">Composants portés par TvService</caption>
+        <thead><tr><th scope="col">Composant</th><th scope="col">Rôle</th><th scope="col">Canal</th></tr></thead>
+        <tbody>
+          <tr><th scope="row"><code>ReceiverServer</code></th><td>API HTTP (NanoHTTPD) de 207&nbsp;routes. L’accès demande un PIN à 6&nbsp;chiffres, puis un jeton de confiance.</td><td>TCP 8765</td></tr>
+          <tr><th scope="row">Annonce mDNS</th><td>Rend la TV visible sur le réseau local. TXT&nbsp;: <code>role=receiver</code>, <code>v=0.2</code>, et <code>locked=1</code> quand la TV n’est pas activée.</td><td><code>_castbridge._tcp</code></td></tr>
+          <tr><th scope="row"><code>BtServer</code></th><td>Serveur Bluetooth&nbsp;: HELLO, envoi reprenable, activation «&nbsp;act-bt&nbsp;», passerelle.</td><td>RFCOMM</td></tr>
+          <tr><th scope="row"><code>DialHost</code></th><td>Répond au protocole DIAL pour que l’appli YouTube du téléphone trouve la TV.</td><td>SSDP 1900, HTTP 30765</td></tr>
+          <tr><th scope="row"><code>WifiDirectGroup</code></th><td>Crée le groupe «&nbsp;CBTN&nbsp;» à la demande du téléphone, pour les gros envois.</td><td>Wi-Fi Direct</td></tr>
+          <tr><th scope="row"><code>UpdateInstaller</code></th><td>Installe l’APK que le téléphone envoie.</td><td><code>/api/apk/install</code></td></tr>
+          <tr><th scope="row"><code>StatusFeed</code></th><td>Alimente la barre d’état de l’écran.</td><td>interne</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Barre d’état et bande de licence</h3>
+    <p>La barre d’état compte sept pastilles, toutes avec un libellé.</p>
+    <ul class="statusbar" role="list" aria-label="Pastilles de la barre d'état">
+      <li>Internet</li><li>Wi-Fi</li><li>Bluetooth</li><li>Stockage</li><li>Téléphones</li><li>Licence</li><li>Jetons</li>
+    </ul>
+    <p><code>KeyBadgeOverlay</code> affiche la bande de licence en haut au centre. Depuis la 0.14.53-beta, elle apparaît 15&nbsp;secondes au retour à l’accueil. Elle n’est plus permanente.</p>
+  </div>
+
+  <div class="sub">
+    <h3>Écrans</h3>
+    <p><code>PlayerActivity</code> est l’écran principal. Elle porte l’accueil à tuiles (<code>HomeScreen</code>), la bibliothèque, le lecteur libVLC 3.6.5 et le MENU «&nbsp;Connexion &amp; réglages&nbsp;».</p>
+    <ul class="tiles" role="list" aria-label="Écrans de CastBridge-TV">
+      <li class="tile"><b>Accueil</b><span>tuiles (HomeScreen)</span></li>
+      <li class="tile"><b>Bibliothèque</b><span>avec vignettes</span></li>
+      <li class="tile"><b>Lecteur</b><span>libVLC 3.6.5</span></li>
+      <li class="tile"><b>Menu</b><span>«&nbsp;Connexion &amp; réglages&nbsp;»</span></li>
+      <li class="tile"><b>Quiz</b><span>et Quiz en ligne</span></li>
+      <li class="tile"><b>Échecs</b></li>
+      <li class="tile"><b>Jeux et Sudoku</b></li>
+      <li class="tile"><b>Apprendre</b><span>contenu embarqué</span></li>
+      <li class="tile"><b>Langues</b><span>contenu embarqué</span></li>
+      <li class="tile"><b>Portefeuille</b><span>jetons NDEM et MBOKO</span></li>
+      <li class="tile"><b>Téléchargements</b><span>aria2</span></li>
+      <li class="tile"><b>Activation</b></li>
+      <li class="tile"><b>Appairage</b><span>PIN et téléphones</span></li>
+      <li class="tile"><b>Contrôle parental</b><span>et supervision</span></li>
+      <li class="tile"><b>Télécommande</b><span>service d’accessibilité</span></li>
+      <li class="tile"><b>Retrait de la clé USB</b></li>
+    </ul>
+  </div>
+
+  <div class="sub">
+    <h3>Stockage et administration</h3>
+    <ul class="marks">
+      <li><strong>Réceptions.</strong> Chaque fichier arrive sous <code>&lt;nom&gt;.part</code>, avec un fichier <code>.meta</code>. La reprise s’appuie sur les deux. Le Wi-Fi et le Bluetooth écrivent le même fichier.</li>
+      <li><strong>Bibliothèque.</strong> Les fichiers reçus, avec leurs vignettes.</li>
+      <li><strong>Clé USB.</strong> Un volume amovible. Un écran dédié gère son retrait.</li>
+      <li><strong>Contenu embarqué.</strong> Apprendre, Langues et Quiz.</li>
+      <li><strong>Administration à distance.</strong> Le module <code>:sshd</code> (Apache MINA SSHD) ouvre l’accès SSH.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- §5 -->
+<section class="sec" id="telephone" aria-labelledby="h-tel">
+  <div class="sec-head"><span class="n" aria-hidden="true">§&nbsp;5</span><h2 id="h-tel">CastBridge (téléphone)</h2></div>
+  <p>Le module <code>:sender</code> compte 107&nbsp;fichiers et s’appuie sur Jetpack Compose. <code>MainActivity</code> présente l’application en onglets. Des services de fond envoient les fichiers, parlent à la TV et relaient les commandes.</p>
+
+  <div class="groups">
+    <article class="group">
+      <h3>Envoi</h3>
+      <dl class="parts">
+        <div><dt>TransferQueue, TransferQueueService</dt><dd>La file d’envoi. Elle lance le service qui convient à la route du lien.</dd></div>
+        <div><dt>UploadService</dt><dd>Envoi HTTP&nbsp;: <code>PUT /upload</code>, multivoie par <code>/api/part</code>, mode progressif «&nbsp;Copier et lire&nbsp;».</dd></div>
+        <div><dt>BtUploadService</dt><dd>Envoi Bluetooth (RFCOMM).</dd></div>
+      </dl>
+    </article>
+    <article class="group">
+      <h3>Liaison avec la TV</h3>
+      <dl class="parts">
+        <div><dt>TvLinkManager, LinkDriver</dt><dd>Établissent le lien&nbsp;: HELLO Bluetooth, routes par priorité LAN, Wi-Fi Direct puis Bluetooth, jetons de confiance, repli et retour. La règle de LinkDriver vit dans <code>core/trust</code>.</dd></div>
+        <div><dt>TvDiscovery</dt><dd>Découverte mDNS avec NsdManager.</dd></div>
+        <div><dt>AutoWifiDirect</dt><dd>Applique la décision de <code>core/link/BulkRoute</code> pour les gros envois.</dd></div>
+      </dl>
+    </article>
+    <article class="group">
+      <h3>Commande, lecture et contenus</h3>
+      <dl class="parts">
+        <div><dt>RemoteController, RemoteService</dt><dd>Télécommande&nbsp;: le Wi-Fi d’abord, puis le Bluetooth (HID).</dd></div>
+        <div><dt>Upnp, DlnaHandoff, CastSession</dt><dd>DLNA&nbsp;: <code>SetAVTransportURI</code> vers une TV tierce.</dd></div>
+        <div><dt>Lecteur «&nbsp;Ouvrir avec&nbsp;»</dt><dd>Un lecteur intégré, appelé depuis le menu «&nbsp;Ouvrir avec&nbsp;» d’Android.</dd></div>
+        <div><dt>Écrans de contenu</dt><dd>Quiz, Échecs, Apprendre, Langues et Portefeuille.</dd></div>
+      </dl>
+    </article>
+    <article class="group">
+      <h3>Administration</h3>
+      <dl class="parts">
+        <div><dt>BtSshGatewayService</dt><dd>Passerelle Bluetooth. Elle expose SSH (port 2222) et une API (port 18765) sur le téléphone, pour un Mac.</dd></div>
+        <div><dt>Variante «&nbsp;superadmin&nbsp;»</dt><dd>La console du propriétaire (bcrypt), construite avec <code>-Pcastbridge.superAdmin=true</code>.</dd></div>
+      </dl>
+    </article>
+  </div>
+</section>
+
+<!-- §6 -->
+<section class="sec" id="protocoles" aria-labelledby="h-proto">
+  <div class="sec-head"><span class="n" aria-hidden="true">§&nbsp;6</span><h2 id="h-proto">Protocoles et ports</h2></div>
+  <p>Chaque liaison a son protocole. L’API HTTP de la TV est la plus riche. Elle demande un PIN à 6&nbsp;chiffres, puis un jeton de confiance.</p>
+  <div class="scroll" tabindex="0" role="region" aria-label="Tableau des protocoles et des ports">
+    <table>
+      <caption class="sr-only">Protocoles et ports de CastBridge</caption>
+      <thead><tr><th scope="col">Protocole</th><th scope="col">Port ou nom</th><th scope="col">Sens</th><th scope="col">Détail</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">API HTTP de la TV</th><td>TCP 8765</td><td>Téléphone vers TV</td><td>NanoHTTPD, 207&nbsp;routes. Routes clés&nbsp;: <code>/api/hello</code>, <code>/api/info</code>, <code>PUT /upload</code>, <code>/api/transfer/begin</code>, <code>/api/part</code>, <code>/api/play</code>, <code>/api/playurl</code>, <code>/api/reception/cancel</code>, <code>/api/apk/install</code>, <code>/api/activation</code>. CastBridge-TV Web sert aussi le port 8765.</td></tr>
+        <tr><th scope="row">mDNS</th><td><code>_castbridge._tcp</code></td><td>La TV annonce, le téléphone cherche</td><td>TXT&nbsp;: <code>role=receiver</code>, <code>v=0.2</code>, <code>locked=1</code> si la TV n’est pas activée. Le téléphone utilise NsdManager.</td></tr>
+        <tr><th scope="row">Bluetooth RFCOMM</th><td><code>BtProtocol</code></td><td>Téléphone vers TV</td><td>HELLO, envoi reprenable, activation «&nbsp;act-bt&nbsp;» sans appairage, passerelle.</td></tr>
+        <tr><th scope="row">Wi-Fi Direct</th><td>groupe «&nbsp;CBTN&nbsp;»</td><td>Le téléphone demande, la TV crée</td><td>Réservé aux gros envois. Décision&nbsp;: <code>core/link/BulkRoute</code>.</td></tr>
+        <tr><th scope="row">DIAL</th><td>SSDP 1900, HTTP 30765</td><td>Appli YouTube vers TV</td><td>Porté par <code>DialHost</code>.</td></tr>
+        <tr><th scope="row">DLNA et UPnP</th><td>AVTransport</td><td>Téléphone vers une TV tierce (sortant)</td><td><code>SetAVTransportURI</code>, depuis <code>CastSession</code>.</td></tr>
+        <tr><th scope="row">SSH</th><td>TCP 2223</td><td>Développeur vers CastBridge Dev</td><td>Outil de développement&nbsp;: SSH et installation d’APK.</td></tr>
+        <tr><th scope="row">SSH</th><td>TCP 2222</td><td>Assistance à distance</td><td>sshd intégré (module <code>:sshd</code>), tunnel d’assistance. Le téléphone expose aussi le port 2222 par sa passerelle Bluetooth, pour un Mac.</td></tr>
+        <tr><th scope="row">API de passerelle</th><td>TCP 18765</td><td>Mac vers téléphone</td><td><code>BtSshGatewayService</code>, avec SSH 2222.</td></tr>
+        <tr><th scope="row">HTTPS</th><td>bridge.sti-cm.com</td><td>Téléphone et TV vers serveur</td><td>Activations et licences, lots, quiz, contenu, mises à jour (<code>/dl/</code>), guide (<code>/guide/</code>), jeu en ligne (<code>/play/</code>), portefeuille, télémétrie, <code>/admin</code>.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- §7 -->
+<section class="sec" id="flux" aria-labelledby="h-flux">
+  <div class="sec-head"><span class="n" aria-hidden="true">§&nbsp;7</span><h2 id="h-flux">Trois flux</h2></div>
+  <p>Trois parcours montrent comment les composants travaillent ensemble&nbsp;: copier un fichier, activer une TV verrouillée et mettre la TV à jour depuis le téléphone.</p>
+
+  <div class="flow">
+    <h3>Copier un fichier du téléphone vers la TV</h3>
+    <p>Un partage ou une sélection entre dans la file d’envoi. La file choisit la voie, puis envoie. La TV écrit le fichier, le range dans sa bibliothèque, et l’envoi se termine par une notification.</p>
+    <figure>
+      <div class="diagram" style="--dmin: 28rem" tabindex="0" role="region" aria-label="Schéma du flux de copie d'un fichier">
+<pre class="mermaid">
+flowchart TD
+  A["Partage ou sélection"]:::phone --> Q["File d'envoi : TransferQueue"]:::phone
+  Q --> R{"Route du lien"}:::phone
+  R -->|"voie 1 : LAN"| H["UploadService : HTTP"]:::phone
+  R -->|"voie 2 : Wi-Fi Direct"| H
+  R -->|"voie 3 : Bluetooth"| B["BtUploadService : RFCOMM"]:::phone
+  B -.->|"retour au Wi-Fi"| R
+  H --> P["La TV écrit nom.part et nom.meta"]:::tv
+  B --> P
+  P --> N["Renommage, puis bibliothèque avec vignette"]:::tv
+  N --> F["Notification de fin"]:::ext
+  classDef phone fill:#2A9D7728,stroke:#2A9D77,stroke-width:2px
+  classDef tv fill:#C27F0A28,stroke:#C27F0A,stroke-width:2px
+  classDef ext fill:#7F8F991F,stroke:#7F8F99,stroke-width:1.5px,stroke-dasharray:4 3
+</pre>
+      </div>
+      <figcaption>Copie d’un fichier. Vert&nbsp;: côté téléphone. Ambre&nbsp;: côté TV. Le trait pointillé montre le retour au Wi-Fi quand un envoi Bluetooth voit le Wi-Fi revenir.</figcaption>
+    </figure>
+    <ul class="marks">
+      <li><strong>Priorité des voies.</strong> LAN, puis Wi-Fi Direct, puis Bluetooth. Un gros envoi demande à la TV le groupe «&nbsp;CBTN&nbsp;».</li>
+      <li><strong>Reprise.</strong> La TV garde <code>&lt;nom&gt;.part</code> et <code>.meta</code>. Le Wi-Fi et le Bluetooth reprennent le même fichier, ce qui permet le retour au Wi-Fi (<span class="tag tag--r">R-54</span>).</li>
+      <li><strong>Annulation.</strong> La route <code>/api/reception/cancel</code> annule une réception en cours. Voir <span class="tag tag--r">R-51</span>, copie interrompue annulable.</li>
+      <li><strong>Notification.</strong> La notification de fin dépend de la permission des notifications (<span class="tag tag--r">R-52</span>).</li>
+    </ul>
+  </div>
+
+  <div class="flow">
+    <h3>Activer une TV verrouillée</h3>
+    <p>Une TV verrouillée le dit dans son annonce mDNS, avec <code>locked=1</code>. Cinq voies peuvent la déverrouiller.</p>
+    <figure>
+      <div class="diagram" style="--dmin: 34rem" tabindex="0" role="region" aria-label="Schéma des cinq voies d'activation">
+<pre class="mermaid">
+flowchart LR
+  L["TV verrouillée : l'annonce mDNS porte locked=1"]:::tv
+  A["TV activée"]:::tv
+  L -->|"code saisi"| A
+  L -->|"QR"| A
+  L -->|"clé USB"| A
+  L -->|"Bluetooth act-bt"| A
+  L -->|"serveur"| A
+  classDef tv fill:#C27F0A28,stroke:#C27F0A,stroke-width:2px
+</pre>
+      </div>
+      <figcaption>Cinq voies mènent d’une TV verrouillée à une TV activée. Le schéma simplifie&nbsp;: la matrice complète des états et des voies est dans <code>docs/ACTIVATION-ETATS-ET-VOIES.md</code>.</figcaption>
+    </figure>
+    <ul class="marks">
+      <li><strong>Le code suffit.</strong> C’est la règle produit du 7 octobre 2026.</li>
+      <li><strong>Bluetooth sans appairage.</strong> L’activation <code>act-bt</code> n’exige pas d’appairage.</li>
+      <li><strong>États et voies par priorité.</strong> La matrice est accompagnée des décisions <span class="tag tag--d">D-ACT-1</span> à <span class="tag tag--d">D-ACT-3</span>.</li>
+    </ul>
+  </div>
+
+  <div class="flow">
+    <h3>Mettre la TV à jour depuis le téléphone</h3>
+    <p>La mise à jour se fait en local, de téléphone à TV, sans passer par le serveur.</p>
+    <ol class="steps">
+      <li><span>Le téléphone importe l’APK de CastBridge-TV. Il peut le partager avec un autre téléphone.</span></li>
+      <li><span>Il envoie l’APK à la TV par <code>/api/apk/install</code>.</span></li>
+      <li><span><code>UpdateInstaller</code> tente l’installation.</span></li>
+      <li><span>Si l’installation n’est pas possible, la TV dépose l’APK dans son dossier Download.</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- §8 -->
+<section class="sec" id="serveur" aria-labelledby="h-serveur">
+  <div class="sec-head"><span class="n" aria-hidden="true">§&nbsp;8</span><h2 id="h-serveur">Serveur</h2></div>
+  <p>CastBridge serveur tourne sur <code>bridge.sti-cm.com</code>. Son code est dans <code>backend/</code>&nbsp;: Java&nbsp;21, Spring Boot&nbsp;3 et MySQL&nbsp;8.4, livrés avec Docker. Il compte 237&nbsp;fichiers Java et 45&nbsp;contrôleurs. L’artefact s’appelle castbridge-server et sa version est la 1.2.5 (code&nbsp;9).</p>
+
+  <div class="sub">
+    <h3>Paquets de castbridge.server</h3>
+    <div class="scroll" tabindex="0" role="region" aria-label="Tableau des paquets du serveur">
+      <table>
+        <caption class="sr-only">Paquets de castbridge.server par domaine</caption>
+        <thead><tr><th scope="col">Domaine</th><th scope="col">Paquets et chemin public</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Activations et licences</th><td><code>activations</code>, <code>licenses</code></td></tr>
+          <tr><th scope="row">Lots</th><td><code>lots</code></td></tr>
+          <tr><th scope="row">Quiz</th><td><code>quiz</code></td></tr>
+          <tr><th scope="row">Contenu</th><td><code>content</code></td></tr>
+          <tr><th scope="row">Mises à jour</th><td><code>updates</code>, publiées sous <code>/dl/</code></td></tr>
+          <tr><th scope="row">Guide</th><td><code>guide</code>, publié sous <code>/guide/</code></td></tr>
+          <tr><th scope="row">Jeu en ligne</th><td><code>play</code>, sous <code>/play/</code></td></tr>
+          <tr><th scope="row">Portefeuille</th><td><code>wallet</code>, avec les sous-paquets <code>core</code> et <code>ops</code></td></tr>
+          <tr><th scope="row">Télémétrie</th><td><code>telemetry</code></td></tr>
+          <tr><th scope="row">Administration</th><td><code>admin</code>, sous <code>/admin</code></td></tr>
+          <tr><th scope="row">Autres paquets métier</th><td><code>library</code>, <code>tunnel</code>, <code>orders</code>, <code>devices</code></td></tr>
+          <tr><th scope="row">Socle</th><td><code>web</code>, <code>config</code>, <code>common</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Autour du serveur</h3>
+    <ul class="marks">
+      <li><code>server-play/</code>&nbsp;: le service de jeu en ligne, en Docker.</li>
+      <li><code>ops/</code>&nbsp;: la mise en service (first-run), la supervision (monitoring) et le tunnel.</li>
+      <li><code>server/</code>&nbsp;: l’ancien serveur Python, avec ses tests.</li>
+      <li><code>deploy-server.sh</code>, dans <code>tools/</code>&nbsp;: le déploiement vers bridge.sti-cm.com.</li>
+      <li><strong>Quiz en ligne.</strong> Seules les TV activées et connectées jouent. Les téléphones passent par leur TV, 8 au maximum par TV. Liaison prévue&nbsp;: 40&nbsp;kbit/s.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- §9 -->
+<section class="sec" id="versions" aria-labelledby="h-versions">
+  <div class="sec-head"><span class="n" aria-hidden="true">§&nbsp;9</span><h2 id="h-versions">Versions, outillage et documentation</h2></div>
+  <p>Le fichier <code>version.properties</code> est la source unique des versions. Chaque produit reçoit une étiquette git à son nom.</p>
+
+  <div class="sub">
+    <h3>Versions au 18 octobre 2026</h3>
+    <div class="scroll" tabindex="0" role="region" aria-label="Tableau des versions">
+      <table>
+        <caption class="sr-only">Versions des produits au 18 octobre 2026</caption>
+        <thead><tr><th scope="col">Produit</th><th scope="col">Version</th><th scope="col">Code</th><th scope="col">Remarque</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">CastBridge-TV</th><td>0.14.53-beta</td><td>132 (verrouillée 133)</td><td>Seules les versions verrouillées sont construites. Étiquette <code>tv-&lt;version&gt;</code>.</td></tr>
+          <tr><th scope="row">CastBridge</th><td>1.2.58-beta</td><td>88</td><td>La 1.2.59 est en préparation. Étiquette <code>phone-&lt;version&gt;</code>.</td></tr>
+          <tr><th scope="row">CastBridge serveur</th><td>1.2.5</td><td>9</td><td>Artefact castbridge-server. Étiquette <code>server-&lt;version&gt;</code>.</td></tr>
+          <tr><th scope="row">CastBridge Propriétaire</th><td>0.2.4</td><td>non relevé</td><td>Jamais publiée.</td></tr>
+          <tr><th scope="row">CastBridge Dev</th><td>0.1.0</td><td>non relevé</td><td>Jamais distribué.</td></tr>
+          <tr><th scope="row">CastBridge-TV Web</th><td>0.1.0-beta</td><td>non relevé</td><td>Étiquette <code>tvweb-&lt;version&gt;</code>.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Les APK sont signés avec le certificat release d’empreinte <code>ef2908…</code>.</p>
+  </div>
+
+  <div class="sub">
+    <h3>Outillage</h3>
+    <div class="scroll" tabindex="0" role="region" aria-label="Tableau des outils">
+      <table>
+        <caption class="sr-only">Outils du dossier tools</caption>
+        <thead><tr><th scope="col">Outil</th><th scope="col">Dossier</th><th scope="col">Rôle</th></tr></thead>
+        <tbody>
+          <tr><th scope="row"><code>check_versions.py</code></th><td><code>tools/release/</code></td><td>Contrôle les versions des produits.</td></tr>
+          <tr><th scope="row"><code>tag-plan.sh</code></th><td><code>tools/release/</code></td><td>Prépare le plan des étiquettes git.</td></tr>
+          <tr><th scope="row"><code>deploy-server.sh</code></th><td><code>tools/release/</code></td><td>Déploie le serveur.</td></tr>
+          <tr><th scope="row"><code>gradle-lock.sh</code></th><td><code>tools/agents/</code></td><td>Verrou Gradle partagé entre les agents.</td></tr>
+          <tr><th scope="row"><code>list_routes.py</code></th><td><code>tools/routes/</code></td><td>Liste les routes HTTP.</td></tr>
+          <tr><th scope="row"><code>quiz-bank</code>, <code>content-*</code>, <code>learn-*</code></th><td><code>tools/</code></td><td>Fabriquent les banques de Quiz et les packs de contenu.</td></tr>
+          <tr><th scope="row"><code>package.sh</code></th><td><code>tools/webos/</code></td><td>Empaquette l’application webOS.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="sub">
+    <h3>Documentation</h3>
+    <p>Le dossier <code>docs/</code> compte environ 80&nbsp;documents.</p>
+    <dl class="docs">
+      <div><dt>HANDOFF</dt><dd>L’état courant du projet, tenu à jour à chaque livraison.</dd></div>
+      <div><dt>REGRESSIONS</dt><dd>Le journal des régressions, entrées R-xx.</dd></div>
+      <div><dt>test-plans/PARCOURS-CRITIQUES</dt><dd>Les parcours de test, entrées P-xx.</dd></div>
+      <div><dt>CHANGELOG</dt><dd>L’historique des changements.</dd></div>
+      <div><dt>RELEASES</dt><dd>Les fiches de livraison.</dd></div>
+      <div><dt>TRANSFER, STORAGE</dt><dd>Le transfert de fichiers et le stockage.</dd></div>
+      <div><dt>ACTIVATION-*, TV-*</dt><dd>L’activation et le comportement de la TV.</dd></div>
+      <div><dt>QUIZ, LEARN, LANGUES, GAMES</dt><dd>Les contenus et les jeux.</dd></div>
+      <div><dt>REMOTE-*</dt><dd>La commande et l’administration à distance.</dd></div>
+      <div><dt>guide-utilisateur/</dt><dd>Le guide de l’utilisateur, régénéré à chaque livraison et servi sur <code>/guide/</code>.</dd></div>
+    </dl>
+  </div>
+
+  <div class="sub">
+    <h3>Convention R, P et D</h3>
+    <div class="conv">
+      <article>
+        <h4><span class="tag tag--r">R-xx</span> Régressions</h4>
+        <p>Chaque régression suivie reçoit un numéro dans <code>docs/REGRESSIONS</code>.</p>
+        <ul>
+          <li><span class="tag tag--r">R-51</span><span>copie interrompue annulable</span></li>
+          <li><span class="tag tag--r">R-52</span><span>permission des notifications</span></li>
+          <li><span class="tag tag--r">R-53</span><span>barre d’état masquée pendant la vidéo</span></li>
+          <li><span class="tag tag--r">R-54</span><span>envoi Bluetooth qui revient au Wi-Fi</span></li>
+        </ul>
+      </article>
+      <article>
+        <h4><span class="tag tag--p">P-xx</span> Parcours</h4>
+        <p>Chaque parcours critique reçoit un numéro dans <code>docs/test-plans/PARCOURS-CRITIQUES</code>.</p>
+      </article>
+      <article>
+        <h4><span class="tag tag--d">D-xxx</span> Décisions</h4>
+        <p>Une décision numérotée garde la trace d’un choix.</p>
+        <ul>
+          <li><span class="tag tag--d">D-ACT-1</span><span>à D-ACT-3&nbsp;: machines à états de l’activation</span></li>
+          <li><span class="tag tag--d">D-IOS</span><span>iOS arrêté, travaux gelés</span></li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<footer>
+  <p>Généré le 2026-10-18 à partir du dépôt</p>
+</footer>
+
+</div>
