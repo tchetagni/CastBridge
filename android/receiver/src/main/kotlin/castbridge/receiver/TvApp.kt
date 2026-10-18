@@ -15,7 +15,7 @@ class TvApp : Application() {
         registerActivityLifecycleCallbacks(TvConnect.lifecycle)
         ParentalHub.init(this)                                          // parental control: local only (docs/PARENTAL.md)
         registerActivityLifecycleCallbacks(ParentalHub.lifecycle)
-        registerActivityLifecycleCallbacks(KeyBadgeOverlay)               // edition and key properties on every screen
+        registerActivityLifecycleCallbacks(KeyBadgeOverlay)               // licence label: 15 s on the home, the red one (key over) on every screen
         runCatching { UsbVolumeWatch.start(this) }                       // the state of every USB key as Android says it (checking, mounted, unmountable, pulled): docs/STORAGE.md
     }
 }

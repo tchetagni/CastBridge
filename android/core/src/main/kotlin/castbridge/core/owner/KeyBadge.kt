@@ -10,7 +10,7 @@ import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
-/** What the TV shows at all times on every screen: the edition (essai / production / super illimité) and the properties of the activation key. [lines] are short French sentences. */
+/** What the TV says about the activation key: the edition (essai / production / super illimité) and its properties. [lines] are short French sentences. When it is on screen: [KeyBadgeDisplay]. */
 data class Badge(val title: String, val lines: List<String>, val ended: Boolean = false) {
     val text: String get() = (listOf(title) + lines).joinToString("  ·  ")
 }
@@ -75,4 +75,22 @@ object KeyBadge {
             }
         }
     }
+}
+
+/**
+ * When the licence label is on screen (decision of the owner, 2026-10-18: « la bande verte de production ne doit pas être permanente et apparaître seulement lorsqu'on revient sur l'accueil pour 15 secondes »).
+ * The green (production, super illimité) and orange (essai) label is NOT permanent: it shows for [HOME_SHOW_MS] each time the home of CastBridge-TV is (re)shown (launch, back from a video, MENU or library
+ * closed, back from Quiz / Apprendre / Jeux…), then goes away; it is never shown on a video, in the MENU, in the library or in another activity.
+ * The red label ([Badge.ended]: no key, key over) stays on every screen, always (assumption of 2026-10-18, the owner may reverse it: only [visible] changes).
+ * Pure rule; the clock and the screens belong to `KeyBadgeOverlay` (receiver).
+ */
+object KeyBadgeDisplay {
+    const val HOME_SHOW_MS = 15_000L
+
+    /**
+     * [ended]: [Badge.ended]; [onHome]: the label's screen is the home of CastBridge-TV (not a video, the MENU, the library or another activity);
+     * [sinceHomeShownMs]: time since the home was last (re)shown (null = never, or the window is over).
+     */
+    fun visible(ended: Boolean, onHome: Boolean, sinceHomeShownMs: Long?): Boolean =
+        ended || (onHome && sinceHomeShownMs != null && sinceHomeShownMs >= 0 && sinceHomeShownMs < HOME_SHOW_MS)
 }

@@ -164,6 +164,7 @@ class PlayerActivity : Activity(), TvService.Screen {
     override fun onResume() {
         super.onResume(); resumed = true
         TvConnect.screens.enter(screenId)
+        if (home?.visible == true && settingsPanel?.visible != true && libScreen?.visible != true) KeyBadgeOverlay.homeShown()   // back on the home (Quiz, Apprendre, Jeux, the launcher…): the licence label shows for 15 s
         if (::extras.isInitialized) svc?.takePending()?.let { runPending(it) }
         serverScreens()
         // portefeuille (W22-07a) : le créer à partir de l'activation, puis le mettre à jour auprès du serveur selon le calendrier (première fois tout de suite, ensuite toutes les 15 min)
@@ -497,6 +498,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         home?.show()
         enterScreen("home")
         refreshStatusBar()
+        KeyBadgeOverlay.homeShown()                                     // the home is (re)shown: the licence label shows for 15 s (decision of 2026-10-18)
     }
 
     /** Hides every screen (a video starts). */
@@ -504,6 +506,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         home?.hide(); libScreen?.hide(); settingsPanel?.hide()
         libraryOpen = false; settingsOpen = false
         refreshStatusBar()
+        KeyBadgeOverlay.homeLeft()                                      // a video starts: no licence label
     }
 
     private fun showLibrary() {
@@ -511,6 +514,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         libScreen?.let { it.show(); libraryOpen = true }
         enterScreen("library")
         refreshStatusBar()
+        KeyBadgeOverlay.homeLeft()                                      // the library is not the home: no licence label
     }
 
     /** Back from a video (BACK, end of file, error): the home with its "Reprendre" row, not an empty screen. */
@@ -745,6 +749,7 @@ class PlayerActivity : Activity(), TvService.Screen {
             }
         }
         settingsPanel?.let { it.show(info, menuItems()); settingsOpen = true }; refreshStatusBar()          // MENU open: the status bar leaves (R-53)
+        KeyBadgeOverlay.homeLeft()                                      // ... and the licence label too (decision of 2026-10-18)
         enterScreen("settings")
     }
 
