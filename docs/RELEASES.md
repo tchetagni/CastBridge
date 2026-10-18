@@ -417,7 +417,8 @@ Tableau reconstruit mécaniquement à partir de l'historique premier-parent de `
 | CastBridge | 1.2.55-beta | 85 | 2026-10-07 | `bad92156` |
 | CastBridge | 1.2.56-beta | 86 | 2026-10-09 | `c733fc6d` |
 | CastBridge | 1.2.57-beta | 87 | 2026-10-15 | `891ba1df` |
-| **CastBridge** | **1.2.58-beta** (courant) | **88** | **2026-10-15** | **cb83f5ff** |
+| CastBridge | 1.2.58-beta | 88 | 2026-10-15 | `cb83f5ff` |
+| **CastBridge** | **1.2.59-beta** (courant) | **89** | **2026-10-18** | **68d41419** |
 | CastBridge Propriétaire | 0.1.0 | 1 | 2026-10-01 | `0ff64edc` |
 | CastBridge Propriétaire | 0.2.0 | 2 | 2026-10-02 | `e40173a5` |
 | CastBridge Propriétaire | 0.2.1 | 3 | 2026-10-02 | `1c26a114` |

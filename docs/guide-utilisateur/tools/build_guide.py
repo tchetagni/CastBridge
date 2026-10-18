@@ -1294,7 +1294,7 @@ def main():
             '<nav class="toc" aria-label="Sommaire">%s</nav>%s'
             '<footer>Les captures viennent d\'un émulateur avec des vidéos de test et des codes masqués. Les dessins sont signalés. '
             'Un cadre en pointillés marque une illustration qui manque encore.<br>'
-            'Version du guide : 2026-10-18 · CastBridge 1.2.58 · CastBridge-TV 0.14.53 (captures de CastBridge 1.2.50 et CastBridge-TV 0.14.43)</footer></div></body></html>'
+            'Version du guide : 2026-10-18 · CastBridge 1.2.59 · CastBridge-TV 0.14.53 (captures de CastBridge 1.2.50 et CastBridge-TV 0.14.43)</footer></div></body></html>'
             % (CSS, "".join(css_imgs), DEFS, nav, body))
     open(OUTFILE, "w", encoding="utf-8").write(html)
     # numéros d'étapes dans annotations.json
