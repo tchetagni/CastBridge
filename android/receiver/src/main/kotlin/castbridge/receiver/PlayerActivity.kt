@@ -21,6 +21,7 @@ import android.widget.TextView
 import castbridge.core.tv.LibraryProvider
 import castbridge.core.tv.NotificationAccessPolicy
 import castbridge.core.tv.PlayerCommand
+import castbridge.core.tv.PlayerIcons
 import castbridge.core.tv.PlayerParams
 import castbridge.core.tv.PlayerState
 import castbridge.core.tv.PlayerTracks
@@ -492,6 +493,7 @@ class PlayerActivity : Activity(), TvService.Screen {
     /** The home (launcher): rows of videos, clock, "ready" band. Technical details are in "Connexion & réglages". */
     private fun showHome() {
         libScreen?.hide(); settingsPanel?.hide()
+        libraryOpen = false; settingsOpen = false
         home?.show()
         enterScreen("home")
         refreshStatusBar()
@@ -500,12 +502,13 @@ class PlayerActivity : Activity(), TvService.Screen {
     /** Hides every screen (a video starts). */
     private fun hideScreens() {
         home?.hide(); libScreen?.hide(); settingsPanel?.hide()
+        libraryOpen = false; settingsOpen = false
         refreshStatusBar()
     }
 
     private fun showLibrary() {
-        home?.hide(); settingsPanel?.hide()
-        libScreen?.show()
+        home?.hide(); settingsPanel?.hide(); settingsOpen = false
+        libScreen?.let { it.show(); libraryOpen = true }
         enterScreen("library")
         refreshStatusBar()
     }
@@ -741,7 +744,7 @@ class PlayerActivity : Activity(), TvService.Screen {
                     (if (st.lastContactAt > 0) " · dernier contact ${ServerActivity.date(st.lastContactAt)}" else ""))
             }
         }
-        settingsPanel?.show(info, menuItems()); refreshStatusBar()
+        settingsPanel?.let { it.show(info, menuItems()); settingsOpen = true }; refreshStatusBar()          // MENU open: the status bar leaves (R-53)
         enterScreen("settings")
     }
 
@@ -756,7 +759,7 @@ class PlayerActivity : Activity(), TvService.Screen {
     private fun startedPlaying(name: String, size: Long) {
         currentSize = size
         controls?.let { it.hide(); it.showDiag(extras.fitOverlay()) }
-        statusBar?.zoneShown = false; refreshStatusBar()                  // pendant la vidéo : zone d'icônes avec libellés, qui suit la barre de commandes       // 6 s, sans aucune touche : mode, source, dalle, image
+        statusBar?.controlsVisible = false; refreshStatusBar()            // pendant la vidéo : zone d'icônes avec libellés, seulement avec la barre de commandes ou 4 s après un changement (R-53)       // 6 s, sans aucune touche : mode, source, dalle, image
         bgRun { library?.db?.onPlayStarted(name, size) }
     }
 
@@ -989,12 +992,28 @@ class PlayerActivity : Activity(), TvService.Screen {
         return StatusBarView(this, box, onOpen = { svc?.let { statusBar?.openPanel(it) } }, leaveFocus = { home?.takeIf { it.visible }?.headerChip?.requestFocus() }).also { statusBar = it }
     }
 
-    /** Redraws the bar from the service's model; it takes the remote's focus only on the home screen (never over a video or another screen). */
+    /**
+     * What is OPEN over the home, set where the screens change: `fadeTo` keeps `visible` true for ~250 ms after `hide()`, so right after BACK on the MENU (or from the library to
+     * the home) the `visible` flags still say « open » and the bar, read from them, would stay hidden once the MENU is closed (R-53). These two are exact at once.
+     */
+    private var settingsOpen = false
+    private var libraryOpen = false
+
+    /**
+     * Redraws the bar from the service's model and tells it where it is drawn (owner's rule of 2026-10-18, R-53, core `PlayerIcons.barVisible`): the MENU panel open → PANEL (hidden), a
+     * video → VIDEO (with the control bar, or 4 s after a change), the home alone → HOME (always; the only place where it takes the remote's focus), another screen → OTHER (4 s after a change).
+     */
     private fun refreshStatusBar() {
         val bar = ensureStatusBar() ?: return
         val s = svc ?: return
-        bar.playerMode = current != null
-        bar.interactive = current == null && home?.visible == true && libScreen?.visible != true && settingsPanel?.visible != true
+        val place = when {
+            settingsOpen -> PlayerIcons.Place.PANEL
+            current != null -> PlayerIcons.Place.VIDEO
+            home?.visible == true && !libraryOpen -> PlayerIcons.Place.HOME
+            else -> PlayerIcons.Place.OTHER
+        }
+        bar.place = place
+        bar.interactive = place == PlayerIcons.Place.HOME
         bar.render(s.icons.snapshot())
     }
 
@@ -1296,7 +1315,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         current = null; snapshot = PlayerState(); releasePlayer(); reopen = null
         if (::extras.isInitialized) extras.forget()
         if (::bar.isInitialized) bar.hideNow()
-        controls?.release(); statusBar?.zoneShown = true; refreshStatusBar()
+        controls?.release(); statusBar?.controlsVisible = false; refreshStatusBar()        // the control bar is gone with the video
         if (wasPlaying || libScreen?.visible == true) afterPlayback() else showHome()
     }
     override fun state(): PlayerState = snapshot.let { s ->
@@ -1382,7 +1401,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         override fun display() = panel.display()
         override fun infos() = showInfosAndLegend()
         override fun refreshProgress() = showBar(if (mp?.isPlaying == true) "" else "Pause")
-        override fun zoneChanged(visible: Boolean) { statusBar?.zoneShown = visible }
+        override fun zoneChanged(visible: Boolean) { statusBar?.controlsVisible = visible; refreshStatusBar() }
     }
 
     /** « Infos » : la ligne de diagnostic revient 6 s, et la fenêtre dit ce que signifie chaque icône (règle : jamais d'icône sans libellé). */
@@ -1508,7 +1527,7 @@ class PlayerActivity : Activity(), TvService.Screen {
             if (keyCode == KeyEvent.KEYCODE_BACK) {
                 when {
                     home?.takeIf { it.visible && settingsPanel?.visible != true && libScreen?.visible != true }?.closeGrid() == true -> Unit   // RETOUR ferme la grille d'un groupe, le focus revient sur son bouton
-                    settingsPanel?.visible == true -> { settingsPanel?.hide(); if (libScreen?.visible != true) showHome() }
+                    settingsPanel?.visible == true -> { settingsPanel?.hide(); settingsOpen = false; if (libScreen?.visible != true) showHome() else refreshStatusBar() }   // the bar comes back (R-53)
                     libScreen?.visible == true -> showHome()
                     else -> moveTaskToBack(true)              // leave the home: the service keeps running
                 }

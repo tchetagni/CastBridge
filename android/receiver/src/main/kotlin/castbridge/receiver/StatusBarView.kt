@@ -20,6 +20,7 @@ import castbridge.core.status.IconState
 import castbridge.core.status.StatusBar
 import castbridge.core.status.StatusIcon
 import castbridge.core.status.Tech
+import castbridge.core.tv.PlayerIcons
 import castbridge.core.tv.status.Badge
 import castbridge.core.tv.status.StatusBadges
 import castbridge.core.tv.status.StatusLevel
@@ -27,8 +28,9 @@ import castbridge.core.tv.status.StatusPalette
 import castbridge.core.tv.status.StatusRules
 
 /**
- * The permanent status bar: a column at the top right (under the clock, over every screen including a playing video) with one
- * chip per active connection or mode, drawn from [castbridge.core.status.StatusIconModel]. A chip = kind glyph + small technology
+ * The status bar: a column at the top right (under the clock) with one chip per active connection or mode, drawn from
+ * [castbridge.core.status.StatusIconModel]. Always on the home, never over the MENU panel, over a playing video only with the player's
+ * control bar or for 4 s after a change (owner's rule of 2026-10-18, R-53: see [place]). A chip = kind glyph + small technology
  * mark (shape, never colour alone); DEGRADED is dimmed with a dot and says « reconnexion »; ERROR has the red badge and a dot.
  * The French label shows only while the chip is new / just changed (4 s), focused, or the bar is expanded (OK on the home).
  * Focusable only when [interactive] (the home screen): during a video it never takes the remote's focus.
@@ -43,13 +45,19 @@ class StatusBarView(private val act: Activity, private val box: LinearLayout, pr
     private var order = emptyList<String>()
     private var last: StatusBar? = null
     /**
-     * During a video (owner's rule of 2026-10-04): every chip carries its French label, in 28 sp with a 40 dp glyph on a dark pill, inside the 5 % safe margins, and the whole
-     * zone follows the player's control bar ([zoneShown]); an error / reconnection or a change of the last 4 s keeps it on screen (core `PlayerIcons.zoneVisible`).
+     * Where the bar is drawn, and whether the player's control bar is on screen; the decision is the core `PlayerIcons.barVisible` (owner's rule of 2026-10-18, R-53, which replaces
+     * « an alert keeps the zone » of 2026-10-04 for the video): HOME always, PANEL (the MENU is open, with or without a video behind) never, VIDEO only with the control bar
+     * ([controlsVisible]: it comes with a short OK) or for 4 s after a chip changes (its passing to an alert included; a standing alert no longer pins the zone), OTHER (the library...) only for those 4 s.
+     * An alert still forces the label of its chip ([bind]), not the presence of the zone. During a video (owner's rule of 2026-10-04) every chip carries its French label, in 28 sp
+     * with a 40 dp glyph on a dark pill, inside the 5 % safe margins.
      */
-    var playerMode = false
-        set(v) { if (field != v) { field = v; relayout(); last?.let { render(it) } } }
-    var zoneShown = true
+    var place = PlayerIcons.Place.HOME
+        set(v) { if (field != v) { val was = playerMode; field = v; if (was != playerMode) relayout(); last?.let { render(it) } } }
+    var controlsVisible = false
         set(v) { if (field != v) { field = v; last?.let { render(it) } } }
+
+    /** The player presentation (labels 28 sp, glyph 40 dp, 5 % margins) is the VIDEO one. */
+    private val playerMode get() = place == PlayerIcons.Place.VIDEO
 
     private fun relayout() {
         val lp = box.layoutParams as? FrameLayout.LayoutParams ?: return
@@ -109,9 +117,8 @@ class StatusBarView(private val act: Activity, private val box: LinearLayout, pr
         more.visibility = if (hidden > 0) View.VISIBLE else View.GONE
         more.isFocusable = interactive && hidden > 0
         more.text = "+$hidden"; more.contentDescription = "$hidden autres pastilles : ${split.hidden.joinToString(", ") { it.text }}"
-        val alert = split.visible.any { it.level == StatusLevel.ERROR } || bar.icons.any { it.state == IconState.DEGRADED }
         val fresh = chips.values.any { now - it.changedAt < SHOW_MS }
-        box.visibility = if (all.isEmpty() || (playerMode && !castbridge.core.tv.PlayerIcons.zoneVisible(zoneShown, alert, fresh))) View.GONE else View.VISIBLE
+        box.visibility = if (all.isEmpty() || !PlayerIcons.barVisible(place, controlsVisible, fresh)) View.GONE else View.VISIBLE      // no alert in the decision (R-53)
         main.removeCallbacks(collapse)
         if (chips.values.any { now - it.changedAt < SHOW_MS }) main.postDelayed(collapse, SHOW_MS)
     }

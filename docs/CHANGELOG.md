@@ -9,7 +9,10 @@ Trois produits livrés ont chacun leur numéro : **CastBridge-TV** (`tv-<version
 
 ## [Non publié]
 
-Rien pour l'instant.
+### CastBridge-TV
+- la barre d'état (les pastilles en haut à droite : Wi-Fi, Bluetooth, Internet…) ne reste plus à l'écran pendant la vidéo ni quand le MENU « Connexion & réglages » est ouvert (R-53, « Les affichages des icônes Bluetooth, Wi-Fi… d'extrême droite perdurent pendant le visionnage de la vidéo ou la navigation sur le menu ») : à l'accueil elle reste et prend la télécommande ; MENU ouvert elle disparaît et revient à la fermeture ; pendant une vidéo elle n'apparaît qu'avec la barre de commandes (OK court) ou 4 s après un changement d'état d'une pastille (passage en alerte compris) ; sur la bibliothèque, 4 s après un changement seulement. Une pastille orange ou rouge qui dure ne la garde plus (la règle du 2026-10-04 « l'alerte garde la zone » est remplacée pour la vidéo) ; libellés de 28 sp, glyphes de 40 dp et marges de 5 % en lecture inchangés
+- vérifié en JVM seulement (`PlayerIconsTest`, règle pure `PlayerIcons.barVisible`) et par la compilation de `:receiver` ; NON ESSAYÉ sur la TV : parcours P-95 à jouer, R-53 reste « à confirmer sur appareil » ; aucun APK construit
+- dans le dépôt, sans effet sur l'APK : parcours P-95 (`docs/test-plans/PARCOURS-CRITIQUES.md`), journal des régressions R-53, `docs/TV-PLAYER.md` (« Icônes du lecteur ») et `docs/TV-ACCUEIL.md` (« Pastilles »)
 
 ## CastBridge-TV
 

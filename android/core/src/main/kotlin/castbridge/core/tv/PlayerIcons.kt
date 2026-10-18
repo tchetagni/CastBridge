@@ -8,6 +8,7 @@ import kotlin.math.pow
 /**
  * Icônes affichées par-dessus la vidéo de CastBridge-TV : règles PURES (libellé, taille, contraste, zone de sécurité, légende). Le dessin est dans les vues Android.
  * Règle du propriétaire (2026-10-04) : jamais une icône seule, toujours un libellé court en français ; lisible à 3 m sur une dalle 720p.
+ * Présence de la barre d'état (2026-10-18, R-53) : [barVisible].
  */
 object PlayerIcons {
     /** Taille minimale du texte (sp) et des icônes (dp) du lecteur. */
@@ -83,6 +84,28 @@ object PlayerIcons {
         return 1.05 / (l + 0.05)
     }
 
-    /** La zone d'icônes du lecteur suit la barre de commandes ; elle reste pour une alerte (erreur, reconnexion) ou pendant 4 s après un changement. */
-    fun zoneVisible(controlsVisible: Boolean, alert: Boolean, changedRecently: Boolean) = controlsVisible || alert || changedRecently
+    /** Où la barre d'état (la colonne de pastilles en haut à droite) est dessinée : le lieu décide de sa présence ([barVisible]). */
+    enum class Place {
+        /** L'accueil, sans panneau ni vidéo : la barre reste et prend la télécommande. */
+        HOME,
+        /** Le panneau « Connexion & réglages » (MENU) est ouvert, avec ou sans vidéo derrière : la barre se retire. */
+        PANEL,
+        /** Une vidéo joue : la zone suit la barre de commandes du lecteur. */
+        VIDEO,
+        /** Un autre écran de l'activité (la bibliothèque…) : la zone ne vient que peu après un changement. */
+        OTHER,
+    }
+
+    /**
+     * La barre d'état est-elle à l'écran ? Décision du propriétaire du 2026-10-18 (R-53 : « les icônes Bluetooth, Wi-Fi… d'extrême droite perdurent pendant le visionnage de la vidéo ou la
+     * navigation sur le menu »), qui remplace pour la vidéo « l'alerte garde la zone » du 2026-10-04 : [Place.HOME] toujours ; [Place.PANEL] jamais ; [Place.VIDEO] avec la barre de commandes
+     * du lecteur ([controlsVisible]) ou pendant 4 s après un changement d'état d'une pastille ([changedRecently], passage en alerte compris) ; [Place.OTHER] seulement pendant ces 4 s.
+     * Il n'y a plus de paramètre d'alerte : une pastille orange ou rouge qui dure n'épingle rien à l'écran (son libellé reste imposé, c'est la vue qui le décide).
+     */
+    fun barVisible(place: Place, controlsVisible: Boolean, changedRecently: Boolean): Boolean = when (place) {
+        Place.HOME -> true
+        Place.PANEL -> false
+        Place.VIDEO -> controlsVisible || changedRecently
+        Place.OTHER -> changedRecently
+    }
 }
