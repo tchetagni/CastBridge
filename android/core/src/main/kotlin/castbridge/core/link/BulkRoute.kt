@@ -100,6 +100,47 @@ object BulkRoute {
     /** Un même fichier ne change de voie après une perte du groupe que 2 fois. */
     const val MAX_REROUTES = 2
 
+    // ------------------------------------------------------------------ R-54 (2026-10-18) : le Wi-Fi d'abord, le Bluetooth en dernier recours, et retour au Wi-Fi en cours d'envoi
+
+    /** Une route Wi-Fi (LAN ou Direct) vue vivante depuis moins que ça compte comme « vue récemment » : la TV redémarre (réinstallation, mise à jour), son Wi-Fi revient. */
+    const val WIFI_RECENT_MS = 10 * 60_000L
+    /** Attente maximale du Wi-Fi quand il a été vu récemment ([WIFI_RECENT_MS]) : le temps qu'une TV redémarre. */
+    const val WAIT_WIFI_RECENT_MS = 45_000L
+    /** Attente maximale du Wi-Fi quand aucune route Wi-Fi n'a été vue récemment : le temps d'un nouveau contrôle du lien. */
+    const val WAIT_WIFI_UNSEEN_MS = 15_000L
+    /** En dessous de ce qui reste à envoyer, quitter le Bluetooth ne gagne rien : il finit (1 Mo). */
+    const val MIN_SWITCH_BYTES = 1L shl 20
+    /** La route Wi-Fi du lien doit être vue vivante sans interruption depuis ce temps avant de quitter le Bluetooth. */
+    const val WIFI_STABLE_MS = 3_000L
+    /** Un même fichier ne repasse du Bluetooth au Wi-Fi que 2 fois en cours d'envoi. */
+    const val MAX_BT_REROUTES = 2
+
+    /**
+     * Avant de lancer un gros fichier en Bluetooth (aucune route Wi-Fi dans la session, aucun Wi-Fi Direct) : combien de temps attendre le retour du Wi-Fi de la TV.
+     * 0 pour un petit fichier (moins de [MIN_WD_BYTES] : le Bluetooth suffit, il part aussitôt) ; [WAIT_WIFI_RECENT_MS] si une route Wi-Fi (LAN ou Direct) a été vivante il y a moins de
+     * [WIFI_RECENT_MS] ([wifiSeenAgoMs], horloge monotone ; la TV redémarre) ; sinon [WAIT_WIFI_UNSEEN_MS]. [wifiSeenAgoMs] null = jamais vue depuis le lancement de l'application.
+     */
+    fun waitForWifiMs(sizeBytes: Long, wifiSeenAgoMs: Long?): Long = when {
+        sizeBytes < MIN_WD_BYTES -> 0L
+        wifiSeenAgoMs != null && wifiSeenAgoMs < WIFI_RECENT_MS -> WAIT_WIFI_RECENT_MS
+        else -> WAIT_WIFI_UNSEEN_MS
+    }
+
+    /**
+     * Pendant un envoi en Bluetooth : faut-il l'arrêter pour le reprendre en Wi-Fi ? Oui s'il reste au moins [MIN_SWITCH_BYTES] ([remainingBytes]), si la route Wi-Fi du lien est vue
+     * stable depuis au moins [WIFI_STABLE_MS] ([lanStableMs], 0 = pas de route Wi-Fi) et si ce fichier n'a pas déjà changé [MAX_BT_REROUTES] fois de voie ([reroutes]).
+     * La TV garde son `.part` (le Bluetooth et le Wi-Fi reprennent chacun la copie de l'autre) : la reprise se fait à l'octet reçu.
+     */
+    fun switchBtToWifi(remainingBytes: Long, lanStableMs: Long, reroutes: Int): Boolean =
+        remainingBytes >= MIN_SWITCH_BYTES && lanStableMs >= WIFI_STABLE_MS && reroutes < MAX_BT_REROUTES
+
+    /**
+     * R-54, garde de la bascule : la TV reprend-elle cette copie en Wi-Fi ? Sa réponse à `GET /api/part?size=` (la question que pose l'envoi Wi-Fi avant son premier octet) : fichier fini ([TvClient.Part.done])
+     * ou aucun code. La TV ne reprend en HTTP qu'une copie dont elle connaît la taille (le `.meta` que pose un envoi Wi-Fi ; la réception Bluetooth n'en pose pas) : une copie COMMENCÉE en Bluetooth répond
+     * `PART_OTHER` (et `NAME_TAKEN`, `TV_CANCELLED` sont des refus) ; l'envoi Wi-Fi la remettrait à zéro (refusé tant qu'elle est vivante) puis échouerait : on ne quitte alors pas le Bluetooth.
+     */
+    fun wifiResumes(part: castbridge.core.tv.TvClient.Part): Boolean = part.done || part.code == null
+
     /**
      * Ce que le téléphone sait au moment d'envoyer un fichier en masse (copie, copie-et-lecture, déplacement, file).
      * [lanAlive] : la session de contrôle passe par un réseau commun qui répond. [isolated] : la TV annonce une adresse du même sous-réseau qui ne répond

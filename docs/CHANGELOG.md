@@ -9,7 +9,9 @@ Trois produits livrés ont chacun leur numéro : **CastBridge-TV** (`tv-<version
 
 ## [Non publié]
 
-Rien pour l'instant.
+### CastBridge (téléphone)
+- la copie d'un gros fichier ne repart plus en Bluetooth quand le Wi-Fi de la TV est revenu (R-54, « la reprise de la copie est lente bien que la disponibilité d'un réseau wifi soit effective ») : au lancement, sans route Wi-Fi ni Wi-Fi Direct, la file attend le Wi-Fi de la TV (45 s si elle l'a vu il y a moins de 10 min, sinon 15 s ; aucune attente sous 5 Mo) avant le Bluetooth ; pendant un envoi Bluetooth elle surveille le lien et, dès que la route Wi-Fi est stable depuis 3 s et que la TV peut reprendre la copie, arrête le Bluetooth et repart en Wi-Fi au même pourcentage (2 fois au plus par fichier, pas sous 1 Mo restant) ; la notification dit « Envoi Bluetooth de X · 59 % · passera en Wi-Fi dès son retour »
+- vérifié en JVM (`AutoWifiDirectTest`, `WifiFirstQueueSourceTest`) et par la compilation de `:sender` ; à confirmer sur appareil : parcours P-97. Limite connue : une copie commencée en Bluetooth reste en Bluetooth (la réception Bluetooth de la TV n'écrit pas le `.meta` que le Wi-Fi exige pour reprendre, `docs/TRANSFER.md` § 13). Pas encore construit ni versionné
 
 ## CastBridge-TV
 

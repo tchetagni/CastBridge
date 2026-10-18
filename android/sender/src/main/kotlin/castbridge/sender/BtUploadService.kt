@@ -112,6 +112,8 @@ class BtUploadService : Service() {
         }
         _route.value = "Bluetooth"
         castChannel = "bluetooth"
+        // R-54: a Bluetooth send driven by the queue (allowWd false) goes on over Wi-Fi by itself as soon as the TV's Wi-Fi is back (TransferQueue.watch); the manual channel does not
+        val hint = if (allowWd) null else castbridge.core.tv.QueueTexts.BT_BACK_TO_WIFI
         val up = ResumableBtUpload(name, total, castbridge.core.trust.TvAuth.btPin(pin),
             connect = { connect() },
             openAt = { off -> openAt(uri, off) },
@@ -126,7 +128,7 @@ class BtUploadService : Service() {
                     is ResumableUpload.State.Waiting -> (s.sent * 100 / s.total).toInt()
                     else -> 0
                 }
-                runCatching { getSystemService(NotificationManager::class.java).notify(NOTIF, notification("Envoi Bluetooth de $name", pct)) }
+                runCatching { getSystemService(NotificationManager::class.java).notify(NOTIF, notification("Envoi Bluetooth de $name", pct, hint)) }
             }
         }
         finish(result)
@@ -193,12 +195,12 @@ class BtUploadService : Service() {
         return fis
     }
 
-    private fun notification(text: String, pct: Int): Notification {
+    private fun notification(text: String, pct: Int, hint: String? = null): Notification {
         val nm = getSystemService(NotificationManager::class.java)
         nm.createNotificationChannel(NotificationChannel(CHANNEL, "Envoi Bluetooth", NotificationManager.IMPORTANCE_LOW))
         val cancel = android.app.PendingIntent.getService(this, 2,
             Intent(this, BtUploadService::class.java).setAction(ACTION_CANCEL), android.app.PendingIntent.FLAG_IMMUTABLE)
-        return Notification.Builder(this, CHANNEL).setContentTitle("CastBridge").setContentText("$text · $pct %").setSubText("$pct %")
+        return Notification.Builder(this, CHANNEL).setContentTitle("CastBridge").setContentText("$text · $pct %" + (hint?.let { " · $it" } ?: "")).setSubText("$pct %")
             .setSmallIcon(R.drawable.ic_stat_castbridge).setOngoing(true).setOnlyAlertOnce(true)
             .setProgress(100, pct, false)
             .addAction(Notification.Action.Builder(null, "Annuler", cancel).build()).build()

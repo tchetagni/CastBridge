@@ -109,6 +109,58 @@ class AutoWifiDirectTest {
         assertFalse(BulkRoute.rerouteAfterLoss(viaWd = false, groupLost = true, reroutes = 0))
     }
 
+    // ------------------------------------------------------------------ R-54 : le Wi-Fi d'abord, le Bluetooth en dernier recours, retour au Wi-Fi en cours d'envoi
+
+    @Test fun aSmallFileLeavesAtOnceOverBluetooth() {
+        assertEquals(0L, BulkRoute.waitForWifiMs(BulkRoute.MIN_WD_BYTES - 1, wifiSeenAgoMs = null), "petit fichier : pas d'attente")
+        assertEquals(0L, BulkRoute.waitForWifiMs(100_000, wifiSeenAgoMs = 2 * 60_000L), "petit fichier, Wi-Fi vu il y a 2 min : toujours aucune attente")
+        assertEquals(0L, BulkRoute.waitForWifiMs(0, wifiSeenAgoMs = 0))
+    }
+
+    @Test fun aBigFileWaitsForTheWifiOfATvThatRestarts() {
+        assertEquals(45_000L, BulkRoute.waitForWifiMs(200 * MB, wifiSeenAgoMs = 2 * 60_000L), "gros fichier, Wi-Fi vu il y a 2 min : 45 s")
+        assertEquals(45_000L, BulkRoute.waitForWifiMs(200 * MB, wifiSeenAgoMs = 0))
+        assertEquals(45_000L, BulkRoute.waitForWifiMs(200 * MB, wifiSeenAgoMs = BulkRoute.WIFI_RECENT_MS - 1), "à 1 ms des 10 minutes : encore récent")
+        assertEquals(15_000L, BulkRoute.waitForWifiMs(200 * MB, wifiSeenAgoMs = BulkRoute.WIFI_RECENT_MS), "10 minutes exactement : plus récent")
+        assertEquals(15_000L, BulkRoute.waitForWifiMs(200 * MB, wifiSeenAgoMs = 3_600_000L), "vu il y a 1 h")
+        assertEquals(15_000L, BulkRoute.waitForWifiMs(200 * MB, wifiSeenAgoMs = null), "jamais vu : 15 s")
+    }
+
+    @Test fun theWaitStartsAtTheSameThresholdAsWifiDirect() {
+        assertEquals(15_000L, BulkRoute.waitForWifiMs(BulkRoute.MIN_WD_BYTES, wifiSeenAgoMs = null), "5 Mo exactement : gros fichier")
+        assertEquals(45_000L, BulkRoute.waitForWifiMs(BulkRoute.MIN_WD_BYTES, wifiSeenAgoMs = 1))
+        assertEquals(0L, BulkRoute.waitForWifiMs(BulkRoute.MIN_WD_BYTES - 1, wifiSeenAgoMs = 1))
+        // les valeurs décidées le 2026-10-18
+        assertEquals(10 * 60_000L, BulkRoute.WIFI_RECENT_MS); assertEquals(45_000L, BulkRoute.WAIT_WIFI_RECENT_MS); assertEquals(15_000L, BulkRoute.WAIT_WIFI_UNSEEN_MS)
+        assertEquals(MB, BulkRoute.MIN_SWITCH_BYTES); assertEquals(3_000L, BulkRoute.WIFI_STABLE_MS); assertEquals(2, BulkRoute.MAX_BT_REROUTES)
+    }
+
+    @Test fun aBluetoothSendGoesBackToWifiOnlyWhenItIsWorthIt() {
+        assertTrue(BulkRoute.switchBtToWifi(remainingBytes = 100 * MB, lanStableMs = 3_000, reroutes = 0), "Wi-Fi stable depuis 3 s, 100 Mo à envoyer : on y retourne")
+        assertTrue(BulkRoute.switchBtToWifi(MB, 3_000, 1), "1 Mo exactement, 3 s exactement, 2e bascule : permis")
+        assertFalse(BulkRoute.switchBtToWifi(MB - 1, 60_000, 0), "il reste moins de 1 Mo : le Bluetooth finit")
+        assertFalse(BulkRoute.switchBtToWifi(500 * 1024, 60_000, 0), "reste 500 Ko : pas de bascule")
+        assertFalse(BulkRoute.switchBtToWifi(100 * MB, 2_999, 0), "route Wi-Fi vue depuis moins de 3 s : pas encore")
+        assertFalse(BulkRoute.switchBtToWifi(100 * MB, 0, 0), "aucune route Wi-Fi")
+        assertFalse(BulkRoute.switchBtToWifi(100 * MB, 60_000, 2), "3e bascule refusée : jamais en boucle")
+        assertFalse(BulkRoute.switchBtToWifi(100 * MB, 60_000, 7))
+        assertFalse(BulkRoute.switchBtToWifi(0, 60_000, 0), "rien à envoyer")
+    }
+
+    @Test fun aBluetoothSendIsOnlyStoppedWhenTheTvCanGoOnWithTheCopyOverWifi() {
+        fun part(done: Boolean = false, code: String? = null) = castbridge.core.tv.TvClient.Part(length = 100, done = done, code = code)
+        assertTrue(BulkRoute.wifiResumes(part()), "copie commencée en Wi-Fi (son .meta existe) : la TV la reprend à l'octet reçu")
+        assertTrue(BulkRoute.wifiResumes(part(done = true)), "déjà complète sur la TV : l'envoi Wi-Fi finit aussitôt")
+        assertFalse(BulkRoute.wifiResumes(part(code = "PART_OTHER")), "copie commencée en Bluetooth (pas de .meta, FixW1505ServerTest) : on ne quitte pas le Bluetooth")
+        assertFalse(BulkRoute.wifiResumes(part(code = "NAME_TAKEN")), "un homonyme d'une autre taille : l'envoi Wi-Fi échouerait")
+        assertFalse(BulkRoute.wifiResumes(part(code = "TV_CANCELLED")), "copie annulée sur la TV (R-51) : refusée 10 minutes")
+    }
+
+    @Test fun theQueueTextsOfTheWifiFirstRule() {
+        assertEquals("Attente du Wi-Fi de la TV avant le Bluetooth…", castbridge.core.tv.QueueTexts.WAITING_WIFI)
+        assertEquals("Envoi Bluetooth de film.mp4 · 59 % · passera en Wi-Fi dès son retour", "Envoi Bluetooth de film.mp4 · 59 % · ${castbridge.core.tv.QueueTexts.BT_BACK_TO_WIFI}")
+    }
+
     // ------------------------------------------------------------------ la ligne d'état honnête (sémantique TvSignal)
 
     @Test fun honestStateLine() {

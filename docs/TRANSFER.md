@@ -148,3 +148,21 @@ Un envoi ou un `begin` qui se glisse entre la marque et la recherche des envois 
 - Rien de ceci n'est mesuré sur la TV réelle (GaiaOS 32 bits, clé exFAT) : voir P-93.
 
 Tests : `TvCancelReceptionServerTest` (16 tests sur la vraie `ReceiverServer` : états, annulation sur tous les volumes, item ABORTED, refus 400 / 409, code de `/api/part`, fin de la fenêtre à la milliseconde, gros corps lu jusqu'au statut, route et PIN, envoi vivant arrêté en cours de corps, nom changé par une clé FAT, et les DEUX clients réels du téléphone, `ResumableUpload` et `TransferClient` — ce dernier annulé avant puis EN COURS de copie — qui finissent sur la phrase de la TV sans boucle), `ReceiveCardTest` (carte « interrompu »), `TransferProgressTest` (`abortWhere` / `abortByName`), `TrialRoutesTest` (route classée fermée en essai).
+
+## 13. Voie de l'envoi : Wi-Fi d'abord, Bluetooth en dernier recours, retour au Wi-Fi en cours d'envoi (R-54, 2026-10-18)
+
+Constaté (téléphone 1.2.58-beta, TV 0.14.52-beta) : « la reprise de la copie est lente bien que la disponibilité d'un réseau wifi soit effective ». Une copie reprise après la réinstallation de la TV est repartie en Bluetooth (3 Ko/s sur la TV) et y est restée alors que le Wi-Fi était revenu. Cause et preuves : ligne R-54 de `docs/REGRESSIONS.md`. Aucun changement de protocole ni de la TV ; téléphone seulement.
+
+Ordre des voies pour un fichier envoyé par le lien de confiance (`TransferQueue.runOneInner`) : (1) la route Wi-Fi du lien (réseau commun) ; (2) le Wi-Fi Direct automatique (R-14, `AutoWifiDirect.bulkBase`) ; (3) **nouveau** : si ni l'une ni l'autre, la file attend le retour du Wi-Fi ; (4) le Bluetooth, en dernier recours.
+
+| Règle pure (`core/link/BulkRoute.kt`) | Valeur |
+|---|---|
+| `waitForWifiMs(taille, âge de la dernière route Wi-Fi vue)` | 0 sous 5 Mo (`MIN_WD_BYTES` : le petit fichier part aussitôt) ; 45 s si une route Wi-Fi (LAN ou Direct) était vivante il y a moins de 10 min (la TV redémarre) ; sinon 15 s |
+| `switchBtToWifi(reste, durée de stabilité, bascules)` | vrai si reste au moins 1 Mo, route Wi-Fi vue stable depuis au moins 3 s, moins de 2 bascules déjà faites pour ce fichier (`MAX_BT_REROUTES`) |
+| `wifiResumes(réponse de GET /api/part?size=)` | vrai si le fichier est fini ou si la TV ne donne aucun code |
+
+**Attente** (`waitForWifi`) : le lien est relu chaque seconde (« Attente du Wi-Fi de la TV avant le Bluetooth… ») ; une route Wi-Fi qui apparaît met fin à l'attente et sa session sert à l'envoi ; la mise en pause de la file ou « Annuler » la terminent. **En cours d'envoi Bluetooth** (`watch`) : si la route Wi-Fi du lien (LAN ou Direct, jamais le tunnel Bluetooth) est stable depuis 3 s, que la règle dit oui et que la TV répond qu'elle reprend la copie, le service Bluetooth est arrêté (la TV garde son `<nom>.part`), le fichier reprend sa place dans la file (même mécanique que la perte du groupe Wi-Fi Direct) et repart en Wi-Fi à l'octet reçu ; « Annuler » n'est jamais confondu avec cet arrêt. Le lien relit sa route toutes les 15 s au premier plan et toutes les 5 min en arrière-plan : pendant un envoi Bluetooth, la file essaie elle-même les adresses de la TV toutes les 5 s et réveille le lien (`TvLinkManager.poke()`) quand l'une répond. Notification d'un envoi Bluetooth de la file : « Envoi Bluetooth de X · 59 % · passera en Wi-Fi dès son retour » (le canal Bluetooth manuel de `TvHub` ne dit rien de tel).
+
+**Limite connue, décision à prendre** : la TV ne reprend en HTTP qu'une copie dont elle connaît la taille (le `.meta` d'un envoi Wi-Fi, `FixW1505ServerTest.aPartWithoutMetaIsNeverResumedForAKnownSize`) et la réception Bluetooth n'en écrit pas. Une copie COMMENCÉE en Bluetooth reste donc en Bluetooth (la TV répond `PART_OTHER`, l'envoi Wi-Fi la remettrait à zéro puis échouerait) ; la file l'écrit au journal et ne la touche pas. Pistes : faire écrire le `.meta` par `BtProtocol.receive` (ces copies deviendraient visibles dans le MENU et sur l'accueil de la TV : à tester), ou remettre la copie à zéro en Wi-Fi quand il reste beaucoup à envoyer.
+
+Non mesuré : tout ce chapitre sur appareil (délai de bascule, cible du propriétaire moins de 10 s ; envoi Wi-Fi refusé en arrière-plan) : voir P-97. Tests : `AutoWifiDirectTest` (règles pures), `WifiFirstQueueSourceTest` (branchement de la file).

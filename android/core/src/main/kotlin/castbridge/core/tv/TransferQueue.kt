@@ -62,6 +62,10 @@ object QueueTexts {
     const val ALREADY_THERE = "Déjà sur la TV : non recopié"
     /** R-19: the upload stopped because the TV did not answer; the queue relaunches it by itself as soon as the TV answers ([ResumeWait]). */
     const val WAITING_TV = "La TV ne répond pas : la copie reprendra d'elle-même dès qu'elle répond."
+    /** R-54: a big file does not leave over Bluetooth the moment the Wi-Fi route of the link is down: the queue waits a little for the TV's Wi-Fi ([castbridge.core.link.BulkRoute.waitForWifiMs]). */
+    const val WAITING_WIFI = "Attente du Wi-Fi de la TV avant le Bluetooth…"
+    /** R-54: the end of the sentence of a Bluetooth send driven by the queue (« Envoi Bluetooth de X · 59 % · passera en Wi-Fi dès son retour »): the queue goes back to Wi-Fi by itself. */
+    const val BT_BACK_TO_WIFI = "passera en Wi-Fi dès son retour"
     /** R-19: [ResumeWait] reached its bound (2 h) without an answer from the TV. */
     const val TV_GONE = "La TV n'a pas répondu pendant 2 heures : touchez « Réessayer » quand elle est allumée et sur le même Wi-Fi."
     const val RESTORED = "Reprise après le redémarrage de CastBridge"

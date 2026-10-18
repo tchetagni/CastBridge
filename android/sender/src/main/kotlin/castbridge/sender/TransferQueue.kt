@@ -310,25 +310,32 @@ object TransferQueue {
         var sendName = item.name
         var dedupe: (suspend () -> Boolean)? = null
         var afterBase: String? = null; var afterCred: String? = null
+        // R-54: the Bluetooth address of the trusted-link TV this file goes to (null = a TV found by name): the Wi-Fi route of THAT TV is the one watched during the send
+        var linkAddress: String? = null
         // R-12: where to ask « is this content already on the TV? » (Wi-Fi only; a code-path TV found by discovery only is not asked: the copy goes)
         var dedupBase: String? = null; var dedupCred: String? = null
         if (item.tvName == null) {
             // the trusted link: its session, waiting up to a minute for it to be (re)established
             CopyReport.step(app, CopyStep.SEARCH, "recherche de la TV de confiance")
-            val (session, refused) = waitForTv()
-            if (session == null) {
+            val (session0, refused) = waitForTv()
+            if (session0 == null) {
                 // the TV said no (code 8 « je ne vous reconnais plus »…): fail at once, with its cause and the PIN to type, never a silent minute
                 val why = refused?.second ?: CopyReport.failed(app, item, CopyStep.SEARCH, null, reason = QueueTexts.NO_TV)
                 model.finish(item.id, false, why); publish()
                 if (refused != null) RefusalNotice.show(app, item, refused.first)
                 return
             }
-            if (item.linkTv != null && session.tv.address != item.linkTv) { model.finish(item.id, false, QueueTexts.OTHER_TV); publish(); return }
+            if (item.linkTv != null && session0.tv.address != item.linkTv) { model.finish(item.id, false, QueueTexts.OTHER_TV); publish(); return }
+            linkAddress = session0.tv.address
+            noteWifi(session0)
             // « Seul le Bluetooth » (R-14): no common network that answers ⇒ the phone and the TV set up Wi-Fi Direct by themselves (core BulkRoute decides,
             // AutoWifiDirect joins); the same upload then runs over it, ordered path and « Copier et lire » included. Never instead of a working LAN.
-            val wdBase = if (!castbridge.core.link.BulkRoute.lanRoute(session.route))
-                runCatching { AutoWifiDirect.bulkBase(app, session, item.size) }.onFailure { android.util.Log.w("TransferQueue", "Wi-Fi Direct", it) }.getOrNull() else null
-            if (wdBase != null) { viaWd = true; wdSince = AutoWifiDirect.clock() }     // the same monotonic clock as lostSince
+            val wdBase = if (!castbridge.core.link.BulkRoute.lanRoute(session0.route))
+                runCatching { AutoWifiDirect.bulkBase(app, session0, item.size) }.onFailure { android.util.Log.w("TransferQueue", "Wi-Fi Direct", it) }.getOrNull() else null
+            if (wdBase != null) { viaWd = true; wdSince = AutoWifiDirect.clock(); lastWifiRouteAt = wdSince }     // the same monotonic clock as lostSince; the group is a Wi-Fi route too
+            // R-54: neither a Wi-Fi route in the session nor a group: a big file does not leave over Bluetooth at once (a TV that restarts brings its Wi-Fi back within a minute and
+            // Bluetooth would carry the whole file at a few kB/s); the queue waits a little for the Wi-Fi (core BulkRoute.waitForWifiMs: 0 for a small file), then goes on with the latest session
+            val session = if (wdBase == null && session0.base == null) waitForWifi(app, item, session0) else session0
             val base = wdBase ?: session.base
             viaBt = base == null
             afterBase = base; afterCred = session.credential
@@ -390,7 +397,10 @@ object TransferQueue {
         CopyReport.step(app, CopyStep.SEND, "envoi lancé (${if (viaBt) "Bluetooth" else "Wi-Fi"})")
         // « Annuler » landed between the launch and its record (cancel() could not know it was launched): stop it now
         if (QueueCancel.afterLaunch(model.cancelAsked(item.id)) == QueueCancel.Action.STOP_UPLOAD) { UploadService.cancel(app); BtUploadService.cancel(app) }
-        val outcome = watch(viaBt, item.id)
+        val outcome = watch(app, viaBt, item.id, linkAddress, sendName)
+        // R-54: the Wi-Fi route of the link came back during a Bluetooth send and `watch` stopped that send on purpose (the TV keeps its .part): neither a failure nor a cancellation. The file
+        // takes its place again and the runner launches it over Wi-Fi, from the byte the TV holds (the same mechanics as the loss of the Wi-Fi Direct group below). Before any failure analysis.
+        if (outcome == REROUTE_WIFI && !model.cancelAsked(item.id)) { model.release(item.id); publish(); delay(1_000); return }
         when (castbridge.core.tv.QueueOutcome.of(outcome, model.cancelAsked(item.id), isBackgroundRefusal(outcome?.let { Exception(it) }))) {
             castbridge.core.tv.QueueOutcome.Kind.CANCELLED -> { model.finishCancelled(item.id); purgeCache(app) }
             castbridge.core.tv.QueueOutcome.Kind.DONE -> {
@@ -435,6 +445,7 @@ object TransferQueue {
                 model.finish(item.id, false, CopyReport.failed(app, item, lastStep, lastPercent.takeIf { it > 0 }, reason = reason))
             }
         }
+        btReroutes.remove(item.id)
         if (!model.busy()) AutoWifiDirect.queueIdle()
         publish()
     }
@@ -445,6 +456,18 @@ object TransferQueue {
 
     /** Reroutes of a file after the loss of the Wi-Fi Direct group ([castbridge.core.link.BulkRoute.MAX_REROUTES]), in memory. */
     private val wdReroutes = ConcurrentHashMap<Long, Int>()
+
+    /** R-54: switches of a file from Bluetooth to Wi-Fi in the middle of its send ([castbridge.core.link.BulkRoute.MAX_BT_REROUTES]), in memory; forgotten when the file ends. */
+    private val btReroutes = ConcurrentHashMap<Long, Int>()
+    /** R-54: the last instant ([AutoWifiDirect.clock], monotonic) a Wi-Fi route of the link (a common network, or the TV's group) was seen alive; 0 = never since the app started. */
+    @Volatile private var lastWifiRouteAt = 0L
+    /** R-54: what [watch] returns when it stopped a Bluetooth send because the Wi-Fi is back: never shown, handled by the runner before any failure analysis. */
+    private const val REROUTE_WIFI = "castbridge:reroute-wifi"
+    /** R-54: after a « no » from the TV (it cannot go on with this copy over Wi-Fi) it is not asked again for this long. */
+    private const val RESUME_ASK_AGAIN_MS = 30_000L
+    /** R-54: during a Bluetooth send the TV's common-network addresses are tried this often; after an answer (the link was asked to look again) this long before the next try. */
+    private const val WIFI_PROBE_EVERY_MS = 5_000L
+    private const val WIFI_POKE_EVERY_MS = 15_000L
 
     private enum class Dedup { COPY, SKIPPED, CANCELLED, SAME_NAME_UNKNOWN }
     /** [sendAs] = a unique name to send under (same name and size on the TV, different content). */
@@ -616,6 +639,70 @@ object TransferQueue {
         return null to null
     }
 
+    /** R-54: does this session go over a real Wi-Fi route (a common network, or the TV's Wi-Fi Direct group)? The Bluetooth tunnel has a [LinkSession.base] too, but it is a local address, not Wi-Fi. */
+    private fun goesOverWifi(s: castbridge.core.trust.LinkSession) =
+        s.route is castbridge.core.tv.LinkPlanner.Route.Lan || s.route is castbridge.core.tv.LinkPlanner.Route.Direct
+
+    /** R-54: remembers the instant a Wi-Fi route was seen alive ([lastWifiRouteAt]); true when [s] goes over one. */
+    private fun noteWifi(s: castbridge.core.trust.LinkSession?): Boolean {
+        val wifi = s != null && goesOverWifi(s)
+        if (wifi) lastWifiRouteAt = AutoWifiDirect.clock()
+        return wifi
+    }
+
+    /** R-54: the current session of the TV at [address] when the link goes over Wi-Fi now (and the instant is remembered); null otherwise. */
+    private fun wifiSession(address: String?): castbridge.core.trust.LinkSession? {
+        val s = (TvLinkManager.state.value as? LinkUi.Connected)?.session ?: return null
+        if (address != null && s.tv.address != address) return null
+        return s.takeIf { noteWifi(it) }
+    }
+
+    /**
+     * R-54: does the TV answer a « hello » on a common-network address of its last HELLO (never a Wi-Fi Direct group address)? The same question the link asks when it plans its route
+     * ([castbridge.core.tv.LinkPlanner.plan]); blocking calls, off the main threads (1.5 s per silent address).
+     */
+    private suspend fun tvAnswersOnLan(address: String): Boolean = withContext(Dispatchers.IO) {
+        val s = (TvLinkManager.state.value as? LinkUi.Connected)?.session?.takeIf { it.tv.address == address } ?: return@withContext false
+        val link = s.info.link
+        castbridge.core.link.HelloIps.lanOnly(link.ips).any { TvLinkManager.reachable("http://$it:${link.port}") }
+    }
+
+    /**
+     * R-54: can the TV go on with this partial copy over Wi-Fi? Asked BEFORE the Bluetooth send is stopped, with the very question the Wi-Fi send asks first (`GET /api/part?size=`,
+     * [castbridge.core.link.BulkRoute.wifiResumes]): the TV resumes over HTTP only a copy whose size it knows (the `.meta` of a Wi-Fi send; the Bluetooth receive writes none). Any doubt
+     * (no answer, an error) means no: the Bluetooth send goes on.
+     */
+    private suspend fun wifiResumes(s: castbridge.core.trust.LinkSession, name: String, total: Long): Boolean = withContext(Dispatchers.IO) {
+        val base = s.base ?: return@withContext false
+        runCatching { castbridge.core.link.BulkRoute.wifiResumes(castbridge.core.tv.TvClient(base, s.credential).part(name, total)) }.getOrDefault(false)
+    }
+
+    /**
+     * R-54: a file too big for Bluetooth leaves while the Wi-Fi route of the link is down (the TV restarts after a reinstall or an update): waits up to [castbridge.core.link.BulkRoute.waitForWifiMs]
+     * (45 s when a Wi-Fi route was alive less than 10 minutes ago, else 15 s; 0 for a small file) for it to come back, reading the link every second. A Wi-Fi route that shows up ends the wait at
+     * once and its session is the one to send with. Ends early when the queue is paused or the file cancelled. Gives back the latest session of this TV (the same one when nothing changed).
+     */
+    private suspend fun waitForWifi(app: Context, item: QueueItem, session: castbridge.core.trust.LinkSession): castbridge.core.trust.LinkSession {
+        val seenAgo = lastWifiRouteAt.takeIf { it > 0 }?.let { AutoWifiDirect.clock() - it }
+        val waitMs = castbridge.core.link.BulkRoute.waitForWifiMs(item.size, seenAgo)
+        if (waitMs <= 0) return session
+        CopyReport.step(app, CopyStep.SEARCH, "attente du Wi-Fi (${waitMs / 1000} s au plus)")
+        val start = AutoWifiDirect.clock()
+        var back: castbridge.core.trust.LinkSession? = null
+        try {
+            while (true) {
+                back = wifiSession(session.tv.address)
+                if (back != null || paused || model.cancelAsked(item.id)) break
+                val left = start + waitMs - AutoWifiDirect.clock()
+                if (left <= 0) break
+                _note.value = QueueTexts.WAITING_WIFI
+                delay(minOf(1_000L, left))
+            }
+        } finally { _note.value = null }
+        CopyReport.step(app, CopyStep.SEARCH, if (back != null) "Wi-Fi revenu après ${(AutoWifiDirect.clock() - start) / 1000} s" else "attente du Wi-Fi terminée après ${(AutoWifiDirect.clock() - start) / 1000} s : pas de Wi-Fi")
+        return back ?: (TvLinkManager.state.value as? LinkUi.Connected)?.session?.takeIf { it.tv.address == session.tv.address } ?: session
+    }
+
     /** Null when the file arrived, else the reason. Waits for the service to start (90 s at most), then for it to end. */
     /** Where the copy is (percent, step), and each new reason it waits for, in the internal journal (« où en est la copie » when it stops later). */
     private fun progress(sent: Long, total: Long, waitReason: String?) {
@@ -628,20 +715,53 @@ object TransferQueue {
     }
     @Volatile private var appForJournal: Context? = null
 
-    private suspend fun watch(viaBt: Boolean, id: Long): String? {
+    /**
+     * Watches the launched upload until it ends. R-54: during a Bluetooth send it also reads the link (every 500 ms); when the Wi-Fi route of the TV at [linkAddress] has been alive for
+     * [castbridge.core.link.BulkRoute.WIFI_STABLE_MS] and [castbridge.core.link.BulkRoute.switchBtToWifi] says it is worth it, the Bluetooth send is stopped (the TV keeps its `.part`)
+     * and [REROUTE_WIFI] is returned: the runner puts the file back at its place and it goes on over Wi-Fi from the byte the TV holds.
+     */
+    private suspend fun watch(app: Context, viaBt: Boolean, id: Long, linkAddress: String?, sendName: String): String? {
         var started = false; var waited = 0
+        var sent = 0L; var total = 0L          // R-54: where the Bluetooth send is
+        var wifiSince = 0L                     // R-54: since when the Wi-Fi route of the link is alive without a break (0 = it is not)
+        var askAgainAt = 0L; var refusalSaid = false     // R-54: the TV cannot go on with this copy over Wi-Fi: not asked again for RESUME_ASK_AGAIN_MS
+        var nextProbeAt = 0L                             // R-54: when the TV's common-network addresses are tried again during a Bluetooth send
         while (true) {
             delay(500)
+            // also while a Wi-Fi send runs: the age of the last Wi-Fi route is what the next launch reads
+            val wifi = if (linkAddress != null) wifiSession(linkAddress) else null
             if (viaBt) {
                 when (val s = BtUploadService.state.value) {
                     is ResumableUpload.State.Done -> return null
                     is ResumableUpload.State.Failed -> return s.reason
-                    is ResumableUpload.State.Uploading -> { started = true; progress(s.sent, s.total, null) }
-                    is ResumableUpload.State.Waiting -> { started = true; progress(s.sent, s.total, s.reason) }
+                    is ResumableUpload.State.Uploading -> { started = true; sent = s.sent; total = s.total; progress(s.sent, s.total, null) }
+                    is ResumableUpload.State.Waiting -> { started = true; sent = s.sent; total = s.total; progress(s.sent, s.total, s.reason) }
                     // no state yet during the Bluetooth negotiation: interrupted only once the upload no longer holds the slot
                     null -> if (started && !BtUploadService.active()) return if (model.cancelAsked(id)) null else "Envoi interrompu"
                 }
                 if (!started && BtUploadService.active()) started = true
+                val now = AutoWifiDirect.clock()
+                wifiSince = if (wifi == null) 0L else if (wifiSince == 0L) now else wifiSince
+                if (wifi != null && started && now >= askAgainAt && !model.cancelAsked(id)) {
+                    val n = btReroutes[id] ?: 0
+                    if (castbridge.core.link.BulkRoute.switchBtToWifi(total - sent, now - wifiSince, n)) {
+                        if (wifiResumes(wifi, sendName, total)) {
+                            btReroutes[id] = n + 1
+                            CopyReport.step(app, CopyStep.SEND, "Wi-Fi revenu à $lastPercent % : l'envoi Bluetooth s'arrête, la copie reprend en Wi-Fi (${n + 1}/${castbridge.core.link.BulkRoute.MAX_BT_REROUTES})")
+                            BtUploadService.cancel(app)         // only breaks the service's send loop; the queue item is NOT cancelled (model.cancelAsked is untouched)
+                            return REROUTE_WIFI
+                        }
+                        askAgainAt = AutoWifiDirect.clock() + RESUME_ASK_AGAIN_MS
+                        if (!refusalSaid) { refusalSaid = true; CopyReport.step(app, CopyStep.SEND, "Wi-Fi revenu à $lastPercent % mais la TV ne reprend pas cette copie en Wi-Fi (commencée en Bluetooth) : l'envoi Bluetooth continue") }
+                    }
+                }
+                // The link re-plans its route every ~15 s in front and every 5 min behind (LinkMachine keep-alive): while the Bluetooth send runs and the link has no Wi-Fi route, the queue
+                // itself tries the TV's common-network addresses every few seconds and, when one answers, asks the link to look again at once (never a forced Bluetooth HELLO for nothing)
+                if (wifi == null && started && linkAddress != null && now >= nextProbeAt) {
+                    val answers = tvAnswersOnLan(linkAddress)
+                    if (answers) TvLinkManager.poke()
+                    nextProbeAt = AutoWifiDirect.clock() + if (answers) WIFI_POKE_EVERY_MS else WIFI_PROBE_EVERY_MS
+                }
             } else {
                 when (val s = UploadService.state.value) {
                     is UploadService.State.Done -> return null
