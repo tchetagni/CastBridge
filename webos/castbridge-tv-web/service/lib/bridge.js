@@ -76,8 +76,8 @@ function createBridge(opts) {
       reportedAt = now();
       optimistic = null;
     }
-    // ack > seq : le service a redémarré depuis, l'app se recale sur le seq rendu et ne rejoue rien
-    return { seq: seq, commands: hasAck && ack <= seq ? since(ack) : [] };
+    // ack > seq : le service a redémarré depuis ; resync dit à l'app de se recaler sur le seq rendu (rien n'est rejoué)
+    return { seq: seq, resync: hasAck && ack > seq, commands: hasAck && ack <= seq ? since(ack) : [] };
   }
 
   return {

@@ -107,7 +107,7 @@ function registerLuna(ServiceClass) {
   service.register('state', function (message) {
     var p = message.payload || {};
     var r = bridge.report(p, p.ack);
-    message.respond({ returnValue: true, seq: r.seq, commands: r.commands });
+    message.respond({ returnValue: true, seq: r.seq, resync: r.resync, commands: r.commands });
   });
 
   service.register('status', function (message) { message.respond(status()); });

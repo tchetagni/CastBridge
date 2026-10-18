@@ -1,0 +1,86 @@
+/* CastBridge-TV Web : mise en page 1920x1080 (appinfo.json : resolution). Sans variables CSS ni grille : les TV webOS anciennes (Chromium 38) la lisent. */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #0b1220;
+  color: #e8eef7;
+  font-family: "LG Smart UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 32px;
+}
+
+.hidden { display: none !important; }
+
+.screen {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---- accueil ---- */
+#home { padding: 72px 120px; box-sizing: border-box; background: #0b1220; }
+
+.top { display: -webkit-flex; display: flex; -webkit-align-items: center; align-items: center; margin-bottom: 48px; }
+.logo {
+  width: 112px; height: 112px; line-height: 112px; text-align: center; font-size: 56px;
+  border-radius: 24px; background: #0b5fa5; color: #ffffff; margin-right: 32px;
+}
+.titles { -webkit-flex: 1; flex: 1; }
+h1 { margin: 0; font-size: 72px; font-weight: 600; letter-spacing: 1px; }
+.version { margin: 6px 0 0; font-size: 28px; color: #8ea3bd; }
+.code {
+  padding: 14px 28px; border: 2px solid #2a4a6b; border-radius: 16px; font-size: 30px; color: #8ea3bd;
+}
+.code b { color: #ffffff; letter-spacing: 6px; margin-left: 10px; }
+
+.card { background: #121c30; border-radius: 28px; padding: 36px 48px; margin-bottom: 36px; }
+.label { margin: 0; font-size: 26px; color: #8ea3bd; text-transform: uppercase; letter-spacing: 2px; }
+.value { margin: 8px 0 20px; font-size: 64px; font-weight: 600; color: #ffffff; }
+.status { margin: 0; font-size: 36px; color: #cfe0f5; }
+.dot { display: inline-block; width: 20px; height: 20px; border-radius: 10px; margin-right: 18px; background: #6b7a90; }
+.dot.ok { background: #35c46a; }
+.dot.ko { background: #e5484d; }
+
+.hint { margin: 0 0 12px; font-size: 40px; color: #ffffff; }
+.note { margin: 0 0 28px; font-size: 28px; color: #8ea3bd; }
+
+.help { background: #121c30; border-radius: 24px; padding: 24px 40px; margin-bottom: 28px; font-size: 28px; line-height: 1.4; color: #cfe0f5; }
+.help h2 { margin: 0 0 8px; font-size: 32px; color: #ffffff; }
+.help ol { margin: 0 0 8px; padding-left: 40px; }
+.help p { margin: 0; color: #8ea3bd; }
+
+.buttons { margin-top: 8px; }
+.btn {
+  font-family: inherit; font-size: 34px; color: #e8eef7; background: #1a2740; border: 4px solid transparent;
+  border-radius: 18px; padding: 16px 48px; margin-right: 28px; cursor: pointer; outline: none;
+}
+.btn.focused, .btn:focus { border-color: #4da3ff; background: #0b5fa5; color: #ffffff; }
+
+.footer { position: absolute; left: 120px; bottom: 40px; margin: 0; font-size: 24px; color: #6b7a90; }
+
+/* ---- lecteur ---- */
+#player { background: #000000; }
+#video { position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: #000000; -o-object-fit: contain; object-fit: contain; }
+
+.overlay {
+  position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 96px 56px; box-sizing: border-box;
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.82)); background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.82));
+  opacity: 0; -webkit-transition: opacity 0.25s; transition: opacity 0.25s;
+}
+.overlay.visible { opacity: 1; }
+.overlay-title { font-size: 44px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.overlay-state { font-size: 30px; color: #8ea3bd; margin: 6px 0 18px; }
+.bar { height: 10px; border-radius: 5px; background: rgba(255, 255, 255, 0.25); overflow: hidden; }
+.bar-fill { height: 100%; width: 0; background: #4da3ff; }
+.overlay-time { margin-top: 14px; font-size: 30px; color: #cfe0f5; text-align: right; }
+
+.message {
+  position: absolute; left: 50%; top: 42%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%);
+  max-width: 1400px; padding: 36px 56px; border-radius: 24px; background: rgba(11, 18, 32, 0.92);
+  font-size: 40px; text-align: center; color: #ffffff;
+}

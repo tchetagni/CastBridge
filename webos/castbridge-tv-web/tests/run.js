@@ -483,10 +483,10 @@ test('pont : rapport en retard sur une commande ignoré, rapport à jour accept�
   assert.deepStrictEqual(r.commands, []);
   assert.strictEqual(b.snapshot().state, 'playing');
   r = b.report({ state: 'paused', name: 'T', pos: 200, dur: 5000 });
-  assert.deepStrictEqual([r.commands, r.seq], [[], 1], 'app neuve (pas d\'ack) : rien n\'est rejoué, elle apprend seq');
+  assert.deepStrictEqual([r.commands, r.seq, r.resync], [[], 1, false], 'app neuve (pas d\'ack) : rien n\'est rejoué, elle apprend seq');
   assert.strictEqual(b.snapshot().state, 'paused');
   r = b.report({ state: 'idle' }, 99);
-  assert.deepStrictEqual([r.commands, r.seq], [[], 1], 'ack > seq : le service a redémarré, rien n\'est rejoué');
+  assert.deepStrictEqual([r.commands, r.seq, r.resync], [[], 1, true], 'ack > seq : le service a redémarré, resync demandé, rien n\'est rejoué');
   assert.strictEqual(b.since(0).length, 1);
 });
 

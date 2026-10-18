@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>CastBridge-TV Web</title>
+  <meta name="viewport" content="width=1920, initial-scale=1">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <!-- Accueil : la TV attend le téléphone CastBridge -->
+  <main id="home" class="screen">
+    <header class="top">
+      <div class="logo" aria-hidden="true">&#9654;</div>
+      <div class="titles">
+        <h1 id="tv-name">CastBridge-TV Web</h1>
+        <p class="version" id="version">version 0.1.0-beta</p>
+      </div>
+      <div class="code">Code <b>000000</b></div>
+    </header>
+
+    <section class="card">
+      <p class="label">Adresse de cette TV</p>
+      <p class="value" id="address">recherche…</p>
+      <p class="status"><span class="dot" id="dot"></span><span id="status-text">En attente du téléphone CastBridge…</span></p>
+    </section>
+
+    <p class="hint">Dans CastBridge sur le téléphone, choisissez cette TV puis Lire</p>
+    <p class="note">Si le téléphone demande le code de la TV, saisissez 000000 : cette version bêta ne le vérifie pas.</p>
+
+    <section id="help" class="help hidden">
+      <h2>Comment ça marche</h2>
+      <ol>
+        <li>Le téléphone et la TV sont sur le même Wi-Fi.</li>
+        <li>Dans CastBridge sur le téléphone, cette TV apparaît dans la liste : choisissez-la.</li>
+        <li>Ouvrez une vidéo et touchez Lire : elle se lit ici, rien n'est copié sur la TV.</li>
+        <li>Gardez cette application ouverte au premier plan : fermée, la TV répond au téléphone « La TV doit être au premier plan ».</li>
+      </ol>
+      <p>Télécommande : OK pause et reprise, flèches gauche et droite &plusmn;10 s, Retour arrête la lecture puis quitte l'application.</p>
+    </section>
+
+    <nav class="buttons">
+      <button id="btn-help" class="btn" type="button">Aide</button>
+      <button id="btn-exit" class="btn" type="button">Quitter</button>
+    </nav>
+    <p class="footer" id="service-line"></p>
+  </main>
+
+  <!-- Lecteur plein écran, piloté par le téléphone (via le service) et par la télécommande -->
+  <section id="player" class="screen hidden">
+    <video id="video" preload="auto"></video>
+    <div id="overlay" class="overlay">
+      <div class="overlay-title" id="overlay-title"></div>
+      <div class="overlay-state" id="overlay-state"></div>
+      <div class="bar"><div class="bar-fill" id="bar-fill"></div></div>
+      <div class="overlay-time" id="overlay-time"></div>
+    </div>
+    <div id="message" class="message hidden"></div>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
