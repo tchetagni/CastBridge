@@ -1,7 +1,7 @@
 # Journal des modifications de CastBridge
 
 Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) ; numérotation [SemVer](https://semver.org/lang/fr/) avec le suffixe `-beta` (règles : `docs/RELEASES.md`, `docs/coordination/VERSIONING-DEVOPS-2026-10-02.md`).
-Trois produits livrés ont chacun leur numéro : **CastBridge-TV** (`tv-<version>`), **CastBridge** téléphone (`phone-<version>`), **CastBridge Propriétaire** (`owner-<version>`, jamais distribué). Le serveur (`backend/`, `pom.xml` 1.2.5 et lignes `server.*` de `version.properties`) a son propre numéro, étiqueté `server-<version>` ; le service de jeu `server-play` a ses étiquettes `server-play-<version>` (hors `version.properties`).
+Trois produits livrés ont chacun leur numéro : **CastBridge-TV** (`tv-<version>`), **CastBridge** téléphone (`phone-<version>`), **CastBridge Propriétaire** (`owner-<version>`, jamais distribué). Le prototype **CastBridge-TV Web** (TV LG webOS, `tvweb-<version>`, jamais distribué) a le sien. Le serveur (`backend/`, `pom.xml` 1.2.5 et lignes `server.*` de `version.properties`) a son propre numéro, étiqueté `server-<version>` ; le service de jeu `server-play` a ses étiquettes `server-play-<version>` (hors `version.properties`).
 
 > **Comment ce journal a été reconstruit, et sa limite.** Aucun tag git n'existait au 2026-10-02 : la correspondance version / commit est reconstituée à partir de l'historique premier-parent de `integration/agents` (`git log --first-parent`) et de l'historique de `version.properties` (`git log -p -- version.properties`). Le contenu de chaque entrée vient **uniquement des sujets de commits** (rien n'est inventé) et peut être **approximatif** : les APK ont parfois été construits avant le commit qui pose leur numéro, et plusieurs numéros n'ont jamais été commités (voir « Numéros sans commit »). Avant le 2026-10-01 (création de `version.properties`, commit `0ff64ed`), les numéros ne sont connus que par les sujets de commits et `docs/HANDOFF.md` : ils sont listés sans promesse de tag. Le plan d'étiquetage prouvable est produit par `tools/release/tag-plan.sh`.
 >
@@ -10,6 +10,17 @@ Trois produits livrés ont chacun leur numéro : **CastBridge-TV** (`tv-<version
 ## [Non publié]
 
 Rien pour l'instant.
+
+## CastBridge-TV Web (LG webOS, prototype)
+
+### [0.1.0-beta] (code 1) : 2026-10-17
+- CastBridge-TV Web 0.1.0-beta (2026-10-17) : première version du prototype pour les TV LG (webOS, pas Android), qui se comporte pour le téléphone CastBridge comme une CastBridge-TV minimale ; rien ne change dans les applications Android
+- découverte : le téléphone voit « CastBridge-TV Web » (mDNS `_castbridge._tcp`, `role=receiver`, `v=0.2`, sans `locked`)
+- « Lire en direct » : `POST /api/playurl` joue en plein écran un lien http(s) du téléphone ; pause, reprise, arrêt et position (`/api/pause`, `/api/resume`, `/api/stop`, `/api/seek`) ; `GET /api/info` rend l'état du lecteur au format que le téléphone lit (`idle`, `buffering`, `playing`, `paused`, `ended`, `error`, position et durée en ms) ; `GET /api/hello`
+- sur la TV : accueil (nom, adresse IP, « En attente du téléphone CastBridge… »), toast webOS au début d'une lecture, télécommande (OK, Retour = 461, flèches, touches média) ; sans TV : `node service.js --standalone` (lecteur simulé, pour curl et le vrai téléphone)
+- écarts avec la CastBridge-TV Android : pas de code PIN (le téléphone en demande un : `000000`), pas d'activation, pas de copie ni de stockage, lecture seulement quand l'application est au premier plan (`docs/TV-WEB-WEBOS.md` § 4.4 et § 7) ; décisions ouvertes D-WEB-1 à D-WEB-5
+- vérifié hors TV seulement : 47 tests Node, service `--standalone` avec curl, découverte et résolution par Bonjour de macOS, application dans Chrome avec une vraie vidéo et un téléphone simulé (17 contrôles) ; **NON ESSAYÉ sur une TV LG** (`docs/TV-WEB-WEBOS.md` § 6.4)
+- dans le dépôt : `webos/castbridge-tv-web/`, `tools/webos/package.sh` et `make-icons.js`, `tvweb.versionName` et `tvweb.versionCode` dans `version.properties`, contrôle de `appinfo.json` par `check_versions.py`, `docs/TV-WEB-WEBOS.md`, `docs/RELEASES.md` § 13
 
 ## CastBridge-TV
 
