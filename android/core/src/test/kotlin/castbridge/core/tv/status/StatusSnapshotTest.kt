@@ -78,6 +78,60 @@ class StatusSnapshotTest {
         for (id in listOf("wifi", "bluetooth", "storage", "phones", "licence", "internet")) assertEquals(StatusLevel.UNKNOWN, m[id]!!.level, id)
     }
 
+    // ---- « Stockage » : l'espace restant de la clé USB qui reçoit les copies (décision du propriétaire du 2026-10-18) ----
+    private fun vol(pct: Int, usb: Boolean = false, writable: Boolean = true) = StatusFeedRules.Vol(pct * GB, 100 * GB, writable, usb, if (usb) "usb-1" else "internal")
+    /** Le chemin complet de la TV : les volumes -> la règle du récepteur -> l'instantané -> la pastille. */
+    private fun storageBadge(vols: List<StatusFeedRules.Vol>, destination: String?): Badge {
+        val r = StatusFeedRules.storage(vols, destination)
+        return byId(healthy().copy(storagePresent = r.present, storageFreeBytes = r.free, storageTotalBytes = r.total, storageReadOnly = r.readOnly, storageUsb = r.usb, storageOther = r.other))["storage"]!!
+    }
+    @Test fun theKeyThatReceivesTheCopiesSaysItsOwnFreeShare() {
+        val b = storageBadge(listOf(vol(50), vol(37, usb = true)), "usb-1")
+        assertEquals("Clé USB · 37 % libre", b.text); assertEquals(StatusLevel.OK, b.level); assertEquals("storage", b.id)
+        assertEquals("37 Go libres sur 100 Go", b.detail); assertEquals("Clé USB · 37 % libre, 37 Go libres sur 100 Go", b.description)
+        val low = storageBadge(listOf(vol(50), vol(12, usb = true)), "usb-1")
+        assertEquals("Clé USB · 12 % libre", low.text); assertEquals(StatusLevel.WARN, low.level)
+        val full = storageBadge(listOf(vol(50), vol(4, usb = true)), "usb-1")
+        assertEquals("Clé USB · 4 % libre", full.text); assertEquals(StatusLevel.ERROR, full.level)
+    }
+    @Test fun withoutAKeyTheBadgeStillSaysStockageForTheInternalMemory() {
+        val b = storageBadge(listOf(vol(12)), null)
+        assertEquals("Stockage · 12 % libre", b.text); assertEquals(StatusLevel.WARN, b.level); assertEquals("12 Go libres sur 100 Go", b.detail)
+        assertEquals("Stockage · 12 % libre", storageBadge(listOf(vol(12), vol(90, usb = true)), "internal").text, "une clé qui ne reçoit pas les copies n'est pas décrite")
+        assertEquals("Stockage · absent", storageBadge(emptyList(), null).text)
+    }
+    @Test fun anotherVolumeInRedTurnsAGreenBadgeOrangeAndSaysSoInTheDetail() {
+        val b = storageBadge(listOf(vol(3), vol(37, usb = true)), "usb-1")
+        assertEquals("Clé USB · 37 % libre", b.text, "la pastille garde le volume de destination")
+        assertEquals(StatusLevel.WARN, b.level)
+        assertEquals("37 Go libres sur 100 Go · mémoire interne presque pleine", b.detail)
+        assertEquals(StatusLevel.WARN, storageBadge(listOf(vol(3), vol(12, usb = true)), "usb-1").level, "déjà orange : inchangé")
+        assertEquals(StatusLevel.ERROR, storageBadge(listOf(vol(3), vol(4, usb = true)), "usb-1").level, "le rouge reste celui du volume décrit")
+        val ro = storageBadge(listOf(vol(40), vol(60, usb = true, writable = false)), "internal")      // clé en lecture seule, ignorée par les envois
+        assertEquals("Stockage · 40 % libre", ro.text); assertEquals(StatusLevel.WARN, ro.level); assertEquals("40 Go libres sur 100 Go · clé USB en lecture seule", ro.detail)
+    }
+    @Test fun aReadOnlyKeyThatIsTheDestinationIsRed() {
+        val b = storageBadge(listOf(vol(50), vol(60, usb = true, writable = false)), "usb-1")
+        assertEquals("Clé USB · lecture seule", b.text); assertEquals(StatusLevel.ERROR, b.level)
+    }
+    @Test fun theStorageBadgeIsNeitherNewNorMovedAndAnUnmeasuredOneStaysGrey() {
+        assertEquals(healthy().badges().map { it.id }, healthy().copy(storageUsb = true, storageOther = OtherStorage.INTERNAL_FULL).badges().map { it.id })
+        val g = byId(healthy().copy(storagePresent = null, storageUsb = true))["storage"]!!
+        assertEquals(StatusLevel.UNKNOWN, g.level); assertEquals("Stockage", g.label); assertEquals("", g.detail)
+        assertEquals("", healthy().badges().first { it.id == "wifi" }.detail, "les autres pastilles n'ont pas de détail")
+    }
+    @Test fun sizesAreReadableInFrenchAndTheDetailIsEmptyWhenNothingIsMeasured() {
+        assertEquals("48 Go", StatusRules.sizeText(48 * GB)); assertEquals("3,1 Go", StatusRules.sizeText(3 * GB + GB / 10)); assertEquals("512 Mo", StatusRules.sizeText(512L shl 20))
+        assertEquals("", StatusRules.storageDetail(false, 0, 0))
+        assertEquals("mémoire interne presque pleine", StatusRules.storageDetail(false, 0, 0, OtherStorage.INTERNAL_FULL))
+        assertEquals("0 Mo libres sur 128 Go", StatusRules.storageDetail(true, -5, 128 * GB))
+    }
+    @Test fun theAndroidFeedGivesTheRuleTheDestinationOfTheCopies() {      // garde de source : le branchement Android (non compilé ici) appelle bien la règle
+        val feed = castbridge.core.PhoneSources.code("receiver/src/main/kotlin/castbridge/receiver/StatusFeed.kt")
+        assertTrue("StatusFeedRules.destinationId(" in feed && "StatusFeedRules.storage(vols, " in feed, "la destination des copies est passée à la règle")
+        assertTrue("storageUsb = r.usb" in feed && "storageOther = r.other" in feed, "l'instantané reçoit la clé et l'alerte d'un autre volume")
+    }
+
     // ---- « + n » ----
     private fun b(id: String, l: StatusLevel) = Badge(id, l, id, "x")
     @Test fun redAndOrangeAreNeverHiddenBehindPlusN() {

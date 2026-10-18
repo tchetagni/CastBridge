@@ -54,6 +54,15 @@ enum class LicenceState { NOT_REQUIRED, NO_KEY, VALID, TRIAL, PENDING_NOTIFICATI
 /** Durée d'une clé : de [fromMs] à [toMs] (null = illimitée). */
 data class LicenceTiming(val fromMs: Long, val toMs: Long?)
 enum class QuizLink { IDLE, CONNECTING, CONNECTED, NOT_ACTIVATED, SERVER_UNREACHABLE }
+/**
+ * Un AUTRE volume que celui décrit par la pastille « Stockage » est en alerte rouge (lecture seule, ou moins de 5 % libre) : la pastille garde son volume, son détail le dit ([phrase])
+ * et son niveau passe au moins à l'orange (décision du propriétaire du 2026-10-18).
+ */
+enum class OtherStorage(val phrase: String) {
+    NONE(""),
+    INTERNAL_FULL("mémoire interne presque pleine"), INTERNAL_READ_ONLY("mémoire interne en lecture seule"),
+    USB_FULL("clé USB presque pleine"), USB_READ_ONLY("clé USB en lecture seule"),
+}
 
 /** Les règles : l'état MESURÉ de chaque indicateur donne un niveau. Fonctions pures, sans Android. */
 object StatusRules {
@@ -112,6 +121,29 @@ object StatusRules {
                 else -> v(StatusLevel.ERROR, word)
             }
         }
+    }
+
+    /** Libellés de la pastille « Stockage » : la clé USB quand elle reçoit les copies, la mémoire interne sinon (décision du propriétaire du 2026-10-18). */
+    const val STORAGE_LABEL = "Stockage"
+    const val STORAGE_USB_LABEL = "Clé USB"
+
+    /** [storage] du volume décrit ; l'alerte d'un AUTRE volume ([other]) le passe de vert à orange, jamais plus haut : le rouge reste celui du volume décrit. */
+    fun storageOf(present: Boolean, freeBytes: Long, totalBytes: Long, readOnly: Boolean, error: Boolean, other: OtherStorage): Verdict {
+        val v = storage(present, freeBytes, totalBytes, readOnly, error)
+        return if (other != OtherStorage.NONE && v.level == StatusLevel.OK) v.copy(level = StatusLevel.WARN) else v
+    }
+
+    /** Le détail de la pastille « Stockage » : « 48 Go libres sur 128 Go », puis l'alerte d'un autre volume (« mémoire interne presque pleine »). Vide quand rien n'est mesuré. */
+    fun storageDetail(measured: Boolean, freeBytes: Long, totalBytes: Long, other: OtherStorage = OtherStorage.NONE): String {
+        val own = if (measured && totalBytes > 0) "${sizeText(freeBytes.coerceIn(0, totalBytes))} libres sur ${sizeText(totalBytes)}" else ""
+        return listOf(own, other.phrase).filter { it.isNotEmpty() }.joinToString(" · ")
+    }
+
+    /** Taille lisible, virgule française : « 48 Go », « 3,1 Go », « 512 Mo » (mêmes seuils que [castbridge.core.tv.StorageLine.size]). */
+    fun sizeText(bytes: Long): String = when {
+        bytes >= 10L shl 30 -> "${bytes shr 30} Go"
+        bytes >= 1L shl 30 -> String.format(java.util.Locale.ROOT, "%.1f", bytes / (1L shl 30).toDouble()).replace('.', ',') + " Go"
+        else -> "${bytes.coerceAtLeast(0) shr 20} Mo"
     }
 
     fun phones(count: Int): Verdict = when {

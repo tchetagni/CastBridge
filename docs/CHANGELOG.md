@@ -9,7 +9,10 @@ Trois produits livrés ont chacun leur numéro : **CastBridge-TV** (`tv-<version
 
 ## [Non publié]
 
-Rien pour l'instant.
+### CastBridge-TV
+- la pastille « Stockage » de la barre d'état dit l'espace restant de la clé USB qui reçoit les copies (décision du propriétaire du 2026-10-18 : « le stockage devrait indiquer le pourcentage d'espace restant dans la clé »), au lieu du volume le plus serré : « Clé USB · 37 % libre » quand la clé est branchée, montée, inscriptible et choisie comme destination (la politique de stockage des envois, `docs/STORAGE.md` § 4), « Stockage · 12 % libre » (mémoire interne) sinon ; seuils inchangés (vert à 20 % libre ou plus, orange de 5 à 20 %, rouge sous 5 % ou en lecture seule) ; si l'autre mémoire est presque pleine ou en lecture seule, la pastille garde son volume, passe au moins à l'orange et le panneau Connexions l'écrit sous le libellé (« 48 Go libres sur 128 Go · mémoire interne presque pleine ») ; aucune pastille de plus, légende du lecteur complétée
+- vérifié en JVM (`StatusFeedRulesTest`, `StatusSnapshotTest` : le volume de destination, le repli sur la mémoire interne, l'autre volume en alerte, la clé en lecture seule, une garde de source du branchement) et par la compilation de `:receiver` ; à confirmer sur la TV de référence avec la clé branchée : parcours P-98
+- dans le dépôt, sans effet sur l'APK : parcours P-98 (`docs/test-plans/PARCOURS-CRITIQUES.md`), `docs/TV-ACCUEIL.md` (« Pastilles »), `docs/TV-PLAYER.md` (« Pastilles d'état ») et `docs/STORAGE.md` (§ 4)
 
 ## CastBridge-TV
 

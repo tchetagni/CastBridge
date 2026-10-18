@@ -2,9 +2,11 @@ package castbridge.core.tv.status
 
 import castbridge.core.status.StatusIcon
 
-/** Une pastille prête à dessiner : niveau, libellé français et mot d'état (la couleur n'est jamais seule). */
-data class Badge(val id: String, val level: StatusLevel, val label: String, val stateWord: String) {
+/** Une pastille prête à dessiner : niveau, libellé français et mot d'état (la couleur n'est jamais seule). [detail] : une ligne en plus pour le panneau Connexions (« 48 Go libres sur 128 Go »), vide le plus souvent. */
+data class Badge(val id: String, val level: StatusLevel, val label: String, val stateWord: String, val detail: String = "") {
     val text: String get() = Verdict(level, stateWord).text(label)
+    /** Ce que lit un lecteur d'écran : le texte, puis le détail. */
+    val description: String get() = if (detail.isEmpty()) text else "$text, $detail"
     /** Orange et rouge : toujours étiquetées et JAMAIS masquées derrière « + n ». */
     val urgent: Boolean get() = level == StatusLevel.WARN || level == StatusLevel.ERROR
 }
@@ -23,6 +25,8 @@ data class StatusSnapshot(
     val btEnabled: Boolean? = null, val bt: BtPhase = BtPhase.IDLE, val btSlowNetwork: Boolean = false,
     val storagePresent: Boolean? = null, val storageFreeBytes: Long = 0, val storageTotalBytes: Long = 0,
     val storageReadOnly: Boolean = false, val storageError: Boolean = false,
+    /** Le volume mesuré est la clé USB qui reçoit les copies (sinon : la mémoire interne) ; [storageOther] : un AUTRE volume est en alerte rouge (décision du propriétaire du 2026-10-18). */
+    val storageUsb: Boolean = false, val storageOther: OtherStorage = OtherStorage.NONE,
     val phones: Int? = null,
     val copyRunning: Boolean = false, val copyPercent: Int? = null, val copySlowed: Boolean = false, val copyFailed: Boolean = false,
     val licence: LicenceState? = null, val licenceTiming: LicenceTiming? = null, val nowMs: Long = 0,
@@ -32,13 +36,20 @@ data class StatusSnapshot(
     private fun unmeasured(id: String, label: String, word: String = "non mesuré") = Badge(id, StatusLevel.UNKNOWN, label, word)
     private fun of(id: String, label: String, v: Verdict) = Badge(id, v.level, label, v.word)
 
+    /** La pastille « Stockage » : « Clé USB » quand la clé reçoit les copies, « Stockage » (mémoire interne) sinon ; le détail dit la place et l'alerte d'un autre volume. */
+    private fun storageBadge(present: Boolean): Badge {
+        val v = StatusRules.storageOf(present, storageFreeBytes, storageTotalBytes, storageReadOnly, storageError, storageOther)
+        val label = if (storageUsb && present) StatusRules.STORAGE_USB_LABEL else StatusRules.STORAGE_LABEL
+        return Badge("storage", v.level, label, v.word, StatusRules.storageDetail(present && !storageError, storageFreeBytes, storageTotalBytes, storageOther))
+    }
+
     /** Les pastilles dans l'ordre d'affichage : Internet, Wi-Fi, Bluetooth, Stockage, Wi-Fi Direct, Téléphones, Copie, Licence, Quiz, Jetons. Celles qui n'ont pas de sens (copie à l'arrêt, quiz hors partie, Wi-Fi Direct éteint) sont absentes. */
     fun badges(): List<Badge> {
         val out = ArrayList<Badge>()
         out += of("internet", "Internet", StatusRules.internet(internet, internetExpected, internetLatencyMs))
         out += if (wifiEnabled == null) unmeasured("wifi", "Wi-Fi") else of("wifi", "Wi-Fi", StatusRules.wifi(wifiEnabled, wifiConnected, wifiConnecting, wifiRssiDbm, wifiHasInternet))
         out += if (btEnabled == null) unmeasured("bluetooth", "Bluetooth") else of("bluetooth", "Bluetooth", StatusRules.bluetooth(btEnabled, bt, btSlowNetwork))
-        out += if (storagePresent == null) unmeasured("storage", "Stockage") else of("storage", "Stockage", StatusRules.storage(storagePresent, storageFreeBytes, storageTotalBytes, storageReadOnly, storageError))
+        out += if (storagePresent == null) unmeasured("storage", StatusRules.STORAGE_LABEL) else storageBadge(storagePresent)
         if (wifiDirectEnabled || wifiDirect != DirectPhase.IDLE) out += of("wifi_direct", "Wi-Fi Direct", StatusRules.wifiDirect(wifiDirectEnabled, wifiDirect))
         out += if (phones == null) unmeasured("phones", "Téléphones") else of("phones", "Téléphones", StatusRules.phones(phones))
         if (copyRunning || copyFailed) out += of("copy", "Copie", StatusRules.copy(copyRunning, copyPercent, copySlowed, copyFailed))

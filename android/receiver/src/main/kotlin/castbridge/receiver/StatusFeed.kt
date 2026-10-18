@@ -6,6 +6,7 @@ import android.net.wifi.WifiManager
 import castbridge.core.net.LinkKind
 import castbridge.core.status.IconKind
 import castbridge.core.status.Tech
+import castbridge.core.tv.StoragePolicy
 import castbridge.core.tv.VolumeKind
 import castbridge.core.tv.status.DirectPhase
 import castbridge.core.tv.status.LicenceReader
@@ -57,13 +58,16 @@ object StatusFeed {
             s = s.copy(btEnabled = adapter?.isEnabled == true, bt = StatusFeedRules.bluetoothPhase(phoneBt, gw), btSlowNetwork = slow)
         }
 
-        // Storage: the tightest volume, read straight from the file system (statfs, cheap)
+        // Storage: the volume the copies go to (the USB drive when it receives them, else the internal memory: the TV's own storage policy, owner's decision of 2026-10-18),
+        // read straight from the file system (statfs, cheap); another volume in red only adds a remark
         runCatching {
-            val vols = svc.registry.volumes().filter { it.kind != VolumeKind.SAF }.map {
-                StatusFeedRules.Vol(it.dir.usableSpace, it.dir.totalSpace.takeIf { t -> t > 0 } ?: it.total, it.writable)
+            val live = svc.registry.volumes().filter { it.kind != VolumeKind.SAF }.map {
+                it.copy(free = it.dir.usableSpace, total = it.dir.totalSpace.takeIf { t -> t > 0 } ?: it.total)
             }
-            val r = StatusFeedRules.storage(vols)
-            s = s.copy(storagePresent = r.present, storageFreeBytes = r.free, storageTotalBytes = r.total, storageReadOnly = r.readOnly)
+            val target = svc.server?.target ?: svc.prefs.getString("storage_target", StoragePolicy.AUTO) ?: StoragePolicy.AUTO
+            val vols = live.map { StatusFeedRules.Vol(it.free, it.total, it.writable, usb = it.kind == VolumeKind.REMOVABLE, id = it.id) }
+            val r = StatusFeedRules.storage(vols, StatusFeedRules.destinationId(live, target))
+            s = s.copy(storagePresent = r.present, storageFreeBytes = r.free, storageTotalBytes = r.total, storageReadOnly = r.readOnly, storageUsb = r.usb, storageOther = r.other)
         }
 
         // Phones synchronised with this TV (n/8)

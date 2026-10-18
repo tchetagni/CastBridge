@@ -47,7 +47,7 @@ object PlayerIcons {
             Entry("badge-internet", "Pastille : Internet", "Vert : accès direct. Orange : lent ou seulement par le téléphone. Rouge : aucun accès alors qu'un réseau est branché. Gris : non testé."),
             Entry("badge-wifi", "Pastille : Wi-Fi", "Noir : désactivé. Vert : connecté. Orange : signal faible ou réseau sans Internet. Rouge : activé mais non connecté. Bleu : connexion."),
             Entry("badge-bluetooth", "Pastille : Bluetooth", "Noir : désactivé. Vert : prêt ou téléphone relié. Orange : passerelle sur un réseau lent. Rouge : erreur ou téléphone refusé."),
-            Entry("badge-storage", "Pastille : Stockage", "Vert : 20 % libre ou plus. Orange : de 5 à 20 %. Rouge : moins de 5 %, lecture seule ou erreur. Noir : absent."),
+            Entry("badge-storage", "Pastille : Stockage", "Vert : 20 % libre ou plus. Orange : de 5 à 20 %. Rouge : moins de 5 %, lecture seule ou erreur. Noir : absent. Mesuré sur la clé USB quand elle reçoit les copies (« Clé USB · 37 % libre »), sinon sur la mémoire interne ; si l'autre mémoire est presque pleine ou en lecture seule, la pastille passe au moins à l'orange et le panneau Connexions le dit."),
             Entry("badge-phones", "Pastille : Téléphones", "Nombre de téléphones reliés sur 8 : vert de 1 à 7, orange quand c'est complet, noir quand il n'y en a aucun."),
             Entry("badge-licence", "Pastille : Licence", "Vert : valide ou illimitée. Orange : la moitié du temps est écoulée, en attente de notification, ou essai. Rouge : 7 jours ou moins, expirée ou invalide."),
             Entry("badge-tokens", "Pastille : Jetons", "Gris : jamais synchronisé. Vert : synchronisé. Orange : serveur hors ligne ou 5 jetons ou moins. Rouge : plus aucun jeton."),
