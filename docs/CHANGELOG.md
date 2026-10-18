@@ -9,9 +9,7 @@ Trois produits livrés ont chacun leur numéro : **CastBridge-TV** (`tv-<version
 
 ## [Non publié]
 
-### CastBridge (téléphone)
-- la copie d'un gros fichier ne repart plus en Bluetooth quand le Wi-Fi de la TV est revenu (R-54, « la reprise de la copie est lente bien que la disponibilité d'un réseau wifi soit effective ») : au lancement, sans route Wi-Fi ni Wi-Fi Direct, la file attend le Wi-Fi de la TV (45 s si elle l'a vu il y a moins de 10 min, sinon 15 s ; aucune attente sous 5 Mo) avant le Bluetooth ; pendant un envoi Bluetooth elle surveille le lien et, dès que la route Wi-Fi est stable depuis 3 s et que la TV peut reprendre la copie, arrête le Bluetooth et repart en Wi-Fi au même pourcentage (2 fois au plus par fichier, pas sous 1 Mo restant) ; la notification dit « Envoi Bluetooth de X · 59 % · passera en Wi-Fi dès son retour »
-- vérifié en JVM (`AutoWifiDirectTest`, `WifiFirstQueueSourceTest`) et par la compilation de `:sender` ; à confirmer sur appareil : parcours P-97. Limite connue : une copie commencée en Bluetooth reste en Bluetooth (la réception Bluetooth de la TV n'écrit pas le `.meta` que le Wi-Fi exige pour reprendre, `docs/TRANSFER.md` § 13). Pas encore construit ni versionné
+Rien pour l'instant.
 
 ## CastBridge-TV
 
@@ -190,6 +188,10 @@ Numéros cités par les sujets de commits (aucun n'est dans `version.properties`
 0.4.2 et 0.4.3 (passerelle Internet Bluetooth, diagnostics), 0.7 (échecs, téléchargements aria2), 0.7.1 (lecteur du téléphone), 0.8 (télécommande du téléphone), 0.9 (Apprendre), 0.9.1 (code 19), 0.11 (code 20, chemin de mise à jour propre), 0.11.1 (code 21, correctif JSON de `/api/library`), 0.12.0 (code 22), 0.12.1 (code 23, adresse serveur officielle masquée).
 
 ## CastBridge (téléphone)
+
+### [1.2.59-beta] (code 89) : 2026-10-18
+- la copie d'un gros fichier ne repart plus en Bluetooth quand le Wi-Fi de la TV est revenu (R-54, « la reprise de la copie est lente bien que la disponibilité d'un réseau wifi soit effective ») : au lancement, sans route Wi-Fi ni Wi-Fi Direct, la file attend le Wi-Fi de la TV (45 s si elle l'a vu il y a moins de 10 min, sinon 15 s ; aucune attente sous 5 Mo) avant le Bluetooth ; pendant un envoi Bluetooth elle surveille le lien et, dès que la route Wi-Fi est stable depuis 3 s et que la TV peut reprendre la copie, arrête le Bluetooth et repart en Wi-Fi au même pourcentage (2 fois au plus par fichier, pas sous 1 Mo restant) ; la notification dit « Envoi Bluetooth de X · 59 % · passera en Wi-Fi dès son retour »
+- vérifié en JVM (`AutoWifiDirectTest`, `WifiFirstQueueSourceTest`) et par la compilation de `:sender` ; à confirmer sur appareil : parcours P-97. Limite connue : une copie commencée en Bluetooth reste en Bluetooth (la réception Bluetooth de la TV n'écrit pas le `.meta` que le Wi-Fi exige pour reprendre, `docs/TRANSFER.md` § 13). Pas encore construit ni versionné
 
 ### [1.2.58-beta] (code 88) : 2026-10-15
 - notifications (R-52, « les copies ne signalent plus en notification ») : quand Android jette les notifications de CastBridge (permission `POST_NOTIFICATIONS` absente ou refusée, ou un canal de copie coupé dans les réglages), un texte en rouge et un bouton « Autoriser » s'affichent en tête de la carte « Envoi vers la TV » et de la file d'attente de l'accueil (une seule fois à l'écran) : « Notifications désactivées pour CastBridge : la progression des copies n'apparaît pas dans la barre. », ou « Canal « Envoi vers la TV » désactivé : … » en nommant les canaux coupés ; rien n'est affiché quand tout va bien
