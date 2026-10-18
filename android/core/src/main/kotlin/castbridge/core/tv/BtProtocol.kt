@@ -27,6 +27,8 @@ object FileLocks {
  *
  * The TV writes into "<name>.part" as bytes arrive and renames it to "<name>" once complete,
  * exactly like the HTTP upload, so both transports can resume each other's partial files.
+ * R-54: it keeps the same size sidecar "<name>.meta" ([Meta]: the total, written before READY, removed once the file is whole): the HTTP route resumes a
+ * partial copy only when it knows which content it is of (a ".part" without it answers PART_OTHER), so a copy STARTED over Bluetooth can go on over Wi-Fi.
  */
 object BtProtocol {
     const val MAGIC = "CBT1"
@@ -282,8 +284,13 @@ object BtProtocol {
                 dout.writeByte(OK); dout.writeLong(total); dout.writeByte(OK); dout.flush(); return OK
             }
             var cur = pf.length()
-            if (cur > total) { pf.delete(); cur = 0 }
+            // R-54: a sidecar that names ANOTHER total says the .part is another content (the HTTP route answers 409 PART_OTHER and appends nothing): it goes with its sidecar, like a .part longer than the file
+            val known = Meta.read(dir, name)
+            if (cur > total || (cur > 0 && known != null && known != total)) { pf.delete(); Meta.delete(dir, name); cur = 0 }
             if (dir.usableSpace - (total - cur) < minFreeBytes) return fail(ERR_SPACE)
+            // R-54: the size sidecar the HTTP upload writes before its first byte (same file, same content: the total), BEFORE the phone is told READY, so that a cut followed by a Wi-Fi
+            // resume (GET /api/part?size=) finds it. Best effort: a sidecar that cannot be written leaves the copy as it always was (resumable over Bluetooth only).
+            runCatching { Meta.write(dir, name, total) }
             dout.writeByte(OK); dout.writeLong(cur); dout.flush()
 
             var done = cur
@@ -303,6 +310,7 @@ object BtProtocol {
             }
             if (final.exists()) final.delete()
             if (!pf.renameTo(final)) return fail(ERR_IO)
+            Meta.delete(dir, name)                // the file is whole: no size sidecar left (the HTTP upload does the same after its commit)
             dout.writeByte(OK); dout.flush()
             return OK
         }

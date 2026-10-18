@@ -85,6 +85,7 @@ persistée dans les préférences de la TV (`storage_target`) et rejouée au dé
   (troncature propre sans couper un caractère). **Casse** : FAT/exFAT/NTFS sont insensibles à la casse : `A.mp4` et `a.mp4` sont le même fichier (recherche insensible à la casse sur ces volumes).
 - **Débit** : `writeBps` par volume dans `/api/storage`. Avertissement si `débit d'écriture < 1,5 x débit vidéo` (`taille / durée`, `dur` en ms passé à `/check`) ; sans durée, seuil de 2,5 Mo/s. Une clé sous 1,5 Mo/s
   est déclassée en `auto`.
+- **Pastille « Stockage » de la barre d'état** (décision du propriétaire du 2026-10-18 : « le stockage devrait indiquer le pourcentage d'espace restant dans la clé ») : elle mesure le volume où cette politique envoie le prochain fichier, donc la clé USB quand elle est montée, inscriptible et choisie (« Clé USB · 37 % libre »), sinon la mémoire interne (« Stockage · 12 % libre ») ; une clé choisie à la main mais en lecture seule reste la destination et rougit (`StatusFeedRules.destinationId`, `docs/TV-ACCUEIL.md` « Pastilles »).
 
 ## 5. Plusieurs dossiers dans `ReceiverServer`
 

@@ -1,6 +1,9 @@
 package castbridge.core.tv.status
 
 import castbridge.core.net.NetState
+import castbridge.core.tv.StoragePolicy
+import castbridge.core.tv.StorageVolume
+import castbridge.core.tv.VolumeKind
 import castbridge.core.wallet.ui.WalletStatus
 
 /** Traduit ce que la TV sait déjà (état réseau, portefeuille, volumes, Quiz) en mesures de [StatusSnapshot]. Pur : la lecture Android reste dans le récepteur. */
@@ -38,14 +41,40 @@ object StatusFeedRules {
         else -> BtPhase.IDLE
     }
 
-    data class Vol(val free: Long, val total: Long, val writable: Boolean)
-    data class StorageReading(val present: Boolean, val free: Long, val total: Long, val readOnly: Boolean)
+    /** Un volume que la TV connaît. [usb] : une clé amovible (sinon la mémoire interne) ; [id] : son identifiant dans le registre des volumes de la TV. */
+    data class Vol(val free: Long, val total: Long, val writable: Boolean, val usb: Boolean = false, val id: String = "")
+    /** Ce que dit la pastille « Stockage » : le volume décrit ([usb] : c'est la clé), s'il est en lecture seule, et l'alerte rouge éventuelle d'un AUTRE volume. */
+    data class StorageReading(val present: Boolean, val free: Long, val total: Long, val readOnly: Boolean, val usb: Boolean = false, val other: OtherStorage = OtherStorage.NONE)
 
-    /** Le stockage à dire : le volume le plus serré (part libre la plus faible) ; un volume en lecture seule suffit à rougir ; aucun volume mesurable = absent. */
-    fun storage(volumes: List<Vol>): StorageReading {
+    /**
+     * Le volume DESTINATION des copies, celui dont la pastille « Stockage » dit l'espace restant (décision du propriétaire du 2026-10-18) : le volume où irait le prochain fichier selon la politique de la TV
+     * ([StoragePolicy.plan], cible [target] = `auto`, `internal` ou l'identifiant d'une clé), donc la clé USB quand elle est montée, inscriptible et choisie (la plus libre en `auto`, hors clé lente déclassée),
+     * sinon la mémoire interne. Une clé choisie à la main reste la destination même en lecture seule (les copies y sont refusées : la pastille doit le dire). Un dossier choisi (SAF) ne se mesure pas :
+     * mémoire interne. Null quand rien ne peut recevoir (ni clé choisie, ni candidat, ni mémoire interne).
+     */
+    fun destinationId(volumes: List<StorageVolume>, target: String): String? {
+        volumes.firstOrNull { it.id == target && it.kind == VolumeKind.REMOVABLE }?.let { return it.id }
+        val planned = StoragePolicy.plan(volumes, target, 0, 0).candidates.firstOrNull()?.volume
+        return (planned?.takeIf { it.kind != VolumeKind.SAF } ?: volumes.firstOrNull { it.kind == VolumeKind.INTERNAL })?.id
+    }
+
+    /** Rouge pour un volume : lecture seule, ou moins de 5 % libre (le seuil exact de [StatusRules.storage]). */
+    private fun red(v: Vol) = !v.writable || v.free.coerceIn(0, v.total) * 100 < v.total * StatusThresholds.STORAGE_WARN_FREE_PERCENT
+
+    /**
+     * Le stockage à dire : le volume [destinationId] (la clé USB quand elle reçoit les copies) ; sans destination connue, absente ou non mesurable, la mémoire interne. Un volume en lecture seule suffit à rougir
+     * quand c'est le volume décrit. Un AUTRE volume rouge (lecture seule, ou moins de 5 % libre) ne change pas le volume décrit : il est signalé dans [StorageReading.other] (la mémoire interne d'abord).
+     * Aucun volume mesurable = absent.
+     */
+    fun storage(volumes: List<Vol>, destinationId: String? = null): StorageReading {
         val usable = volumes.filter { it.total > 0 }
         if (usable.isEmpty()) return StorageReading(false, 0, 0, false)
-        val worst = usable.minByOrNull { it.free.coerceIn(0, it.total).toDouble() / it.total }!!
-        return StorageReading(true, worst.free, worst.total, usable.any { !it.writable })
+        val di = usable.indexOfFirst { destinationId != null && it.id == destinationId }.takeIf { it >= 0 } ?: usable.indexOfFirst { !it.usb }.takeIf { it >= 0 } ?: 0
+        val dest = usable[di]
+        val others = usable.filterIndexed { i, v -> i != di && red(v) }.sortedBy { it.usb }
+        val other = others.firstOrNull()?.let { v ->
+            when { v.usb && !v.writable -> OtherStorage.USB_READ_ONLY; v.usb -> OtherStorage.USB_FULL; !v.writable -> OtherStorage.INTERNAL_READ_ONLY; else -> OtherStorage.INTERNAL_FULL }
+        } ?: OtherStorage.NONE
+        return StorageReading(true, dest.free, dest.total, !dest.writable, dest.usb, other)
     }
 }

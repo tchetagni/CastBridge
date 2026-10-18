@@ -183,7 +183,7 @@ class StatusBarView(private val act: Activity, private val box: LinearLayout, pr
         c.dot.visibility = View.VISIBLE
         if (c.errBg != error) { c.errBg = error; c.view.background = if (error) act.getDrawable(R.drawable.badge_warn_bg) else TvStyle.focusable(act, 0xCC0B3D5C.toInt(), TvStyle.R_XL) }
         c.view.alpha = 1f
-        c.view.contentDescription = "${b.text} (${level.colour.lowercase()})"
+        c.view.contentDescription = "${b.description} (${level.colour.lowercase()})"
         c.view.isFocusable = interactive
         val big = playerMode
         c.label.textSize = if (big) castbridge.core.tv.PlayerIcons.TEXT_SP.toFloat() else TvStyle.Type.CAPTION
@@ -196,7 +196,7 @@ class StatusBarView(private val act: Activity, private val box: LinearLayout, pr
 
     private fun badgeGlyph(b: Badge): Int = badgeDrawable(b.id, b.stateWord)
 
-    /** One cell of the grid: ring + dot of the level colour and the full text (label · state word). */
+    /** One cell of the grid: ring + dot of the level colour and the full text (label · state word), then the detail line when the badge has one (« 48 Go libres sur 128 Go »). */
     private fun badgeCell(b: Badge): View {
         val disc = ImageView(act).apply {
             setImageResource(badgeGlyph(b)); alpha = StatusPalette.glyphAlpha(b.level); setPadding(dp(6), dp(6), dp(6), dp(6))
@@ -205,8 +205,12 @@ class StatusBarView(private val act: Activity, private val box: LinearLayout, pr
         return LinearLayout(act).apply {
             orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL; setPadding(dp(4), dp(6), dp(12), dp(6))
             addView(disc, LinearLayout.LayoutParams(dp(44), dp(44)).apply { rightMargin = dp(10) })
-            addView(text(b.text, TvStyle.Type.BODY, TvStyle.TEXT))
-            contentDescription = "${b.text} (${b.level.colour.lowercase()})"
+            addView(LinearLayout(act).apply {
+                orientation = LinearLayout.VERTICAL
+                addView(text(b.text, TvStyle.Type.BODY, TvStyle.TEXT))
+                if (b.detail.isNotEmpty()) addView(text(b.detail, TvStyle.Type.CAPTION, TvStyle.TEXT2))
+            })
+            contentDescription = "${b.description} (${b.level.colour.lowercase()})"
         }
     }
     /** OK on the home expands every label for a while (see [openPanel]). */

@@ -125,7 +125,7 @@ Demande du propriétaire : « les pastilles d'état Wifi, Bluetooth, Internet, S
 | Wi-Fi Direct | désactivé ou inactif | groupe actif | | échec | en cours | |
 | Bluetooth | désactivé | prêt, téléphone relié, passerelle | passerelle sur réseau lent | erreur adaptateur, téléphone refusé | en connexion | |
 | Internet | hors ligne non attendu | direct | via la passerelle du téléphone, ou latence de 1,5 s et plus | aucun accès alors qu'attendu | vérification | non testé |
-| Stockage | absent | 20 % libre ou plus | de 5 % à moins de 20 % | moins de 5 %, lecture seule, erreur | | non mesuré |
+| Stockage (le volume de destination des copies : « Clé USB » quand la clé les reçoit, sinon la mémoire interne, décision du 2026-10-18) | absent | 20 % libre ou plus | de 5 % à moins de 20 % ; ou vert alors que l'autre mémoire est presque pleine ou en lecture seule (le détail le dit) | moins de 5 %, lecture seule, erreur | | non mesuré |
 | Téléphones n/8 | aucun | 1 à 7 | 8/8 complet | | | |
 | Copie en cours | aucune | | ralentie | échec | en cours (pourcentage) | |
 | Licence | non requise (build non verrouillé) | clé illimitée ; clé à durée limitée tant que moins de la moitié du temps est écoulé | moitié du temps écoulé ; en attente de notification ; ESSAI (DÉCIDÉ par le propriétaire, 2026-10-04 : orange) | il reste 7 jours ou moins (le rouge prime), expirée, invalide, sans clé, essai dans sa dernière semaine ou terminé | | durée inconnue |
