@@ -9,14 +9,16 @@ Trois produits livrés ont chacun leur numéro : **CastBridge-TV** (`tv-<version
 
 ## [Non publié]
 
-### CastBridge-TV
+Rien pour l'instant.
+
+## CastBridge-TV
+
+### [0.14.54-beta] (code 134 ; verrouillée 135) : 2026-10-18
 - la pastille « Stockage » de la barre d'état dit l'espace restant de la clé USB qui reçoit les copies (décision du propriétaire du 2026-10-18 : « le stockage devrait indiquer le pourcentage d'espace restant dans la clé »), au lieu du volume le plus serré : « Clé USB · 37 % libre » quand la clé est branchée, montée, inscriptible et choisie comme destination (la politique de stockage des envois, `docs/STORAGE.md` § 4), « Stockage · 12 % libre » (mémoire interne) sinon ; seuils inchangés (vert à 20 % libre ou plus, orange de 5 à 20 %, rouge sous 5 % ou en lecture seule) ; si l'autre mémoire est presque pleine ou en lecture seule, la pastille garde son volume, passe au moins à l'orange et le panneau Connexions l'écrit sous le libellé (« 48 Go libres sur 128 Go · mémoire interne presque pleine ») ; aucune pastille de plus, légende du lecteur complétée
 - vérifié en JVM (`StatusFeedRulesTest`, `StatusSnapshotTest` : le volume de destination, le repli sur la mémoire interne, l'autre volume en alerte, la clé en lecture seule, une garde de source du branchement) et par la compilation de `:receiver` ; à confirmer sur la TV de référence avec la clé branchée : parcours P-98
 - dans le dépôt, sans effet sur l'APK : parcours P-98 (`docs/test-plans/PARCOURS-CRITIQUES.md`), `docs/TV-ACCUEIL.md` (« Pastilles »), `docs/TV-PLAYER.md` (« Pastilles d'état ») et `docs/STORAGE.md` (§ 4)
 - la réception Bluetooth écrit le même fichier de taille `<nom>.meta` que l'envoi HTTP (la taille totale, avant le premier octet, retiré quand le fichier est complet) : une copie COMMENCÉE en Bluetooth peut être reprise en Wi-Fi à l'octet reçu (`GET /api/part?size=` ne répond plus `PART_OTHER`), suite de R-54 (« la reprise de la copie est lente bien que la disponibilité d'un réseau wifi soit effective ») ; un `.part` dont le `.meta` annonce une autre taille est écarté et la copie repart de zéro, comme le 409 du HTTP ; ces copies apparaissent désormais dans la liste des copies reçues en partie (accueil, MENU « Copie : annuler »)
 - vérifié en JVM (`BtPartMetaTest` : 5 tests sur la vraie `ReceiverServer` et la vraie `BtProtocol.serve` : reprise en Wi-Fi d'une copie commencée en Bluetooth, autre taille refusée, `.meta` écrit avant « prêt » et retiré à la fin, autre contenu écarté, copie ancienne sans `.meta` adoptée) et par la compilation de `:receiver` ; à confirmer sur la TV réelle avec le téléphone : parcours P-97 (R-54) ; sera livré avec la prochaine construction de CastBridge-TV (0.14.54)
-
-## CastBridge-TV
 
 ### [0.14.53-beta] (code 132 ; verrouillée 133) : 2026-10-18
 - la bande de licence (l'étiquette en haut au centre : « PRODUCTION · Clé illimitée » en vert, « ESSAI … » en orange) n'est plus permanente (décision du propriétaire du 2026-10-18 : « La bande verte de production ne doit pas être permanente et apparaître seulement lorsqu'on revient sur l'accueil pour 15 secondes ») : elle s'affiche 15 s chaque fois que l'accueil de CastBridge-TV est (re)montré (lancement de l'app, retour d'une vidéo, fermeture du MENU ou de la bibliothèque, retour de Quiz, Apprendre, Jeux…) puis disparaît ; jamais pendant une vidéo, MENU ouvert, dans la bibliothèque ni dans une autre activité. Hypothèse à confirmer (le propriétaire peut la renverser) : la bande ROUGE (clé finie ou absente, « ACTIVATION TERMINÉE », « SANS CLÉ ») reste affichée sur tous les écrans, comme avant ; « SUPER ILLIMITÉ » (vert) devient temporaire comme la production. Règle pure `KeyBadgeDisplay` (`core/owner/KeyBadge.kt`), branchement dans `KeyBadgeOverlay` et `PlayerActivity` (`showHome`, `onResume`, `hideScreens`, `showLibrary`, ouverture du MENU)
