@@ -3,11 +3,12 @@
 
 Vérifie :
   a) version.properties : forme, SemVer, versionCode strictement croissant par rapport à HEAD et aux tags
-     tv-*, phone-*, owner-*, server-* ;
+     tv-*, phone-*, owner-*, tvweb-*, server-* ;
   b) la règle de la variante TV verrouillée (code +1, suffixe -verrouillee) documentée de façon cohérente ;
   c) avec --apk : versionName/versionCode lus par aapt2, comparés à version.properties ;
   d) l'état git : branche, avance/retard sur origin, fichiers non commités / non suivis, HEAD étiqueté ;
-  e) backend/pom.xml comparé à server.versionName (proposition de lignes server.* si absentes).
+  e) backend/pom.xml comparé à server.versionName (proposition de lignes server.* si absentes) ;
+  f) webos/castbridge-tv-web/appinfo.json (CastBridge-TV Web) : sa version = tvweb.versionName sans le suffixe -beta.
 
 Codes de sortie : 0 = conforme (avertissements possibles), 1 = au moins une erreur (ou un avertissement avec --strict),
 2 = usage ou environnement invalide (pas un dépôt git, version.properties illisible).
@@ -25,8 +26,8 @@ import sys
 import xml.etree.ElementTree as ET
 
 SEMVER = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(-beta)?$")
-APPS = ("phone", "tv", "owner", "dev")
-TAG_APPS = ("tv", "phone", "owner", "server")
+APPS = ("phone", "tv", "owner", "dev", "tvweb")
+TAG_APPS = ("tv", "phone", "owner", "tvweb", "server")
 PACKAGE_APP = {"castbridge.receiver": "tv", "castbridge.sender": "phone",
                "castbridge.owner": "owner", "castbridge.dev": "dev"}
 LOCK_SUFFIX = "-verrouillee"
@@ -198,12 +199,31 @@ def check_vs_tags(root, props, rep):
                     if n_cur not in [t[len(app) + 1:] for t in tags] else
                     "%s : %s déjà étiqueté, codes identiques" % (app, n_cur))
     if not seen:
-        rep.add(WARN, "tags", "aucun tag tv-*, phone-*, owner-*, server-* : rien n'est étiqueté (voir tools/release/tag-plan.sh)")
+        rep.add(WARN, "tags", "aucun tag tv-*, phone-*, owner-*, tvweb-*, server-* : rien n'est étiqueté (voir tools/release/tag-plan.sh)")
     # tags de la version courante
-    for app in ("tv", "phone", "owner"):
+    for app in ("tv", "phone", "owner", "tvweb"):
         n_cur, _ = app_version(props, app)
         if n_cur and "%s-%s" % (app, n_cur) not in list_tags(root, app):
             rep.add(WARN, "tags", "tag %s-%s absent" % (app, n_cur))
+
+
+# ---------------------------------------------------------------------------------------------- f)
+def check_webos(root, props, rep):
+    """CastBridge-TV Web : appinfo.json porte tvweb.versionName SANS le suffixe -beta (webOS exige X.Y.Z)."""
+    text = read(os.path.join(root, "webos", "castbridge-tv-web", "appinfo.json"))
+    name, _ = app_version(props, "tvweb")
+    if text is None or name is None:
+        return
+    try:
+        version = json.loads(text).get("version")
+    except (ValueError, AttributeError):
+        rep.add(ERR, "webOS", "appinfo.json illisible (JSON invalide)")
+        return
+    expected = re.sub(r"-beta$", "", name)
+    if version != expected:
+        rep.add(ERR, "webOS", "appinfo.json : version « %s » alors que tvweb.versionName=%s demande « %s »" % (version, name, expected))
+    else:
+        rep.add(OK, "webOS", "appinfo.json %s = tvweb.versionName %s sans le suffixe" % (version, name))
 
 
 # ---------------------------------------------------------------------------------------------- b)
@@ -409,6 +429,7 @@ def run(root, apks):
     check_properties(props, bad, dup, rep)
     check_vs_head(root, props, rep)
     check_vs_tags(root, props, rep)
+    check_webos(root, props, rep)
     check_lock_rule(root, rep)
     check_apks(props, apks, rep)
     state = git_state(root, rep)

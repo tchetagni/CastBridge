@@ -36,6 +36,8 @@ owner.versionName=0.2.3
 owner.versionCode=5
 dev.versionName=0.1.0
 dev.versionCode=1
+tvweb.versionName=0.1.0-beta
+tvweb.versionCode=1
 """
 GIT_ENV = dict(os.environ, GIT_AUTHOR_NAME="t", GIT_AUTHOR_EMAIL="t@example.org", GIT_COMMITTER_NAME="t",
                GIT_COMMITTER_EMAIL="t@example.org", GIT_CONFIG_GLOBAL="/dev/null", GIT_CONFIG_SYSTEM="/dev/null",
@@ -111,6 +113,20 @@ class CheckVersionsTests(TempRepo):
         p = self.check("--json")
         self.assertEqual(p.returncode, 0, p.stdout)
         self.assertEqual(json.loads(p.stdout)["erreurs"], 0)
+
+    def test_webos_appinfo_version_matches_tvweb(self):
+        appinfo = os.path.join(self.repo, "webos", "castbridge-tv-web", "appinfo.json")
+        write(appinfo, json.dumps({"id": "com.sticm.castbridge.tv", "version": "0.1.0"}))
+        self.commit(props())
+        p = self.check("--json")
+        self.assertEqual(p.returncode, 0, p.stdout)
+        self.assertIn(("webOS", "ok"), self.levels(p.stdout))
+        write(appinfo, json.dumps({"id": "com.sticm.castbridge.tv", "version": "0.2.0"}))
+        p = self.check("--json")
+        self.assertEqual(p.returncode, 1)
+        self.assertTrue(any("appinfo.json" in m and "0.1.0" in m for m in self.messages(p.stdout, "erreur")))
+        write(appinfo, "{pas du json")
+        self.assertEqual(self.check("--json").returncode, 1)
 
     def test_not_a_repo_is_exit_2(self):
         d = os.path.join(self.tmp, "nogit")

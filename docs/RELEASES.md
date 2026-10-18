@@ -11,6 +11,7 @@ Ce document décrit le processus complet de publication des applications CastBri
 
 ### Applications non publiées
 - **CastBridge Dev** (outils SSH + installation, `:dev`, jamais distribué) : version dev
+- **CastBridge-TV Web** (prototype pour les TV LG webOS, `webos/castbridge-tv-web/`, hors Gradle) : version tvweb, jamais publiée sur le LG Content Store ; paquet `.ipk` construit par `tools/webos/package.sh` (voir `docs/TV-WEB-WEBOS.md`)
 - **Backend** (serveur) : versionné indépendamment (tags `server-<version>`), déployé par `tools/release/deploy-server.sh` (voir § 14 et `docs/coordination/VERSIONING-DEVOPS-2026-10-02.md`)
 
 ### Architecture
@@ -42,6 +43,7 @@ Les applications téléphone et TV partagent le module `:core` et les outils `to
 - `tv.versionName` et `tv.versionCode`
 - `owner.versionName` et `owner.versionCode`
 - `dev.versionName` et `dev.versionCode`
+- `tvweb.versionName` et `tvweb.versionCode` (CastBridge-TV Web ; `appinfo.json` porte la même version SANS le suffixe `-beta`, voir § 13)
 
 ### Override de test
 
@@ -485,7 +487,7 @@ Tableau reconstruit mécaniquement à partir de l'historique premier-parent de `
 
 | Outil | Rôle | Écrit quelque chose ? |
 |---|---|---|
-| `python3 tools/release/check_versions.py [--apk FILE...] [--json] [--strict]` | Contrôle `version.properties` (forme, SemVer, versionCode croissant par rapport à HEAD et aux tags), la règle de la variante verrouillée, les APK (aapt2), l'état git, la cohérence avec `backend/pom.xml`. Codes de sortie : 0 conforme, 1 erreur, 2 usage/environnement | Non |
+| `python3 tools/release/check_versions.py [--apk FILE...] [--json] [--strict]` | Contrôle `version.properties` (forme, SemVer, versionCode croissant par rapport à HEAD et aux tags), la règle de la variante verrouillée, les APK (aapt2), l'état git, la cohérence avec `backend/pom.xml` et avec `webos/castbridge-tv-web/appinfo.json`. Codes de sortie : 0 conforme, 1 erreur, 2 usage/environnement | Non |
 | `bash tools/release/tag-plan.sh [--apply] [--push] [--app tv\|phone\|owner]` | Propose les tags annotés `tv-`, `phone-`, `owner-` sur le commit qui a introduit chaque version ; sans `--apply` : plan seulement ; ne déplace jamais un tag existant ; ne pousse que avec `--apply --push` | Seulement avec `--apply` |
 | `bash tools/release/deploy-server.sh <tag> [--apply]` | Déploiement traçable du serveur (voir § 14) | Seulement avec `--apply` |
 | `bash tools/release/sha256sums.sh DIR` | Sommes SHA-256 des APK (déjà décrit au § 7) | `DIR/SHA256SUMS` |
@@ -507,10 +509,11 @@ Tests : `python3 -m unittest discover -s tools/tests -p 'test_release_tools.py'`
 | `tv-<versionName>` | CastBridge-TV (le tag désigne la variante sans verrou ; la variante verrouillée porte le même tag, nom + `-verrouillee`, code +1) | `tv-0.14.17-beta` |
 | `phone-<versionName>` | CastBridge (téléphone) | `phone-1.2.29-beta` |
 | `owner-<versionName>` | Console Propriétaire | `owner-0.2.3` |
+| `tvweb-<versionName>` | CastBridge-TV Web (LG webOS). `appinfo.json` porte la même version SANS le suffixe `-beta` (webOS exige `X.Y.Z`) : `tvweb-0.1.0-beta` correspond à `"version": "0.1.0"`, contrôlé par `check_versions.py` | `tvweb-0.1.0-beta` |
 | `server-<versionName>` | Serveur (ligne `server.versionName`, à créer) ; c'est ce tag que `deploy-server.sh` déploie | `server-1.0.0` |
 | `release-AAAA.MM.JJ-N` | Publication coordonnée TV + téléphone + serveur | `release-2026.10.02-1` |
 
-Tags toujours **annotés** (`git tag -a`), jamais déplacés ni supprimés une fois poussés ; une erreur se corrige par une nouvelle version. Détails, modèle de branches et règles de décision : `docs/coordination/VERSIONING-DEVOPS-2026-10-02.md`.
+Tags toujours **annotés** (`git tag -a`), jamais déplacés ni supprimés une fois poussés ; une erreur se corrige par une nouvelle version. `tag-plan.sh` ne connaît pas encore `tvweb` : ce tag se pose à la main (`git tag -a tvweb-0.1.0-beta -m "CastBridge-TV Web 0.1.0-beta (code 1)" <commit>`) sur le commit qui introduit la version. Détails, modèle de branches et règles de décision : `docs/coordination/VERSIONING-DEVOPS-2026-10-02.md`.
 
 ## 14. Déploiement du serveur (ajouté le 2026-10-02)
 
