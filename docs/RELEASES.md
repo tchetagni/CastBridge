@@ -376,7 +376,8 @@ Tableau reconstruit mécaniquement à partir de l'historique premier-parent de `
 | CastBridge-TV | 0.14.49-beta | 124 | 2026-10-11 | `b70645c6` |
 | CastBridge-TV | 0.14.50-beta | 126 | 2026-10-15 | `891ba1df` |
 | CastBridge-TV | 0.14.51-beta | 128 | 2026-10-15 | `cb83f5ff` |
-| **CastBridge-TV** | **0.14.52-beta** (courant) | **130** | **2026-10-18** | **f7fe1051** (APK construite sur ce commit ; code 131 verrouillée) |
+| CastBridge-TV | 0.14.52-beta | 130 | 2026-10-18 | `f7fe1051` (APK code 131 verrouillée construite sur ce commit) |
+| **CastBridge-TV** | **0.14.53-beta** (courant) | **132** | **2026-10-18** | **d00b21b7** (APK code 133 verrouillée construite sur ce commit) |
 | CastBridge | 1.2.19-beta | 29 | 2026-10-01 | `0ff64edc` |
 | CastBridge | 1.2.20-beta | 30 | 2026-10-01 | `86ad3f21` |
 | CastBridge | 1.2.21-beta | 31 | 2026-10-01 | `e6825e76` |
