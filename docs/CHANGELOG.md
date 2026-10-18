@@ -9,12 +9,14 @@ Trois produits livrés ont chacun leur numéro : **CastBridge-TV** (`tv-<version
 
 ## [Non publié]
 
-### CastBridge-TV
-- la barre d'état (les pastilles en haut à droite : Wi-Fi, Bluetooth, Internet…) ne reste plus à l'écran pendant la vidéo ni quand le MENU « Connexion & réglages » est ouvert (R-53, « Les affichages des icônes Bluetooth, Wi-Fi… d'extrême droite perdurent pendant le visionnage de la vidéo ou la navigation sur le menu ») : à l'accueil elle reste et prend la télécommande ; MENU ouvert elle disparaît et revient à la fermeture ; pendant une vidéo elle n'apparaît qu'avec la barre de commandes (OK court) ou 4 s après un changement d'état d'une pastille (passage en alerte compris) ; sur la bibliothèque, 4 s après un changement seulement. Une pastille orange ou rouge qui dure ne la garde plus (la règle du 2026-10-04 « l'alerte garde la zone » est remplacée pour la vidéo) ; libellés de 28 sp, glyphes de 40 dp et marges de 5 % en lecture inchangés
-- vérifié en JVM seulement (`PlayerIconsTest`, règle pure `PlayerIcons.barVisible`) et par la compilation de `:receiver` ; NON ESSAYÉ sur la TV : parcours P-95 à jouer, R-53 reste « à confirmer sur appareil » ; aucun APK construit
-- dans le dépôt, sans effet sur l'APK : parcours P-95 (`docs/test-plans/PARCOURS-CRITIQUES.md`), journal des régressions R-53, `docs/TV-PLAYER.md` (« Icônes du lecteur ») et `docs/TV-ACCUEIL.md` (« Pastilles »)
+Rien pour l'instant.
 
 ## CastBridge-TV
+
+### [0.14.52-beta] (code 130 ; verrouillée 131) : 2026-10-18
+- la barre d'état (les pastilles en haut à droite : Wi-Fi, Bluetooth, Internet…) ne reste plus à l'écran pendant la vidéo ni quand le MENU « Connexion & réglages » est ouvert (R-53, « Les affichages des icônes Bluetooth, Wi-Fi… d'extrême droite perdurent pendant le visionnage de la vidéo ou la navigation sur le menu ») : à l'accueil elle reste et prend la télécommande ; MENU ouvert elle disparaît et revient à la fermeture ; pendant une vidéo elle n'apparaît qu'avec la barre de commandes (OK court) ou 4 s après un changement d'état d'une pastille (passage en alerte compris) ; sur la bibliothèque, 4 s après un changement seulement. Une pastille orange ou rouge qui dure ne la garde plus (la règle du 2026-10-04 « l'alerte garde la zone » est remplacée pour la vidéo) ; libellés de 28 sp, glyphes de 40 dp et marges de 5 % en lecture inchangés
+- vérifié en JVM (`PlayerIconsTest`, règle pure `PlayerIcons.barVisible`) et par la compilation de `:receiver` ; à confirmer sur la TV de référence : parcours P-95, R-53 « CORRIGÉE (à confirmer sur appareil) »
+- dans le dépôt, sans effet sur l'APK : parcours P-95 (`docs/test-plans/PARCOURS-CRITIQUES.md`), journal des régressions R-53, `docs/TV-PLAYER.md` (« Icônes du lecteur ») et `docs/TV-ACCUEIL.md` (« Pastilles »)
 
 ### [0.14.51-beta] (code 128 ; verrouillée 129) : 2026-10-15
 - une copie interrompue s'annule depuis la TV (R-51, « Une copie interrompue sur la TV n'est pas annulable ») : le MENU porte une ligne « Copie : annuler « titre » (42 %, interrompue) » (ou « …, en cours ») par copie reçue en partie, et la tuile « Recevoir du téléphone » les propose après « Comment envoyer depuis le téléphone » ; une confirmation où « Non, la garder » est présélectionné, puis le bandeau « Copie annulée : titre » (ou « Rien à annuler ») ; l'annulation efface le fichier partiel (`.part` et `.meta`) sur tous les volumes et arrête l'envoi qui écrivait encore
