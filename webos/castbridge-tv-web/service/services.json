@@ -1,0 +1,15 @@
+{
+  "id": "com.sticm.castbridge.tv.service",
+  "description": "CastBridge-TV Web : annonce mDNS, API HTTP du téléphone CastBridge, pont vers l'app",
+  "services": [
+    {
+      "name": "com.sticm.castbridge.tv.service",
+      "description": "Service CastBridge-TV Web",
+      "commands": [
+        { "name": "events", "description": "Abonnement : les commandes du téléphone (play, pause, resume, stop, seek)" },
+        { "name": "state", "description": "L'app pousse l'état du lecteur et reçoit les commandes en attente" },
+        { "name": "status", "description": "État du service (adresses, mDNS, HTTP)" }
+      ]
+    }
+  ]
+}
