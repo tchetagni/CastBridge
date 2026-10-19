@@ -32,3 +32,7 @@ curl -sI https://bridge.sti-cm.com/guide    # 301 vers /guide/
 Sans fichier publié : 404 « Guide non publié ». La route est limitée par IP comme `/api` (`RateLimitFilter`).
 
 La page voisine `/telecharger` (télécharger les APK de la TV et du téléphone, même sécurité, même CSP et même cache) renvoie vers ce guide et se met à jour seule à chaque publication d'APK : rien à copier à la main, voir `docs/RELEASES.md` § 8.
+
+## Page claude.ai
+
+La même page est publiée comme artifact claude.ai (https://claude.ai/artifact/DzcWC3ri5FkpWm1r7HXz9j) : copie du HTML avec le bloc `tools/claude-dark-block.css` (variables du thème sombre pour `[data-theme="dark"]`) collé à la fin de la ligne 3, puis publication par l'outil Artifact sur la même URL.
