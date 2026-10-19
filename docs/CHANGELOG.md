@@ -9,17 +9,15 @@ Trois produits livrés ont chacun leur numéro : **CastBridge-TV** (`tv-<version
 
 ## [Non publié]
 
-### CastBridge-TV
+Rien pour l'instant.
+
+## CastBridge-TV
+
+### [0.14.55-beta] (code 136 ; verrouillée 137) : 2026-10-19
 - un refus pour manque de place dit pourquoi la clé USB n'a pas servi (R-55, propriétaire, 2026-10-18 : « l'erreur … n'est pas normale » ; clé de 58 Go avec 23 Go libres et refus « il resterait 211 Mo sur Mémoire interne ») : après « Espace insuffisant : … », une phrase par autre volume présent, par exemple « Clé USB (23 Go libres) non utilisée : lecture seule (test d'écriture raté). », « … fichier trop gros pour FAT32. », « … réglage « Où ranger les nouveaux fichiers : Mémoire interne » ; choisissez Automatique ou la clé dans MENU › Stockage. » (ou « … choix « Destination sur la TV : Mémoire interne » du téléphone ; choisissez Automatique ou la clé. »), « … jugée lente, pourtant retenue en dernier recours. », et « pas assez de place (…) » ou « quota de stockage atteint » ; au début d'un envoi, au contrôle préalable et à l'ouverture d'un transfert multi-connexion ; un seul volume : le message est inchangé
 - une clé écartée « lecture seule » quand une copie est refusée pour manque de place est testée de nouveau avant la réponse (cette clé seulement, une fois par minute au plus), puis la TV refait son choix : son test d'écriture n'était fait qu'une fois au montage ; un réglage « Mémoire interne » ne relance rien
 - vérifié en JVM (`SpaceRefusalTextTest` : 8 tests, `SpaceRefusalServerTest` : 7 tests sur la vraie `ReceiverServer`) et par la compilation de `:receiver` ; à confirmer sur la TV de référence avec la clé : parcours P-99 (la cause réelle du défaut du 2026-10-18, réglage ou test d'écriture, reste à relever sur la TV)
 - dans le dépôt, sans effet sur l'APK : parcours P-99 (`docs/test-plans/PARCOURS-CRITIQUES.md`), `docs/REGRESSIONS.md` (R-55) et `docs/STORAGE.md` (§ 4)
-
-### CastBridge (téléphone)
-- la ligne de la file (« Copie impossible : il n'y a plus assez de place sur la TV. … ») et la notification « n'est pas parti » (déployée) portent le texte entier du refus de la TV pour manque de place, avec les phrases par volume (R-55), à la place du seul conseil « Libérez de la place sur la TV » ; la ligne rouge de la carte d'envoi et celle du contrôle préalable montraient déjà le message entier
-- vérifié en JVM (`UploadFailureTest` : 3 tests ajoutés) et par la compilation de `:sender` ; à confirmer avec une CastBridge-TV qui envoie les phrases par volume : parcours P-99
-
-## CastBridge-TV
 
 ### [0.14.54-beta] (code 134 ; verrouillée 135) : 2026-10-18
 - la pastille « Stockage » de la barre d'état dit l'espace restant de la clé USB qui reçoit les copies (décision du propriétaire du 2026-10-18 : « le stockage devrait indiquer le pourcentage d'espace restant dans la clé »), au lieu du volume le plus serré : « Clé USB · 37 % libre » quand la clé est branchée, montée, inscriptible et choisie comme destination (la politique de stockage des envois, `docs/STORAGE.md` § 4), « Stockage · 12 % libre » (mémoire interne) sinon ; seuils inchangés (vert à 20 % libre ou plus, orange de 5 à 20 %, rouge sous 5 % ou en lecture seule) ; si l'autre mémoire est presque pleine ou en lecture seule, la pastille garde son volume, passe au moins à l'orange et le panneau Connexions l'écrit sous le libellé (« 48 Go libres sur 128 Go · mémoire interne presque pleine ») ; aucune pastille de plus, légende du lecteur complétée
@@ -203,6 +201,10 @@ Numéros cités par les sujets de commits (aucun n'est dans `version.properties`
 0.4.2 et 0.4.3 (passerelle Internet Bluetooth, diagnostics), 0.7 (échecs, téléchargements aria2), 0.7.1 (lecteur du téléphone), 0.8 (télécommande du téléphone), 0.9 (Apprendre), 0.9.1 (code 19), 0.11 (code 20, chemin de mise à jour propre), 0.11.1 (code 21, correctif JSON de `/api/library`), 0.12.0 (code 22), 0.12.1 (code 23, adresse serveur officielle masquée).
 
 ## CastBridge (téléphone)
+
+### [1.2.60-beta] (code 90) : 2026-10-19
+- la ligne de la file (« Copie impossible : il n'y a plus assez de place sur la TV. … ») et la notification « n'est pas parti » (déployée) portent le texte entier du refus de la TV pour manque de place, avec les phrases par volume (R-55), à la place du seul conseil « Libérez de la place sur la TV » ; la ligne rouge de la carte d'envoi et celle du contrôle préalable montraient déjà le message entier
+- vérifié en JVM (`UploadFailureTest` : 3 tests ajoutés) et par la compilation de `:sender` ; à confirmer avec une CastBridge-TV qui envoie les phrases par volume : parcours P-99
 
 ### [1.2.59-beta] (code 89) : 2026-10-18
 - la copie d'un gros fichier ne repart plus en Bluetooth quand le Wi-Fi de la TV est revenu (R-54, « la reprise de la copie est lente bien que la disponibilité d'un réseau wifi soit effective ») : au lancement, sans route Wi-Fi ni Wi-Fi Direct, la file attend le Wi-Fi de la TV (45 s si elle l'a vu il y a moins de 10 min, sinon 15 s ; aucune attente sous 5 Mo) avant le Bluetooth ; pendant un envoi Bluetooth elle surveille le lien et, dès que la route Wi-Fi est stable depuis 3 s et que la TV peut reprendre la copie, arrête le Bluetooth et repart en Wi-Fi au même pourcentage (2 fois au plus par fichier, pas sous 1 Mo restant) ; la notification dit « Envoi Bluetooth de X · 59 % · passera en Wi-Fi dès son retour »
