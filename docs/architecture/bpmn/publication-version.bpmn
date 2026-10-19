@@ -1,0 +1,634 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" id="Definitions_publication_version" targetNamespace="https://bridge.sti-cm.com/castbridge/architecture" exporter="CastBridge tools/architecture/bpmn_gen.py" exporterVersion="1.0">
+  <bpmn:collaboration id="Collaboration_publication_version">
+    <bpmn:documentation>Publier une version — Une livraison suit toujours le même chemin. `check_versions.py` contrôle `version.properties` : SemVer, `versionCode` strictement croissant, variante verrouillée de la TV avec code + 1 et suffixe `-verrouillee`. La TV est construite verrouillée (`-PrequireActivation=true`, clés de confiance hors dépôt) et le téléphone en deux variantes, simple et superadmin. Chaque APK est aligné (`zipalign`), signé (`apksigner`, `release.jks`, certificat `ef2908…`) et reçoit sa somme `SHA256SUMS`. Les APK sont déposés dans le dossier Download de la TV par SSH, sur la clé USB de distribution (jamais la variante superadmin), puis sur le téléphone du propriétaire par ADB avec l'installation de la console. Les documents (`CHANGELOG`, `RELEASES` § 9, `REGRESSIONS`, `HANDOFF`) et le guide sont mis à jour, le guide est copié sur le serveur (`/guide/`) et republié sur la page claude.ai. Les étiquettes suivent ; le push, la fusion d'`integration/agents` et l'avance de `main` sont des décisions du propriétaire.</bpmn:documentation>
+    <bpmn:participant id="Participant_owner" name="Utilisateur / Propriétaire" processRef="Process_owner" />
+    <bpmn:participant id="Participant_mac" name="Mac d'assistance" processRef="Process_mac" />
+    <bpmn:participant id="Participant_tv" name="CastBridge-TV" processRef="Process_tv" />
+    <bpmn:participant id="Participant_usb" name="Clé USB" processRef="Process_usb" />
+    <bpmn:participant id="Participant_phone" name="CastBridge (téléphone)" processRef="Process_phone" />
+    <bpmn:participant id="Participant_server" name="Serveur bridge.sti-cm.com" processRef="Process_server" />
+    <bpmn:messageFlow id="MessageFlow_m_o_go__m_in" name="Livraison" sourceRef="SendTask_o_go" targetRef="StartEvent_m_in" />
+    <bpmn:messageFlow id="MessageFlow_m_m_dtv__t_in" name="SSH" sourceRef="SendTask_m_dtv" targetRef="StartEvent_t_in" />
+    <bpmn:messageFlow id="MessageFlow_m_m_dusb__k_in" name="Copie" sourceRef="SendTask_m_dusb" targetRef="StartEvent_k_in" />
+    <bpmn:messageFlow id="MessageFlow_m_m_dph__p_in" name="ADB" sourceRef="SendTask_m_dph" targetRef="StartEvent_p_in" />
+    <bpmn:messageFlow id="MessageFlow_m_m_srv__v_in" name="scp" sourceRef="SendTask_m_srv" targetRef="StartEvent_v_in" />
+    <bpmn:messageFlow id="MessageFlow_m_m_ask__o_dec" name="Décision" sourceRef="EndEvent_m_ask" targetRef="UserTask_o_dec" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_owner" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_owner">
+      <bpmn:lane id="Lane_o1" name="Propriétaire">
+        <bpmn:flowNodeRef>StartEvent_o_start</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SendTask_o_go</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>UserTask_o_dec</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_o_end</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_o_start" name="Version décidée">
+      <bpmn:outgoing>Flow_o_start__o_go</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sendTask id="SendTask_o_go" name="Lancer la livraison (version.properties à jour)">
+      <bpmn:incoming>Flow_o_start__o_go</bpmn:incoming>
+      <bpmn:outgoing>Flow_o_go__o_dec</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:userTask id="UserTask_o_dec" name="Décider : push, fusion, avance de main">
+      <bpmn:documentation>Fusion d'integration/agents puis avance rapide de main : décision du propriétaire (docs/coordination/VERSIONING-DEVOPS-2026-10-02.md).</bpmn:documentation>
+      <bpmn:incoming>Flow_o_go__o_dec</bpmn:incoming>
+      <bpmn:outgoing>Flow_o_dec__o_end</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="EndEvent_o_end" name="Version publiée">
+      <bpmn:incoming>Flow_o_dec__o_end</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_o_start__o_go" sourceRef="StartEvent_o_start" targetRef="SendTask_o_go" />
+    <bpmn:sequenceFlow id="Flow_o_go__o_dec" sourceRef="SendTask_o_go" targetRef="UserTask_o_dec" />
+    <bpmn:sequenceFlow id="Flow_o_dec__o_end" sourceRef="UserTask_o_dec" targetRef="EndEvent_o_end" />
+  </bpmn:process>
+  <bpmn:process id="Process_mac" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_mac">
+      <bpmn:lane id="Lane_m1" name="Contrôles et build">
+        <bpmn:flowNodeRef>StartEvent_m_in</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_m_chk</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_m_ok</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_m_stop</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_m_bt</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_m_bp</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_m2" name="Signature et dépôts">
+        <bpmn:flowNodeRef>Task_m_sign</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SendTask_m_dtv</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SendTask_m_dusb</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SendTask_m_dph</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_m3" name="Documents, guide et étiquettes">
+        <bpmn:flowNodeRef>Task_m_docs</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_m_guide</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SendTask_m_srv</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_m_page</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_m_tag</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_m_ask</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_m_in" name="Livraison demandée">
+      <bpmn:outgoing>Flow_m_in__m_chk</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="StartEvent_m_in_def" />
+    </bpmn:startEvent>
+    <bpmn:task id="Task_m_chk" name="check_versions.py">
+      <bpmn:documentation>Forme, SemVer, versionCode croissant, variante verrouillée (code + 1, suffixe -verrouillee), état git, cohérence avec backend/pom.xml.</bpmn:documentation>
+      <bpmn:incoming>Flow_m_in__m_chk</bpmn:incoming>
+      <bpmn:outgoing>Flow_m_chk__m_ok</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="Gateway_m_ok" name="Contrôle sans erreur ?" default="Flow_m_ok__m_bt">
+      <bpmn:incoming>Flow_m_chk__m_ok</bpmn:incoming>
+      <bpmn:outgoing>Flow_m_ok__m_bt</bpmn:outgoing>
+      <bpmn:outgoing>Flow_m_ok__m_stop</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="EndEvent_m_stop" name="Corriger les versions et recommencer">
+      <bpmn:incoming>Flow_m_ok__m_stop</bpmn:incoming>
+      <bpmn:errorEventDefinition id="EndEvent_m_stop_def" />
+    </bpmn:endEvent>
+    <bpmn:task id="Task_m_bt" name="Construire la TV verrouillée (-PrequireActivation=true)">
+      <bpmn:documentation>Avec -PtrustedKeysFile=~/.castbridge-signing/activation-trusted-keys.txt ; plus de variante déverrouillée.</bpmn:documentation>
+      <bpmn:incoming>Flow_m_ok__m_bt</bpmn:incoming>
+      <bpmn:outgoing>Flow_m_bt__m_bp</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_m_bp" name="Construire le téléphone : simple et superadmin">
+      <bpmn:incoming>Flow_m_bt__m_bp</bpmn:incoming>
+      <bpmn:outgoing>Flow_m_bp__m_sign</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_m_sign" name="zipalign, apksigner (release.jks), SHA256SUMS">
+      <bpmn:documentation>apksigner sign --ks release.jks --ks-pass file:… ; certificat ef2908… vérifié ; check_versions.py --apk compare chaque APK à version.properties.</bpmn:documentation>
+      <bpmn:incoming>Flow_m_bp__m_sign</bpmn:incoming>
+      <bpmn:outgoing>Flow_m_sign__m_dtv</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sendTask id="SendTask_m_dtv" name="Copier dans Download de la TV (SSH)">
+      <bpmn:documentation>CastBridge Dev, port 2223 ; vérifier la taille et le SHA-256 des deux côtés.</bpmn:documentation>
+      <bpmn:incoming>Flow_m_sign__m_dtv</bpmn:incoming>
+      <bpmn:outgoing>Flow_m_dtv__m_dusb</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:sendTask id="SendTask_m_dusb" name="Copier sur la clé USB avec SHA256SUMS.txt">
+      <bpmn:documentation>Les dernières versions seulement : TV verrouillée et téléphone simple, jamais la variante superadmin ; éjecter la clé avant de la retirer.</bpmn:documentation>
+      <bpmn:incoming>Flow_m_dtv__m_dusb</bpmn:incoming>
+      <bpmn:outgoing>Flow_m_dusb__m_dph</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:sendTask id="SendTask_m_dph" name="adb install -r de la console, adb push des APK">
+      <bpmn:documentation>Les trois APK signés et SHA256SUMS dans /sdcard/Download, vérifiés par sha256sum -c sur l'appareil.</bpmn:documentation>
+      <bpmn:incoming>Flow_m_dusb__m_dph</bpmn:incoming>
+      <bpmn:outgoing>Flow_m_dph__m_docs</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:task id="Task_m_docs" name="CHANGELOG, RELEASES § 9, REGRESSIONS, HANDOFF">
+      <bpmn:incoming>Flow_m_dph__m_docs</bpmn:incoming>
+      <bpmn:outgoing>Flow_m_docs__m_guide</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_m_guide" name="build_guide.py : guide HTML régénéré">
+      <bpmn:incoming>Flow_m_docs__m_guide</bpmn:incoming>
+      <bpmn:outgoing>Flow_m_guide__m_srv</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sendTask id="SendTask_m_srv" name="scp et docker cp vers /guide/">
+      <bpmn:incoming>Flow_m_guide__m_srv</bpmn:incoming>
+      <bpmn:outgoing>Flow_m_srv__m_page</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:task id="Task_m_page" name="Republier la page claude.ai du guide">
+      <bpmn:incoming>Flow_m_srv__m_page</bpmn:incoming>
+      <bpmn:outgoing>Flow_m_page__m_tag</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_m_tag" name="Étiquettes tv-, phone-, tvweb-">
+      <bpmn:incoming>Flow_m_page__m_tag</bpmn:incoming>
+      <bpmn:outgoing>Flow_m_tag__m_ask</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="EndEvent_m_ask" name="Proposer le push et la fusion">
+      <bpmn:incoming>Flow_m_tag__m_ask</bpmn:incoming>
+      <bpmn:messageEventDefinition id="EndEvent_m_ask_def" />
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_m_in__m_chk" sourceRef="StartEvent_m_in" targetRef="Task_m_chk" />
+    <bpmn:sequenceFlow id="Flow_m_chk__m_ok" sourceRef="Task_m_chk" targetRef="Gateway_m_ok" />
+    <bpmn:sequenceFlow id="Flow_m_ok__m_bt" name="Oui" sourceRef="Gateway_m_ok" targetRef="Task_m_bt" />
+    <bpmn:sequenceFlow id="Flow_m_ok__m_stop" name="Non" sourceRef="Gateway_m_ok" targetRef="EndEvent_m_stop" />
+    <bpmn:sequenceFlow id="Flow_m_bt__m_bp" sourceRef="Task_m_bt" targetRef="Task_m_bp" />
+    <bpmn:sequenceFlow id="Flow_m_bp__m_sign" sourceRef="Task_m_bp" targetRef="Task_m_sign" />
+    <bpmn:sequenceFlow id="Flow_m_sign__m_dtv" sourceRef="Task_m_sign" targetRef="SendTask_m_dtv" />
+    <bpmn:sequenceFlow id="Flow_m_dtv__m_dusb" sourceRef="SendTask_m_dtv" targetRef="SendTask_m_dusb" />
+    <bpmn:sequenceFlow id="Flow_m_dusb__m_dph" sourceRef="SendTask_m_dusb" targetRef="SendTask_m_dph" />
+    <bpmn:sequenceFlow id="Flow_m_dph__m_docs" sourceRef="SendTask_m_dph" targetRef="Task_m_docs" />
+    <bpmn:sequenceFlow id="Flow_m_docs__m_guide" sourceRef="Task_m_docs" targetRef="Task_m_guide" />
+    <bpmn:sequenceFlow id="Flow_m_guide__m_srv" sourceRef="Task_m_guide" targetRef="SendTask_m_srv" />
+    <bpmn:sequenceFlow id="Flow_m_srv__m_page" sourceRef="SendTask_m_srv" targetRef="Task_m_page" />
+    <bpmn:sequenceFlow id="Flow_m_page__m_tag" sourceRef="Task_m_page" targetRef="Task_m_tag" />
+    <bpmn:sequenceFlow id="Flow_m_tag__m_ask" sourceRef="Task_m_tag" targetRef="EndEvent_m_ask" />
+  </bpmn:process>
+  <bpmn:process id="Process_tv" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_tv">
+      <bpmn:lane id="Lane_t1" name="Dossier Download de la TV">
+        <bpmn:flowNodeRef>StartEvent_t_in</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_t_end</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_t_in" name="APK déposé par SSH">
+      <bpmn:outgoing>Flow_t_in__t_end</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="StartEvent_t_in_def" />
+    </bpmn:startEvent>
+    <bpmn:endEvent id="EndEvent_t_end" name="APK prêt à installer">
+      <bpmn:incoming>Flow_t_in__t_end</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_t_in__t_end" sourceRef="StartEvent_t_in" targetRef="EndEvent_t_end" />
+  </bpmn:process>
+  <bpmn:process id="Process_usb" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_usb">
+      <bpmn:lane id="Lane_k1" name="Clé de distribution">
+        <bpmn:flowNodeRef>StartEvent_k_in</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_k_end</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_k_in" name="APK et sommes copiés">
+      <bpmn:outgoing>Flow_k_in__k_end</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="StartEvent_k_in_def" />
+    </bpmn:startEvent>
+    <bpmn:endEvent id="EndEvent_k_end" name="Clé prête : l'éjecter avant de la retirer">
+      <bpmn:incoming>Flow_k_in__k_end</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_k_in__k_end" sourceRef="StartEvent_k_in" targetRef="EndEvent_k_end" />
+  </bpmn:process>
+  <bpmn:process id="Process_phone" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_phone">
+      <bpmn:lane id="Lane_p1" name="Téléphone du propriétaire (ADB)">
+        <bpmn:flowNodeRef>StartEvent_p_in</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_p_inst</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_p_end</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_p_in" name="APK poussés par ADB">
+      <bpmn:outgoing>Flow_p_in__p_inst</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="StartEvent_p_in_def" />
+    </bpmn:startEvent>
+    <bpmn:task id="Task_p_inst" name="Installer la console par-dessus, contrôler les sommes">
+      <bpmn:incoming>Flow_p_in__p_inst</bpmn:incoming>
+      <bpmn:outgoing>Flow_p_inst__p_end</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="EndEvent_p_end" name="Téléphone à jour">
+      <bpmn:incoming>Flow_p_inst__p_end</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_p_in__p_inst" sourceRef="StartEvent_p_in" targetRef="Task_p_inst" />
+    <bpmn:sequenceFlow id="Flow_p_inst__p_end" sourceRef="Task_p_inst" targetRef="EndEvent_p_end" />
+  </bpmn:process>
+  <bpmn:process id="Process_server" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_server">
+      <bpmn:lane id="Lane_v1" name="Guide public">
+        <bpmn:flowNodeRef>StartEvent_v_in</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_v_end</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_v_in" name="Guide reçu">
+      <bpmn:outgoing>Flow_v_in__v_end</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="StartEvent_v_in_def" />
+    </bpmn:startEvent>
+    <bpmn:endEvent id="EndEvent_v_end" name="Guide servi sur /guide/">
+      <bpmn:incoming>Flow_v_in__v_end</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_v_in__v_end" sourceRef="StartEvent_v_in" targetRef="EndEvent_v_end" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_publication_version">
+    <bpmndi:BPMNPlane id="BPMNPlane_publication_version" bpmnElement="Collaboration_publication_version">
+      <bpmndi:BPMNShape id="Participant_owner_di" bpmnElement="Participant_owner" isHorizontal="true">
+        <dc:Bounds x="10" y="20" width="3284" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_o1_di" bpmnElement="Lane_o1" isHorizontal="true">
+        <dc:Bounds x="40" y="20" width="3254" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_mac_di" bpmnElement="Participant_mac" isHorizontal="true">
+        <dc:Bounds x="10" y="238" width="3284" height="560" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_m1_di" bpmnElement="Lane_m1" isHorizontal="true">
+        <dc:Bounds x="40" y="238" width="3254" height="260" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_m2_di" bpmnElement="Lane_m2" isHorizontal="true">
+        <dc:Bounds x="40" y="498" width="3254" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_m3_di" bpmnElement="Lane_m3" isHorizontal="true">
+        <dc:Bounds x="40" y="648" width="3254" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_tv_di" bpmnElement="Participant_tv" isHorizontal="true">
+        <dc:Bounds x="10" y="894" width="3284" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_t1_di" bpmnElement="Lane_t1" isHorizontal="true">
+        <dc:Bounds x="40" y="894" width="3254" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_usb_di" bpmnElement="Participant_usb" isHorizontal="true">
+        <dc:Bounds x="10" y="1126" width="3284" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_k1_di" bpmnElement="Lane_k1" isHorizontal="true">
+        <dc:Bounds x="40" y="1126" width="3254" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_phone_di" bpmnElement="Participant_phone" isHorizontal="true">
+        <dc:Bounds x="10" y="1344" width="3284" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_p1_di" bpmnElement="Lane_p1" isHorizontal="true">
+        <dc:Bounds x="40" y="1344" width="3254" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_server_di" bpmnElement="Participant_server" isHorizontal="true">
+        <dc:Bounds x="10" y="1548" width="3284" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_v1_di" bpmnElement="Lane_v1" isHorizontal="true">
+        <dc:Bounds x="40" y="1548" width="3254" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_o_start_di" bpmnElement="StartEvent_o_start" bioc:stroke="#455A64" bioc:fill="#FFFFFF">
+        <dc:Bounds x="117" y="77" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="95" y="116" width="81" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SendTask_o_go_di" bpmnElement="SendTask_o_go" bioc:stroke="#455A64" bioc:fill="#ECEFF1">
+        <dc:Bounds x="270" y="55" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_o_dec_di" bpmnElement="UserTask_o_dec" bioc:stroke="#455A64" bioc:fill="#ECEFF1">
+        <dc:Bounds x="2930" y="55" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_o_end_di" bpmnElement="EndEvent_o_end" bioc:stroke="#455A64" bioc:fill="#FFFFFF">
+        <dc:Bounds x="3157" y="77" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3136" y="116" width="78" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_m_in_di" bpmnElement="StartEvent_m_in" bioc:stroke="#00695C" bioc:fill="#FFFFFF">
+        <dc:Bounds x="307" y="295" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="298" y="334" width="54" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_m_chk_di" bpmnElement="Task_m_chk" bioc:stroke="#00695C" bioc:fill="#E0F2F1">
+        <dc:Bounds x="460" y="273" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_m_ok_di" bpmnElement="Gateway_m_ok" isMarkerVisible="true" bioc:stroke="#00695C" bioc:fill="#FFFFFF">
+        <dc:Bounds x="680" y="288" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="670" y="256" width="70" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_m_stop_di" bpmnElement="EndEvent_m_stop" bioc:stroke="#00695C" bioc:fill="#FFFFFF">
+        <dc:Bounds x="877" y="405" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="860" y="444" width="70" height="42" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_m_bt_di" bpmnElement="Task_m_bt" bioc:stroke="#00695C" bioc:fill="#E0F2F1">
+        <dc:Bounds x="840" y="273" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_m_bp_di" bpmnElement="Task_m_bp" bioc:stroke="#00695C" bioc:fill="#E0F2F1">
+        <dc:Bounds x="1030" y="273" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_m_sign_di" bpmnElement="Task_m_sign" bioc:stroke="#00695C" bioc:fill="#E0F2F1">
+        <dc:Bounds x="1220" y="533" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SendTask_m_dtv_di" bpmnElement="SendTask_m_dtv" bioc:stroke="#00695C" bioc:fill="#E0F2F1">
+        <dc:Bounds x="1410" y="533" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SendTask_m_dusb_di" bpmnElement="SendTask_m_dusb" bioc:stroke="#00695C" bioc:fill="#E0F2F1">
+        <dc:Bounds x="1600" y="533" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SendTask_m_dph_di" bpmnElement="SendTask_m_dph" bioc:stroke="#00695C" bioc:fill="#E0F2F1">
+        <dc:Bounds x="1790" y="533" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_m_docs_di" bpmnElement="Task_m_docs" bioc:stroke="#00695C" bioc:fill="#E0F2F1">
+        <dc:Bounds x="1980" y="683" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_m_guide_di" bpmnElement="Task_m_guide" bioc:stroke="#00695C" bioc:fill="#E0F2F1">
+        <dc:Bounds x="2170" y="683" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SendTask_m_srv_di" bpmnElement="SendTask_m_srv" bioc:stroke="#00695C" bioc:fill="#E0F2F1">
+        <dc:Bounds x="2360" y="683" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_m_page_di" bpmnElement="Task_m_page" bioc:stroke="#00695C" bioc:fill="#E0F2F1">
+        <dc:Bounds x="2550" y="683" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_m_tag_di" bpmnElement="Task_m_tag" bioc:stroke="#00695C" bioc:fill="#E0F2F1">
+        <dc:Bounds x="2740" y="683" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_m_ask_di" bpmnElement="EndEvent_m_ask" bioc:stroke="#00695C" bioc:fill="#FFFFFF">
+        <dc:Bounds x="2967" y="705" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2942" y="744" width="86" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_t_in_di" bpmnElement="StartEvent_t_in" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1447" y="951" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1424" y="990" width="83" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_t_end_di" bpmnElement="EndEvent_t_end" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1637" y="951" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1627" y="990" width="56" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_k_in_di" bpmnElement="StartEvent_k_in" bioc:stroke="#3949AB" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1637" y="1183" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1615" y="1222" width="81" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_k_end_di" bpmnElement="EndEvent_k_end" bioc:stroke="#3949AB" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1827" y="1183" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1803" y="1222" width="85" height="42" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_p_in_di" bpmnElement="StartEvent_p_in" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1827" y="1401" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1802" y="1440" width="87" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_p_inst_di" bpmnElement="Task_p_inst" bioc:stroke="#0A6A4B" bioc:fill="#D3ECE1">
+        <dc:Bounds x="1980" y="1379" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_p_end_di" bpmnElement="EndEvent_p_end" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
+        <dc:Bounds x="2207" y="1401" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2183" y="1440" width="85" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_v_in_di" bpmnElement="StartEvent_v_in" bioc:stroke="#2D5776" bioc:fill="#FFFFFF">
+        <dc:Bounds x="2397" y="1605" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2387" y="1644" width="56" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_v_end_di" bpmnElement="EndEvent_v_end" bioc:stroke="#2D5776" bioc:fill="#FFFFFF">
+        <dc:Bounds x="2587" y="1605" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2567" y="1644" width="76" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_k_in__k_end_di" bpmnElement="Flow_k_in__k_end">
+        <di:waypoint x="1673" y="1201" />
+        <di:waypoint x="1690" y="1201" />
+        <di:waypoint x="1690" y="1200" />
+        <di:waypoint x="1810" y="1200" />
+        <di:waypoint x="1810" y="1201" />
+        <di:waypoint x="1827" y="1201" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_m_bp__m_sign_di" bpmnElement="Flow_m_bp__m_sign">
+        <di:waypoint x="1140" y="313" />
+        <di:waypoint x="1155" y="313" />
+        <di:waypoint x="1155" y="310" />
+        <di:waypoint x="1180" y="310" />
+        <di:waypoint x="1180" y="570" />
+        <di:waypoint x="1205" y="570" />
+        <di:waypoint x="1205" y="573" />
+        <di:waypoint x="1220" y="573" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_m_bt__m_bp_di" bpmnElement="Flow_m_bt__m_bp">
+        <di:waypoint x="950" y="313" />
+        <di:waypoint x="965" y="313" />
+        <di:waypoint x="965" y="310" />
+        <di:waypoint x="1015" y="310" />
+        <di:waypoint x="1015" y="313" />
+        <di:waypoint x="1030" y="313" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_m_chk__m_ok_di" bpmnElement="Flow_m_chk__m_ok">
+        <di:waypoint x="570" y="313" />
+        <di:waypoint x="585" y="313" />
+        <di:waypoint x="585" y="310" />
+        <di:waypoint x="665" y="310" />
+        <di:waypoint x="665" y="313" />
+        <di:waypoint x="680" y="313" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_m_docs__m_guide_di" bpmnElement="Flow_m_docs__m_guide">
+        <di:waypoint x="2090" y="723" />
+        <di:waypoint x="2105" y="723" />
+        <di:waypoint x="2105" y="720" />
+        <di:waypoint x="2155" y="720" />
+        <di:waypoint x="2155" y="723" />
+        <di:waypoint x="2170" y="723" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_m_dph__m_docs_di" bpmnElement="Flow_m_dph__m_docs">
+        <di:waypoint x="1900" y="573" />
+        <di:waypoint x="1915" y="573" />
+        <di:waypoint x="1915" y="570" />
+        <di:waypoint x="1940" y="570" />
+        <di:waypoint x="1940" y="720" />
+        <di:waypoint x="1965" y="720" />
+        <di:waypoint x="1965" y="723" />
+        <di:waypoint x="1980" y="723" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_m_dtv__m_dusb_di" bpmnElement="Flow_m_dtv__m_dusb">
+        <di:waypoint x="1520" y="573" />
+        <di:waypoint x="1535" y="573" />
+        <di:waypoint x="1535" y="570" />
+        <di:waypoint x="1585" y="570" />
+        <di:waypoint x="1585" y="573" />
+        <di:waypoint x="1600" y="573" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_m_dusb__m_dph_di" bpmnElement="Flow_m_dusb__m_dph">
+        <di:waypoint x="1710" y="573" />
+        <di:waypoint x="1725" y="573" />
+        <di:waypoint x="1725" y="570" />
+        <di:waypoint x="1775" y="570" />
+        <di:waypoint x="1775" y="573" />
+        <di:waypoint x="1790" y="573" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_m_guide__m_srv_di" bpmnElement="Flow_m_guide__m_srv">
+        <di:waypoint x="2280" y="723" />
+        <di:waypoint x="2295" y="723" />
+        <di:waypoint x="2295" y="720" />
+        <di:waypoint x="2345" y="720" />
+        <di:waypoint x="2345" y="723" />
+        <di:waypoint x="2360" y="723" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_m_in__m_chk_di" bpmnElement="Flow_m_in__m_chk">
+        <di:waypoint x="343" y="313" />
+        <di:waypoint x="360" y="313" />
+        <di:waypoint x="360" y="310" />
+        <di:waypoint x="445" y="310" />
+        <di:waypoint x="445" y="313" />
+        <di:waypoint x="460" y="313" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_m_ok__m_bt_di" bpmnElement="Flow_m_ok__m_bt">
+        <di:waypoint x="730" y="313" />
+        <di:waypoint x="745" y="313" />
+        <di:waypoint x="745" y="310" />
+        <di:waypoint x="825" y="310" />
+        <di:waypoint x="825" y="313" />
+        <di:waypoint x="840" y="313" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="751" y="292" width="20" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_m_ok__m_stop_di" bpmnElement="Flow_m_ok__m_stop">
+        <di:waypoint x="705" y="338" />
+        <di:waypoint x="705" y="420" />
+        <di:waypoint x="860" y="420" />
+        <di:waypoint x="860" y="423" />
+        <di:waypoint x="877" y="423" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="709" y="344" width="23" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_m_page__m_tag_di" bpmnElement="Flow_m_page__m_tag">
+        <di:waypoint x="2660" y="723" />
+        <di:waypoint x="2675" y="723" />
+        <di:waypoint x="2675" y="720" />
+        <di:waypoint x="2725" y="720" />
+        <di:waypoint x="2725" y="723" />
+        <di:waypoint x="2740" y="723" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_m_sign__m_dtv_di" bpmnElement="Flow_m_sign__m_dtv">
+        <di:waypoint x="1330" y="573" />
+        <di:waypoint x="1345" y="573" />
+        <di:waypoint x="1345" y="570" />
+        <di:waypoint x="1395" y="570" />
+        <di:waypoint x="1395" y="573" />
+        <di:waypoint x="1410" y="573" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_m_srv__m_page_di" bpmnElement="Flow_m_srv__m_page">
+        <di:waypoint x="2470" y="723" />
+        <di:waypoint x="2485" y="723" />
+        <di:waypoint x="2485" y="720" />
+        <di:waypoint x="2535" y="720" />
+        <di:waypoint x="2535" y="723" />
+        <di:waypoint x="2550" y="723" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_m_tag__m_ask_di" bpmnElement="Flow_m_tag__m_ask">
+        <di:waypoint x="2850" y="723" />
+        <di:waypoint x="2865" y="723" />
+        <di:waypoint x="2865" y="720" />
+        <di:waypoint x="2950" y="720" />
+        <di:waypoint x="2950" y="723" />
+        <di:waypoint x="2967" y="723" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_o_dec__o_end_di" bpmnElement="Flow_o_dec__o_end">
+        <di:waypoint x="3040" y="95" />
+        <di:waypoint x="3157" y="95" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_o_go__o_dec_di" bpmnElement="Flow_o_go__o_dec">
+        <di:waypoint x="380" y="95" />
+        <di:waypoint x="2930" y="95" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_o_start__o_go_di" bpmnElement="Flow_o_start__o_go">
+        <di:waypoint x="153" y="95" />
+        <di:waypoint x="270" y="95" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_in__p_inst_di" bpmnElement="Flow_p_in__p_inst">
+        <di:waypoint x="1863" y="1419" />
+        <di:waypoint x="1880" y="1419" />
+        <di:waypoint x="1880" y="1415" />
+        <di:waypoint x="1965" y="1415" />
+        <di:waypoint x="1965" y="1419" />
+        <di:waypoint x="1980" y="1419" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_inst__p_end_di" bpmnElement="Flow_p_inst__p_end">
+        <di:waypoint x="2090" y="1419" />
+        <di:waypoint x="2105" y="1419" />
+        <di:waypoint x="2105" y="1415" />
+        <di:waypoint x="2190" y="1415" />
+        <di:waypoint x="2190" y="1419" />
+        <di:waypoint x="2207" y="1419" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_t_in__t_end_di" bpmnElement="Flow_t_in__t_end">
+        <di:waypoint x="1483" y="969" />
+        <di:waypoint x="1500" y="969" />
+        <di:waypoint x="1500" y="965" />
+        <di:waypoint x="1620" y="965" />
+        <di:waypoint x="1620" y="969" />
+        <di:waypoint x="1637" y="969" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_v_in__v_end_di" bpmnElement="Flow_v_in__v_end">
+        <di:waypoint x="2433" y="1623" />
+        <di:waypoint x="2450" y="1623" />
+        <di:waypoint x="2450" y="1620" />
+        <di:waypoint x="2570" y="1620" />
+        <di:waypoint x="2570" y="1623" />
+        <di:waypoint x="2587" y="1623" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_m_ask__o_dec_di" bpmnElement="MessageFlow_m_m_ask__o_dec">
+        <di:waypoint x="2985" y="705" />
+        <di:waypoint x="2985" y="135" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2989" y="683" width="45" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_m_dph__p_in_di" bpmnElement="MessageFlow_m_m_dph__p_in">
+        <di:waypoint x="1845" y="613" />
+        <di:waypoint x="1845" y="1165" />
+        <di:waypoint x="1895" y="1165" />
+        <di:waypoint x="1895" y="1270" />
+        <di:waypoint x="1845" y="1270" />
+        <di:waypoint x="1845" y="1401" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1849" y="619" width="25" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_m_dtv__t_in_di" bpmnElement="MessageFlow_m_m_dtv__t_in">
+        <di:waypoint x="1465" y="613" />
+        <di:waypoint x="1465" y="951" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1469" y="619" width="25" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_m_dusb__k_in_di" bpmnElement="MessageFlow_m_m_dusb__k_in">
+        <di:waypoint x="1655" y="613" />
+        <di:waypoint x="1655" y="935" />
+        <di:waypoint x="1690" y="935" />
+        <di:waypoint x="1690" y="1025" />
+        <di:waypoint x="1655" y="1025" />
+        <di:waypoint x="1655" y="1183" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1659" y="619" width="31" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_m_srv__v_in_di" bpmnElement="MessageFlow_m_m_srv__v_in">
+        <di:waypoint x="2415" y="763" />
+        <di:waypoint x="2415" y="1605" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2419" y="769" width="20" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_o_go__m_in_di" bpmnElement="MessageFlow_m_o_go__m_in">
+        <di:waypoint x="325" y="135" />
+        <di:waypoint x="325" y="295" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="329" y="141" width="47" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

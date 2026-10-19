@@ -1,0 +1,650 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" id="Definitions_jetons_et_lots" targetNamespace="https://bridge.sti-cm.com/castbridge/architecture" exporter="CastBridge tools/architecture/bpmn_gen.py" exporterVersion="1.0">
+  <bpmn:collaboration id="Collaboration_jetons_et_lots">
+    <bpmn:documentation>Jetons du portefeuille et lots en location — Deux circuits se rejoignent à la TV. Le portefeuille est un grand livre tenu par le serveur : une commande payée en espèces est validée par un administrateur (compte nommé et code TOTP), qui crédite le compte de la TV par un don ; au-delà du plafond, un second administrateur doit approuver. La TV ne garde qu'un solde signé (`cbw1`). Une location part de la Boutique de la TV, qui refuse l'essai, le profil enfant et les lots libres ; la demande `castbridge-rent-request-v1` est confirmée par un adulte sur le téléphone, puis l'émetteur signe le droit `rental` (1 à 366 jours). Le téléphone télécharge le lot signé et le livre à la TV, qui ne télécharge jamais un lot elle-même (sauf le bouton « Mettre à jour les lots Langues »). À la fin de la location, ou sur ordre signé de retrait, la TV détruit la clé puis efface les fichiers ; la progression est gardée. L'émission des locations par le serveur est une conception cible ; l'émetteur actuel est l'outil de bureau du propriétaire.</bpmn:documentation>
+    <bpmn:participant id="Participant_user" name="Utilisateur / Propriétaire" processRef="Process_user" />
+    <bpmn:participant id="Participant_server" name="Serveur bridge.sti-cm.com" processRef="Process_server" />
+    <bpmn:participant id="Participant_phone" name="CastBridge (téléphone)" processRef="Process_phone" />
+    <bpmn:participant id="Participant_tv" name="CastBridge-TV" processRef="Process_tv" />
+    <bpmn:messageFlow id="MessageFlow_m_c_pay__a_in" name="Espèces" sourceRef="EndEvent_c_pay" targetRef="StartEvent_a_in" />
+    <bpmn:messageFlow id="MessageFlow_m_t_req__p_adult" name="Demande" sourceRef="EndEvent_t_req" targetRef="StartEvent_p_adult" />
+    <bpmn:messageFlow id="MessageFlow_m_p_fwd__l_in" name="Demande confirmée" sourceRef="EndEvent_p_fwd" targetRef="StartEvent_l_in" />
+    <bpmn:messageFlow id="MessageFlow_m_l_pub__p_in" name="Lot et droit" sourceRef="EndEvent_l_pub" targetRef="StartEvent_p_in" />
+    <bpmn:messageFlow id="MessageFlow_m_p_push__x_in" name="Lot livré" sourceRef="EndEvent_p_push" targetRef="StartEvent_x_in" />
+    <bpmn:messageFlow id="MessageFlow_m_w_snap__t_bal" name="Solde" sourceRef="EndEvent_w_snap" targetRef="StartEvent_t_bal" />
+    <bpmn:messageFlow id="MessageFlow_m_a_rev__x_rev" name="Retrait" sourceRef="EndEvent_a_rev" targetRef="Event_x_rev" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_user" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_user">
+      <bpmn:lane id="Lane_c1" name="Client">
+        <bpmn:flowNodeRef>StartEvent_c_start</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_c_pay</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_c_start" name="Le client commande des jetons ou une location">
+      <bpmn:outgoing>Flow_c_start__c_pay</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="EndEvent_c_pay" name="Régler en espèces au point focal">
+      <bpmn:incoming>Flow_c_start__c_pay</bpmn:incoming>
+      <bpmn:messageEventDefinition id="EndEvent_c_pay_def" />
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_c_start__c_pay" sourceRef="StartEvent_c_start" targetRef="EndEvent_c_pay" />
+  </bpmn:process>
+  <bpmn:process id="Process_server" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_server">
+      <bpmn:lane id="Lane_a1" name="Administration (/admin)">
+        <bpmn:flowNodeRef>StartEvent_a_in</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>UserTask_a_val</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_a_don</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>StartEvent_a_rstart</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_a_rev</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_w1" name="Portefeuille (wallet)">
+        <bpmn:flowNodeRef>Task_w_post</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_w_snap</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_l1" name="Lots et licences">
+        <bpmn:flowNodeRef>StartEvent_l_in</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_l_right</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_l_pub</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_a_in" name="Commande payée à valider">
+      <bpmn:outgoing>Flow_a_in__a_val</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="StartEvent_a_in_def" />
+    </bpmn:startEvent>
+    <bpmn:userTask id="UserTask_a_val" name="Valider : compte nommé et code TOTP">
+      <bpmn:incoming>Flow_a_in__a_val</bpmn:incoming>
+      <bpmn:outgoing>Flow_a_val__a_don</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:task id="Task_a_don" name="Créer le don au compte de la TV">
+      <bpmn:documentation>POST /api/v1/admin/wallet/grant ; plafond par don et par jour ; au-delà, un second administrateur (TOTP distinct) approuve.</bpmn:documentation>
+      <bpmn:incoming>Flow_a_val__a_don</bpmn:incoming>
+      <bpmn:outgoing>Flow_a_don__w_post</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:startEvent id="StartEvent_a_rstart" name="Retrait décidé">
+      <bpmn:outgoing>Flow_a_rstart__a_rev</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="EndEvent_a_rev" name="Révoquer : ordre signé (license.revoke, catalog.retire)">
+      <bpmn:documentation>Ordre cbx1 de type order, liste d'actions fermée ; le téléphone le transporte.</bpmn:documentation>
+      <bpmn:incoming>Flow_a_rstart__a_rev</bpmn:incoming>
+      <bpmn:messageEventDefinition id="EndEvent_a_rev_def" />
+    </bpmn:endEvent>
+    <bpmn:task id="Task_w_post" name="Écrire au grand livre : NDEM ou MBOKO">
+      <bpmn:documentation>Écritures immuables à double entrée, clé d'idempotence ; l'attribution mensuelle par édition passe par la même écriture (essai 100 NDEM par mois ; production 1 000 NDEM et 10 MBOKO).</bpmn:documentation>
+      <bpmn:incoming>Flow_a_don__w_post</bpmn:incoming>
+      <bpmn:outgoing>Flow_w_post__w_snap</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="EndEvent_w_snap" name="Solde signé cbw1 à la synchronisation">
+      <bpmn:incoming>Flow_w_post__w_snap</bpmn:incoming>
+      <bpmn:messageEventDefinition id="EndEvent_w_snap_def" />
+    </bpmn:endEvent>
+    <bpmn:startEvent id="StartEvent_l_in" name="Demande de location transmise">
+      <bpmn:outgoing>Flow_l_in__l_right</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="StartEvent_l_in_def" />
+    </bpmn:startEvent>
+    <bpmn:task id="Task_l_right" name="Émettre le droit rental (1 à 366 jours)">
+      <bpmn:documentation>Durée du bouquet (rentalDays, 30 jours par défaut), une location par bouquet ; renouvellement : kind=extend avec le même period.</bpmn:documentation>
+      <bpmn:incoming>Flow_l_in__l_right</bpmn:incoming>
+      <bpmn:outgoing>Flow_l_right__l_pub</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="EndEvent_l_pub" name="Lot signé et droit disponibles">
+      <bpmn:incoming>Flow_l_right__l_pub</bpmn:incoming>
+      <bpmn:messageEventDefinition id="EndEvent_l_pub_def" />
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_a_in__a_val" sourceRef="StartEvent_a_in" targetRef="UserTask_a_val" />
+    <bpmn:sequenceFlow id="Flow_a_val__a_don" sourceRef="UserTask_a_val" targetRef="Task_a_don" />
+    <bpmn:sequenceFlow id="Flow_a_don__w_post" sourceRef="Task_a_don" targetRef="Task_w_post" />
+    <bpmn:sequenceFlow id="Flow_w_post__w_snap" sourceRef="Task_w_post" targetRef="EndEvent_w_snap" />
+    <bpmn:sequenceFlow id="Flow_a_rstart__a_rev" sourceRef="StartEvent_a_rstart" targetRef="EndEvent_a_rev" />
+    <bpmn:sequenceFlow id="Flow_l_in__l_right" sourceRef="StartEvent_l_in" targetRef="Task_l_right" />
+    <bpmn:sequenceFlow id="Flow_l_right__l_pub" sourceRef="Task_l_right" targetRef="EndEvent_l_pub" />
+  </bpmn:process>
+  <bpmn:process id="Process_phone" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_phone">
+      <bpmn:lane id="Lane_p1" name="Messager et livraison des lots">
+        <bpmn:flowNodeRef>StartEvent_p_adult</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>UserTask_p_ok</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_p_fwd</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>StartEvent_p_in</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_p_push</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_p_adult" name="Demande de location reçue">
+      <bpmn:outgoing>Flow_p_adult__p_ok</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="StartEvent_p_adult_def" />
+    </bpmn:startEvent>
+    <bpmn:userTask id="UserTask_p_ok" name="Un adulte confirme sur le téléphone">
+      <bpmn:incoming>Flow_p_adult__p_ok</bpmn:incoming>
+      <bpmn:outgoing>Flow_p_ok__p_fwd</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="EndEvent_p_fwd" name="Transmettre à l'émetteur">
+      <bpmn:incoming>Flow_p_ok__p_fwd</bpmn:incoming>
+      <bpmn:messageEventDefinition id="EndEvent_p_fwd_def" />
+    </bpmn:endEvent>
+    <bpmn:startEvent id="StartEvent_p_in" name="Lot et droit disponibles">
+      <bpmn:outgoing>Flow_p_in__p_push</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="StartEvent_p_in_def" />
+    </bpmn:startEvent>
+    <bpmn:endEvent id="EndEvent_p_push" name="Télécharger le lot, le livrer à la TV">
+      <bpmn:documentation>GET /api/v1/lots/{feature}/{scope}/{version} avec reprise par plages (100 Mo au plus) ; livraison différée par Bluetooth ou Wi-Fi (10 Mo au plus sur la TV).</bpmn:documentation>
+      <bpmn:incoming>Flow_p_in__p_push</bpmn:incoming>
+      <bpmn:messageEventDefinition id="EndEvent_p_push_def" />
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_p_adult__p_ok" sourceRef="StartEvent_p_adult" targetRef="UserTask_p_ok" />
+    <bpmn:sequenceFlow id="Flow_p_ok__p_fwd" sourceRef="UserTask_p_ok" targetRef="EndEvent_p_fwd" />
+    <bpmn:sequenceFlow id="Flow_p_in__p_push" sourceRef="StartEvent_p_in" targetRef="EndEvent_p_push" />
+  </bpmn:process>
+  <bpmn:process id="Process_tv" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_tv">
+      <bpmn:lane id="Lane_t1" name="Boutique et portefeuille">
+        <bpmn:flowNodeRef>StartEvent_t_start</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_t_chk</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_t_ref</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_t_req</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>StartEvent_t_bal</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_t_bend</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_x1" name="Lots (RentalHub, carnet des locations)">
+        <bpmn:flowNodeRef>StartEvent_x_in</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_x_use</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_x_evgw</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_x_exp</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_x_rev</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_x_shred</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_x_end</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_t_start" name="Boutique : Louer un bouquet">
+      <bpmn:outgoing>Flow_t_start__t_chk</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="Gateway_t_chk" name="Essai, profil enfant ou lot libre ?" default="Flow_t_chk__t_req">
+      <bpmn:incoming>Flow_t_start__t_chk</bpmn:incoming>
+      <bpmn:outgoing>Flow_t_chk__t_ref</bpmn:outgoing>
+      <bpmn:outgoing>Flow_t_chk__t_req</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="EndEvent_t_ref" name="Refus : TRIAL_TV, KID_PROFILE, FREE_BUNDLE">
+      <bpmn:incoming>Flow_t_chk__t_ref</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="EndEvent_t_req" name="Créer la demande castbridge-rent-request-v1">
+      <bpmn:documentation>Une demande n'est pas un droit : seul l'émetteur décide, après confirmation d'un adulte.</bpmn:documentation>
+      <bpmn:incoming>Flow_t_chk__t_req</bpmn:incoming>
+      <bpmn:messageEventDefinition id="EndEvent_t_req_def" />
+    </bpmn:endEvent>
+    <bpmn:startEvent id="StartEvent_t_bal" name="Solde signé cbw1 reçu">
+      <bpmn:outgoing>Flow_t_bal__t_bend</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="StartEvent_t_bal_def" />
+    </bpmn:startEvent>
+    <bpmn:endEvent id="EndEvent_t_bend" name="Solde affiché (NDEM, MBOKO)">
+      <bpmn:incoming>Flow_t_bal__t_bend</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:startEvent id="StartEvent_x_in" name="Lot livré par le téléphone">
+      <bpmn:outgoing>Flow_x_in__x_use</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="StartEvent_x_in_def" />
+    </bpmn:startEvent>
+    <bpmn:task id="Task_x_use" name="Vérifier, installer, ouvrir les lots loués">
+      <bpmn:documentation>Catalogue signé et SHA-256 vérifiés ; coffre chiffré par TV ; compteur d'usage ; fenêtre d'essai unique : 3 jours et 720 minutes.</bpmn:documentation>
+      <bpmn:incoming>Flow_x_in__x_use</bpmn:incoming>
+      <bpmn:outgoing>Flow_x_use__x_evgw</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:eventBasedGateway id="Gateway_x_evgw" name="Attendre la fin de la location">
+      <bpmn:incoming>Flow_x_use__x_evgw</bpmn:incoming>
+      <bpmn:outgoing>Flow_x_evgw__x_exp</bpmn:outgoing>
+      <bpmn:outgoing>Flow_x_evgw__x_rev</bpmn:outgoing>
+    </bpmn:eventBasedGateway>
+    <bpmn:intermediateCatchEvent id="Event_x_exp" name="Fin de la location">
+      <bpmn:incoming>Flow_x_evgw__x_exp</bpmn:incoming>
+      <bpmn:outgoing>Flow_x_exp__x_shred</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="Event_x_exp_def" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="Event_x_rev" name="Ordre de retrait reçu">
+      <bpmn:incoming>Flow_x_evgw__x_rev</bpmn:incoming>
+      <bpmn:outgoing>Flow_x_rev__x_shred</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="Event_x_rev_def" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="Task_x_shred" name="Détruire la clé, effacer les fichiers">
+      <bpmn:documentation>RentalSweeper : clé d'abord, fichiers ensuite, reprise après coupure ; ne touche que les lots loués expirés.</bpmn:documentation>
+      <bpmn:incoming>Flow_x_exp__x_shred</bpmn:incoming>
+      <bpmn:incoming>Flow_x_rev__x_shred</bpmn:incoming>
+      <bpmn:outgoing>Flow_x_shred__x_end</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="EndEvent_x_end" name="Lot supprimé, progression gardée">
+      <bpmn:incoming>Flow_x_shred__x_end</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_t_start__t_chk" sourceRef="StartEvent_t_start" targetRef="Gateway_t_chk" />
+    <bpmn:sequenceFlow id="Flow_t_chk__t_ref" name="Oui" sourceRef="Gateway_t_chk" targetRef="EndEvent_t_ref" />
+    <bpmn:sequenceFlow id="Flow_t_chk__t_req" name="Non" sourceRef="Gateway_t_chk" targetRef="EndEvent_t_req" />
+    <bpmn:sequenceFlow id="Flow_t_bal__t_bend" sourceRef="StartEvent_t_bal" targetRef="EndEvent_t_bend" />
+    <bpmn:sequenceFlow id="Flow_x_in__x_use" sourceRef="StartEvent_x_in" targetRef="Task_x_use" />
+    <bpmn:sequenceFlow id="Flow_x_use__x_evgw" sourceRef="Task_x_use" targetRef="Gateway_x_evgw" />
+    <bpmn:sequenceFlow id="Flow_x_evgw__x_exp" sourceRef="Gateway_x_evgw" targetRef="Event_x_exp" />
+    <bpmn:sequenceFlow id="Flow_x_evgw__x_rev" sourceRef="Gateway_x_evgw" targetRef="Event_x_rev" />
+    <bpmn:sequenceFlow id="Flow_x_exp__x_shred" sourceRef="Event_x_exp" targetRef="Task_x_shred" />
+    <bpmn:sequenceFlow id="Flow_x_rev__x_shred" sourceRef="Event_x_rev" targetRef="Task_x_shred" />
+    <bpmn:sequenceFlow id="Flow_x_shred__x_end" sourceRef="Task_x_shred" targetRef="EndEvent_x_end" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_jetons_et_lots">
+    <bpmndi:BPMNPlane id="BPMNPlane_jetons_et_lots" bpmnElement="Collaboration_jetons_et_lots">
+      <bpmndi:BPMNShape id="Participant_user_di" bpmnElement="Participant_user" isHorizontal="true">
+        <dc:Bounds x="10" y="20" width="2520" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_c1_di" bpmnElement="Lane_c1" isHorizontal="true">
+        <dc:Bounds x="40" y="20" width="2490" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_server_di" bpmnElement="Participant_server" isHorizontal="true">
+        <dc:Bounds x="10" y="224" width="2520" height="560" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_a1_di" bpmnElement="Lane_a1" isHorizontal="true">
+        <dc:Bounds x="40" y="224" width="2490" height="260" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_w1_di" bpmnElement="Lane_w1" isHorizontal="true">
+        <dc:Bounds x="40" y="484" width="2490" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_l1_di" bpmnElement="Lane_l1" isHorizontal="true">
+        <dc:Bounds x="40" y="634" width="2490" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_phone_di" bpmnElement="Participant_phone" isHorizontal="true">
+        <dc:Bounds x="10" y="880" width="2520" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_p1_di" bpmnElement="Lane_p1" isHorizontal="true">
+        <dc:Bounds x="40" y="880" width="2490" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_tv_di" bpmnElement="Participant_tv" isHorizontal="true">
+        <dc:Bounds x="10" y="1126" width="2520" height="520" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_t1_di" bpmnElement="Lane_t1" isHorizontal="true">
+        <dc:Bounds x="40" y="1126" width="2490" height="260" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_x1_di" bpmnElement="Lane_x1" isHorizontal="true">
+        <dc:Bounds x="40" y="1386" width="2490" height="260" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_c_start_di" bpmnElement="StartEvent_c_start" bioc:stroke="#455A64" bioc:fill="#FFFFFF">
+        <dc:Bounds x="117" y="77" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="96" y="116" width="78" height="55" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_c_pay_di" bpmnElement="EndEvent_c_pay" bioc:stroke="#455A64" bioc:fill="#FFFFFF">
+        <dc:Bounds x="307" y="77" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="282" y="32" width="86" height="42" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_a_in_di" bpmnElement="StartEvent_a_in" bioc:stroke="#2D5776" bioc:fill="#FFFFFF">
+        <dc:Bounds x="307" y="281" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="279" y="320" width="92" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_a_val_di" bpmnElement="UserTask_a_val" bioc:stroke="#2D5776" bioc:fill="#D9E6F0">
+        <dc:Bounds x="460" y="259" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_a_don_di" bpmnElement="Task_a_don" bioc:stroke="#2D5776" bioc:fill="#D9E6F0">
+        <dc:Bounds x="650" y="259" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_a_rstart_di" bpmnElement="StartEvent_a_rstart" bioc:stroke="#2D5776" bioc:fill="#FFFFFF">
+        <dc:Bounds x="117" y="281" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="100" y="320" width="70" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_a_rev_di" bpmnElement="EndEvent_a_rev" bioc:stroke="#2D5776" bioc:fill="#FFFFFF">
+        <dc:Bounds x="307" y="391" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="283" y="333" width="85" height="55" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_w_post_di" bpmnElement="Task_w_post" bioc:stroke="#2D5776" bioc:fill="#D9E6F0">
+        <dc:Bounds x="840" y="519" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_w_snap_di" bpmnElement="EndEvent_w_snap" bioc:stroke="#2D5776" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1067" y="541" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1041" y="496" width="89" height="42" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_l_in_di" bpmnElement="StartEvent_l_in" bioc:stroke="#2D5776" bioc:fill="#FFFFFF">
+        <dc:Bounds x="877" y="691" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="850" y="659" width="91" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_l_right_di" bpmnElement="Task_l_right" bioc:stroke="#2D5776" bioc:fill="#D9E6F0">
+        <dc:Bounds x="1030" y="669" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_l_pub_di" bpmnElement="EndEvent_l_pub" bioc:stroke="#2D5776" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1257" y="691" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1233" y="659" width="84" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_p_adult_di" bpmnElement="StartEvent_p_adult" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
+        <dc:Bounds x="497" y="937" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="480" y="905" width="71" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_p_ok_di" bpmnElement="UserTask_p_ok" bioc:stroke="#0A6A4B" bioc:fill="#D3ECE1">
+        <dc:Bounds x="650" y="915" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_p_fwd_di" bpmnElement="EndEvent_p_fwd" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
+        <dc:Bounds x="877" y="937" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="860" y="976" width="71" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_p_in_di" bpmnElement="StartEvent_p_in" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1257" y="937" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1246" y="976" width="58" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_p_push_di" bpmnElement="EndEvent_p_push" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1447" y="937" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1420" y="905" width="91" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_t_start_di" bpmnElement="StartEvent_t_start" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="117" y="1183" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="94" y="1222" width="83" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_t_chk_di" bpmnElement="Gateway_t_chk" isMarkerVisible="true" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="300" y="1176" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="282" y="1131" width="87" height="42" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_t_ref_di" bpmnElement="EndEvent_t_ref" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="497" y="1183" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="474" y="1222" width="83" height="55" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_t_req_di" bpmnElement="EndEvent_t_req" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="497" y="1293" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="470" y="1332" width="91" height="42" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_t_bal_di" bpmnElement="StartEvent_t_bal" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1067" y="1183" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1041" y="1222" width="89" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_t_bend_di" bpmnElement="EndEvent_t_bend" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1257" y="1183" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1231" y="1222" width="89" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_x_in_di" bpmnElement="StartEvent_x_in" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1447" y="1443" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1429" y="1482" width="72" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_x_use_di" bpmnElement="Task_x_use" bioc:stroke="#885600" bioc:fill="#FAE8B9">
+        <dc:Bounds x="1600" y="1421" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_x_evgw_di" bpmnElement="Gateway_x_evgw" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1820" y="1436" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1802" y="1404" width="86" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_x_exp_di" bpmnElement="Event_x_exp" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="2017" y="1443" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1992" y="1482" width="86" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_x_rev_di" bpmnElement="Event_x_rev" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="2017" y="1553" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1997" y="1592" width="77" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_x_shred_di" bpmnElement="Task_x_shred" bioc:stroke="#885600" bioc:fill="#FAE8B9">
+        <dc:Bounds x="2170" y="1421" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_x_end_di" bpmnElement="EndEvent_x_end" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="2397" y="1443" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2381" y="1482" width="69" height="42" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_a_don__w_post_di" bpmnElement="Flow_a_don__w_post">
+        <di:waypoint x="760" y="299" />
+        <di:waypoint x="775" y="299" />
+        <di:waypoint x="775" y="295" />
+        <di:waypoint x="800" y="295" />
+        <di:waypoint x="800" y="555" />
+        <di:waypoint x="825" y="555" />
+        <di:waypoint x="825" y="559" />
+        <di:waypoint x="840" y="559" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_a_in__a_val_di" bpmnElement="Flow_a_in__a_val">
+        <di:waypoint x="343" y="299" />
+        <di:waypoint x="360" y="299" />
+        <di:waypoint x="360" y="295" />
+        <di:waypoint x="445" y="295" />
+        <di:waypoint x="445" y="299" />
+        <di:waypoint x="460" y="299" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_a_rstart__a_rev_di" bpmnElement="Flow_a_rstart__a_rev">
+        <di:waypoint x="153" y="299" />
+        <di:waypoint x="170" y="299" />
+        <di:waypoint x="170" y="295" />
+        <di:waypoint x="230" y="295" />
+        <di:waypoint x="230" y="405" />
+        <di:waypoint x="290" y="405" />
+        <di:waypoint x="290" y="409" />
+        <di:waypoint x="307" y="409" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_a_val__a_don_di" bpmnElement="Flow_a_val__a_don">
+        <di:waypoint x="570" y="299" />
+        <di:waypoint x="585" y="299" />
+        <di:waypoint x="585" y="295" />
+        <di:waypoint x="635" y="295" />
+        <di:waypoint x="635" y="299" />
+        <di:waypoint x="650" y="299" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_c_start__c_pay_di" bpmnElement="Flow_c_start__c_pay">
+        <di:waypoint x="153" y="95" />
+        <di:waypoint x="307" y="95" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_l_in__l_right_di" bpmnElement="Flow_l_in__l_right">
+        <di:waypoint x="913" y="709" />
+        <di:waypoint x="930" y="709" />
+        <di:waypoint x="930" y="705" />
+        <di:waypoint x="1015" y="705" />
+        <di:waypoint x="1015" y="709" />
+        <di:waypoint x="1030" y="709" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_l_right__l_pub_di" bpmnElement="Flow_l_right__l_pub">
+        <di:waypoint x="1140" y="709" />
+        <di:waypoint x="1155" y="709" />
+        <di:waypoint x="1155" y="705" />
+        <di:waypoint x="1240" y="705" />
+        <di:waypoint x="1240" y="709" />
+        <di:waypoint x="1257" y="709" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_adult__p_ok_di" bpmnElement="Flow_p_adult__p_ok">
+        <di:waypoint x="533" y="955" />
+        <di:waypoint x="650" y="955" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_in__p_push_di" bpmnElement="Flow_p_in__p_push">
+        <di:waypoint x="1293" y="955" />
+        <di:waypoint x="1447" y="955" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_ok__p_fwd_di" bpmnElement="Flow_p_ok__p_fwd">
+        <di:waypoint x="760" y="955" />
+        <di:waypoint x="877" y="955" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_t_bal__t_bend_di" bpmnElement="Flow_t_bal__t_bend">
+        <di:waypoint x="1103" y="1201" />
+        <di:waypoint x="1120" y="1201" />
+        <di:waypoint x="1120" y="1200" />
+        <di:waypoint x="1240" y="1200" />
+        <di:waypoint x="1240" y="1201" />
+        <di:waypoint x="1257" y="1201" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_t_chk__t_ref_di" bpmnElement="Flow_t_chk__t_ref">
+        <di:waypoint x="350" y="1201" />
+        <di:waypoint x="365" y="1201" />
+        <di:waypoint x="365" y="1200" />
+        <di:waypoint x="480" y="1200" />
+        <di:waypoint x="480" y="1201" />
+        <di:waypoint x="497" y="1201" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="371" y="1182" width="20" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_t_chk__t_req_di" bpmnElement="Flow_t_chk__t_req">
+        <di:waypoint x="325" y="1226" />
+        <di:waypoint x="325" y="1310" />
+        <di:waypoint x="480" y="1310" />
+        <di:waypoint x="480" y="1311" />
+        <di:waypoint x="497" y="1311" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="329" y="1232" width="23" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_t_start__t_chk_di" bpmnElement="Flow_t_start__t_chk">
+        <di:waypoint x="153" y="1201" />
+        <di:waypoint x="170" y="1201" />
+        <di:waypoint x="170" y="1200" />
+        <di:waypoint x="285" y="1200" />
+        <di:waypoint x="285" y="1201" />
+        <di:waypoint x="300" y="1201" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_w_post__w_snap_di" bpmnElement="Flow_w_post__w_snap">
+        <di:waypoint x="950" y="559" />
+        <di:waypoint x="965" y="559" />
+        <di:waypoint x="965" y="555" />
+        <di:waypoint x="1050" y="555" />
+        <di:waypoint x="1050" y="559" />
+        <di:waypoint x="1067" y="559" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_x_evgw__x_exp_di" bpmnElement="Flow_x_evgw__x_exp">
+        <di:waypoint x="1870" y="1461" />
+        <di:waypoint x="1885" y="1461" />
+        <di:waypoint x="1885" y="1460" />
+        <di:waypoint x="2000" y="1460" />
+        <di:waypoint x="2000" y="1461" />
+        <di:waypoint x="2017" y="1461" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_x_evgw__x_rev_di" bpmnElement="Flow_x_evgw__x_rev">
+        <di:waypoint x="1845" y="1486" />
+        <di:waypoint x="1845" y="1570" />
+        <di:waypoint x="2000" y="1570" />
+        <di:waypoint x="2000" y="1571" />
+        <di:waypoint x="2017" y="1571" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_x_exp__x_shred_di" bpmnElement="Flow_x_exp__x_shred">
+        <di:waypoint x="2053" y="1461" />
+        <di:waypoint x="2070" y="1461" />
+        <di:waypoint x="2070" y="1460" />
+        <di:waypoint x="2155" y="1460" />
+        <di:waypoint x="2155" y="1461" />
+        <di:waypoint x="2170" y="1461" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_x_in__x_use_di" bpmnElement="Flow_x_in__x_use">
+        <di:waypoint x="1483" y="1461" />
+        <di:waypoint x="1500" y="1461" />
+        <di:waypoint x="1500" y="1460" />
+        <di:waypoint x="1585" y="1460" />
+        <di:waypoint x="1585" y="1461" />
+        <di:waypoint x="1600" y="1461" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_x_rev__x_shred_di" bpmnElement="Flow_x_rev__x_shred">
+        <di:waypoint x="2053" y="1571" />
+        <di:waypoint x="2070" y="1571" />
+        <di:waypoint x="2070" y="1570" />
+        <di:waypoint x="2225" y="1570" />
+        <di:waypoint x="2225" y="1501" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_x_shred__x_end_di" bpmnElement="Flow_x_shred__x_end">
+        <di:waypoint x="2280" y="1461" />
+        <di:waypoint x="2295" y="1461" />
+        <di:waypoint x="2295" y="1460" />
+        <di:waypoint x="2380" y="1460" />
+        <di:waypoint x="2380" y="1461" />
+        <di:waypoint x="2397" y="1461" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_x_use__x_evgw_di" bpmnElement="Flow_x_use__x_evgw">
+        <di:waypoint x="1710" y="1461" />
+        <di:waypoint x="1725" y="1461" />
+        <di:waypoint x="1725" y="1460" />
+        <di:waypoint x="1805" y="1460" />
+        <di:waypoint x="1805" y="1461" />
+        <di:waypoint x="1820" y="1461" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_a_rev__x_rev_di" bpmnElement="MessageFlow_m_a_rev__x_rev">
+        <di:waypoint x="325" y="427" />
+        <di:waypoint x="325" y="645" />
+        <di:waypoint x="1940" y="645" />
+        <di:waypoint x="1940" y="1535" />
+        <di:waypoint x="2035" y="1535" />
+        <di:waypoint x="2035" y="1553" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="329" y="433" width="35" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_c_pay__a_in_di" bpmnElement="MessageFlow_m_c_pay__a_in">
+        <di:waypoint x="325" y="113" />
+        <di:waypoint x="325" y="281" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="329" y="119" width="45" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_l_pub__p_in_di" bpmnElement="MessageFlow_m_l_pub__p_in">
+        <di:waypoint x="1275" y="727" />
+        <di:waypoint x="1275" y="937" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1279" y="733" width="54" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_p_fwd__l_in_di" bpmnElement="MessageFlow_m_p_fwd__l_in">
+        <di:waypoint x="895" y="937" />
+        <di:waypoint x="895" y="727" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="899" y="902" width="51" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_p_push__x_in_di" bpmnElement="MessageFlow_m_p_push__x_in">
+        <di:waypoint x="1465" y="973" />
+        <di:waypoint x="1465" y="1443" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1469" y="979" width="41" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_t_req__p_adult_di" bpmnElement="MessageFlow_m_t_req__p_adult">
+        <di:waypoint x="515" y="1293" />
+        <di:waypoint x="515" y="1235" />
+        <di:waypoint x="550" y="1235" />
+        <di:waypoint x="550" y="1165" />
+        <di:waypoint x="515" y="1165" />
+        <di:waypoint x="515" y="973" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="519" y="1143" width="50" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_w_snap__t_bal_di" bpmnElement="MessageFlow_m_w_snap__t_bal">
+        <di:waypoint x="1085" y="577" />
+        <di:waypoint x="1085" y="650" />
+        <di:waypoint x="990" y="650" />
+        <di:waypoint x="990" y="1165" />
+        <di:waypoint x="1085" y="1165" />
+        <di:waypoint x="1085" y="1183" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1089" y="583" width="31" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

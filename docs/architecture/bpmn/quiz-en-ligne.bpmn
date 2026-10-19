@@ -1,0 +1,685 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" id="Definitions_quiz_en_ligne" targetNamespace="https://bridge.sti-cm.com/castbridge/architecture" exporter="CastBridge tools/architecture/bpmn_gen.py" exporterVersion="1.0">
+  <bpmn:collaboration id="Collaboration_quiz_en_ligne">
+    <bpmn:documentation>Jouer au Quiz en ligne — Seule une TV activée et connectée à Internet, directement ou par le relais d'un téléphone synchronisé, joue en ligne ; les téléphones passent par leur TV (8 au plus, liaison de référence de 40 kbit/s). Pour une partie avec mise, la TV obtient de l'API un blocage `cbe1` signé (NDEM ou MBOKO, une mise par siège), puis un ticket `cbp1` (600 secondes, à usage unique), et ouvre la salle du service de jeu avec son activation `cbx1`. Le service contrôle le ticket, les droits, les plafonds et le blocage, ouvre la salle (code de 8 caractères, 2 heures) et enchaîne les questions : 1 à 2 secondes entre deux questions, horodatages du serveur. À la fin, le service signe le résultat `cbr1` ; la TV le poste à l'API (`/api/v1/wallet/settle`), qui crédite et débite le portefeuille en une transaction.</bpmn:documentation>
+    <bpmn:participant id="Participant_phone" name="CastBridge (téléphone)" processRef="Process_phone" />
+    <bpmn:participant id="Participant_tv" name="CastBridge-TV" processRef="Process_tv" />
+    <bpmn:participant id="Participant_server" name="Serveur bridge.sti-cm.com" processRef="Process_server" />
+    <bpmn:messageFlow id="MessageFlow_m_h_join__t_rel" name="join" sourceRef="SendTask_h_join" targetRef="Task_t_rel" />
+    <bpmn:messageFlow id="MessageFlow_m_t_esc__a_esc" name="/wallet/escrow" sourceRef="ServiceTask_t_esc" targetRef="Task_a_esc" />
+    <bpmn:messageFlow id="MessageFlow_m_a_esc__t_esc" name="cbe1" sourceRef="Task_a_esc" targetRef="ServiceTask_t_esc" />
+    <bpmn:messageFlow id="MessageFlow_m_t_tk__a_tk" name="/play/ticket" sourceRef="ServiceTask_t_tk" targetRef="Task_a_tk" />
+    <bpmn:messageFlow id="MessageFlow_m_a_tk__t_tk" name="cbp1" sourceRef="Task_a_tk" targetRef="ServiceTask_t_tk" />
+    <bpmn:messageFlow id="MessageFlow_m_t_create__p_in" name="create" sourceRef="SendTask_t_create" targetRef="StartEvent_p_in" />
+    <bpmn:messageFlow id="MessageFlow_m_p_ko__b_ko" name="Refus" sourceRef="EndEvent_p_ko" targetRef="BoundaryEvent_b_ko" />
+    <bpmn:messageFlow id="MessageFlow_m_p_res__t_res" name="cbr1" sourceRef="EndEvent_p_res" targetRef="Event_t_res" />
+    <bpmn:messageFlow id="MessageFlow_m_t_set__a_set" name="/wallet/settle" sourceRef="ServiceTask_t_set" targetRef="Task_a_set" />
+    <bpmn:messageFlow id="MessageFlow_m_a_set__t_set" name="Solde" sourceRef="Task_a_set" targetRef="ServiceTask_t_set" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_phone" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_phone">
+      <bpmn:lane id="Lane_h1" name="Joueur relayé par sa TV">
+        <bpmn:flowNodeRef>StartEvent_h_start</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SendTask_h_join</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_h_end</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_h_start" name="Un joueur veut jouer en ligne">
+      <bpmn:outgoing>Flow_h_start__h_join</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sendTask id="SendTask_h_join" name="Rejoindre par la TV : code de salle">
+      <bpmn:documentation>Page /quiz de la TV, jeton aléatoire de 128 bits par joueur ; aucun téléphone ne parle au service de jeu.</bpmn:documentation>
+      <bpmn:incoming>Flow_h_start__h_join</bpmn:incoming>
+      <bpmn:outgoing>Flow_h_join__h_end</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:endEvent id="EndEvent_h_end" name="Partie jouée par le relais de la TV">
+      <bpmn:incoming>Flow_h_join__h_end</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_h_start__h_join" sourceRef="StartEvent_h_start" targetRef="SendTask_h_join" />
+    <bpmn:sequenceFlow id="Flow_h_join__h_end" sourceRef="SendTask_h_join" targetRef="EndEvent_h_end" />
+  </bpmn:process>
+  <bpmn:process id="Process_tv" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_tv">
+      <bpmn:lane id="Lane_t1" name="Hôte (Quiz, PlayHub, portefeuille)">
+        <bpmn:flowNodeRef>StartEvent_t_in</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_t_chk</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_t_ref</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_t_x</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ServiceTask_t_esc</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ServiceTask_t_tk</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SendTask_t_create</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>BoundaryEvent_b_ko</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_t_rel</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_t_res</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ServiceTask_t_set</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_t_end</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_t_in" name="Ouvrir Quiz › Partie Internet">
+      <bpmn:outgoing>Flow_t_in__t_chk</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="Gateway_t_chk" name="TV activée et en ligne (direct ou relais) ?" default="Flow_t_chk__t_x">
+      <bpmn:incoming>Flow_t_in__t_chk</bpmn:incoming>
+      <bpmn:outgoing>Flow_t_chk__t_x</bpmn:outgoing>
+      <bpmn:outgoing>Flow_t_chk__t_ref</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="EndEvent_t_ref" name="Refus : activer la TV ou connecter Internet">
+      <bpmn:incoming>Flow_t_chk__t_ref</bpmn:incoming>
+      <bpmn:incoming>Flow_b_ko__t_ref</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:exclusiveGateway id="Gateway_t_x" name="Partie avec mise ?" default="Flow_t_x__t_tk">
+      <bpmn:incoming>Flow_t_chk__t_x</bpmn:incoming>
+      <bpmn:outgoing>Flow_t_x__t_esc</bpmn:outgoing>
+      <bpmn:outgoing>Flow_t_x__t_tk</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="ServiceTask_t_esc" name="Bloquer la mise : cbe1 (NDEM ou MBOKO)">
+      <bpmn:documentation>Une mise par siège, de 1 à 8 sièges par TV ; une TV d'essai ne mise jamais.</bpmn:documentation>
+      <bpmn:incoming>Flow_t_x__t_esc</bpmn:incoming>
+      <bpmn:outgoing>Flow_t_esc__t_tk</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="ServiceTask_t_tk" name="Demander le ticket cbp1 (600 s)">
+      <bpmn:documentation>Usage unique (jti), signé Ed25519 par l'API ; l'API en redonne 20 par heure et par appareil.</bpmn:documentation>
+      <bpmn:incoming>Flow_t_x__t_tk</bpmn:incoming>
+      <bpmn:incoming>Flow_t_esc__t_tk</bpmn:incoming>
+      <bpmn:outgoing>Flow_t_tk__t_create</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sendTask id="SendTask_t_create" name="create : ticket, activation cbx1, preuve">
+      <bpmn:documentation>Ticket, activation cbx1 et preuve de possession de la clé d'installation (PLAY-PROTOCOL § Ticket et droits).</bpmn:documentation>
+      <bpmn:incoming>Flow_t_tk__t_create</bpmn:incoming>
+      <bpmn:outgoing>Flow_t_create__t_rel</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:boundaryEvent id="BoundaryEvent_b_ko" name="Refus du service" cancelActivity="true" attachedToRef="SendTask_t_create">
+      <bpmn:outgoing>Flow_b_ko__t_ref</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="BoundaryEvent_b_ko_def" />
+    </bpmn:boundaryEvent>
+    <bpmn:task id="Task_t_rel" name="Relayer les téléphones : 8 au plus">
+      <bpmn:documentation>relayJoin et relayAct ; fenêtre de réponse allongée de la latence mesurée, bornée à 1 s ; 40 kbit/s.</bpmn:documentation>
+      <bpmn:incoming>Flow_t_create__t_rel</bpmn:incoming>
+      <bpmn:outgoing>Flow_t_rel__t_res</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:intermediateCatchEvent id="Event_t_res" name="Résultat cbr1 signé reçu">
+      <bpmn:incoming>Flow_t_rel__t_res</bpmn:incoming>
+      <bpmn:outgoing>Flow_t_res__t_set</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="Event_t_res_def" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:serviceTask id="ServiceTask_t_set" name="Régler : POST /api/v1/wallet/settle (cbr1)">
+      <bpmn:incoming>Flow_t_res__t_set</bpmn:incoming>
+      <bpmn:outgoing>Flow_t_set__t_end</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="EndEvent_t_end" name="Solde mis à jour (cbw1)">
+      <bpmn:incoming>Flow_t_set__t_end</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_t_in__t_chk" sourceRef="StartEvent_t_in" targetRef="Gateway_t_chk" />
+    <bpmn:sequenceFlow id="Flow_t_chk__t_x" name="Oui" sourceRef="Gateway_t_chk" targetRef="Gateway_t_x" />
+    <bpmn:sequenceFlow id="Flow_t_chk__t_ref" name="Non" sourceRef="Gateway_t_chk" targetRef="EndEvent_t_ref" />
+    <bpmn:sequenceFlow id="Flow_t_x__t_esc" name="Oui" sourceRef="Gateway_t_x" targetRef="ServiceTask_t_esc" />
+    <bpmn:sequenceFlow id="Flow_t_x__t_tk" name="Non" sourceRef="Gateway_t_x" targetRef="ServiceTask_t_tk" />
+    <bpmn:sequenceFlow id="Flow_t_esc__t_tk" sourceRef="ServiceTask_t_esc" targetRef="ServiceTask_t_tk" />
+    <bpmn:sequenceFlow id="Flow_t_tk__t_create" sourceRef="ServiceTask_t_tk" targetRef="SendTask_t_create" />
+    <bpmn:sequenceFlow id="Flow_t_create__t_rel" sourceRef="SendTask_t_create" targetRef="Task_t_rel" />
+    <bpmn:sequenceFlow id="Flow_b_ko__t_ref" sourceRef="BoundaryEvent_b_ko" targetRef="EndEvent_t_ref" />
+    <bpmn:sequenceFlow id="Flow_t_rel__t_res" sourceRef="Task_t_rel" targetRef="Event_t_res" />
+    <bpmn:sequenceFlow id="Flow_t_res__t_set" sourceRef="Event_t_res" targetRef="ServiceTask_t_set" />
+    <bpmn:sequenceFlow id="Flow_t_set__t_end" sourceRef="ServiceTask_t_set" targetRef="EndEvent_t_end" />
+  </bpmn:process>
+  <bpmn:process id="Process_server" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_server">
+      <bpmn:lane id="Lane_a1" name="castbridge-api (ticket, portefeuille)">
+        <bpmn:flowNodeRef>StartEvent_a_start</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_a_esc</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_a_tk</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_a_set</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_a_end</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_s1" name="castbridge-play (salle de jeu)">
+        <bpmn:flowNodeRef>StartEvent_p_in</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_p_gate</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_p_ko</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_p_room</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_p_q</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_p_ans</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_p_more</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_p_settle</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_p_res</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_a_start" name="API principale disponible">
+      <bpmn:outgoing>Flow_a_start__a_esc</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Task_a_esc" name="Bloquer la mise au grand livre, signer cbe1">
+      <bpmn:incoming>Flow_a_start__a_esc</bpmn:incoming>
+      <bpmn:outgoing>Flow_a_esc__a_tk</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_a_tk" name="Émettre le ticket cbp1 (Ed25519, jti)">
+      <bpmn:incoming>Flow_a_esc__a_tk</bpmn:incoming>
+      <bpmn:outgoing>Flow_a_tk__a_set</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_a_set" name="Régler : crédit et débit en une transaction">
+      <bpmn:documentation>Idempotent : un seul résultat par salle (rid = SHA-256 de la salle).</bpmn:documentation>
+      <bpmn:incoming>Flow_a_tk__a_set</bpmn:incoming>
+      <bpmn:outgoing>Flow_a_set__a_end</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="EndEvent_a_end" name="Solde signé cbw1">
+      <bpmn:incoming>Flow_a_set__a_end</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:startEvent id="StartEvent_p_in" name="create ou join reçu">
+      <bpmn:outgoing>Flow_p_in__p_gate</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="StartEvent_p_in_def" />
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="Gateway_p_gate" name="Ticket, droits, plafonds, blocage valides ?" default="Flow_p_gate__p_room">
+      <bpmn:incoming>Flow_p_in__p_gate</bpmn:incoming>
+      <bpmn:outgoing>Flow_p_gate__p_room</bpmn:outgoing>
+      <bpmn:outgoing>Flow_p_gate__p_ko</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="EndEvent_p_ko" name="Refuser : PLAY_TICKET_REFUSED, SCOPE_FORBIDDEN…">
+      <bpmn:incoming>Flow_p_gate__p_ko</bpmn:incoming>
+      <bpmn:messageEventDefinition id="EndEvent_p_ko_def" />
+    </bpmn:endEvent>
+    <bpmn:task id="Task_p_room" name="Ouvrir la salle : code XXXX-XXXX (2 h)">
+      <bpmn:documentation>8 joueurs au plus par table, 8 sièges relayés au plus par TV ; 50 essais faux changent le code.</bpmn:documentation>
+      <bpmn:incoming>Flow_p_gate__p_room</bpmn:incoming>
+      <bpmn:outgoing>Flow_p_room__p_q</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_p_q" name="Annoncer la question : ouverture après 1,5 s">
+      <bpmn:documentation>PlayTiming : opensAtServerMs = révélation + délai de 1 à 2 s ; une réponse avant est refusée (TOO_EARLY).</bpmn:documentation>
+      <bpmn:incoming>Flow_p_room__p_q</bpmn:incoming>
+      <bpmn:incoming>Flow_p_more__p_q</bpmn:incoming>
+      <bpmn:outgoing>Flow_p_q__p_ans</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_p_ans" name="Recevoir les réponses, révéler, scorer">
+      <bpmn:incoming>Flow_p_q__p_ans</bpmn:incoming>
+      <bpmn:outgoing>Flow_p_ans__p_more</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="Gateway_p_more" name="Dernière question ?" default="Flow_p_more__p_settle">
+      <bpmn:incoming>Flow_p_ans__p_more</bpmn:incoming>
+      <bpmn:outgoing>Flow_p_more__p_q</bpmn:outgoing>
+      <bpmn:outgoing>Flow_p_more__p_settle</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="Task_p_settle" name="Règlement : cagnotte partagée">
+      <bpmn:documentation>QuizSettlement : 1 joueur 100 % ; 2 joueurs 70/30 ; 3 et plus 60/30/10 ; personne n'a marqué : chacun reprend sa mise.</bpmn:documentation>
+      <bpmn:incoming>Flow_p_more__p_settle</bpmn:incoming>
+      <bpmn:outgoing>Flow_p_settle__p_res</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="EndEvent_p_res" name="Résultat cbr1 signé">
+      <bpmn:incoming>Flow_p_settle__p_res</bpmn:incoming>
+      <bpmn:messageEventDefinition id="EndEvent_p_res_def" />
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_a_start__a_esc" sourceRef="StartEvent_a_start" targetRef="Task_a_esc" />
+    <bpmn:sequenceFlow id="Flow_a_esc__a_tk" sourceRef="Task_a_esc" targetRef="Task_a_tk" />
+    <bpmn:sequenceFlow id="Flow_a_tk__a_set" sourceRef="Task_a_tk" targetRef="Task_a_set" />
+    <bpmn:sequenceFlow id="Flow_a_set__a_end" sourceRef="Task_a_set" targetRef="EndEvent_a_end" />
+    <bpmn:sequenceFlow id="Flow_p_in__p_gate" sourceRef="StartEvent_p_in" targetRef="Gateway_p_gate" />
+    <bpmn:sequenceFlow id="Flow_p_gate__p_room" name="Oui" sourceRef="Gateway_p_gate" targetRef="Task_p_room" />
+    <bpmn:sequenceFlow id="Flow_p_gate__p_ko" name="Non" sourceRef="Gateway_p_gate" targetRef="EndEvent_p_ko" />
+    <bpmn:sequenceFlow id="Flow_p_room__p_q" sourceRef="Task_p_room" targetRef="Task_p_q" />
+    <bpmn:sequenceFlow id="Flow_p_q__p_ans" sourceRef="Task_p_q" targetRef="Task_p_ans" />
+    <bpmn:sequenceFlow id="Flow_p_ans__p_more" sourceRef="Task_p_ans" targetRef="Gateway_p_more" />
+    <bpmn:sequenceFlow id="Flow_p_more__p_q" name="Non" sourceRef="Gateway_p_more" targetRef="Task_p_q" />
+    <bpmn:sequenceFlow id="Flow_p_more__p_settle" name="Oui" sourceRef="Gateway_p_more" targetRef="Task_p_settle" />
+    <bpmn:sequenceFlow id="Flow_p_settle__p_res" sourceRef="Task_p_settle" targetRef="EndEvent_p_res" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_quiz_en_ligne">
+    <bpmndi:BPMNPlane id="BPMNPlane_quiz_en_ligne" bpmnElement="Collaboration_quiz_en_ligne">
+      <bpmndi:BPMNShape id="Participant_phone_di" bpmnElement="Participant_phone" isHorizontal="true">
+        <dc:Bounds x="10" y="20" width="2910" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_h1_di" bpmnElement="Lane_h1" isHorizontal="true">
+        <dc:Bounds x="40" y="20" width="2880" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_tv_di" bpmnElement="Participant_tv" isHorizontal="true">
+        <dc:Bounds x="10" y="224" width="2910" height="400" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_t1_di" bpmnElement="Lane_t1" isHorizontal="true">
+        <dc:Bounds x="40" y="224" width="2880" height="400" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_server_di" bpmnElement="Participant_server" isHorizontal="true">
+        <dc:Bounds x="10" y="776" width="2910" height="425" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_a1_di" bpmnElement="Lane_a1" isHorizontal="true">
+        <dc:Bounds x="40" y="776" width="2880" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_s1_di" bpmnElement="Lane_s1" isHorizontal="true">
+        <dc:Bounds x="40" y="926" width="2880" height="275" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_h_start_di" bpmnElement="StartEvent_h_start" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
+        <dc:Bounds x="117" y="77" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="98" y="116" width="74" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SendTask_h_join_di" bpmnElement="SendTask_h_join" bioc:stroke="#0A6A4B" bioc:fill="#D3ECE1">
+        <dc:Bounds x="270" y="55" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_h_end_di" bpmnElement="EndEvent_h_end" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
+        <dc:Bounds x="497" y="77" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="469" y="116" width="92" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_t_in_di" bpmnElement="StartEvent_t_in" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="117" y="281" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="99" y="320" width="72" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_t_chk_di" bpmnElement="Gateway_t_chk" isMarkerVisible="true" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="300" y="274" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="284" y="229" width="82" height="42" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_t_ref_di" bpmnElement="EndEvent_t_ref" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1637" y="391" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1613" y="346" width="84" height="42" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_t_x_di" bpmnElement="Gateway_t_x" isMarkerVisible="true" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="490" y="384" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="473" y="352" width="84" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_t_esc_di" bpmnElement="ServiceTask_t_esc" bioc:stroke="#885600" bioc:fill="#FAE8B9">
+        <dc:Bounds x="650" y="479" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_t_tk_di" bpmnElement="ServiceTask_t_tk" bioc:stroke="#885600" bioc:fill="#FAE8B9">
+        <dc:Bounds x="840" y="479" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SendTask_t_create_di" bpmnElement="SendTask_t_create" bioc:stroke="#885600" bioc:fill="#FAE8B9">
+        <dc:Bounds x="1030" y="479" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BoundaryEvent_b_ko_di" bpmnElement="BoundaryEvent_b_ko" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1032" y="541" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="944" y="561" width="84" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_t_rel_di" bpmnElement="Task_t_rel" bioc:stroke="#885600" bioc:fill="#FAE8B9">
+        <dc:Bounds x="1220" y="479" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_t_res_di" bpmnElement="Event_t_res" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="2397" y="501" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2382" y="469" width="67" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_t_set_di" bpmnElement="ServiceTask_t_set" bioc:stroke="#885600" bioc:fill="#FAE8B9">
+        <dc:Bounds x="2550" y="479" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_t_end_di" bpmnElement="EndEvent_t_end" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="2777" y="501" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2755" y="540" width="81" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_a_start_di" bpmnElement="StartEvent_a_start" bioc:stroke="#2D5776" bioc:fill="#FFFFFF">
+        <dc:Bounds x="117" y="833" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="100" y="872" width="70" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_a_esc_di" bpmnElement="Task_a_esc" bioc:stroke="#2D5776" bioc:fill="#D9E6F0">
+        <dc:Bounds x="650" y="811" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_a_tk_di" bpmnElement="Task_a_tk" bioc:stroke="#2D5776" bioc:fill="#D9E6F0">
+        <dc:Bounds x="840" y="811" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_a_set_di" bpmnElement="Task_a_set" bioc:stroke="#2D5776" bioc:fill="#D9E6F0">
+        <dc:Bounds x="2550" y="811" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_a_end_di" bpmnElement="EndEvent_a_end" bioc:stroke="#2D5776" bioc:fill="#FFFFFF">
+        <dc:Bounds x="2777" y="833" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2751" y="872" width="89" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_p_in_di" bpmnElement="StartEvent_p_in" bioc:stroke="#2D5776" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1067" y="983" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1051" y="1022" width="69" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_p_gate_di" bpmnElement="Gateway_p_gate" isMarkerVisible="true" bioc:stroke="#2D5776" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1250" y="976" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1231" y="931" width="89" height="42" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_p_ko_di" bpmnElement="EndEvent_p_ko" bioc:stroke="#2D5776" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1447" y="1093" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1420" y="1132" width="90" height="68" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_p_room_di" bpmnElement="Task_p_room" bioc:stroke="#2D5776" bioc:fill="#D9E6F0">
+        <dc:Bounds x="1410" y="961" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_p_q_di" bpmnElement="Task_p_q" bioc:stroke="#2D5776" bioc:fill="#D9E6F0">
+        <dc:Bounds x="1600" y="961" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_p_ans_di" bpmnElement="Task_p_ans" bioc:stroke="#2D5776" bioc:fill="#D9E6F0">
+        <dc:Bounds x="1790" y="961" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_p_more_di" bpmnElement="Gateway_p_more" isMarkerVisible="true" bioc:stroke="#2D5776" bioc:fill="#FFFFFF">
+        <dc:Bounds x="2010" y="976" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1991" y="944" width="89" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_p_settle_di" bpmnElement="Task_p_settle" bioc:stroke="#2D5776" bioc:fill="#D9E6F0">
+        <dc:Bounds x="2170" y="961" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_p_res_di" bpmnElement="EndEvent_p_res" bioc:stroke="#2D5776" bioc:fill="#FFFFFF">
+        <dc:Bounds x="2397" y="983" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2382" y="1022" width="67" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_a_esc__a_tk_di" bpmnElement="Flow_a_esc__a_tk">
+        <di:waypoint x="760" y="851" />
+        <di:waypoint x="775" y="851" />
+        <di:waypoint x="775" y="850" />
+        <di:waypoint x="825" y="850" />
+        <di:waypoint x="825" y="851" />
+        <di:waypoint x="840" y="851" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_a_set__a_end_di" bpmnElement="Flow_a_set__a_end">
+        <di:waypoint x="2660" y="851" />
+        <di:waypoint x="2675" y="851" />
+        <di:waypoint x="2675" y="850" />
+        <di:waypoint x="2760" y="850" />
+        <di:waypoint x="2760" y="851" />
+        <di:waypoint x="2777" y="851" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_a_start__a_esc_di" bpmnElement="Flow_a_start__a_esc">
+        <di:waypoint x="153" y="851" />
+        <di:waypoint x="170" y="851" />
+        <di:waypoint x="170" y="850" />
+        <di:waypoint x="635" y="850" />
+        <di:waypoint x="635" y="851" />
+        <di:waypoint x="650" y="851" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_a_tk__a_set_di" bpmnElement="Flow_a_tk__a_set">
+        <di:waypoint x="950" y="851" />
+        <di:waypoint x="965" y="851" />
+        <di:waypoint x="965" y="850" />
+        <di:waypoint x="2535" y="850" />
+        <di:waypoint x="2535" y="851" />
+        <di:waypoint x="2550" y="851" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_b_ko__t_ref_di" bpmnElement="Flow_b_ko__t_ref">
+        <di:waypoint x="1055" y="577" />
+        <di:waypoint x="1055" y="595" />
+        <di:waypoint x="1655" y="595" />
+        <di:waypoint x="1655" y="427" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_h_join__h_end_di" bpmnElement="Flow_h_join__h_end">
+        <di:waypoint x="380" y="95" />
+        <di:waypoint x="497" y="95" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_h_start__h_join_di" bpmnElement="Flow_h_start__h_join">
+        <di:waypoint x="153" y="95" />
+        <di:waypoint x="270" y="95" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_ans__p_more_di" bpmnElement="Flow_p_ans__p_more">
+        <di:waypoint x="1900" y="1001" />
+        <di:waypoint x="1915" y="1001" />
+        <di:waypoint x="1915" y="1000" />
+        <di:waypoint x="1995" y="1000" />
+        <di:waypoint x="1995" y="1001" />
+        <di:waypoint x="2010" y="1001" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_gate__p_ko_di" bpmnElement="Flow_p_gate__p_ko">
+        <di:waypoint x="1275" y="1026" />
+        <di:waypoint x="1275" y="1110" />
+        <di:waypoint x="1430" y="1110" />
+        <di:waypoint x="1430" y="1111" />
+        <di:waypoint x="1447" y="1111" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1279" y="1032" width="23" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_gate__p_room_di" bpmnElement="Flow_p_gate__p_room">
+        <di:waypoint x="1300" y="1001" />
+        <di:waypoint x="1315" y="1001" />
+        <di:waypoint x="1315" y="1000" />
+        <di:waypoint x="1395" y="1000" />
+        <di:waypoint x="1395" y="1001" />
+        <di:waypoint x="1410" y="1001" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1321" y="982" width="20" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_in__p_gate_di" bpmnElement="Flow_p_in__p_gate">
+        <di:waypoint x="1103" y="1001" />
+        <di:waypoint x="1120" y="1001" />
+        <di:waypoint x="1120" y="1000" />
+        <di:waypoint x="1235" y="1000" />
+        <di:waypoint x="1235" y="1001" />
+        <di:waypoint x="1250" y="1001" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_more__p_q_di" bpmnElement="Flow_p_more__p_q">
+        <di:waypoint x="2035" y="1026" />
+        <di:waypoint x="2035" y="1060" />
+        <di:waypoint x="1655" y="1060" />
+        <di:waypoint x="1655" y="1041" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2039" y="1032" width="23" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_more__p_settle_di" bpmnElement="Flow_p_more__p_settle">
+        <di:waypoint x="2060" y="1001" />
+        <di:waypoint x="2075" y="1001" />
+        <di:waypoint x="2075" y="1000" />
+        <di:waypoint x="2155" y="1000" />
+        <di:waypoint x="2155" y="1001" />
+        <di:waypoint x="2170" y="1001" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2081" y="982" width="20" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_q__p_ans_di" bpmnElement="Flow_p_q__p_ans">
+        <di:waypoint x="1710" y="1001" />
+        <di:waypoint x="1725" y="1001" />
+        <di:waypoint x="1725" y="1000" />
+        <di:waypoint x="1775" y="1000" />
+        <di:waypoint x="1775" y="1001" />
+        <di:waypoint x="1790" y="1001" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_room__p_q_di" bpmnElement="Flow_p_room__p_q">
+        <di:waypoint x="1520" y="1001" />
+        <di:waypoint x="1535" y="1001" />
+        <di:waypoint x="1535" y="1000" />
+        <di:waypoint x="1585" y="1000" />
+        <di:waypoint x="1585" y="1001" />
+        <di:waypoint x="1600" y="1001" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_settle__p_res_di" bpmnElement="Flow_p_settle__p_res">
+        <di:waypoint x="2280" y="1001" />
+        <di:waypoint x="2295" y="1001" />
+        <di:waypoint x="2295" y="1000" />
+        <di:waypoint x="2380" y="1000" />
+        <di:waypoint x="2380" y="1001" />
+        <di:waypoint x="2397" y="1001" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_t_chk__t_ref_di" bpmnElement="Flow_t_chk__t_ref">
+        <di:waypoint x="325" y="324" />
+        <di:waypoint x="325" y="345" />
+        <di:waypoint x="1560" y="345" />
+        <di:waypoint x="1560" y="405" />
+        <di:waypoint x="1620" y="405" />
+        <di:waypoint x="1620" y="409" />
+        <di:waypoint x="1637" y="409" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="298" y="330" width="23" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_t_chk__t_x_di" bpmnElement="Flow_t_chk__t_x">
+        <di:waypoint x="350" y="299" />
+        <di:waypoint x="365" y="299" />
+        <di:waypoint x="365" y="295" />
+        <di:waypoint x="420" y="295" />
+        <di:waypoint x="420" y="405" />
+        <di:waypoint x="475" y="405" />
+        <di:waypoint x="475" y="409" />
+        <di:waypoint x="490" y="409" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="371" y="277" width="20" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_t_create__t_rel_di" bpmnElement="Flow_t_create__t_rel">
+        <di:waypoint x="1140" y="519" />
+        <di:waypoint x="1155" y="519" />
+        <di:waypoint x="1155" y="515" />
+        <di:waypoint x="1205" y="515" />
+        <di:waypoint x="1205" y="519" />
+        <di:waypoint x="1220" y="519" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_t_esc__t_tk_di" bpmnElement="Flow_t_esc__t_tk">
+        <di:waypoint x="760" y="519" />
+        <di:waypoint x="775" y="519" />
+        <di:waypoint x="775" y="515" />
+        <di:waypoint x="825" y="515" />
+        <di:waypoint x="825" y="519" />
+        <di:waypoint x="840" y="519" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_t_in__t_chk_di" bpmnElement="Flow_t_in__t_chk">
+        <di:waypoint x="153" y="299" />
+        <di:waypoint x="170" y="299" />
+        <di:waypoint x="170" y="295" />
+        <di:waypoint x="285" y="295" />
+        <di:waypoint x="285" y="299" />
+        <di:waypoint x="300" y="299" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_t_rel__t_res_di" bpmnElement="Flow_t_rel__t_res">
+        <di:waypoint x="1330" y="519" />
+        <di:waypoint x="1345" y="519" />
+        <di:waypoint x="1345" y="515" />
+        <di:waypoint x="2380" y="515" />
+        <di:waypoint x="2380" y="519" />
+        <di:waypoint x="2397" y="519" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_t_res__t_set_di" bpmnElement="Flow_t_res__t_set">
+        <di:waypoint x="2433" y="519" />
+        <di:waypoint x="2450" y="519" />
+        <di:waypoint x="2450" y="515" />
+        <di:waypoint x="2535" y="515" />
+        <di:waypoint x="2535" y="519" />
+        <di:waypoint x="2550" y="519" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_t_set__t_end_di" bpmnElement="Flow_t_set__t_end">
+        <di:waypoint x="2660" y="519" />
+        <di:waypoint x="2675" y="519" />
+        <di:waypoint x="2675" y="515" />
+        <di:waypoint x="2760" y="515" />
+        <di:waypoint x="2760" y="519" />
+        <di:waypoint x="2777" y="519" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_t_tk__t_create_di" bpmnElement="Flow_t_tk__t_create">
+        <di:waypoint x="950" y="519" />
+        <di:waypoint x="965" y="519" />
+        <di:waypoint x="965" y="515" />
+        <di:waypoint x="1015" y="515" />
+        <di:waypoint x="1015" y="519" />
+        <di:waypoint x="1030" y="519" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_t_x__t_esc_di" bpmnElement="Flow_t_x__t_esc">
+        <di:waypoint x="540" y="409" />
+        <di:waypoint x="555" y="409" />
+        <di:waypoint x="555" y="405" />
+        <di:waypoint x="610" y="405" />
+        <di:waypoint x="610" y="515" />
+        <di:waypoint x="635" y="515" />
+        <di:waypoint x="635" y="519" />
+        <di:waypoint x="650" y="519" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="561" y="387" width="20" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_t_x__t_tk_di" bpmnElement="Flow_t_x__t_tk">
+        <di:waypoint x="515" y="434" />
+        <di:waypoint x="515" y="460" />
+        <di:waypoint x="895" y="460" />
+        <di:waypoint x="895" y="479" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="519" y="440" width="23" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_a_esc__t_esc_di" bpmnElement="MessageFlow_m_a_esc__t_esc">
+        <di:waypoint x="715" y="811" />
+        <di:waypoint x="715" y="559" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="719" y="789" width="26" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_a_set__t_set_di" bpmnElement="MessageFlow_m_a_set__t_set">
+        <di:waypoint x="2615" y="811" />
+        <di:waypoint x="2615" y="559" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2619" y="789" width="31" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_a_tk__t_tk_di" bpmnElement="MessageFlow_m_a_tk__t_tk">
+        <di:waypoint x="905" y="811" />
+        <di:waypoint x="905" y="559" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="909" y="789" width="26" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_h_join__t_rel_di" bpmnElement="MessageFlow_m_h_join__t_rel">
+        <di:waypoint x="325" y="135" />
+        <di:waypoint x="325" y="220" />
+        <di:waypoint x="1275" y="220" />
+        <di:waypoint x="1275" y="479" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="329" y="141" width="20" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_p_ko__b_ko_di" bpmnElement="MessageFlow_m_p_ko__b_ko">
+        <di:waypoint x="1465" y="1093" />
+        <di:waypoint x="1465" y="1060" />
+        <di:waypoint x="1045" y="1060" />
+        <di:waypoint x="1045" y="577" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1469" y="1071" width="31" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_p_res__t_res_di" bpmnElement="MessageFlow_m_p_res__t_res">
+        <di:waypoint x="2415" y="983" />
+        <di:waypoint x="2415" y="537" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2419" y="961" width="24" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_t_create__p_in_di" bpmnElement="MessageFlow_m_t_create__p_in">
+        <di:waypoint x="1085" y="559" />
+        <di:waypoint x="1085" y="983" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1089" y="565" width="33" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_t_esc__a_esc_di" bpmnElement="MessageFlow_m_t_esc__a_esc">
+        <di:waypoint x="695" y="559" />
+        <di:waypoint x="695" y="811" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="619" y="565" width="72" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_t_set__a_set_di" bpmnElement="MessageFlow_m_t_set__a_set">
+        <di:waypoint x="2595" y="559" />
+        <di:waypoint x="2595" y="811" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2528" y="565" width="63" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_t_tk__a_tk_di" bpmnElement="MessageFlow_m_t_tk__a_tk">
+        <di:waypoint x="885" y="559" />
+        <di:waypoint x="885" y="811" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="827" y="565" width="54" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

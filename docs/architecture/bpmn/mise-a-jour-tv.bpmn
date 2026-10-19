@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" id="Definitions_mise_a_jour_tv" targetNamespace="https://bridge.sti-cm.com/castbridge/architecture" exporter="CastBridge tools/architecture/bpmn_gen.py" exporterVersion="1.0">
+  <bpmn:collaboration id="Collaboration_mise_a_jour_tv">
+    <bpmn:documentation>Mettre CastBridge-TV à jour depuis le téléphone — La mise à jour se fait en local, sans le serveur de jeu. Le téléphone obtient l'APK de CastBridge-TV (WhatsApp, Fichiers ou `/telecharger`), vérifie le paquet `castbridge.receiver` et le certificat `ef2908…`, peut le partager à un autre téléphone, puis l'envoie à la TV par Wi-Fi local ou Wi-Fi Direct (jamais le Bluetooth, trop lent) : CastBridge › CastBridge TV › Avancé › Installer des APK. La TV inspecte l'APK (`/api/apk/install`, code de la TV seulement) et refuse une version plus ancienne, une autre signature ou un fichier illisible ; elle répond 403 tant que « Installer des apps inconnues » n'est pas autorisé. `PackageInstaller` ouvre la session et la confirmation se fait à l'écran de la TV. Sinon, l'APK est déposé dans le dossier Download de la clé USB, avec `SHA256SUMS.txt`, et installé par l'explorateur de la TV. L'import et le partage entre téléphones sont codés sur la branche `claude/phone-updates-tv`, non fusionnée à la date de cette page.</bpmn:documentation>
+    <bpmn:participant id="Participant_phone" name="CastBridge (téléphone)" processRef="Process_phone" />
+    <bpmn:participant id="Participant_tv" name="CastBridge-TV" processRef="Process_tv" />
+    <bpmn:participant id="Participant_usb" name="Clé USB" processRef="Process_usb" />
+    <bpmn:messageFlow id="MessageFlow_m_p_inst__t_in" name="/api/apk/install" sourceRef="SendTask_p_inst" targetRef="StartEvent_t_in" />
+    <bpmn:messageFlow id="MessageFlow_m_t_ref__b_err" name="400, 404, 409" sourceRef="EndEvent_t_ref" targetRef="BoundaryEvent_b_err" />
+    <bpmn:messageFlow id="MessageFlow_m_t_403__b_perm" name="403" sourceRef="EndEvent_t_403" targetRef="BoundaryEvent_b_perm" />
+    <bpmn:messageFlow id="MessageFlow_m_k_plug__x_in" name="Clé branchée" sourceRef="EndEvent_k_plug" targetRef="StartEvent_x_in" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_phone" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_phone">
+      <bpmn:lane id="Lane_p1" name="Mettre à jour la TV">
+        <bpmn:flowNodeRef>StartEvent_p_start</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_p_imp</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_p_x</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_p_share</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_p_adv</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_p_put</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SendTask_p_inst</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>BoundaryEvent_b_perm</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>BoundaryEvent_b_err</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_p_wait</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_p_fail</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_p_end</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_p_start" name="APK de CastBridge-TV obtenu (WhatsApp, Fichiers, /telecharger)">
+      <bpmn:outgoing>Flow_p_start__p_imp</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Task_p_imp" name="Importer l'APK : paquet et certificat">
+      <bpmn:documentation>Vérifie le paquet castbridge.receiver et le certificat ef2908… ; aucun APK de la TV n'est embarqué dans CastBridge.</bpmn:documentation>
+      <bpmn:incoming>Flow_p_start__p_imp</bpmn:incoming>
+      <bpmn:outgoing>Flow_p_imp__p_x</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="Gateway_p_x" name="Partager à un autre téléphone ?" default="Flow_p_x__p_adv">
+      <bpmn:incoming>Flow_p_imp__p_x</bpmn:incoming>
+      <bpmn:outgoing>Flow_p_x__p_adv</bpmn:outgoing>
+      <bpmn:outgoing>Flow_p_x__p_share</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="Task_p_share" name="Partager CastBridge-TV (autre téléphone)">
+      <bpmn:incoming>Flow_p_x__p_share</bpmn:incoming>
+      <bpmn:outgoing>Flow_p_share__p_adv</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_p_adv" name="Avancé › Installer des APK">
+      <bpmn:documentation>CastBridge › CastBridge TV › Avancé › Installer des APK sur la TV (par Wi-Fi), TvHub.</bpmn:documentation>
+      <bpmn:incoming>Flow_p_x__p_adv</bpmn:incoming>
+      <bpmn:incoming>Flow_p_share__p_adv</bpmn:incoming>
+      <bpmn:outgoing>Flow_p_adv__p_put</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_p_put" name="Envoyer l'APK en Wi-Fi (PUT /upload)">
+      <bpmn:documentation>Wi-Fi local ou Wi-Fi Direct ; jamais le Bluetooth pour une mise à jour.</bpmn:documentation>
+      <bpmn:incoming>Flow_p_adv__p_put</bpmn:incoming>
+      <bpmn:outgoing>Flow_p_put__p_inst</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sendTask id="SendTask_p_inst" name="POST /api/apk/install avec le code">
+      <bpmn:documentation>Le jeton de confiance n'ouvre pas cette route : le code de la TV seulement.</bpmn:documentation>
+      <bpmn:incoming>Flow_p_put__p_inst</bpmn:incoming>
+      <bpmn:incoming>Flow_p_wait__p_inst</bpmn:incoming>
+      <bpmn:outgoing>Flow_p_inst__p_end</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:boundaryEvent id="BoundaryEvent_b_perm" name="403 non autorisé" cancelActivity="true" attachedToRef="SendTask_p_inst">
+      <bpmn:outgoing>Flow_b_perm__p_wait</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="BoundaryEvent_b_perm_def" />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="BoundaryEvent_b_err" name="400, 404 ou 409" cancelActivity="true" attachedToRef="SendTask_p_inst">
+      <bpmn:outgoing>Flow_b_err__p_fail</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="BoundaryEvent_b_err_def" />
+    </bpmn:boundaryEvent>
+    <bpmn:task id="Task_p_wait" name="Autoriser « Installer des apps inconnues »">
+      <bpmn:incoming>Flow_b_perm__p_wait</bpmn:incoming>
+      <bpmn:outgoing>Flow_p_wait__p_inst</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="EndEvent_p_fail" name="APK refusé : plus ancien, autre signature ou illisible">
+      <bpmn:incoming>Flow_b_err__p_fail</bpmn:incoming>
+      <bpmn:errorEventDefinition id="EndEvent_p_fail_def" />
+    </bpmn:endEvent>
+    <bpmn:endEvent id="EndEvent_p_end" name="Installation lancée">
+      <bpmn:incoming>Flow_p_inst__p_end</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_p_start__p_imp" sourceRef="StartEvent_p_start" targetRef="Task_p_imp" />
+    <bpmn:sequenceFlow id="Flow_p_imp__p_x" sourceRef="Task_p_imp" targetRef="Gateway_p_x" />
+    <bpmn:sequenceFlow id="Flow_p_x__p_adv" name="Non" sourceRef="Gateway_p_x" targetRef="Task_p_adv" />
+    <bpmn:sequenceFlow id="Flow_p_x__p_share" name="Oui" sourceRef="Gateway_p_x" targetRef="Task_p_share" />
+    <bpmn:sequenceFlow id="Flow_p_share__p_adv" sourceRef="Task_p_share" targetRef="Task_p_adv" />
+    <bpmn:sequenceFlow id="Flow_p_adv__p_put" sourceRef="Task_p_adv" targetRef="Task_p_put" />
+    <bpmn:sequenceFlow id="Flow_p_put__p_inst" sourceRef="Task_p_put" targetRef="SendTask_p_inst" />
+    <bpmn:sequenceFlow id="Flow_p_inst__p_end" sourceRef="SendTask_p_inst" targetRef="EndEvent_p_end" />
+    <bpmn:sequenceFlow id="Flow_b_perm__p_wait" sourceRef="BoundaryEvent_b_perm" targetRef="Task_p_wait" />
+    <bpmn:sequenceFlow id="Flow_p_wait__p_inst" name="Réessayer" sourceRef="Task_p_wait" targetRef="SendTask_p_inst" />
+    <bpmn:sequenceFlow id="Flow_b_err__p_fail" sourceRef="BoundaryEvent_b_err" targetRef="EndEvent_p_fail" />
+  </bpmn:process>
+  <bpmn:process id="Process_tv" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_tv">
+      <bpmn:lane id="Lane_t1" name="API et installateur (UpdateInstaller)">
+        <bpmn:flowNodeRef>StartEvent_t_in</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_t_chk</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_t_ok</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_t_ref</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_t_perm</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_t_403</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_t_pi</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_t2" name="Écran et explorateur de la TV">
+        <bpmn:flowNodeRef>UserTask_t_conf</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_t_repl</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_t_end</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>StartEvent_x_in</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>UserTask_x_expl</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_t_in" name="Installation demandée">
+      <bpmn:outgoing>Flow_t_in__t_chk</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="StartEvent_t_in_def" />
+    </bpmn:startEvent>
+    <bpmn:task id="Task_t_chk" name="Inspecter l'APK : paquet, version, signature">
+      <bpmn:documentation>UpdateInstaller : 404 introuvable, 400 illisible ou signature différente, 409 version plus ancienne (pas de rétrogradation).</bpmn:documentation>
+      <bpmn:incoming>Flow_t_in__t_chk</bpmn:incoming>
+      <bpmn:outgoing>Flow_t_chk__t_ok</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="Gateway_t_ok" name="APK valide ?" default="Flow_t_ok__t_perm">
+      <bpmn:incoming>Flow_t_chk__t_ok</bpmn:incoming>
+      <bpmn:outgoing>Flow_t_ok__t_perm</bpmn:outgoing>
+      <bpmn:outgoing>Flow_t_ok__t_ref</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="EndEvent_t_ref" name="Répondre 400, 404 ou 409">
+      <bpmn:incoming>Flow_t_ok__t_ref</bpmn:incoming>
+      <bpmn:messageEventDefinition id="EndEvent_t_ref_def" />
+    </bpmn:endEvent>
+    <bpmn:exclusiveGateway id="Gateway_t_perm" name="Apps inconnues autorisées ?" default="Flow_t_perm__t_pi">
+      <bpmn:incoming>Flow_t_ok__t_perm</bpmn:incoming>
+      <bpmn:outgoing>Flow_t_perm__t_pi</bpmn:outgoing>
+      <bpmn:outgoing>Flow_t_perm__t_403</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="EndEvent_t_403" name="Répondre 403 needsPermission">
+      <bpmn:documentation>Ouvre aussi les réglages « Installer des apps inconnues » de la TV.</bpmn:documentation>
+      <bpmn:incoming>Flow_t_perm__t_403</bpmn:incoming>
+      <bpmn:messageEventDefinition id="EndEvent_t_403_def" />
+    </bpmn:endEvent>
+    <bpmn:task id="Task_t_pi" name="Ouvrir une session PackageInstaller">
+      <bpmn:incoming>Flow_t_perm__t_pi</bpmn:incoming>
+      <bpmn:outgoing>Flow_t_pi__t_conf</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:userTask id="UserTask_t_conf" name="Valider l'installation à l'écran (télécommande)">
+      <bpmn:incoming>Flow_t_pi__t_conf</bpmn:incoming>
+      <bpmn:incoming>Flow_x_expl__t_conf</bpmn:incoming>
+      <bpmn:outgoing>Flow_t_conf__t_repl</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:task id="Task_t_repl" name="Android remplace l'app puis la relance">
+      <bpmn:documentation>MY_PACKAGE_REPLACED, BootReceiver, TvService.</bpmn:documentation>
+      <bpmn:incoming>Flow_t_conf__t_repl</bpmn:incoming>
+      <bpmn:outgoing>Flow_t_repl__t_end</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="EndEvent_t_end" name="TV à jour">
+      <bpmn:incoming>Flow_t_repl__t_end</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:startEvent id="StartEvent_x_in" name="Clé USB branchée">
+      <bpmn:outgoing>Flow_x_in__x_expl</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="StartEvent_x_in_def" />
+    </bpmn:startEvent>
+    <bpmn:userTask id="UserTask_x_expl" name="Explorateur : Download › Installer">
+      <bpmn:incoming>Flow_x_in__x_expl</bpmn:incoming>
+      <bpmn:outgoing>Flow_x_expl__t_conf</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_t_in__t_chk" sourceRef="StartEvent_t_in" targetRef="Task_t_chk" />
+    <bpmn:sequenceFlow id="Flow_t_chk__t_ok" sourceRef="Task_t_chk" targetRef="Gateway_t_ok" />
+    <bpmn:sequenceFlow id="Flow_t_ok__t_perm" name="Oui" sourceRef="Gateway_t_ok" targetRef="Gateway_t_perm" />
+    <bpmn:sequenceFlow id="Flow_t_ok__t_ref" name="Non" sourceRef="Gateway_t_ok" targetRef="EndEvent_t_ref" />
+    <bpmn:sequenceFlow id="Flow_t_perm__t_pi" name="Oui" sourceRef="Gateway_t_perm" targetRef="Task_t_pi" />
+    <bpmn:sequenceFlow id="Flow_t_perm__t_403" name="Non" sourceRef="Gateway_t_perm" targetRef="EndEvent_t_403" />
+    <bpmn:sequenceFlow id="Flow_t_pi__t_conf" sourceRef="Task_t_pi" targetRef="UserTask_t_conf" />
+    <bpmn:sequenceFlow id="Flow_t_conf__t_repl" sourceRef="UserTask_t_conf" targetRef="Task_t_repl" />
+    <bpmn:sequenceFlow id="Flow_t_repl__t_end" sourceRef="Task_t_repl" targetRef="EndEvent_t_end" />
+    <bpmn:sequenceFlow id="Flow_x_in__x_expl" sourceRef="StartEvent_x_in" targetRef="UserTask_x_expl" />
+    <bpmn:sequenceFlow id="Flow_x_expl__t_conf" sourceRef="UserTask_x_expl" targetRef="UserTask_t_conf" />
+  </bpmn:process>
+  <bpmn:process id="Process_usb" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_usb">
+      <bpmn:lane id="Lane_k1" name="Dossier Download de la clé">
+        <bpmn:flowNodeRef>StartEvent_k_start</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_k_copy</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_k_plug</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_k_start" name="Livraison par la clé USB">
+      <bpmn:outgoing>Flow_k_start__k_copy</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Task_k_copy" name="Copier l'APK et SHA256SUMS.txt (SSH, sync)">
+      <bpmn:documentation>ssh -p 2223 tv@&lt;ip&gt; « cat &gt; &lt;clé&gt;/Download/&lt;apk&gt; » puis sync ; vérifier la taille et le SHA-256.</bpmn:documentation>
+      <bpmn:incoming>Flow_k_start__k_copy</bpmn:incoming>
+      <bpmn:outgoing>Flow_k_copy__k_plug</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="EndEvent_k_plug" name="Éjecter la clé, la brancher sur la TV">
+      <bpmn:incoming>Flow_k_copy__k_plug</bpmn:incoming>
+      <bpmn:messageEventDefinition id="EndEvent_k_plug_def" />
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_k_start__k_copy" sourceRef="StartEvent_k_start" targetRef="Task_k_copy" />
+    <bpmn:sequenceFlow id="Flow_k_copy__k_plug" sourceRef="Task_k_copy" targetRef="EndEvent_k_plug" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_mise_a_jour_tv">
+    <bpmndi:BPMNPlane id="BPMNPlane_mise_a_jour_tv" bpmnElement="Collaboration_mise_a_jour_tv">
+      <bpmndi:BPMNShape id="Participant_phone_di" bpmnElement="Participant_phone" isHorizontal="true">
+        <dc:Bounds x="10" y="20" width="2699" height="415" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_p1_di" bpmnElement="Lane_p1" isHorizontal="true">
+        <dc:Bounds x="40" y="20" width="2669" height="415" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_tv_di" bpmnElement="Participant_tv" isHorizontal="true">
+        <dc:Bounds x="10" y="517" width="2699" height="410" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_t1_di" bpmnElement="Lane_t1" isHorizontal="true">
+        <dc:Bounds x="40" y="517" width="2669" height="260" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_t2_di" bpmnElement="Lane_t2" isHorizontal="true">
+        <dc:Bounds x="40" y="777" width="2669" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_usb_di" bpmnElement="Participant_usb" isHorizontal="true">
+        <dc:Bounds x="10" y="981" width="2699" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_k1_di" bpmnElement="Lane_k1" isHorizontal="true">
+        <dc:Bounds x="40" y="981" width="2669" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_p_start_di" bpmnElement="StartEvent_p_start" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
+        <dc:Bounds x="117" y="77" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="98" y="116" width="75" height="82" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_p_imp_di" bpmnElement="Task_p_imp" bioc:stroke="#0A6A4B" bioc:fill="#D3ECE1">
+        <dc:Bounds x="270" y="55" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_p_x_di" bpmnElement="Gateway_p_x" isMarkerVisible="true" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
+        <dc:Bounds x="490" y="70" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="471" y="38" width="88" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_p_share_di" bpmnElement="Task_p_share" bioc:stroke="#0A6A4B" bioc:fill="#D3ECE1">
+        <dc:Bounds x="650" y="165" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_p_adv_di" bpmnElement="Task_p_adv" bioc:stroke="#0A6A4B" bioc:fill="#D3ECE1">
+        <dc:Bounds x="840" y="55" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_p_put_di" bpmnElement="Task_p_put" bioc:stroke="#0A6A4B" bioc:fill="#D3ECE1">
+        <dc:Bounds x="1030" y="55" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SendTask_p_inst_di" bpmnElement="SendTask_p_inst" bioc:stroke="#0A6A4B" bioc:fill="#D3ECE1">
+        <dc:Bounds x="1220" y="55" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BoundaryEvent_b_perm_di" bpmnElement="BoundaryEvent_b_perm" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1222" y="117" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1134" y="137" width="84" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BoundaryEvent_b_err_di" bpmnElement="BoundaryEvent_b_err" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1292" y="117" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1332" y="137" width="82" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_p_wait_di" bpmnElement="Task_p_wait" bioc:stroke="#0A6A4B" bioc:fill="#D3ECE1">
+        <dc:Bounds x="2170" y="165" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_p_fail_di" bpmnElement="EndEvent_p_fail" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
+        <dc:Bounds x="2017" y="297" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1992" y="336" width="87" height="55" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_p_end_di" bpmnElement="EndEvent_p_end" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1447" y="77" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1420" y="116" width="91" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_t_in_di" bpmnElement="StartEvent_t_in" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1257" y="574" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1248" y="613" width="55" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_t_chk_di" bpmnElement="Task_t_chk" bioc:stroke="#885600" bioc:fill="#FAE8B9">
+        <dc:Bounds x="1410" y="552" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_t_ok_di" bpmnElement="Gateway_t_ok" isMarkerVisible="true" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1630" y="567" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1623" y="548" width="65" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_t_ref_di" bpmnElement="EndEvent_t_ref" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1827" y="684" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1808" y="723" width="75" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_t_perm_di" bpmnElement="Gateway_t_perm" isMarkerVisible="true" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1820" y="567" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1805" y="535" width="81" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_t_403_di" bpmnElement="EndEvent_t_403" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="2017" y="684" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1992" y="723" width="87" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_t_pi_di" bpmnElement="Task_t_pi" bioc:stroke="#885600" bioc:fill="#FAE8B9">
+        <dc:Bounds x="1980" y="552" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_t_conf_di" bpmnElement="UserTask_t_conf" bioc:stroke="#885600" bioc:fill="#FAE8B9">
+        <dc:Bounds x="2170" y="812" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_t_repl_di" bpmnElement="Task_t_repl" bioc:stroke="#885600" bioc:fill="#FAE8B9">
+        <dc:Bounds x="2360" y="812" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_t_end_di" bpmnElement="EndEvent_t_end" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="2587" y="834" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2582" y="873" width="47" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_x_in_di" bpmnElement="StartEvent_x_in" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="497" y="834" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="491" y="802" width="48" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_x_expl_di" bpmnElement="UserTask_x_expl" bioc:stroke="#885600" bioc:fill="#FAE8B9">
+        <dc:Bounds x="650" y="812" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_k_start_di" bpmnElement="StartEvent_k_start" bioc:stroke="#3949AB" bioc:fill="#FFFFFF">
+        <dc:Bounds x="117" y="1038" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="97" y="1077" width="77" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_k_copy_di" bpmnElement="Task_k_copy" bioc:stroke="#3949AB" bioc:fill="#E8EAF6">
+        <dc:Bounds x="270" y="1016" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_k_plug_di" bpmnElement="EndEvent_k_plug" bioc:stroke="#3949AB" bioc:fill="#FFFFFF">
+        <dc:Bounds x="497" y="1038" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="475" y="1077" width="80" height="42" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_b_err__p_fail_di" bpmnElement="Flow_b_err__p_fail">
+        <di:waypoint x="1315" y="153" />
+        <di:waypoint x="1315" y="315" />
+        <di:waypoint x="2017" y="315" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_b_perm__p_wait_di" bpmnElement="Flow_b_perm__p_wait">
+        <di:waypoint x="1245" y="153" />
+        <di:waypoint x="1245" y="205" />
+        <di:waypoint x="2170" y="205" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_k_copy__k_plug_di" bpmnElement="Flow_k_copy__k_plug">
+        <di:waypoint x="380" y="1056" />
+        <di:waypoint x="395" y="1056" />
+        <di:waypoint x="395" y="1055" />
+        <di:waypoint x="480" y="1055" />
+        <di:waypoint x="480" y="1056" />
+        <di:waypoint x="497" y="1056" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_k_start__k_copy_di" bpmnElement="Flow_k_start__k_copy">
+        <di:waypoint x="153" y="1056" />
+        <di:waypoint x="170" y="1056" />
+        <di:waypoint x="170" y="1055" />
+        <di:waypoint x="255" y="1055" />
+        <di:waypoint x="255" y="1056" />
+        <di:waypoint x="270" y="1056" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_adv__p_put_di" bpmnElement="Flow_p_adv__p_put">
+        <di:waypoint x="950" y="95" />
+        <di:waypoint x="1030" y="95" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_imp__p_x_di" bpmnElement="Flow_p_imp__p_x">
+        <di:waypoint x="380" y="95" />
+        <di:waypoint x="490" y="95" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_inst__p_end_di" bpmnElement="Flow_p_inst__p_end">
+        <di:waypoint x="1330" y="95" />
+        <di:waypoint x="1447" y="95" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_put__p_inst_di" bpmnElement="Flow_p_put__p_inst">
+        <di:waypoint x="1140" y="95" />
+        <di:waypoint x="1220" y="95" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_share__p_adv_di" bpmnElement="Flow_p_share__p_adv">
+        <di:waypoint x="760" y="205" />
+        <di:waypoint x="895" y="205" />
+        <di:waypoint x="895" y="135" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_start__p_imp_di" bpmnElement="Flow_p_start__p_imp">
+        <di:waypoint x="153" y="95" />
+        <di:waypoint x="270" y="95" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_wait__p_inst_di" bpmnElement="Flow_p_wait__p_inst">
+        <di:waypoint x="2225" y="245" />
+        <di:waypoint x="2225" y="260" />
+        <di:waypoint x="1285" y="260" />
+        <di:waypoint x="1285" y="135" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2164" y="262" width="55" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_x__p_adv_di" bpmnElement="Flow_p_x__p_adv">
+        <di:waypoint x="540" y="95" />
+        <di:waypoint x="840" y="95" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="546" y="77" width="23" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_x__p_share_di" bpmnElement="Flow_p_x__p_share">
+        <di:waypoint x="515" y="120" />
+        <di:waypoint x="515" y="205" />
+        <di:waypoint x="650" y="205" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="519" y="126" width="20" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_t_chk__t_ok_di" bpmnElement="Flow_t_chk__t_ok">
+        <di:waypoint x="1520" y="592" />
+        <di:waypoint x="1535" y="592" />
+        <di:waypoint x="1535" y="590" />
+        <di:waypoint x="1615" y="590" />
+        <di:waypoint x="1615" y="592" />
+        <di:waypoint x="1630" y="592" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_t_conf__t_repl_di" bpmnElement="Flow_t_conf__t_repl">
+        <di:waypoint x="2280" y="852" />
+        <di:waypoint x="2295" y="852" />
+        <di:waypoint x="2295" y="850" />
+        <di:waypoint x="2345" y="850" />
+        <di:waypoint x="2345" y="852" />
+        <di:waypoint x="2360" y="852" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_t_in__t_chk_di" bpmnElement="Flow_t_in__t_chk">
+        <di:waypoint x="1293" y="592" />
+        <di:waypoint x="1310" y="592" />
+        <di:waypoint x="1310" y="590" />
+        <di:waypoint x="1395" y="590" />
+        <di:waypoint x="1395" y="592" />
+        <di:waypoint x="1410" y="592" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_t_ok__t_perm_di" bpmnElement="Flow_t_ok__t_perm">
+        <di:waypoint x="1680" y="592" />
+        <di:waypoint x="1695" y="592" />
+        <di:waypoint x="1695" y="590" />
+        <di:waypoint x="1805" y="590" />
+        <di:waypoint x="1805" y="592" />
+        <di:waypoint x="1820" y="592" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1701" y="572" width="20" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_t_ok__t_ref_di" bpmnElement="Flow_t_ok__t_ref">
+        <di:waypoint x="1655" y="617" />
+        <di:waypoint x="1655" y="700" />
+        <di:waypoint x="1810" y="700" />
+        <di:waypoint x="1810" y="702" />
+        <di:waypoint x="1827" y="702" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1659" y="623" width="23" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_t_perm__t_403_di" bpmnElement="Flow_t_perm__t_403">
+        <di:waypoint x="1845" y="617" />
+        <di:waypoint x="1845" y="665" />
+        <di:waypoint x="2000" y="665" />
+        <di:waypoint x="2000" y="702" />
+        <di:waypoint x="2017" y="702" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1849" y="623" width="23" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_t_perm__t_pi_di" bpmnElement="Flow_t_perm__t_pi">
+        <di:waypoint x="1870" y="592" />
+        <di:waypoint x="1885" y="592" />
+        <di:waypoint x="1885" y="590" />
+        <di:waypoint x="1965" y="590" />
+        <di:waypoint x="1965" y="592" />
+        <di:waypoint x="1980" y="592" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1891" y="572" width="20" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_t_pi__t_conf_di" bpmnElement="Flow_t_pi__t_conf">
+        <di:waypoint x="2090" y="592" />
+        <di:waypoint x="2105" y="592" />
+        <di:waypoint x="2105" y="590" />
+        <di:waypoint x="2225" y="590" />
+        <di:waypoint x="2225" y="812" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_t_repl__t_end_di" bpmnElement="Flow_t_repl__t_end">
+        <di:waypoint x="2470" y="852" />
+        <di:waypoint x="2485" y="852" />
+        <di:waypoint x="2485" y="850" />
+        <di:waypoint x="2570" y="850" />
+        <di:waypoint x="2570" y="852" />
+        <di:waypoint x="2587" y="852" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_x_expl__t_conf_di" bpmnElement="Flow_x_expl__t_conf">
+        <di:waypoint x="760" y="852" />
+        <di:waypoint x="775" y="852" />
+        <di:waypoint x="775" y="850" />
+        <di:waypoint x="2155" y="850" />
+        <di:waypoint x="2155" y="852" />
+        <di:waypoint x="2170" y="852" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_x_in__x_expl_di" bpmnElement="Flow_x_in__x_expl">
+        <di:waypoint x="533" y="852" />
+        <di:waypoint x="550" y="852" />
+        <di:waypoint x="550" y="850" />
+        <di:waypoint x="635" y="850" />
+        <di:waypoint x="635" y="852" />
+        <di:waypoint x="650" y="852" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_k_plug__x_in_di" bpmnElement="MessageFlow_m_k_plug__x_in">
+        <di:waypoint x="515" y="1038" />
+        <di:waypoint x="515" y="870" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="519" y="1016" width="68" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_p_inst__t_in_di" bpmnElement="MessageFlow_m_p_inst__t_in">
+        <di:waypoint x="1265" y="135" />
+        <di:waypoint x="1265" y="555" />
+        <di:waypoint x="1275" y="555" />
+        <di:waypoint x="1275" y="574" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1189" y="141" width="72" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_t_403__b_perm_di" bpmnElement="MessageFlow_m_t_403__b_perm">
+        <di:waypoint x="2035" y="684" />
+        <di:waypoint x="2035" y="650" />
+        <di:waypoint x="1235" y="650" />
+        <di:waypoint x="1235" y="153" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2039" y="662" width="21" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_t_ref__b_err_di" bpmnElement="MessageFlow_m_t_ref__b_err">
+        <di:waypoint x="1845" y="684" />
+        <di:waypoint x="1845" y="665" />
+        <di:waypoint x="1750" y="665" />
+        <di:waypoint x="1750" y="170" />
+        <di:waypoint x="1305" y="170" />
+        <di:waypoint x="1305" y="153" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1769" y="667" width="70" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

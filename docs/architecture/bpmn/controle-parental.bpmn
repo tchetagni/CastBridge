@@ -1,0 +1,639 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" id="Definitions_controle_parental" targetNamespace="https://bridge.sti-cm.com/castbridge/architecture" exporter="CastBridge tools/architecture/bpmn_gen.py" exporterVersion="1.0">
+  <bpmn:collaboration id="Collaboration_controle_parental">
+    <bpmn:documentation>Contrôle parental et retrait de la clé USB — Le parent crée un code parental (4 à 6 chiffres, PBKDF2, verrou progressif de 1 minute à 1 heure après 5 échecs) et un profil enfant : tranche d'âge, heures, durée quotidienne, catégories bloquées. En mode enfant, l'accueil se réduit à huit tuiles ; le code de connexion de la TV et les lignes de copie sont masqués, et la tuile de retrait de la clé USB n'est pas proposée. À chaque action de l'enfant, `ParentalHub` décide : vidéo au-delà de l'âge, catégorie ou application bloquée, heures ou durée dépassées. Un refus ramène l'écran verrouillé, où seul le code parental ouvre une séance de 30 minutes, et envoie une alerte au téléphone du parent par Bluetooth (rapport signé HMAC, livré quand le téléphone vient le chercher). Le parent prépare le retrait de la clé USB (arrêt des copies, `fsync`, `sync`) avant de la débrancher.</bpmn:documentation>
+    <bpmn:participant id="Participant_user" name="Utilisateur / Propriétaire" processRef="Process_user" />
+    <bpmn:participant id="Participant_tv" name="CastBridge-TV" processRef="Process_tv" />
+    <bpmn:participant id="Participant_phone" name="CastBridge (téléphone)" processRef="Process_phone" />
+    <bpmn:messageFlow id="MessageFlow_m_u_p1__c_cfg" name="Configuration" sourceRef="SendTask_u_p1" targetRef="StartEvent_c_cfg" />
+    <bpmn:messageFlow id="MessageFlow_m_u_c1__e_in" name="Action" sourceRef="EndEvent_u_c1" targetRef="StartEvent_e_in" />
+    <bpmn:messageFlow id="MessageFlow_m_u_p2__e_wait" name="Code" sourceRef="SendTask_u_p2" targetRef="Event_e_wait" />
+    <bpmn:messageFlow id="MessageFlow_m_u_p3__k_start" name="Retrait" sourceRef="EndEvent_u_p3" targetRef="StartEvent_k_start" />
+    <bpmn:messageFlow id="MessageFlow_m_r_rep__ph_in" name="Rapport" sourceRef="EndEvent_r_rep" targetRef="StartEvent_ph_in" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_user" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_user">
+      <bpmn:lane id="Lane_u1" name="Parent">
+        <bpmn:flowNodeRef>StartEvent_u_p0</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SendTask_u_p1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SendTask_u_p2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_u_p3</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_u2" name="Enfant">
+        <bpmn:flowNodeRef>StartEvent_u_c0</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_u_c1</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_u_p0" name="Le parent protège la TV">
+      <bpmn:outgoing>Flow_u_p0__u_p1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sendTask id="SendTask_u_p1" name="Créer le code, le profil enfant et les règles">
+      <bpmn:incoming>Flow_u_p0__u_p1</bpmn:incoming>
+      <bpmn:outgoing>Flow_u_p1__u_p2</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:sendTask id="SendTask_u_p2" name="Saisir le code parental (séance parent)">
+      <bpmn:incoming>Flow_u_p1__u_p2</bpmn:incoming>
+      <bpmn:outgoing>Flow_u_p2__u_p3</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:endEvent id="EndEvent_u_p3" name="Préparer le retrait de la clé USB">
+      <bpmn:incoming>Flow_u_p2__u_p3</bpmn:incoming>
+      <bpmn:messageEventDefinition id="EndEvent_u_p3_def" />
+    </bpmn:endEvent>
+    <bpmn:startEvent id="StartEvent_u_c0" name="L'enfant utilise la TV">
+      <bpmn:outgoing>Flow_u_c0__u_c1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="EndEvent_u_c1" name="Lancer une vidéo ou une application, ouvrir MENU">
+      <bpmn:incoming>Flow_u_c0__u_c1</bpmn:incoming>
+      <bpmn:messageEventDefinition id="EndEvent_u_c1_def" />
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_u_p0__u_p1" sourceRef="StartEvent_u_p0" targetRef="SendTask_u_p1" />
+    <bpmn:sequenceFlow id="Flow_u_p1__u_p2" sourceRef="SendTask_u_p1" targetRef="SendTask_u_p2" />
+    <bpmn:sequenceFlow id="Flow_u_p2__u_p3" sourceRef="SendTask_u_p2" targetRef="EndEvent_u_p3" />
+    <bpmn:sequenceFlow id="Flow_u_c0__u_c1" sourceRef="StartEvent_u_c0" targetRef="EndEvent_u_c1" />
+  </bpmn:process>
+  <bpmn:process id="Process_tv" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_tv">
+      <bpmn:lane id="Lane_t1" name="Configuration (ParentalHub, ParentalEngine)">
+        <bpmn:flowNodeRef>StartEvent_c_cfg</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_c_pin</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_c_prof</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_c_mode</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_c_end</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_t2" name="Application des règles et alertes">
+        <bpmn:flowNodeRef>StartEvent_e_in</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_e_dec</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_e_ok</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_e_fork</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_e_lock</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_r_rep</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_e_wait</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_e_chk</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_e_end</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_e_fail</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_t3" name="Retrait de la clé USB (UsbRemoval)">
+        <bpmn:flowNodeRef>StartEvent_k_start</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_k_x</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_k_stop</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_k_sync</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_k_ready</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_c_cfg" name="Configuration demandée">
+      <bpmn:outgoing>Flow_c_cfg__c_pin</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="StartEvent_c_cfg_def" />
+    </bpmn:startEvent>
+    <bpmn:task id="Task_c_pin" name="Enregistrer le code parental">
+      <bpmn:documentation>PBKDF2-HMAC-SHA256, sel de 16 octets, 60 000 itérations ; jamais en clair ni dans un journal ; 4444 et 1234 refusés ; verrou progressif 1 min, 5, 15 min, 1 h.</bpmn:documentation>
+      <bpmn:incoming>Flow_c_cfg__c_pin</bpmn:incoming>
+      <bpmn:outgoing>Flow_c_pin__c_prof</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_c_prof" name="Créer le profil : âge, heures, durée, catégories">
+      <bpmn:documentation>Tranches -12, 12-15, 16-17, adulte ; vidéo classée par fichier, mot-clé ou dossier ; une vidéo non classée vaut adulte.</bpmn:documentation>
+      <bpmn:incoming>Flow_c_pin__c_prof</bpmn:incoming>
+      <bpmn:outgoing>Flow_c_prof__c_mode</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_c_mode" name="Mode enfant : accueil réduit, code TV masqué">
+      <bpmn:documentation>KID_HOME : Apprendre, Jeux, Quiz, Échecs, Bibliothèque, Boutique, Aide, Contrôle parental ; les lignes « Copie… » relèvent de la catégorie Réglages.</bpmn:documentation>
+      <bpmn:incoming>Flow_c_prof__c_mode</bpmn:incoming>
+      <bpmn:outgoing>Flow_c_mode__c_end</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="EndEvent_c_end" name="Contrôle actif">
+      <bpmn:incoming>Flow_c_mode__c_end</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:startEvent id="StartEvent_e_in" name="Action de l'enfant détectée">
+      <bpmn:outgoing>Flow_e_in__e_dec</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="StartEvent_e_in_def" />
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="Gateway_e_dec" name="Règle : classement, catégorie, heures, durée ?" default="Flow_e_dec__e_ok">
+      <bpmn:documentation>ParentalEngine : décision pure ; surveillance de toute la TV par application (ForegroundWatcher, statistiques d'usage ou service d'accessibilité).</bpmn:documentation>
+      <bpmn:incoming>Flow_e_in__e_dec</bpmn:incoming>
+      <bpmn:outgoing>Flow_e_dec__e_ok</bpmn:outgoing>
+      <bpmn:outgoing>Flow_e_dec__e_fork</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="EndEvent_e_ok" name="Usage autorisé">
+      <bpmn:incoming>Flow_e_dec__e_ok</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:parallelGateway id="Gateway_e_fork" name="Refus">
+      <bpmn:incoming>Flow_e_dec__e_fork</bpmn:incoming>
+      <bpmn:outgoing>Flow_e_fork__e_lock</bpmn:outgoing>
+      <bpmn:outgoing>Flow_e_fork__r_rep</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:task id="Task_e_lock" name="Écran verrouillé : « Saisir le PIN parental »">
+      <bpmn:documentation>Toujours « Retour à l'accueil » ; RETOUR et ACCUEIL ne sont jamais interceptés.</bpmn:documentation>
+      <bpmn:incoming>Flow_e_fork__e_lock</bpmn:incoming>
+      <bpmn:outgoing>Flow_e_lock__e_wait</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="EndEvent_r_rep" name="Alerte dans l'outbox signée (HMAC)">
+      <bpmn:documentation>40 rapports par téléphone, 200 Ko, 14 jours ; message CBTP ; seul un téléphone de confiance et désigné reçoit.</bpmn:documentation>
+      <bpmn:incoming>Flow_e_fork__r_rep</bpmn:incoming>
+      <bpmn:messageEventDefinition id="EndEvent_r_rep_def" />
+    </bpmn:endEvent>
+    <bpmn:intermediateCatchEvent id="Event_e_wait" name="Code parental saisi">
+      <bpmn:incoming>Flow_e_lock__e_wait</bpmn:incoming>
+      <bpmn:incoming>Flow_e_fail__e_wait</bpmn:incoming>
+      <bpmn:outgoing>Flow_e_wait__e_chk</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="Event_e_wait_def" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:exclusiveGateway id="Gateway_e_chk" name="Code correct ?" default="Flow_e_chk__e_end">
+      <bpmn:incoming>Flow_e_wait__e_chk</bpmn:incoming>
+      <bpmn:outgoing>Flow_e_chk__e_end</bpmn:outgoing>
+      <bpmn:outgoing>Flow_e_chk__e_fail</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="EndEvent_e_end" name="Séance parent de 30 minutes : règles suspendues">
+      <bpmn:incoming>Flow_e_chk__e_end</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:task id="Task_e_fail" name="Échec compté : verrou progressif">
+      <bpmn:incoming>Flow_e_chk__e_fail</bpmn:incoming>
+      <bpmn:outgoing>Flow_e_fail__e_wait</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:startEvent id="StartEvent_k_start" name="Retrait de la clé demandé">
+      <bpmn:outgoing>Flow_k_start__k_x</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="StartEvent_k_start_def" />
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="Gateway_k_x" name="Des copies écrivent sur la clé ?" default="Flow_k_x__k_sync">
+      <bpmn:incoming>Flow_k_start__k_x</bpmn:incoming>
+      <bpmn:outgoing>Flow_k_x__k_stop</bpmn:outgoing>
+      <bpmn:outgoing>Flow_k_x__k_sync</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="Task_k_stop" name="Attendre la fin ou mettre les copies en pause">
+      <bpmn:documentation>Aucune nouvelle copie n'est acceptée : 503 volume removed, cause held ; rien n'est redirigé sur la mémoire interne.</bpmn:documentation>
+      <bpmn:incoming>Flow_k_x__k_stop</bpmn:incoming>
+      <bpmn:outgoing>Flow_k_stop__k_sync</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_k_sync" name="fsync de chaque .part, puis sync">
+      <bpmn:documentation>Au mieux 15 s ; jamais un faux « prête » : si une copie ne lâche pas la clé, l'écran dit de ne pas la retirer.</bpmn:documentation>
+      <bpmn:incoming>Flow_k_x__k_sync</bpmn:incoming>
+      <bpmn:incoming>Flow_k_stop__k_sync</bpmn:incoming>
+      <bpmn:outgoing>Flow_k_sync__k_ready</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="EndEvent_k_ready" name="Clé retirable (10 minutes, sinon reprise des copies)">
+      <bpmn:incoming>Flow_k_sync__k_ready</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_c_cfg__c_pin" sourceRef="StartEvent_c_cfg" targetRef="Task_c_pin" />
+    <bpmn:sequenceFlow id="Flow_c_pin__c_prof" sourceRef="Task_c_pin" targetRef="Task_c_prof" />
+    <bpmn:sequenceFlow id="Flow_c_prof__c_mode" sourceRef="Task_c_prof" targetRef="Task_c_mode" />
+    <bpmn:sequenceFlow id="Flow_c_mode__c_end" sourceRef="Task_c_mode" targetRef="EndEvent_c_end" />
+    <bpmn:sequenceFlow id="Flow_e_in__e_dec" sourceRef="StartEvent_e_in" targetRef="Gateway_e_dec" />
+    <bpmn:sequenceFlow id="Flow_e_dec__e_ok" name="Autorisé" sourceRef="Gateway_e_dec" targetRef="EndEvent_e_ok" />
+    <bpmn:sequenceFlow id="Flow_e_dec__e_fork" name="Refusé" sourceRef="Gateway_e_dec" targetRef="Gateway_e_fork" />
+    <bpmn:sequenceFlow id="Flow_e_fork__e_lock" sourceRef="Gateway_e_fork" targetRef="Task_e_lock" />
+    <bpmn:sequenceFlow id="Flow_e_fork__r_rep" sourceRef="Gateway_e_fork" targetRef="EndEvent_r_rep" />
+    <bpmn:sequenceFlow id="Flow_e_lock__e_wait" sourceRef="Task_e_lock" targetRef="Event_e_wait" />
+    <bpmn:sequenceFlow id="Flow_e_wait__e_chk" sourceRef="Event_e_wait" targetRef="Gateway_e_chk" />
+    <bpmn:sequenceFlow id="Flow_e_chk__e_end" name="Oui" sourceRef="Gateway_e_chk" targetRef="EndEvent_e_end" />
+    <bpmn:sequenceFlow id="Flow_e_chk__e_fail" name="Non" sourceRef="Gateway_e_chk" targetRef="Task_e_fail" />
+    <bpmn:sequenceFlow id="Flow_e_fail__e_wait" name="Réessayer" sourceRef="Task_e_fail" targetRef="Event_e_wait" />
+    <bpmn:sequenceFlow id="Flow_k_start__k_x" sourceRef="StartEvent_k_start" targetRef="Gateway_k_x" />
+    <bpmn:sequenceFlow id="Flow_k_x__k_stop" name="Oui" sourceRef="Gateway_k_x" targetRef="Task_k_stop" />
+    <bpmn:sequenceFlow id="Flow_k_x__k_sync" name="Non" sourceRef="Gateway_k_x" targetRef="Task_k_sync" />
+    <bpmn:sequenceFlow id="Flow_k_stop__k_sync" sourceRef="Task_k_stop" targetRef="Task_k_sync" />
+    <bpmn:sequenceFlow id="Flow_k_sync__k_ready" sourceRef="Task_k_sync" targetRef="EndEvent_k_ready" />
+  </bpmn:process>
+  <bpmn:process id="Process_phone" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_phone">
+      <bpmn:lane id="Lane_p1" name="Téléphone du parent (ParentalInbox)">
+        <bpmn:flowNodeRef>StartEvent_ph_in</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ph_store</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_ph_end</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_ph_in" name="Le téléphone vient chercher (toutes les 15 min)">
+      <bpmn:outgoing>Flow_ph_in__ph_store</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="StartEvent_ph_in_def" />
+    </bpmn:startEvent>
+    <bpmn:task id="Task_ph_store" name="Vérifier la signature, stocker, notifier en privé">
+      <bpmn:documentation>150 rapports, 90 jours, hors sauvegarde ; accusé de réception envoyé seulement après stockage.</bpmn:documentation>
+      <bpmn:incoming>Flow_ph_in__ph_store</bpmn:incoming>
+      <bpmn:outgoing>Flow_ph_store__ph_end</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="EndEvent_ph_end" name="Parent informé">
+      <bpmn:incoming>Flow_ph_store__ph_end</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_ph_in__ph_store" sourceRef="StartEvent_ph_in" targetRef="Task_ph_store" />
+    <bpmn:sequenceFlow id="Flow_ph_store__ph_end" sourceRef="Task_ph_store" targetRef="EndEvent_ph_end" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_controle_parental">
+    <bpmndi:BPMNPlane id="BPMNPlane_controle_parental" bpmnElement="Collaboration_controle_parental">
+      <bpmndi:BPMNShape id="Participant_user_di" bpmnElement="Participant_user" isHorizontal="true">
+        <dc:Bounds x="10" y="20" width="1590" height="300" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_u1_di" bpmnElement="Lane_u1" isHorizontal="true">
+        <dc:Bounds x="40" y="20" width="1560" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_u2_di" bpmnElement="Lane_u2" isHorizontal="true">
+        <dc:Bounds x="40" y="170" width="1560" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_tv_di" bpmnElement="Participant_tv" isHorizontal="true">
+        <dc:Bounds x="10" y="416" width="1590" height="795" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_t1_di" bpmnElement="Lane_t1" isHorizontal="true">
+        <dc:Bounds x="40" y="416" width="1560" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_t2_di" bpmnElement="Lane_t2" isHorizontal="true">
+        <dc:Bounds x="40" y="566" width="1560" height="385" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_t3_di" bpmnElement="Lane_t3" isHorizontal="true">
+        <dc:Bounds x="40" y="951" width="1560" height="260" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_phone_di" bpmnElement="Participant_phone" isHorizontal="true">
+        <dc:Bounds x="10" y="1265" width="1590" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_p1_di" bpmnElement="Lane_p1" isHorizontal="true">
+        <dc:Bounds x="40" y="1265" width="1560" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_u_p0_di" bpmnElement="StartEvent_u_p0" bioc:stroke="#455A64" bioc:fill="#FFFFFF">
+        <dc:Bounds x="117" y="77" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="91" y="116" width="89" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SendTask_u_p1_di" bpmnElement="SendTask_u_p1" bioc:stroke="#455A64" bioc:fill="#ECEFF1">
+        <dc:Bounds x="270" y="55" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SendTask_u_p2_di" bpmnElement="SendTask_u_p2" bioc:stroke="#455A64" bioc:fill="#ECEFF1">
+        <dc:Bounds x="460" y="55" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_u_p3_di" bpmnElement="EndEvent_u_p3" bioc:stroke="#455A64" bioc:fill="#FFFFFF">
+        <dc:Bounds x="687" y="77" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="661" y="45" width="88" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_u_c0_di" bpmnElement="StartEvent_u_c0" bioc:stroke="#455A64" bioc:fill="#FFFFFF">
+        <dc:Bounds x="117" y="227" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="93" y="266" width="84" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_u_c1_di" bpmnElement="EndEvent_u_c1" bioc:stroke="#455A64" bioc:fill="#FFFFFF">
+        <dc:Bounds x="307" y="227" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="281" y="169" width="89" height="55" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_c_cfg_di" bpmnElement="StartEvent_c_cfg" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="307" y="473" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="291" y="512" width="68" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_c_pin_di" bpmnElement="Task_c_pin" bioc:stroke="#885600" bioc:fill="#FAE8B9">
+        <dc:Bounds x="460" y="451" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_c_prof_di" bpmnElement="Task_c_prof" bioc:stroke="#885600" bioc:fill="#FAE8B9">
+        <dc:Bounds x="650" y="451" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_c_mode_di" bpmnElement="Task_c_mode" bioc:stroke="#885600" bioc:fill="#FAE8B9">
+        <dc:Bounds x="840" y="451" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_c_end_di" bpmnElement="EndEvent_c_end" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1067" y="473" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1052" y="512" width="67" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_e_in_di" bpmnElement="StartEvent_e_in" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="307" y="623" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="282" y="662" width="87" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_e_dec_di" bpmnElement="Gateway_e_dec" isMarkerVisible="true" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="490" y="616" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="470" y="558" width="91" height="55" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_e_ok_di" bpmnElement="EndEvent_e_ok" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="687" y="623" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="667" y="662" width="76" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_e_fork_di" bpmnElement="Gateway_e_fork" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="680" y="726" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="690" y="707" width="31" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_e_lock_di" bpmnElement="Task_e_lock" bioc:stroke="#885600" bioc:fill="#FAE8B9">
+        <dc:Bounds x="840" y="711" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_r_rep_di" bpmnElement="EndEvent_r_rep" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="877" y="843" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="857" y="798" width="76" height="42" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_e_wait_di" bpmnElement="Event_e_wait" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1067" y="733" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1097" y="701" width="72" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_e_chk_di" bpmnElement="Gateway_e_chk" isMarkerVisible="true" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1250" y="726" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1238" y="707" width="75" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_e_end_di" bpmnElement="EndEvent_e_end" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1447" y="733" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1421" y="772" width="89" height="55" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_e_fail_di" bpmnElement="Task_e_fail" bioc:stroke="#885600" bioc:fill="#FAE8B9">
+        <dc:Bounds x="1410" y="821" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_k_start_di" bpmnElement="StartEvent_k_start" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="687" y="1008" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="666" y="1047" width="79" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_k_x_di" bpmnElement="Gateway_k_x" isMarkerVisible="true" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="870" y="1001" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="851" y="956" width="88" height="42" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_k_stop_di" bpmnElement="Task_k_stop" bioc:stroke="#885600" bioc:fill="#FAE8B9">
+        <dc:Bounds x="1030" y="1096" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_k_sync_di" bpmnElement="Task_k_sync" bioc:stroke="#885600" bioc:fill="#FAE8B9">
+        <dc:Bounds x="1220" y="1096" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_k_ready_di" bpmnElement="EndEvent_k_ready" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1447" y="1118" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1425" y="1157" width="81" height="55" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_ph_in_di" bpmnElement="StartEvent_ph_in" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
+        <dc:Bounds x="877" y="1322" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="849" y="1361" width="92" height="42" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ph_store_di" bpmnElement="Task_ph_store" bioc:stroke="#0A6A4B" bioc:fill="#D3ECE1">
+        <dc:Bounds x="1030" y="1300" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_ph_end_di" bpmnElement="EndEvent_ph_end" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1257" y="1322" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1238" y="1361" width="75" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_c_cfg__c_pin_di" bpmnElement="Flow_c_cfg__c_pin">
+        <di:waypoint x="343" y="491" />
+        <di:waypoint x="360" y="491" />
+        <di:waypoint x="360" y="490" />
+        <di:waypoint x="445" y="490" />
+        <di:waypoint x="445" y="491" />
+        <di:waypoint x="460" y="491" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_c_mode__c_end_di" bpmnElement="Flow_c_mode__c_end">
+        <di:waypoint x="950" y="491" />
+        <di:waypoint x="965" y="491" />
+        <di:waypoint x="965" y="490" />
+        <di:waypoint x="1050" y="490" />
+        <di:waypoint x="1050" y="491" />
+        <di:waypoint x="1067" y="491" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_c_pin__c_prof_di" bpmnElement="Flow_c_pin__c_prof">
+        <di:waypoint x="570" y="491" />
+        <di:waypoint x="585" y="491" />
+        <di:waypoint x="585" y="490" />
+        <di:waypoint x="635" y="490" />
+        <di:waypoint x="635" y="491" />
+        <di:waypoint x="650" y="491" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_c_prof__c_mode_di" bpmnElement="Flow_c_prof__c_mode">
+        <di:waypoint x="760" y="491" />
+        <di:waypoint x="775" y="491" />
+        <di:waypoint x="775" y="490" />
+        <di:waypoint x="825" y="490" />
+        <di:waypoint x="825" y="491" />
+        <di:waypoint x="840" y="491" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_e_chk__e_end_di" bpmnElement="Flow_e_chk__e_end">
+        <di:waypoint x="1300" y="751" />
+        <di:waypoint x="1315" y="751" />
+        <di:waypoint x="1315" y="750" />
+        <di:waypoint x="1430" y="750" />
+        <di:waypoint x="1430" y="751" />
+        <di:waypoint x="1447" y="751" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1321" y="732" width="20" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_e_chk__e_fail_di" bpmnElement="Flow_e_chk__e_fail">
+        <di:waypoint x="1275" y="776" />
+        <di:waypoint x="1275" y="860" />
+        <di:waypoint x="1395" y="860" />
+        <di:waypoint x="1395" y="861" />
+        <di:waypoint x="1410" y="861" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1279" y="782" width="23" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_e_dec__e_fork_di" bpmnElement="Flow_e_dec__e_fork">
+        <di:waypoint x="515" y="666" />
+        <di:waypoint x="515" y="750" />
+        <di:waypoint x="665" y="750" />
+        <di:waypoint x="665" y="751" />
+        <di:waypoint x="680" y="751" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="519" y="672" width="37" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_e_dec__e_ok_di" bpmnElement="Flow_e_dec__e_ok">
+        <di:waypoint x="540" y="641" />
+        <di:waypoint x="555" y="641" />
+        <di:waypoint x="555" y="640" />
+        <di:waypoint x="670" y="640" />
+        <di:waypoint x="670" y="641" />
+        <di:waypoint x="687" y="641" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="561" y="622" width="43" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_e_fail__e_wait_di" bpmnElement="Flow_e_fail__e_wait">
+        <di:waypoint x="1465" y="901" />
+        <di:waypoint x="1465" y="920" />
+        <di:waypoint x="1085" y="920" />
+        <di:waypoint x="1085" y="769" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1404" y="902" width="55" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_e_fork__e_lock_di" bpmnElement="Flow_e_fork__e_lock">
+        <di:waypoint x="730" y="751" />
+        <di:waypoint x="745" y="751" />
+        <di:waypoint x="745" y="750" />
+        <di:waypoint x="825" y="750" />
+        <di:waypoint x="825" y="751" />
+        <di:waypoint x="840" y="751" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_e_fork__r_rep_di" bpmnElement="Flow_e_fork__r_rep">
+        <di:waypoint x="705" y="776" />
+        <di:waypoint x="705" y="860" />
+        <di:waypoint x="860" y="860" />
+        <di:waypoint x="860" y="861" />
+        <di:waypoint x="877" y="861" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_e_in__e_dec_di" bpmnElement="Flow_e_in__e_dec">
+        <di:waypoint x="343" y="641" />
+        <di:waypoint x="360" y="641" />
+        <di:waypoint x="360" y="640" />
+        <di:waypoint x="475" y="640" />
+        <di:waypoint x="475" y="641" />
+        <di:waypoint x="490" y="641" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_e_lock__e_wait_di" bpmnElement="Flow_e_lock__e_wait">
+        <di:waypoint x="950" y="751" />
+        <di:waypoint x="965" y="751" />
+        <di:waypoint x="965" y="750" />
+        <di:waypoint x="1050" y="750" />
+        <di:waypoint x="1050" y="751" />
+        <di:waypoint x="1067" y="751" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_e_wait__e_chk_di" bpmnElement="Flow_e_wait__e_chk">
+        <di:waypoint x="1103" y="751" />
+        <di:waypoint x="1120" y="751" />
+        <di:waypoint x="1120" y="750" />
+        <di:waypoint x="1235" y="750" />
+        <di:waypoint x="1235" y="751" />
+        <di:waypoint x="1250" y="751" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_k_start__k_x_di" bpmnElement="Flow_k_start__k_x">
+        <di:waypoint x="723" y="1026" />
+        <di:waypoint x="740" y="1026" />
+        <di:waypoint x="740" y="1025" />
+        <di:waypoint x="855" y="1025" />
+        <di:waypoint x="855" y="1026" />
+        <di:waypoint x="870" y="1026" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_k_stop__k_sync_di" bpmnElement="Flow_k_stop__k_sync">
+        <di:waypoint x="1140" y="1136" />
+        <di:waypoint x="1155" y="1136" />
+        <di:waypoint x="1155" y="1135" />
+        <di:waypoint x="1205" y="1135" />
+        <di:waypoint x="1205" y="1136" />
+        <di:waypoint x="1220" y="1136" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_k_sync__k_ready_di" bpmnElement="Flow_k_sync__k_ready">
+        <di:waypoint x="1330" y="1136" />
+        <di:waypoint x="1345" y="1136" />
+        <di:waypoint x="1345" y="1135" />
+        <di:waypoint x="1430" y="1135" />
+        <di:waypoint x="1430" y="1136" />
+        <di:waypoint x="1447" y="1136" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_k_x__k_stop_di" bpmnElement="Flow_k_x__k_stop">
+        <di:waypoint x="920" y="1026" />
+        <di:waypoint x="935" y="1026" />
+        <di:waypoint x="935" y="1025" />
+        <di:waypoint x="990" y="1025" />
+        <di:waypoint x="990" y="1135" />
+        <di:waypoint x="1015" y="1135" />
+        <di:waypoint x="1015" y="1136" />
+        <di:waypoint x="1030" y="1136" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="941" y="1007" width="20" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_k_x__k_sync_di" bpmnElement="Flow_k_x__k_sync">
+        <di:waypoint x="895" y="1051" />
+        <di:waypoint x="895" y="1080" />
+        <di:waypoint x="1275" y="1080" />
+        <di:waypoint x="1275" y="1096" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="899" y="1057" width="23" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ph_in__ph_store_di" bpmnElement="Flow_ph_in__ph_store">
+        <di:waypoint x="913" y="1340" />
+        <di:waypoint x="1030" y="1340" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_ph_store__ph_end_di" bpmnElement="Flow_ph_store__ph_end">
+        <di:waypoint x="1140" y="1340" />
+        <di:waypoint x="1257" y="1340" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_u_c0__u_c1_di" bpmnElement="Flow_u_c0__u_c1">
+        <di:waypoint x="153" y="245" />
+        <di:waypoint x="307" y="245" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_u_p0__u_p1_di" bpmnElement="Flow_u_p0__u_p1">
+        <di:waypoint x="153" y="95" />
+        <di:waypoint x="270" y="95" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_u_p1__u_p2_di" bpmnElement="Flow_u_p1__u_p2">
+        <di:waypoint x="380" y="95" />
+        <di:waypoint x="460" y="95" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_u_p2__u_p3_di" bpmnElement="Flow_u_p2__u_p3">
+        <di:waypoint x="570" y="95" />
+        <di:waypoint x="687" y="95" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_r_rep__ph_in_di" bpmnElement="MessageFlow_m_r_rep__ph_in">
+        <di:waypoint x="895" y="879" />
+        <di:waypoint x="895" y="950" />
+        <di:waypoint x="800" y="950" />
+        <di:waypoint x="800" y="1305" />
+        <di:waypoint x="895" y="1305" />
+        <di:waypoint x="895" y="1322" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="899" y="885" width="42" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_u_c1__e_in_di" bpmnElement="MessageFlow_m_u_c1__e_in">
+        <di:waypoint x="325" y="263" />
+        <di:waypoint x="325" y="455" />
+        <di:waypoint x="285" y="455" />
+        <di:waypoint x="285" y="605" />
+        <di:waypoint x="325" y="605" />
+        <di:waypoint x="325" y="623" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="329" y="269" width="33" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_u_p1__c_cfg_di" bpmnElement="MessageFlow_m_u_p1__c_cfg">
+        <di:waypoint x="325" y="135" />
+        <di:waypoint x="325" y="160" />
+        <di:waypoint x="420" y="160" />
+        <di:waypoint x="420" y="455" />
+        <di:waypoint x="325" y="455" />
+        <di:waypoint x="325" y="473" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="329" y="141" width="68" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_u_p2__e_wait_di" bpmnElement="MessageFlow_m_u_p2__e_wait">
+        <di:waypoint x="515" y="135" />
+        <di:waypoint x="515" y="430" />
+        <di:waypoint x="990" y="430" />
+        <di:waypoint x="990" y="715" />
+        <di:waypoint x="1085" y="715" />
+        <di:waypoint x="1085" y="733" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="519" y="141" width="29" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_u_p3__k_start_di" bpmnElement="MessageFlow_m_u_p3__k_start">
+        <di:waypoint x="705" y="113" />
+        <di:waypoint x="705" y="435" />
+        <di:waypoint x="610" y="435" />
+        <di:waypoint x="610" y="990" />
+        <di:waypoint x="705" y="990" />
+        <di:waypoint x="705" y="1008" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="709" y="119" width="35" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

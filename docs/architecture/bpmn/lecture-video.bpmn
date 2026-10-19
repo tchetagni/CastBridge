@@ -1,0 +1,679 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" id="Definitions_lecture_video" targetNamespace="https://bridge.sti-cm.com/castbridge/architecture" exporter="CastBridge tools/architecture/bpmn_gen.py" exporterVersion="1.0">
+  <bpmn:collaboration id="Collaboration_lecture_video">
+    <bpmn:documentation>Lire une vidéo sur la TV — Un fichier ouvert avec CastBridge (Ouvrir avec, Partager) passe par le lecteur du téléphone (Media3), puis par « Caster ». Vers une CastBridge-TV : lecture directe (`POST /api/play` ou `/api/playurl`) ou « Copier et lire », où la TV lit le fichier pendant qu'il arrive. Si CastBridge-TV n'est pas devant, la TV répond 409 `needsForeground` : le téléphone l'ouvre (`OpenTvFlow`) puis réessaie jusqu'à cinq fois. Pendant une copie, la lecture passe d'abord : la copie est plafonnée à la moitié du débit d'écriture du disque (de 1 à 6 Mo/s, 40 % sur le même disque) et la TV affiche « Copie ralentie ». Vers une TV tierce, le téléphone envoie `SetAVTransportURI` (DLNA) ; l'application YouTube trouve la TV par DIAL (SSDP, port 30765) et lance YouTube TV.</bpmn:documentation>
+    <bpmn:participant id="Participant_user" name="Utilisateur / Propriétaire" processRef="Process_user" />
+    <bpmn:participant id="Participant_phone" name="CastBridge (téléphone)" processRef="Process_phone" />
+    <bpmn:participant id="Participant_dlna" name="TV tierce (DLNA)" processRef="Process_dlna" />
+    <bpmn:participant id="Participant_tv" name="CastBridge-TV" processRef="Process_tv" />
+    <bpmn:participant id="Participant_yt" name="Application YouTube" processRef="Process_yt" />
+    <bpmn:messageFlow id="MessageFlow_m_u_pick__p_open" name="Vidéo à caster" sourceRef="SendTask_u_pick" targetRef="StartEvent_p_open" />
+    <bpmn:messageFlow id="MessageFlow_m_p_play__r_play" name="/api/play" sourceRef="SendTask_p_play" targetRef="StartEvent_r_play" />
+    <bpmn:messageFlow id="MessageFlow_m_p_up__r_play" name="PUT /upload" sourceRef="SendTask_p_up" targetRef="StartEvent_r_play" />
+    <bpmn:messageFlow id="MessageFlow_m_r_409__b_409" name="409" sourceRef="EndEvent_r_409" targetRef="BoundaryEvent_b_409" />
+    <bpmn:messageFlow id="MessageFlow_m_p_dlna__l_set" name="DLNA" sourceRef="SendTask_p_dlna" targetRef="StartEvent_l_set" />
+    <bpmn:messageFlow id="MessageFlow_m_y_send__d_in" name="DIAL" sourceRef="EndEvent_y_send" targetRef="StartEvent_d_in" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_user" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_user">
+      <bpmn:lane id="Lane_u1" name="Sur le téléphone">
+        <bpmn:flowNodeRef>StartEvent_u_start</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SendTask_u_pick</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_u_end</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_u_start" name="Ouvrir une vidéo avec CastBridge">
+      <bpmn:outgoing>Flow_u_start__u_pick</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sendTask id="SendTask_u_pick" name="Toucher « Caster » et choisir la cible">
+      <bpmn:documentation>Bouton cast du lecteur : feuille « Diffuser sur ».</bpmn:documentation>
+      <bpmn:incoming>Flow_u_start__u_pick</bpmn:incoming>
+      <bpmn:outgoing>Flow_u_pick__u_end</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:endEvent id="EndEvent_u_end" name="Vidéo regardée">
+      <bpmn:incoming>Flow_u_pick__u_end</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_u_start__u_pick" sourceRef="StartEvent_u_start" targetRef="SendTask_u_pick" />
+    <bpmn:sequenceFlow id="Flow_u_pick__u_end" sourceRef="SendTask_u_pick" targetRef="EndEvent_u_end" />
+  </bpmn:process>
+  <bpmn:process id="Process_phone" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_phone">
+      <bpmn:lane id="Lane_p1" name="Lecteur et « Caster » (player/)">
+        <bpmn:flowNodeRef>StartEvent_p_open</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_p_cast</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SendTask_p_play</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SendTask_p_up</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SendTask_p_dlna</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>BoundaryEvent_b_409</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_p_fg</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_p_ctl</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_p_end</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_p_open" name="Vidéo ouverte dans le lecteur">
+      <bpmn:documentation>« Ouvrir avec » et « Partager » : content://, http(s) direct, HLS, DASH.</bpmn:documentation>
+      <bpmn:outgoing>Flow_p_open__p_cast</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="StartEvent_p_open_def" />
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="Gateway_p_cast" name="Quelle cible ?" default="Flow_p_cast__p_play">
+      <bpmn:incoming>Flow_p_open__p_cast</bpmn:incoming>
+      <bpmn:outgoing>Flow_p_cast__p_play</bpmn:outgoing>
+      <bpmn:outgoing>Flow_p_cast__p_up</bpmn:outgoing>
+      <bpmn:outgoing>Flow_p_cast__p_dlna</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sendTask id="SendTask_p_play" name="Lire en direct : POST /api/play ou /api/playurl">
+      <bpmn:documentation>La TV lit le petit serveur HTTP du téléphone (route /api/playurl, TV 0.6.5 et plus).</bpmn:documentation>
+      <bpmn:incoming>Flow_p_cast__p_play</bpmn:incoming>
+      <bpmn:incoming>Flow_p_fg__p_play</bpmn:incoming>
+      <bpmn:outgoing>Flow_p_play__p_ctl</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:sendTask id="SendTask_p_up" name="Copier et lire : envoi progressif">
+      <bpmn:documentation>UploadService en mode progressif ; le fichier est mis dans la file d'envoi.</bpmn:documentation>
+      <bpmn:incoming>Flow_p_cast__p_up</bpmn:incoming>
+      <bpmn:outgoing>Flow_p_up__p_ctl</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:sendTask id="SendTask_p_dlna" name="SetAVTransportURI vers la TV tierce">
+      <bpmn:documentation>MediaServer (port 8089) sert le fichier avec Range ; Upnp envoie la commande.</bpmn:documentation>
+      <bpmn:incoming>Flow_p_cast__p_dlna</bpmn:incoming>
+      <bpmn:outgoing>Flow_p_dlna__p_ctl</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:boundaryEvent id="BoundaryEvent_b_409" name="409 needsForeground" cancelActivity="true" attachedToRef="SendTask_p_play">
+      <bpmn:outgoing>Flow_b_409__p_fg</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="BoundaryEvent_b_409_def" />
+    </bpmn:boundaryEvent>
+    <bpmn:task id="Task_p_fg" name="Ouvrir CastBridge-TV sur la TV (OpenTvFlow)">
+      <bpmn:documentation>OpenTv.playOpeningTv : ouvre CastBridge-TV puis réessaie 5 fois à 1 s d'intervalle.</bpmn:documentation>
+      <bpmn:incoming>Flow_b_409__p_fg</bpmn:incoming>
+      <bpmn:outgoing>Flow_p_fg__p_play</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_p_ctl" name="Devenir la télécommande : lecture, ±10 s, volume">
+      <bpmn:documentation>« Revenir sur le téléphone » reprend à la position de la TV.</bpmn:documentation>
+      <bpmn:incoming>Flow_p_play__p_ctl</bpmn:incoming>
+      <bpmn:incoming>Flow_p_up__p_ctl</bpmn:incoming>
+      <bpmn:incoming>Flow_p_dlna__p_ctl</bpmn:incoming>
+      <bpmn:outgoing>Flow_p_ctl__p_end</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="EndEvent_p_end" name="Lecture pilotée">
+      <bpmn:incoming>Flow_p_ctl__p_end</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_p_open__p_cast" sourceRef="StartEvent_p_open" targetRef="Gateway_p_cast" />
+    <bpmn:sequenceFlow id="Flow_p_cast__p_play" name="TV CastBridge, en direct" sourceRef="Gateway_p_cast" targetRef="SendTask_p_play" />
+    <bpmn:sequenceFlow id="Flow_p_cast__p_up" name="TV CastBridge, copier et lire" sourceRef="Gateway_p_cast" targetRef="SendTask_p_up" />
+    <bpmn:sequenceFlow id="Flow_p_cast__p_dlna" name="TV DLNA" sourceRef="Gateway_p_cast" targetRef="SendTask_p_dlna" />
+    <bpmn:sequenceFlow id="Flow_p_play__p_ctl" sourceRef="SendTask_p_play" targetRef="Task_p_ctl" />
+    <bpmn:sequenceFlow id="Flow_p_up__p_ctl" sourceRef="SendTask_p_up" targetRef="Task_p_ctl" />
+    <bpmn:sequenceFlow id="Flow_p_dlna__p_ctl" sourceRef="SendTask_p_dlna" targetRef="Task_p_ctl" />
+    <bpmn:sequenceFlow id="Flow_b_409__p_fg" sourceRef="BoundaryEvent_b_409" targetRef="Task_p_fg" />
+    <bpmn:sequenceFlow id="Flow_p_fg__p_play" name="Réessayer (5 fois)" sourceRef="Task_p_fg" targetRef="SendTask_p_play" />
+    <bpmn:sequenceFlow id="Flow_p_ctl__p_end" sourceRef="Task_p_ctl" targetRef="EndEvent_p_end" />
+  </bpmn:process>
+  <bpmn:process id="Process_dlna" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_dlna">
+      <bpmn:lane id="Lane_l1" name="Récepteur DLNA">
+        <bpmn:flowNodeRef>StartEvent_l_set</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_l_play</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_l_end</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_l_set" name="SetAVTransportURI reçu">
+      <bpmn:outgoing>Flow_l_set__l_play</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="StartEvent_l_set_def" />
+    </bpmn:startEvent>
+    <bpmn:task id="Task_l_play" name="Lire l'URL du téléphone (Range)">
+      <bpmn:incoming>Flow_l_set__l_play</bpmn:incoming>
+      <bpmn:outgoing>Flow_l_play__l_end</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="EndEvent_l_end" name="Lecture sur la TV tierce">
+      <bpmn:incoming>Flow_l_play__l_end</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_l_set__l_play" sourceRef="StartEvent_l_set" targetRef="Task_l_play" />
+    <bpmn:sequenceFlow id="Flow_l_play__l_end" sourceRef="Task_l_play" targetRef="EndEvent_l_end" />
+  </bpmn:process>
+  <bpmn:process id="Process_tv" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_tv">
+      <bpmn:lane id="Lane_t1" name="Lecture (PlayerActivity, libVLC)">
+        <bpmn:flowNodeRef>StartEvent_r_play</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_r_fg</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_r_409</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_r_vlc</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_r_cp</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_r_slow</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_r_end</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_t2" name="DIAL (DialHost)">
+        <bpmn:flowNodeRef>StartEvent_d_in</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_d_chk</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_d_launch</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_d_end</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_r_play" name="Demande de lecture reçue">
+      <bpmn:outgoing>Flow_r_play__r_fg</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="StartEvent_r_play_def" />
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="Gateway_r_fg" name="CastBridge-TV devant ?" default="Flow_r_fg__r_vlc">
+      <bpmn:incoming>Flow_r_play__r_fg</bpmn:incoming>
+      <bpmn:outgoing>Flow_r_fg__r_vlc</bpmn:outgoing>
+      <bpmn:outgoing>Flow_r_fg__r_409</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="EndEvent_r_409" name="Répondre 409 needsForeground">
+      <bpmn:incoming>Flow_r_fg__r_409</bpmn:incoming>
+      <bpmn:messageEventDefinition id="EndEvent_r_409_def" />
+    </bpmn:endEvent>
+    <bpmn:task id="Task_r_vlc" name="Lire avec libVLC (Remplir l'écran)">
+      <bpmn:documentation>VideoFit : remplir l'écran par défaut ; pour « Copier et lire », libVLC lit le .part qui grandit.</bpmn:documentation>
+      <bpmn:incoming>Flow_r_fg__r_vlc</bpmn:incoming>
+      <bpmn:outgoing>Flow_r_vlc__r_cp</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="Gateway_r_cp" name="Une copie écrit sur le disque ?" default="Flow_r_cp__r_end">
+      <bpmn:incoming>Flow_r_vlc__r_cp</bpmn:incoming>
+      <bpmn:outgoing>Flow_r_cp__r_slow</bpmn:outgoing>
+      <bpmn:outgoing>Flow_r_cp__r_end</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="Task_r_slow" name="Ralentir la copie : « Copie ralentie »">
+      <bpmn:documentation>PlaybackPriority.receiveCap : moitié du débit du disque, 1 à 6 Mo/s ; PlaybackAwareCopyPolicy : 40 % (0,5 à 3 Mo/s) sur le même disque.</bpmn:documentation>
+      <bpmn:incoming>Flow_r_cp__r_slow</bpmn:incoming>
+      <bpmn:outgoing>Flow_r_slow__r_end</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="EndEvent_r_end" name="Lecture en cours">
+      <bpmn:incoming>Flow_r_cp__r_end</bpmn:incoming>
+      <bpmn:incoming>Flow_r_slow__r_end</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:startEvent id="StartEvent_d_in" name="Requête DIAL reçue">
+      <bpmn:outgoing>Flow_d_in__d_chk</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="StartEvent_d_in_def" />
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="Gateway_d_chk" name="Source locale, Host exact, Origin YouTube ?" default="Flow_d_chk__d_launch">
+      <bpmn:documentation>DialRules : sources du réseau local seulement, Host = ip:port de la TV, Origin refusé sauf YouTube, 6 lancements par minute.</bpmn:documentation>
+      <bpmn:incoming>Flow_d_in__d_chk</bpmn:incoming>
+      <bpmn:outgoing>Flow_d_chk__d_launch</bpmn:outgoing>
+      <bpmn:outgoing>Flow_d_chk__d_end</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="Task_d_launch" name="Lancer YouTube TV (code d'appairage)">
+      <bpmn:incoming>Flow_d_chk__d_launch</bpmn:incoming>
+      <bpmn:outgoing>Flow_d_launch__d_end</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="EndEvent_d_end" name="Fin : lancé ou refusé">
+      <bpmn:incoming>Flow_d_chk__d_end</bpmn:incoming>
+      <bpmn:incoming>Flow_d_launch__d_end</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_r_play__r_fg" sourceRef="StartEvent_r_play" targetRef="Gateway_r_fg" />
+    <bpmn:sequenceFlow id="Flow_r_fg__r_vlc" name="Oui" sourceRef="Gateway_r_fg" targetRef="Task_r_vlc" />
+    <bpmn:sequenceFlow id="Flow_r_fg__r_409" name="Non" sourceRef="Gateway_r_fg" targetRef="EndEvent_r_409" />
+    <bpmn:sequenceFlow id="Flow_r_vlc__r_cp" sourceRef="Task_r_vlc" targetRef="Gateway_r_cp" />
+    <bpmn:sequenceFlow id="Flow_r_cp__r_slow" name="Oui" sourceRef="Gateway_r_cp" targetRef="Task_r_slow" />
+    <bpmn:sequenceFlow id="Flow_r_cp__r_end" name="Non" sourceRef="Gateway_r_cp" targetRef="EndEvent_r_end" />
+    <bpmn:sequenceFlow id="Flow_r_slow__r_end" sourceRef="Task_r_slow" targetRef="EndEvent_r_end" />
+    <bpmn:sequenceFlow id="Flow_d_in__d_chk" sourceRef="StartEvent_d_in" targetRef="Gateway_d_chk" />
+    <bpmn:sequenceFlow id="Flow_d_chk__d_launch" name="Oui" sourceRef="Gateway_d_chk" targetRef="Task_d_launch" />
+    <bpmn:sequenceFlow id="Flow_d_chk__d_end" name="Non" sourceRef="Gateway_d_chk" targetRef="EndEvent_d_end" />
+    <bpmn:sequenceFlow id="Flow_d_launch__d_end" sourceRef="Task_d_launch" targetRef="EndEvent_d_end" />
+  </bpmn:process>
+  <bpmn:process id="Process_yt" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_yt">
+      <bpmn:lane id="Lane_y1" name="YouTube sur le téléphone">
+        <bpmn:flowNodeRef>StartEvent_y_start</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_y_send</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_y_start" name="Toucher « Caster » dans YouTube">
+      <bpmn:outgoing>Flow_y_start__y_send</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="EndEvent_y_send" name="Chercher la TV (SSDP), lancer (DIAL)">
+      <bpmn:incoming>Flow_y_start__y_send</bpmn:incoming>
+      <bpmn:messageEventDefinition id="EndEvent_y_send_def" />
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_y_start__y_send" sourceRef="StartEvent_y_start" targetRef="EndEvent_y_send" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_lecture_video">
+    <bpmndi:BPMNPlane id="BPMNPlane_lecture_video" bpmnElement="Collaboration_lecture_video">
+      <bpmndi:BPMNShape id="Participant_user_di" bpmnElement="Participant_user" isHorizontal="true">
+        <dc:Bounds x="10" y="20" width="1767" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_u1_di" bpmnElement="Lane_u1" isHorizontal="true">
+        <dc:Bounds x="40" y="20" width="1737" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_phone_di" bpmnElement="Participant_phone" isHorizontal="true">
+        <dc:Bounds x="10" y="224" width="1767" height="525" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_p1_di" bpmnElement="Lane_p1" isHorizontal="true">
+        <dc:Bounds x="40" y="224" width="1737" height="525" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_dlna_di" bpmnElement="Participant_dlna" isHorizontal="true">
+        <dc:Bounds x="10" y="845" width="1767" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_l1_di" bpmnElement="Lane_l1" isHorizontal="true">
+        <dc:Bounds x="40" y="845" width="1737" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_tv_di" bpmnElement="Participant_tv" isHorizontal="true">
+        <dc:Bounds x="10" y="1077" width="1767" height="520" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_t1_di" bpmnElement="Lane_t1" isHorizontal="true">
+        <dc:Bounds x="40" y="1077" width="1737" height="260" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_t2_di" bpmnElement="Lane_t2" isHorizontal="true">
+        <dc:Bounds x="40" y="1337" width="1737" height="260" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_yt_di" bpmnElement="Participant_yt" isHorizontal="true">
+        <dc:Bounds x="10" y="1651" width="1767" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_y1_di" bpmnElement="Lane_y1" isHorizontal="true">
+        <dc:Bounds x="40" y="1651" width="1737" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_u_start_di" bpmnElement="StartEvent_u_start" bioc:stroke="#455A64" bioc:fill="#FFFFFF">
+        <dc:Bounds x="117" y="77" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="94" y="116" width="83" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SendTask_u_pick_di" bpmnElement="SendTask_u_pick" bioc:stroke="#455A64" bioc:fill="#ECEFF1">
+        <dc:Bounds x="270" y="55" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_u_end_di" bpmnElement="EndEvent_u_end" bioc:stroke="#455A64" bioc:fill="#FFFFFF">
+        <dc:Bounds x="497" y="77" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="476" y="116" width="78" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_p_open_di" bpmnElement="StartEvent_p_open" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
+        <dc:Bounds x="307" y="391" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="288" y="430" width="74" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_p_cast_di" bpmnElement="Gateway_p_cast" isMarkerVisible="true" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
+        <dc:Bounds x="490" y="384" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="527" y="365" width="69" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SendTask_p_play_di" bpmnElement="SendTask_p_play" bioc:stroke="#0A6A4B" bioc:fill="#D3ECE1">
+        <dc:Bounds x="650" y="369" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SendTask_p_up_di" bpmnElement="SendTask_p_up" bioc:stroke="#0A6A4B" bioc:fill="#D3ECE1">
+        <dc:Bounds x="650" y="589" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SendTask_p_dlna_di" bpmnElement="SendTask_p_dlna" bioc:stroke="#0A6A4B" bioc:fill="#D3ECE1">
+        <dc:Bounds x="650" y="259" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BoundaryEvent_b_409_di" bpmnElement="BoundaryEvent_b_409" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
+        <dc:Bounds x="652" y="431" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="559" y="451" width="89" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_p_fg_di" bpmnElement="Task_p_fg" bioc:stroke="#0A6A4B" bioc:fill="#D3ECE1">
+        <dc:Bounds x="1220" y="479" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_p_ctl_di" bpmnElement="Task_p_ctl" bioc:stroke="#0A6A4B" bioc:fill="#D3ECE1">
+        <dc:Bounds x="840" y="369" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_p_end_di" bpmnElement="EndEvent_p_end" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1067" y="391" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1048" y="430" width="75" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_l_set_di" bpmnElement="StartEvent_l_set" bioc:stroke="#616161" bioc:fill="#FFFFFF">
+        <dc:Bounds x="687" y="902" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="661" y="941" width="89" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_l_play_di" bpmnElement="Task_l_play" bioc:stroke="#616161" bioc:fill="#F1F1F1">
+        <dc:Bounds x="840" y="880" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_l_end_di" bpmnElement="EndEvent_l_end" bioc:stroke="#616161" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1067" y="902" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1042" y="941" width="86" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_r_play_di" bpmnElement="StartEvent_r_play" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="687" y="1134" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="672" y="1173" width="66" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_r_fg_di" bpmnElement="Gateway_r_fg" isMarkerVisible="true" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="870" y="1127" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="858" y="1095" width="75" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_r_409_di" bpmnElement="EndEvent_r_409" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1067" y="1244" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1041" y="1283" width="89" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_r_vlc_di" bpmnElement="Task_r_vlc" bioc:stroke="#885600" bioc:fill="#FAE8B9">
+        <dc:Bounds x="1030" y="1112" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_r_cp_di" bpmnElement="Gateway_r_cp" isMarkerVisible="true" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1250" y="1127" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1237" y="1095" width="76" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_r_slow_di" bpmnElement="Task_r_slow" bioc:stroke="#885600" bioc:fill="#FAE8B9">
+        <dc:Bounds x="1410" y="1222" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_r_end_di" bpmnElement="EndEvent_r_end" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1637" y="1244" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1613" y="1283" width="84" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_d_in_di" bpmnElement="StartEvent_d_in" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="307" y="1394" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="289" y="1362" width="72" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_d_chk_di" bpmnElement="Gateway_d_chk" isMarkerVisible="true" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="490" y="1387" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="470" y="1342" width="90" height="42" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_d_launch_di" bpmnElement="Task_d_launch" bioc:stroke="#885600" bioc:fill="#FAE8B9">
+        <dc:Bounds x="650" y="1482" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_d_end_di" bpmnElement="EndEvent_d_end" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="877" y="1504" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="861" y="1543" width="69" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_y_start_di" bpmnElement="StartEvent_y_start" bioc:stroke="#616161" bioc:fill="#FFFFFF">
+        <dc:Bounds x="117" y="1708" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="92" y="1747" width="87" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_y_send_di" bpmnElement="EndEvent_y_send" bioc:stroke="#616161" bioc:fill="#FFFFFF">
+        <dc:Bounds x="307" y="1708" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="287" y="1747" width="76" height="42" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_b_409__p_fg_di" bpmnElement="Flow_b_409__p_fg">
+        <di:waypoint x="675" y="467" />
+        <di:waypoint x="675" y="515" />
+        <di:waypoint x="1205" y="515" />
+        <di:waypoint x="1205" y="519" />
+        <di:waypoint x="1220" y="519" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_d_chk__d_end_di" bpmnElement="Flow_d_chk__d_end">
+        <di:waypoint x="515" y="1437" />
+        <di:waypoint x="515" y="1465" />
+        <di:waypoint x="895" y="1465" />
+        <di:waypoint x="895" y="1504" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="519" y="1443" width="23" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_d_chk__d_launch_di" bpmnElement="Flow_d_chk__d_launch">
+        <di:waypoint x="540" y="1412" />
+        <di:waypoint x="555" y="1412" />
+        <di:waypoint x="555" y="1410" />
+        <di:waypoint x="610" y="1410" />
+        <di:waypoint x="610" y="1520" />
+        <di:waypoint x="635" y="1520" />
+        <di:waypoint x="635" y="1522" />
+        <di:waypoint x="650" y="1522" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="561" y="1392" width="20" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_d_in__d_chk_di" bpmnElement="Flow_d_in__d_chk">
+        <di:waypoint x="343" y="1412" />
+        <di:waypoint x="360" y="1412" />
+        <di:waypoint x="360" y="1410" />
+        <di:waypoint x="475" y="1410" />
+        <di:waypoint x="475" y="1412" />
+        <di:waypoint x="490" y="1412" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_d_launch__d_end_di" bpmnElement="Flow_d_launch__d_end">
+        <di:waypoint x="760" y="1522" />
+        <di:waypoint x="775" y="1522" />
+        <di:waypoint x="775" y="1520" />
+        <di:waypoint x="860" y="1520" />
+        <di:waypoint x="860" y="1522" />
+        <di:waypoint x="877" y="1522" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_l_play__l_end_di" bpmnElement="Flow_l_play__l_end">
+        <di:waypoint x="950" y="920" />
+        <di:waypoint x="1067" y="920" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_l_set__l_play_di" bpmnElement="Flow_l_set__l_play">
+        <di:waypoint x="723" y="920" />
+        <di:waypoint x="840" y="920" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_cast__p_dlna_di" bpmnElement="Flow_p_cast__p_dlna">
+        <di:waypoint x="515" y="384" />
+        <di:waypoint x="515" y="295" />
+        <di:waypoint x="635" y="295" />
+        <di:waypoint x="635" y="299" />
+        <di:waypoint x="650" y="299" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="462" y="362" width="49" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_cast__p_play_di" bpmnElement="Flow_p_cast__p_play">
+        <di:waypoint x="540" y="409" />
+        <di:waypoint x="555" y="409" />
+        <di:waypoint x="555" y="405" />
+        <di:waypoint x="635" y="405" />
+        <di:waypoint x="635" y="409" />
+        <di:waypoint x="650" y="409" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="561" y="374" width="92" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_cast__p_up_di" bpmnElement="Flow_p_cast__p_up">
+        <di:waypoint x="515" y="434" />
+        <di:waypoint x="515" y="625" />
+        <di:waypoint x="635" y="625" />
+        <di:waypoint x="635" y="629" />
+        <di:waypoint x="650" y="629" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="434" y="440" width="77" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_ctl__p_end_di" bpmnElement="Flow_p_ctl__p_end">
+        <di:waypoint x="950" y="409" />
+        <di:waypoint x="965" y="409" />
+        <di:waypoint x="965" y="405" />
+        <di:waypoint x="1050" y="405" />
+        <di:waypoint x="1050" y="409" />
+        <di:waypoint x="1067" y="409" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_dlna__p_ctl_di" bpmnElement="Flow_p_dlna__p_ctl">
+        <di:waypoint x="760" y="299" />
+        <di:waypoint x="775" y="299" />
+        <di:waypoint x="775" y="295" />
+        <di:waypoint x="895" y="295" />
+        <di:waypoint x="895" y="369" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_fg__p_play_di" bpmnElement="Flow_p_fg__p_play">
+        <di:waypoint x="1275" y="559" />
+        <di:waypoint x="1275" y="575" />
+        <di:waypoint x="800" y="575" />
+        <di:waypoint x="800" y="465" />
+        <di:waypoint x="715" y="465" />
+        <di:waypoint x="715" y="449" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1177" y="577" width="92" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_open__p_cast_di" bpmnElement="Flow_p_open__p_cast">
+        <di:waypoint x="343" y="409" />
+        <di:waypoint x="360" y="409" />
+        <di:waypoint x="360" y="405" />
+        <di:waypoint x="475" y="405" />
+        <di:waypoint x="475" y="409" />
+        <di:waypoint x="490" y="409" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_play__p_ctl_di" bpmnElement="Flow_p_play__p_ctl">
+        <di:waypoint x="760" y="409" />
+        <di:waypoint x="775" y="409" />
+        <di:waypoint x="775" y="405" />
+        <di:waypoint x="825" y="405" />
+        <di:waypoint x="825" y="409" />
+        <di:waypoint x="840" y="409" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_up__p_ctl_di" bpmnElement="Flow_p_up__p_ctl">
+        <di:waypoint x="760" y="629" />
+        <di:waypoint x="775" y="629" />
+        <di:waypoint x="775" y="625" />
+        <di:waypoint x="895" y="625" />
+        <di:waypoint x="895" y="449" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_r_cp__r_end_di" bpmnElement="Flow_r_cp__r_end">
+        <di:waypoint x="1275" y="1177" />
+        <di:waypoint x="1275" y="1205" />
+        <di:waypoint x="1655" y="1205" />
+        <di:waypoint x="1655" y="1244" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1279" y="1183" width="23" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_r_cp__r_slow_di" bpmnElement="Flow_r_cp__r_slow">
+        <di:waypoint x="1300" y="1152" />
+        <di:waypoint x="1315" y="1152" />
+        <di:waypoint x="1315" y="1150" />
+        <di:waypoint x="1370" y="1150" />
+        <di:waypoint x="1370" y="1260" />
+        <di:waypoint x="1395" y="1260" />
+        <di:waypoint x="1395" y="1262" />
+        <di:waypoint x="1410" y="1262" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1321" y="1132" width="20" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_r_fg__r_409_di" bpmnElement="Flow_r_fg__r_409">
+        <di:waypoint x="895" y="1177" />
+        <di:waypoint x="895" y="1260" />
+        <di:waypoint x="1050" y="1260" />
+        <di:waypoint x="1050" y="1262" />
+        <di:waypoint x="1067" y="1262" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="899" y="1183" width="23" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_r_fg__r_vlc_di" bpmnElement="Flow_r_fg__r_vlc">
+        <di:waypoint x="920" y="1152" />
+        <di:waypoint x="935" y="1152" />
+        <di:waypoint x="935" y="1150" />
+        <di:waypoint x="1015" y="1150" />
+        <di:waypoint x="1015" y="1152" />
+        <di:waypoint x="1030" y="1152" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="941" y="1132" width="20" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_r_play__r_fg_di" bpmnElement="Flow_r_play__r_fg">
+        <di:waypoint x="723" y="1152" />
+        <di:waypoint x="740" y="1152" />
+        <di:waypoint x="740" y="1150" />
+        <di:waypoint x="855" y="1150" />
+        <di:waypoint x="855" y="1152" />
+        <di:waypoint x="870" y="1152" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_r_slow__r_end_di" bpmnElement="Flow_r_slow__r_end">
+        <di:waypoint x="1520" y="1262" />
+        <di:waypoint x="1535" y="1262" />
+        <di:waypoint x="1535" y="1260" />
+        <di:waypoint x="1620" y="1260" />
+        <di:waypoint x="1620" y="1262" />
+        <di:waypoint x="1637" y="1262" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_r_vlc__r_cp_di" bpmnElement="Flow_r_vlc__r_cp">
+        <di:waypoint x="1140" y="1152" />
+        <di:waypoint x="1155" y="1152" />
+        <di:waypoint x="1155" y="1150" />
+        <di:waypoint x="1235" y="1150" />
+        <di:waypoint x="1235" y="1152" />
+        <di:waypoint x="1250" y="1152" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_u_pick__u_end_di" bpmnElement="Flow_u_pick__u_end">
+        <di:waypoint x="380" y="95" />
+        <di:waypoint x="497" y="95" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_u_start__u_pick_di" bpmnElement="Flow_u_start__u_pick">
+        <di:waypoint x="153" y="95" />
+        <di:waypoint x="270" y="95" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_y_start__y_send_di" bpmnElement="Flow_y_start__y_send">
+        <di:waypoint x="153" y="1726" />
+        <di:waypoint x="170" y="1726" />
+        <di:waypoint x="170" y="1725" />
+        <di:waypoint x="290" y="1725" />
+        <di:waypoint x="290" y="1726" />
+        <di:waypoint x="307" y="1726" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_p_dlna__l_set_di" bpmnElement="MessageFlow_m_p_dlna__l_set">
+        <di:waypoint x="705" y="339" />
+        <di:waypoint x="705" y="355" />
+        <di:waypoint x="795" y="355" />
+        <di:waypoint x="795" y="580" />
+        <di:waypoint x="800" y="580" />
+        <di:waypoint x="800" y="885" />
+        <di:waypoint x="705" y="885" />
+        <di:waypoint x="705" y="902" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="799" y="361" width="32" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_p_play__r_play_di" bpmnElement="MessageFlow_m_p_play__r_play">
+        <di:waypoint x="695" y="449" />
+        <di:waypoint x="695" y="570" />
+        <di:waypoint x="610" y="570" />
+        <di:waypoint x="610" y="1115" />
+        <di:waypoint x="700" y="1115" />
+        <di:waypoint x="700" y="1134" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="646" y="552" width="43" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_p_up__r_play_di" bpmnElement="MessageFlow_m_p_up__r_play">
+        <di:waypoint x="705" y="669" />
+        <di:waypoint x="705" y="885" />
+        <di:waypoint x="655" y="885" />
+        <di:waypoint x="655" y="975" />
+        <di:waypoint x="710" y="975" />
+        <di:waypoint x="710" y="1134" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="709" y="675" width="64" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_r_409__b_409_di" bpmnElement="MessageFlow_m_r_409__b_409">
+        <di:waypoint x="1085" y="1244" />
+        <di:waypoint x="1085" y="1210" />
+        <di:waypoint x="990" y="1210" />
+        <di:waypoint x="990" y="485" />
+        <di:waypoint x="665" y="485" />
+        <di:waypoint x="665" y="467" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1089" y="1222" width="21" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_u_pick__p_open_di" bpmnElement="MessageFlow_m_u_pick__p_open">
+        <di:waypoint x="325" y="135" />
+        <di:waypoint x="325" y="391" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="329" y="141" width="73" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_y_send__d_in_di" bpmnElement="MessageFlow_m_y_send__d_in">
+        <di:waypoint x="325" y="1708" />
+        <di:waypoint x="325" y="1430" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="329" y="1686" width="27" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

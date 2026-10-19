@@ -1,0 +1,681 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" id="Definitions_lien_confiance" targetNamespace="https://bridge.sti-cm.com/castbridge/architecture" exporter="CastBridge tools/architecture/bpmn_gen.py" exporterVersion="1.0">
+  <bpmn:collaboration id="Collaboration_lien_confiance">
+    <bpmn:documentation>Établir et garder le lien de confiance — Le téléphone retrouve la TV par mDNS (`_castbridge._tcp`) ou par Bluetooth, puis obtient un jeton par un HELLO sur le Bluetooth appairé : la TV ne répond qu'à un pair appairé et de confiance, et ne lui livre le jeton (256 bits, 12 heures, gardé haché côté TV) qu'à lui. Sans Bluetooth, le PIN à 6 chiffres est saisi une seule fois par TV (une fiche par TV, jamais redemandée en changeant de TV ou de session : règle du 2026-10-06). Un garde-vivant de deux sondes vérifie le jeton toutes les 15 secondes (5 minutes en arrière-plan), et le jeton est renouvelé à mi-vie. Si la route Wi-Fi tombe, le lien se replie sur Wi-Fi Direct puis sur le Bluetooth avec le même jeton, et reprend la route la plus rapide dès qu'elle répond. Un jeton refusé (TV réinstallée, téléphone retiré) provoque un nouveau HELLO ; la réponse de code 8 (`ERR_UNTRUSTED`) demande de réassocier.</bpmn:documentation>
+    <bpmn:participant id="Participant_phone" name="CastBridge (téléphone)" processRef="Process_phone" />
+    <bpmn:participant id="Participant_tv" name="CastBridge-TV" processRef="Process_tv" />
+    <bpmn:messageFlow id="MessageFlow_m_n_pub__p_find" name="mDNS" sourceRef="EndEvent_n_pub" targetRef="Task_p_find" />
+    <bpmn:messageFlow id="MessageFlow_m_a_bond__t_win" name="Demande d'ajout" sourceRef="ServiceTask_a_bond" targetRef="StartEvent_t_win" />
+    <bpmn:messageFlow id="MessageFlow_m_t_ok__a_bond" name="Autorisé" sourceRef="EndEvent_t_ok" targetRef="ServiceTask_a_bond" />
+    <bpmn:messageFlow id="MessageFlow_m_p_hello__h_recv" name="HELLO" sourceRef="ServiceTask_p_hello" targetRef="StartEvent_h_recv" />
+    <bpmn:messageFlow id="MessageFlow_m_h_deny__b_deny" name="Refus" sourceRef="EndEvent_h_deny" targetRef="BoundaryEvent_b_deny" />
+    <bpmn:messageFlow id="MessageFlow_m_h_ans__p_hello" name="Jeton" sourceRef="EndEvent_h_ans" targetRef="ServiceTask_p_hello" />
+    <bpmn:messageFlow id="MessageFlow_m_p_probe__i_recv" name="GET /api/info" sourceRef="ServiceTask_p_probe" targetRef="StartEvent_i_recv" />
+    <bpmn:messageFlow id="MessageFlow_m_i_ok__p_probe" name="200" sourceRef="EndEvent_i_ok" targetRef="ServiceTask_p_probe" />
+    <bpmn:messageFlow id="MessageFlow_m_i_no__p_probe" name="401" sourceRef="EndEvent_i_no" targetRef="ServiceTask_p_probe" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_phone" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_phone">
+      <bpmn:lane id="Lane_p1" name="Boucle du lien (LinkDriver)">
+        <bpmn:flowNodeRef>StartEvent_p_start</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_p_known</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_p_find</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_p_tok</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ServiceTask_p_hello</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>BoundaryEvent_b_deny</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_p_conn</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_p_ka</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ServiceTask_p_probe</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_p_resp</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_p_fall</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_p_err</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_p2" name="Association (PairFlow, PinBook)">
+        <bpmn:flowNodeRef>ServiceTask_a_bond</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_a_bt</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>UserTask_a_pin</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_p_start" name="Ouverture, réseau ou tâche périodique">
+      <bpmn:documentation>Déclencheurs : ouverture de l'app, écran allumé, réseau, diffusions Bluetooth, job périodique de 15 min.</bpmn:documentation>
+      <bpmn:outgoing>Flow_p_start__p_known</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="Gateway_p_known" name="TV déjà ajoutée ?" default="Flow_p_known__p_find">
+      <bpmn:incoming>Flow_p_start__p_known</bpmn:incoming>
+      <bpmn:outgoing>Flow_p_known__p_find</bpmn:outgoing>
+      <bpmn:outgoing>Flow_p_known__a_bond</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="ServiceTask_a_bond" name="Appairer en Bluetooth, demander l'ajout">
+      <bpmn:documentation>Comparaison du code sur les deux écrans, puis demande d'ajout à la TV (PairFlow).</bpmn:documentation>
+      <bpmn:incoming>Flow_p_known__a_bond</bpmn:incoming>
+      <bpmn:outgoing>Flow_a_bond__a_bt</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_a_bt" name="Bluetooth utilisable ?" default="Flow_a_bt__p_find">
+      <bpmn:incoming>Flow_a_bond__a_bt</bpmn:incoming>
+      <bpmn:outgoing>Flow_a_bt__p_find</bpmn:outgoing>
+      <bpmn:outgoing>Flow_a_bt__a_pin</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="UserTask_a_pin" name="Saisir le PIN à 6 chiffres (une fois par TV)">
+      <bpmn:documentation>PinBook : une fiche par TV (bt:&lt;adresse&gt;, name:, host:), jamais effacée sur refus.</bpmn:documentation>
+      <bpmn:incoming>Flow_a_bt__a_pin</bpmn:incoming>
+      <bpmn:outgoing>Flow_a_pin__p_find</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:task id="Task_p_find" name="Chercher la TV : mDNS, sinon Bluetooth">
+      <bpmn:incoming>Flow_p_known__p_find</bpmn:incoming>
+      <bpmn:incoming>Flow_a_bt__p_find</bpmn:incoming>
+      <bpmn:incoming>Flow_a_pin__p_find</bpmn:incoming>
+      <bpmn:outgoing>Flow_p_find__p_tok</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="Gateway_p_tok" name="Jeton valide (marge de 60 s) ?" default="Flow_p_tok__p_hello">
+      <bpmn:incoming>Flow_p_find__p_tok</bpmn:incoming>
+      <bpmn:outgoing>Flow_p_tok__p_conn</bpmn:outgoing>
+      <bpmn:outgoing>Flow_p_tok__p_hello</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="ServiceTask_p_hello" name="HELLO Bluetooth (RFCOMM, TV appairée)">
+      <bpmn:documentation>Un HELLO ne porte jamais le PIN ; 10 HELLO par minute au plus par pair côté TV (ERR_BUSY).</bpmn:documentation>
+      <bpmn:incoming>Flow_p_tok__p_hello</bpmn:incoming>
+      <bpmn:incoming>Flow_p_resp__p_hello</bpmn:incoming>
+      <bpmn:outgoing>Flow_p_hello__p_conn</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:boundaryEvent id="BoundaryEvent_b_deny" name="Refus : code 8 ou 9" cancelActivity="true" attachedToRef="ServiceTask_p_hello">
+      <bpmn:outgoing>Flow_b_deny__p_err</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="BoundaryEvent_b_deny_def" />
+    </bpmn:boundaryEvent>
+    <bpmn:task id="Task_p_conn" name="Connecté : route la plus rapide qui répond">
+      <bpmn:documentation>Priorité : réseau local, Wi-Fi Direct, Bluetooth seul.</bpmn:documentation>
+      <bpmn:incoming>Flow_p_tok__p_conn</bpmn:incoming>
+      <bpmn:incoming>Flow_p_hello__p_conn</bpmn:incoming>
+      <bpmn:outgoing>Flow_p_conn__p_ka</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:intermediateCatchEvent id="Event_p_ka" name="Garde-vivant : 15 s (5 min en arrière-plan)">
+      <bpmn:incoming>Flow_p_conn__p_ka</bpmn:incoming>
+      <bpmn:incoming>Flow_p_resp__p_ka</bpmn:incoming>
+      <bpmn:incoming>Flow_p_fall__p_ka</bpmn:incoming>
+      <bpmn:outgoing>Flow_p_ka__p_probe</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="Event_p_ka_def"><bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT15S</bpmn:timeDuration></bpmn:timerEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:serviceTask id="ServiceTask_p_probe" name="Deux sondes GET /api/info avec le jeton">
+      <bpmn:documentation>Jamais un seul délai : deux essais.</bpmn:documentation>
+      <bpmn:incoming>Flow_p_ka__p_probe</bpmn:incoming>
+      <bpmn:outgoing>Flow_p_probe__p_resp</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_p_resp" name="Réponse de la TV ?" default="Flow_p_resp__p_ka">
+      <bpmn:incoming>Flow_p_probe__p_resp</bpmn:incoming>
+      <bpmn:outgoing>Flow_p_resp__p_ka</bpmn:outgoing>
+      <bpmn:outgoing>Flow_p_resp__p_hello</bpmn:outgoing>
+      <bpmn:outgoing>Flow_p_resp__p_fall</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="Task_p_fall" name="Repli : Wi-Fi Direct, puis Bluetooth (même jeton)">
+      <bpmn:incoming>Flow_p_resp__p_fall</bpmn:incoming>
+      <bpmn:outgoing>Flow_p_fall__p_ka</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="EndEvent_p_err" name="TV non reconnue : réassocier">
+      <bpmn:incoming>Flow_b_deny__p_err</bpmn:incoming>
+      <bpmn:errorEventDefinition id="EndEvent_p_err_def" />
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_p_start__p_known" sourceRef="StartEvent_p_start" targetRef="Gateway_p_known" />
+    <bpmn:sequenceFlow id="Flow_p_known__p_find" name="Oui" sourceRef="Gateway_p_known" targetRef="Task_p_find" />
+    <bpmn:sequenceFlow id="Flow_p_known__a_bond" name="Non" sourceRef="Gateway_p_known" targetRef="ServiceTask_a_bond" />
+    <bpmn:sequenceFlow id="Flow_a_bond__a_bt" sourceRef="ServiceTask_a_bond" targetRef="Gateway_a_bt" />
+    <bpmn:sequenceFlow id="Flow_a_bt__p_find" name="Oui" sourceRef="Gateway_a_bt" targetRef="Task_p_find" />
+    <bpmn:sequenceFlow id="Flow_a_bt__a_pin" name="Non" sourceRef="Gateway_a_bt" targetRef="UserTask_a_pin" />
+    <bpmn:sequenceFlow id="Flow_a_pin__p_find" sourceRef="UserTask_a_pin" targetRef="Task_p_find" />
+    <bpmn:sequenceFlow id="Flow_p_find__p_tok" sourceRef="Task_p_find" targetRef="Gateway_p_tok" />
+    <bpmn:sequenceFlow id="Flow_p_tok__p_conn" name="Oui" sourceRef="Gateway_p_tok" targetRef="Task_p_conn" />
+    <bpmn:sequenceFlow id="Flow_p_tok__p_hello" name="Non" sourceRef="Gateway_p_tok" targetRef="ServiceTask_p_hello" />
+    <bpmn:sequenceFlow id="Flow_p_hello__p_conn" sourceRef="ServiceTask_p_hello" targetRef="Task_p_conn" />
+    <bpmn:sequenceFlow id="Flow_b_deny__p_err" sourceRef="BoundaryEvent_b_deny" targetRef="EndEvent_p_err" />
+    <bpmn:sequenceFlow id="Flow_p_conn__p_ka" sourceRef="Task_p_conn" targetRef="Event_p_ka" />
+    <bpmn:sequenceFlow id="Flow_p_ka__p_probe" sourceRef="Event_p_ka" targetRef="ServiceTask_p_probe" />
+    <bpmn:sequenceFlow id="Flow_p_probe__p_resp" sourceRef="ServiceTask_p_probe" targetRef="Gateway_p_resp" />
+    <bpmn:sequenceFlow id="Flow_p_resp__p_ka" name="Jeton valide" sourceRef="Gateway_p_resp" targetRef="Event_p_ka" />
+    <bpmn:sequenceFlow id="Flow_p_resp__p_hello" name="Mi-vie ou jeton refusé" sourceRef="Gateway_p_resp" targetRef="ServiceTask_p_hello" />
+    <bpmn:sequenceFlow id="Flow_p_resp__p_fall" name="Aucune réponse" sourceRef="Gateway_p_resp" targetRef="Task_p_fall" />
+    <bpmn:sequenceFlow id="Flow_p_fall__p_ka" sourceRef="Task_p_fall" targetRef="Event_p_ka" />
+  </bpmn:process>
+  <bpmn:process id="Process_tv" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_tv">
+      <bpmn:lane id="Lane_t1" name="Annonce (mDNS, TvService)">
+        <bpmn:flowNodeRef>StartEvent_n_ann</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_n_pub</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_t2" name="HELLO et registre (HelloHandler, TrustRegistry)">
+        <bpmn:flowNodeRef>StartEvent_h_recv</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_h_peer</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_h_deny</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_h_ans</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>StartEvent_t_win</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>UserTask_t_auth</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_t_ok</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_t3" name="API HTTP (ReceiverServer)">
+        <bpmn:flowNodeRef>StartEvent_i_recv</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_i_gate</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_i_ok</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_i_no</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_n_ann" name="TV allumée">
+      <bpmn:outgoing>Flow_n_ann__n_pub</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="EndEvent_n_pub" name="Annoncer _castbridge._tcp (role=receiver)">
+      <bpmn:incoming>Flow_n_ann__n_pub</bpmn:incoming>
+      <bpmn:messageEventDefinition id="EndEvent_n_pub_def" />
+    </bpmn:endEvent>
+    <bpmn:startEvent id="StartEvent_h_recv" name="HELLO reçu">
+      <bpmn:outgoing>Flow_h_recv__h_peer</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="StartEvent_h_recv_def" />
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="Gateway_h_peer" name="Pair appairé et de confiance ?" default="Flow_h_peer__h_ans">
+      <bpmn:incoming>Flow_h_recv__h_peer</bpmn:incoming>
+      <bpmn:outgoing>Flow_h_peer__h_deny</bpmn:outgoing>
+      <bpmn:outgoing>Flow_h_peer__h_ans</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="EndEvent_h_deny" name="Erreur d'un octet (8, 9, 12 ou 14)">
+      <bpmn:incoming>Flow_h_peer__h_deny</bpmn:incoming>
+      <bpmn:messageEventDefinition id="EndEvent_h_deny_def" />
+    </bpmn:endEvent>
+    <bpmn:endEvent id="EndEvent_h_ans" name="Répondre : nom, IP:port, jeton de 12 h">
+      <bpmn:documentation>Identifiant d'installation de la TV ; jeton de 256 bits gardé haché, renouvelé à mi-vie.</bpmn:documentation>
+      <bpmn:incoming>Flow_h_peer__h_ans</bpmn:incoming>
+      <bpmn:messageEventDefinition id="EndEvent_h_ans_def" />
+    </bpmn:endEvent>
+    <bpmn:startEvent id="StartEvent_t_win" name="Demande d'ajout reçue">
+      <bpmn:outgoing>Flow_t_win__t_auth</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="StartEvent_t_win_def" />
+    </bpmn:startEvent>
+    <bpmn:userTask id="UserTask_t_auth" name="Autoriser ce téléphone ? (fenêtre de 2 min)">
+      <bpmn:documentation>« Refuser » présélectionné ; trois refus bloquent le téléphone 10 minutes.</bpmn:documentation>
+      <bpmn:incoming>Flow_t_win__t_auth</bpmn:incoming>
+      <bpmn:outgoing>Flow_t_auth__t_ok</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="EndEvent_t_ok" name="Téléphone inscrit (8 au plus)">
+      <bpmn:incoming>Flow_t_auth__t_ok</bpmn:incoming>
+      <bpmn:messageEventDefinition id="EndEvent_t_ok_def" />
+    </bpmn:endEvent>
+    <bpmn:startEvent id="StartEvent_i_recv" name="GET /api/info avec X-CB-Token">
+      <bpmn:outgoing>Flow_i_recv__i_gate</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="StartEvent_i_recv_def" />
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="Gateway_i_gate" name="Jeton connu et valide ?" default="Flow_i_gate__i_ok">
+      <bpmn:incoming>Flow_i_recv__i_gate</bpmn:incoming>
+      <bpmn:outgoing>Flow_i_gate__i_ok</bpmn:outgoing>
+      <bpmn:outgoing>Flow_i_gate__i_no</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="EndEvent_i_ok" name="200 : la TV répond">
+      <bpmn:incoming>Flow_i_gate__i_ok</bpmn:incoming>
+      <bpmn:messageEventDefinition id="EndEvent_i_ok_def" />
+    </bpmn:endEvent>
+    <bpmn:endEvent id="EndEvent_i_no" name="Jeton refusé (jamais un faux PIN)">
+      <bpmn:incoming>Flow_i_gate__i_no</bpmn:incoming>
+      <bpmn:messageEventDefinition id="EndEvent_i_no_def" />
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_n_ann__n_pub" sourceRef="StartEvent_n_ann" targetRef="EndEvent_n_pub" />
+    <bpmn:sequenceFlow id="Flow_h_recv__h_peer" sourceRef="StartEvent_h_recv" targetRef="Gateway_h_peer" />
+    <bpmn:sequenceFlow id="Flow_h_peer__h_deny" name="Non" sourceRef="Gateway_h_peer" targetRef="EndEvent_h_deny" />
+    <bpmn:sequenceFlow id="Flow_h_peer__h_ans" name="Oui" sourceRef="Gateway_h_peer" targetRef="EndEvent_h_ans" />
+    <bpmn:sequenceFlow id="Flow_t_win__t_auth" sourceRef="StartEvent_t_win" targetRef="UserTask_t_auth" />
+    <bpmn:sequenceFlow id="Flow_t_auth__t_ok" sourceRef="UserTask_t_auth" targetRef="EndEvent_t_ok" />
+    <bpmn:sequenceFlow id="Flow_i_recv__i_gate" sourceRef="StartEvent_i_recv" targetRef="Gateway_i_gate" />
+    <bpmn:sequenceFlow id="Flow_i_gate__i_ok" name="Oui" sourceRef="Gateway_i_gate" targetRef="EndEvent_i_ok" />
+    <bpmn:sequenceFlow id="Flow_i_gate__i_no" name="Non" sourceRef="Gateway_i_gate" targetRef="EndEvent_i_no" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_lien_confiance">
+    <bpmndi:BPMNPlane id="BPMNPlane_lien_confiance" bpmnElement="Collaboration_lien_confiance">
+      <bpmndi:BPMNShape id="Participant_phone_di" bpmnElement="Participant_phone" isHorizontal="true">
+        <dc:Bounds x="10" y="20" width="2540" height="700" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_p1_di" bpmnElement="Lane_p1" isHorizontal="true">
+        <dc:Bounds x="40" y="20" width="2510" height="440" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_p2_di" bpmnElement="Lane_p2" isHorizontal="true">
+        <dc:Bounds x="40" y="460" width="2510" height="260" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_tv_di" bpmnElement="Participant_tv" isHorizontal="true">
+        <dc:Bounds x="10" y="872" width="2540" height="670" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_t1_di" bpmnElement="Lane_t1" isHorizontal="true">
+        <dc:Bounds x="40" y="872" width="2510" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_t2_di" bpmnElement="Lane_t2" isHorizontal="true">
+        <dc:Bounds x="40" y="1022" width="2510" height="260" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_t3_di" bpmnElement="Lane_t3" isHorizontal="true">
+        <dc:Bounds x="40" y="1282" width="2510" height="260" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_p_start_di" bpmnElement="StartEvent_p_start" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
+        <dc:Bounds x="117" y="77" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="90" y="116" width="91" height="42" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_p_known_di" bpmnElement="Gateway_p_known" isMarkerVisible="true" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
+        <dc:Bounds x="300" y="70" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="281" y="51" width="89" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_a_bond_di" bpmnElement="ServiceTask_a_bond" bioc:stroke="#0A6A4B" bioc:fill="#D3ECE1">
+        <dc:Bounds x="460" y="495" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_a_bt_di" bpmnElement="Gateway_a_bt" isMarkerVisible="true" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
+        <dc:Bounds x="680" y="510" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="678" y="563" width="54" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_a_pin_di" bpmnElement="UserTask_a_pin" bioc:stroke="#0A6A4B" bioc:fill="#D3ECE1">
+        <dc:Bounds x="840" y="605" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_p_find_di" bpmnElement="Task_p_find" bioc:stroke="#0A6A4B" bioc:fill="#D3ECE1">
+        <dc:Bounds x="1030" y="55" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_p_tok_di" bpmnElement="Gateway_p_tok" isMarkerVisible="true" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1250" y="70" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1231" y="38" width="89" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_p_hello_di" bpmnElement="ServiceTask_p_hello" bioc:stroke="#0A6A4B" bioc:fill="#D3ECE1">
+        <dc:Bounds x="1410" y="165" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BoundaryEvent_b_deny_di" bpmnElement="BoundaryEvent_b_deny" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1412" y="227" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1319" y="247" width="89" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_p_conn_di" bpmnElement="Task_p_conn" bioc:stroke="#0A6A4B" bioc:fill="#D3ECE1">
+        <dc:Bounds x="1600" y="55" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_p_ka_di" bpmnElement="Event_p_ka" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1827" y="77" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1799" y="32" width="92" height="42" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_p_probe_di" bpmnElement="ServiceTask_p_probe" bioc:stroke="#0A6A4B" bioc:fill="#D3ECE1">
+        <dc:Bounds x="1980" y="55" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_p_resp_di" bpmnElement="Gateway_p_resp" isMarkerVisible="true" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
+        <dc:Bounds x="2200" y="70" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2180" y="38" width="91" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_p_fall_di" bpmnElement="Task_p_fall" bioc:stroke="#0A6A4B" bioc:fill="#D3ECE1">
+        <dc:Bounds x="2360" y="55" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_p_err_di" bpmnElement="EndEvent_p_err" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
+        <dc:Bounds x="2017" y="297" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1992" y="336" width="87" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_n_ann_di" bpmnElement="StartEvent_n_ann" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="117" y="929" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="106" y="968" width="58" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_n_pub_di" bpmnElement="EndEvent_n_pub" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="307" y="929" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="284" y="968" width="83" height="42" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_h_recv_di" bpmnElement="StartEvent_h_recv" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1447" y="1079" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1434" y="1118" width="63" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_h_peer_di" bpmnElement="Gateway_h_peer" isMarkerVisible="true" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1630" y="1072" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1611" y="1040" width="89" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_h_deny_di" bpmnElement="EndEvent_h_deny" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1827" y="1079" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1804" y="1118" width="83" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_h_ans_di" bpmnElement="EndEvent_h_ans" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="1827" y="1189" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1803" y="1228" width="84" height="42" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_t_win_di" bpmnElement="StartEvent_t_win" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="497" y="1079" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="473" y="1118" width="85" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_t_auth_di" bpmnElement="UserTask_t_auth" bioc:stroke="#885600" bioc:fill="#FAE8B9">
+        <dc:Bounds x="650" y="1057" width="110" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_t_ok_di" bpmnElement="EndEvent_t_ok" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="877" y="1079" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="852" y="1118" width="86" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_i_recv_di" bpmnElement="StartEvent_i_recv" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="2017" y="1339" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1991" y="1378" width="89" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_i_gate_di" bpmnElement="Gateway_i_gate" isMarkerVisible="true" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="2200" y="1332" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2188" y="1300" width="75" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_i_ok_di" bpmnElement="EndEvent_i_ok" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="2397" y="1339" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2387" y="1378" width="56" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_i_no_di" bpmnElement="EndEvent_i_no" bioc:stroke="#885600" bioc:fill="#FFFFFF">
+        <dc:Bounds x="2397" y="1449" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2377" y="1488" width="77" height="42" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_a_bond__a_bt_di" bpmnElement="Flow_a_bond__a_bt">
+        <di:waypoint x="570" y="535" />
+        <di:waypoint x="680" y="535" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_a_bt__a_pin_di" bpmnElement="Flow_a_bt__a_pin">
+        <di:waypoint x="730" y="535" />
+        <di:waypoint x="800" y="535" />
+        <di:waypoint x="800" y="645" />
+        <di:waypoint x="840" y="645" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="736" y="517" width="23" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_a_bt__p_find_di" bpmnElement="Flow_a_bt__p_find">
+        <di:waypoint x="705" y="510" />
+        <di:waypoint x="705" y="150" />
+        <di:waypoint x="1085" y="150" />
+        <di:waypoint x="1085" y="135" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="709" y="488" width="20" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_a_pin__p_find_di" bpmnElement="Flow_a_pin__p_find">
+        <di:waypoint x="950" y="645" />
+        <di:waypoint x="1105" y="645" />
+        <di:waypoint x="1105" y="135" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_b_deny__p_err_di" bpmnElement="Flow_b_deny__p_err">
+        <di:waypoint x="1435" y="263" />
+        <di:waypoint x="1435" y="315" />
+        <di:waypoint x="2017" y="315" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_h_peer__h_ans_di" bpmnElement="Flow_h_peer__h_ans">
+        <di:waypoint x="1655" y="1122" />
+        <di:waypoint x="1655" y="1205" />
+        <di:waypoint x="1810" y="1205" />
+        <di:waypoint x="1810" y="1207" />
+        <di:waypoint x="1827" y="1207" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1659" y="1128" width="20" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_h_peer__h_deny_di" bpmnElement="Flow_h_peer__h_deny">
+        <di:waypoint x="1680" y="1097" />
+        <di:waypoint x="1695" y="1097" />
+        <di:waypoint x="1695" y="1095" />
+        <di:waypoint x="1810" y="1095" />
+        <di:waypoint x="1810" y="1097" />
+        <di:waypoint x="1827" y="1097" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1701" y="1077" width="23" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_h_recv__h_peer_di" bpmnElement="Flow_h_recv__h_peer">
+        <di:waypoint x="1483" y="1097" />
+        <di:waypoint x="1500" y="1097" />
+        <di:waypoint x="1500" y="1095" />
+        <di:waypoint x="1615" y="1095" />
+        <di:waypoint x="1615" y="1097" />
+        <di:waypoint x="1630" y="1097" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_i_gate__i_no_di" bpmnElement="Flow_i_gate__i_no">
+        <di:waypoint x="2225" y="1382" />
+        <di:waypoint x="2225" y="1465" />
+        <di:waypoint x="2380" y="1465" />
+        <di:waypoint x="2380" y="1467" />
+        <di:waypoint x="2397" y="1467" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2229" y="1388" width="23" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_i_gate__i_ok_di" bpmnElement="Flow_i_gate__i_ok">
+        <di:waypoint x="2250" y="1357" />
+        <di:waypoint x="2265" y="1357" />
+        <di:waypoint x="2265" y="1355" />
+        <di:waypoint x="2380" y="1355" />
+        <di:waypoint x="2380" y="1357" />
+        <di:waypoint x="2397" y="1357" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2271" y="1337" width="20" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_i_recv__i_gate_di" bpmnElement="Flow_i_recv__i_gate">
+        <di:waypoint x="2053" y="1357" />
+        <di:waypoint x="2070" y="1357" />
+        <di:waypoint x="2070" y="1355" />
+        <di:waypoint x="2185" y="1355" />
+        <di:waypoint x="2185" y="1357" />
+        <di:waypoint x="2200" y="1357" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_n_ann__n_pub_di" bpmnElement="Flow_n_ann__n_pub">
+        <di:waypoint x="153" y="947" />
+        <di:waypoint x="170" y="947" />
+        <di:waypoint x="170" y="945" />
+        <di:waypoint x="290" y="945" />
+        <di:waypoint x="290" y="947" />
+        <di:waypoint x="307" y="947" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_conn__p_ka_di" bpmnElement="Flow_p_conn__p_ka">
+        <di:waypoint x="1710" y="95" />
+        <di:waypoint x="1827" y="95" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_fall__p_ka_di" bpmnElement="Flow_p_fall__p_ka">
+        <di:waypoint x="2415" y="135" />
+        <di:waypoint x="2415" y="155" />
+        <di:waypoint x="1850" y="155" />
+        <di:waypoint x="1850" y="113" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_find__p_tok_di" bpmnElement="Flow_p_find__p_tok">
+        <di:waypoint x="1140" y="95" />
+        <di:waypoint x="1250" y="95" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_hello__p_conn_di" bpmnElement="Flow_p_hello__p_conn">
+        <di:waypoint x="1520" y="205" />
+        <di:waypoint x="1655" y="205" />
+        <di:waypoint x="1655" y="135" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_ka__p_probe_di" bpmnElement="Flow_p_ka__p_probe">
+        <di:waypoint x="1863" y="95" />
+        <di:waypoint x="1980" y="95" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_known__a_bond_di" bpmnElement="Flow_p_known__a_bond">
+        <di:waypoint x="325" y="120" />
+        <di:waypoint x="325" y="535" />
+        <di:waypoint x="460" y="535" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="329" y="126" width="23" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_known__p_find_di" bpmnElement="Flow_p_known__p_find">
+        <di:waypoint x="350" y="95" />
+        <di:waypoint x="1030" y="95" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="356" y="77" width="20" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_probe__p_resp_di" bpmnElement="Flow_p_probe__p_resp">
+        <di:waypoint x="2090" y="95" />
+        <di:waypoint x="2200" y="95" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_resp__p_fall_di" bpmnElement="Flow_p_resp__p_fall">
+        <di:waypoint x="2250" y="95" />
+        <di:waypoint x="2360" y="95" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2256" y="77" width="83" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_resp__p_hello_di" bpmnElement="Flow_p_resp__p_hello">
+        <di:waypoint x="2225" y="120" />
+        <di:waypoint x="2225" y="135" />
+        <di:waypoint x="2130" y="135" />
+        <di:waypoint x="2130" y="260" />
+        <di:waypoint x="1485" y="260" />
+        <di:waypoint x="1485" y="245" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2050" y="229" width="74" height="29" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_resp__p_ka_di" bpmnElement="Flow_p_resp__p_ka">
+        <di:waypoint x="2225" y="120" />
+        <di:waypoint x="2225" y="150" />
+        <di:waypoint x="1840" y="150" />
+        <di:waypoint x="1840" y="113" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2229" y="126" width="61" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_start__p_known_di" bpmnElement="Flow_p_start__p_known">
+        <di:waypoint x="153" y="95" />
+        <di:waypoint x="300" y="95" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_tok__p_conn_di" bpmnElement="Flow_p_tok__p_conn">
+        <di:waypoint x="1300" y="95" />
+        <di:waypoint x="1600" y="95" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1306" y="77" width="20" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_p_tok__p_hello_di" bpmnElement="Flow_p_tok__p_hello">
+        <di:waypoint x="1275" y="120" />
+        <di:waypoint x="1275" y="205" />
+        <di:waypoint x="1410" y="205" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1279" y="126" width="23" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_t_auth__t_ok_di" bpmnElement="Flow_t_auth__t_ok">
+        <di:waypoint x="760" y="1097" />
+        <di:waypoint x="775" y="1097" />
+        <di:waypoint x="775" y="1095" />
+        <di:waypoint x="860" y="1095" />
+        <di:waypoint x="860" y="1097" />
+        <di:waypoint x="877" y="1097" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_t_win__t_auth_di" bpmnElement="Flow_t_win__t_auth">
+        <di:waypoint x="533" y="1097" />
+        <di:waypoint x="550" y="1097" />
+        <di:waypoint x="550" y="1095" />
+        <di:waypoint x="635" y="1095" />
+        <di:waypoint x="635" y="1097" />
+        <di:waypoint x="650" y="1097" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_a_bond__t_win_di" bpmnElement="MessageFlow_m_a_bond__t_win">
+        <di:waypoint x="505" y="575" />
+        <di:waypoint x="505" y="1060" />
+        <di:waypoint x="515" y="1060" />
+        <di:waypoint x="515" y="1079" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="416" y="581" width="85" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_h_ans__p_hello_di" bpmnElement="MessageFlow_m_h_ans__p_hello">
+        <di:waypoint x="1845" y="1189" />
+        <di:waypoint x="1845" y="1155" />
+        <di:waypoint x="1750" y="1155" />
+        <di:waypoint x="1750" y="265" />
+        <di:waypoint x="1465" y="265" />
+        <di:waypoint x="1465" y="245" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1849" y="1167" width="29" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_h_deny__b_deny_di" bpmnElement="MessageFlow_m_h_deny__b_deny">
+        <di:waypoint x="1845" y="1079" />
+        <di:waypoint x="1845" y="280" />
+        <di:waypoint x="1425" y="280" />
+        <di:waypoint x="1425" y="263" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1849" y="1057" width="31" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_i_no__p_probe_di" bpmnElement="MessageFlow_m_i_no__p_probe">
+        <di:waypoint x="2415" y="1449" />
+        <di:waypoint x="2415" y="1415" />
+        <di:waypoint x="2320" y="1415" />
+        <di:waypoint x="2320" y="165" />
+        <di:waypoint x="2055" y="165" />
+        <di:waypoint x="2055" y="135" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2419" y="1427" width="21" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_i_ok__p_probe_di" bpmnElement="MessageFlow_m_i_ok__p_probe">
+        <di:waypoint x="2415" y="1339" />
+        <di:waypoint x="2415" y="160" />
+        <di:waypoint x="2035" y="160" />
+        <di:waypoint x="2035" y="135" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2419" y="1317" width="21" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_n_pub__p_find_di" bpmnElement="MessageFlow_m_n_pub__p_find">
+        <di:waypoint x="325" y="929" />
+        <di:waypoint x="325" y="705" />
+        <di:waypoint x="1065" y="705" />
+        <di:waypoint x="1065" y="135" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="329" y="907" width="35" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_p_hello__h_recv_di" bpmnElement="MessageFlow_m_p_hello__h_recv">
+        <di:waypoint x="1445" y="245" />
+        <di:waypoint x="1445" y="1060" />
+        <di:waypoint x="1465" y="1060" />
+        <di:waypoint x="1465" y="1079" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1451" y="1042" width="39" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_p_probe__i_recv_di" bpmnElement="MessageFlow_m_p_probe__i_recv">
+        <di:waypoint x="2015" y="135" />
+        <di:waypoint x="2015" y="280" />
+        <di:waypoint x="1985" y="280" />
+        <di:waypoint x="1985" y="370" />
+        <di:waypoint x="2035" y="370" />
+        <di:waypoint x="2035" y="1339" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1942" y="262" width="67" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_m_t_ok__a_bond_di" bpmnElement="MessageFlow_m_t_ok__a_bond">
+        <di:waypoint x="895" y="1079" />
+        <di:waypoint x="895" y="700" />
+        <di:waypoint x="525" y="700" />
+        <di:waypoint x="525" y="575" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="899" y="1057" width="43" height="16" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
