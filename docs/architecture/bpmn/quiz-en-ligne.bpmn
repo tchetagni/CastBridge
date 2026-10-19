@@ -124,7 +124,7 @@
   </bpmn:process>
   <bpmn:process id="Process_server" isExecutable="false">
     <bpmn:laneSet id="LaneSet_server">
-      <bpmn:lane id="Lane_a1" name="castbridge-api (ticket, portefeuille)">
+      <bpmn:lane id="Lane_a1" name="castbridge-api">
         <bpmn:flowNodeRef>StartEvent_a_start</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_a_esc</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_a_tk</bpmn:flowNodeRef>
@@ -171,7 +171,8 @@
       <bpmn:outgoing>Flow_p_gate__p_room</bpmn:outgoing>
       <bpmn:outgoing>Flow_p_gate__p_ko</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:endEvent id="EndEvent_p_ko" name="Refuser : PLAY_TICKET_REFUSED, SCOPE_FORBIDDEN…">
+    <bpmn:endEvent id="EndEvent_p_ko" name="Refuser : ticket, droits ou plafonds">
+      <bpmn:documentation>Codes : PLAY_TICKET_REFUSED, PLAY_SCOPE_FORBIDDEN, PLAY_BUSY, STAKE_ESCROW_INVALID.</bpmn:documentation>
       <bpmn:incoming>Flow_p_gate__p_ko</bpmn:incoming>
       <bpmn:messageEventDefinition id="EndEvent_p_ko_def" />
     </bpmn:endEvent>
@@ -349,7 +350,7 @@
       <bpmndi:BPMNShape id="EndEvent_p_ko_di" bpmnElement="EndEvent_p_ko" bioc:stroke="#2D5776" bioc:fill="#FFFFFF">
         <dc:Bounds x="1447" y="1093" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1420" y="1132" width="90" height="68" />
+          <dc:Bounds x="1421" y="1132" width="89" height="29" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_p_room_di" bpmnElement="Task_p_room" bioc:stroke="#2D5776" bioc:fill="#D9E6F0">

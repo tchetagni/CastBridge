@@ -403,8 +403,23 @@ def assign_ports(P, nodes, order, back):
         lst.sort(key=(lambda it: nodes[it[2]]["cx"]) if side in "NS" else (lambda it: nodes[it[2]]["cy"]))
         step = 20 if n["type"] in TASKS else 8
         k = len(lst)
+        offs = [int(round((j - (k - 1) / 2.0) * step / G)) * G for j in range(k)]
+        bevs = [b["cx"] - n["cx"] for b in nodes.values() if b.get("attach") == nid] if side == "S" else []
+        if bevs and n["type"] in TASKS:
+            # les événements limites sont au bord bas : les flux de la tâche passent à 27 px au moins de leur centre
+            allowed = [o for o in range(-45, 50, G) if all(abs(o - dx) >= 27 for dx in bevs)]
+            if allowed:
+                mid = (allowed[0] + allowed[-1]) / 2.0
+                chosen = []
+                for o in sorted(allowed, key=lambda o: abs(o - mid)):
+                    if all(abs(o - c) >= 14 for c in chosen):
+                        chosen.append(o)
+                    if len(chosen) == k:
+                        break
+                if len(chosen) == k:
+                    offs = sorted(chosen)
         for j, (f, which, _) in enumerate(lst):
-            f[which] = (side, int(round((j - (k - 1) / 2.0) * step / G)) * G)
+            f[which] = (side, offs[j])
 
 
 def place_node_labels(P, nodes):
@@ -873,10 +888,17 @@ def lint(P, L):
         msgs.append("%d nœuds (attendu : de 12 à 30)" % n)
     for node in nodes.values():
         t = node["type"]
-        if t in TASKS and len(wrap(node["label"], 98, 12)) > 4:
+        if t in TASKS and len(wrap(node["label"], 98, 12)) > (4 if t == "task" else 3):
             msgs.append("tâche au libellé trop long (%d lignes) : %s" % (len(wrap(node["label"], 98, 12)), node["label"]))
         if node["lbl"] and node["label"] and node["lbl"][3] - node["lbl"][1] > 45:
             msgs.append("libellé externe sur plus de 3 lignes : %s" % node["label"])
+    for pool in P["pools"]:
+        if text_w(pool["name"], 12) > pool["h"] - 2:
+            msgs.append("nom de pool trop long pour sa hauteur : %s" % pool["name"])
+        for lane in pool["lanes"]:
+            if len(pool["lanes"]) > 1 or True:
+                if text_w(lane["name"], 12) > lane["h"] - 16:
+                    msgs.append("nom de lane trop long pour sa hauteur (%d px) : %s" % (lane["h"], lane["name"]))
     rects = {i: node_rect(nd) for i, nd in nodes.items()}
     for _, e in L["edges"]:
         for p, qq in zip(e["pts"], e["pts"][1:]):
@@ -1004,9 +1026,17 @@ def verify_all():
 
 
 # ------------------------------------------------------------------------------------------------ page
+def french(s):
+    """Espaces insécables de la typographie française (hors code) : avant : ; ? ! », après «."""
+    s = re.sub(r"(?<=\S) ([:;?!»])", "&nbsp;\\1", s)
+    s = re.sub(r"(«) ", "\\1&nbsp;", s)
+    return s.replace("'", "’")
+
+
 def inline_code(s):
     s = escape(s)
-    return re.sub(r"`([^`]+)`", r"<code>\1</code>", s)
+    parts = re.split(r"(`[^`]+`)", s)
+    return "".join("<code>%s</code>" % p[1:-1] if p.startswith("`") and p.endswith("`") and len(p) > 1 else french(p) for p in parts)
 
 
 def card_html(P, L, k):

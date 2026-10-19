@@ -72,7 +72,7 @@
       <bpmn:incoming>Flow_p_cast__p_up</bpmn:incoming>
       <bpmn:outgoing>Flow_p_up__p_ctl</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:sendTask id="SendTask_p_dlna" name="SetAVTransportURI vers la TV tierce">
+    <bpmn:sendTask id="SendTask_p_dlna" name="Envoyer l'URL à la TV tierce (DLNA)">
       <bpmn:documentation>MediaServer (port 8089) sert le fichier avec Range ; Upnp envoie la commande.</bpmn:documentation>
       <bpmn:incoming>Flow_p_cast__p_dlna</bpmn:incoming>
       <bpmn:outgoing>Flow_p_dlna__p_ctl</bpmn:outgoing>
@@ -97,8 +97,8 @@
       <bpmn:incoming>Flow_p_ctl__p_end</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_p_open__p_cast" sourceRef="StartEvent_p_open" targetRef="Gateway_p_cast" />
-    <bpmn:sequenceFlow id="Flow_p_cast__p_play" name="TV CastBridge, en direct" sourceRef="Gateway_p_cast" targetRef="SendTask_p_play" />
-    <bpmn:sequenceFlow id="Flow_p_cast__p_up" name="TV CastBridge, copier et lire" sourceRef="Gateway_p_cast" targetRef="SendTask_p_up" />
+    <bpmn:sequenceFlow id="Flow_p_cast__p_play" name="En direct" sourceRef="Gateway_p_cast" targetRef="SendTask_p_play" />
+    <bpmn:sequenceFlow id="Flow_p_cast__p_up" name="Copier et lire" sourceRef="Gateway_p_cast" targetRef="SendTask_p_up" />
     <bpmn:sequenceFlow id="Flow_p_cast__p_dlna" name="TV DLNA" sourceRef="Gateway_p_cast" targetRef="SendTask_p_dlna" />
     <bpmn:sequenceFlow id="Flow_p_play__p_ctl" sourceRef="SendTask_p_play" targetRef="Task_p_ctl" />
     <bpmn:sequenceFlow id="Flow_p_up__p_ctl" sourceRef="SendTask_p_up" targetRef="Task_p_ctl" />
@@ -211,7 +211,7 @@
   </bpmn:process>
   <bpmn:process id="Process_yt" isExecutable="false">
     <bpmn:laneSet id="LaneSet_yt">
-      <bpmn:lane id="Lane_y1" name="YouTube sur le téléphone">
+      <bpmn:lane id="Lane_y1" name="YouTube (téléphone)">
         <bpmn:flowNodeRef>StartEvent_y_start</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_y_send</bpmn:flowNodeRef>
       </bpmn:lane>
@@ -469,7 +469,7 @@
         <di:waypoint x="635" y="409" />
         <di:waypoint x="650" y="409" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="561" y="374" width="92" height="29" />
+          <dc:Bounds x="561" y="387" width="46" height="16" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_p_cast__p_up_di" bpmnElement="Flow_p_cast__p_up">
@@ -479,7 +479,7 @@
         <di:waypoint x="635" y="629" />
         <di:waypoint x="650" y="629" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="434" y="440" width="77" height="29" />
+          <dc:Bounds x="446" y="440" width="65" height="16" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_p_ctl__p_end_di" bpmnElement="Flow_p_ctl__p_end">
@@ -502,8 +502,8 @@
         <di:waypoint x="1275" y="575" />
         <di:waypoint x="800" y="575" />
         <di:waypoint x="800" y="465" />
-        <di:waypoint x="715" y="465" />
-        <di:waypoint x="715" y="449" />
+        <di:waypoint x="725" y="465" />
+        <di:waypoint x="725" y="449" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1177" y="577" width="92" height="16" />
         </bpmndi:BPMNLabel>
@@ -628,14 +628,14 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="MessageFlow_m_p_play__r_play_di" bpmnElement="MessageFlow_m_p_play__r_play">
-        <di:waypoint x="695" y="449" />
-        <di:waypoint x="695" y="570" />
+        <di:waypoint x="710" y="449" />
+        <di:waypoint x="710" y="570" />
         <di:waypoint x="610" y="570" />
         <di:waypoint x="610" y="1115" />
         <di:waypoint x="700" y="1115" />
         <di:waypoint x="700" y="1134" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="646" y="552" width="43" height="16" />
+          <dc:Bounds x="661" y="552" width="43" height="16" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="MessageFlow_m_p_up__r_play_di" bpmnElement="MessageFlow_m_p_up__r_play">

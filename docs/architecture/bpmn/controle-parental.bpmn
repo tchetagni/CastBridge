@@ -42,7 +42,7 @@
     <bpmn:startEvent id="StartEvent_u_c0" name="L'enfant utilise la TV">
       <bpmn:outgoing>Flow_u_c0__u_c1</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:endEvent id="EndEvent_u_c1" name="Lancer une vidéo ou une application, ouvrir MENU">
+    <bpmn:endEvent id="EndEvent_u_c1" name="Lancer une vidéo ou une application">
       <bpmn:incoming>Flow_u_c0__u_c1</bpmn:incoming>
       <bpmn:messageEventDefinition id="EndEvent_u_c1_def" />
     </bpmn:endEvent>
@@ -53,7 +53,7 @@
   </bpmn:process>
   <bpmn:process id="Process_tv" isExecutable="false">
     <bpmn:laneSet id="LaneSet_tv">
-      <bpmn:lane id="Lane_t1" name="Configuration (ParentalHub, ParentalEngine)">
+      <bpmn:lane id="Lane_t1" name="Configuration">
         <bpmn:flowNodeRef>StartEvent_c_cfg</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_c_pin</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_c_prof</bpmn:flowNodeRef>
@@ -106,7 +106,7 @@
       <bpmn:outgoing>Flow_e_in__e_dec</bpmn:outgoing>
       <bpmn:messageEventDefinition id="StartEvent_e_in_def" />
     </bpmn:startEvent>
-    <bpmn:exclusiveGateway id="Gateway_e_dec" name="Règle : classement, catégorie, heures, durée ?" default="Flow_e_dec__e_ok">
+    <bpmn:exclusiveGateway id="Gateway_e_dec" name="Règle respectée ?" default="Flow_e_dec__e_ok">
       <bpmn:documentation>ParentalEngine : décision pure ; surveillance de toute la TV par application (ForegroundWatcher, statistiques d'usage ou service d'accessibilité).</bpmn:documentation>
       <bpmn:incoming>Flow_e_in__e_dec</bpmn:incoming>
       <bpmn:outgoing>Flow_e_dec__e_ok</bpmn:outgoing>
@@ -141,7 +141,8 @@
       <bpmn:outgoing>Flow_e_chk__e_end</bpmn:outgoing>
       <bpmn:outgoing>Flow_e_chk__e_fail</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:endEvent id="EndEvent_e_end" name="Séance parent de 30 minutes : règles suspendues">
+    <bpmn:endEvent id="EndEvent_e_end" name="Séance parent de 30 min">
+      <bpmn:documentation>Les règles sont suspendues pendant la séance parent.</bpmn:documentation>
       <bpmn:incoming>Flow_e_chk__e_end</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:task id="Task_e_fail" name="Échec compté : verrou progressif">
@@ -168,7 +169,8 @@
       <bpmn:incoming>Flow_k_stop__k_sync</bpmn:incoming>
       <bpmn:outgoing>Flow_k_sync__k_ready</bpmn:outgoing>
     </bpmn:task>
-    <bpmn:endEvent id="EndEvent_k_ready" name="Clé retirable (10 minutes, sinon reprise des copies)">
+    <bpmn:endEvent id="EndEvent_k_ready" name="Clé retirable (10 min)">
+      <bpmn:documentation>Dix minutes sans retrait : les copies reprennent toutes seules.</bpmn:documentation>
       <bpmn:incoming>Flow_k_sync__k_ready</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_c_cfg__c_pin" sourceRef="StartEvent_c_cfg" targetRef="Task_c_pin" />
@@ -193,7 +195,7 @@
   </bpmn:process>
   <bpmn:process id="Process_phone" isExecutable="false">
     <bpmn:laneSet id="LaneSet_phone">
-      <bpmn:lane id="Lane_p1" name="Téléphone du parent (ParentalInbox)">
+      <bpmn:lane id="Lane_p1" name="Téléphone du parent">
         <bpmn:flowNodeRef>StartEvent_ph_in</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_ph_store</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_ph_end</bpmn:flowNodeRef>
@@ -270,7 +272,7 @@
       <bpmndi:BPMNShape id="EndEvent_u_c1_di" bpmnElement="EndEvent_u_c1" bioc:stroke="#455A64" bioc:fill="#FFFFFF">
         <dc:Bounds x="307" y="227" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="281" y="169" width="89" height="55" />
+          <dc:Bounds x="279" y="195" width="92" height="29" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="StartEvent_c_cfg_di" bpmnElement="StartEvent_c_cfg" bioc:stroke="#885600" bioc:fill="#FFFFFF">
@@ -303,7 +305,7 @@
       <bpmndi:BPMNShape id="Gateway_e_dec_di" bpmnElement="Gateway_e_dec" isMarkerVisible="true" bioc:stroke="#885600" bioc:fill="#FFFFFF">
         <dc:Bounds x="490" y="616" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="470" y="558" width="91" height="55" />
+          <dc:Bounds x="469" y="597" width="92" height="16" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_e_ok_di" bpmnElement="EndEvent_e_ok" bioc:stroke="#885600" bioc:fill="#FFFFFF">
@@ -342,7 +344,7 @@
       <bpmndi:BPMNShape id="EndEvent_e_end_di" bpmnElement="EndEvent_e_end" bioc:stroke="#885600" bioc:fill="#FFFFFF">
         <dc:Bounds x="1447" y="733" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1421" y="772" width="89" height="55" />
+          <dc:Bounds x="1421" y="701" width="89" height="29" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_e_fail_di" bpmnElement="Task_e_fail" bioc:stroke="#885600" bioc:fill="#FAE8B9">
@@ -369,7 +371,7 @@
       <bpmndi:BPMNShape id="EndEvent_k_ready_di" bpmnElement="EndEvent_k_ready" bioc:stroke="#885600" bioc:fill="#FFFFFF">
         <dc:Bounds x="1447" y="1118" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1425" y="1157" width="81" height="55" />
+          <dc:Bounds x="1425" y="1157" width="81" height="29" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="StartEvent_ph_in_di" bpmnElement="StartEvent_ph_in" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
@@ -603,8 +605,8 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="MessageFlow_m_u_p1__c_cfg_di" bpmnElement="MessageFlow_m_u_p1__c_cfg">
         <di:waypoint x="325" y="135" />
-        <di:waypoint x="325" y="160" />
-        <di:waypoint x="420" y="160" />
+        <di:waypoint x="325" y="190" />
+        <di:waypoint x="420" y="190" />
         <di:waypoint x="420" y="455" />
         <di:waypoint x="325" y="455" />
         <di:waypoint x="325" y="473" />

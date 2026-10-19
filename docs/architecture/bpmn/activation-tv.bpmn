@@ -30,7 +30,7 @@
   </bpmn:process>
   <bpmn:process id="Process_usb" isExecutable="false">
     <bpmn:laneSet id="LaneSet_usb">
-      <bpmn:lane id="Lane_k1" name="Fichier d'activation préparé par l'agent">
+      <bpmn:lane id="Lane_k1" name="Fichier d'activation">
         <bpmn:flowNodeRef>StartEvent_k_start</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_k_write</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_k_plug</bpmn:flowNodeRef>
@@ -77,8 +77,8 @@
       <bpmn:outgoing>Flow_a_joined__a_req</bpmn:outgoing>
       <bpmn:outgoing>Flow_a_joined__a_none</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:serviceTask id="ServiceTask_a_req" name="Lire la demande d'appareil (code, facteurs, install_sig)">
-      <bpmn:documentation>GET /api/activation/device-request avec le code dans X-CB-Pin ; jamais de ligne install=.</bpmn:documentation>
+    <bpmn:serviceTask id="ServiceTask_a_req" name="Lire la demande d'appareil">
+      <bpmn:documentation>GET /api/activation/device-request avec le code dans X-CB-Pin ; la demande porte code=, k=, factor= et install_sig=, jamais install=.</bpmn:documentation>
       <bpmn:incoming>Flow_a_joined__a_req</bpmn:incoming>
       <bpmn:outgoing>Flow_a_req__a_key</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -174,7 +174,8 @@
       <bpmn:outgoing>Flow_k_ok__k_inst</bpmn:outgoing>
       <bpmn:outgoing>Flow_k_ok__k_ko</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:endEvent id="EndEvent_k_ko" name="Refus avec la cause (périmée, autre TV, clé inconnue)">
+    <bpmn:endEvent id="EndEvent_k_ko" name="Refus avec la cause">
+      <bpmn:documentation>Clé périmée, faite pour une autre TV, clé de confiance inconnue, conditions d'usage non acceptées.</bpmn:documentation>
       <bpmn:incoming>Flow_k_ok__k_ko</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:task id="Task_k_inst" name="Installer la clé (la production s'ajoute à l'essai)">
@@ -379,7 +380,7 @@
       <bpmndi:BPMNShape id="EndEvent_k_ko_di" bpmnElement="EndEvent_k_ko" bioc:stroke="#885600" bioc:fill="#FFFFFF">
         <dc:Bounds x="1637" y="1321" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1615" y="1360" width="81" height="55" />
+          <dc:Bounds x="1621" y="1360" width="69" height="29" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_k_inst_di" bpmnElement="Task_k_inst" bioc:stroke="#885600" bioc:fill="#FAE8B9">

@@ -42,7 +42,7 @@
   </bpmn:process>
   <bpmn:process id="Process_phone" isExecutable="false">
     <bpmn:laneSet id="LaneSet_phone">
-      <bpmn:lane id="Lane_q" name="File d'envoi (TransferQueue)">
+      <bpmn:lane id="Lane_q" name="File d'envoi">
         <bpmn:flowNodeRef>StartEvent_q_in</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_q_link</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_g_route</bpmn:flowNodeRef>
@@ -155,7 +155,7 @@
         <bpmn:flowNodeRef>Task_l_play</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_r_end</bpmn:flowNodeRef>
       </bpmn:lane>
-      <bpmn:lane id="Lane_b" name="Écran de la TV (accueil, MENU)">
+      <bpmn:lane id="Lane_b" name="Écran de la TV">
         <bpmn:flowNodeRef>StartEvent_c_start</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>UserTask_c_task</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ServiceTask_c_do</bpmn:flowNodeRef>
@@ -202,7 +202,7 @@
     <bpmn:startEvent id="StartEvent_c_start" name="Copie interrompue (puce d'accueil)">
       <bpmn:outgoing>Flow_c_start__c_task</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:userTask id="UserTask_c_task" name="MENU › Copie : annuler, confirmer">
+    <bpmn:userTask id="UserTask_c_task" name="MENU › Copie : annuler">
       <bpmn:incoming>Flow_c_start__c_task</bpmn:incoming>
       <bpmn:outgoing>Flow_c_task__c_do</bpmn:outgoing>
     </bpmn:userTask>

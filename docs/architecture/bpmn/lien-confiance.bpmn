@@ -7,7 +7,7 @@
     <bpmn:messageFlow id="MessageFlow_m_n_pub__p_find" name="mDNS" sourceRef="EndEvent_n_pub" targetRef="Task_p_find" />
     <bpmn:messageFlow id="MessageFlow_m_a_bond__t_win" name="Demande d'ajout" sourceRef="ServiceTask_a_bond" targetRef="StartEvent_t_win" />
     <bpmn:messageFlow id="MessageFlow_m_t_ok__a_bond" name="Autorisé" sourceRef="EndEvent_t_ok" targetRef="ServiceTask_a_bond" />
-    <bpmn:messageFlow id="MessageFlow_m_p_hello__h_recv" name="HELLO" sourceRef="ServiceTask_p_hello" targetRef="StartEvent_h_recv" />
+    <bpmn:messageFlow id="MessageFlow_m_p_hello__h_recv" sourceRef="ServiceTask_p_hello" targetRef="StartEvent_h_recv" />
     <bpmn:messageFlow id="MessageFlow_m_h_deny__b_deny" name="Refus" sourceRef="EndEvent_h_deny" targetRef="BoundaryEvent_b_deny" />
     <bpmn:messageFlow id="MessageFlow_m_h_ans__p_hello" name="Jeton" sourceRef="EndEvent_h_ans" targetRef="ServiceTask_p_hello" />
     <bpmn:messageFlow id="MessageFlow_m_p_probe__i_recv" name="GET /api/info" sourceRef="ServiceTask_p_probe" targetRef="StartEvent_i_recv" />
@@ -55,8 +55,8 @@
       <bpmn:outgoing>Flow_a_bt__p_find</bpmn:outgoing>
       <bpmn:outgoing>Flow_a_bt__a_pin</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="UserTask_a_pin" name="Saisir le PIN à 6 chiffres (une fois par TV)">
-      <bpmn:documentation>PinBook : une fiche par TV (bt:&lt;adresse&gt;, name:, host:), jamais effacée sur refus.</bpmn:documentation>
+    <bpmn:userTask id="UserTask_a_pin" name="Saisir le PIN à 6 chiffres">
+      <bpmn:documentation>Une seule fois par TV. PinBook : une fiche par TV (bt:&lt;adresse&gt;, name:, host:), jamais effacée sur refus.</bpmn:documentation>
       <bpmn:incoming>Flow_a_bt__a_pin</bpmn:incoming>
       <bpmn:outgoing>Flow_a_pin__p_find</bpmn:outgoing>
     </bpmn:userTask>
@@ -135,11 +135,11 @@
   </bpmn:process>
   <bpmn:process id="Process_tv" isExecutable="false">
     <bpmn:laneSet id="LaneSet_tv">
-      <bpmn:lane id="Lane_t1" name="Annonce (mDNS, TvService)">
+      <bpmn:lane id="Lane_t1" name="Annonce mDNS">
         <bpmn:flowNodeRef>StartEvent_n_ann</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_n_pub</bpmn:flowNodeRef>
       </bpmn:lane>
-      <bpmn:lane id="Lane_t2" name="HELLO et registre (HelloHandler, TrustRegistry)">
+      <bpmn:lane id="Lane_t2" name="HELLO et registre">
         <bpmn:flowNodeRef>StartEvent_h_recv</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_h_peer</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_h_deny</bpmn:flowNodeRef>
@@ -539,8 +539,8 @@
         <di:waypoint x="2225" y="135" />
         <di:waypoint x="2130" y="135" />
         <di:waypoint x="2130" y="260" />
-        <di:waypoint x="1485" y="260" />
-        <di:waypoint x="1485" y="245" />
+        <di:waypoint x="1500" y="260" />
+        <di:waypoint x="1500" y="245" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="2050" y="229" width="74" height="29" />
         </bpmndi:BPMNLabel>
@@ -603,8 +603,8 @@
         <di:waypoint x="1845" y="1155" />
         <di:waypoint x="1750" y="1155" />
         <di:waypoint x="1750" y="265" />
-        <di:waypoint x="1465" y="265" />
-        <di:waypoint x="1465" y="245" />
+        <di:waypoint x="1485" y="265" />
+        <di:waypoint x="1485" y="245" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1849" y="1167" width="29" height="16" />
         </bpmndi:BPMNLabel>
@@ -648,13 +648,10 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="MessageFlow_m_p_hello__h_recv_di" bpmnElement="MessageFlow_m_p_hello__h_recv">
-        <di:waypoint x="1445" y="245" />
-        <di:waypoint x="1445" y="1060" />
+        <di:waypoint x="1470" y="245" />
+        <di:waypoint x="1470" y="1060" />
         <di:waypoint x="1465" y="1060" />
         <di:waypoint x="1465" y="1079" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1451" y="1042" width="39" height="16" />
-        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="MessageFlow_m_p_probe__i_recv_di" bpmnElement="MessageFlow_m_p_probe__i_recv">
         <di:waypoint x="2015" y="135" />

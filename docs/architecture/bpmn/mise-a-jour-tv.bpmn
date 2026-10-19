@@ -5,7 +5,7 @@
     <bpmn:participant id="Participant_phone" name="CastBridge (téléphone)" processRef="Process_phone" />
     <bpmn:participant id="Participant_tv" name="CastBridge-TV" processRef="Process_tv" />
     <bpmn:participant id="Participant_usb" name="Clé USB" processRef="Process_usb" />
-    <bpmn:messageFlow id="MessageFlow_m_p_inst__t_in" name="/api/apk/install" sourceRef="SendTask_p_inst" targetRef="StartEvent_t_in" />
+    <bpmn:messageFlow id="MessageFlow_m_p_inst__t_in" sourceRef="SendTask_p_inst" targetRef="StartEvent_t_in" />
     <bpmn:messageFlow id="MessageFlow_m_t_ref__b_err" name="400, 404, 409" sourceRef="EndEvent_t_ref" targetRef="BoundaryEvent_b_err" />
     <bpmn:messageFlow id="MessageFlow_m_t_403__b_perm" name="403" sourceRef="EndEvent_t_403" targetRef="BoundaryEvent_b_perm" />
     <bpmn:messageFlow id="MessageFlow_m_k_plug__x_in" name="Clé branchée" sourceRef="EndEvent_k_plug" targetRef="StartEvent_x_in" />
@@ -27,7 +27,8 @@
         <bpmn:flowNodeRef>EndEvent_p_end</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:startEvent id="StartEvent_p_start" name="APK de CastBridge-TV obtenu (WhatsApp, Fichiers, /telecharger)">
+    <bpmn:startEvent id="StartEvent_p_start" name="APK de CastBridge-TV obtenu">
+      <bpmn:documentation>WhatsApp, Fichiers ou la page /telecharger du serveur.</bpmn:documentation>
       <bpmn:outgoing>Flow_p_start__p_imp</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:task id="Task_p_imp" name="Importer l'APK : paquet et certificat">
@@ -73,7 +74,8 @@
       <bpmn:incoming>Flow_b_perm__p_wait</bpmn:incoming>
       <bpmn:outgoing>Flow_p_wait__p_inst</bpmn:outgoing>
     </bpmn:task>
-    <bpmn:endEvent id="EndEvent_p_fail" name="APK refusé : plus ancien, autre signature ou illisible">
+    <bpmn:endEvent id="EndEvent_p_fail" name="APK refusé">
+      <bpmn:documentation>Version plus ancienne (409), signature différente ou fichier illisible (400), APK introuvable (404).</bpmn:documentation>
       <bpmn:incoming>Flow_b_err__p_fail</bpmn:incoming>
       <bpmn:errorEventDefinition id="EndEvent_p_fail_def" />
     </bpmn:endEvent>
@@ -103,7 +105,7 @@
         <bpmn:flowNodeRef>EndEvent_t_403</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_t_pi</bpmn:flowNodeRef>
       </bpmn:lane>
-      <bpmn:lane id="Lane_t2" name="Écran et explorateur de la TV">
+      <bpmn:lane id="Lane_t2" name="Écran et explorateur">
         <bpmn:flowNodeRef>UserTask_t_conf</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_t_repl</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_t_end</bpmn:flowNodeRef>
@@ -143,7 +145,8 @@
       <bpmn:incoming>Flow_t_perm__t_pi</bpmn:incoming>
       <bpmn:outgoing>Flow_t_pi__t_conf</bpmn:outgoing>
     </bpmn:task>
-    <bpmn:userTask id="UserTask_t_conf" name="Valider l'installation à l'écran (télécommande)">
+    <bpmn:userTask id="UserTask_t_conf" name="Valider l'installation à l'écran">
+      <bpmn:documentation>Avec la télécommande : Android demande une confirmation pour chaque application.</bpmn:documentation>
       <bpmn:incoming>Flow_t_pi__t_conf</bpmn:incoming>
       <bpmn:incoming>Flow_x_expl__t_conf</bpmn:incoming>
       <bpmn:outgoing>Flow_t_conf__t_repl</bpmn:outgoing>
@@ -178,7 +181,7 @@
   </bpmn:process>
   <bpmn:process id="Process_usb" isExecutable="false">
     <bpmn:laneSet id="LaneSet_usb">
-      <bpmn:lane id="Lane_k1" name="Dossier Download de la clé">
+      <bpmn:lane id="Lane_k1" name="Dossier Download">
         <bpmn:flowNodeRef>StartEvent_k_start</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_k_copy</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_k_plug</bpmn:flowNodeRef>
@@ -225,7 +228,7 @@
       <bpmndi:BPMNShape id="StartEvent_p_start_di" bpmnElement="StartEvent_p_start" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
         <dc:Bounds x="117" y="77" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="98" y="116" width="75" height="82" />
+          <dc:Bounds x="98" y="116" width="75" height="42" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_p_imp_di" bpmnElement="Task_p_imp" bioc:stroke="#0A6A4B" bioc:fill="#D3ECE1">
@@ -267,7 +270,7 @@
       <bpmndi:BPMNShape id="EndEvent_p_fail_di" bpmnElement="EndEvent_p_fail" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
         <dc:Bounds x="2017" y="297" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1992" y="336" width="87" height="55" />
+          <dc:Bounds x="2006" y="336" width="58" height="16" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_p_end_di" bpmnElement="EndEvent_p_end" bioc:stroke="#0A6A4B" bioc:fill="#FFFFFF">
@@ -532,9 +535,6 @@
         <di:waypoint x="1265" y="555" />
         <di:waypoint x="1275" y="555" />
         <di:waypoint x="1275" y="574" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1189" y="141" width="72" height="16" />
-        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="MessageFlow_m_t_403__b_perm_di" bpmnElement="MessageFlow_m_t_403__b_perm">
         <di:waypoint x="2035" y="684" />

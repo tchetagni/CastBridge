@@ -52,3 +52,10 @@ une référence inconnue, un nœud sans flux, un flux de séquence entre deux po
 
 `--verify` contrôle pour chaque fichier : XML bien formé, identifiants uniques, `bpmnElement` résolus, un `BPMNShape` par nœud, pool et lane (pools et lanes en
 `isHorizontal="true"`), un `BPMNEdge` par flux, segments orthogonaux dont les extrémités sont sur le bord de leurs formes, flux de message entre deux pools.
+
+## Notes
+
+- **Filigrane bpmn.io.** Le viewer affiche par défaut un logo bpmn.io. Il est masqué par CSS (`.bjs-powered-by`) à la demande du propriétaire, et la section 10 cite bpmn-js (bpmn.io). La licence de bpmn.io demande de conserver ce filigrane : à revoir avant toute diffusion publique de la page.
+- **Page sans enveloppe.** La page commence par `<title>` puis `<style>` et n'a ni `<html>`, ni `<head>`, ni `<body>` : c'est le contrat des artefacts. Les couleurs sont des jetons de `:root`, redéfinis pour le thème sombre (`@media (prefers-color-scheme: dark)` et `:root[data-theme="dark"]`) ; le fond du viewer BPMN (`--diagram-bg`) reste clair dans les deux thèmes.
+- **Scripts externes.** Un seul : `https://unpkg.com/bpmn-js@17.11.1/dist/bpmn-viewer.production.min.js`. Les feuilles `diagram-js.css` et `bpmn-js.css` du même paquet sont recopiées, minifiées et sans règle qui charge une ressource, dans le `<style>`. Mermaid est fourni par la plateforme (`<pre class="mermaid">`).
+- **Boutons.** « Copier le XML » écrit dans le presse-papiers depuis le gestionnaire de clic (`navigator.clipboard.writeText`) et, s'il est refusé, sélectionne le XML dans une zone de texte. Il n'y a aucun lien de téléchargement.

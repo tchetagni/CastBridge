@@ -148,8 +148,8 @@ RAW.append(dict(
     """,
     pools=[
         ("user", "Utilisateur / Propriétaire", "user", [("u1", "Sur le téléphone")]),
-        ("phone", "CastBridge (téléphone)", "phone", [("q", "File d'envoi (TransferQueue)"), ("s", "Envoi (UploadService, BtUploadService)")]),
-        ("tv", "CastBridge-TV", "tv", [("r", "Réception (ReceiverServer, BtServer)"), ("b", "Écran de la TV (accueil, MENU)")]),
+        ("phone", "CastBridge (téléphone)", "phone", [("q", "File d'envoi"), ("s", "Envoi (UploadService, BtUploadService)")]),
+        ("tv", "CastBridge-TV", "tv", [("r", "Réception (ReceiverServer, BtServer)"), ("b", "Écran de la TV")]),
     ],
     nodes="""
         u_start | u1 | start           | Copier un fichier vers la TV
@@ -177,8 +177,8 @@ RAW.append(dict(
         r_final | r  | task            | Vérifier, renommer, ranger en bibliothèque | | Relecture et SHA-256 des blocs (multivoie), renommage atomique, vignette.
         l_play  | r  | task            | Lire le .part pendant la copie | | Lecture progressive du fichier qui grandit (Progressive, PlaybackPriority).
         r_end   | r  | end             | Fichier dans la bibliothèque
-        c_start | b  | start           | Copie interrompue (puce d'accueil)
-        c_task  | b  | user            | MENU › Copie : annuler, confirmer
+        c_start | b | start | Copie interrompue (puce d'accueil)
+        c_task  | b | user | MENU › Copie : annuler
         c_do    | b  | service         | cancelReception : refus 10 min, effacer le .part
         c_end   | b  | end             | Copie annulée
     """,
@@ -244,14 +244,14 @@ RAW.append(dict(
     """,
     pools=[
         ("phone", "CastBridge (téléphone)", "phone", [("p1", "Boucle du lien (LinkDriver)"), ("p2", "Association (PairFlow, PinBook)")]),
-        ("tv", "CastBridge-TV", "tv", [("t1", "Annonce (mDNS, TvService)"), ("t2", "HELLO et registre (HelloHandler, TrustRegistry)"), ("t3", "API HTTP (ReceiverServer)")]),
+        ("tv", "CastBridge-TV", "tv", [("t1", "Annonce mDNS"), ("t2", "HELLO et registre"), ("t3", "API HTTP (ReceiverServer)")]),
     ],
     nodes="""
         p_start | p1 | start            | Ouverture, réseau ou tâche périodique | | Déclencheurs : ouverture de l'app, écran allumé, réseau, diffusions Bluetooth, job périodique de 15 min.
         p_known | p1 | xor              | TV déjà ajoutée ?
         a_bond  | p2 | service          | Appairer en Bluetooth, demander l'ajout | | Comparaison du code sur les deux écrans, puis demande d'ajout à la TV (PairFlow).
         a_bt    | p2 | xor              | Bluetooth utilisable ?
-        a_pin   | p2 | user             | Saisir le PIN à 6 chiffres (une fois par TV) | | PinBook : une fiche par TV (bt:<adresse>, name:, host:), jamais effacée sur refus.
+        a_pin   | p2 | user | Saisir le PIN à 6 chiffres |  | Une seule fois par TV. PinBook : une fiche par TV (bt:<adresse>, name:, host:), jamais effacée sur refus.
         p_find  | p1 | task             | Chercher la TV : mDNS, sinon Bluetooth
         p_tok   | p1 | xor              | Jeton valide (marge de 60 s) ?
         p_hello | p1 | service          | HELLO Bluetooth (RFCOMM, TV appairée) | | Un HELLO ne porte jamais le PIN ; 10 HELLO par minute au plus par pair côté TV (ERR_BUSY).
@@ -310,7 +310,7 @@ RAW.append(dict(
         n_pub => p_find : mDNS
         a_bond => t_win : Demande d'ajout
         t_ok => a_bond : Autorisé
-        p_hello => h_recv : HELLO
+        p_hello => h_recv
         h_deny => b_deny : Refus
         h_ans => p_hello : Jeton
         p_probe => i_recv : GET /api/info
@@ -343,7 +343,7 @@ RAW.append(dict(
     """,
     pools=[
         ("user", "Utilisateur / Propriétaire", "user", [("o1", "Devant la TV")]),
-        ("usb", "Clé USB", "usb", [("k1", "Fichier d'activation préparé par l'agent")]),
+        ("usb", "Clé USB", "usb", [("k1", "Fichier d'activation")]),
         ("phone", "CastBridge (téléphone)", "phone", [("p1", "Activer la TV (ActivationDriver)")]),
         ("tv", "CastBridge-TV", "tv", [("t1", "État et écran d'activation (FeatureGate)"), ("t2", "Réception de la clé (ActivationReceiver)")]),
         ("server", "Serveur bridge.sti-cm.com", "server", [("v1", "Licences et portefeuille")]),
@@ -357,7 +357,7 @@ RAW.append(dict(
         a_start | p1 | start            | « Activer la TV » : code de connexion saisi | | Le code à 6 chiffres affiché par la TV suffit (règle du 2026-10-07).
         a_plan  | p1 | task             | Essayer les voies : réseau local, Bluetooth, Wi-Fi Direct | | ActivationRoutePlan : réseau local (10 s), Bluetooth sans appairage (25 s), réseau de la TV (50 s), Bluetooth appairé (20 s, 90 s si appairage).
         a_joined| p1 | xor              | TV jointe ?
-        a_req   | p1 | service          | Lire la demande d'appareil (code, facteurs, install_sig) | | GET /api/activation/device-request avec le code dans X-CB-Pin ; jamais de ligne install=.
+        a_req   | p1 | service | Lire la demande d'appareil |  | GET /api/activation/device-request avec le code dans X-CB-Pin ; la demande porte code=, k=, factor= et install_sig=, jamais install=.
         a_key   | p1 | task             | Obtenir la clé : console, collage ou fichier | | Console du propriétaire (émettre et installer), clé collée ou fichier ; la demande au serveur est éteinte (ServerActivationRequests.ENABLED = false).
         a_send  | p1 | end:message      | Envoyer la clé et le code à la TV | | POST /api/activation/install ; la clé et le code ne partent qu'à la TV qui a répondu 200.
         a_none  | p1 | end              | Dernier recours : clé USB ou télécommande
@@ -371,7 +371,7 @@ RAW.append(dict(
         c_net   | t2 | catch:message    | Clé reçue du téléphone
         k_ver   | t2 | task             | Vérifier : signature, matériel, 48 h, clé d'installation | | ActivationReceiver : ActivationVerifier puis ActivationBinding ; les clés de confiance sont compilées dans la TV (BuildConfig.TRUSTED_KEYS).
         k_ok    | t2 | xor              | Clé valable ?
-        k_ko    | t2 | end              | Refus avec la cause (périmée, autre TV, clé inconnue)
+        k_ko    | t2 | end | Refus avec la cause |  | Clé périmée, faite pour une autre TV, clé de confiance inconnue, conditions d'usage non acceptées.
         k_inst  | t2 | task             | Installer la clé (la production s'ajoute à l'essai) | | InstalledActivations garde l'essai et la production ; TvGate rend essai, production ou super illimité.
         k_done  | t2 | end:message      | TV activée : notifier le serveur
         v_in    | v1 | start:message    | Activation notifiée (preuve bind, install_sig)
@@ -441,7 +441,7 @@ RAW.append(dict(
         ("phone", "CastBridge (téléphone)", "phone", [("p1", "Lecteur et « Caster » (player/)")]),
         ("dlna", "TV tierce (DLNA)", "other", [("l1", "Récepteur DLNA")]),
         ("tv", "CastBridge-TV", "tv", [("t1", "Lecture (PlayerActivity, libVLC)"), ("t2", "DIAL (DialHost)")]),
-        ("yt", "Application YouTube", "other", [("y1", "YouTube sur le téléphone")]),
+        ("yt", "Application YouTube", "other", [("y1", "YouTube (téléphone)")]),
     ],
     nodes="""
         u_start | u1 | start            | Ouvrir une vidéo avec CastBridge
@@ -451,7 +451,7 @@ RAW.append(dict(
         p_cast  | p1 | xor              | Quelle cible ?
         p_play  | p1 | send             | Lire en direct : POST /api/play ou /api/playurl | | La TV lit le petit serveur HTTP du téléphone (route /api/playurl, TV 0.6.5 et plus).
         p_up    | p1 | send             | Copier et lire : envoi progressif | | UploadService en mode progressif ; le fichier est mis dans la file d'envoi.
-        p_dlna  | p1 | send             | SetAVTransportURI vers la TV tierce | | MediaServer (port 8089) sert le fichier avec Range ; Upnp envoie la commande.
+        p_dlna  | p1 | send | Envoyer l'URL à la TV tierce (DLNA) |  | MediaServer (port 8089) sert le fichier avec Range ; Upnp envoie la commande.
         b_409   | p1 | boundary:message | 409 needsForeground | attach=p_play
         p_fg    | p1 | task             | Ouvrir CastBridge-TV sur la TV (OpenTvFlow) | | OpenTv.playOpeningTv : ouvre CastBridge-TV puis réessaie 5 fois à 1 s d'intervalle.
         p_ctl   | p1 | task             | Devenir la télécommande : lecture, ±10 s, volume | | « Revenir sur le téléphone » reprend à la position de la TV.
@@ -477,8 +477,8 @@ RAW.append(dict(
         u_start -> u_pick
         u_pick -> u_end
         p_open -> p_cast
-        p_cast -> p_play : TV CastBridge, en direct *
-        p_cast -> p_up : TV CastBridge, copier et lire
+        p_cast -> p_play : En direct *
+        p_cast -> p_up : Copier et lire
         p_cast -> p_dlna : TV DLNA
         p_play -> p_ctl
         p_up -> p_ctl
@@ -535,11 +535,11 @@ RAW.append(dict(
     """,
     pools=[
         ("phone", "CastBridge (téléphone)", "phone", [("p1", "Mettre à jour la TV")]),
-        ("tv", "CastBridge-TV", "tv", [("t1", "API et installateur (UpdateInstaller)"), ("t2", "Écran et explorateur de la TV")]),
-        ("usb", "Clé USB", "usb", [("k1", "Dossier Download de la clé")]),
+        ("tv", "CastBridge-TV", "tv", [("t1", "API et installateur (UpdateInstaller)"), ("t2", "Écran et explorateur")]),
+        ("usb", "Clé USB", "usb", [("k1", "Dossier Download")]),
     ],
     nodes="""
-        p_start | p1 | start            | APK de CastBridge-TV obtenu (WhatsApp, Fichiers, /telecharger)
+        p_start | p1 | start            | APK de CastBridge-TV obtenu | | WhatsApp, Fichiers ou la page /telecharger du serveur.
         p_imp   | p1 | task             | Importer l'APK : paquet et certificat | | Vérifie le paquet castbridge.receiver et le certificat ef2908… ; aucun APK de la TV n'est embarqué dans CastBridge.
         p_x     | p1 | xor              | Partager à un autre téléphone ?
         p_share | p1 | task             | Partager CastBridge-TV (autre téléphone)
@@ -549,16 +549,16 @@ RAW.append(dict(
         b_perm  | p1 | boundary:message | 403 non autorisé | attach=p_inst
         b_err   | p1 | boundary:message | 400, 404 ou 409 | attach=p_inst
         p_wait  | p1 | task             | Autoriser « Installer des apps inconnues »
-        p_fail  | p1 | end:error        | APK refusé : plus ancien, autre signature ou illisible
+        p_fail  | p1 | end:error        | APK refusé | | Version plus ancienne (409), signature différente ou fichier illisible (400), APK introuvable (404).
         p_end   | p1 | end              | Installation lancée
         t_in    | t1 | start:message    | Installation demandée
         t_chk   | t1 | task             | Inspecter l'APK : paquet, version, signature | | UpdateInstaller : 404 introuvable, 400 illisible ou signature différente, 409 version plus ancienne (pas de rétrogradation).
         t_ok    | t1 | xor              | APK valide ?
-        t_ref   | t1 | end:message      | Répondre 400, 404 ou 409
+        t_ref   | t1 | end:message | Répondre 400, 404 ou 409
         t_perm  | t1 | xor              | Apps inconnues autorisées ?
         t_403   | t1 | end:message      | Répondre 403 needsPermission | | Ouvre aussi les réglages « Installer des apps inconnues » de la TV.
         t_pi    | t1 | task             | Ouvrir une session PackageInstaller
-        t_conf  | t2 | user             | Valider l'installation à l'écran (télécommande)
+        t_conf  | t2 | user | Valider l'installation à l'écran |  | Avec la télécommande : Android demande une confirmation pour chaque application.
         t_repl  | t2 | task             | Android remplace l'app puis la relance | | MY_PACKAGE_REPLACED, BootReceiver, TvService.
         t_end   | t2 | end              | TV à jour
         x_in    | t2 | start:message    | Clé USB branchée
@@ -594,7 +594,7 @@ RAW.append(dict(
         k_copy -> k_plug
     """,
     messages="""
-        p_inst => t_in : /api/apk/install
+        p_inst => t_in
         t_ref => b_err : 400, 404, 409
         t_403 => b_perm : 403
         k_plug => x_in : Clé branchée
@@ -614,20 +614,14 @@ RAW.append(dict(
     id="publication-version",
     title="Publier une version",
     summary="""
-    Une livraison suit toujours le même chemin. `check_versions.py` contrôle `version.properties` : SemVer, `versionCode` strictement croissant, variante
-    verrouillée de la TV avec code + 1 et suffixe `-verrouillee`. La TV est construite verrouillée (`-PrequireActivation=true`, clés de confiance hors dépôt) et
-    le téléphone en deux variantes, simple et superadmin. Chaque APK est aligné (`zipalign`), signé (`apksigner`, `release.jks`, certificat `ef2908…`) et reçoit sa
-    somme `SHA256SUMS`. Les APK sont déposés dans le dossier Download de la TV par SSH, sur la clé USB de distribution (jamais la variante superadmin), puis sur
-    le téléphone du propriétaire par ADB avec l'installation de la console. Les documents (`CHANGELOG`, `RELEASES` § 9, `REGRESSIONS`, `HANDOFF`) et le guide sont
-    mis à jour, le guide est copié sur le serveur (`/guide/`) et republié sur la page claude.ai. Les étiquettes suivent ; le push, la fusion d'`integration/agents`
-    et l'avance de `main` sont des décisions du propriétaire.
+    Une livraison suit toujours le même chemin : `check_versions.py` contrôle `version.properties` (SemVer, `versionCode` strictement croissant, variante verrouillée de la TV avec code + 1 et suffixe `-verrouillee`). La TV est construite verrouillée (`-PrequireActivation=true`, clés de confiance hors dépôt) et le téléphone en deux variantes, simple et superadmin. Chaque APK est aligné (`zipalign`), signé (`apksigner`, `release.jks`, certificat `ef2908…`) et reçoit sa somme `SHA256SUMS`. Les APK sont déposés dans le dossier Download de la TV par SSH, sur la clé USB de distribution (jamais la variante superadmin), puis sur le téléphone du propriétaire par ADB avec l'installation de la console. Les documents (`CHANGELOG`, `RELEASES` § 9, `REGRESSIONS`, `HANDOFF`) et le guide sont mis à jour, le guide est copié sur le serveur (`/guide/`) et republié sur la page claude.ai. Les étiquettes suivent ; le push, la fusion d'`integration/agents` et l'avance de `main` sont des décisions du propriétaire.
     """,
     pools=[
         ("owner", "Utilisateur / Propriétaire", "user", [("o1", "Propriétaire")]),
-        ("mac", "Mac d'assistance", "mac", [("m1", "Contrôles et build"), ("m2", "Signature et dépôts"), ("m3", "Documents, guide et étiquettes")]),
-        ("tv", "CastBridge-TV", "tv", [("t1", "Dossier Download de la TV")]),
+        ("mac", "Mac d'assistance", "mac", [("m1", "Contrôles et build"), ("m2", "Signature et dépôts"), ("m3", "Docs et étiquettes")]),
+        ("tv", "CastBridge-TV", "tv", [("t1", "Dossier Download")]),
         ("usb", "Clé USB", "usb", [("k1", "Clé de distribution")]),
-        ("phone", "CastBridge (téléphone)", "phone", [("p1", "Téléphone du propriétaire (ADB)")]),
+        ("phone", "CastBridge (téléphone)", "phone", [("p1", "Téléphone (ADB)")]),
         ("server", "Serveur bridge.sti-cm.com", "server", [("v1", "Guide public")]),
     ],
     nodes="""
@@ -719,7 +713,7 @@ RAW.append(dict(
     pools=[
         ("phone", "CastBridge (téléphone)", "phone", [("h1", "Joueur relayé par sa TV")]),
         ("tv", "CastBridge-TV", "tv", [("t1", "Hôte (Quiz, PlayHub, portefeuille)")]),
-        ("server", "Serveur bridge.sti-cm.com", "server", [("a1", "castbridge-api (ticket, portefeuille)"), ("s1", "castbridge-play (salle de jeu)")]),
+        ("server", "Serveur bridge.sti-cm.com", "server", [("a1", "castbridge-api"), ("s1", "castbridge-play (salle de jeu)")]),
     ],
     nodes="""
         h_start | h1 | start            | Un joueur veut jouer en ligne
@@ -744,7 +738,7 @@ RAW.append(dict(
         a_end   | a1 | end              | Solde signé cbw1
         p_in    | s1 | start:message    | create ou join reçu
         p_gate  | s1 | xor              | Ticket, droits, plafonds, blocage valides ?
-        p_ko    | s1 | end:message      | Refuser : PLAY_TICKET_REFUSED, SCOPE_FORBIDDEN…
+        p_ko    | s1 | end:message | Refuser : ticket, droits ou plafonds |  | Codes : PLAY_TICKET_REFUSED, PLAY_SCOPE_FORBIDDEN, PLAY_BUSY, STAKE_ESCROW_INVALID.
         p_room  | s1 | task             | Ouvrir la salle : code XXXX-XXXX (2 h) | | 8 joueurs au plus par table, 8 sièges relayés au plus par TV ; 50 essais faux changent le code.
         p_q     | s1 | task             | Annoncer la question : ouverture après 1,5 s | | PlayTiming : opensAtServerMs = révélation + délai de 1 à 2 s ; une réponse avant est refusée (TOO_EARLY).
         p_ans   | s1 | task             | Recevoir les réponses, révéler, scorer
@@ -808,28 +802,22 @@ RAW.append(dict(
     id="jetons-et-lots",
     title="Jetons du portefeuille et lots en location",
     summary="""
-    Deux circuits se rejoignent à la TV. Le portefeuille est un grand livre tenu par le serveur : une commande payée en espèces est validée par un administrateur
-    (compte nommé et code TOTP), qui crédite le compte de la TV par un don ; au-delà du plafond, un second administrateur doit approuver. La TV ne garde qu'un solde
-    signé (`cbw1`). Une location part de la Boutique de la TV, qui refuse l'essai, le profil enfant et les lots libres ; la demande `castbridge-rent-request-v1`
-    est confirmée par un adulte sur le téléphone, puis l'émetteur signe le droit `rental` (1 à 366 jours). Le téléphone télécharge le lot signé et le livre à la TV,
-    qui ne télécharge jamais un lot elle-même (sauf le bouton « Mettre à jour les lots Langues »). À la fin de la location, ou sur ordre signé de retrait, la TV
-    détruit la clé puis efface les fichiers ; la progression est gardée. L'émission des locations par le serveur est une conception cible ; l'émetteur actuel est
-    l'outil de bureau du propriétaire.
+    Deux circuits se rejoignent à la TV. Le portefeuille est un grand livre tenu par le serveur : une commande payée en espèces est validée par un administrateur (compte nommé et code TOTP), qui crédite le compte de la TV par un don ; au-delà du plafond, un second administrateur doit approuver, et la TV ne garde qu'un solde signé (`cbw1`). Une location part de la Boutique de la TV, qui refuse l'essai, le profil enfant et les lots libres ; la demande `castbridge-rent-request-v1` est confirmée par un adulte sur le téléphone, puis l'émetteur signe le droit `rental` (1 à 366 jours). Le téléphone télécharge le lot signé et le livre à la TV, qui ne télécharge jamais un lot elle-même (sauf le bouton « Mettre à jour les lots Langues »). À la fin de la location, ou sur ordre signé de retrait, la TV détruit la clé puis efface les fichiers ; la progression est gardée. L'émission des locations par le serveur est une conception cible ; l'émetteur actuel est l'outil de bureau du propriétaire.
     """,
     pools=[
         ("user", "Utilisateur / Propriétaire", "user", [("c1", "Client")]),
         ("server", "Serveur bridge.sti-cm.com", "server", [("a1", "Administration (/admin)"), ("w1", "Portefeuille (wallet)"), ("l1", "Lots et licences")]),
-        ("phone", "CastBridge (téléphone)", "phone", [("p1", "Messager et livraison des lots")]),
+        ("phone", "CastBridge (téléphone)", "phone", [("p1", "Messager des lots")]),
         ("tv", "CastBridge-TV", "tv", [("t1", "Boutique et portefeuille"), ("x1", "Lots (RentalHub, carnet des locations)")]),
     ],
     nodes="""
-        c_start | c1 | start           | Le client commande des jetons ou une location
+        c_start | c1 | start | Commande de jetons ou de location
         c_pay   | c1 | end:message     | Régler en espèces au point focal
         a_in    | a1 | start:message   | Commande payée à valider
         a_val   | a1 | user            | Valider : compte nommé et code TOTP
         a_don   | a1 | task            | Créer le don au compte de la TV | | POST /api/v1/admin/wallet/grant ; plafond par don et par jour ; au-delà, un second administrateur (TOTP distinct) approuve.
         a_rstart| a1 | start           | Retrait décidé
-        a_rev   | a1 | end:message     | Révoquer : ordre signé (license.revoke, catalog.retire) | | Ordre cbx1 de type order, liste d'actions fermée ; le téléphone le transporte.
+        a_rev   | a1 | end:message | Révoquer : ordre signé | rank=1 | Ordre cbx1 de type order, liste d'actions fermée ; le téléphone le transporte.
         w_post  | w1 | task            | Écrire au grand livre : NDEM ou MBOKO | | Écritures immuables à double entrée, clé d'idempotence ; l'attribution mensuelle par édition passe par la même écriture (essai 100 NDEM par mois ; production 1 000 NDEM et 10 MBOKO).
         w_snap  | w1 | end:message     | Solde signé cbw1 à la synchronisation
         l_in    | l1 | start:message   | Demande de location transmise
@@ -842,7 +830,7 @@ RAW.append(dict(
         p_push  | p1 | end:message     | Télécharger le lot, le livrer à la TV | | GET /api/v1/lots/{feature}/{scope}/{version} avec reprise par plages (100 Mo au plus) ; livraison différée par Bluetooth ou Wi-Fi (10 Mo au plus sur la TV).
         t_start | t1 | start           | Boutique : Louer un bouquet
         t_chk   | t1 | xor             | Essai, profil enfant ou lot libre ?
-        t_ref   | t1 | end             | Refus : TRIAL_TV, KID_PROFILE, FREE_BUNDLE
+        t_ref   | t1 | end | Refus : essai, enfant ou lot libre |  | Raisons du cœur : TRIAL_TV, KID_PROFILE, FREE_BUNDLE, UNKNOWN_FAMILY, OVER_LIMIT, DUPLICATE.
         t_req   | t1 | end:message     | Créer la demande castbridge-rent-request-v1 | | Une demande n'est pas un droit : seul l'émetteur décide, après confirmation d'un adulte.
         t_bal   | t1 | start:message   | Solde signé cbw1 reçu
         t_bend  | t1 | end             | Solde affiché (NDEM, MBOKO)
@@ -912,7 +900,7 @@ RAW.append(dict(
     """,
     pools=[
         ("user", "Utilisateur / Propriétaire", "user", [("u1", "Devant la TV")]),
-        ("phone", "CastBridge (téléphone)", "phone", [("g1", "Tuyau Internet (RelayRuntime, BtGatewayService)"), ("g2", "Passerelle Bluetooth (BtSshGateway)")]),
+        ("phone", "CastBridge (téléphone)", "phone", [("g1", "Tuyau Internet"), ("g2", "Passerelle Bluetooth")]),
         ("tv", "CastBridge-TV", "tv", [("t1", "Conditions et chemin réseau (TunnelHub)"), ("t2", "Session SSH (TvSshServer)")]),
         ("mac", "Mac d'assistance", "mac", [("e1", "Poste de l'expert")]),
         ("server", "Serveur bridge.sti-cm.com", "server", [("s1", "Tunnels (/api/v1/tunnel)")]),
@@ -940,7 +928,7 @@ RAW.append(dict(
         t_close | t2 | task            | Fermer à la fin de la session
         t_end   | t2 | end             | Tuyau libéré 10 minutes après
         e_start | e1 | start           | L'expert prend l'assistance
-        e_x     | e1 | xor             | Voie d'accès ?
+        e_x     | e1 | xor | Voie d'accès ? | rank=5
         e_jump  | e1 | end:message     | ssh -J cbexpert@serveur:2200 -p 22xxx | | Le port 22xxx n'écoute que sur 127.0.0.1 du serveur ; les experts ont restrict,pty.
         e_gw    | e1 | end:message     | tv-tunnel.sh up : adb forward 2222 et 18765
         e_lan   | e1 | end:message     | ssh -p 2222 tv@<ip> (ou 2223) | | SSH de l'utilisateur (SshControl, 2222) ou CastBridge Dev (2223), activés par la TV.
@@ -1011,8 +999,8 @@ RAW.append(dict(
     """,
     pools=[
         ("user", "Utilisateur / Propriétaire", "user", [("u1", "Parent"), ("u2", "Enfant")]),
-        ("tv", "CastBridge-TV", "tv", [("t1", "Configuration (ParentalHub, ParentalEngine)"), ("t2", "Application des règles et alertes"), ("t3", "Retrait de la clé USB (UsbRemoval)")]),
-        ("phone", "CastBridge (téléphone)", "phone", [("p1", "Téléphone du parent (ParentalInbox)")]),
+        ("tv", "CastBridge-TV", "tv", [("t1", "Configuration"), ("t2", "Application des règles et alertes"), ("t3", "Retrait de la clé USB (UsbRemoval)")]),
+        ("phone", "CastBridge (téléphone)", "phone", [("p1", "Téléphone du parent")]),
     ],
     nodes="""
         u_p0    | u1 | start           | Le parent protège la TV
@@ -1020,27 +1008,27 @@ RAW.append(dict(
         u_p2    | u1 | send            | Saisir le code parental (séance parent)
         u_p3    | u1 | end:message     | Préparer le retrait de la clé USB
         u_c0    | u2 | start           | L'enfant utilise la TV
-        u_c1    | u2 | end:message     | Lancer une vidéo ou une application, ouvrir MENU
+        u_c1    | u2 | end:message | Lancer une vidéo ou une application
         c_cfg   | t1 | start:message   | Configuration demandée
         c_pin   | t1 | task            | Enregistrer le code parental | | PBKDF2-HMAC-SHA256, sel de 16 octets, 60 000 itérations ; jamais en clair ni dans un journal ; 4444 et 1234 refusés ; verrou progressif 1 min, 5, 15 min, 1 h.
         c_prof  | t1 | task            | Créer le profil : âge, heures, durée, catégories | | Tranches -12, 12-15, 16-17, adulte ; vidéo classée par fichier, mot-clé ou dossier ; une vidéo non classée vaut adulte.
         c_mode  | t1 | task            | Mode enfant : accueil réduit, code TV masqué | | KID_HOME : Apprendre, Jeux, Quiz, Échecs, Bibliothèque, Boutique, Aide, Contrôle parental ; les lignes « Copie… » relèvent de la catégorie Réglages.
         c_end   | t1 | end             | Contrôle actif
         e_in    | t2 | start:message   | Action de l'enfant détectée
-        e_dec   | t2 | xor             | Règle : classement, catégorie, heures, durée ? | | ParentalEngine : décision pure ; surveillance de toute la TV par application (ForegroundWatcher, statistiques d'usage ou service d'accessibilité).
+        e_dec   | t2 | xor | Règle respectée ? |  | ParentalEngine : décision pure ; surveillance de toute la TV par application (ForegroundWatcher, statistiques d'usage ou service d'accessibilité).
         e_ok    | t2 | end             | Usage autorisé
         e_fork  | t2 | and             | Refus
         e_lock  | t2 | task            | Écran verrouillé : « Saisir le PIN parental » | | Toujours « Retour à l'accueil » ; RETOUR et ACCUEIL ne sont jamais interceptés.
         r_rep   | t2 | end:message     | Alerte dans l'outbox signée (HMAC) | | 40 rapports par téléphone, 200 Ko, 14 jours ; message CBTP ; seul un téléphone de confiance et désigné reçoit.
         e_wait  | t2 | catch:message   | Code parental saisi
         e_chk   | t2 | xor             | Code correct ?
-        e_end   | t2 | end             | Séance parent de 30 minutes : règles suspendues
+        e_end   | t2 | end | Séance parent de 30 min | lbl=N | Les règles sont suspendues pendant la séance parent.
         e_fail  | t2 | task            | Échec compté : verrou progressif
         k_start | t3 | start:message   | Retrait de la clé demandé
         k_x     | t3 | xor             | Des copies écrivent sur la clé ?
         k_stop  | t3 | task            | Attendre la fin ou mettre les copies en pause | | Aucune nouvelle copie n'est acceptée : 503 volume removed, cause held ; rien n'est redirigé sur la mémoire interne.
         k_sync  | t3 | task            | fsync de chaque .part, puis sync | | Au mieux 15 s ; jamais un faux « prête » : si une copie ne lâche pas la clé, l'écran dit de ne pas la retirer.
-        k_ready | t3 | end             | Clé retirable (10 minutes, sinon reprise des copies)
+        k_ready | t3 | end | Clé retirable (10 min) |  | Dix minutes sans retrait : les copies reprennent toutes seules.
         ph_in   | p1 | start:message   | Le téléphone vient chercher (toutes les 15 min)
         ph_store| p1 | task            | Vérifier la signature, stocker, notifier en privé | | 150 rapports, 90 jours, hors sauvegarde ; accusé de réception envoyé seulement après stockage.
         ph_end  | p1 | end             | Parent informé
