@@ -1065,17 +1065,19 @@ class ReceiverServer(
             if (offset != cur || offset + len > total) return json(Response.Status.CONFLICT, partJson(name))
             if (owner == null) {
                 // A new upload: pick the volume (policy), then check quota/space there (evicting old played files if allowed).
-                val plan = StoragePolicy.plan(volumes.snapshot(), target, total, TransferRule.minFree(cfg), reclaimable = ::reclaimable)
-                plan.refusal?.let { r -> return if (r.http == 507) spaceRefusal(r.message, target, total) else refusal(r) }
+                val plan = planNew(target, total)
+                val byPhone = viaPhone(p["target"])
+                plan.refusal?.let { r -> return if (r.http == 507) spaceRefusal(r.message, target, total, plan.skipped, byPhone) else refusal(r) }
                 var why: String? = null
+                val declined = ArrayList<StoragePolicy.Skipped>()          // R-55: the volumes that said no once asked (quota, room), for the sentences of the refusal
                 for (c in plan.candidates) {
                     val w = ensureRoom(c.volume, total, xferCfg)
-                    if (w != null) { why = w; continue }
+                    if (w != null) { why = w; declined += StoragePolicy.Skipped(c.volume.id, w); continue }
                     val st = volumes.store(c.volume)
                     owner = Hit(c.volume, st, c.volume.storedName(name), 0)
                     break
                 }
-                val o = owner ?: return spaceRefusal(why ?: "no storage available", target, total)
+                val o = owner ?: return spaceRefusal(why ?: "no storage available", target, total, plan.skipped + declined, byPhone)
                 if (fences.containsKey(o.v.id)) return held()                // the key is being prepared for removal: the copy waits for it (nothing is redirected elsewhere)
                 // No stale empty partial copy elsewhere (a failed earlier attempt).
                 volumes.volumes().filter { it.id != o.v.id }.forEach { v ->
@@ -1218,7 +1220,7 @@ class ReceiverServer(
             synchronized(FileLocks.of(LOCK_ROOT, name)) {
                 if (moving(name)) return json(Response.Status.CONFLICT, """{"error":"moving"}""")
                 // discard=1: the bench's "network alone" run (bytes are hashed and dropped, nothing is stored)
-                val r = if (p["discard"] == "1") transfers.beginDiscard(m) else transfers.begin(m) { mf -> allocateTransfer(mf, target) }
+                val r = if (p["discard"] == "1") transfers.beginDiscard(m) else transfers.begin(m) { mf -> allocateTransfer(mf, target, viaPhone(p["target"])) }
                 return when (r) {
                     is castbridge.core.xfer.TransferHost.Begin.AlreadyThere -> ok("""{"done":true,"name":${q(name)}}""")
                     is castbridge.core.xfer.TransferHost.Begin.Refused ->
@@ -1243,25 +1245,26 @@ class ReceiverServer(
     }
 
     /** Picks the volume like an upload does (policy, quota, "free space after the transfer" rule); folders only (not the system picker's). */
-    private fun allocateTransfer(m: castbridge.core.xfer.Manifest, target: String): castbridge.core.xfer.Allocation {
+    private fun allocateTransfer(m: castbridge.core.xfer.Manifest, target: String, byPhone: Boolean = false): castbridge.core.xfer.Allocation {
         findPart(m.name)?.let { return castbridge.core.xfer.Allocation.Refused(409, "upload in progress") }
         if (volumes.missingOwner(m.name) != null) return castbridge.core.xfer.Allocation.Refused(503, "volume removed")
         if (fencedHolds(m)) return castbridge.core.xfer.Allocation.Refused(503, "volume removed")         // its partial copy is on the key being prepared for removal: resumed there, never started again elsewhere
-        val plan = StoragePolicy.plan(volumes.snapshot(), target, m.size, TransferRule.minFree(cfg), reclaimable = ::reclaimable)
-        plan.refusal?.let { r -> return castbridge.core.xfer.Allocation.Refused(r.http, if (r.http == 507) spaceMessage(r.message, target, m.size).second else r.message) }
+        val plan = planNew(target, m.size)
+        plan.refusal?.let { r -> return castbridge.core.xfer.Allocation.Refused(r.http, if (r.http == 507) spaceMessage(r.message, target, m.size, plan.skipped, byPhone).second else r.message) }
         if (plan.candidates.firstOrNull()?.volume?.id?.let { fences.containsKey(it) } == true) return castbridge.core.xfer.Allocation.Refused(503, "volume removed")      // the key is being prepared for removal: the copy waits for it
         var why: String? = null
+        val declined = ArrayList<StoragePolicy.Skipped>()
         for (c in plan.candidates) {
             val st = volumes.store(c.volume) as? FileStore
             if (st == null) { why = "not supported on this volume"; continue }
             val w = ensureRoom(c.volume, m.size, xferCfg)
-            if (w != null) { why = w; continue }
+            if (w != null) { why = w; declined += StoragePolicy.Skipped(c.volume.id, w); continue }
             return castbridge.core.xfer.Allocation.At(st.dir, c.volume.storedName(m.name), c.volume.id,
                 preallocate = castbridge.core.xfer.PartAssembler.preallocates(effectiveFs(c.volume)))
         }
         val reason = why ?: "no storage available"
         return if (reason == "not supported on this volume") castbridge.core.xfer.Allocation.Refused(501, reason)
-        else castbridge.core.xfer.Allocation.Refused(507, spaceMessage(reason, target, m.size).second)
+        else castbridge.core.xfer.Allocation.Refused(507, spaceMessage(reason, target, m.size, plan.skipped + declined, byPhone).second)
     }
 
     private fun transferChunk(s: IHTTPSession, p: Map<String, String>): Response {
@@ -1875,19 +1878,45 @@ class ReceiverServer(
      * 507 with the precise reason of the "free space after the transfer" rule, about the volume that was the best chance
      * (the explicit target, or in auto the writable volume with the most free space).
      */
-    private fun spaceRefusal(why: String, target: String, size: Long): Response {
-        val (v, msg) = spaceMessage(why, target, size)
+    private fun spaceRefusal(why: String, target: String, size: Long, skipped: List<StoragePolicy.Skipped> = emptyList(), byPhone: Boolean = false): Response {
+        val (v, msg) = spaceMessage(why, target, size, skipped, byPhone)
         return json(INSUFFICIENT_STORAGE, """{"error":${q(why)},"message":${q(msg)}${v?.let { ""","volume":${q(it.id)},"free":${it.free}""" } ?: ""}}""")
     }
 
-    private fun spaceMessage(why: String, target: String, size: Long): Pair<StorageVolume?, String> {
-        val snap = volumes.snapshot().filter { it.writable }
+    private fun spaceMessage(why: String, target: String, size: Long, skipped: List<StoragePolicy.Skipped> = emptyList(), byPhone: Boolean = false): Pair<StorageVolume?, String> {
+        val all = volumes.snapshot()
+        val snap = all.filter { it.writable }
         val v = snap.firstOrNull { it.id == target } ?: (if (target == StoragePolicy.INTERNAL) snap.firstOrNull { it.kind == VolumeKind.INTERNAL } else null)
             ?: snap.maxByOrNull { it.free }
         val minFree = TransferRule.minFree(cfg)
-        val msg = if (v != null && v.free >= 0 && (why == "not enough space" || !TransferRule.ok(v.free, size, minFree)))
+        val head = if (v != null && v.free >= 0 && (why == "not enough space" || !TransferRule.ok(v.free, size, minFree)))
             TransferRule.message(v.label, v.free, size, minFree, !drivepresent()) else humanRefusal(why)
-        return v to msg
+        // R-55: then one sentence per other volume present, saying why it was not used (a key with room that stays unexplained looks like a bug)
+        return v to SpaceRefusalText.with(head, SpaceRefusalText.sentences(all, skipped, target, size, minFree, v?.id, byPhone))
+    }
+
+    /** R-55: [requested] (the `target` / `volume` parameter of a request) is the PHONE's own choice when it is there and differs from the TV's setting. */
+    private fun viaPhone(requested: String?): Boolean = !requested.isNullOrEmpty() && requested != cfg.target
+
+    /** R-55: when a refused copy last tested a key again (wall clock), per volume id. */
+    private val retestedAt = java.util.concurrent.ConcurrentHashMap<String, Long>()
+
+    /**
+     * R-55: the policy's plan for a NEW copy of [size] bytes. When none of its volumes can take the copy while a removable volume was set aside as « not writable »
+     * (its write test is made once, at mount, and may have failed for nothing), that volume is tested again, once a minute at most ([KeyRetest]), and the plan is asked again.
+     * A setting that leaves the keys out (internal storage asked for) tests nothing: the keys were not set aside for being read-only.
+     */
+    private fun planNew(target: String, size: Long, durMs: Long = 0): StoragePolicy.Plan {
+        val minFree = TransferRule.minFree(cfg)
+        val first = StoragePolicy.plan(volumes.snapshot(), target, size, minFree, durMs, ::reclaimable)
+        if (first.skipped.none { it.reason.startsWith("not writable") }) return first          // the usual case: no key set aside
+        if ((first.refusal?.http ?: 507) != 507 || first.candidates.any { roomWithoutDeleting(it.volume, size, true, xferCfg) == null }) return first
+        val now = System.currentTimeMillis()
+        val due = KeyRetest.due(first.skipped, volumes.volumes(), target, retestedAt, now)
+        if (due.isEmpty()) return first
+        due.forEach { id -> retestedAt[id] = now; runCatching { volumes.reprobe(id) } }
+        invalidate()
+        return StoragePolicy.plan(volumes.snapshot(), target, size, minFree, durMs, ::reclaimable)
     }
 
     // ---- storage API ----
@@ -1964,10 +1993,10 @@ class ReceiverServer(
         volumes.missingOwner(name)?.let {
             return ok("""{"ok":false,"status":503,"error":"volume removed","message":${q("La clé « ${it.label} » qui contient cet envoi est retirée : remettez-la pour reprendre.")}}""")
         }
-        val plan = StoragePolicy.plan(volumes.snapshot(), target, size, minFree, dur, ::reclaimable)
+        val plan = planNew(target, size, dur)
         val skipped = plan.skipped.joinToString(",", "[", "]") { """{"volume":${q(it.volumeId)},"reason":${q(it.reason)}}""" }
         fun refuse(status: Int, error: String): Response {
-            val msg = if (status == 507) spaceMessage(error, target, size).second else humanRefusal(error)
+            val msg = if (status == 507) spaceMessage(error, target, size, plan.skipped, viaPhone(p["volume"])).second else humanRefusal(error)
             return ok("""{"ok":false,"status":$status,"error":${q(error)},"message":${q(msg)},"remaining":$size,"minFreeAfter":$minFree,"skipped":$skipped,"options":$options}""")
         }
         plan.refusal?.let { r -> return refuse(r.http, r.message) }

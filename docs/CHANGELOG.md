@@ -9,7 +9,15 @@ Trois produits livrés ont chacun leur numéro : **CastBridge-TV** (`tv-<version
 
 ## [Non publié]
 
-Rien pour l'instant.
+### CastBridge-TV
+- un refus pour manque de place dit pourquoi la clé USB n'a pas servi (R-55, propriétaire, 2026-10-18 : « l'erreur … n'est pas normale » ; clé de 58 Go avec 23 Go libres et refus « il resterait 211 Mo sur Mémoire interne ») : après « Espace insuffisant : … », une phrase par autre volume présent, par exemple « Clé USB (23 Go libres) non utilisée : lecture seule (test d'écriture raté). », « … fichier trop gros pour FAT32. », « … réglage « Où ranger les nouveaux fichiers : Mémoire interne » ; choisissez Automatique ou la clé dans MENU › Stockage. » (ou « … choix « Destination sur la TV : Mémoire interne » du téléphone ; choisissez Automatique ou la clé. »), « … jugée lente, pourtant retenue en dernier recours. », et « pas assez de place (…) » ou « quota de stockage atteint » ; au début d'un envoi, au contrôle préalable et à l'ouverture d'un transfert multi-connexion ; un seul volume : le message est inchangé
+- une clé écartée « lecture seule » quand une copie est refusée pour manque de place est testée de nouveau avant la réponse (cette clé seulement, une fois par minute au plus), puis la TV refait son choix : son test d'écriture n'était fait qu'une fois au montage ; un réglage « Mémoire interne » ne relance rien
+- vérifié en JVM (`SpaceRefusalTextTest` : 8 tests, `SpaceRefusalServerTest` : 7 tests sur la vraie `ReceiverServer`) et par la compilation de `:receiver` ; à confirmer sur la TV de référence avec la clé : parcours P-99 (la cause réelle du défaut du 2026-10-18, réglage ou test d'écriture, reste à relever sur la TV)
+- dans le dépôt, sans effet sur l'APK : parcours P-99 (`docs/test-plans/PARCOURS-CRITIQUES.md`), `docs/REGRESSIONS.md` (R-55) et `docs/STORAGE.md` (§ 4)
+
+### CastBridge (téléphone)
+- la ligne de la file (« Copie impossible : il n'y a plus assez de place sur la TV. … ») et la notification « n'est pas parti » (déployée) portent le texte entier du refus de la TV pour manque de place, avec les phrases par volume (R-55), à la place du seul conseil « Libérez de la place sur la TV » ; la ligne rouge de la carte d'envoi et celle du contrôle préalable montraient déjà le message entier
+- vérifié en JVM (`UploadFailureTest` : 3 tests ajoutés) et par la compilation de `:sender` ; à confirmer avec une CastBridge-TV qui envoie les phrases par volume : parcours P-99
 
 ## CastBridge-TV
 

@@ -22,8 +22,11 @@ object UploadFailure {
     enum class Cause { TV_NOT_FOUND, TV_UNREACHABLE, PIN_REFUSED, PIN_LOCKED, TOKEN_EXPIRED, NO_SPACE, CONNECTION_LOST, TIMEOUT, FILE_UNREADABLE, FILE_EMPTY,
         NETWORK_CHANGED, TV_BUSY, TV_OLD, NAME_TAKEN, TIME_LIMIT, BACKGROUND_BLOCKED, SERVICE_STOPPED, RESUME_FAILED, CANCELLED, TV_ERROR, UNKNOWN }
 
-    /** [what]: la phrase de la cause (« la connexion à la TV a été coupée »), [action]: quoi faire, [asksPin]: toucher mène au champ du code PIN. */
-    data class Info(val cause: Cause, val what: String, val action: String, val technical: String, val asksPin: Boolean = false)
+    /**
+     * [what]: la phrase de la cause (« la connexion à la TV a été coupée »), [action]: quoi faire, [asksPin]: toucher mène au champ du code PIN.
+     * [explanation] (R-55) : les mots de la TV elle-même pour un refus « Espace insuffisant » (quel volume, combien il manque, pourquoi la clé n'a pas servi) ; vide sinon.
+     */
+    data class Info(val cause: Cause, val what: String, val action: String, val technical: String, val asksPin: Boolean = false, val explanation: String = "")
 
     private class Row(val what: String, val action: String, val pin: Boolean = false)
     private const val RETRY = "Touchez pour réessayer"
@@ -53,6 +56,8 @@ object UploadFailure {
 
     private fun info(c: Cause, technical: String): Info { val r = rows.getValue(c); return Info(c, r.what, r.action, technical.take(MAX_TECH), r.pin) }
     private const val MAX_TECH = 120
+    /** R-55 : le refus de la TV pour manque de place peut compter une phrase par volume : on le garde en entier (une ligne de 120 caractères le couperait). */
+    private const val MAX_EXPLANATION = 700
 
     private val urls = Regex("(?:content|file)://\\S+")
     private val paths = Regex("/[\\w.\\-%@+]+/.*?(?=: |$)")
@@ -61,7 +66,10 @@ object UploadFailure {
     private val digits = Regex("\\d{6,}")
 
     /** Une ligne, sans chemin, adresse de contenu, jeton ni suite de 6 chiffres ou plus (un code PIN), 120 caractères au plus. */
-    fun sanitize(s: String?): String = s.orEmpty().replace(Regex("\\s+"), " ").replace(urls, "…").replace(bearer, "…").replace(tokens, "…").replace(paths, "…").replace(digits, "…").trim().take(MAX_TECH)
+    fun sanitize(s: String?, max: Int = MAX_TECH): String = s.orEmpty().replace(Regex("\\s+"), " ").replace(urls, "…").replace(bearer, "…").replace(tokens, "…").replace(paths, "…").replace(digits, "…").trim().take(max)
+
+    /** R-55 : la phrase de la TV pour un manque de place (« Espace insuffisant : … »), nettoyée mais entière ; vide si [text] n'en est pas une. */
+    private fun tvSpaceWords(text: String?): String = text?.takeIf { "espace insuffisant" in it.lowercase() }?.let { sanitize(it, MAX_EXPLANATION) }.orEmpty()
 
     fun ofHttp(code: Int, body: String): Info {
         val b = body.lowercase()
@@ -76,7 +84,8 @@ object UploadFailure {
             else -> Cause.TV_ERROR
         }
         val t = sanitize(body)
-        return info(c, "HTTP $code" + if (t.isNotEmpty()) " : $t" else "")
+        val words = if (c == Cause.NO_SPACE) tvSpaceWords(TvClient.str(body, "message")) else ""
+        return info(c, "HTTP $code" + if (t.isNotEmpty()) " : $t" else "").copy(explanation = words)
     }
 
     fun ofException(t: Throwable): Info {
@@ -123,13 +132,16 @@ object UploadFailure {
             "occupée" in r -> Cause.TV_BUSY
             else -> Cause.UNKNOWN
         }
-        return info(c, sanitize(reason))
+        return info(c, sanitize(reason)).copy(explanation = if (c == Cause.NO_SPACE) tvSpaceWords(reason) else "")
     }
 
     /** « Copie interrompue : la connexion à la TV a été coupée à 63 %. Touchez pour réessayer » (« Copie impossible » quand rien n'était parti). */
     fun message(i: Info, percent: Int?): String {
         val started = percent != null && percent > 0
         val detail = if (i.cause == Cause.UNKNOWN && i.technical.isNotEmpty()) " (détail : ${i.technical})" else ""
-        return (if (started) "Copie interrompue" else "Copie impossible") + " : ${i.what}" + (if (started) " à $percent %" else "") + detail + ". ${i.action}"
+        val head = (if (started) "Copie interrompue" else "Copie impossible") + " : ${i.what}" + (if (started) " à $percent %" else "") + detail
+        // R-55 : le refus de la TV pour manque de place est dit en entier (quel volume, pourquoi la clé n'a pas servi) ; il porte déjà quoi libérer ou quoi choisir
+        if (i.cause == Cause.NO_SPACE && i.explanation.isNotEmpty()) return "$head. ${i.explanation.trimEnd('.')}. $RETRY"
+        return "$head. ${i.action}"
     }
 }

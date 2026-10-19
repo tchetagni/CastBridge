@@ -49,6 +49,9 @@ class AndroidVolumeProvider(private val ctx: Context, private val prefs: TvPrefs
     override fun storeFor(volume: StorageVolume): VolumeStore =
         if (volume.kind == VolumeKind.SAF) saf ?: throw IOException("no SAF folder") else FileStore(volume, sync = castbridge.core.tv.ShellSync.shared)
 
+    /** R-55: the write test of this volume is forgotten; the next [scan] runs it again (the other volumes keep theirs, so a copy running on them is not disturbed by a speed test). */
+    override fun reprobe(volumeId: String) { probes.remove(volumeId) }
+
     override fun scan(remeasure: Boolean): List<StorageVolume> {
         val out = ArrayList<StorageVolume>()
         val dirs: List<File?> = runCatching { ctx.getExternalFilesDirs(null).toList() }.getOrDefault(emptyList())

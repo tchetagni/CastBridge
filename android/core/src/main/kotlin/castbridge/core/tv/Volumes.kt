@@ -346,6 +346,8 @@ open class FileStore(override val volume: StorageVolume, private val free: () ->
 interface VolumeProvider {
     /** [remeasure] forces a new write-speed measurement of every volume (else measured once per mount). */
     fun scan(remeasure: Boolean = false): List<StorageVolume>
+    /** R-55: forgets the write test of ONE volume, so that the next [scan] tests it again and only it (the others keep theirs). Nothing to do where no test is kept. */
+    fun reprobe(volumeId: String) {}
     fun storeFor(volume: StorageVolume): VolumeStore = FileStore(volume)
 }
 
@@ -403,6 +405,9 @@ class VolumeRegistry(
         old.filter { it.id !in ids }.forEach { v -> listeners.forEach { it(VolumeEvent(v, false)) } }
         return now
     }
+
+    /** R-55: tests the volume [id] again, and only it, and applies the result at once (a key that failed its single write test at mount is « lecture seule » until then). */
+    fun reprobe(id: String): List<StorageVolume> { provider.reprobe(id); return refresh() }
 
     /** Immediate removal (system "unmounted/eject" broadcast, or an I/O error proving the medium is gone). */
     @Synchronized fun markRemoved(id: String) {
