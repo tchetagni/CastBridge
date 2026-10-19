@@ -378,7 +378,8 @@ Tableau reconstruit mécaniquement à partir de l'historique premier-parent de `
 | CastBridge-TV | 0.14.51-beta | 128 | 2026-10-15 | `cb83f5ff` |
 | CastBridge-TV | 0.14.52-beta | 130 | 2026-10-18 | `f7fe1051` (APK code 131 verrouillée construite sur ce commit) |
 | CastBridge-TV | 0.14.53-beta | 132 | 2026-10-18 | `d00b21b7` (APK code 133 verrouillée construite sur ce commit) |
-| **CastBridge-TV** | **0.14.54-beta** (courant) | **134** | **2026-10-18** | **412d0428** (APK code 135 verrouillée construite sur ce commit) |
+| CastBridge-TV | 0.14.54-beta | 134 | 2026-10-18 | `412d0428` (APK code 135 verrouillée construite sur ce commit) |
+| **CastBridge-TV** | **0.14.55-beta** (courant) | **136** | **2026-10-19** | **8036140f** (APK code 137 verrouillée construite sur ce commit) |
 | CastBridge | 1.2.19-beta | 29 | 2026-10-01 | `0ff64edc` |
 | CastBridge | 1.2.20-beta | 30 | 2026-10-01 | `86ad3f21` |
 | CastBridge | 1.2.21-beta | 31 | 2026-10-01 | `e6825e76` |
@@ -419,7 +420,8 @@ Tableau reconstruit mécaniquement à partir de l'historique premier-parent de `
 | CastBridge | 1.2.56-beta | 86 | 2026-10-09 | `c733fc6d` |
 | CastBridge | 1.2.57-beta | 87 | 2026-10-15 | `891ba1df` |
 | CastBridge | 1.2.58-beta | 88 | 2026-10-15 | `cb83f5ff` |
-| **CastBridge** | **1.2.59-beta** (courant) | **89** | **2026-10-18** | **68d41419** |
+| CastBridge | 1.2.59-beta | 89 | 2026-10-18 | `68d41419` |
+| **CastBridge** | **1.2.60-beta** (courant) | **90** | **2026-10-19** | **8036140f** |
 | CastBridge Propriétaire | 0.1.0 | 1 | 2026-10-01 | `0ff64edc` |
 | CastBridge Propriétaire | 0.2.0 | 2 | 2026-10-02 | `e40173a5` |
 | CastBridge Propriétaire | 0.2.1 | 3 | 2026-10-02 | `1c26a114` |
