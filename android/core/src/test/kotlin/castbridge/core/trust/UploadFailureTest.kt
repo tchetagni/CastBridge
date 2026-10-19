@@ -129,4 +129,34 @@ class UploadFailureTest {
         val r = UploadFailure.ofReason("quelque chose d'inédit")
         assertTrue("quelque chose d'inédit" in r.technical)
     }
+
+    // R-55 : le refus de la TV pour manque de place, avec une phrase par volume non utilisé, arrive en entier dans la ligne de la file et dans la notification
+    private val tvWords = "Espace insuffisant : il resterait 211 Mo sur Mémoire interne après le transfert, il en faut 1 Go : libérez 813 Mo ou choisissez un autre volume. " +
+        "Clé USB (22.5 Go libres) non utilisée : lecture seule (test d'écriture raté)."
+
+    @Test fun theTvsSpaceRefusalIsKeptWholeInTheMessage() {
+        assertTrue(tvWords.length > 120, "longer than the one-line technical cause")
+        val i = UploadFailure.ofReason(tvWords)
+        assertEquals(Cause.NO_SPACE, i.cause); assertEquals(tvWords, i.explanation); assertTrue(i.technical.length <= 120)
+        assertEquals("Copie impossible : il n'y a plus assez de place sur la TV. $tvWords Touchez pour réessayer", UploadFailure.message(i, null))
+        assertEquals("Copie interrompue : il n'y a plus assez de place sur la TV à 40 %. $tvWords Touchez pour réessayer", UploadFailure.message(i, 40))
+        // the same words when the TV's answer arrives as an HTTP body
+        val h = http(507, """{"error":"not enough space","message":"$tvWords"}""")
+        assertEquals(Cause.NO_SPACE, h.cause); assertEquals(tvWords, h.explanation)
+        assertEquals(UploadFailure.message(i, null), UploadFailure.message(h, null))
+    }
+
+    @Test fun withoutTheTvsWordsTheSpaceMessageIsWhatItAlwaysWas() {
+        for (i in listOf(UploadFailure.ofReason("Plus de place sur la TV."), http(507), http(413, "{}"), http(507, """{"error":"quota exceeded","message":"Quota de stockage atteint."}"""))) {
+            assertEquals(Cause.NO_SPACE, i.cause); assertEquals("", i.explanation)
+            assertEquals("Copie impossible : il n'y a plus assez de place sur la TV. Libérez de la place sur la TV, puis touchez pour réessayer", UploadFailure.message(i, null))
+        }
+    }
+
+    @Test fun theTvsSpaceWordsAreSanitizedButNotCutAtOneLine() {
+        val i = UploadFailure.ofReason("Espace insuffisant : voir /storage/emulated/0/Android/x: le code 482913 " + "pas assez de place ".repeat(20))
+        assertEquals(Cause.NO_SPACE, i.cause)
+        assertFalse("/storage" in i.explanation || "482913" in i.explanation, i.explanation)
+        assertTrue(i.explanation.length in 121..700, "${i.explanation.length}")
+    }
 }
