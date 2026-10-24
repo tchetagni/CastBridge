@@ -35,23 +35,23 @@ import java.util.concurrent.Executors
  */
 object TvStyle {
     private val T = castbridge.core.brand.BrandTokens
-    const val BG = castbridge.core.brand.BrandTokens.Dark.BACKGROUND
-    const val BG_ELEVATED = castbridge.core.brand.BrandTokens.Dark.BACKGROUND_ELEVATED
-    const val CARD = castbridge.core.brand.BrandTokens.Dark.SURFACE
-    const val CARD_FOCUS = castbridge.core.brand.BrandTokens.Dark.SURFACE_HIGH
-    const val OUTLINE = castbridge.core.brand.BrandTokens.Dark.OUTLINE
-    const val TEXT = castbridge.core.brand.BrandTokens.Dark.TEXT_HIGH
-    const val TEXT2 = castbridge.core.brand.BrandTokens.Dark.TEXT_MEDIUM
-    const val TEXT3 = castbridge.core.brand.BrandTokens.Dark.TEXT_LOW
+    val BG get() = castbridge.core.brand.BrandPalette.Dark.BACKGROUND
+    val BG_ELEVATED get() = castbridge.core.brand.BrandPalette.Dark.BACKGROUND_ELEVATED
+    val CARD get() = castbridge.core.brand.BrandPalette.Dark.SURFACE
+    val CARD_FOCUS get() = castbridge.core.brand.BrandPalette.Dark.SURFACE_HIGH
+    val OUTLINE get() = castbridge.core.brand.BrandPalette.Dark.OUTLINE
+    val TEXT get() = castbridge.core.brand.BrandPalette.Dark.TEXT_HIGH
+    val TEXT2 get() = castbridge.core.brand.BrandPalette.Dark.TEXT_MEDIUM
+    val TEXT3 get() = castbridge.core.brand.BrandPalette.Dark.TEXT_LOW
     /** Primary: gold. Used for accents, selection and progress (the focus ring is [RING]). */
-    const val ACCENT = castbridge.core.brand.BrandTokens.Dark.PRIMARY
-    const val ON_ACCENT = castbridge.core.brand.BrandTokens.Dark.ON_PRIMARY
-    const val RING = castbridge.core.brand.BrandTokens.Dark.FOCUS_RING
-    const val MUTED = castbridge.core.brand.BrandTokens.Dark.TEXT_MEDIUM
-    const val GOOD = castbridge.core.brand.BrandTokens.Dark.SECONDARY
-    const val GOOD_TEXT = castbridge.core.brand.BrandTokens.Semantic.SUCCESS_DARK
-    const val ERROR = castbridge.core.brand.BrandTokens.Semantic.ERROR_DARK
-    const val INFO = castbridge.core.brand.BrandTokens.Semantic.INFO_DARK
+    val ACCENT get() = castbridge.core.brand.BrandPalette.Dark.PRIMARY
+    val ON_ACCENT get() = castbridge.core.brand.BrandPalette.Dark.ON_PRIMARY
+    val RING get() = castbridge.core.brand.BrandPalette.Dark.FOCUS_RING
+    val MUTED get() = castbridge.core.brand.BrandPalette.Dark.TEXT_MEDIUM
+    val GOOD get() = castbridge.core.brand.BrandPalette.Dark.SECONDARY
+    val GOOD_TEXT get() = castbridge.core.brand.BrandPalette.Semantic.SUCCESS_DARK
+    val ERROR get() = castbridge.core.brand.BrandPalette.Semantic.ERROR_DARK
+    val INFO get() = castbridge.core.brand.BrandPalette.Semantic.INFO_DARK
 
     /** Corner radii (dp): sm 8, md 12, lg 16, xl 24. */
     const val R_SM = castbridge.core.brand.BrandTokens.RADIUS_SM_DP

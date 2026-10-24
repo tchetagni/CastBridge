@@ -81,6 +81,23 @@ Côté code :
 
 Vérifications faites (2026-10-24) : `assembleDebug` des deux apps sans `-Pbrand` : `castbridge.sender` « CastBridge », `castbridge.receiver` « CastBridge TV » (aapt2), comme avant ; avec `-Pbrand=eduplay` : `com.technohub.eduplay` « EduPlay » et `com.technohub.eduplay.tv` « EduPlay TV », APK `eduplay-sender-debug.apk` / `eduplay-receiver-<abi>-debug.apk`, raccourci `targetPackage` à jour ; `-Pbrand=inconnue` : erreur française claire. Tests du cœur : `BrandTest`, `OpenTvShortcutTest`, `BrandContrastTest`, `OpenTv*` verts ; la suite complète du cœur est très longue sur ce poste (non terminée), et `PlayHttpTransportStubTest` se bloque sur le JDK 21 local (verrou dans `HttpURLConnection.disconnect`, sans rapport avec ce changement). Pas encore faits : APK signé de marque (clé propre, phase 2), contrôle visuel sur appareil, textes à l'intérieur d'images ou de ressources du client.
 
+## Couleurs et thème (phase 2, en place)
+
+Les couleurs construites dans le code passent par `castbridge.core.brand.BrandPalette` (palette effective). Sans clé `color.*`, chaque valeur est exactement l'ancienne constante de `BrandTokens` (test `BrandPaletteTest.defaultPaletteEqualsOldConstants`) : CastBridge est visuellement identique. Les clés de `brand.properties` arrivent par `BuildConfig.BRAND_PALETTE` / `BRAND_PHONE_THEME` puis `Brand.init(...)`.
+
+| Clé | Rôle |
+|---|---|
+| `theme.phone.default` | `dark` (défaut), `light` ou `system` : thème du téléphone tant que l'utilisateur n'a rien choisi dans Réglages (son choix prime) |
+| `color.background` | téléphone clair : fond (et surfaces) |
+| `color.text` | téléphone clair : texte ; les niveaux moyen/faible et les contours en sont dérivés ; texte posé sur les remplissages vert/cyan |
+| `color.primary`, `color.onPrimary` | téléphone clair : couleur principale (boutons) et texte dessus |
+| `color.success`, `color.info` | remplissages vert/cyan ; en TEXTE, assombris (clair) ou éclaircis (sombre) automatiquement jusqu'à 4,5:1 |
+| `color.tvBackground`, `color.tvSurface`, `color.tvSurface2` | fond de la TV et thème sombre du téléphone ; cartes ; carte focalisée |
+| `color.focus` | anneau de focus (TV et téléphone sombre) |
+| `color.tvAccent` | optionnel : accent lisible sur fond sombre (texte, sélection, progression) ; défaut = `color.focus` |
+
+Encore aux couleurs CastBridge, volontairement : palettes de sous-marque Quiz des Millions (`QuizViews.kt`), Échecs (`ChessTvView.kt`), Apprendre (`LearnViews.kt`) ; pastilles d'état (`StatusLevel.kt`, sémantique) ; lecteur et télécommande du téléphone (`player/`) ; avertissement et erreur (sémantique universelle, jamais recolorés).
+
 ## Inventaire des identifiants de découverte (phase 4)
 
 Rien ci-dessous n'a été changé en phase 1. Ce sont des identifiants de protocole ou de reconnaissance entre un téléphone et une TV, pas de la marque. Avant tout changement (proposition WL : préfixer par `BRAND_ID`), les deux apps de la même marque doivent changer ensemble, et une TV ou un téléphone CastBridge déjà installé ne parlera plus à la nouvelle marque (voulu : isolation).

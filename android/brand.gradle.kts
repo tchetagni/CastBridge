@@ -25,6 +25,11 @@ val brandOwner = prop("brand.owner", "CastBridge")
 val brandTagline = prop("brand.tagline")
 val supportPhone = if (isDefaultBrand) "+237686031070" else prop("support.phone")
 val serverUrl = prop("server.url")
+// Couleurs : clés « color.<rôle> » (docs/WHITE-LABEL.md § Couleurs) transmises telles quelles à BrandPalette ; thème du téléphone par défaut.
+val palette = if (isDefaultBrand) "" else brandProps.stringPropertyNames().filter { it.startsWith("color.") }.sorted()
+    .joinToString(";") { it.removePrefix("color.") + "=" + brandProps.getProperty(it).trim() }
+val phoneTheme = prop("theme.phone.default", "dark").uppercase()
+if (phoneTheme !in setOf("DARK", "LIGHT", "SYSTEM")) throw GradleException("$brandDir/brand.properties : theme.phone.default doit valoir dark, light ou system.")
 val module = project.name   // « sender » ou « receiver »
 val appIdKey = if (module == "receiver") "tv.applicationId" else "phone.applicationId"
 
@@ -44,6 +49,8 @@ pluginManager.withPlugin("com.android.application") {
             "buildConfigField"("String", "BRAND_OWNER", lit(brandOwner))
             "buildConfigField"("String", "BRAND_TAGLINE", lit(brandTagline))
             "buildConfigField"("String", "SUPPORT_PHONE", lit(supportPhone))
+            "buildConfigField"("String", "BRAND_PALETTE", lit(palette))
+            "buildConfigField"("String", "BRAND_PHONE_THEME", lit(phoneTheme))
         }
         if (!isDefaultBrand) {
             // Ressources de la marque : jeux de sources des types de build (priorité sur main, aucune tâche renommée).

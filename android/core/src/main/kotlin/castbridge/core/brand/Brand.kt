@@ -17,11 +17,15 @@ object Brand {
     @Volatile var owner = DEFAULT_NAME; private set
     @Volatile var tagline = ""; private set
     @Volatile var supportPhone = ""; private set
+    /** Thème par défaut du téléphone pour cette marque : DARK (CastBridge), LIGHT ou SYSTEM. Le choix de l'utilisateur prime. */
+    @Volatile var phoneTheme = "DARK"; private set
 
     /** Vrai si la marque n'est pas CastBridge : le seul cas où [t] fait quelque chose. */
     val isCustom: Boolean get() = name != DEFAULT_NAME || tvName != DEFAULT_TV_NAME
 
-    fun init(id: String, name: String, tvName: String, owner: String, tagline: String, supportPhone: String) {
+    fun init(id: String, name: String, tvName: String, owner: String, tagline: String, supportPhone: String, palette: String = "", phoneTheme: String = "DARK") {
+        BrandPalette.init(palette)
+        this.phoneTheme = phoneTheme.uppercase().takeIf { it in setOf("DARK", "LIGHT", "SYSTEM") } ?: "DARK"
         this.id = id; this.name = name; this.tvName = tvName; this.owner = owner; this.tagline = tagline; this.supportPhone = supportPhone
     }
 
