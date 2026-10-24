@@ -1,5 +1,6 @@
 package castbridge.receiver
 
+import castbridge.core.brand.Brand
 import android.app.Activity
 import android.app.AlertDialog
 import android.graphics.Color
@@ -392,11 +393,11 @@ class PlayerPanel(private val act: Activity, private val api: Api) {
         items += "Décodage : ${PlayerParams.hwLabel(t.hw)}" to {
             pick("Décodage vidéo", PlayerParams.HW_MODES.map(PlayerParams::hwLabel), PlayerParams.HW_MODES.indexOf(t.hw)) { i -> api.command(PlayerCommand.Hw(PlayerParams.HW_MODES[i])) }
         }
-        items += "Informations techniques" to { AlertDialog.Builder(act).setTitle("Informations").setMessage(api.info()).setPositiveButton("Fermer", null).show() }
+        items += "Informations techniques" to { AlertDialog.Builder(act).setTitle(Brand.t("Informations")).setMessage(Brand.t(api.info())).setPositiveButton(Brand.t("Fermer"), null).show() }
         items += "Options générales (USB, Bluetooth, SSH…)" to { api.general() }
-        AlertDialog.Builder(act).setTitle("Réglages de lecture")
+        AlertDialog.Builder(act).setTitle(Brand.t("Réglages de lecture"))
             .setItems(items.map { it.first }.toTypedArray()) { _, w -> items[w].second() }
-            .setNegativeButton("Fermer", null).show()
+            .setNegativeButton(Brand.t("Fermer"), null).show()
     }
 
     /**
@@ -425,7 +426,7 @@ class PlayerPanel(private val act: Activity, private val api: Api) {
         }
         val lv = android.widget.ListView(act)
         lv.adapter = adapter
-        val dlg = AlertDialog.Builder(act).setTitle("Réglages du lecteur  (◀ ▶ : changer · OK : valider)").setView(lv).setNegativeButton("Fermer", null).create()
+        val dlg = AlertDialog.Builder(act).setTitle(Brand.t("Réglages du lecteur  (◀ ▶ : changer · OK : valider)")).setView(lv).setNegativeButton(Brand.t("Fermer"), null).create()
         fun change(position: Int, dir: Int) {
             val row = items.getOrNull(position)?.row ?: return
             if (row.kind != PlayerSettings.Kind.VALUE) return
@@ -457,9 +458,9 @@ class PlayerPanel(private val act: Activity, private val api: Api) {
         val b = api.settingsState().file.bookmarks
         if (b.marksMs.isEmpty()) { api.flash("Aucun marque-page : utilisez « Marque-page : ajouter ici »"); return }
         pick("Marque-pages", b.labels(), -1) { i ->
-            AlertDialog.Builder(act).setTitle(b.labels()[i])
+            AlertDialog.Builder(act).setTitle(Brand.t(b.labels()[i]))
                 .setItems(arrayOf("Aller à ${LibraryLogic.clock(b.marksMs[i])}", "Supprimer ce marque-page")) { _, w -> api.command(if (w == 0) PlayerCommand.BookmarkGo(i) else PlayerCommand.BookmarkDelete(i)) }
-                .setNegativeButton("Fermer", null).show()
+                .setNegativeButton(Brand.t("Fermer"), null).show()
             true
         }
     }
@@ -472,7 +473,7 @@ class PlayerPanel(private val act: Activity, private val api: Api) {
             typeface = when (style.font) { "serif" -> Typeface.SERIF; "monospace" -> Typeface.MONOSPACE; "sans-serif" -> Typeface.SANS_SERIF; else -> Typeface.DEFAULT }
             if (style.outline != SubtitleStyle.Outline.NONE) setShadowLayer(if (style.outline == SubtitleStyle.Outline.THICK) 8f else 4f, 0f, 0f, Color.BLACK)
         }
-        AlertDialog.Builder(act).setTitle("Aperçu des sous-titres").setView(tv).setPositiveButton("Fermer", null).show()
+        AlertDialog.Builder(act).setTitle(Brand.t("Aperçu des sous-titres")).setView(tv).setPositiveButton(Brand.t("Fermer"), null).show()
     }
 
     // Entrées directes de la barre de commandes à l'écran (mêmes choix que le panneau, aucune logique en double).
@@ -505,18 +506,18 @@ class PlayerPanel(private val act: Activity, private val api: Api) {
     private fun delay(title: String, cur: Long, cmd: (Long) -> PlayerCommand) {
         val steps = listOf(-500L, -50L, 50L, 500L)
         val labels = steps.map { (if (it > 0) "+" else "") + "$it ms" } + "Remettre à 0"
-        AlertDialog.Builder(act).setTitle("$title : ${PlayerParams.delayLabel(cur)}")
+        AlertDialog.Builder(act).setTitle(Brand.t("$title : ${PlayerParams.delayLabel(cur)}"))
             .setItems(labels.toTypedArray()) { _, i ->
                 val v = if (i < steps.size) PlayerParams.clampDelay(cur + steps[i]) else 0L
                 api.command(cmd(v))
                 delay(title, v, cmd)                            // stay in the dialog: adjust again
-            }.setNegativeButton("Fermer", null).show()
+            }.setNegativeButton(Brand.t("Fermer"), null).show()
     }
 
     private fun pick(title: String, labels: List<String>, checked: Int, apply: (Int) -> Boolean) {
-        AlertDialog.Builder(act).setTitle(title)
+        AlertDialog.Builder(act).setTitle(Brand.t(title))
             .setSingleChoiceItems(labels.toTypedArray(), checked) { d, i -> d.dismiss(); if (!apply(i)) api.flash("Impossible pour ce fichier") }
-            .setNegativeButton("Fermer", null).show()
+            .setNegativeButton(Brand.t("Fermer"), null).show()
     }
 }
 

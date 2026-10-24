@@ -1,5 +1,6 @@
 package castbridge.receiver
 
+import castbridge.core.brand.Brand
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
@@ -111,9 +112,9 @@ class PinActivity : Activity() {
         flow = PinFlow.step(flow, PinEvent.GENERATE, decision())
         refresh()
         if (flow.phase != PinPhase.CONFIRMING) return
-        val d = AlertDialog.Builder(this).setTitle("Générer un nouveau PIN ?").setMessage(PinFlow.CONFIRM_TEXT)
-            .setNegativeButton("Annuler") { _, _ -> flow = PinFlow.step(flow, PinEvent.CANCEL, decision()); refresh() }
-            .setPositiveButton("Générer") { _, _ -> confirm() }
+        val d = AlertDialog.Builder(this).setTitle(Brand.t("Générer un nouveau PIN ?")).setMessage(Brand.t(PinFlow.CONFIRM_TEXT))
+            .setNegativeButton(Brand.t("Annuler")) { _, _ -> flow = PinFlow.step(flow, PinEvent.CANCEL, decision()); refresh() }
+            .setPositiveButton(Brand.t("Générer")) { _, _ -> confirm() }
             .setOnCancelListener { flow = PinFlow.step(flow, PinEvent.CANCEL, decision()); refresh() }
             .create()
         d.setOnShowListener { d.getButton(AlertDialog.BUTTON_NEGATIVE)?.requestFocus() }      // « Annuler » preselected

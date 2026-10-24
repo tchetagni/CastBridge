@@ -1,5 +1,6 @@
 package castbridge.sender
 
+import castbridge.core.brand.Brand
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -301,8 +302,8 @@ class UploadService : Service() {
                 val open = android.app.PendingIntent.getActivity(this, 2, Intent(this, MainActivity::class.java)
                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP), android.app.PendingIntent.FLAG_IMMUTABLE)
                 getSystemService(NotificationManager::class.java).notify(NOTIF_MOVE, Notification.Builder(this, CHANNEL)
-                    .setSmallIcon(R.drawable.ic_stat_castbridge).setContentTitle("« ${job.fileName} » est sur la TV")
-                    .setContentText("Touchez pour le retirer du téléphone").setAutoCancel(true).setContentIntent(open).build())
+                    .setSmallIcon(R.drawable.ic_stat_castbridge).setContentTitle(Brand.t("« ${job.fileName} » est sur la TV"))
+                    .setContentText(Brand.t("Touchez pour le retirer du téléphone")).setAutoCancel(true).setContentIntent(open).build())
             }
         } else _moveNote.value = when {
             cancelled -> null
@@ -381,7 +382,7 @@ class UploadService : Service() {
         nm.createNotificationChannel(NotificationChannel(CHANNEL, "Envoi vers la TV", NotificationManager.IMPORTANCE_LOW))
         val cancel = android.app.PendingIntent.getService(this, 1,
             Intent(this, UploadService::class.java).setAction(ACTION_CANCEL), android.app.PendingIntent.FLAG_IMMUTABLE)
-        return Notification.Builder(this, CHANNEL).setContentTitle("CastBridge").setContentText(text).setSubText("$pct %")
+        return Notification.Builder(this, CHANNEL).setContentTitle(Brand.t("CastBridge")).setContentText(Brand.t(text)).setSubText(Brand.t("$pct %"))
             .setSmallIcon(R.drawable.ic_stat_castbridge).setOngoing(true).setOnlyAlertOnce(true)
             .setProgress(100, pct, false)
             .addAction(Notification.Action.Builder(null, "Annuler", cancel).build()).build()

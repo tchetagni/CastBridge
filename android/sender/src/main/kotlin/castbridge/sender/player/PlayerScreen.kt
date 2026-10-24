@@ -2,6 +2,7 @@
 
 package castbridge.sender.player
 
+import castbridge.core.brand.Brand
 import castbridge.sender.cbv
 
 import android.content.Intent
@@ -141,7 +142,7 @@ fun VideoPlayerScreen(act: PlayerActivity, p: ExoPlayer) {
         runCatching { ctx.contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION) }
         val n = nameOf(ctx, uri) ?: ""
         if (SubtitleTypes.mimeOf(n) == null) {
-            android.widget.Toast.makeText(ctx, "Format de sous-titres non pris en charge (SRT, ASS/SSA, VTT, TTML).", android.widget.Toast.LENGTH_LONG).show()
+            android.widget.Toast.makeText(ctx, Brand.t("Format de sous-titres non pris en charge (SRT, ASS/SSA, VTT, TTML)."), android.widget.Toast.LENGTH_LONG).show()
             return@rememberLauncherForActivityResult
         }
         val idx = p.currentMediaItemIndex; val at = p.currentPosition

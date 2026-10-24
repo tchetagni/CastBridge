@@ -1,5 +1,6 @@
 package castbridge.receiver
 
+import castbridge.core.brand.Brand
 import android.app.Activity
 import android.app.AlertDialog
 import android.graphics.Color
@@ -267,7 +268,7 @@ class StatusBarView(private val act: Activity, private val box: LinearLayout, pr
         }
         if (bar.hidden > 0) list.addView(text("${bar.hidden} de plus ne tiennent pas dans la barre.", TvStyle.Type.CAPTION, TvStyle.TEXT2), LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(14) })
         val sv = ScrollView(act).apply { addView(list); setBackgroundColor(TvStyle.BG_ELEVATED) }
-        dialog = AlertDialog.Builder(act).setTitle("Connexions").setView(sv).setPositiveButton("Fermer", null).create().also { d ->
+        dialog = AlertDialog.Builder(act).setTitle(Brand.t("Connexions")).setView(sv).setPositiveButton(Brand.t("Fermer"), null).create().also { d ->
             d.setOnShowListener { d.getButton(AlertDialog.BUTTON_POSITIVE)?.requestFocus() }
             d.setOnDismissListener { bigBar = false; last?.let { render(it) } }
         }
@@ -283,7 +284,7 @@ class StatusBarView(private val act: Activity, private val box: LinearLayout, pr
 
     /** Confirmation where the harmless answer (Annuler) is selected, like the phones panel. */
     private fun confirm(title: String, msg: String, yes: String, run: () -> Unit) {
-        AlertDialog.Builder(act).setTitle(title).setMessage(msg).setPositiveButton(yes) { _, _ -> run() }.setNegativeButton("Annuler", null).create().also { d ->
+        AlertDialog.Builder(act).setTitle(Brand.t(title)).setMessage(Brand.t(msg)).setPositiveButton(Brand.t(yes)) { _, _ -> run() }.setNegativeButton(Brand.t("Annuler"), null).create().also { d ->
             d.setOnShowListener { d.getButton(AlertDialog.BUTTON_NEGATIVE)?.requestFocus() }
         }.show()
     }

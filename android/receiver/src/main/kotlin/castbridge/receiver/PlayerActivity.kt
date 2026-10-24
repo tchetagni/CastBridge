@@ -1,5 +1,6 @@
 package castbridge.receiver
 
+import castbridge.core.brand.Brand
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
@@ -203,11 +204,11 @@ class PlayerActivity : Activity(), TvService.Screen {
     private fun showTermsDialog() {
         val tv = TextView(this).apply { text = castbridge.core.tunnel.TunnelTerms.TEXT; textSize = TvStyle.Type.CAPTION; setTextColor(TvStyle.TEXT); setPadding(32, 24, 32, 24) }
         val sv = android.widget.ScrollView(this).apply { addView(tv); setBackgroundColor(TvStyle.BG_ELEVATED) }
-        AlertDialog.Builder(this).setTitle(castbridge.core.tunnel.TunnelTerms.TITLE + " (" + castbridge.core.tunnel.TunnelTerms.VERSION + ")").setView(sv)
-            .setPositiveButton(castbridge.core.tunnel.TunnelTerms.ACCEPT_BUTTON) { _, _ ->
+        AlertDialog.Builder(this).setTitle(Brand.t(castbridge.core.tunnel.TunnelTerms.TITLE + " (" + castbridge.core.tunnel.TunnelTerms.VERSION + ")")).setView(sv)
+            .setPositiveButton(Brand.t(castbridge.core.tunnel.TunnelTerms.ACCEPT_BUTTON)) { _, _ ->
                 flash(if (TunnelHub.acceptTerms(this)) "Conditions acceptées." else "Impossible d'enregistrer l'acceptation : réessayez depuis le menu.")
             }
-            .setNegativeButton(castbridge.core.tunnel.TunnelTerms.LATER_BUTTON, null).show()
+            .setNegativeButton(Brand.t(castbridge.core.tunnel.TunnelTerms.LATER_BUTTON), null).show()
     }
 
     /** « À propos > Assistance à distance »: the state line, the detail and the local journal of connections and of the experts that logged in. */
@@ -220,14 +221,14 @@ class PlayerActivity : Activity(), TvService.Screen {
             append(if (lines.isEmpty()) castbridge.core.tunnel.TunnelText.EMPTY_JOURNAL else lines.asReversed().joinToString("\n"))
         }
         val tv = TextView(this).apply { typeface = android.graphics.Typeface.MONOSPACE; textSize = TvStyle.Type.CAPTION; setTextColor(TvStyle.TEXT); setPadding(32, 24, 32, 24); this.text = text }
-        val b = AlertDialog.Builder(this).setTitle("À propos : " + castbridge.core.tunnel.TunnelText.TITLE)
+        val b = AlertDialog.Builder(this).setTitle(Brand.t("À propos : " + castbridge.core.tunnel.TunnelText.TITLE))
             .setView(android.widget.ScrollView(this).apply { addView(tv); setBackgroundColor(TvStyle.BG_ELEVATED) })
-            .setPositiveButton("Fermer", null)
-            .setNeutralButton("Lire les conditions…") { _, _ -> showTermsDialog() }
+            .setPositiveButton(Brand.t("Fermer"), null)
+            .setNeutralButton(Brand.t("Lire les conditions…")) { _, _ -> showTermsDialog() }
         // relay-R1 : une demande EXPLICITE d'assistance sans Internet par la TV elle-même : un téléphone synchronisé ouvre un tuyau (jamais en tâche de fond : le tunnel permanent ne réveille aucun téléphone).
         // R-45 : c'est aussi la SEULE façon d'autoriser le tunnel à employer un tuyau déjà ouvert pour autre chose (partie, portefeuille…) : le bouton reste donc proposé tant que le réseau propre ne porte pas Internet
         if (TunnelHub.termsAccepted(this) && TunnelHub.state() != castbridge.core.tunnel.TunnelState.UP && TvNet.state() != castbridge.core.connect.NetState.DIRECT)
-            b.setNegativeButton("Se connecter maintenant") { _, _ -> TvNet.requestAssistance(); TunnelHub.poke(); flash(castbridge.core.relay.RelayText.ASKING) }
+            b.setNegativeButton(Brand.t("Se connecter maintenant")) { _, _ -> TvNet.requestAssistance(); TunnelHub.poke(); flash(castbridge.core.relay.RelayText.ASKING) }
         b.show()
     }
 
@@ -295,9 +296,9 @@ class PlayerActivity : Activity(), TvService.Screen {
     private fun showUsbGuide() {
         val e = UsbVolumeWatch.attention()
         if (e == null) { flash("La clé n'a rien à signaler."); return }
-        val b = AlertDialog.Builder(this).setTitle("Clé USB").setMessage(e.verdict.line).setNegativeButton("Fermer", null)
+        val b = AlertDialog.Builder(this).setTitle(Brand.t("Clé USB")).setMessage(Brand.t(e.verdict.line)).setNegativeButton(Brand.t("Fermer"), null)
         if (e.verdict.action == castbridge.core.tv.UsbAction.OPEN_STORAGE_SETTINGS)
-            b.setPositiveButton(e.verdict.actionLabel ?: castbridge.core.tv.UsbVolumeState.SETTINGS_LABEL) { _, _ -> svc?.openStorageSettings()?.let { m -> flash(m) } }
+            b.setPositiveButton(Brand.t(e.verdict.actionLabel ?: castbridge.core.tv.UsbVolumeState.SETTINGS_LABEL)) { _, _ -> svc?.openStorageSettings()?.let { m -> flash(m) } }
         b.show()
     }
 
@@ -307,11 +308,11 @@ class PlayerActivity : Activity(), TvService.Screen {
         val ids = mutableListOf("auto", "internal") + vols.filter { it.kind != VolumeKind.INTERNAL }.map { it.id }
         val names = mutableListOf("Automatique (clé USB si utilisable, sinon interne)", "Mémoire interne") +
             vols.filter { it.kind != VolumeKind.INTERNAL }.map { it.label + if (it.kind == VolumeKind.SAF) " (dossier choisi, sans lecture pendant l'envoi)" else "" }
-        AlertDialog.Builder(this).setTitle("Où ranger les nouveaux fichiers ?")
+        AlertDialog.Builder(this).setTitle(Brand.t("Où ranger les nouveaux fichiers ?"))
             .setItems(names.toTypedArray()) { _, i ->
                 val ok = server?.setTargetValue(ids[i]) == true
                 flash(if (ok) "Cible : ${names[i]}" else "Cible refusée"); s.updateStorageStatus()
-            }.setNegativeButton("Fermer", null).show()
+            }.setNegativeButton(Brand.t("Fermer"), null).show()
     }
 
     private fun forgetSafFolder() {
@@ -547,9 +548,9 @@ class PlayerActivity : Activity(), TvService.Screen {
         override fun tools(): List<HomeTool> = homeTools()
         override fun openHelp() {
             // the phone button is named by its current label (castbridge.core.ux.TvHelpTexts ← SendWay.COPY), never a stale one
-            AlertDialog.Builder(this@PlayerActivity).setTitle(castbridge.core.ux.TvHelpTexts.SEND_TITLE)
-                .setMessage(castbridge.core.ux.TvHelpTexts.send(ParentalHub.shownPin(pin), "http://${TvService.localIp() ?: "adresse-de-la-TV"}:${ReceiverServer.PORT}") + "\n\nPastilles : " + castbridge.core.ux.TvSignal.LEGEND)
-                .setPositiveButton("Compris", null).show()
+            AlertDialog.Builder(this@PlayerActivity).setTitle(Brand.t(castbridge.core.ux.TvHelpTexts.SEND_TITLE))
+                .setMessage(Brand.t(castbridge.core.ux.TvHelpTexts.send(ParentalHub.shownPin(pin), "http://${TvService.localIp() ?: "adresse-de-la-TV"}:${ReceiverServer.PORT}") + "\n\nPastilles : " + castbridge.core.ux.TvSignal.LEGEND))
+                .setPositiveButton(Brand.t("Compris"), null).show()
         }
     }
 
@@ -601,8 +602,8 @@ class PlayerActivity : Activity(), TvService.Screen {
     private fun choose(title: String, items: List<Pair<String, () -> Unit>>) {
         if (items.isEmpty()) return
         val items = ParentalHub.wrapMenu(this, items)
-        AlertDialog.Builder(this).setTitle(title).setItems(items.map { it.first }.toTypedArray()) { _, i -> items[i].second() }
-            .setNegativeButton("Fermer", null).show()
+        AlertDialog.Builder(this).setTitle(Brand.t(title)).setItems(items.map { it.first }.toTypedArray()) { _, i -> items[i].second() }
+            .setNegativeButton(Brand.t("Fermer"), null).show()
     }
 
     /** Every feature of the app as a home icon, with its live state. */
@@ -845,9 +846,9 @@ class PlayerActivity : Activity(), TvService.Screen {
         if (!ParentalHub.allow(this, castbridge.core.parental.Category.SETTINGS)) return
         // the list is built ONCE: a line that comes and goes by itself (a key that ends its check, a copy that ends) must not shift the lines under the finger
         val items = menuItems()
-        AlertDialog.Builder(this).setTitle("CastBridge TV")
+        AlertDialog.Builder(this).setTitle(Brand.t("CastBridge TV"))
             .setItems(items.map { it.first }.toTypedArray()) { _, i -> items.getOrNull(i)?.second?.invoke() }
-            .setNegativeButton("Fermer", null).show()
+            .setNegativeButton(Brand.t("Fermer"), null).show()
     }
 
     // ---- R-51 : annuler depuis la TV une copie reçue en partie (vivante ou interrompue) ----
@@ -874,16 +875,16 @@ class PlayerActivity : Activity(), TvService.Screen {
     private fun confirmCancelCopy(p: castbridge.core.tv.PartialCopy) {
         val title = castbridge.core.tv.LibraryLogic.title(p.name)
         val pct = castbridge.core.xfer.ReceiveCards.percent(p.received, p.total)
-        AlertDialog.Builder(this).setTitle("Annuler la copie « $title » ?")
-            .setMessage("$pct % déjà reçus. Ce qui est reçu sera effacé : le téléphone devra renvoyer le fichier en entier, et ne pourra pas le faire avant quelques minutes." +
-                (if (p.live) "\n\nCette copie est en cours : elle sera arrêtée." else ""))
-            .setPositiveButton("Oui, annuler la copie") { _, _ ->
+        AlertDialog.Builder(this).setTitle(Brand.t("Annuler la copie « $title » ?"))
+            .setMessage(Brand.t("$pct % déjà reçus. Ce qui est reçu sera effacé : le téléphone devra renvoyer le fichier en entier, et ne pourra pas le faire avant quelques minutes." +
+                (if (p.live) "\n\nCette copie est en cours : elle sera arrêtée." else "")))
+            .setPositiveButton(Brand.t("Oui, annuler la copie")) { _, _ ->
                 bgRun {
                     val done = runCatching { server?.cancelReception(p.name) == true }.getOrDefault(false)
                     main.post { flash(if (done) "Copie annulée : $title" else "Rien à annuler"); refreshPartials() }
                 }
             }
-            .setNegativeButton("Non, la garder", null).create().also { d -> d.setOnShowListener { d.getButton(AlertDialog.BUTTON_NEGATIVE)?.requestFocus() } }.show()
+            .setNegativeButton(Brand.t("Non, la garder"), null).create().also { d -> d.setOnShowListener { d.getButton(AlertDialog.BUTTON_NEGATIVE)?.requestFocus() } }.show()
     }
 
     /** La tuile « Recevoir du téléphone » : comment envoyer et, s'il y a des copies en partie, chacune annulable ; sinon l'aide seule, comme avant. */
@@ -1034,8 +1035,8 @@ class PlayerActivity : Activity(), TvService.Screen {
         }
         val sv = android.widget.ScrollView(this).apply { addView(tv); setBackgroundColor(TvStyle.BG_ELEVATED) }
         diagView = tv
-        diagDialog = AlertDialog.Builder(this).setTitle("Test Internet : $host").setView(sv)
-            .setPositiveButton("Fermer", null).show()
+        diagDialog = AlertDialog.Builder(this).setTitle(Brand.t("Test Internet : $host")).setView(sv)
+            .setPositiveButton(Brand.t("Fermer"), null).show()
     }
 
     fun appendDiag(line: String) {
@@ -1412,7 +1413,7 @@ class PlayerActivity : Activity(), TvService.Screen {
     /** « Infos » : la ligne de diagnostic revient 6 s, et la fenêtre dit ce que signifie chaque icône (règle : jamais d'icône sans libellé). */
     private fun showInfosAndLegend() {
         controls?.showDiag(extras.fitOverlay())
-        IconLegend.show(this, extras.fitOverlay()) { AlertDialog.Builder(this).setTitle("Informations").setMessage(infoText()).setPositiveButton("Fermer", null).show() }
+        IconLegend.show(this, extras.fitOverlay()) { AlertDialog.Builder(this).setTitle(Brand.t("Informations")).setMessage(Brand.t(infoText())).setPositiveButton(Brand.t("Fermer"), null).show() }
     }
 
     private fun infoText(): String {

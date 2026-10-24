@@ -48,7 +48,7 @@
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <application
         android:name=".CastBridgeApp"
-        android:label="CastBridge"
+        android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:usesCleartextTraffic="true"
@@ -191,7 +191,7 @@
         <activity android:name=".ReselectActivity" android:exported="false" android:excludeFromRecents="true" android:taskAffinity=""
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!-- « Ouvrir avec » on a local video, audio or image: copy or move to the TV in the background, or play here. -->
-        <activity android:name=".OpenWithActivity" android:exported="true" android:label="CastBridge"
+        <activity android:name=".OpenWithActivity" android:exported="true" android:label="@string/app_name"
             android:launchMode="standard" android:excludeFromRecents="true" android:taskAffinity=""
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
@@ -211,7 +211,7 @@
         </activity>
         <!-- The phone's own media player: "Ouvrir avec" / "Partager" from the Gallery, Files, WhatsApp, Telegram, the browser. -->
         <activity android:name=".player.PlayerActivity" android:exported="true"
-            android:label="CastBridge Lecteur"
+            android:label="@string/app_name_player"
             android:launchMode="singleTask" android:taskAffinity="castbridge.sender.player"
             android:supportsPictureInPicture="true" android:resizeableActivity="true"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboardHidden|uiMode|density"

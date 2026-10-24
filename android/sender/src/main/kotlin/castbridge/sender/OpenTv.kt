@@ -1,5 +1,6 @@
 package castbridge.sender
 
+import castbridge.core.brand.Brand
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.bluetooth.BluetoothManager
@@ -138,7 +139,7 @@ object OpenTv {
         lastLink = now
         TvHomeRequest.pending.value = TvHomeRequest.TV                // the CastBridge TV tab, where the line is shown
         open(activity, OpenTvScreen.parse(uri.getQueryParameter("screen"))) { o ->
-            Toast.makeText(activity, o.line, Toast.LENGTH_LONG).show()
+            Toast.makeText(activity, Brand.t(o.line), Toast.LENGTH_LONG).show()
             if (o.alreadyFront) RemoteActivity.open(activity)
         }
         return true

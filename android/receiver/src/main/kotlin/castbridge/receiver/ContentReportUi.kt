@@ -1,5 +1,6 @@
 package castbridge.receiver
 
+import castbridge.core.brand.Brand
 import android.app.Activity
 import android.app.AlertDialog
 import android.widget.Toast
@@ -17,9 +18,9 @@ import castbridge.core.learn.Pack
 fun Activity.askReportReason(send: (ReportReason) -> String) {
     val reasons = ContentFeedback.REASONS
     AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_Alert)
-        .setTitle("Signaler une erreur : pourquoi ?")
-        .setItems(reasons.map { it.label }.toTypedArray()) { _, i -> Toast.makeText(this, send(reasons[i]), Toast.LENGTH_LONG).show() }
-        .setNegativeButton("Annuler", null).show()
+        .setTitle(Brand.t("Signaler une erreur : pourquoi ?"))
+        .setItems(reasons.map { it.label }.toTypedArray()) { _, i -> Toast.makeText(this, Brand.t(send(reasons[i])), Toast.LENGTH_LONG).show() }
+        .setNegativeButton(Brand.t("Annuler"), null).show()
 }
 
 /** Reports of « Apprendre » content from the TV screens (the quiz reports go through QuizRoom). */

@@ -1,5 +1,6 @@
 package castbridge.sender
 
+import castbridge.core.brand.Brand
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -102,9 +103,9 @@ object ParentalInbox {
             lockscreenVisibility = Notification.VISIBILITY_PRIVATE
         })
         val open = PendingIntent.getActivity(ctx, 0, Intent(ctx, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP), PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
-        val public = Notification.Builder(ctx, CHANNEL).setSmallIcon(R.drawable.ic_stat_castbridge).setContentTitle("Rapport du contrôle parental").build()
-        nm.notify(NOTIF_ID, Notification.Builder(ctx, CHANNEL).setSmallIcon(R.drawable.ic_stat_castbridge).setContentTitle(title).setContentText(text)
-            .setStyle(Notification.BigTextStyle().bigText(text)).setVisibility(Notification.VISIBILITY_PRIVATE).setPublicVersion(public)
+        val public = Notification.Builder(ctx, CHANNEL).setSmallIcon(R.drawable.ic_stat_castbridge).setContentTitle(Brand.t("Rapport du contrôle parental")).build()
+        nm.notify(NOTIF_ID, Notification.Builder(ctx, CHANNEL).setSmallIcon(R.drawable.ic_stat_castbridge).setContentTitle(Brand.t(title)).setContentText(Brand.t(text))
+            .setStyle(Notification.BigTextStyle().bigText(Brand.t(text))).setVisibility(Notification.VISIBILITY_PRIVATE).setPublicVersion(public)
             .setAutoCancel(true).setContentIntent(open).build())
     }
 }

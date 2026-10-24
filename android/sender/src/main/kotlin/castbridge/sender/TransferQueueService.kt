@@ -1,5 +1,6 @@
 package castbridge.sender
 
+import castbridge.core.brand.Brand
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -91,8 +92,8 @@ class TransferQueueService : Service() {
         val open = PendingIntent.getActivity(this, 9, Intent(this, MainActivity::class.java).putExtra(TvHomeRequest.EXTRA, TvHomeRequest.TV)
             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP), PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
         return Notification.Builder(this, CHANNEL).setSmallIcon(android.R.drawable.stat_sys_upload)
-            .setContentTitle("CastBridge : file d'envoi vers la TV")
-            .setContentText(if (pct != null) "$text · $pct %" else text)
+            .setContentTitle(Brand.t("CastBridge : file d'envoi vers la TV"))
+            .setContentText(Brand.t(if (pct != null) "$text · $pct %" else text))
             .setContentIntent(open)
             .apply { if (pct != null) { setSubText("$pct %"); setProgress(100, pct, false) } }
             .setOngoing(true).setOnlyAlertOnce(true).build()

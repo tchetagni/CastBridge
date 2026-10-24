@@ -1,5 +1,6 @@
 package castbridge.receiver
 
+import castbridge.core.brand.Brand
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -174,7 +175,7 @@ class GamesActivity : Activity() {
             gravity = Gravity.START
             if (g.soon) alpha = 0.7f                       // « bientôt » : visible mais pas jouable
             setOnClickListener {
-                if (g.soon) { android.widget.Toast.makeText(this@GamesActivity, GameCatalog.SOON, android.widget.Toast.LENGTH_LONG).show(); return@setOnClickListener }
+                if (g.soon) { android.widget.Toast.makeText(this@GamesActivity, Brand.t(GameCatalog.SOON), android.widget.Toast.LENGTH_LONG).show(); return@setOnClickListener }
                 getSharedPreferences("castbridge_games", MODE_PRIVATE).edit().putString("last", g.id).apply()
                 Games.open(this@GamesActivity, g, "menu")
             }

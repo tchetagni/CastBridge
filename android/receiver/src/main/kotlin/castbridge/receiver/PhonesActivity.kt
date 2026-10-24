@@ -1,5 +1,6 @@
 package castbridge.receiver
 
+import castbridge.core.brand.Brand
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
@@ -153,9 +154,9 @@ class PhonesActivity : Activity() {
 
     private fun confirmRemove(s: TvService, r: PhoneRoster.Row, awaiting: PairCapacityFlow.State.AwaitingRemoval?) {
         val text = if (awaiting != null) PhonesTexts.confirmReplaceText(r.name, r.address, awaiting.request.name, awaiting.request.address) else PhonesTexts.CONFIRM_REMOVE_TEXT
-        AlertDialog.Builder(this).setTitle(PhonesTexts.confirmRemoveTitle(r.name, r.address)).setMessage(text)
-            .setPositiveButton(PhonesTexts.REMOVE) { _, _ -> remove(s, r, awaiting?.request?.address) }
-            .setNegativeButton("Annuler", null).create().also { d ->
+        AlertDialog.Builder(this).setTitle(Brand.t(PhonesTexts.confirmRemoveTitle(r.name, r.address))).setMessage(Brand.t(text))
+            .setPositiveButton(Brand.t(PhonesTexts.REMOVE)) { _, _ -> remove(s, r, awaiting?.request?.address) }
+            .setNegativeButton(Brand.t("Annuler"), null).create().also { d ->
                 d.setOnShowListener { d.getButton(AlertDialog.BUTTON_NEGATIVE)?.requestFocus() }     // the harmless answer is the selected one
                 dialog = d
             }.show()

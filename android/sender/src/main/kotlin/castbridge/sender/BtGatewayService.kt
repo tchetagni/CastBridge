@@ -1,5 +1,6 @@
 package castbridge.sender
 
+import castbridge.core.brand.Brand
 import android.annotation.SuppressLint
 import android.app.Notification
 import android.app.NotificationChannel
@@ -268,9 +269,9 @@ class BtGatewayService : Service() {
         val nm = getSystemService(NotificationManager::class.java)
         if (Build.VERSION.SDK_INT >= 26) nm.createNotificationChannel(NotificationChannel(CHANNEL, RelayText.NOTIFICATION_CHANNEL, NotificationManager.IMPORTANCE_LOW).apply { lockscreenVisibility = Notification.VISIBILITY_PRIVATE })
         val stop = PendingIntent.getService(this, 1, Intent(this, BtGatewayService::class.java).setAction(ACTION_STOP), PendingIntent.FLAG_IMMUTABLE)
-        val generic = Notification.Builder(this, CHANNEL).setSmallIcon(R.drawable.ic_stat_castbridge).setContentTitle(RelayText.NOTIFICATION_PUBLIC).build()
+        val generic = Notification.Builder(this, CHANNEL).setSmallIcon(R.drawable.ic_stat_castbridge).setContentTitle(Brand.t(RelayText.NOTIFICATION_PUBLIC)).build()
         return Notification.Builder(this, CHANNEL).setSmallIcon(R.drawable.ic_stat_castbridge)
-            .setContentTitle("CastBridge").setContentText(RelayText.notification(tvName)).setOngoing(true)
+            .setContentTitle(Brand.t("CastBridge")).setContentText(Brand.t(RelayText.notification(tvName))).setOngoing(true)
             .setVisibility(Notification.VISIBILITY_PRIVATE).setPublicVersion(generic).setCategory(Notification.CATEGORY_SERVICE).setShowWhen(false)
             .addAction(Notification.Action.Builder(null, RelayText.STOP, stop).build()).build()
     }

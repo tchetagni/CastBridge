@@ -1,5 +1,6 @@
 package castbridge.receiver
 
+import castbridge.core.brand.Brand
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
@@ -233,9 +234,9 @@ class ServerActivity : Activity() {
         else action("Accepter les statistiques d'usage") { TvConnect.post { setConsent(true); tick() }; toast("Merci : statistiques d'usage acceptées") }
         action("Mes données (ce que le serveur connaît de cette TV)") { myData() }
         action("Effacer mes données") {
-            AlertDialog.Builder(this).setTitle("Effacer mes données ?")
-                .setMessage("Le serveur supprime la fiche de cette TV, son historique et ses statistiques. L'écran d'information sera affiché à nouveau.")
-                .setPositiveButton("Effacer") { _, _ -> erase() }.setNegativeButton("Annuler", null).show()
+            AlertDialog.Builder(this).setTitle(Brand.t("Effacer mes données ?"))
+                .setMessage(Brand.t("Le serveur supprime la fiche de cette TV, son historique et ses statistiques. L'écran d'information sera affiché à nouveau."))
+                .setPositiveButton(Brand.t("Effacer")) { _, _ -> erase() }.setNegativeButton(Brand.t("Annuler"), null).show()
         }
         action("Relire l'information complète") { open(this, MODE_CONSENT, thenFinish = false) }
         action("Mises à jour") { mode = MODE_UPDATES; render(true) }
@@ -265,14 +266,14 @@ class ServerActivity : Activity() {
 
     private fun editUrl(link: ServerLink) {
         val input = EditText(this).apply { setText(if (link.state.customServer) link.state.baseUrl else ""); inputType = InputType.TYPE_TEXT_VARIATION_URI; setSelectAllOnFocus(true) }
-        AlertDialog.Builder(this).setTitle("Adresse du serveur CastBridge").setMessage("HTTPS obligatoire. Laissez vide pour le serveur par défaut.")
+        AlertDialog.Builder(this).setTitle(Brand.t("Adresse du serveur CastBridge")).setMessage(Brand.t("HTTPS obligatoire. Laissez vide pour le serveur par défaut."))
             .setView(input)
-            .setPositiveButton("Enregistrer") { _, _ ->
+            .setPositiveButton(Brand.t("Enregistrer")) { _, _ ->
                 val v = input.text.toString().trim().ifEmpty { ServerUrl.DEFAULT }
                 val problem = ServerUrl.problem(v)
                 if (problem != null) toast(problem)
                 else { TvConnect.post { state.baseUrl = v; tick() }; toast(if (v == ServerUrl.DEFAULT) "Serveur par défaut rétabli" else "Serveur : ${ServerUrl.normalize(v)}") }
-            }.setNegativeButton("Annuler", null).show()
+            }.setNegativeButton(Brand.t("Annuler"), null).show()
     }
 
     private fun myData() {
@@ -282,8 +283,8 @@ class ServerActivity : Activity() {
             main.post {
                 if (isFinishing) return@post
                 val tv = TextView(this@ServerActivity).apply { this.text = text; typeface = Typeface.MONOSPACE; textSize = TvStyle.Type.CAPTION; setTextColor(TvStyle.TEXT); setPadding(dp(20), dp(16), dp(20), dp(16)) }
-                AlertDialog.Builder(this@ServerActivity).setTitle("Mes données").setView(ScrollView(this@ServerActivity).apply { addView(tv); setBackgroundColor(TvStyle.BG_ELEVATED) })
-                    .setPositiveButton("Fermer", null).show()
+                AlertDialog.Builder(this@ServerActivity).setTitle(Brand.t("Mes données")).setView(ScrollView(this@ServerActivity).apply { addView(tv); setBackgroundColor(TvStyle.BG_ELEVATED) })
+                    .setPositiveButton(Brand.t("Fermer"), null).show()
             }
         }
     }
@@ -299,7 +300,7 @@ class ServerActivity : Activity() {
         }
     }
 
-    private fun toast(s: String) = android.widget.Toast.makeText(this, s, android.widget.Toast.LENGTH_LONG).show()
+    private fun toast(s: String) = android.widget.Toast.makeText(this, Brand.t(s), android.widget.Toast.LENGTH_LONG).show()
 
     companion object {
         const val EXTRA_MODE = "mode"

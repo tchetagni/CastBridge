@@ -2,6 +2,7 @@
 
 package castbridge.sender
 
+import castbridge.core.brand.Brand
 import android.app.Application
 import android.content.ClipData
 import android.content.ClipDescription
@@ -121,7 +122,7 @@ class ActivateTvActivity : ComponentActivity() {
     /** « Partager le code QR » : l'image du QR, SEULE (bouton à part, présent seulement quand le QR tient), avec l'autorisation de lecture sur l'intention et sur le sélecteur ; si l'image ne s'écrit pas, le dit et ne partage rien. */
     private fun shareQr(plan: ShareRequestPlan.Send) {
         val png = plan.image?.let { runCatching { writeQrPng(it) }.getOrNull() }
-        if (png == null) { android.widget.Toast.makeText(this, ShareRequestPlan.QR_FAILED, android.widget.Toast.LENGTH_LONG).show(); return }
+        if (png == null) { android.widget.Toast.makeText(this, Brand.t(ShareRequestPlan.QR_FAILED), android.widget.Toast.LENGTH_LONG).show(); return }
         startActivity(ShareRequestIntents.chooser(plan, png))
     }
 

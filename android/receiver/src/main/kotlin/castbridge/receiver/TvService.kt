@@ -1,5 +1,6 @@
 package castbridge.receiver
 
+import castbridge.core.brand.Brand
 import android.Manifest
 import android.app.Activity
 import android.app.Notification
@@ -191,7 +192,7 @@ class TvService : Service(), Device {
         val nm = getSystemService(NotificationManager::class.java)
         nm.createNotificationChannel(NotificationChannel(CH_SERVICE, "CastBridge TV actif", NotificationManager.IMPORTANCE_MIN))
         val open = PendingIntent.getActivity(this, 0, Intent(this, PlayerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), PendingIntent.FLAG_IMMUTABLE)
-        return Notification.Builder(this, CH_SERVICE).setContentTitle("CastBridge TV actif").setContentText(text)
+        return Notification.Builder(this, CH_SERVICE).setContentTitle(Brand.t("CastBridge TV actif")).setContentText(Brand.t(text))
             .setSmallIcon(R.drawable.ic_stat_castbridge).setOngoing(true).setContentIntent(open).build()
     }
 
@@ -935,11 +936,11 @@ class TvService : Service(), Device {
             val open = PendingIntent.getActivity(this, 2, Intent(this, PlayerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), PendingIntent.FLAG_IMMUTABLE)
             val b = Notification.Builder(this, CH_TRANSFER).setSmallIcon(R.drawable.ic_stat_castbridge).setContentIntent(open).setOnlyAlertOnce(true)
             if (!item.ended) {
-                b.setContentTitle("Réception : ${item.title}").setContentText(item.detail()).setOngoing(true)
+                b.setContentTitle(Brand.t("Réception : ${item.title}")).setContentText(Brand.t(item.detail())).setOngoing(true)
                     .setProgress(100, item.percent, item.total <= 0).setCategory(Notification.CATEGORY_PROGRESS)
                 main.removeCallbacksAndMessages(token)
             } else {
-                b.setContentTitle(item.endLine()).setContentText(item.title).setOngoing(false).setAutoCancel(true)
+                b.setContentTitle(Brand.t(item.endLine())).setContentText(Brand.t(item.title)).setOngoing(false).setAutoCancel(true)
                 main.removeCallbacksAndMessages(token)
                 main.postAtTime({ runCatching { nm.cancel(id) } }, token, android.os.SystemClock.uptimeMillis() + 10_000)
             }
@@ -992,7 +993,7 @@ class TvService : Service(), Device {
         val nm = getSystemService(NotificationManager::class.java)
         nm.createNotificationChannel(NotificationChannel(CH_LAUNCH, "Demandes du téléphone", NotificationManager.IMPORTANCE_HIGH))
         val pi = PendingIntent.getActivity(this, 1, Intent(intent).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
-        val b = Notification.Builder(this, CH_LAUNCH).setContentTitle("CastBridge TV").setContentText(what)
+        val b = Notification.Builder(this, CH_LAUNCH).setContentTitle(Brand.t("CastBridge TV")).setContentText(Brand.t(what))
             .setSmallIcon(R.drawable.ic_stat_castbridge).setContentIntent(pi).setAutoCancel(true).setCategory(Notification.CATEGORY_CALL)
         if (fullScreen) b.setFullScreenIntent(pi, true)
         nm.notify(NOTIF_LAUNCH, b.build())

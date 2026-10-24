@@ -1,5 +1,6 @@
 package castbridge.sender.player
 
+import castbridge.core.brand.Brand
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
@@ -92,7 +93,7 @@ class PlaybackService : MediaLibraryService() {
     /** Android Auto / Bluetooth browsers: one folder, the current queue. */
     private inner class LibraryCallback : MediaLibrarySession.Callback {
         private fun root() = MediaItem.Builder().setMediaId(ROOT).setMediaMetadata(
-            MediaMetadata.Builder().setTitle("CastBridge").setIsBrowsable(true).setIsPlayable(false)
+            MediaMetadata.Builder().setTitle(Brand.t("CastBridge")).setIsBrowsable(true).setIsPlayable(false)
                 .setMediaType(MediaMetadata.MEDIA_TYPE_FOLDER_MIXED).build()).build()
 
         private fun queue(): List<MediaItem> {

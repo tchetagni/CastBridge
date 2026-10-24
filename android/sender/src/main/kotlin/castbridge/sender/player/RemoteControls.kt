@@ -1,5 +1,6 @@
 package castbridge.sender.player
 
+import castbridge.core.brand.Brand
 import castbridge.sender.cbv
 
 import android.content.Intent
@@ -101,7 +102,7 @@ fun CastMiniBar(modifier: Modifier = Modifier) {
     val ctx = LocalContext.current
     val r by CastSession.state.collectAsState()
     val now = rememberNow()
-    LaunchedEffect(Unit) { CastSession.notices.collect { Toast.makeText(ctx, it, Toast.LENGTH_LONG).show() } }
+    LaunchedEffect(Unit) { CastSession.notices.collect { Toast.makeText(ctx, Brand.t(it), Toast.LENGTH_LONG).show() } }
     val s = r ?: return
     val sub = when (s.phase) {
         Remote.Phase.STARTING -> "Connexion à ${s.target.name}…"

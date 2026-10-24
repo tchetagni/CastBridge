@@ -1,5 +1,6 @@
 package castbridge.sender
 
+import castbridge.core.brand.Brand
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothClass
 import android.bluetooth.BluetoothManager
@@ -235,7 +236,7 @@ private fun RunningCard(st: BtSshGatewayService.State) {
                     }
                     TextButton(onClick = {
                         (ctx.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager).setPrimaryClip(ClipData.newPlainText("CastBridge", BtGatewayView.forClipboard(c.line)))
-                        Toast.makeText(ctx, "Copié", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(ctx, Brand.t("Copié"), Toast.LENGTH_SHORT).show()
                     }) { Icon(Icons.Filled.ContentCopy, null, Modifier.size(16.dp)); Spacer(Modifier.width(4.dp)); Text("Copier") }
                 }
             }

@@ -1,5 +1,6 @@
 package castbridge.sender.agent
 
+import castbridge.core.brand.Brand
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -73,7 +74,7 @@ object AgentProactive {
         })
         val open = PendingIntent.getActivity(ctx, 0, Intent(ctx, AssistantActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
         nm.notify(NOTIF_ID, android.app.Notification.Builder(ctx, CHANNEL)
-            .setSmallIcon(R.drawable.ic_stat_castbridge).setContentTitle(m.title).setContentText(m.text).setStyle(android.app.Notification.BigTextStyle().bigText(m.text))
+            .setSmallIcon(R.drawable.ic_stat_castbridge).setContentTitle(Brand.t(m.title)).setContentText(Brand.t(m.text)).setStyle(android.app.Notification.BigTextStyle().bigText(Brand.t(m.text)))
             .setAutoCancel(true).setOnlyAlertOnce(true).setContentIntent(open).build())
     }
 }

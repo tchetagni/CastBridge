@@ -1,5 +1,6 @@
 package castbridge.receiver
 
+import castbridge.core.brand.Brand
 import android.app.Activity
 import android.app.AlertDialog
 import android.graphics.Color
@@ -135,16 +136,16 @@ class ParentalActivity : Activity() {
     }
 
     private fun forgot() {
-        AlertDialog.Builder(this).setTitle("Code parental oublié")
-            .setMessage("Avec le code de connexion de la TV (celui à 6 chiffres, réservé à l'administrateur), le code parental sera EFFACÉ et le contrôle parental DÉSACTIVÉ. " +
-                "Vos profils et vos règles sont gardés ; il faudra créer un nouveau code pour réactiver. Sans ce code, seul l'effacement des données de l'application aide.")
-            .setPositiveButton("Continuer") { _, _ ->
+        AlertDialog.Builder(this).setTitle(Brand.t("Code parental oublié"))
+            .setMessage(Brand.t("Avec le code de connexion de la TV (celui à 6 chiffres, réservé à l'administrateur), le code parental sera EFFACÉ et le contrôle parental DÉSACTIVÉ. " +
+                "Vos profils et vos règles sont gardés ; il faudra créer un nouveau code pour réactiver. Sans ce code, seul l'effacement des données de l'application aide."))
+            .setPositiveButton(Brand.t("Continuer")) { _, _ ->
                 val tvPin = TvService.running?.pin
                 if (tvPin.isNullOrEmpty()) { toast("Le service de la TV n'est pas prêt. Réessayez dans un instant."); return@setPositiveButton }
                 ParentalUi.pinDialog(this, "Code de connexion de la TV", "Les 6 chiffres affichés dans « Connexion & réglages ».",
                     check = { pin -> ParentalHub.pinError(e.adminReset(pin) { Pin.matches(tvPin, it) }) },
                     onOk = { toast("Code parental effacé. Le contrôle est désactivé."); authed = false; stack.clear(); push(entryPage()) })
-            }.setNegativeButton("Annuler", null).show()
+            }.setNegativeButton(Brand.t("Annuler"), null).show()
     }
 
     // ------------------------------------------------------------------ main page
@@ -234,8 +235,8 @@ class ParentalActivity : Activity() {
             for (b in blocked) sb.append("• ${f.format(java.util.Date((b["ts"] as Number).toLong()))} ${b["what"]}\n")
         }
         sb.append("\nCes informations restent sur la TV et sur votre téléphone ; rien n'est envoyé au serveur.")
-        AlertDialog.Builder(this).setTitle("Activité").setMessage(sb.toString()).setPositiveButton("Fermer", null)
-            .setNeutralButton("Effacer l'historique") { _, _ -> e.clearHistory(); toast("Historique effacé.") }.show()
+        AlertDialog.Builder(this).setTitle(Brand.t("Activité")).setMessage(Brand.t(sb.toString())).setPositiveButton(Brand.t("Fermer"), null)
+            .setNeutralButton(Brand.t("Effacer l'historique")) { _, _ -> e.clearHistory(); toast("Historique effacé.") }.show()
     }
 
     // ------------------------------------------------------------------ profiles
@@ -257,9 +258,9 @@ class ParentalActivity : Activity() {
 
     private fun askText(title: String, initial: String, max: Int, onText: (String) -> Unit) {
         val et = EditText(this).apply { setText(initial); inputType = InputType.TYPE_CLASS_TEXT; setSingleLine(); textSize = 24f; setSelection(text.length) }
-        AlertDialog.Builder(this).setTitle(title).setView(et)
-            .setPositiveButton("OK") { _, _ -> val t = et.text.toString().trim().take(max); if (t.isNotEmpty()) onText(t) }
-            .setNegativeButton("Annuler", null).show()
+        AlertDialog.Builder(this).setTitle(Brand.t(title)).setView(et)
+            .setPositiveButton(Brand.t("OK")) { _, _ -> val t = et.text.toString().trim().take(max); if (t.isNotEmpty()) onText(t) }
+            .setNegativeButton(Brand.t("Annuler"), null).show()
     }
 
     private fun addProfile() = askText("Prénom de l'enfant", "", ParentalConfig.MAX_NAME) { name ->
@@ -297,26 +298,26 @@ class ParentalActivity : Activity() {
         row("Ce qui compte : " + (p.kinds.joinToString { it.label.lowercase() }.ifEmpty { "rien" }), "Les heures et la durée s'appliquent à la lecture, aux jeux, aux téléchargements (à cocher).") {
             val all = UseKind.values()
             val on = BooleanArray(all.size) { all[it] in p.kinds }
-            AlertDialog.Builder(this@ParentalActivity).setTitle("Ce qui compte dans le temps")
+            AlertDialog.Builder(this@ParentalActivity).setTitle(Brand.t("Ce qui compte dans le temps"))
                 .setMultiChoiceItems(all.map { it.label }.toTypedArray(), on) { _, i, b -> on[i] = b }
-                .setPositiveButton("OK") { _, _ -> change { it.copy(kinds = all.filterIndexed { i, _ -> on[i] }.toSet()) } }
-                .setNegativeButton("Annuler", null).show()
+                .setPositiveButton(Brand.t("OK")) { _, _ -> change { it.copy(kinds = all.filterIndexed { i, _ -> on[i] }.toSet()) } }
+                .setNegativeButton(Brand.t("Annuler"), null).show()
         }
         row("Écrans bloqués : " + (p.blocked.joinToString { it.label }.ifEmpty { "aucun" }), "Jeux, téléchargements, Internet, administration, SSH, réglages (à cocher).") {
             val all = Category.BLOCKABLE
             val on = BooleanArray(all.size) { all[it] in p.blocked }
-            AlertDialog.Builder(this@ParentalActivity).setTitle("Écrans bloqués pour ${p.name}")
+            AlertDialog.Builder(this@ParentalActivity).setTitle(Brand.t("Écrans bloqués pour ${p.name}"))
                 .setMultiChoiceItems(all.map { it.label }.toTypedArray(), on) { _, i, b -> on[i] = b }
-                .setPositiveButton("OK") { _, _ -> change { it.copy(blocked = all.filterIndexed { i, _ -> on[i] }.toSet()) } }
-                .setNegativeButton("Annuler", null).show()
+                .setPositiveButton(Brand.t("OK")) { _, _ -> change { it.copy(blocked = all.filterIndexed { i, _ -> on[i] }.toSet()) } }
+                .setNegativeButton(Brand.t("Annuler"), null).show()
         }
         row("Utiliser ce profil maintenant", if (e.config().activeProfile == id) "C'est déjà le profil actif." else null) { e.edit { it.copy(activeProfile = id) }; toast("Profil actif : ${p.name}"); render() }
         row("Supprimer ce profil") {
-            AlertDialog.Builder(this@ParentalActivity).setTitle("Supprimer le profil de ${p.name} ?").setMessage("Ses règles sont effacées. Son historique de temps reste dans le rapport.")
-                .setPositiveButton("Supprimer") { _, _ ->
+            AlertDialog.Builder(this@ParentalActivity).setTitle(Brand.t("Supprimer le profil de ${p.name} ?")).setMessage(Brand.t("Ses règles sont effacées. Son historique de temps reste dans le rapport."))
+                .setPositiveButton(Brand.t("Supprimer")) { _, _ ->
                     e.edit { c -> c.copy(profiles = c.profiles.filterNot { it.id == id }, activeProfile = if (c.activeProfile == id) null else c.activeProfile, enabled = c.enabled && c.activeProfile != id) }
                     pop()
-                }.setNegativeButton("Annuler", null).show().getButton(AlertDialog.BUTTON_NEGATIVE)?.requestFocus()
+                }.setNegativeButton(Brand.t("Annuler"), null).show().getButton(AlertDialog.BUTTON_NEGATIVE)?.requestFocus()
         }
     }
 
