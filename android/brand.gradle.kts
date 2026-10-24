@@ -25,6 +25,10 @@ val brandOwner = prop("brand.owner", "CastBridge")
 val brandTagline = prop("brand.tagline")
 val supportPhone = if (isDefaultBrand) "+237686031070" else prop("support.phone")
 val serverUrl = prop("server.url")
+val marketedBy = prop("brand.marketedBy")
+// Libellés surchargés : clés « label.<clé> » (ex. label.tab.phone) -> « clé=valeur;… » lu par Brand.label.
+val labels = if (isDefaultBrand) "" else brandProps.stringPropertyNames().filter { it.startsWith("label.") }.sorted()
+    .joinToString(";") { it.removePrefix("label.") + "=" + brandProps.getProperty(it).trim().replace(";", ",") }
 // Couleurs : clés « color.<rôle> » (docs/WHITE-LABEL.md § Couleurs) transmises telles quelles à BrandPalette ; thème du téléphone par défaut.
 val palette = if (isDefaultBrand) "" else brandProps.stringPropertyNames().filter { it.startsWith("color.") }.sorted()
     .joinToString(";") { it.removePrefix("color.") + "=" + brandProps.getProperty(it).trim() }
@@ -49,6 +53,8 @@ pluginManager.withPlugin("com.android.application") {
             "buildConfigField"("String", "BRAND_OWNER", lit(brandOwner))
             "buildConfigField"("String", "BRAND_TAGLINE", lit(brandTagline))
             "buildConfigField"("String", "SUPPORT_PHONE", lit(supportPhone))
+            "buildConfigField"("String", "BRAND_MARKETED_BY", lit(marketedBy))
+            "buildConfigField"("String", "BRAND_LABELS", lit(labels))
             "buildConfigField"("String", "BRAND_PALETTE", lit(palette))
             "buildConfigField"("String", "BRAND_PHONE_THEME", lit(phoneTheme))
         }
@@ -79,6 +85,8 @@ if (!isDefaultBrand) {
         val mainRes = File(projectDir, "src/main/res")
         inputs.dir(mainRes); inputs.property("brand", listOf(brandId, brandName, brandTvName, brandAppId))
         if (overlayRes.isDirectory) inputs.dir(overlayRes)
+        val legalDir = File(brandDir, "legal")
+        if (legalDir.isDirectory) inputs.dir(legalDir)
         outputs.dir(genDir)
         doLast {
             val out = genDir.get().asFile; out.deleteRecursively()
@@ -94,6 +102,10 @@ if (!isDefaultBrand) {
             }
             File(out, "values").mkdirs()
             File(out, "values/brand_generated.xml").writeText("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<!-- GÉNÉRÉ par brand.gradle.kts pour la marque $brandId : ne pas modifier -->\n<resources>\n" + lines.joinToString("\n") + "\n</resources>\n")
+            // CGU fournies par le client (legal/cgu.md ou cgu.txt) : embarquées dans l'app du téléphone, res/raw/brand_cgu (l'entrée n'existe que si le fichier existe)
+            if (module == "sender") (listOf("cgu.md", "cgu.txt").map { File(brandDir, "legal/$it") }.firstOrNull { it.isFile })?.let { c ->
+                File(out, "raw").mkdirs(); c.copyTo(File(out, "raw/brand_cgu.txt"), overwrite = true)
+            }
             val sc = File(mainRes, "xml/shortcuts.xml")
             if (sc.isFile) {
                 File(out, "xml").mkdirs()

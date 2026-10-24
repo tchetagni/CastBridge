@@ -97,7 +97,7 @@ Les couleurs construites dans le code passent par `castbridge.core.brand.BrandPa
 | `color.focus` | anneau de focus (TV et téléphone sombre) |
 | `color.tvAccent` | optionnel : accent lisible sur fond sombre (texte, sélection, progression) ; défaut = `color.focus` |
 
-Sous-marque Apprendre du téléphone : pour une marque autre que CastBridge, `SubBrandHeader` (`Ui.kt`) affiche pictogramme + « Apprendre » aux couleurs de la marque au lieu du logo de sous-marque (qui contient le mot « CastBridge »). Le logo de la barre d'app (`CastBridgeLogo`) est agrandi de 40 % pour une marque (logo compact presque carré).
+Sous-marque Apprendre du téléphone : pour une marque autre que CastBridge, **aucune rangée d'en-tête** n'est affichée dans l'onglet Apprendre (`SubBrandHeader` n'est appelé que pour CastBridge ; le contenu remonte sous les onglets). C'est le seul onglet qui avait une telle rangée (Jeux, Échecs, Quiz affichent leurs propres cartes). Le logo de la barre d'app (`CastBridgeLogo`) est agrandi de 40 % pour une marque (logo compact presque carré) : la marque le fournit en **VectorDrawable** transparent (`logo_castbridge_logo_horizontal.xml` et `_light.xml`, mêmes noms que ceux de CastBridge), sans carte blanche.
 
 Encore aux couleurs CastBridge, volontairement : palettes de sous-marque Quiz des Millions (`QuizViews.kt`), Échecs (`ChessTvView.kt`), Apprendre (`LearnViews.kt`) ; pastilles d'état (`StatusLevel.kt`, sémantique) ; lecteur et télécommande du téléphone (`player/`) ; avertissement et erreur (sémantique universelle, jamais recolorés).
 
@@ -141,3 +141,15 @@ Rien ci-dessous n'a été changé en phase 1. Ce sont des identifiants de protoc
 | `sshd` | aucune bannière « CastBridge » trouvée dans les sources (bannière SSH par défaut de la bibliothèque) | à revérifier à l'exécution |
 
 Découverte aujourd'hui sans nom de marque : la TV est trouvée par le type mDNS `_castbridge._tcp.`, par l'UUID RFCOMM (appairage Bluetooth) et par le SSID `DIRECT-CB-…` ; aucun de ces trois ne dépend d'un texte affiché. Les deux seuls tests sur un **nom** sont `TvReach.kt:164` (préfixe `castbridge tv` du nom mDNS) et `DialRules.kt:52` (nom DIAL).
+
+## À propos, libellés et CGU (téléphone, marque blanche uniquement)
+
+Pour une marque autre que CastBridge, la rangée d'onglets du téléphone gagne un 7e onglet **« À propos »** (`AboutScreen.kt`) ; CastBridge garde ses six onglets, identiques (l'app n'avait pas d'écran « À propos » réutilisable : la boîte « À propos » du gestionnaire de téléchargements décrit un contenu, pas l'app). Contenu : logo (vecteur), nom et version, slogan (`brand.tagline`), support (`support.phone`, boutons Appeler / WhatsApp), entrée **CGU** si le client a fourni le fichier, et, en bas de l'onglet, « Commercialisé par <valeur> ».
+
+| Clé de `brand.properties` | Effet |
+|---|---|
+| `brand.marketedBy` | `BuildConfig.BRAND_MARKETED_BY` -> `Brand.marketedBy`. La ligne « Commercialisé par <valeur> » n'apparaît que si la clé est remplie (`Brand.marketedByLine()`). |
+| `label.<clé>` | libellé surchargé, `BuildConfig.BRAND_LABELS` -> `Brand.label(clé, défaut)`. Clé connue : `label.tab.phone` (onglet « Sur le téléphone », défaut CastBridge ; EduPlay : « Galerie du téléphone »). Ajouter une surcharge = un appel `Brand.label("…", défaut)` à l'endroit voulu. Le guide intégré et les aides ne reprennent pas ce libellé d'onglet ; seul le placeholder « Rechercher sur le téléphone » de la galerie reste tel quel. |
+| `legal/cgu.md` (ou `cgu.txt`) | fichier fourni par le client, copié par `generateBrandResources` en `res/raw/brand_cgu` du téléphone. L'entrée « Conditions générales d'utilisation (CGU) » de l'onglet n'existe que si le fichier existe. Rendu markdown minimal maison : `#`/`##`/`###`, `- ` puces, `> ` citation, paragraphes, `**` retiré. |
+
+Tests : `BrandTest` (CastBridge sans ligne « Commercialisé par » et libellés inchangés ; marque avec ligne et surcharge).
