@@ -32,7 +32,8 @@ fun CbLogo(@DrawableRes res: Int, height: Dp, modifier: Modifier = Modifier, des
 @Composable
 fun CastBridgeLogo(height: Dp, modifier: Modifier = Modifier) =
     CbLogo(if (MaterialTheme.colorScheme.background.luminance() < 0.5f) R.drawable.logo_castbridge_logo_horizontal else R.drawable.logo_castbridge_logo_horizontal_light,
-        height, modifier, "CastBridge")
+        // Marque blanche : un logo compact (emblème + nom, presque carré) a besoin de plus de hauteur pour rester lisible dans la barre d'app.
+        if (castbridge.core.brand.Brand.isCustom) height * 1.4f else height, modifier, castbridge.core.brand.Brand.name)
 
 /** An icon of the charte as an [androidx.compose.ui.graphics.vector.ImageVector] (for APIs that take a vector). */
 @Composable
@@ -47,9 +48,17 @@ fun CbIcon(@DrawableRes res: Int, description: String? = null, modifier: Modifie
 @Composable
 fun SubBrandHeader(@DrawableRes logo: Int, name: String) {
     Box(Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.surface).padding(horizontal = 16.dp, vertical = 6.dp)) {
-        CbLogo(logo, 40.dp, description = name)
+        if (castbridge.core.brand.Brand.isCustom) {
+            // Marque blanche : le logo de sous-marque contient le mot « CastBridge » (et ses couleurs) : à sa place, pictogramme + nom, aux couleurs de la marque.
+            Row(Modifier.height(40.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                CbIcon(subBrandIcon(logo), null, Modifier.size(28.dp), MaterialTheme.colorScheme.primary)
+                Text(name, style = MaterialTheme.typography.titleLarge, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
+            }
+        } else CbLogo(logo, 40.dp, description = name)
     }
 }
+
+@DrawableRes private fun subBrandIcon(logo: Int): Int = R.drawable.ic_cb_apprendre
 
 fun fmtTime(ms: Long): String {
     val s = ms / 1000
