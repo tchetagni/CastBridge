@@ -79,8 +79,9 @@ for mod in ("sender", "receiver"):
 
 # ---- téléphone (fond clair) : logos de l'appli
 S = f"{OUT}/sender/res/drawable"
-save(fit(LOCKUP, 640, 640), f"{S}/logo_castbridge_logo_horizontal_light.png")        # fond clair : version compacte (emblème + EduPlay)
-save(card(fit(LOCKUP, 560, 560)), f"{S}/logo_castbridge_logo_horizontal.png")         # fond sombre : compact sur carte blanche
+# logo du téléphone : VECTEUR, voir gen_compact_vector.py (plus de PNG)
+# save(fit(LOCKUP, 640, 640), f"{S}/logo_castbridge_logo_horizontal_light.png")        # fond clair : version compacte (emblème + EduPlay)
+# save(card(fit(LOCKUP, 560, 560)), f"{S}/logo_castbridge_logo_horizontal.png")         # fond sombre : compact sur carte blanche
 save(fit(EMBLEM, 512, 512), f"{S}/logo_castbridge_mark.png")
 save(fit(EMBLEM, 512, 512), f"{S}/logo_castbridge_symbol.png")
 save(stat(), f"{S}/ic_stat_castbridge.png")
