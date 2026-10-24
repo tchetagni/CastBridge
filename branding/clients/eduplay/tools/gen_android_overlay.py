@@ -24,6 +24,16 @@ em = full1254.crop((372, 84, 1110, 655))                          # emblème : s
 ar = np.array(em); ar[(np.arange(em.height)[:, None] + 84 >= 632) & (np.arange(em.width)[None, :] + 372 < 460), 3] = 0
 EMBLEM = Image.fromarray(ar); EMBLEM = EMBLEM.crop(EMBLEM.split()[3].getbbox())
 
+# Version COMPACTE PROVISOIRE : emblème + mot « EduPlay » seulement, recadrés du même SVG (rien de redessiné ni de recoloré) ;
+# on masque « THE », le slogan « Apprendre · Jouer · Se Divertir » et « par TechnoHub Enterprise » (la queue du « y » est conservée).
+la = np.array(full1254)
+yy, xx = np.mgrid[0:la.shape[0], 0:la.shape[1]]
+la[(xx < 372) & (yy >= 540) & (yy < 670)] = 0                    # « THE »
+la[(xx >= 372) & (xx < 460) & (yy >= 632) & (yy < 670)] = 0      # filet vert au-dessus du « E »
+la[(yy >= 892) & (xx < 1020)] = 0                                  # slogan et « par TechnoHub Enterprise »
+la[yy >= 1000] = 0
+LOCKUP = Image.fromarray(la); LOCKUP = LOCKUP.crop(LOCKUP.split()[3].getbbox())
+
 def fit(im, w, h):
     s = min(w / im.width, h / im.height); return im.resize((max(1, round(im.width * s)), max(1, round(im.height * s))), Image.LANCZOS)
 
@@ -69,14 +79,14 @@ for mod in ("sender", "receiver"):
 
 # ---- téléphone (fond clair) : logos de l'appli
 S = f"{OUT}/sender/res/drawable"
-save(fit(LOGO, 640, 640), f"{S}/logo_castbridge_logo_horizontal_light.png")        # fond clair : logo seul
-save(card(fit(LOGO, 560, 560)), f"{S}/logo_castbridge_logo_horizontal.png")         # fond sombre : sur carte blanche
+save(fit(LOCKUP, 640, 640), f"{S}/logo_castbridge_logo_horizontal_light.png")        # fond clair : version compacte (emblème + EduPlay)
+save(card(fit(LOCKUP, 560, 560)), f"{S}/logo_castbridge_logo_horizontal.png")         # fond sombre : compact sur carte blanche
 save(fit(EMBLEM, 512, 512), f"{S}/logo_castbridge_mark.png")
 save(fit(EMBLEM, 512, 512), f"{S}/logo_castbridge_symbol.png")
 save(stat(), f"{S}/ic_stat_castbridge.png")
 # ---- TV (fond bleu nuit) : logos sur carte blanche
 T = f"{OUT}/receiver/res/drawable"
-save(card(fit(EMBLEM, 360, 360), 0.10), f"{T}/logo_castbridge_tv_horizontal_compact.png")
+save(card(fit(LOCKUP, 400, 400), 0.08), f"{T}/logo_castbridge_tv_horizontal_compact.png")
 save(card(fit(LOGO, 640, 640)), f"{T}/logo_castbridge_tv_horizontal.png")
 save(card(fit(LOGO, 640, 640)), f"{T}/logo_castbridge_tv.png")
 save(card(fit(LOGO, 640, 640)), f"{T}/logo_castbridge_logo_horizontal.png")
