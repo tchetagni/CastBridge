@@ -237,8 +237,8 @@ Les utilisateurs peuvent contacter TechnoHub Enterprise pour signaler une diffic
 
 Les demandes peuvent être adressées aux coordonnées suivantes :
 
-- Téléphone : +237 695 09 36 75
-- WhatsApp professionnel : +237 695 09 36 75
+- Téléphone : +237 680 24 74 36
+- WhatsApp professionnel : +237 680 24 74 36
 - Adresse électronique : [À compléter]
 - Adresse physique : [À compléter]
 

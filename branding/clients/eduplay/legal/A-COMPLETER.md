@@ -10,7 +10,7 @@ Annexe de la version de travail reçue de TechnoHub Enterprise le 2026-10-24 (no
 | Renouvellement | Formule payante évoquée | Prix, durée, modalités |
 | Compatibilité matérielle | Certains équipements Android TV envisagés | Publier la liste des équipements compatibles |
 | Données personnelles | Modalités techniques à confirmer | Politique de confidentialité conforme au fonctionnement réel (loi n° 2024/017 du 23/12/2024) |
-| Assistance | Téléphone/WhatsApp +237 695 09 36 75 renseignés (art. 13) | Courriel et adresse physique |
+| Assistance | Téléphone/WhatsApp +237 680 24 74 36 renseignés (art. 13) | Courriel et adresse physique |
 | Vente et remboursement | À définir | CGV distinctes des CGU |
 
 Documents à distinguer (recommandation de l'annexe) : 1. CGU EduPlay ; 2. CGV EduPlay ; 3. contrat de partenariat technique (droits sur le logiciel, licences, maintenance, mises à jour, confidentialité, responsabilités du partenaire).
