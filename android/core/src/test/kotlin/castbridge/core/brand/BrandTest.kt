@@ -40,4 +40,16 @@ class BrandTest {
             assertEquals(null, Brand.marketedByLine())
         } finally { reset() }
     }
+
+    @Test fun gamesHiddenOnlyForTheBrandThatListsThem() {
+        try {
+            reset()
+            assertEquals(false, Brand.gameHidden("bataille"))
+            Brand.init("eduplay", "EduPlay", "EduPlay TV", "TechnoHub Enterprise", "", "", "", "LIGHT", "", "games.hidden=bataille, fap-fap,agraham-tia;tab.phone=Galerie du téléphone")
+            assertEquals(true, Brand.gameHidden("bataille"))
+            assertEquals(true, Brand.gameHidden("fap-fap"))
+            assertEquals(true, Brand.gameHidden("agraham-tia"))
+            assertEquals(false, Brand.gameHidden("quiz"))
+        } finally { reset() }
+    }
 }

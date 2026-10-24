@@ -37,6 +37,9 @@ object Brand {
     /** Libellé surchargé par la marque (clés `label.<clé>` de brand.properties, ex. `label.tab.phone`) ; [default] sans surcharge (CastBridge). */
     fun label(key: String, default: String): String = labels[key] ?: default
 
+    /** Vrai si la marque retire le jeu [id] de ses listes (clé `games.hidden` de brand.properties) ; toujours faux pour CastBridge. */
+    fun gameHidden(id: String): Boolean = labels["games.hidden"]?.split(",")?.any { it.trim() == id } == true
+
     /** « Commercialisé par … » ou null quand `brand.marketedBy` est vide. */
     fun marketedByLine(): String? = marketedBy.takeIf { it.isNotEmpty() }?.let { "Commercialisé par $it" }
 

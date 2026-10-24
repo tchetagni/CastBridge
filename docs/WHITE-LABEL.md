@@ -153,3 +153,7 @@ Pour une marque autre que CastBridge, la rangée d'onglets du téléphone gagne 
 | `legal/cgu.md` (ou `cgu.txt`) | fichier fourni par le client, copié par `generateBrandResources` en `res/raw/brand_cgu` du téléphone. L'entrée « Conditions générales d'utilisation (CGU) » de l'onglet n'existe que si le fichier existe. Rendu markdown minimal maison : `#`/`##`/`###`, `- ` puces, `> ` citation, paragraphes, `**` retiré. |
 
 Tests : `BrandTest` (CastBridge sans ligne « Commercialisé par » et libellés inchangés ; marque avec ligne et surcharge).
+
+## Jeux retirés d'une marque
+
+Clé `games.hidden` de `brand.properties` : identifiants séparés par des virgules (`bataille`, `fap-fap`, `agraham-tia`, `quiz`, `chess`, `sudoku`). Ces jeux disparaissent de l'onglet « Jeux » du téléphone et du hub Jeux de la TV (`Brand.gameHidden`). CastBridge n'en retire aucun. EduPlay (2026-10-24) : les trois jeux de cartes.
