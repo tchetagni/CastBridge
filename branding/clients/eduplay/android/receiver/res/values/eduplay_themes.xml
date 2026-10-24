@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EduPlay TV : mêmes styles que la TV CastBridge (mêmes noms, donc remplacés), mais l'accent des boîtes de dialogue est le cyan (le bleu #0750B8 ne ressortirait pas sur le fond du dialogue). -->
+<resources>
+    <style name="CastBridge.Dialog" parent="@android:style/Theme.DeviceDefault.Dialog.Alert">
+        <item name="android:fontFamily">@font/cb_inter</item>
+        <item name="android:windowBackground">@drawable/cb_dialog_bg</item>
+        <item name="android:colorBackground">@color/cb_surface</item>
+        <item name="android:textColorPrimary">@color/cb_text_high</item>
+        <item name="android:textColorSecondary">@color/cb_text_medium</item>
+        <item name="android:colorAccent">@color/cb_focus_ring</item>
+        <item name="android:textColorHint">@color/cb_text_low</item>
+    </style>
+    <style name="Theme.CastBridge.Tv" parent="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+        <item name="android:fontFamily">@font/cb_inter</item>
+        <item name="android:alertDialogTheme">@style/CastBridge.Dialog</item>
+        <item name="android:colorAccent">@color/cb_focus_ring</item>
+    </style>
+    <style name="Theme.CastBridge.Tv.Screen" parent="@android:style/Theme.DeviceDefault.NoActionBar">
+        <item name="android:fontFamily">@font/cb_inter</item>
+        <item name="android:windowBackground">@color/cb_background</item>
+        <item name="android:alertDialogTheme">@style/CastBridge.Dialog</item>
+        <item name="android:colorAccent">@color/cb_focus_ring</item>
+    </style>
+</resources>
