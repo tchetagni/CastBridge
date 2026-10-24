@@ -1,5 +1,6 @@
 package castbridge.receiver
 
+import castbridge.core.brand.Brand
 import android.app.Activity
 import android.app.Application
 import android.content.Context
@@ -317,18 +318,18 @@ object ParentalHub {
 
     /** "Classer cette vidéo" from the library actions: asks the PIN, then the rating; saves a rule on this file. */
     fun rateDialog(a: Activity, name: String, title: String) {
-        if (!engine.hasPin()) { Toast.makeText(a, "Créez d'abord le code parental : tuile « Contrôle parental ».", Toast.LENGTH_LONG).show(); return }
+        if (!engine.hasPin()) { Toast.makeText(a, Brand.t("Créez d'abord le code parental : tuile « Contrôle parental »."), Toast.LENGTH_LONG).show(); return }
         authorize(a, "Classer « $title »") {
             val cur = engine.config().let { castbridge.core.parental.ParentalRules.ratingOf(it, name) }
             val labels = Rating.values().map { it.label } + "Retirer le classement de cette vidéo"
-            android.app.AlertDialog.Builder(a).setTitle("Classer « $title » (actuel : ${cur.label})")
+            android.app.AlertDialog.Builder(a).setTitle(Brand.t("Classer « $title » (actuel : ${cur.label})"))
                 .setItems(labels.toTypedArray()) { _, i ->
                     engine.edit { c ->
                         val rest = c.rules.filterNot { it.kind == RuleKind.FILE && it.match.equals(name, true) }
                         c.copy(rules = if (i < Rating.values().size) rest + RatingRule(RuleKind.FILE, name.take(80), Rating.values()[i]) else rest)
                     }
-                    Toast.makeText(a, if (i < Rating.values().size) "Classée : ${Rating.values()[i].label}" else "Classement retiré", Toast.LENGTH_SHORT).show()
-                }.setNegativeButton("Annuler", null).show()
+                    Toast.makeText(a, Brand.t(if (i < Rating.values().size) "Classée : ${Rating.values()[i].label}" else "Classement retiré"), Toast.LENGTH_SHORT).show()
+                }.setNegativeButton(Brand.t("Annuler"), null).show()
         }
     }
 
@@ -367,7 +368,7 @@ object ParentalHub {
             tracker?.tick(type, title, e.activeProfile()?.id, dt)
         }
         r.warnMinutes?.let { m ->
-            app?.let { Toast.makeText(it, "Il reste ${if (m <= 1) "1 minute" else "$m minutes"} d'écran. Pensez à terminer.", Toast.LENGTH_LONG).show() }
+            app?.let { Toast.makeText(it, Brand.t("Il reste ${if (m <= 1) "1 minute" else "$m minutes"} d'écran. Pensez à terminer."), Toast.LENGTH_LONG).show() }
         }
         if (r.blockReason != null) {
             e.recordBlocked(kind?.label ?: "Temps d'écran", r.blockReason!!)
@@ -457,7 +458,7 @@ object ParentalHub {
         if (env.isEssential(pkg)) return
         val label = AppCatalog.label(c, pkg)
         val r = e.appTick(pkg, label, dt, env)
-        r.warnMinutes?.let { m -> Toast.makeText(c, "Il reste ${if (m <= 1) "1 minute" else "$m minutes"} sur cette application. Pensez à terminer.", Toast.LENGTH_LONG).show() }
+        r.warnMinutes?.let { m -> Toast.makeText(c, Brand.t("Il reste ${if (m <= 1) "1 minute" else "$m minutes"} sur cette application. Pensez à terminer."), Toast.LENGTH_LONG).show() }
         if (r.blockReason != null) enforceApp(c, pkg, e.checkApp(pkg, env).code, r.blockReason!!)
     }
 

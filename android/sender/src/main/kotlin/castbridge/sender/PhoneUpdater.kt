@@ -1,5 +1,6 @@
 package castbridge.sender
 
+import castbridge.core.brand.Brand
 import android.app.Activity
 import android.app.Notification
 import android.app.NotificationChannel
@@ -137,7 +138,7 @@ class PhoneUpdater(private val ctx: Context, private val onChanged: () -> Unit) 
         val open = PendingIntent.getActivity(ctx, 7, Intent(ctx, MainActivity::class.java).putExtra(EXTRA_INSTALL, true)
             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP), PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
         nm.notify(NOTIF, Notification.Builder(ctx, CHANNEL).setSmallIcon(R.drawable.ic_stat_castbridge)
-            .setContentTitle("Mise à jour prête — Installer").setContentText("CastBridge ${m.versionName} : touchez pour installer")
+            .setContentTitle(Brand.t("Mise à jour prête — Installer")).setContentText(Brand.t("CastBridge ${m.versionName} : touchez pour installer"))
             .setAutoCancel(true).setContentIntent(open)
             .addAction(Notification.Action.Builder(null, "Installer", open).build()).build())
     }

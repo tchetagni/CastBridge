@@ -1,5 +1,6 @@
 package castbridge.sender
 
+import castbridge.core.brand.Brand
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -24,12 +25,12 @@ class ReselectActivity : ComponentActivity() {
             if (item != null && TransferQueue.reanchor(this, item.id, u)) n++
         }
         val left = TransferQueue.toReshare().size
-        Toast.makeText(this, when {
+        Toast.makeText(this, Brand.t(when {
             n > 0 && left == 0 -> "CastBridge : $n fichier(s) repris, l'envoi continue."
             n > 0 -> "CastBridge : $n fichier(s) repris, il en reste $left à choisir."
             uris.isEmpty() -> "CastBridge : aucun fichier choisi."
             else -> "CastBridge : aucun des fichiers choisis ne correspond à la file (même nom attendu)."
-        }, Toast.LENGTH_LONG).show()
+        }), Toast.LENGTH_LONG).show()
         finish()
     }
 
@@ -39,7 +40,7 @@ class ReselectActivity : ComponentActivity() {
         if (items.isEmpty()) { finish(); return }
         val kinds = items.map { MediaKind.of(null, it.name) }.toSet()
         val mimes = buildList { add("video/*"); if (MediaKind.AUDIO in kinds) add("audio/*"); if (MediaKind.IMAGE in kinds) add("image/*") }
-        Toast.makeText(this, "Choisissez : " + items.take(3).joinToString(", ") { "« ${it.name} »" } + if (items.size > 3) ", …" else "", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, Brand.t("Choisissez : " + items.take(3).joinToString(", ") { "« ${it.name} »" } + if (items.size > 3) ", …" else ""), Toast.LENGTH_LONG).show()
         runCatching { pick.launch(mimes.toTypedArray()) }.onFailure { finish() }
     }
 }

@@ -1,5 +1,6 @@
 package castbridge.receiver
 
+import castbridge.core.brand.Brand
 import android.app.Activity
 import android.app.ActivityManager
 import android.app.Notification
@@ -157,7 +158,7 @@ object TvForeground {
         nm.createNotificationChannel(NotificationChannel(CH_LAUNCH, "Demandes du téléphone", NotificationManager.IMPORTANCE_HIGH))
         // its own request code (the playback request of TvService uses 1 for PlayerActivity too): the same notification slot, but never the same PendingIntent
         val pi = PendingIntent.getActivity(ctx, 3, Intent(intent).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
-        val b = Notification.Builder(ctx, CH_LAUNCH).setContentTitle("CastBridge-TV").setContentText("Le téléphone demande d'ouvrir CastBridge-TV")
+        val b = Notification.Builder(ctx, CH_LAUNCH).setContentTitle(Brand.t("CastBridge-TV")).setContentText(Brand.t("Le téléphone demande d'ouvrir CastBridge-TV"))
             .setSmallIcon(R.drawable.ic_stat_castbridge).setContentIntent(pi).setAutoCancel(true).setCategory(Notification.CATEGORY_CALL)
         if (fullScreen) b.setFullScreenIntent(pi, true)
         nm.notify(NOTIF_LAUNCH, b.build())

@@ -2,6 +2,7 @@
 
 package castbridge.sender
 
+import castbridge.core.brand.Brand
 import android.Manifest
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothManager
@@ -127,7 +128,7 @@ fun BtScreen() {
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             Button(enabled = !busy && granted && selected != null && castbridge.core.trust.TvAuth.isUsable(pin) && fileUri != null && fileName != null,
                 onClick = { runCatching { BtUploadService.start(ctx, fileUri!!, fileName!!, selected!!, pin) }
-                    .onFailure { android.widget.Toast.makeText(ctx, it.message ?: "Impossible de démarrer l'envoi", android.widget.Toast.LENGTH_LONG).show() } }) { Text("Envoyer") }
+                    .onFailure { android.widget.Toast.makeText(ctx, Brand.t(it.message ?: "Impossible de démarrer l'envoi"), android.widget.Toast.LENGTH_LONG).show() } }) { Text("Envoyer") }
             if (busy) OutlinedButton(onClick = { BtUploadService.cancel(ctx) }) { Text("Annuler") }
         }
         GatewaySwitch(selected, pin, granted)

@@ -1,5 +1,6 @@
 package castbridge.sender
 
+import castbridge.core.brand.Brand
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -175,7 +176,7 @@ class DownloadService : Service() {
         val nm = getSystemService(NotificationManager::class.java)
         nm.createNotificationChannel(NotificationChannel(CHANNEL, "Téléchargements depuis la TV", NotificationManager.IMPORTANCE_LOW))
         val cancel = PendingIntent.getService(this, 6, Intent(this, DownloadService::class.java).setAction(ACTION_CANCEL), PendingIntent.FLAG_IMMUTABLE)
-        return Notification.Builder(this, CHANNEL).setContentTitle("CastBridge").setContentText("$text · $pct %").setSubText("$pct %")
+        return Notification.Builder(this, CHANNEL).setContentTitle(Brand.t("CastBridge")).setContentText(Brand.t("$text · $pct %")).setSubText(Brand.t("$pct %"))
             .setSmallIcon(R.drawable.ic_stat_castbridge).setOngoing(true).setOnlyAlertOnce(true).setProgress(100, pct, false)
             .addAction(Notification.Action.Builder(null, "Annuler", cancel).build()).build()
     }

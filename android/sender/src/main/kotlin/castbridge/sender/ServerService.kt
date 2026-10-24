@@ -1,5 +1,6 @@
 package castbridge.sender
 
+import castbridge.core.brand.Brand
 import android.app.*
 import android.content.Context
 import android.content.Intent
@@ -18,8 +19,8 @@ class ServerService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val nm = getSystemService(NotificationManager::class.java)
         nm.createNotificationChannel(NotificationChannel("cast", "Diffusion", NotificationManager.IMPORTANCE_LOW))
-        val n = Notification.Builder(this, "cast").setContentTitle("CastBridge")
-            .setContentText("Diffusion en cours").setSmallIcon(R.drawable.ic_stat_castbridge).build()
+        val n = Notification.Builder(this, "cast").setContentTitle(Brand.t("CastBridge"))
+            .setContentText(Brand.t("Diffusion en cours")).setSmallIcon(R.drawable.ic_stat_castbridge).build()
         startForeground(1, n)
         if (server == null) {
             try {

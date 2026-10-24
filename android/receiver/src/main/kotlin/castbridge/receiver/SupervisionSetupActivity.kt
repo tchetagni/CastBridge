@@ -1,5 +1,6 @@
 package castbridge.receiver
 
+import castbridge.core.brand.Brand
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
@@ -99,7 +100,7 @@ class SupervisionSetupActivity : Activity() {
         ParentalUi.pinDialog(this, "Code parental", "Saisissez votre code pour ${if (on) "désactiver" else "activer"} la surveillance de toute la TV.",
             check = { pin -> ParentalHub.pinError(e.verifyPin(pin)) }, onOk = {
                 e.editApps { it.copy(supervise = !on) }
-                Toast.makeText(this, if (on) "Surveillance désactivée." else "Surveillance activée. Vérifiez l'état affiché en haut.", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, Brand.t(if (on) "Surveillance désactivée." else "Surveillance activée. Vérifiez l'état affiché en haut."), Toast.LENGTH_LONG).show()
                 render()
             })
     }

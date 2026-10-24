@@ -1,5 +1,6 @@
 package castbridge.receiver
 
+import castbridge.core.brand.Brand
 import android.app.Activity
 import android.app.AlertDialog
 import android.graphics.Color
@@ -155,8 +156,8 @@ class DownloadsActivity : Activity() {
         if (v.state == DlState.QUEUED || v.state == DlState.PAUSED) items += "Passer en premier" to { act { it.priority(id, "top") } }
         items += "Supprimer (garder ce qui est téléchargé)" to { act { it.remove(id, false) } }
         items += "Supprimer avec les fichiers" to { confirm("Supprimer « ${v.name} » et ses fichiers ?") { act { it.remove(id, true) } } }
-        AlertDialog.Builder(this).setTitle(v.name).setItems(items.map { it.first }.toTypedArray()) { _, i -> items[i].second() }
-            .setNegativeButton("Fermer", null).show()
+        AlertDialog.Builder(this).setTitle(Brand.t(v.name)).setItems(items.map { it.first }.toTypedArray()) { _, i -> items[i].second() }
+            .setNegativeButton(Brand.t("Fermer"), null).show()
     }
 
     private fun doneActions(id: String) {
@@ -165,8 +166,8 @@ class DownloadsActivity : Activity() {
         f.files.forEach { name -> items += "Regarder « $name »" to { play(name) } }
         items += "Retirer de la liste (garder le fichier)" to { act { it.remove(id, false) } }
         items += "Supprimer le fichier" to { confirm("Supprimer « ${f.name} » de la TV ?") { act { it.remove(id, true) } } }
-        AlertDialog.Builder(this).setTitle(f.name).setItems(items.map { it.first }.toTypedArray()) { _, i -> items[i].second() }
-            .setNegativeButton("Fermer", null).show()
+        AlertDialog.Builder(this).setTitle(Brand.t(f.name)).setItems(items.map { it.first }.toTypedArray()) { _, i -> items[i].second() }
+            .setNegativeButton(Brand.t("Fermer"), null).show()
     }
 
     /** Asks the TV's own server to play it (same path as the phone), then shows the player. */
@@ -191,27 +192,27 @@ class DownloadsActivity : Activity() {
             imeOptions = EditorInfo.IME_ACTION_DONE
             setSingleLine()
         }
-        AlertDialog.Builder(this).setTitle("Ajouter un lien").setMessage("Tapez ou collez l'adresse du fichier (http, https, ftp, sftp) ou un lien magnet.")
-            .setView(input).setPositiveButton("Télécharger") { _, _ ->
+        AlertDialog.Builder(this).setTitle(Brand.t("Ajouter un lien")).setMessage(Brand.t("Tapez ou collez l'adresse du fichier (http, https, ftp, sftp) ou un lien magnet."))
+            .setView(input).setPositiveButton(Brand.t("Télécharger")) { _, _ ->
                 val t = input.text.toString()
                 act { it.addLink(t) }
-            }.setNegativeButton("Annuler", null).show()
+            }.setNegativeButton(Brand.t("Annuler"), null).show()
         input.requestFocus()
     }
 
     private fun showWarning() {
-        AlertDialog.Builder(this).setTitle("Avant de télécharger").setMessage(DownloadManager.WARNING)
-            .setPositiveButton("J'ai compris") { _, _ -> io.execute { dm?.acceptWarning() } }
-            .setNegativeButton("Plus tard", null).show()
+        AlertDialog.Builder(this).setTitle(Brand.t("Avant de télécharger")).setMessage(Brand.t(DownloadManager.WARNING))
+            .setPositiveButton(Brand.t("J'ai compris")) { _, _ -> io.execute { dm?.acceptWarning() } }
+            .setNegativeButton(Brand.t("Plus tard"), null).show()
     }
 
     private fun about() {
-        AlertDialog.Builder(this).setTitle("À propos des téléchargements").setMessage(DownloadManager.ABOUT)
-            .setPositiveButton("Fermer", null).show()
+        AlertDialog.Builder(this).setTitle(Brand.t("À propos des téléchargements")).setMessage(Brand.t(DownloadManager.ABOUT))
+            .setPositiveButton(Brand.t("Fermer"), null).show()
     }
 
     private fun confirm(q: String, yes: () -> Unit) {
-        AlertDialog.Builder(this).setMessage(q).setPositiveButton("Supprimer") { _, _ -> yes() }.setNegativeButton("Annuler", null).show()
+        AlertDialog.Builder(this).setMessage(Brand.t(q)).setPositiveButton(Brand.t("Supprimer")) { _, _ -> yes() }.setNegativeButton(Brand.t("Annuler"), null).show()
     }
 
     private fun act(f: (DownloadManager) -> DownloadManager.Result) {
@@ -228,7 +229,7 @@ class DownloadsActivity : Activity() {
         }
     }
 
-    private fun flash(s: String) { android.widget.Toast.makeText(this, s, android.widget.Toast.LENGTH_LONG).show() }
+    private fun flash(s: String) { android.widget.Toast.makeText(this, Brand.t(s), android.widget.Toast.LENGTH_LONG).show() }
 
     // ---- views ----
 

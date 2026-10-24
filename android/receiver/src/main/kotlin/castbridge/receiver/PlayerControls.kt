@@ -1,5 +1,6 @@
 package castbridge.receiver
 
+import castbridge.core.brand.Brand
 import android.app.Activity
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
@@ -164,7 +165,7 @@ object IconLegend {
             list.addView(TextView(act).apply { text = e.meaning; textSize = 18f; setTextColor(TvStyle.TEXT2) }, LinearLayout.LayoutParams(-1, -2).apply { leftMargin = dp(PlayerIcons.ICON_DP + 14) })
         }
         val sv = android.widget.ScrollView(act).apply { addView(list); setBackgroundColor(TvStyle.BG_ELEVATED) }
-        android.app.AlertDialog.Builder(act).setTitle("Légende des icônes").setView(sv)
-            .setPositiveButton("Fermer", null).setNeutralButton("Infos techniques") { _, _ -> technical() }.show()
+        android.app.AlertDialog.Builder(act).setTitle(Brand.t("Légende des icônes")).setView(sv)
+            .setPositiveButton(Brand.t("Fermer"), null).setNeutralButton(Brand.t("Infos techniques")) { _, _ -> technical() }.show()
     }
 }

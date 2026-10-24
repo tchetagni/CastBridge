@@ -1,5 +1,6 @@
 package castbridge.sender
 
+import castbridge.core.brand.Brand
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -73,7 +74,7 @@ object CopyReport {
                 PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
             val text = castbridge.core.tv.ReshareTexts.groupText(names)
             nm.notify(NOTIF_RESHARE, Notification.Builder(ctx, CHANNEL).setSmallIcon(android.R.drawable.stat_notify_error)
-                .setContentTitle(castbridge.core.tv.ReshareTexts.groupTitle(names)).setContentText(text).setStyle(Notification.BigTextStyle().bigText(text))
+                .setContentTitle(Brand.t(castbridge.core.tv.ReshareTexts.groupTitle(names))).setContentText(Brand.t(text)).setStyle(Notification.BigTextStyle().bigText(Brand.t(text)))
                 .setContentIntent(tap).setAutoCancel(true).build())
         }
     }
@@ -88,8 +89,8 @@ object CopyReport {
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_GRANT_READ_URI_PERMISSION)
             val tap = PendingIntent.getActivity(ctx, NOTIF, reopen, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
             nm.notify(NOTIF, Notification.Builder(ctx, CHANNEL).setSmallIcon(android.R.drawable.stat_notify_error)
-                .setContentTitle("CastBridge : « ${item.name} » n'est pas parti")
-                .setContentText(text).setStyle(Notification.BigTextStyle().bigText(text))
+                .setContentTitle(Brand.t("CastBridge : « ${item.name} » n'est pas parti"))
+                .setContentText(Brand.t(text)).setStyle(Notification.BigTextStyle().bigText(Brand.t(text)))
                 .setContentIntent(tap).setAutoCancel(true).build())
         }
     }

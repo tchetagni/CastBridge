@@ -3,6 +3,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
 }
+apply(from = "../brand.gradle.kts")      // marque blanche : -Pbrand=<id> (docs/WHITE-LABEL.md)
 android {
     val versions = Properties().apply { File(rootDir.parentFile, "version.properties").takeIf { it.isFile }?.reader()?.use { load(it) } }
     fun ver(key: String) = versions.getProperty(key) ?: throw GradleException("version.properties : « $key » manquant")
@@ -10,7 +11,7 @@ android {
     namespace = "castbridge.receiver"
     compileSdk = 35
     defaultConfig {
-        applicationId = "castbridge.receiver"
+        applicationId = (project.extra["brand.appId"] as String?) ?: "castbridge.receiver"
         minSdk = 26
         targetSdk = 35
         // -Pcastbridge.versionCode / -Pcastbridge.versionName: build a higher version to test the automatic updates
@@ -24,12 +25,12 @@ android {
         // grace until LOCK_GRACE_START_MS + ACTIVATION_GRACE_DAYS (absolute); any later install is locked at once. TRUSTED_KEYS = the PUBLIC keys that may sign activations, read from a file OUTSIDE the repository
         // (~/.castbridge-signing/activation-trusted-keys.txt, one « kid=… pub=… scopes=… » line per tool): empty => nobody can activate (the build then refuses to enable the lock).
         val requireActivation = (project.findProperty("requireActivation") as String?) == "true"
-        val trustedFile = (project.findProperty("trustedKeysFile") as String?)?.let { File(it) } ?: File(System.getProperty("user.home"), ".castbridge-signing/activation-trusted-keys.txt")      // -PtrustedKeysFile=… : essais avec une clé jetable
+        val trustedFile = (project.findProperty("trustedKeysFile") as String?)?.let { File(it) } ?: File(System.getProperty("user.home"), ".castbridge-signing/" + (if (project.extra["brand.isDefault"] as Boolean) "" else "${project.extra["brand.id"]}/") + "activation-trusted-keys.txt")      // marque blanche : un dossier par marque ; -PtrustedKeysFile=… : essais avec une clé jetable
         val trustedLines = if (trustedFile.isFile) trustedFile.readLines().map { it.trim() }.filter { it.startsWith("kid=") && " pub=" in it } else emptyList()
         // A line without « scopes= » is accepted by the app but grants NO scope (fail closed): warn at build so a mistyped line is noticed (the TV could not accept anything signed by that key).
         trustedLines.filter { l -> l.split(' ', '\t').none { it.startsWith("scopes=") && it.length > "scopes=".length } }.forEach { project.logger.warn("ATTENTION clé de confiance sans scopes= (aucune portée accordée, la TV ne l'acceptera pour rien) : ${it.substringBefore(" pub=")}") }
         val trustedKeys = trustedLines.joinToString("\\n")
-        if (requireActivation && trustedKeys.isEmpty()) throw GradleException("requireActivation=true mais aucune clé publique de confiance : créez ~/.castbridge-signing/activation-trusted-keys.txt (lignes « kid=… pub=… scopes=… » données par « Clé publique » de la console ou « cle » de l'outil de bureau). Sans elle, personne ne pourrait activer la TV.")
+        if (requireActivation && trustedKeys.isEmpty()) throw GradleException("requireActivation=true mais aucune clé publique de confiance : créez ${trustedFile.path} (lignes « kid=… pub=… scopes=… » données par « Clé publique » de la console ou « cle » de l'outil de bureau). Sans elle, personne ne pourrait activer la TV.")
         buildConfigField("boolean", "REQUIRE_ACTIVATION", requireActivation.toString())
         // D1 (owner decision): once the fleet is activated, set « lock.graceDays=0 » in version.properties (or pass -Pcastbridge.graceDays=0): NO install gets a grace any more (a pre-lock install
         // loses its remaining grace and is locked at once). Kept at 30 for now: do NOT change the default here, change version.properties (docs/TRIAL-EDITION.md § 16).
@@ -42,7 +43,7 @@ android {
         val walletFile = (project.findProperty("walletKeysFile") as String?)?.let { File(it) } ?: File(projectDir, "wallet-keys.txt")
         val walletKeys = if (walletFile.isFile) walletFile.readLines().map { it.trim() }.filter { it.startsWith("kid=") && " pub=" in it }.joinToString("\\n") else ""
         buildConfigField("String", "WALLET_KEYS", "\"$walletKeys\"")
-        buildConfigField("String", "DEFAULT_SERVER", "\"${(project.findProperty("castbridge.serverUrl") as String?) ?: ""}\"")
+        buildConfigField("String", "DEFAULT_SERVER", "\"${(project.findProperty("castbridge.serverUrl") as String?) ?: (project.extra["brand.serverUrl"] as String)}\"")
     }
     buildFeatures { buildConfig = true }
     splits {

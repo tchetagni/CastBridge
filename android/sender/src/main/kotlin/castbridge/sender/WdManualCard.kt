@@ -1,5 +1,6 @@
 package castbridge.sender
 
+import castbridge.core.brand.Brand
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -118,7 +119,7 @@ fun WdManualCard(tv: SavedTv?, session: LinkSession?, credential: String?, onPai
                     Text(r, style = MaterialTheme.typography.bodySmall, fontFamily = FontFamily.Monospace)
                     OutlinedButton(onClick = {
                         (ctx.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager).setPrimaryClip(ClipData.newPlainText("CastBridge", "CastBridge · relevé Wi-Fi Direct\n$r"))
-                        Toast.makeText(ctx, "Rapport copié", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(ctx, Brand.t("Rapport copié"), Toast.LENGTH_SHORT).show()
                     }, modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)) {
                         Icon(Icons.Filled.ContentCopy, null); Spacer(Modifier.width(8.dp)); Text("Copier le rapport")
                     }

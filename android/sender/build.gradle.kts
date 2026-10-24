@@ -4,13 +4,14 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.compose")
 }
+apply(from = "../brand.gradle.kts")      // marque blanche : -Pbrand=<id> (docs/WHITE-LABEL.md)
 android {
     val versions = Properties().apply { File(rootDir.parentFile, "version.properties").takeIf { it.isFile }?.reader()?.use { load(it) } }
     fun ver(key: String) = versions.getProperty(key) ?: throw GradleException("version.properties : « $key » manquant")
     namespace = "castbridge.sender"
     compileSdk = 35
     defaultConfig {
-        applicationId = "castbridge.sender"
+        applicationId = (project.extra["brand.appId"] as String?) ?: "castbridge.sender"
         minSdk = 26
         targetSdk = 35
         // -Pcastbridge.versionCode / -Pcastbridge.versionName: build a higher version to test the automatic updates
@@ -19,7 +20,7 @@ android {
         // For a LOCAL test server only (docs/API-SERVER.md, « Tester en local »): -Pcastbridge.serverUrl=http://10.0.2.2:7090 and
         // -Pcastbridge.extraUpdateKey=<its public key>. Both empty by default: production server and production key only (UpdateKeys).
         buildConfigField("String", "EXTRA_UPDATE_KEY", "\"${(project.findProperty("castbridge.extraUpdateKey") as String?) ?: ""}\"")
-        buildConfigField("String", "DEFAULT_SERVER", "\"${(project.findProperty("castbridge.serverUrl") as String?) ?: ""}\"")
+        buildConfigField("String", "DEFAULT_SERVER", "\"${(project.findProperty("castbridge.serverUrl") as String?) ?: (project.extra["brand.serverUrl"] as String)}\"")
     }
     compileOptions { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }
     kotlinOptions { jvmTarget = "17" }

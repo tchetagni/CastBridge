@@ -1,5 +1,6 @@
 package castbridge.sender
 
+import castbridge.core.brand.Brand
 import android.app.Activity
 import android.content.Context
 import android.net.Uri
@@ -11,7 +12,6 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
@@ -28,8 +28,8 @@ fun MoveHandler() {
     val note by UploadService.moveNote.collectAsState()
     val confirm = rememberLauncherForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { r ->
         val name = req?.name
-        Toast.makeText(ctx, if (r.resultCode == Activity.RESULT_OK) "« $name » déplacé : il n'est plus sur le téléphone"
-            else "Suppression annulée : « $name » reste aussi sur le téléphone", Toast.LENGTH_LONG).show()
+        Toast.makeText(ctx, Brand.t(if (r.resultCode == Activity.RESULT_OK) "« $name » déplacé : il n'est plus sur le téléphone"
+            else "Suppression annulée : « $name » reste aussi sur le téléphone"), Toast.LENGTH_LONG).show()
         UploadService.moveHandled()
     }
     note?.let { n ->
@@ -41,14 +41,14 @@ fun MoveHandler() {
         // R-12 (second audit): just before the deletion, the original must still be the file that was checked (same size, same date); else it is kept
         val now = fileStamp(ctx, r.uri)
         if (!castbridge.core.tv.MoveProof.unchanged(r.size, r.stamp, now?.first ?: -1, now?.second ?: -1)) {
-            Toast.makeText(ctx, "« ${r.name} » : " + castbridge.core.tv.MoveProof.CHANGED_TEXT, Toast.LENGTH_LONG).show()
+            Toast.makeText(ctx, Brand.t("« ${r.name} » : " + castbridge.core.tv.MoveProof.CHANGED_TEXT), Toast.LENGTH_LONG).show()
             UploadService.moveHandled(); return
         }
         when (val out = deleteFromPhone(ctx, r.uri)) {
-            null -> { Toast.makeText(ctx, "« ${r.name} » déplacé vers la TV", Toast.LENGTH_LONG).show(); UploadService.moveHandled() }
+            null -> { Toast.makeText(ctx, Brand.t("« ${r.name} » déplacé vers la TV"), Toast.LENGTH_LONG).show(); UploadService.moveHandled() }
             is DeleteNeedsConfirmation -> confirm.launch(IntentSenderRequest.Builder(out.sender).build())
             is DeleteImpossible -> {
-                Toast.makeText(ctx, "« ${r.name} » est sur la TV, mais le téléphone ne permet pas de le supprimer d'ici : supprimez-le depuis la Galerie.", Toast.LENGTH_LONG).show()
+                Toast.makeText(ctx, Brand.t("« ${r.name} » est sur la TV, mais le téléphone ne permet pas de le supprimer d'ici : supprimez-le depuis la Galerie."), Toast.LENGTH_LONG).show()
                 UploadService.moveHandled()
             }
         }
@@ -56,9 +56,9 @@ fun MoveHandler() {
     // R-12 audit: a path that deletes WITHOUT Android's own dialog (a document, Android 10 and older) is confirmed in the app first
     var ask by remember { mutableStateOf<UploadService.MoveRequest?>(null) }
     ask?.let { r ->
-        AlertDialog(onDismissRequest = { ask = null; Toast.makeText(ctx, "« ${r.name} » reste aussi sur le téléphone", Toast.LENGTH_LONG).show(); UploadService.moveHandled() },
+        AlertDialog(onDismissRequest = { ask = null; Toast.makeText(ctx, Brand.t("« ${r.name} » reste aussi sur le téléphone"), Toast.LENGTH_LONG).show(); UploadService.moveHandled() },
             confirmButton = { TextButton({ ask = null; proceed(r) }) { Text("Supprimer") } },
-            dismissButton = { TextButton({ ask = null; Toast.makeText(ctx, "« ${r.name} » reste aussi sur le téléphone", Toast.LENGTH_LONG).show(); UploadService.moveHandled() }) { Text("Garder") } },
+            dismissButton = { TextButton({ ask = null; Toast.makeText(ctx, Brand.t("« ${r.name} » reste aussi sur le téléphone"), Toast.LENGTH_LONG).show(); UploadService.moveHandled() }) { Text("Garder") } },
             title = { Text("Déplacement") }, text = { Text("Supprimer l'original de « ${r.name} » de ce téléphone ? La TV en a une copie vérifiée.") })
     }
     LaunchedEffect(req) {

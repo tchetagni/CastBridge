@@ -1,5 +1,6 @@
 package castbridge.receiver
 
+import castbridge.core.brand.Brand
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
@@ -134,11 +135,11 @@ object ParentalUi {
     }
 
     fun choose(a: Activity, title: String, labels: List<String>, current: Int = -1, onPick: (Int) -> Unit) {
-        AlertDialog.Builder(a).setTitle(title).setSingleChoiceItems(labels.toTypedArray(), current) { d, i -> d.dismiss(); onPick(i) }
-            .setNegativeButton("Annuler", null).show()
+        AlertDialog.Builder(a).setTitle(Brand.t(title)).setSingleChoiceItems(labels.toTypedArray(), current) { d, i -> d.dismiss(); onPick(i) }
+            .setNegativeButton(Brand.t("Annuler"), null).show()
     }
 
     fun info(a: Activity, title: String, message: String) {
-        AlertDialog.Builder(a).setTitle(title).setMessage(message).setPositiveButton("Compris", null).show()
+        AlertDialog.Builder(a).setTitle(Brand.t(title)).setMessage(Brand.t(message)).setPositiveButton(Brand.t("Compris"), null).show()
     }
 }

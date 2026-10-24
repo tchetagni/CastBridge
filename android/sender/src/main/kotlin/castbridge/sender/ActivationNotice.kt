@@ -1,5 +1,6 @@
 package castbridge.sender
 
+import castbridge.core.brand.Brand
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -23,7 +24,7 @@ object ActivationNotice {
             val nm = ctx.getSystemService(NotificationManager::class.java)
             nm.createNotificationChannel(NotificationChannel(CHANNEL, "Activation de la TV", NotificationManager.IMPORTANCE_DEFAULT))
             val open = PendingIntent.getActivity(ctx, 77, Intent(ctx, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP), PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
-            nm.notify(NOTIF, Notification.Builder(ctx, CHANNEL).setSmallIcon(R.drawable.ic_stat_castbridge).setContentTitle(title).setContentText(text).setAutoCancel(true).setContentIntent(open).build())
+            nm.notify(NOTIF, Notification.Builder(ctx, CHANNEL).setSmallIcon(R.drawable.ic_stat_castbridge).setContentTitle(Brand.t(title)).setContentText(Brand.t(text)).setAutoCancel(true).setContentIntent(open).build())
         }
     }
 }

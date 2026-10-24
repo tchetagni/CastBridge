@@ -1,5 +1,6 @@
 package castbridge.sender
 
+import castbridge.core.brand.Brand
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Notification
@@ -126,7 +127,7 @@ class BtSshGatewayService : Service() {
         val nm = getSystemService(NotificationManager::class.java)
         nm.createNotificationChannel(NotificationChannel(CHANNEL, "Passerelle Bluetooth", NotificationManager.IMPORTANCE_LOW))
         val stop = PendingIntent.getService(this, 4, Intent(this, BtSshGatewayService::class.java).setAction(ACTION_STOP), PendingIntent.FLAG_IMMUTABLE)
-        return Notification.Builder(this, CHANNEL).setContentTitle("CastBridge").setContentText(text)
+        return Notification.Builder(this, CHANNEL).setContentTitle(Brand.t("CastBridge")).setContentText(Brand.t(text))
             .setSmallIcon(R.drawable.ic_stat_castbridge).setOngoing(true)
             .addAction(Notification.Action.Builder(null, "Arrêter", stop).build()).build()
     }

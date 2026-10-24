@@ -1,5 +1,6 @@
 package castbridge.receiver
 
+import castbridge.core.brand.Brand
 import android.app.Activity
 import android.app.AlertDialog
 import android.graphics.Color
@@ -171,10 +172,10 @@ class LibraryScreen(
     fun open(i: LibraryItem, section: List<LibraryItem>, index: Int) {
         if (i.type == MediaType.OTHER) { actions(i, section, index); return }
         if (castbridge.core.tv.ResumePolicy.offer(i.meta.resumeMs, i.meta.durationMs) && !i.meta.watched) {
-            AlertDialog.Builder(act).setTitle(i.title)
+            AlertDialog.Builder(act).setTitle(Brand.t(i.title))
                 .setItems(arrayOf(castbridge.core.tv.ResumePolicy.label(i.meta.resumeMs), castbridge.core.tv.ResumePolicy.RESTART_LABEL)) { _, w ->
                     play(i, if (w == 0) i.meta.resumeMs else 0)
-                }.setNegativeButton("Annuler", null).show()
+                }.setNegativeButton(Brand.t("Annuler"), null).show()
         } else play(i, 0)
     }
 
@@ -202,25 +203,25 @@ class LibraryScreen(
         if (i.type != MediaType.OTHER) items += "Classer (contrôle parental)…" to { ParentalHub.rateDialog(act, i.name, i.title) }
         items += "Renommer…" to { rename(i) }
         items += "Supprimer…" to { confirmDelete(i) }
-        AlertDialog.Builder(act).setTitle(i.title)
+        AlertDialog.Builder(act).setTitle(Brand.t(i.title))
             .setItems(items.map { it.first }.toTypedArray()) { _, w -> items[w].second() }
-            .setNegativeButton("Fermer", null).show()
+            .setNegativeButton(Brand.t("Fermer"), null).show()
     }
 
     private fun rename(i: LibraryItem) {
         val e = EditText(act).apply { setText(i.name); inputType = InputType.TYPE_CLASS_TEXT; setSingleLine(); setSelection(0, i.name.substringBeforeLast('.').length) }
-        AlertDialog.Builder(act).setTitle("Renommer").setView(e)
-            .setPositiveButton("Renommer") { _, _ ->
+        AlertDialog.Builder(act).setTitle(Brand.t("Renommer")).setView(e)
+            .setPositiveButton(Brand.t("Renommer")) { _, _ ->
                 val to = e.text.toString().trim()
                 if (to.isNotEmpty() && to != i.name) run("Renommage") { it.rename(i.name, to) }
-            }.setNegativeButton("Annuler", null).show()
+            }.setNegativeButton(Brand.t("Annuler"), null).show()
     }
 
     private fun confirmDelete(i: LibraryItem) {
-        AlertDialog.Builder(act).setTitle("Supprimer « ${i.title} » ?")
-            .setMessage("${StorageLine.size(i.size)}, ${if (i.volumeKind == castbridge.core.tv.VolumeKind.INTERNAL) "sur la TV" else "sur ${i.volumeLabel}"}. Cette action est définitive.")
-            .setPositiveButton("Supprimer") { _, _ -> run("Suppression") { it.delete(i.name, i.volumeId) } }
-            .setNegativeButton("Annuler", null).show()
+        AlertDialog.Builder(act).setTitle(Brand.t("Supprimer « ${i.title} » ?"))
+            .setMessage(Brand.t("${StorageLine.size(i.size)}, ${if (i.volumeKind == castbridge.core.tv.VolumeKind.INTERNAL) "sur la TV" else "sur ${i.volumeLabel}"}. Cette action est définitive."))
+            .setPositiveButton(Brand.t("Supprimer")) { _, _ -> run("Suppression") { it.delete(i.name, i.volumeId) } }
+            .setNegativeButton(Brand.t("Annuler"), null).show()
             .getButton(AlertDialog.BUTTON_NEGATIVE)?.requestFocus()       // the safe choice has the focus
     }
 

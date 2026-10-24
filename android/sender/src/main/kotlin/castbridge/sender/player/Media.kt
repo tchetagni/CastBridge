@@ -1,5 +1,6 @@
 package castbridge.sender.player
 
+import castbridge.core.brand.Brand
 import android.Manifest
 import android.content.ContentUris
 import android.content.Context
@@ -46,7 +47,7 @@ data class PlayItem(
                 .setLanguage(SubtitleTypes.language(name, n)).setSelectionFlags(if (i == 0) androidx.media3.common.C.SELECTION_FLAG_DEFAULT else 0).build()
         }
         val b = MediaItem.Builder().setUri(uri).setMediaId(uri.toString()).setSubtitleConfigurations(subs)
-            .setMediaMetadata(MediaMetadata.Builder().setTitle(name.substringBeforeLast('.').ifEmpty { name }).setDisplayTitle(name)
+            .setMediaMetadata(MediaMetadata.Builder().setTitle(Brand.t(name.substringBeforeLast('.').ifEmpty { name })).setDisplayTitle(name)
                 .setIsPlayable(true).setIsBrowsable(false)
                 .setMediaType(if (kind == MediaKind.AUDIO) MediaMetadata.MEDIA_TYPE_MUSIC else MediaMetadata.MEDIA_TYPE_VIDEO)
                 .setExtras(ResumeTracker.extras(name, size, kind.name, noResume = fromTv)).build())

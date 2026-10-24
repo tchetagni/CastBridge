@@ -1,5 +1,6 @@
 package castbridge.receiver
 
+import castbridge.core.brand.Brand
 import android.app.Activity
 import android.app.AlertDialog
 import android.graphics.Canvas
@@ -157,7 +158,7 @@ class LearnActivity : Activity() {
 
     /** Short message shown in place of the hint line (a system toast would be drawn over the page's text). */
     fun toast(m: String) {
-        val h = hintView ?: return Toast.makeText(this, m, Toast.LENGTH_LONG).show()
+        val h = hintView ?: return Toast.makeText(this, Brand.t(m), Toast.LENGTH_LONG).show()
         val before = hintText
         h.text = m; h.setTextColor(LearnStyle.GOLD); h.maxLines = 3
         main.removeCallbacks(restoreHint); restoreHint = Runnable { if (hintView === h) { h.text = before; h.setTextColor(LearnStyle.MUTED); h.maxLines = 1 } }
@@ -168,7 +169,7 @@ class LearnActivity : Activity() {
     private var restoreHint = Runnable {}
 
     fun confirm(title: String, msg: String, yes: () -> Unit) {
-        AlertDialog.Builder(this).setTitle(title).setMessage(msg).setPositiveButton("Oui") { _, _ -> yes() }.setNegativeButton("Non", null).show()
+        AlertDialog.Builder(this).setTitle(Brand.t(title)).setMessage(Brand.t(msg)).setPositiveButton(Brand.t("Oui")) { _, _ -> yes() }.setNegativeButton(Brand.t("Non"), null).show()
     }
 
     fun speak(text: String, lang: String) {
@@ -272,10 +273,10 @@ class ProfilesScreen(a: LearnActivity) : LearnActivity.Screen(a) {
     }
 
     private fun manage(p: Profile) {
-        AlertDialog.Builder(a).setTitle(p.name).setItems(arrayOf("Changer la classe…", "Supprimer ce profil et ses progrès")) { _, i ->
+        AlertDialog.Builder(a).setTitle(Brand.t(p.name)).setItems(arrayOf("Changer la classe…", "Supprimer ce profil et ses progrès")) { _, i ->
             if (i == 0) a.push(NewProfileScreen(a, p))
             else a.confirm("Supprimer ${p.name} ?", "Ses étoiles, badges et progrès seront effacés de la TV.") { LearnHub.progress().removeProfile(p.id); LearnHub.save(); a.rebuild() }
-        }.setNegativeButton("Fermer", null).show()
+        }.setNegativeButton(Brand.t("Fermer"), null).show()
     }
 }
 

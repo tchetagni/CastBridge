@@ -1,5 +1,6 @@
 package castbridge.receiver
 
+import castbridge.core.brand.Brand
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -230,8 +231,8 @@ class PairActivity : Activity() {
 
     /** Confirmation dialog where the harmless answer (Annuler) is the one selected. */
     private fun confirm(title: String, text: String, yes: String, action: () -> Unit) {
-        AlertDialog.Builder(this).setTitle(title).setMessage(text)
-            .setPositiveButton(yes) { _, _ -> action() }.setNegativeButton("Annuler", null).create().also { d ->
+        AlertDialog.Builder(this).setTitle(Brand.t(title)).setMessage(Brand.t(text))
+            .setPositiveButton(Brand.t(yes)) { _, _ -> action() }.setNegativeButton(Brand.t("Annuler"), null).create().also { d ->
                 d.setOnShowListener { d.getButton(AlertDialog.BUTTON_NEGATIVE)?.requestFocus() }
             }.show()
     }
@@ -270,10 +271,10 @@ class PairActivity : Activity() {
         if (state !is PairingSession.State.Asking) { dialog?.takeIf { it.isShowing }?.dismiss(); dialog = null; return }
         if (dialog?.isShowing == true) return
         val d = AlertDialog.Builder(this)
-            .setTitle("Autoriser ${state.name} à piloter cette TV ?")
-            .setMessage("Ce téléphone pourra envoyer des vidéos, utiliser la télécommande et la bibliothèque sans code. Vérifiez que le nom est bien le vôtre. Vous pourrez le retirer à tout moment.")
-            .setPositiveButton("Autoriser") { _, _ -> svc.pairing.approve(); message = "${state.name} est maintenant autorisé." }
-            .setNegativeButton("Refuser") { _, _ -> svc.pairing.deny(); message = "${state.name} a été refusé." }
+            .setTitle(Brand.t("Autoriser ${state.name} à piloter cette TV ?"))
+            .setMessage(Brand.t("Ce téléphone pourra envoyer des vidéos, utiliser la télécommande et la bibliothèque sans code. Vérifiez que le nom est bien le vôtre. Vous pourrez le retirer à tout moment."))
+            .setPositiveButton(Brand.t("Autoriser")) { _, _ -> svc.pairing.approve(); message = "${state.name} est maintenant autorisé." }
+            .setNegativeButton(Brand.t("Refuser")) { _, _ -> svc.pairing.deny(); message = "${state.name} a été refusé." }
             .setOnCancelListener { svc.pairing.deny() }
             .create()
         d.setOnShowListener { d.getButton(AlertDialog.BUTTON_NEGATIVE)?.requestFocus() }     // the safe answer is the pre-selected one

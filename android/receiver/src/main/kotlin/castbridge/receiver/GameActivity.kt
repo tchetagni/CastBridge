@@ -1,5 +1,6 @@
 package castbridge.receiver
 
+import castbridge.core.brand.Brand
 import android.app.Activity
 import android.os.Bundle
 import android.os.Handler
@@ -51,7 +52,7 @@ class GameActivity : Activity() {
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         val e = GameCatalog.entry(intent?.getStringExtra(EXTRA_GAME) ?: GameCatalog.BATAILLE.id)?.takeIf { it.playable }
         val r = e?.let { GameRoomHost.open(it.id) }
-        if (e == null || r == null) { Toast.makeText(this, GameCatalog.SOON, Toast.LENGTH_LONG).show(); finish(); return }     // « bientôt » : aucune règle, aucune salle
+        if (e == null || r == null) { Toast.makeText(this, Brand.t(GameCatalog.SOON), Toast.LENGTH_LONG).show(); finish(); return }     // « bientôt » : aucune règle, aucune salle
         entry = e; room = r
         view = GameTvView(this, st)
         setContentView(view)

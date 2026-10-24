@@ -1,5 +1,6 @@
 package castbridge.sender
 
+import castbridge.core.brand.Brand
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -34,7 +35,6 @@ import castbridge.core.trust.PinEntry
 import castbridge.core.trust.PinEntryState
 import castbridge.core.trust.PinVerdict
 import castbridge.core.trust.TvAuthReply
-import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -144,7 +144,7 @@ class OpenWithActivity : ComponentActivity() {
                                         TvLinkManager.saved.default()?.let { TvLinkManager.codeAccepted(it.address) }
                                         send(uri, name, move = false, SendChoices.afterCode(codeTv), codeTv, pins)
                                     }
-                                    else Toast.makeText(this@OpenWithActivity, "Le code n'a pas pu être gardé sur ce téléphone.", Toast.LENGTH_LONG).show()
+                                    else Toast.makeText(this@OpenWithActivity, Brand.t("Le code n'a pas pu être gardé sur ce téléphone."), Toast.LENGTH_LONG).show()
                                 })
                             else if (choice.action != SendAction.NONE)
                                 Button({ openApp(choice.action) }, Modifier.fillMaxWidth()) { Text(choice.action.label) }
@@ -248,7 +248,7 @@ class OpenWithActivity : ComponentActivity() {
             !prefs.getBoolean("media_perm_asked", false) && !SourceAnchoring.tryPersist(this, uri)
         if (!needsAsk) { doSend(uri, name, move, choice, pinTv, pins); return }
         prefs.edit().putBoolean("media_perm_asked", true).apply()
-        Toast.makeText(this, castbridge.core.tv.ReshareTexts.MEDIA_PERMISSION_WHY, Toast.LENGTH_LONG).show()
+        Toast.makeText(this, Brand.t(castbridge.core.tv.ReshareTexts.MEDIA_PERMISSION_WHY), Toast.LENGTH_LONG).show()
         afterMediaPermission = { doSend(uri, name, move, choice, pinTv, pins) }
         runCatching { mediaPermission.launch(perm!!) }.onFailure { afterMediaPermission = null; doSend(uri, name, move, choice, pinTv, pins) }
     }
@@ -262,13 +262,13 @@ class OpenWithActivity : ComponentActivity() {
         when (choice.route) {
             // the trusted link: the queue waits (≤ 1 min) for the link being (re)established
             SendRoute.QUEUE -> runCatching { TransferQueue.add(this, uri, name, size, move) }
-                .onSuccess { t -> Toast.makeText(this, sent(what, t), Toast.LENGTH_LONG).show(); finish() }
-                .onFailure { Toast.makeText(this, "Impossible de mettre l'envoi en file : ${it.message}", Toast.LENGTH_LONG).show() }
+                .onSuccess { t -> Toast.makeText(this, Brand.t(sent(what, t)), Toast.LENGTH_LONG).show(); finish() }
+                .onFailure { Toast.makeText(this, Brand.t("Impossible de mettre l'envoi en file : ${it.message}"), Toast.LENGTH_LONG).show() }
             // the code path: the same upload as the home screen (finds the TV by its name, waits for it), nothing played on the TV;
             // R-09: through the queue too, so a second « Copier » while one runs is queued instead of being dropped in silence
             SendRoute.PIN_UPLOAD -> runCatching { TransferQueue.add(this, uri, name, size, move, tvName = pinTv!!, credential = pins.get(pinTv)) }
-                .onSuccess { t -> Toast.makeText(this, sent(what, t), Toast.LENGTH_LONG).show(); finish() }
-                .onFailure { Toast.makeText(this, "Impossible de mettre l'envoi en file : ${it.message}", Toast.LENGTH_LONG).show() }
+                .onSuccess { t -> Toast.makeText(this, Brand.t(sent(what, t)), Toast.LENGTH_LONG).show(); finish() }
+                .onFailure { Toast.makeText(this, Brand.t("Impossible de mettre l'envoi en file : ${it.message}"), Toast.LENGTH_LONG).show() }
             SendRoute.NONE -> Unit
         }
     }
@@ -288,7 +288,7 @@ class OpenWithActivity : ComponentActivity() {
                 CastSession.start(applicationContext, target, how.action, item)
             }.exceptionOrNull()?.let { it.message ?: "erreur inattendue" }
             if (error != null) {
-                Toast.makeText(this@OpenWithActivity, "Impossible de démarrer : $error", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@OpenWithActivity, Brand.t("Impossible de démarrer : $error"), Toast.LENGTH_LONG).show()
                 return@launch
             }
             runCatching {

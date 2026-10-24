@@ -1,5 +1,6 @@
 package castbridge.sender
 
+import castbridge.core.brand.Brand
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -100,7 +101,7 @@ class RemoteService : Service() {
         if (Build.VERSION.SDK_INT >= 26) nm.createNotificationChannel(NotificationChannel(CHANNEL, "Télécommande TV", NotificationManager.IMPORTANCE_LOW))
         val open = PendingIntent.getActivity(this, 0, Intent(this, RemoteActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), PendingIntent.FLAG_IMMUTABLE)
         return Notification.Builder(this, CHANNEL).setSmallIcon(R.drawable.ic_stat_castbridge)
-            .setContentTitle("CastBridge").setContentText(text).setOngoing(true).setContentIntent(open)
+            .setContentTitle(Brand.t("CastBridge")).setContentText(Brand.t(text)).setOngoing(true).setContentIntent(open)
             .addAction(key(RemoteKey.VOLUME_DOWN, "Vol −", 1))
             .addAction(key(RemoteKey.VOLUME_MUTE, "Muet", 2))
             .addAction(key(RemoteKey.VOLUME_UP, "Vol +", 3))

@@ -1,5 +1,6 @@
 package castbridge.receiver
 
+import castbridge.core.brand.Brand
 import android.animation.ValueAnimator
 import android.app.Activity
 import android.app.AlertDialog
@@ -206,17 +207,17 @@ class QuizActivity : Activity() {
     private fun confirm(title: String, message: String, yes: String, action: () -> Unit) {
         dialog?.dismiss()
         dialog = AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_Alert)
-            .setTitle(title).setMessage(message)
-            .setPositiveButton(yes) { _, _ -> action() }
-            .setNegativeButton("Annuler", null)
+            .setTitle(Brand.t(title)).setMessage(Brand.t(message))
+            .setPositiveButton(Brand.t(yes)) { _, _ -> action() }
+            .setNegativeButton(Brand.t("Annuler"), null)
             .show().also { d -> d.getButton(AlertDialog.BUTTON_NEGATIVE)?.requestFocus() }
     }
 
     private fun choose(title: String, items: List<String>, action: (Int) -> Unit) {
         dialog?.dismiss()
         dialog = AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_Alert)
-            .setTitle(title).setItems(items.toTypedArray()) { _, i -> action(i) }
-            .setNegativeButton("Annuler", null).show()
+            .setTitle(Brand.t(title)).setItems(items.toTypedArray()) { _, i -> action(i) }
+            .setNegativeButton(Brand.t("Annuler"), null).show()
     }
 
     // ------------------------------------------------------------------ setup: Mode → Parcours → Niveau → Filière → Format / Mise
@@ -271,7 +272,7 @@ class QuizActivity : Activity() {
         steps.clear(); render()
         if (why != null) {
             TvConnect.error("quiz", "start", why)
-            android.widget.Toast.makeText(this, why, android.widget.Toast.LENGTH_LONG).show()
+            android.widget.Toast.makeText(this, Brand.t(why), android.widget.Toast.LENGTH_LONG).show()
         }
     }
 
@@ -942,7 +943,7 @@ class QuizActivity : Activity() {
     private fun replay() {
         val r = room ?: return
         r.backToLobby()
-        r.startGame()?.let { android.widget.Toast.makeText(this, it, android.widget.Toast.LENGTH_LONG).show() }
+        r.startGame()?.let { android.widget.Toast.makeText(this, Brand.t(it), android.widget.Toast.LENGTH_LONG).show() }
     }
 
     private fun animateRanking(box: FrameLayout, ranking: List<Map<String, Any?>>, payouts: Map<String, Any?>? = null) {

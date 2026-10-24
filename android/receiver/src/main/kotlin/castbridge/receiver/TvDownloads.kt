@@ -1,5 +1,6 @@
 package castbridge.receiver
 
+import castbridge.core.brand.Brand
 import android.annotation.SuppressLint
 import android.app.Notification
 import android.app.NotificationChannel
@@ -72,7 +73,7 @@ class TvDownloads private constructor(private val app: Context, @Volatile privat
         manager.systemSync = castbridge.core.tv.ShellSync.shared          // a download that reaches a USB key asks for one best-effort system sync at the end of its file (docs/STORAGE.md)
         manager.addFinishedListener { f ->
             val what = f.files.firstOrNull() ?: f.name
-            main.post { runCatching { Toast.makeText(app, "Téléchargement terminé : $what", Toast.LENGTH_LONG).show() } }
+            main.post { runCatching { Toast.makeText(app, Brand.t("Téléchargement terminé : $what"), Toast.LENGTH_LONG).show() } }
             notifyDone(f.name, f.volumeLabel)
             val seen = followed.remove(f.id)
             TvConnect.track("download", mapOf("type" to (seen?.first ?: "http"), "bytes" to f.size, "ok" to true,
@@ -151,7 +152,7 @@ class TvDownloads private constructor(private val app: Context, @Volatile privat
         val nm = app.getSystemService(NotificationManager::class.java)
         ensureChannel(app)
         val n = Notification.Builder(app, CHANNEL).setSmallIcon(R.drawable.ic_stat_castbridge)
-            .setContentTitle("Téléchargement terminé").setContentText("$name ($where)").setAutoCancel(true).build()
+            .setContentTitle(Brand.t("Téléchargement terminé")).setContentText(Brand.t("$name ($where)")).setAutoCancel(true).build()
         nm.notify(name.hashCode(), n)
     }
 
@@ -195,7 +196,7 @@ class DownloadService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         TvDownloads.ensureChannel(this)
         val n = Notification.Builder(this, TvDownloads.CHANNEL).setSmallIcon(R.drawable.ic_stat_castbridge)
-            .setContentTitle("CastBridge TV").setContentText("Téléchargements en cours").setOngoing(true).build()
+            .setContentTitle(Brand.t("CastBridge TV")).setContentText(Brand.t("Téléchargements en cours")).setOngoing(true).build()
         runCatching {
             if (Build.VERSION.SDK_INT >= 29) startForeground(NOTIF_ID, n, ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC)
             else startForeground(NOTIF_ID, n)

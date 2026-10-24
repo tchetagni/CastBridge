@@ -31,7 +31,7 @@ class OpenTvShortcutTest {
         assertEquals("castbridge.sender.MainActivity", attr(shortcuts, "targetClass"))
         assertEquals("true", attr(shortcuts, "enabled"))
         assertEquals("open_tv", attr(shortcuts, "shortcutId"))
-        assertTrue(repoFile("android/sender/build.gradle.kts").readText().contains("""applicationId = "castbridge.sender""""), "the target package is the real application id (a resource cannot use a placeholder)")
+        assertTrue(repoFile("android/sender/build.gradle.kts").readText().contains("""?: "castbridge.sender""""), "the target package is the real application id (a resource cannot use a placeholder)")
     }
 
     @Test fun theLinkIsDeclaredOnTheMainActivityAndASingleWebPageCannotFireIt() {

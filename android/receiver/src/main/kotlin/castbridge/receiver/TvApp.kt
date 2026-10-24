@@ -9,6 +9,8 @@ import android.app.Application
 class TvApp : Application() {
     override fun onCreate() {
         super.onCreate()
+        castbridge.core.brand.Brand.init(BuildConfig.BRAND_ID, BuildConfig.BRAND_NAME, BuildConfig.BRAND_TV_NAME, BuildConfig.BRAND_OWNER, BuildConfig.BRAND_TAGLINE, BuildConfig.SUPPORT_PHONE)   // marque blanche (docs/WHITE-LABEL.md)
+        if (castbridge.core.brand.Brand.isCustom) registerActivityLifecycleCallbacks(BrandViews)   // texte vu : la marque à la place de CastBridge (aucun effet pour CastBridge)
         TvFonts.init(this)
         TvConnect.installCrashHandler(this)
         runCatching { TvConnect.init(this) }.onFailure { TvConnect.logw("init: ${it.javaClass.simpleName}") }
