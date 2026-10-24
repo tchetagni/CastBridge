@@ -36,7 +36,7 @@ class CastBridgeApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        castbridge.core.brand.Brand.init(BuildConfig.BRAND_ID, BuildConfig.BRAND_NAME, BuildConfig.BRAND_TV_NAME, BuildConfig.BRAND_OWNER, BuildConfig.BRAND_TAGLINE, BuildConfig.SUPPORT_PHONE, BuildConfig.BRAND_PALETTE, BuildConfig.BRAND_PHONE_THEME)   // marque blanche (docs/WHITE-LABEL.md)
+        castbridge.core.brand.Brand.init(BuildConfig.BRAND_ID, BuildConfig.BRAND_NAME, BuildConfig.BRAND_TV_NAME, BuildConfig.BRAND_OWNER, BuildConfig.BRAND_TAGLINE, BuildConfig.SUPPORT_PHONE, BuildConfig.BRAND_PALETTE, BuildConfig.BRAND_PHONE_THEME, BuildConfig.BRAND_MARKETED_BY, BuildConfig.BRAND_LABELS)   // marque blanche (docs/WHITE-LABEL.md)
         ThemePrefs.load(this)
         PhoneConnect.init(this)
         TvLinkManager.init(this)

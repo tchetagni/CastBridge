@@ -44,21 +44,11 @@ fun cbv(@DrawableRes res: Int) = androidx.compose.ui.graphics.vector.ImageVector
 fun CbIcon(@DrawableRes res: Int, description: String? = null, modifier: Modifier = Modifier, tint: Color = LocalContentColor.current) =
     Icon(painterResource(res), description, modifier, tint)
 
-/** Thin band with the sub-brand's own logo (its palette is part of the logo, the rest of the screen stays in the app theme). */
+/** Thin band with the sub-brand's own logo (its palette is part of the logo, the rest of the screen stays in the app theme). Not shown at all for a white-label brand (see MainActivity). */
 @Composable
 fun SubBrandHeader(@DrawableRes logo: Int, name: String) {
-    Box(Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.surface).padding(horizontal = 16.dp, vertical = 6.dp)) {
-        if (castbridge.core.brand.Brand.isCustom) {
-            // Marque blanche : le logo de sous-marque contient le mot « CastBridge » (et ses couleurs) : à sa place, pictogramme + nom, aux couleurs de la marque.
-            Row(Modifier.height(40.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                CbIcon(subBrandIcon(logo), null, Modifier.size(28.dp), MaterialTheme.colorScheme.primary)
-                Text(name, style = MaterialTheme.typography.titleLarge, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
-            }
-        } else CbLogo(logo, 40.dp, description = name)
-    }
+    Box(Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.surface).padding(horizontal = 16.dp, vertical = 6.dp)) { CbLogo(logo, 40.dp, description = name) }
 }
-
-@DrawableRes private fun subBrandIcon(logo: Int): Int = R.drawable.ic_cb_apprendre
 
 fun fmtTime(ms: Long): String {
     val s = ms / 1000

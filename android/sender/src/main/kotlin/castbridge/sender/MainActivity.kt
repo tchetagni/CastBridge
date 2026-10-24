@@ -103,7 +103,7 @@ class MainActivity : ComponentActivity() {
         var settings by rememberSaveable { mutableStateOf(false) }
         val home = castbridge.core.ux.PhoneTabs.index(castbridge.core.ux.PhoneTabs.Tab.HOME)
         // screen_time per tab (ids of EventCatalog: the "CastBridge TV" tab is the app's home); the Parental tab is never reported
-        LaunchedEffect(tab, settings) { if (!settings) castbridge.core.ux.PhoneTabs.at(tab).screen?.let { PhoneConnect.screens.enter(it) } }
+        LaunchedEffect(tab, settings) { if (!settings && tab < castbridge.core.ux.PhoneTabs.ORDER.size) castbridge.core.ux.PhoneTabs.at(tab).screen?.let { PhoneConnect.screens.enter(it) } }
         fun select(i: Int) {
             if (i != tab) castbridge.core.ux.PhoneTabs.at(i).feature?.let { PhoneConnect.feature(it, "tile") }
             tab = i
@@ -152,9 +152,11 @@ class MainActivity : ComponentActivity() {
                         LeadingIconTab(tab == 0, onClick = { select(0) }, text = { Text(castbridge.core.ux.PhoneTabs.Tab.DLNA.label, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) }, icon = { CbIcon(R.drawable.ic_cb_caster, null, ic) })
                         LeadingIconTab(tab == 1, onClick = { select(1) }, text = { Text(castbridge.core.ux.PhoneTabs.Tab.HOME.label, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) }, icon = { CbIcon(R.drawable.ic_cb_recevoir_du_telephone, null, ic) })
                         LeadingIconTab(tab == 2, onClick = { select(2) }, text = { Text(castbridge.core.ux.PhoneTabs.Tab.GAMES.label, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) }, icon = { CbIcon(R.drawable.ic_cb_quiz, null, ic) })
-                        LeadingIconTab(tab == 3, onClick = { select(3) }, text = { Text(castbridge.core.ux.PhoneTabs.Tab.PHONE.label, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) }, icon = { CbIcon(R.drawable.ic_cb_sur_le_telephone, null, ic) })
+                        LeadingIconTab(tab == 3, onClick = { select(3) }, text = { Text(castbridge.core.brand.Brand.label("tab.phone", castbridge.core.ux.PhoneTabs.Tab.PHONE.label), maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) }, icon = { CbIcon(R.drawable.ic_cb_sur_le_telephone, null, ic) })
                         LeadingIconTab(tab == 4, onClick = { select(4) }, text = { Text(castbridge.core.ux.PhoneTabs.Tab.LEARN.label, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) }, icon = { CbIcon(R.drawable.ic_cb_apprendre, null, ic) })
                         LeadingIconTab(tab == 5, onClick = { select(5) }, text = { Text(castbridge.core.ux.PhoneTabs.Tab.PARENTAL.label, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) }, icon = { Icon(Icons.Filled.Lock, null, ic) })
+                        // white-label brand only: « À propos » (brand logo, version, support, CGU, « Commercialisé par … »); CastBridge keeps its six tabs
+                        if (castbridge.core.brand.Brand.isCustom) LeadingIconTab(tab == 6, onClick = { select(6) }, text = { Text("À propos", maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) }, icon = { Icon(Icons.Filled.Info, null, ic) })
                     }
                 }
             },
@@ -164,8 +166,9 @@ class MainActivity : ComponentActivity() {
                 // sub-brand wordmark (branding/logo) above the Apprendre tab; the Jeux tab shows its own cards
                 if (castbridge.core.ux.QueueGlances.stripVisible(onHome = tab == home, glance = glance)) glance?.let { g -> QueueStrip(g) { select(home) } }
                 if (castbridge.core.ux.BtGatewayView.stripVisible(onHome = tab == home, glance = gwGlance)) gwGlance?.let { g -> GatewayStrip(g) { select(home) } }
-                if (tab == 4) SubBrandHeader(R.drawable.logo_apprendre_horizontal, "Apprendre")
-                Box(Modifier.weight(1f).fillMaxWidth()) { when (tab) { 0 -> App(); 1 -> TvHub(); 2 -> GamesScreen(); 3 -> castbridge.sender.player.PhoneLibraryScreen(); 5 -> ParentalTab(); else -> LearnScreen() } }
+                // white-label brand: no sub-brand row at all (its logo carries the CastBridge name); the content starts right under the tabs
+                if (tab == 4 && !castbridge.core.brand.Brand.isCustom) SubBrandHeader(R.drawable.logo_apprendre_horizontal, "Apprendre")
+                Box(Modifier.weight(1f).fillMaxWidth()) { when (tab) { 0 -> App(); 1 -> TvHub(); 2 -> GamesScreen(); 3 -> castbridge.sender.player.PhoneLibraryScreen(); 5 -> ParentalTab(); 6 -> AboutScreen(); else -> LearnScreen() } }
             }
         }
         MoveHandler()
