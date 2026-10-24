@@ -27,7 +27,8 @@ val supportPhone = if (isDefaultBrand) "+237686031070" else prop("support.phone"
 val serverUrl = prop("server.url")
 val marketedBy = prop("brand.marketedBy")
 // Libellés surchargés : clés « label.<clé> » (ex. label.tab.phone) -> « clé=valeur;… » lu par Brand.label.
-val labels = if (isDefaultBrand) "" else brandProps.stringPropertyNames().filter { it.startsWith("label.") }.sorted()
+// « games.hidden » (identifiants séparés par des virgules) voyage avec eux : jeux retirés des listes de la marque, lu par Brand.gameHidden.
+val labels = if (isDefaultBrand) "" else brandProps.stringPropertyNames().filter { it.startsWith("label.") || it == "games.hidden" }.sorted()
     .joinToString(";") { it.removePrefix("label.") + "=" + brandProps.getProperty(it).trim().replace(";", ",") }
 // Couleurs : clés « color.<rôle> » (docs/WHITE-LABEL.md § Couleurs) transmises telles quelles à BrandPalette ; thème du téléphone par défaut.
 val palette = if (isDefaultBrand) "" else brandProps.stringPropertyNames().filter { it.startsWith("color.") }.sorted()

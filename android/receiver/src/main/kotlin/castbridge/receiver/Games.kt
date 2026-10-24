@@ -45,7 +45,7 @@ class GameDef(
 
 object Games {
     /** What the current key opens: every game, or the Sudoku only in the trial. */
-    fun visible(): List<GameDef> = if (ActivationCenter.trial()) all.filter { castbridge.core.owner.TrialPolicy.gameAllowed(it.id) } else all
+    fun visible(): List<GameDef> = all.filterNot { castbridge.core.brand.Brand.gameHidden(it.id) }.let { l -> if (ActivationCenter.trial()) l.filter { castbridge.core.owner.TrialPolicy.gameAllowed(it.id) } else l }
 
     val all: List<GameDef> = listOf(
         GameDef("quiz", R.drawable.ic_cb_quiz, "Quiz des Millions", "Solo · Multijoueur",
