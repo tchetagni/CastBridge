@@ -60,7 +60,7 @@ private val PHONE_GAMES = listOf(
 @Composable
 fun GamesScreen() {
     var open by rememberSaveable { mutableStateOf<String?>(null) }
-    val game = PHONE_GAMES.firstOrNull { it.id == open && !Brand.gameHidden(it.id) }
+    val game = PHONE_GAMES.firstOrNull { it.id == open && !castbridge.core.brand.Brand.gameHidden(it.id) }
     if (game == null) {
         GamesList { open = it; PhoneConnect.feature(it, "tile") }
         return
@@ -84,7 +84,7 @@ private fun GamesList(onOpen: (String) -> Unit) {
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Text("Jeux", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
         Text("Jouez sur la TV, avec vos amis ou en solo.", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        PHONE_GAMES.filterNot { Brand.gameHidden(it.id) }.forEach { g ->
+        PHONE_GAMES.filterNot { castbridge.core.brand.Brand.gameHidden(it.id) }.forEach { g ->
             Card(Modifier.fillMaxWidth().then(if (g.soon) Modifier else Modifier.clickable { onOpen(g.id) }), border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)) {
                 Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {

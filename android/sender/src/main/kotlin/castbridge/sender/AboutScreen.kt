@@ -3,6 +3,7 @@ package castbridge.sender
 import android.content.Intent
 import android.net.Uri
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -16,6 +17,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -31,6 +33,8 @@ fun AboutScreen() {
     val ctx = LocalContext.current
     var cgu by rememberSaveable { mutableStateOf(false) }
     val cguId = remember { ctx.resources.getIdentifier("brand_cgu", "raw", ctx.packageName) }
+    // Logo de l'entreprise qui commercialise la marque (drawable « brand_marketer_logo » de la superposition), au-dessus de « Commercialisé par … » ; absent = rien.
+    val marketerLogo = remember { ctx.resources.getIdentifier("brand_marketer_logo", "drawable", ctx.packageName) }
     if (cgu && cguId != 0) {
         BackHandler { cgu = false }
         CguScreen(runCatching { ctx.resources.openRawResource(cguId).bufferedReader(Charsets.UTF_8).use { it.readText() } }.getOrDefault("")) { cgu = false }
@@ -71,6 +75,7 @@ fun AboutScreen() {
                 HorizontalDivider()
             }
         }
+        if (marketerLogo != 0) Image(painterResource(marketerLogo), Brand.marketedBy.ifEmpty { null }, Modifier.align(Alignment.CenterHorizontally).padding(top = 8.dp).height(72.dp))
         Brand.marketedByLine()?.let { Text(it, Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 16.dp), textAlign = TextAlign.Center, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant) }
     }
 }

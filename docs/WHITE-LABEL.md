@@ -157,3 +157,7 @@ Tests : `BrandTest` (CastBridge sans ligne « Commercialisé par » et libellés
 ## Jeux retirés d'une marque
 
 Clé `games.hidden` de `brand.properties` : identifiants séparés par des virgules (`bataille`, `fap-fap`, `agraham-tia`, `quiz`, `chess`, `sudoku`). Ces jeux disparaissent de l'onglet « Jeux » du téléphone et du hub Jeux de la TV (`Brand.gameHidden`). CastBridge n'en retire aucun. EduPlay (2026-10-24) : les trois jeux de cartes.
+
+## Logo de l'entreprise qui commercialise
+
+Drawable optionnel `brand_marketer_logo` dans la superposition du téléphone : affiché en bas de l'onglet « À propos », au-dessus de « Commercialisé par … ». Absent = rien (CastBridge).
