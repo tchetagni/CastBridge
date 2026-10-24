@@ -80,7 +80,7 @@ private fun lightScheme() = lightColorScheme(
     surfaceVariant = Color(P.Light.SURFACE_VARIANT), onSurfaceVariant = Color(P.Light.TEXT_MEDIUM),
     surfaceTint = Color(P.Light.PRIMARY),
     surfaceContainerLowest = Color(P.Light.SURFACE), surfaceContainerLow = Color(P.Light.BACKGROUND),
-    surfaceContainer = Color(P.Light.SURFACE_VARIANT), surfaceContainerHigh = Color(P.Light.SURFACE_VARIANT), surfaceContainerHighest = Color(P.Light.OUTLINE),
+    surfaceContainer = Color(P.Light.SURFACE_VARIANT), surfaceContainerHigh = Color(P.Light.SURFACE_VARIANT), surfaceContainerHighest = Color(P.Light.CARD),
     outline = Color(P.Light.TEXT_LOW), outlineVariant = Color(P.Light.OUTLINE),
     error = Color(P.Semantic.ERROR_LIGHT), onError = Color.White,
     errorContainer = Color(P.Light.SURFACE_VARIANT), onErrorContainer = Color(P.Semantic.ERROR_LIGHT),

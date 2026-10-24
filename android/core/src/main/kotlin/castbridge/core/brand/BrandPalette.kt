@@ -66,6 +66,10 @@ object BrandPalette {
         val TEXT_HIGH get() = k("text") ?: BrandTokens.Light.TEXT_HIGH
         val TEXT_MEDIUM get() = k("text")?.let { mix(it, BACKGROUND, 0.82) } ?: BrandTokens.Light.TEXT_MEDIUM
         val TEXT_LOW get() = k("text")?.let { mix(it, BACKGROUND, 0.72) } ?: BrandTokens.Light.TEXT_LOW
+        /** Remplissage des cartes (Card) du téléphone clair : `color.card`, sinon l'ancien contour/gris (CastBridge inchangé). */
+        val CARD get() = k("card") ?: OUTLINE
+        /** Liseré des cartes du téléphone clair : `color.cardBorder`, sinon aucun (null). */
+        val CARD_BORDER: Int? get() = k("cardBorder")
         val PRIMARY get() = k("primary") ?: BrandTokens.Light.PRIMARY
         val ON_PRIMARY get() = k("onPrimary") ?: BrandTokens.Light.ON_PRIMARY
         /** Remplissages vert / cyan : le texte posé dessus est le texte foncé de la marque. */

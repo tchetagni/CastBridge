@@ -30,6 +30,13 @@ class BrandPaletteTest {
         assertEquals(T.Semantic.INFO_DARK, s.INFO_DARK); assertEquals(T.Semantic.INFO_LIGHT, s.INFO_LIGHT)
         assertEquals(T.Semantic.WARNING_DARK, s.WARNING_DARK); assertEquals(T.Semantic.ERROR_LIGHT, s.ERROR_LIGHT)
         assertTrue(!BrandPalette.isCustom)
+        assertEquals(T.Light.OUTLINE, l.CARD); assertEquals(null, l.CARD_BORDER)   // cartes : même gris qu'avant, pas de liseré
+    }
+
+    @Test fun cardRoleOverridesFill() {
+        BrandPalette.init("$eduplay;card=#FFFFFF;cardBorder=#D5DCE8")
+        assertEquals(0xFFFFFFFF.toInt(), BrandPalette.Light.CARD); assertEquals(0xFFD5DCE8.toInt(), BrandPalette.Light.CARD_BORDER)
+        ok(BrandPalette.Light.TEXT_HIGH, BrandPalette.Light.CARD, 4.5, "texte sur carte"); ok(BrandPalette.Light.TEXT_MEDIUM, BrandPalette.Light.CARD, 4.5, "texte moyen sur carte")
     }
 
     @Test fun defaultBrandPhoneThemeIsDark() { Brand.init("castbridge", "CastBridge", "CastBridge-TV", "CastBridge", "", ""); assertEquals("DARK", Brand.phoneTheme) }

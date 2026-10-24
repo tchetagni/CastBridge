@@ -93,8 +93,11 @@ Les couleurs construites dans le code passent par `castbridge.core.brand.BrandPa
 | `color.primary`, `color.onPrimary` | téléphone clair : couleur principale (boutons) et texte dessus |
 | `color.success`, `color.info` | remplissages vert/cyan ; en TEXTE, assombris (clair) ou éclaircis (sombre) automatiquement jusqu'à 4,5:1 |
 | `color.tvBackground`, `color.tvSurface`, `color.tvSurface2` | fond de la TV et thème sombre du téléphone ; cartes ; carte focalisée |
+| `color.card`, `color.cardBorder` | optionnels : remplissage des cartes (`Card`) du téléphone clair (défaut : l'ancien gris) et liseré 1 dp + ombre légère (défaut : aucun) ; la `Card` du paquet `castbridge.sender` (`BrandText.kt`) applique le liseré |
 | `color.focus` | anneau de focus (TV et téléphone sombre) |
 | `color.tvAccent` | optionnel : accent lisible sur fond sombre (texte, sélection, progression) ; défaut = `color.focus` |
+
+Sous-marque Apprendre du téléphone : pour une marque autre que CastBridge, `SubBrandHeader` (`Ui.kt`) affiche pictogramme + « Apprendre » aux couleurs de la marque au lieu du logo de sous-marque (qui contient le mot « CastBridge »). Le logo de la barre d'app (`CastBridgeLogo`) est agrandi de 40 % pour une marque (logo compact presque carré).
 
 Encore aux couleurs CastBridge, volontairement : palettes de sous-marque Quiz des Millions (`QuizViews.kt`), Échecs (`ChessTvView.kt`), Apprendre (`LearnViews.kt`) ; pastilles d'état (`StatusLevel.kt`, sémantique) ; lecteur et télécommande du téléphone (`player/`) ; avertissement et erreur (sémantique universelle, jamais recolorés).
 
