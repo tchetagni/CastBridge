@@ -9,10 +9,10 @@ Ressources posées par `-Pbrand=eduplay` par-dessus `src/main/res` (voir `docs/W
 - **Icône d'application PROVISOIRE** : adaptative (avant-plan, monochrome, fond blanc) et mipmaps classiques ronds/carrés, tirés de l'emblème du logo (sans « THE » ni mot-symbole), sur fond blanc. À remplacer par la version « icône d'application » du client dès réception. Icône de notification : silhouette blanche de l'emblème. Bannière TV : logo complet sur blanc.
 - **Logos dans l'appli** : `logo_castbridge_*` remplacés par le logo EduPlay (PNG). Téléphone : logo seul sur fond clair, sur carte blanche pour la variante « fond sombre ». TV : logo ou emblème sur carte blanche arrondie (les textes bleu foncé du logo sont illisibles sur bleu nuit et la charte interdit de le recolorer). Écran de démarrage : blanc (téléphone) / bleu nuit avec carte (TV).
 
+- **Couleurs en code (phase 2 du tronc)** : rôles `color.*` et `theme.phone.default=light` de `brand.properties` -> `BrandPalette`. Téléphone : `Theme.kt` clair (fond blanc, texte `#082A59`, primaire `#0750B8`, vert/cyan en remplissage) et sombre (dérivé du marine de la TV, accent cyan) ; thème par défaut clair, le choix de Réglages prime. TV : `TvStyle` (`TvCards.kt`) fond `#082A59`, cartes `#0E3A75` / `#12457F`, anneau et accent cyan `#00B8F0`.
+
 ## Ce qui reste d'aspect CastBridge (non superposable sans toucher au code partagé)
 
-- Couleurs de l'interface téléphone (Compose) : `core/.../brand/BrandTokens` via `sender/.../Theme.kt` (jeux sombre et clair). Le thème par défaut du téléphone est le **sombre** (`ThemePrefs`) ; EduPlay clair demande de choisir Clair dans Réglages ou de changer le défaut. L'or CastBridge reste la couleur primaire dans les deux.
-- Couleurs de la TV construites en code (`TvCards.kt`, `TvStyle`, écrans Quiz/Échecs/Cartes/Jeux) : ni ressources ni overlay.
 - Sous-marques `logo_apprendre*`, `logo_echecs*`, `logo_quiz_des_millions*`, icônes `ic_cb_*` : laissées (contenu CastBridge, hors charte EduPlay).
 - Polices Sora (quiz) et Manrope (échecs) de la TV.
 - Identifiants de découverte (UUID Bluetooth, mDNS `_castbridge._tcp`, DIAL) et textes dans des images : voir `docs/WHITE-LABEL.md`, phase 4.
