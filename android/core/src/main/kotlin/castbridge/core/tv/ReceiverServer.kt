@@ -1543,7 +1543,7 @@ class ReceiverServer(
     }
 
     // /api/info is polled every second by phones and the web page: list the folders at most once per infoCacheMs.
-    private class Entry(val v: StorageVolume, val name: String, val size: Long, val received: Long, val complete: Boolean, val dup: Boolean, val folder: String = "", val origin: String? = null)
+    private class Entry(val v: StorageVolume, val name: String, val size: Long, val received: Long, val complete: Boolean, val dup: Boolean, val folder: String = "", val origin: String? = null, val mtime: Long = -1)
     private class Listing(val at: Long, val entries: List<Entry>, val used: Map<String, Long>, val partials: List<Triple<String, Long, Long>> = emptyList()) {
         val filesJson: String by lazy {
             entries.joinToString(",", "[", "]") { e ->
@@ -1553,6 +1553,18 @@ class ReceiverServer(
         }
     }
     @Volatile private var listing: Listing? = null
+    private val listingGen = java.util.concurrent.atomic.AtomicLong()
+    @Volatile private var listingSig = 0
+
+    /**
+     * Empreinte de tout ce qui change [libraryItems] : la liste des fichiers (relue au plus toutes les [TvProfile.infoCacheMs]), ce que la
+     * bibliothèque sait d'eux, le fichier en lecture, les dossiers virtuels. L'accueil de la TV ne refait pas la liste tant qu'elle ne change pas.
+     */
+    fun libraryStamp(): Long {
+        listing()
+        val ps = player.state()
+        return java.util.Objects.hash(listingGen.get(), library?.generation ?: 0L, if (ps.state != "idle") ps.name else "", folders?.version() ?: 0).toLong()
+    }
     private fun invalidate() { listing = null }
 
     /** The library changed behind the server's back (the bin, a returned drive...): the next listing is read again. */
@@ -1569,7 +1581,7 @@ class ReceiverServer(
         val listed = vols.map { it to runCatching { volumes.store(it).list() }.getOrDefault(emptyList()) }
         for ((v, l) in listed) {
             used[v.id] = l.sumOf { it.size }
-            for (e in l) if (!e.part) { raw += Entry(v, e.name, e.size, e.size, true, false, e.folder, e.origin); finalKeys += e.name.lowercase() }
+            for (e in l) if (!e.part) { raw += Entry(v, e.name, e.size, e.size, true, false, e.folder, e.origin, e.mtime); finalKeys += e.name.lowercase() }
         }
         // what is arriving right now, for the TV screen: EVERY partial copy with a known size, even when the same name already exists complete (an episode sent again,
         // a move target): the library listing hides those (it would show the name twice), the progress line must not
@@ -1580,8 +1592,11 @@ class ReceiverServer(
             if (e.name.lowercase() !in finalKeys) raw += Entry(v, e.name, total, e.size, false, false)
         }
         val count = raw.groupingBy { it.name.lowercase() to it.complete }.eachCount()
-        val entries = raw.map { Entry(it.v, it.name, it.size, it.received, it.complete, (count[it.name.lowercase() to it.complete] ?: 1) > 1, it.folder, it.origin) }
+        val entries = raw.map { Entry(it.v, it.name, it.size, it.received, it.complete, (count[it.name.lowercase() to it.complete] ?: 1) > 1, it.folder, it.origin, it.mtime) }
             .sortedWith(compareBy({ it.name }, { it.v.id }))
+        // le contenu de la liste a-t-il changé ? (l'accueil de la TV ne recalcule rien tant que le numéro est le même)
+        val sig = entries.map { listOf(it.v.id, it.name, it.size, it.received, it.complete, it.dup, it.folder, it.mtime) }.hashCode()
+        if (sig != listingSig) { listingSig = sig; listingGen.incrementAndGet() }
         return Listing(now, entries, used, arriving).also { listing = it }
     }
 
@@ -1717,12 +1732,25 @@ class ReceiverServer(
         val ps = player.state()
         val resolvers = HashMap<String, ((String) -> java.io.File)?>()      // un résolveur par volume : le dossier n'est lu qu'une fois par liste, pas une fois par fichier
         val files = l.entries.filter { it.complete }.map { e ->
-            val f = resolvers.getOrPut(e.v.id) { (volumes.store(e.v) as? FileStore)?.fileResolver() }?.invoke(e.name)
-            val m = lib?.meta(e.name, e.size, f) ?: FileMeta()
-            LibraryItem(e.name, e.size, f?.lastModified() ?: 0L, e.v.id, e.v.label, e.v.kind, m, e.dup,
+            // la date vient de la liste du dossier : aucun fichier rouvert (sur une clé exFAT lente, c'était des minutes). Sans date (volume sans dossier) : l'ancien chemin.
+            val known = e.mtime >= 0
+            val f = if (known) null else resolvers.getOrPut(e.v.id) { (volumes.store(e.v) as? FileStore)?.fileResolver() }?.invoke(e.name)
+            val m = (if (known) lib?.metaAt(e.name, e.size, e.mtime) else lib?.meta(e.name, e.size, f)) ?: FileMeta()
+            LibraryItem(e.name, e.size, if (known) e.mtime else f?.lastModified() ?: 0L, e.v.id, e.v.label, e.v.kind, m, e.dup,
                 ps.state != "idle" && ps.name == e.name, folders?.folderOf(e.name).orEmpty().ifEmpty { e.folder })
         }
         return LibraryLogic.sortNewestFirst(files, { it.mtime }, { it.name })
+    }
+
+    /** Où est rangé le fichier fini [name] (volume, dossier virtuel), d'après la liste en cache : gardé avec la position de lecture pour le prochain démarrage. */
+    fun placeOf(name: String): LibraryDb.Place? = listing().entries.firstOrNull { it.complete && it.name == name }
+        ?.let { LibraryDb.Place(it.v.id, it.v.label, it.v.kind, folders?.folderOf(it.name).orEmpty().ifEmpty { it.folder }) }
+
+    /** Le fichier [name] est-il toujours là ? Un seul accès au volume demandé (tous les volumes si inconnu) : sert à ouvrir une carte « Reprendre » lue avant la liste. */
+    fun fileStillThere(name: String, volumeId: String): Boolean {
+        val vols = volumes.volumes().filter { volumeId.isEmpty() || it.id == volumeId }
+        if (vols.isEmpty()) return false
+        return vols.any { v -> (volumes.store(v) as? FileStore)?.fileOf(name)?.isFile ?: true }
     }
 
     fun libraryJson(): String {

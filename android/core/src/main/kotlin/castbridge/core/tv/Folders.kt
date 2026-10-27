@@ -30,6 +30,8 @@ class FolderIndex(private val file: File?, private val maxEntries: Int = 20_000,
 
     /** Folder of [name], "" = root. */
     @Synchronized fun folderOf(name: String): String = map[name] ?: ""
+    /** Empreinte de l'index (change quand un dossier virtuel change) : l'accueil ne recalcule rien tant qu'elle est la même. */
+    @Synchronized fun version(): Int = map.hashCode()
 
     /** What a folder path becomes: trimmed parts, Unicode NFC, same case as an existing folder; or a French reason. */
     sealed class Path { data class Ok(val path: String) : Path(); data class Bad(val reason: String) : Path() }

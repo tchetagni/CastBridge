@@ -186,7 +186,9 @@ object WriteProbe {
 // ---------------------------------------------------------------------------------------------------------------
 
 /** [folder] = the real sub-folder of a filed file ("" = the folder of the volume); [origin] = the name the phone sent it under, when the file was renamed on reception. */
-data class StoreEntry(val name: String, val size: Long, val part: Boolean, val folder: String = "", val origin: String? = null)
+data class StoreEntry(val name: String, val size: Long, val part: Boolean, val folder: String = "", val origin: String? = null,
+    /** Date de modification relevée pendant le parcours du dossier (-1 = inconnue) : la bibliothèque n'a plus à rouvrir chaque fichier pour la lire. */
+    val mtime: Long = -1)
 
 interface VolumeStore {
     val volume: StorageVolume
@@ -345,14 +347,14 @@ open class FileStore(override val volume: StorageVolume, private val free: () ->
     override fun list(): List<StoreEntry> {
         val flat = dir.listFiles().orEmpty()
             .filter { it.isFile && !it.name.startsWith(".") && !it.name.endsWith(Meta.SUFFIX) }
-            .map { if (it.name.endsWith(Storage.PART)) StoreEntry(it.name.removeSuffix(Storage.PART), it.length(), true) else StoreEntry(it.name, it.length(), false) }
+            .map { if (it.name.endsWith(Storage.PART)) StoreEntry(it.name.removeSuffix(Storage.PART), it.length(), true) else StoreEntry(it.name, it.length(), false, mtime = it.lastModified()) }
         val entries = filing.entries()
         if (entries.isEmpty()) return flat
         val origins = filing.origins()
         val names = flat.mapTo(HashSet()) { it.name.lowercase() }
         val filed = entries.mapNotNull { (k, r) ->
             if (k.lowercase() in names) return@mapNotNull null
-            File(dir, r).takeIf { it.isFile }?.let { StoreEntry(k, it.length(), false, r.substringBeforeLast('/', ""), origins[k.lowercase()]) }
+            File(dir, r).takeIf { it.isFile }?.let { StoreEntry(k, it.length(), false, r.substringBeforeLast('/', ""), origins[k.lowercase()], it.lastModified()) }
         }
         return flat + filed
     }

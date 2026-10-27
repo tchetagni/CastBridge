@@ -18,6 +18,10 @@ interface LibraryMeta {
     fun meta(name: String, size: Long): FileMeta
     /** Same, with the file when it lives in a real folder (its modification time keys the thumbnail cache). */
     fun meta(name: String, size: Long, file: File?): FileMeta = meta(name, size)
+    /** Même chose quand la date de modification du fichier est déjà connue (relevée avec la liste du dossier) : aucun accès au fichier. */
+    fun metaAt(name: String, size: Long, mtime: Long): FileMeta = meta(name, size)
+    /** Change à chaque modification de ce que la bibliothèque sait des fichiers (position, vu, durée...) : l'accueil ne recalcule rien tant qu'il est le même. */
+    val generation: Long get() = 0L
     /** Cached JPEG thumbnail, or null (not ready: the provider may start making it; clients ask again later). [file] is set for real folders. */
     fun thumb(name: String, size: Long, file: File?): ByteArray?
     /** True when no thumbnail can be made for this file (not a video, undecodable): the server answers 404 instead of 202. */
@@ -138,6 +142,13 @@ object LibrarySections {
 
     data class Section<T : LibraryEntry>(val id: String, val title: String, val items: List<T>)
 
+    /** Au plus ce nombre de fichiers dans la rangée « Reprendre » instantanée de l'accueil (les plus récemment lus, regardés en partie). */
+    const val QUICK_RESUME_MAX = 10
+
+    /** The rule of « Reprendre »: started (resumeMs > 0), not finished, media only, last played first. The one place that says it. */
+    fun <T : LibraryEntry> resume(items: List<T>): List<T> =
+        items.filter { it.type != MediaType.OTHER && it.resumeMs > 0 && !it.watched }.sortedWith(compareByDescending<T> { it.playedAtMs }.thenBy { it.title.lowercase() })
+
     /**
      * "Reprendre" (started, not finished, last played first), "Récemment ajoutés" (the [recentCount] newest media),
      * "Toutes" (every video/audio file, by title), "Autres fichiers" (documents, APKs...). Empty sections are left out;
@@ -145,7 +156,7 @@ object LibrarySections {
      */
     fun <T : LibraryEntry> build(items: List<T>, recentCount: Int = 12): List<Section<T>> {
         val media = items.filter { it.type != MediaType.OTHER }
-        val resume = media.filter { it.resumeMs > 0 && !it.watched }.sortedWith(compareByDescending<T> { it.playedAtMs }.thenBy { it.title.lowercase() })
+        val resume = resume(media)
         val recent = LibraryLogic.sortNewestFirst(media, { it.mtime }, { it.name }).take(recentCount)
         val all = media.sortedWith(compareBy<T> { it.title.lowercase() }.thenBy { it.name })
         val other = items.filter { it.type == MediaType.OTHER }.sortedBy { it.name.lowercase() }

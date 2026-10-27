@@ -261,6 +261,9 @@ object ParentalHub {
         return items.filter { it.type != castbridge.core.tv.MediaType.VIDEO || f(it.name, it.volumeLabel) }
     }
 
+    /** Empreinte de ce qui décide du filtre de la bibliothèque (profil actif, et l'heure à la minute : horaires) : l'accueil refait sa liste quand elle change. */
+    fun filterStamp(): Int = if (engineOrNull == null) 0 else java.util.Objects.hash(engine.activeProfile(), System.currentTimeMillis() / 60_000)
+
     /** Would playing this item ask the PIN (lock mode)? */
     fun needsPin(i: LibraryItem): Boolean = engineOrNull != null && i.type == castbridge.core.tv.MediaType.VIDEO && engine.needsPinToPlay(i.name, i.volumeLabel)
 

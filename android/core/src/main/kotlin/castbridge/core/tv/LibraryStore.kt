@@ -21,9 +21,19 @@ class LibraryDb(private val file: File?, private val maxEntries: Int = 2000, pri
         val playedAtMs: Long = 0,
         /** Per-file player settings (audio/subtitle track, delays...), encoded by [PlayerPrefs]. */
         val prefs: String = "",
+        /** Où le fichier a été lu la dernière fois (pour afficher « Reprendre » avant que la liste des volumes soit lue) ; vide = inconnu. */
+        val volumeId: String = "",
+        val volumeLabel: String = "",
+        val volumeKind: String = "",
+        val folder: String = "",
     )
 
+    /** Où un fichier est rangé, gardé à la lecture pour le prochain démarrage. */
+    data class Place(val volumeId: String, val volumeLabel: String, val volumeKind: VolumeKind, val folder: String = "")
+
     private val map = LinkedHashMap<String, Entry>()
+    @Volatile var generation = 0L
+        private set
 
     init { load() }
 
@@ -36,10 +46,27 @@ class LibraryDb(private val file: File?, private val maxEntries: Int = 2000, pri
         val e = f(map[k] ?: Entry())
         if (map[k] == e) return
         map[k] = e
+        generation++
         prune(); save()
     }
 
-    fun onPlayStarted(name: String, size: Long) = edit(name, size) { it.copy(playedAtMs = now()) }
+    fun onPlayStarted(name: String, size: Long, place: Place? = null) = edit(name, size) {
+        it.copy(playedAtMs = now()).let { e -> if (place == null) e else e.copy(volumeId = place.volumeId, volumeLabel = place.volumeLabel, volumeKind = place.volumeKind.name, folder = place.folder) }
+    }
+
+    /**
+     * « Reprendre » lue dans la mémoire de la base seule, sans toucher au disque ni aux volumes : les fichiers regardés en partie (même règle que
+     * [LibrarySections.resume]), les [max] derniers lus d'abord. mtime inconnu (0), vignette à demander à l'affichage.
+     */
+    @Synchronized fun resumeItems(max: Int = LibrarySections.QUICK_RESUME_MAX): List<LibraryItem> {
+        val all = map.entries.mapNotNull { (k, e) ->
+            val size = k.substringBefore(':').toLongOrNull() ?: return@mapNotNull null
+            val name = k.substringAfter(':')
+            val kind = runCatching { VolumeKind.valueOf(e.volumeKind) }.getOrDefault(VolumeKind.REMOVABLE)
+            LibraryItem(name, size, 0L, e.volumeId, e.volumeLabel, kind, FileMeta(e.durationMs, e.resumeMs, e.watched, false, e.playedAtMs), folder = e.folder)
+        }
+        return LibrarySections.resume(all).take(max)
+    }
 
     /** Playback stopped or paused at [posMs]: remember where (normalised), and whether it counts as watched. */
     fun onStopped(name: String, size: Long, posMs: Long, durMs: Long) = edit(name, size) { e ->
@@ -59,10 +86,10 @@ class LibraryDb(private val file: File?, private val maxEntries: Int = 2000, pri
 
     @Synchronized fun renamed(from: String, to: String, size: Long) {
         val e = map.remove(key(from, size)) ?: return
-        map[key(to, size)] = e; save()
+        map[key(to, size)] = e; generation++; save()
     }
 
-    @Synchronized fun deleted(name: String, size: Long) { if (map.remove(key(name, size)) != null) save() }
+    @Synchronized fun deleted(name: String, size: Long) { if (map.remove(key(name, size)) != null) { generation++; save() } }
 
     @Synchronized fun size() = map.size
 
@@ -81,7 +108,8 @@ class LibraryDb(private val file: File?, private val maxEntries: Int = 2000, pri
             val p = l.split('\t')
             if (p.size < 6) continue
             runCatching {
-                map[dec(p[0])] = Entry(p[1].toLong(), p[2].toLong(), p[3] == "1", p[4].toLong(), dec(p[5]))
+                map[dec(p[0])] = Entry(p[1].toLong(), p[2].toLong(), p[3] == "1", p[4].toLong(), dec(p[5]),
+                    p.getOrNull(6)?.let(::dec).orEmpty(), p.getOrNull(7)?.let(::dec).orEmpty(), p.getOrNull(8)?.let(::dec).orEmpty(), p.getOrNull(9)?.let(::dec).orEmpty())
             }
         }
     }
@@ -92,7 +120,7 @@ class LibraryDb(private val file: File?, private val maxEntries: Int = 2000, pri
             f.parentFile?.mkdirs()
             val tmp = File(f.parentFile, f.name + ".tmp")
             tmp.writeText(map.entries.joinToString("") { (k, e) ->
-                "${enc(k)}\t${e.durationMs}\t${e.resumeMs}\t${if (e.watched) 1 else 0}\t${e.playedAtMs}\t${enc(e.prefs)}\n"
+                "${enc(k)}\t${e.durationMs}\t${e.resumeMs}\t${if (e.watched) 1 else 0}\t${e.playedAtMs}\t${enc(e.prefs)}\t${enc(e.volumeId)}\t${enc(e.volumeLabel)}\t${enc(e.volumeKind)}\t${enc(e.folder)}\n"
             })
             if (!tmp.renameTo(f)) { f.delete(); tmp.renameTo(f) }
         }
@@ -233,6 +261,13 @@ class LibraryProvider(val db: LibraryDb, val cache: ThumbCache, private val work
     private fun keyOf(name: String, size: Long, file: File?) = file?.let { cache.key(name, size, it.lastModified()) }
 
     override fun meta(name: String, size: Long) = meta(name, size, null)
+
+    override val generation: Long get() = db.generation
+
+    override fun metaAt(name: String, size: Long, mtime: Long): FileMeta {
+        val e = db.get(name, size)
+        return FileMeta(e?.durationMs ?: 0, e?.resumeMs ?: 0, e?.watched ?: false, cache.has(cache.key(name, size, mtime)), e?.playedAtMs ?: 0)
+    }
 
     override fun meta(name: String, size: Long, file: File?): FileMeta {
         val e = db.get(name, size)

@@ -43,6 +43,14 @@ import java.util.concurrent.Executors
 class HomeScreen(private val act: Activity, private val container: FrameLayout, private val thumbs: TvThumbs, private val api: Api) {
     interface Api {
         fun items(): List<LibraryItem>
+        /** « Reprendre » lue dans la mémoire de la base seule (au plus 10, regardés en partie, derniers lus d'abord), sans lire les volumes. */
+        fun quickResume(): List<LibraryItem> = emptyList()
+        /** Empreinte de ce qui change [items] ; la même valeur = rien à recalculer. null = inconnue. */
+        fun stamp(): Long? = null
+        /** Le fichier d'une carte lue avant la liste est-il toujours là ? (un seul accès au volume, hors du fil principal). */
+        fun stillThere(i: LibraryItem): Boolean = true
+        /** Il n'est plus là : le message court. */
+        fun gone(i: LibraryItem) {}
         /** (ready text, code, receiving line or null). */
         fun status(): Triple<String, String, String?>
         /** The status signalling (castbridge.core.ux.TvSignal): colour, text and the one action. null = old chip. */
@@ -58,6 +66,15 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
 
     private val main = Handler(Looper.getMainLooper())
     private val io = Executors.newSingleThreadExecutor { r -> Thread(r, "cb-home").apply { isDaemon = true } }
+    // « Reprendre » instantanée : son propre fil, pour ne jamais attendre la lecture de la bibliothèque (qui occupe [io])
+    private val quickIo = Executors.newSingleThreadExecutor { r -> Thread(r, "cb-home-quick").apply { isDaemon = true } }
+    /** Vrai tant que la liste complète n'est pas arrivée : l'accueil montre les outils et « Reprendre » (lue dans la base seule). */
+    private var loadingShown = false
+    private var fullApplied = false
+    private var quickList: List<LibraryItem> = emptyList()
+    // dernière liste complète et l'empreinte qui l'a produite (lues et écrites seulement sur le fil [io])
+    private var lastStamp: Long? = null
+    private var lastItems: List<LibraryItem>? = null
     private val dp = { v: Int -> TvStyle.dp(act, v) }
     private val bg = ImageView(act).apply { scaleType = ImageView.ScaleType.CENTER_CROP; alpha = 0.5f }
     private val zoom = SlowZoom(bg)
@@ -130,7 +147,10 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
 
     fun show() {
         container.fadeTo(true)
-        reload(focusFirst = true)
+        // jamais d'accueil vide qui attend la bibliothèque : outils et texte d'attente tout de suite, « Reprendre » dès qu'elle est lue dans la base
+        val early = toolsRow == null
+        if (early) { apply(emptyList(), 0, true, loading = true); loadQuick() }
+        reload(focusFirst = !early)
         if (!paused) { zoom.start(); main.removeCallbacks(tick); main.postDelayed(tick, 4000) }
     }
 
@@ -148,7 +168,14 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         zoom.start(); main.removeCallbacks(tick); reload(); refreshTools(); main.postDelayed(tick, 4000)
     }
 
-    fun release() { hide(); io.shutdownNow() }
+    fun release() { hide(); io.shutdownNow(); quickIo.shutdownNow() }
+
+    private fun loadQuick() {
+        runCatching { quickIo.execute {
+            val q = runCatching { api.quickResume() }.getOrDefault(emptyList())
+            main.post { if (!fullApplied && q.isNotEmpty()) { quickList = q; apply(q, 1, false, loading = true) } }
+        } }
+    }
 
     fun onThumbReady(name: String) = main.post { rows.values.forEach { (_, a) -> a.refresh(name) } }
 
@@ -180,15 +207,26 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
     private fun reload(focusFirst: Boolean = false) {
         refreshStatus()
         // the list and its signature are computed here, off the main thread (a big library made items.hashCode() a main-thread cost every 4 s)
-        runCatching { io.execute { val items = runCatching { api.items() }.getOrDefault(emptyList()); val sig = items.hashCode(); main.post { apply(items, sig, focusFirst) } } }
+        runCatching { io.execute {
+            val stamp = runCatching { api.stamp() }.getOrNull()
+            val same = stamp != null && stamp == lastStamp && lastItems != null
+            if (same && !focusFirst && fullApplied) return@execute                  // rien n'a changé depuis la dernière liste : rien à recalculer (ni lecture, ni calcul de la liste)
+            val items = if (same) lastItems!! else runCatching { api.items() }.getOrNull()
+            if (items == null) { main.post { if (!fullApplied) apply(emptyList(), 0, focusFirst, loading = true) }; return@execute }
+            lastStamp = stamp; lastItems = items
+            val sig = items.hashCode()
+            main.post { fullApplied = true; apply(items, sig, focusFirst) }
+        } }
     }
 
-    private fun apply(items: List<LibraryItem>, sig: Int, focusFirst: Boolean) {
-        if (sig == signature && rows.isNotEmpty() && !focusFirst) return
-        signature = sig
+    private fun apply(items: List<LibraryItem>, sig: Int, focusFirst: Boolean, loading: Boolean = false) {
+        if (!loading && !loadingShown && sig == signature && rows.isNotEmpty() && !focusFirst) return
+        if (loading && fullApplied) return
+        loadingShown = loading
+        signature = if (loading) 0 else sig
         val media = items.filter { it.type != MediaType.OTHER }
-        val sections = LibrarySections.build(items).associateBy { it.id }
-        val wanted = listOf(
+        val sections = if (loading) emptyMap() else LibrarySections.build(items).associateBy { it.id }
+        val wanted = if (loading) listOf("Reprendre" to items).filter { it.second.isNotEmpty() } else listOf(
             "Reprendre" to sections[LibrarySections.RESUME]?.items.orEmpty(),
             "Récemment ajoutés" to LibraryLogic.sortNewestFirst(media, { it.mtime }, { it.name }).take(15),
             "Sur la clé USB" to LibraryLogic.sortNewestFirst(media.filter { it.volumeKind == VolumeKind.REMOVABLE }, { it.mtime }, { it.name }),
@@ -199,13 +237,15 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         // (also the very first time: an empty TV still needs its tools row, or the home has nothing to focus)
         var rebuilt: castbridge.core.ux.TvHomeFocus.Target = castbridge.core.ux.TvHomeFocus.Target.None
         if (toolsRow == null || wanted.map { it.first } != rows.keys.toList()) {
-            val hadFocus = rowsBox.hasFocus()
+            // La rangée des outils reste en place (et son focus) : seules les rangées de cartes sont refaites, quand la liste complète arrive.
             val oldTools = toolsRow?.tag as? ViewGroup
-            val focusedTool = oldTools?.let { b -> (0 until b.childCount).firstOrNull { b.getChildAt(it).hasFocus() } }
-            rebuilt = castbridge.core.ux.TvHomeFocus.afterRebuild(hadFocus, focusedTool, oldTools?.childCount ?: 0, wanted.isNotEmpty())
-            rowsBox.removeAllViews(); rows.clear()
-            // Tools first: every feature (Internet test, USB, Bluetooth, quiz…) is visible without scrolling.
-            toolsRow = tools().also { rowsBox.addView(it) }
+            val focusInTools = oldTools?.let { b -> (0 until b.childCount).any { b.getChildAt(it).hasFocus() } } == true
+            if (rowsBox.hasFocus() && !focusInTools) rebuilt = castbridge.core.ux.TvHomeFocus.afterRebuild(true, null, oldTools?.childCount ?: 0, wanted.isNotEmpty())
+            if (toolsRow == null) {
+                // Tools first: every feature (Internet test, USB, Bluetooth, quiz…) is visible without scrolling.
+                toolsRow = tools().also { rowsBox.addView(it) }
+            } else while (rowsBox.childCount > 1) rowsBox.removeViewAt(1)
+            rows.clear()
             for ((title, _) in wanted) {
                 val h = TextView(act).apply { setTextColor(Color.WHITE); textSize = 21f; typeface = TvFonts.bold; setPadding(dp(10), dp(14), 0, 0) }
                 val a = RowAdapter(title)
@@ -214,12 +254,18 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
                     adapter = a; itemAnimator = null; clipChildren = false; clipToPadding = false
                     setPadding(dp(4), dp(8), dp(40), dp(8)); descendantFocusability = ViewGroup.FOCUS_AFTER_DESCENDANTS
                 }
+                a.rv = rv
                 rowsBox.addView(h); rowsBox.addView(rv, LinearLayout.LayoutParams(-1, -2))
                 rows[title] = h to a
             }
         }
-        for ((title, list) in wanted) rows[title]?.let { (h, a) -> h.text = "$title  ·  ${list.size}"; a.set(list) }
-        if (items.isEmpty()) {
+        var deferred = false
+        for ((title, list) in wanted) rows[title]?.let { (h, a) -> h.text = "$title  ·  ${list.size}"; if (!a.set(list)) deferred = true }
+        if (deferred) signature = 0                                                     // une rangée tient le focus : sa nouvelle liste est appliquée au prochain passage
+        if (loading && wanted.isEmpty()) {
+            heroTitle.text = "Lecture de la bibliothèque…"
+            heroSub.text = "Vos vidéos et vos fichiers apparaissent dans un instant."
+        } else if (items.isEmpty() && !loading) {
             heroTitle.text = "Bienvenue sur CastBridge"
             heroSub.text = "Pour relier votre téléphone sans code : « Ajouter un téléphone », ci-dessous. Ensuite, envoyez une vidéo depuis l'app CastBridge : elle apparaîtra ici, prête à regarder, même sans réseau."
             bg.setImageBitmap(null)
@@ -230,6 +276,21 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         val target = if (focusFirst) castbridge.core.ux.TvHomeFocus.onShow(opened, openedTool, (toolsRow?.tag as? ViewGroup)?.childCount ?: 0, wanted.isNotEmpty())
             .also { opened = castbridge.core.ux.TvHomeFocus.Opened.NOTHING } else rebuilt
         if (target != castbridge.core.ux.TvHomeFocus.Target.None) main.postDelayed({ focus(target) }, 80)
+    }
+
+    /**
+     * Ouvre une carte. Tant que la liste complète n'est pas là, « Reprendre » vient de la base seule : le fichier n'est cherché qu'à l'ouverture (un seul accès,
+     * hors du fil principal) ; absent, un message court et la carte disparaît.
+     */
+    private fun openCard(i: LibraryItem, row: List<LibraryItem>, index: Int) {
+        if (fullApplied || i !in quickList) { api.open(i, row, index); return }
+        runCatching { quickIo.execute {
+            val there = runCatching { api.stillThere(i) }.getOrDefault(true)
+            main.post {
+                if (there) api.open(i, row, index)
+                else { api.gone(i); quickList = quickList - i; if (!fullApplied) apply(quickList, 1, false, loading = true) }
+            }
+        } }
     }
 
     /** Puts the D-pad focus where [castbridge.core.ux.TvHomeFocus] says (first card of the first row, or a tile; falls back to the other). */
@@ -373,7 +434,18 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
     private inner class RowAdapter(val title: String) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private var list: List<LibraryItem> = emptyList()
         init { setHasStableIds(true) }
-        fun set(l: List<LibraryItem>) { if (l != list) { list = l; notifyDataSetChanged() } }
+        var rv: RecyclerView? = null
+        private fun keys(l: List<LibraryItem>) = l.map { "${it.volumeId}:${it.name}" }
+        /**
+         * La nouvelle liste. Mêmes fichiers dans le même ordre : les cartes se mettent à jour en place (le focus reste). Autre ordre ou autres fichiers
+         * pendant que la rangée tient le focus : rien ne bouge (false = à reprendre au prochain passage). Rangée sans focus : refaite.
+         */
+        fun set(l: List<LibraryItem>): Boolean {
+            if (l == list) return true
+            if (keys(l) == keys(list)) { list = l; notifyItemRangeChanged(0, l.size, Unit); return true }
+            if (rv?.hasFocus() == true) return false
+            list = l; notifyDataSetChanged(); return true
+        }
         fun refresh(name: String) { list.forEachIndexed { i, it -> if (it.name == name) notifyItemChanged(i) } }
         override fun getItemCount() = list.size
         override fun getItemId(position: Int) = "${list[position].volumeId}:${list[position].name}".hashCode().toLong()
@@ -382,7 +454,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
             card.layoutParams = RecyclerView.LayoutParams(dp(220), ViewGroup.LayoutParams.WRAP_CONTENT).apply { setMargins(dp(10), dp(10), dp(10), dp(10)) }
             val h = object : RecyclerView.ViewHolder(card) {}
             TvStyle.focusZoom(card) { has -> if (has) card.item?.let { describe(it) } }
-            card.setOnClickListener { val p = h.bindingAdapterPosition; if (p >= 0) { opened = castbridge.core.ux.TvHomeFocus.Opened.CARD; api.open(list[p], list, p) } }
+            card.setOnClickListener { val p = h.bindingAdapterPosition; if (p >= 0) { opened = castbridge.core.ux.TvHomeFocus.Opened.CARD; openCard(list[p], list, p) } }
             card.setOnLongClickListener { val p = h.bindingAdapterPosition; if (p >= 0) api.actions(list[p], list, p); true }
             card.setOnKeyListener { _, code, ev ->
                 if (ev.action == KeyEvent.ACTION_DOWN && (code == KeyEvent.KEYCODE_MENU || code == KeyEvent.KEYCODE_INFO)) {

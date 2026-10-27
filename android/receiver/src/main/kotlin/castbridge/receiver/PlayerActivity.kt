@@ -527,6 +527,11 @@ class PlayerActivity : Activity(), TvService.Screen {
     @Volatile private var homeItemCount = -1
     private fun homeApi() = object : HomeScreen.Api {
         override fun items() = ParentalHub.filterItems(server?.libraryItems().orEmpty()).also { homeItemCount = it.size }
+        // « Reprendre » lue dans la base de la bibliothèque seule (mémoire), avant et sans la liste des volumes
+        override fun quickResume() = ParentalHub.filterItems(library?.db?.resumeItems().orEmpty())
+        override fun stamp(): Long? = server?.let { it.libraryStamp() * 31 + ParentalHub.filterStamp() }
+        override fun stillThere(i: castbridge.core.tv.LibraryItem) = server?.fileStillThere(i.name, i.volumeId) ?: true
+        override fun gone(i: castbridge.core.tv.LibraryItem) { flash("« ${i.title} » n'est plus sur la TV.") }
         override fun status(): Triple<String, String, String?> {
             val s = server
             // ONE source for every path (Wi-Fi, Wi-Fi multivoie, Bluetooth), held by the service (independent of the HTTP server): castbridge.core.xfer.ReceiveCards
@@ -765,7 +770,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         currentSize = size
         controls?.let { it.hide(); it.showDiag(extras.fitOverlay()) }
         statusBar?.controlsVisible = false; refreshStatusBar()            // pendant la vidéo : zone d'icônes avec libellés, seulement avec la barre de commandes ou 4 s après un changement (R-53)       // 6 s, sans aucune touche : mode, source, dalle, image
-        bgRun { library?.db?.onPlayStarted(name, size) }
+        bgRun { library?.db?.onPlayStarted(name, size, runCatching { server?.placeOf(name) }.getOrNull()) }
     }
 
     /** The library's view of the app: listing, thumbnails, and the app's own API on loopback for actions. */

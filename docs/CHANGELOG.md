@@ -13,6 +13,7 @@ Trois produits livrés ont chacun leur numéro : **CastBridge-TV** (`tv-<version
 - CastBridge-TV 0.14.56-beta verrouillée (137 / 138) : binaire fonctionnellement inchangé (version seule), le lancement à distance existait déjà.
 
 - CastBridge-TV (à venir) : la bibliothèque lit le dossier de la clé USB une fois par liste, pas une fois par fichier (`FileStore.fileResolver`) ; accueil vide des minutes avec 172 fichiers sur une clé exFAT (propriétaire, 2026-10-27). Vérifié en JVM (`FileResolverTest`).
+- CastBridge-TV (à venir) : accueil en lecture progressive : les outils et le texte « Lecture de la bibliothèque… » s'affichent tout de suite ; « Reprendre » (10 fichiers au plus, regardés en partie, derniers lus d'abord) est lue dans la base de la bibliothèque seule, avant la liste des volumes (la carte n'est cherchée sur le disque qu'à son ouverture ; absente : message court et la carte disparaît) ; la liste lit la date de chaque fichier avec le dossier au lieu de rouvrir chaque fichier ; le rafraîchissement toutes les 4 s ne recalcule rien tant que la liste, la base, le fichier en lecture, les dossiers virtuels et le profil parental n'ont pas changé ; la liste complète met les cartes à jour en place sans prendre le focus. `/api/library` inchangé. Vérifié en JVM (`HomeFastPathTest`) ; à confirmer sur la TV avec la clé.
 
 ## CastBridge-TV
 
