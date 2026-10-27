@@ -999,7 +999,8 @@ class PlayerActivity : Activity(), TvService.Screen {
     private fun ensureStatusBar(): StatusBarView? {
         statusBar?.let { return it }
         val box = findViewById<android.widget.LinearLayout>(R.id.statusBar) ?: return null
-        return StatusBarView(this, box, onOpen = { svc?.let { statusBar?.openPanel(it) } }, leaveFocus = { home?.takeIf { it.visible }?.headerChip?.requestFocus() }).also { statusBar = it }
+        val pill = findViewById<TextView>(R.id.statusPill) ?: return null
+        return StatusBarView(this, box, pill, onOpen = { svc?.let { statusBar?.openPanel(it) } }, leaveFocus = { home?.takeIf { it.visible }?.headerChip?.requestFocus() }).also { statusBar = it }
     }
 
     /**
