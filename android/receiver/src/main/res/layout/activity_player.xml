@@ -24,18 +24,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone" />
-    <!-- Barre d'icônes de statut (StatusBarView), toujours visible : colonne en haut à droite sous l'horloge, par-dessus l'accueil et la vidéo.
-         Remplace les anciens badges séparés Internet / passerelle / SSH. Jamais prise de focus pendant une vidéo. -->
+    <!-- Barre d'état enroulable (StatusBarView) : le panneau déroulé (OK sur la pastille, accueil seulement) en haut à droite, par-dessus l'accueil ; enroulé par défaut.
+         Jamais pris de focus pendant une vidéo. -->
     <LinearLayout
         android:id="@+id/statusBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|end"
         android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="88dp"
         android:orientation="vertical"
         android:gravity="end"
+        android:visibility="gone" />
+    <!-- La pastille de la barre enroulée : pire niveau + nombre, dans la bande d'en-tête à côté de l'horloge. -->
+    <TextView
+        android:id="@+id/statusPill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="39dp"
+        android:layout_marginEnd="144dp"
         android:visibility="gone" />
     <TextView
         android:id="@+id/lead"

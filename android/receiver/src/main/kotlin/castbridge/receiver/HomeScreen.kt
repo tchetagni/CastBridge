@@ -123,10 +123,10 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         val top = LinearLayout(act).apply { orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL }
         top.addView(TvStyle.logo(act, R.drawable.logo_castbridge_tv_horizontal_compact, 56).apply { contentDescription = "CastBridge TV" })
         top.addView(View(act), LinearLayout.LayoutParams(0, 1, 1f))
-        top.addView(chip, LinearLayout.LayoutParams(-2, -2).apply { rightMargin = dp(20) })
+        top.addView(chip, LinearLayout.LayoutParams(-2, -2).apply { rightMargin = dp(20 + 100) })   // 100 dp kept for the status pill (collapsed status bar, StatusBarView) beside the clock
         top.addView(TextClock(act).apply { format24Hour = "HH:mm"; format12Hour = "HH:mm"; textSize = 30f; setTextColor(Color.WHITE) })
         content.addView(top)
-        content.addView(signalRow, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(8); rightMargin = dp(220) })   // keeps clear of the icon status bar (under the clock)
+        content.addView(signalRow, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(8) })   // the status bar is a pill in the header now: the full width is free
         content.addView(heroTitle, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(26) })
         // Fixed height: a one- or two-line description never pushes the rows around.
         heroSub.minLines = 2
