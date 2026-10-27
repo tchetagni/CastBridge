@@ -1544,7 +1544,7 @@ class ReceiverServer(
 
     // /api/info is polled every second by phones and the web page: list the folders at most once per infoCacheMs.
     private class Entry(val v: StorageVolume, val name: String, val size: Long, val received: Long, val complete: Boolean, val dup: Boolean, val folder: String = "", val origin: String? = null, val mtime: Long = -1)
-    private class Listing(val at: Long, val entries: List<Entry>, val used: Map<String, Long>, val partials: List<Triple<String, Long, Long>> = emptyList()) {
+    private class Listing(val at: Long, val gen: Long, val entries: List<Entry>, val used: Map<String, Long>, val partials: List<Triple<String, Long, Long>> = emptyList()) {
         val filesJson: String by lazy {
             entries.joinToString(",", "[", "]") { e ->
                 "{\"name\":${q(e.name)},\"size\":${e.size},\"received\":${e.received},\"complete\":${e.complete}," +
@@ -1561,18 +1561,44 @@ class ReceiverServer(
      * bibliothèque sait d'eux, le fichier en lecture, les dossiers virtuels. L'accueil de la TV ne refait pas la liste tant qu'elle ne change pas.
      */
     fun libraryStamp(): Long {
-        listing()
+        listing(tolerant = true)
         val ps = player.state()
         return java.util.Objects.hash(listingGen.get(), library?.generation ?: 0L, if (ps.state != "idle") ps.name else "", folders?.version() ?: 0).toLong()
     }
-    private fun invalidate() { listing = null }
+    /** Numéro des invalidations : une liste lue avant la dernière n'est plus à jour pour qui vient d'écrire (envoi, déplacement, corbeille...). */
+    private val invalGen = java.util.concurrent.atomic.AtomicLong()
+    private val scanLock = Object()
+    private var scanning = false
+    private fun invalidate() { invalGen.incrementAndGet() }
 
     /** The library changed behind the server's back (the bin, a returned drive...): the next listing is read again. */
     fun changed() = invalidate()
 
-    private fun listing(): Listing {
-        val now = System.nanoTime() / 1_000_000
-        listing?.let { if (now - it.at < cfg.infoCacheMs) return it }
+    /**
+     * La liste des fichiers de tous les volumes, UNE lecture à la fois (sur une clé exFAT lente elle dure des dizaines de secondes : avant, chaque appel
+     * périmé lançait la sienne en parallèle, les fils HTTP s'empilaient et même /api/hello ne répondait plus). Pendant une lecture en cours :
+     * [tolerant] (lecteurs qui sondent : /api/info, l'accueil, la ligne d'état) rend la liste précédente tout de suite si elle existe ; sinon
+     * (et pour qui vient d'écrire : [invalidate]) on attend la fin de la lecture, et on en lance une nouvelle si elle avait commencé avant l'invalidation.
+     */
+    private fun listing(tolerant: Boolean = false): Listing {
+        while (true) {
+            val now = System.nanoTime() / 1_000_000
+            val g = invalGen.get()
+            val cur = listing
+            if (cur != null && cur.gen == g && now - cur.at < cfg.infoCacheMs) return cur
+            var mine = false
+            synchronized(scanLock) {
+                if (!scanning) { scanning = true; mine = true }
+                else if (tolerant && cur != null) return cur
+                else scanLock.wait(1000)
+            }
+            if (!mine) continue
+            try { return scanListing(g) } finally { synchronized(scanLock) { scanning = false; scanLock.notifyAll() } }
+        }
+    }
+
+    private fun scanListing(gen: Long): Listing {
+        val started = System.nanoTime() / 1_000_000
         val vols = volumes.volumes()
         val raw = ArrayList<Entry>()
         val used = HashMap<String, Long>()
@@ -1597,7 +1623,10 @@ class ReceiverServer(
         // le contenu de la liste a-t-il changé ? (l'accueil de la TV ne recalcule rien tant que le numéro est le même)
         val sig = entries.map { listOf(it.v.id, it.name, it.size, it.received, it.complete, it.dup, it.folder, it.mtime) }.hashCode()
         if (sig != listingSig) { listingSig = sig; listingGen.incrementAndGet() }
-        return Listing(now, entries, used, arriving).also { listing = it }
+        val ended = System.nanoTime() / 1_000_000
+        // « at » = la FIN de la lecture : le délai de [TvProfile.infoCacheMs] court à partir de là (sinon une lecture longue serait périmée dès qu'elle rend)
+        if (ended - started > 500) runCatching { onLog("listing : ${entries.count { it.complete }} fichiers, ${vols.size} volumes, ${ended - started} ms") }
+        return Listing(ended, gen, entries, used, arriving).also { listing = it }
     }
 
     /** The volume the next upload would go to (for the top-level free/used/quota numbers older clients read). */
@@ -1616,7 +1645,7 @@ class ReceiverServer(
      * Every copy the TV holds in part (a `.part` with its size sidecar, on any volume), each with whether a writer is on it right now (R-51). The listing is the cached one (at most
      * [TvProfile.infoCacheMs] old); [PartialCopy.live] is asked afresh at each call.
      */
-    fun partials(): List<PartialCopy> = listing().partials.map { (n, got, total) -> PartialCopy(n, got, total, liveCopy(n)) }
+    fun partials(): List<PartialCopy> = listing(tolerant = true).partials.map { (n, got, total) -> PartialCopy(n, got, total, liveCopy(n)) }
 
     /** Files being received right now: (name, received bytes, final size). Only the LIVE copies (R-51): a `.part` nobody writes any more is a [stalledCopies], not a reception. */
     fun receiving(): List<Triple<String, Long, Long>> = partials().filter { it.live }.map { Triple(it.name, it.received, it.total) }
@@ -1727,7 +1756,7 @@ class ReceiverServer(
 
     /** Finished files (newest first) with what the library screens need: thumbnail, duration, resume position, volume. */
     fun libraryItems(): List<LibraryItem> {
-        val l = listing()
+        val l = listing(tolerant = true)
         val lib = library
         val ps = player.state()
         val resolvers = HashMap<String, ((String) -> java.io.File)?>()      // un résolveur par volume : le dossier n'est lu qu'une fois par liste, pas une fois par fichier
@@ -1741,6 +1770,9 @@ class ReceiverServer(
         }
         return LibraryLogic.sortNewestFirst(files, { it.mtime }, { it.name })
     }
+
+    /** Les noms des fichiers finis d'une liste à jour (attend une lecture faite après la dernière invalidation) : pour les tests de [listing]. */
+    internal fun fileStillThereNames(): List<String> = listing().entries.filter { it.complete }.map { it.name }
 
     /** Où est rangé le fichier fini [name] (volume, dossier virtuel), d'après la liste en cache : gardé avec la position de lecture pour le prochain démarrage. */
     fun placeOf(name: String): LibraryDb.Place? = listing().entries.firstOrNull { it.complete && it.name == name }
@@ -1796,7 +1828,7 @@ class ReceiverServer(
     }
 
     private fun info(): String {
-        val l = listing()
+        val l = listing(tolerant = true)
         val ps = player.state()
         val pv = primary()
         val free = pv?.let { volumes.free(it) } ?: 0
@@ -1954,7 +1986,7 @@ class ReceiverServer(
     // ---- storage API ----
 
     private fun storageJson(): String {
-        val l = listing()
+        val l = listing(tolerant = true)
         val pv = primary()
         val used = pv?.let { l.used[it.id] } ?: 0
         val warnings = volumes.snapshot().flatMap { v -> warningsOf(v, 0).filter { v.kind != VolumeKind.INTERNAL }.map { "${v.label} : $it" } }
