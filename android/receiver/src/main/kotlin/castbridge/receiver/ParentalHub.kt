@@ -269,6 +269,9 @@ object ParentalHub {
 
     // ------------------------------------------------------------------ home
 
+    /** Un profil enfant est actif : la suppression en masse est refusée (comme par le serveur, 403). */
+    fun childActive(): Boolean = engineOrNull?.activeProfile() != null
+
     fun kidHomeActive(): Boolean = engineOrNull?.activeProfile()?.kidMode == true
 
     /** Home tiles: in kid mode only Apprendre, allowed games, the library, help and the parental door. */

@@ -1538,6 +1538,7 @@ class PlayerActivity : Activity(), TvService.Screen {
                 when {
                     home?.takeIf { it.visible && settingsPanel?.visible != true && libScreen?.visible != true }?.closeGrid() == true -> Unit   // RETOUR ferme la grille d'un groupe, le focus revient sur son bouton
                     settingsPanel?.visible == true -> { settingsPanel?.hide(); settingsOpen = false; if (libScreen?.visible != true) showHome() else refreshStatusBar() }   // the bar comes back (R-53)
+                    libScreen?.takeIf { it.visible }?.onBack() == true -> Unit                 // RETOUR quitte la sélection de la suppression en masse (ou ne fait rien pendant la suppression)
                     libScreen?.visible == true -> showHome()
                     else -> moveTaskToBack(true)              // leave the home: the service keeps running
                 }

@@ -60,6 +60,7 @@ Les noms de fichiers sont sans `/`, `\`, ni `.part` final, 200 caractères max. 
 | `POST /api/pause` `POST /api/resume` `POST /api/stop` | contrôle | comme `info` |
 | `POST /api/seek?pos=ms` | saut | comme `info` |
 | `POST /api/delete?name=` | supprime fichier et `.part` | comme `info` |
+| `POST /api/delete/batch` (corps `{"files":[{"name","volume"}]}`) puis `GET /api/delete/batch?job=` | suppression définitive en masse, en arrière-plan (un lot à la fois : 409 ; 403 si profil enfant actif) ; `{"done","total","freed","skipped":[{"name","reason"}],"finished"}` | comme `info` |
 | `POST /api/rename?name=&to=` | renomme (409 si la cible existe) | comme `info` |
 | `GET /api/library` | bibliothèque : fichiers finis, plus récents d'abord, avec métadonnées | `{"files":[{"name","title","size","mtime","volume","volumeLabel","kind","type":"video\|audio\|other","durationMs","resumeMs","watched","playedAt","hasThumb","duplicate","playing"}],"count"}` |
 | `GET /api/thumb?name=[&volume=]` | miniature JPEG (~320 px) ; la première demande lance sa fabrication | `200` image, `202` pas encore prête (redemander plus tard), `404` impossible (pas une vidéo, fichier illisible) |

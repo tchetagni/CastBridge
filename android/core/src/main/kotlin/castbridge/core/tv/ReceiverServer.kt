@@ -533,6 +533,74 @@ class ReceiverServer(
         }
     }
 
+    /**
+     * Efface [name] (fichier fini et copie partielle) de tous les volumes, ou du seul volume [only] : les étapes de `POST /api/delete`, partagées avec la suppression
+     * en masse. Sous le verrou du nom. Rend les octets libérés (taille des fichiers finis) ; n'invalide PAS la liste (l'appelant le fait, une fois pour un lot).
+     */
+    private fun deleteStored(name: String, only: String?): Long {
+        var freed = 0L
+        synchronized(FileLocks.of(LOCK_ROOT, name)) {
+            volumes.volumes().filter { only == null || it.id == only }.forEach { v ->
+                val st = volumes.store(v); val n = v.storedName(name)
+                st.finalSize(n)?.let { sz -> freed += sz; library?.deleted(n, sz); folders?.deleted(n) }
+                st.deleteFinal(n); st.deletePart(n)
+                (st as? FileStore)?.let { Meta.delete(it.dir, n); Storage.forget(it.dir, n) }
+                volumes.forgetPart(v, n)
+            }
+            if (only == null) volumes.forgetMissing(name)
+            meters.remove(name)
+        }
+        return freed
+    }
+
+    /** Suppression en masse (docs/LIBRARY-AGENT.md) : le travail en cours ou le dernier terminé ; un seul à la fois. */
+    @Volatile private var bulkJob: BulkDelete.Job? = null
+    private val bulkSeq = java.util.concurrent.atomic.AtomicInteger()
+
+    /**
+     * Lance la suppression DÉFINITIVE de [targets] en arrière-plan (une clé exFAT lente met du temps) ; null si un lot tourne déjà. Chaque fichier suit les règles de
+     * `POST /api/delete` : « moving » (déplacement en cours) est laissé en place, « absent » (aucune copie finie) aussi, le fichier en lecture est arrêté d'abord.
+     * La liste n'est invalidée qu'une fois, à la fin. La TV l'appelle par HTTP sur elle-même (comme `/api/delete`), le téléphone de même.
+     */
+    fun deleteBatch(targets: List<BulkDelete.Target>): BulkDelete.Job? {
+        val job: BulkDelete.Job
+        synchronized(this) {
+            if (bulkJob?.finished == false) return null
+            job = BulkDelete.Job("b${System.currentTimeMillis().toString(36)}${bulkSeq.incrementAndGet()}", targets.size)
+            bulkJob = job
+        }
+        Thread({
+            BulkDelete.run(job, targets, { t ->
+                val only = t.volume.takeIf { it.isNotEmpty() }
+                when {
+                    moving(t.name) -> BulkDelete.Outcome.Skipped("moving")
+                    volumes.volumes().none { v -> (only == null || v.id == only) && volumes.store(v).finalSize(v.storedName(t.name)) != null } -> BulkDelete.Outcome.Skipped("absent")
+                    else -> {
+                        if (isPlaying(t.name)) player.stop()
+                        BulkDelete.Outcome.Deleted(deleteStored(t.name, only))
+                    }
+                }
+            }, atEnd = { invalidate() })
+        }, "cb-bulk-delete").apply { isDaemon = true }.start()
+        return job
+    }
+
+    private fun bulkDelete(s: IHTTPSession, p: Map<String, String>): Response {
+        if (s.method == Method.GET) {
+            val j = bulkJob?.takeIf { it.id == p["job"] } ?: return json(Response.Status.NOT_FOUND, """{"error":"unknown job"}""")
+            return ok(j.json())
+        }
+        if (s.method != Method.POST) return json(Response.Status.METHOD_NOT_ALLOWED, """{"error":"use GET or POST"}""")
+        val body = extBody(s) ?: return json(Response.Status.BAD_REQUEST, """{"error":"body missing or too large"}""").also { it.addHeader("Connection", "close") }
+        // un profil enfant actif : pas de suppression en masse (même règle que le rangement de la bibliothèque) ; l'enfant n'efface pas d'un geste ce que le parent a classé
+        if (contentFlags?.childActive() == true) return json(Response.Status.FORBIDDEN, """{"error":"child active","message":"Un profil enfant est actif : la suppression en masse est refusée."}""")
+        val targets = BulkDelete.parseTargets(body.decodeToString())?.distinct() ?: return bad("files required")
+        if (targets.isEmpty() || targets.size > BULK_MAX) return bad("1 to $BULK_MAX files")
+        if (targets.any { safeName(it.name) != it.name }) return bad("bad name")
+        val job = deleteBatch(targets) ?: return json(Response.Status.CONFLICT, """{"error":"busy","job":${q(bulkJob?.id.orEmpty())}}""")
+        return ok("""{"job":${q(job.id)},"count":${targets.size}}""")
+    }
+
     private fun isPlaying(name: String): Boolean {
         val ps = player.state()
         val n = ps.name ?: return false
@@ -834,6 +902,7 @@ class ReceiverServer(
             path == "/api/library" && s.method == Method.GET -> ok(libraryJson())
             path == "/api/library/organize" -> if (s.method == Method.GET) ok(organizeJson(organizePlan(), null)) else json(Response.Status.METHOD_NOT_ALLOWED, """{"error":"use GET"}""")
             path == "/api/library/organize/apply" -> if (s.method == Method.POST) organizeApply(p["max"]?.toIntOrNull()) else json(Response.Status.METHOD_NOT_ALLOWED, """{"error":"use POST"}""")
+            path == "/api/delete/batch" -> bulkDelete(s, p)
             path == "/api/player/tracks" && s.method == Method.GET -> ok(tracksJson())
             path == "/api/thumb" && s.method == Method.GET -> named(p) { thumb(it, p["volume"]) }
             ext != null && ext.bytes != null -> newFixedLengthResponse(status(ext.status), ext.mime, java.io.ByteArrayInputStream(ext.bytes), ext.bytes.size.toLong())
@@ -928,17 +997,8 @@ class ReceiverServer(
                 if (moving(name)) return@named json(Response.Status.CONFLICT, """{"error":"moving"}""")
                 val only = p["volume"]?.takeIf { it.isNotEmpty() }
                 if (isPlaying(name)) player.stop()
-                synchronized(FileLocks.of(LOCK_ROOT, name)) {
-                    volumes.volumes().filter { only == null || it.id == only }.forEach { v ->
-                        val st = volumes.store(v); val n = v.storedName(name)
-                        st.finalSize(n)?.let { sz -> library?.deleted(n, sz); folders?.deleted(n) }
-                        st.deleteFinal(n); st.deletePart(n)
-                        (st as? FileStore)?.let { Meta.delete(it.dir, n); Storage.forget(it.dir, n) }
-                        volumes.forgetPart(v, n)
-                    }
-                    if (only == null) volumes.forgetMissing(name)
-                    meters.remove(name); invalidate()
-                }
+                deleteStored(name, only)
+                invalidate()
                 ok(info())
             }
             path == "/api/play" -> named(p) { name ->
@@ -2255,6 +2315,8 @@ class ReceiverServer(
         const val PENDING_FILE = ".cbfiling-pending"
         const val VERSION = "0.7"
         const val MAX_EXT_BODY = 4 shl 20
+        /** Fichiers au plus dans un lot de `POST /api/delete/batch`. */
+        const val BULK_MAX = 5000
         /**
          * POST routes of an extension that wants a body ([ApiExtension.wantsBody]) but works WITHOUT one (« corps facultatif ») : a POST that announces no body at all is an ordinary call,
          * not a 413. Today only `POST /api/tv/open` (« Ouvrir CastBridge-TV », body `{"screen":"library"}` optional). A constant here, not a new method of the interface: adding a default method to

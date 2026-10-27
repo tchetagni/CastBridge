@@ -9,6 +9,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -30,6 +31,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import castbridge.core.tv.BulkDelete
 import castbridge.core.tv.LibraryEntry
 import castbridge.core.tv.LibraryLogic
 import castbridge.core.tv.LibrarySections
@@ -51,6 +53,10 @@ data class TvLibItem(
 ) : LibraryEntry {
     override val type: MediaType get() = MediaType.of(name)
 }
+
+/** Le fichier tel que la suppression en masse le voit (logique pure dans :core, castbridge.core.tv.BulkDelete). */
+fun TvLibItem.bulk() = BulkDelete.Entry(name, volume, size, mtime, folder, watched, playedAtMs, playing)
+private fun TvLibItem.key() = BulkDelete.key(volume, name)
 
 object TvLibraryParser {
     fun parse(json: String): List<TvLibItem> {
@@ -105,6 +111,16 @@ fun TvLibraryDialog(client: TvClient, onDismiss: () -> Unit, onDownload: ((TvLib
     var reload by remember { mutableIntStateOf(0) }
     var showAssistant by remember { mutableStateOf(false) }       // « Ranger ma bibliothèque » (castbridge.sender.agent)
     var showOrganize by remember { mutableStateOf(false) }        // rangement réel dans des dossiers, fait par CastBridge-TV (docs/STORAGE.md)
+    // ---- suppression en masse (décision du 2026-10-27) : cocher, UNE confirmation, suppression définitive faite par la TV
+    var selecting by remember { mutableStateOf(false) }
+    var bySize by remember { mutableStateOf(false) }
+    var selected by remember { mutableStateOf(emptySet<String>()) }
+    var bulkMenu by remember { mutableStateOf(false) }
+    var folderPick by remember { mutableStateOf(false) }
+    var monthsPick by remember { mutableStateOf(false) }
+    var confirmBulk by remember { mutableStateOf(false) }
+    var bulkProgress by remember { mutableStateOf<String?>(null) }
+    var bulkResult by remember { mutableStateOf<String?>(null) }
     val scope = rememberCoroutineScope()
 
     LaunchedEffect(client, reload) {
@@ -121,15 +137,79 @@ fun TvLibraryDialog(client: TvClient, onDismiss: () -> Unit, onDownload: ((TvLib
         if (e != null) msg = e.let { "$label : " + ((it as? TvClient.HttpError)?.message?.substringAfter(": ")?.let { b -> TvClient.str(b, "message") ?: TvClient.str(b, "error") } ?: it.message) }
         reload++
     }
+    fun leaveSelection() { selecting = false; bySize = false; selected = emptySet() }
+    fun startSelection(pre: Set<String>, sizeOrder: Boolean = false) {
+        if (pre.isEmpty() && !sizeOrder) { msg = "Aucun fichier ne correspond."; return }
+        selecting = true; bySize = sizeOrder; selected = pre
+    }
+    fun toggle(i: TvLibItem) { selected = if (i.key() in selected) selected - i.key() else selected + i.key() }
+    fun bulkWhy(e: Throwable): String {
+        val body = (e as? TvClient.HttpError)?.message?.substringAfter(": ")
+        return when {
+            (e as? TvClient.HttpError)?.code == 409 -> "Une suppression est déjà en cours sur la TV."
+            body != null -> TvClient.str(body, "message") ?: TvClient.str(body, "error") ?: e.message ?: "erreur"
+            else -> e.message ?: "erreur"
+        }
+    }
+    /** Le lot part sur la TV (`POST /api/delete/batch`) et la progression est lue ; une TV plus ancienne (404) : fichier par fichier avec `/api/delete`, même affichage. */
+    fun runBulk(chosen: List<TvLibItem>) = scope.launch {
+        val total = chosen.size
+        bulkProgress = BulkDelete.progressText(0, total)
+        val text = withContext(Dispatchers.IO) {
+            runCatching {
+                val job = try { JSONObject(client.deleteBatch(chosen.map { BulkDelete.Target(it.name, it.volume) })).getString("job") }
+                    catch (e: TvClient.HttpError) { if (e.code == 404) null else throw e }
+                if (job != null) {
+                    var out: String? = null
+                    while (out == null) {
+                        val st = JSONObject(client.deleteBatchStatus(job))
+                        val done = st.optInt("done")
+                        bulkProgress = BulkDelete.progressText(done, total)
+                        if (st.optBoolean("finished")) {
+                            val a = st.optJSONArray("skipped")
+                            val sk = (0 until (a?.length() ?: 0)).map { k -> a!!.getJSONObject(k).let { BulkDelete.Skip(it.optString("name"), it.optString("reason")) } }
+                            out = BulkDelete.resultText(done - sk.size, st.optLong("freed"), sk)
+                        } else Thread.sleep(400)
+                    }
+                    out
+                } else {
+                    var freed = 0L; var deleted = 0; val sk = ArrayList<BulkDelete.Skip>()
+                    chosen.forEachIndexed { k, i ->
+                        try { client.delete(i.name, i.volume); freed += i.size; deleted++ }
+                        catch (e: TvClient.HttpError) { sk += BulkDelete.Skip(i.name, when (e.code) { 409 -> "moving"; 404 -> "absent"; else -> "error" }) }
+                        bulkProgress = BulkDelete.progressText(k + 1, total)
+                    }
+                    BulkDelete.resultText(deleted, freed, sk)
+                }
+            }.getOrElse { "Suppression impossible : ${bulkWhy(it)}" }
+        }
+        bulkProgress = null; bulkResult = text
+        leaveSelection(); reload++
+    }
     fun play(i: TvLibItem, pos: Long) = act("Lecture") { play(i.name, pos) }.also { msg = "Lecture de « ${i.title} » sur la TV" }
 
-    Dialog(onDismissRequest = onDismiss, properties = DialogProperties(usePlatformDefaultWidth = false)) {
+    Dialog(onDismissRequest = { if (bulkProgress != null) Unit else if (selecting) leaveSelection() else onDismiss() }, properties = DialogProperties(usePlatformDefaultWidth = false)) {
         Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
             Column {
+                if (selecting) {
+                    val all = items.orEmpty().map { it.bulk() }
+                    TopAppBar(title = { Text(BulkDelete.headline(BulkDelete.count(all, selected), BulkDelete.totalSize(all, selected)), maxLines = 1, overflow = TextOverflow.Ellipsis) },
+                        navigationIcon = { IconButton({ leaveSelection() }) { Icon(Icons.Filled.Close, "Annuler la sélection") } },
+                        actions = {
+                            val everything = all.isNotEmpty() && selected.size >= all.size
+                            IconButton({ selected = if (everything) emptySet() else all.map { it.key }.toSet() }) {
+                                Icon(if (everything) Icons.Filled.Deselect else Icons.Filled.SelectAll, if (everything) "Tout désélectionner" else "Tout sélectionner")
+                            }
+                            IconButton({ if (selected.isEmpty()) msg = "Rien n'est sélectionné." else confirmBulk = true }) {
+                                Icon(Icons.Filled.Delete, "Supprimer définitivement", tint = MaterialTheme.colorScheme.error)
+                            }
+                        },
+                        colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.surface))
+                } else
                 TopAppBar(title = { Text("Bibliothèque de la TV", maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) },
                     navigationIcon = { IconButton(onDismiss) { Icon(Icons.Filled.ArrowBack, "Retour") } },
                     actions = {
-                        // R-23: 2 visible actions at most (AppBarBudget); the two « ranger » actions go in the « ⋮ » menu
+                        // R-23: 2 visible actions at most (AppBarBudget); the « ranger » actions and « Supprimer en masse » go in the « ⋮ » menu
                         var more by remember { mutableStateOf(false) }
                         IconButton({ reload++ }) { Icon(Icons.Filled.Refresh, castbridge.core.ux.UxLabels.REFRESH) }
                         Box {
@@ -137,6 +217,7 @@ fun TvLibraryDialog(client: TvClient, onDismiss: () -> Unit, onDownload: ((TvLib
                             DropdownMenu(more, { more = false }) {
                                 DropdownMenuItem(text = { Text(castbridge.core.ux.UxLabels.ASSISTANT) }, leadingIcon = { Icon(Icons.Filled.AutoAwesome, null) }, onClick = { more = false; showAssistant = true })
                                 DropdownMenuItem(text = { Text(castbridge.core.ux.UxLabels.ORGANIZE) }, leadingIcon = { Icon(Icons.Filled.CreateNewFolder, null) }, onClick = { more = false; showOrganize = true })
+                                DropdownMenuItem(text = { Text("Supprimer en masse") }, leadingIcon = { Icon(Icons.Filled.DeleteSweep, null) }, onClick = { more = false; bulkMenu = true })
                             }
                         }
                     },
@@ -146,15 +227,19 @@ fun TvLibraryDialog(client: TvClient, onDismiss: () -> Unit, onDownload: ((TvLib
                 error?.let { Text("TV injoignable : $it", Modifier.padding(16.dp), color = MaterialTheme.colorScheme.error) }
                 val list = items
                 if (list == null) { LinearProgressIndicator(Modifier.fillMaxWidth()); return@Column }
-                val sections = LibrarySections.build(list)
+                val sections = if (selecting && bySize) {
+                    val sorted = list.sortedWith(compareBy<TvLibItem>({ -it.size }, { it.name.lowercase() }))
+                    listOf(LibrarySections.Section("size", "Les plus gros d'abord", sorted))
+                } else LibrarySections.build(list)
                 if (sections.isEmpty()) Text("Aucun fichier sur la TV.", Modifier.padding(16.dp), color = MaterialTheme.colorScheme.onSurfaceVariant)
                 LazyVerticalGrid(GridCells.Adaptive(156.dp), Modifier.fillMaxSize(), contentPadding = PaddingValues(8.dp)) {
                     sections.forEach { s ->
                         item(span = { GridItemSpan(maxLineSpan) }, key = "h:${s.id}") { SectionHeader("${s.title} · ${s.items.size}") }
                         items(s.items, key = { "${s.id}:${it.volume}:${it.name}" }) { i ->
                             LibCard(client, i, Modifier.combinedClickable(
-                                onClick = { if (i.type == MediaType.OTHER) menuFor = i else if (i.resumeMs > 0 && !i.watched) resumeFor = i else play(i, 0) },
-                                onLongClick = { menuFor = i }))
+                                onClick = { if (selecting) toggle(i) else if (i.type == MediaType.OTHER) menuFor = i else if (i.resumeMs > 0 && !i.watched) resumeFor = i else play(i, 0) },
+                                // appui long : le menu du fichier, qui offre « Sélectionner plusieurs » (sélection ouverte : coche / décoche)
+                                onLongClick = { if (selecting) toggle(i) else menuFor = i }), if (selecting) i.key() in selected else null)
                         }
                     }
                 }
@@ -187,6 +272,7 @@ fun TvLibraryDialog(client: TvClient, onDismiss: () -> Unit, onDownload: ((TvLib
                     volumes.filter { it.present && it.writable && it.id != i.volume }.forEach { v ->
                         row(cbv(R.drawable.ic_cb_deplacer_vers_tv), "Déplacer vers ${v.label}") { act("Déplacement") { moveFile(i.name, v.id) }.also { msg = "Déplacement vers ${v.label} lancé" } }
                     }
+                    row(Icons.Filled.Checklist, "Sélectionner plusieurs") { startSelection(setOf(i.key())) }
                     row(Icons.Filled.Edit, "Renommer") { renameFor = i }
                     row(Icons.Filled.Delete, "Supprimer") { deleteFor = i }
                 }
@@ -199,6 +285,61 @@ fun TvLibraryDialog(client: TvClient, onDismiss: () -> Unit, onDownload: ((TvLib
                 confirmButton = { TextButton({ renameFor = null; if (to.isNotBlank() && to != i.name) act("Renommage") { rename(i.name, to.trim()) } }) { Text("Renommer") } },
                 dismissButton = { TextButton({ renameFor = null }) { Text("Annuler") } })
         }
+        if (bulkMenu) AlertDialog(onDismissRequest = { bulkMenu = false }, title = { Text("Supprimer en masse") },
+            text = {
+                Column {
+                    val e = items.orEmpty().map { it.bulk() }
+                    @Composable fun entry(text: String, f: () -> Unit) = TextButton({ bulkMenu = false; f() }, Modifier.fillMaxWidth()) { Text(text, Modifier.fillMaxWidth()) }
+                    Text("Ces choix cochent des fichiers ; vous pouvez en décocher avant de confirmer.", style = MaterialTheme.typography.bodySmall)
+                    entry("Un dossier…") { folderPick = true }
+                    entry("Vidéos déjà vues") { startSelection(BulkDelete.watched(e)) }
+                    entry("Non lues depuis…") { monthsPick = true }
+                    entry("Les plus gros d'abord") { startSelection(emptySet(), sizeOrder = true) }
+                }
+            },
+            confirmButton = {}, dismissButton = { TextButton({ bulkMenu = false }) { Text("Fermer") } })
+        if (folderPick) {
+            val fs = BulkDelete.folders(items.orEmpty().map { it.bulk() })
+            AlertDialog(onDismissRequest = { folderPick = false }, title = { Text("Quel dossier ?") },
+                text = {
+                    if (fs.isEmpty()) Text("Aucun dossier dans la bibliothèque.")
+                    else Column(Modifier.heightIn(max = 360.dp).verticalScroll(androidx.compose.foundation.rememberScrollState())) {
+                        for (f in fs) {
+                            ListItem(headlineContent = { Text(f.folder) }, supportingContent = { Text("${BulkDelete.files(f.count)} · ${BulkDelete.size(f.bytes)}") },
+                                modifier = Modifier.combinedClickable(onClick = { folderPick = false; startSelection(BulkDelete.inFolder(items.orEmpty().map { it.bulk() }, f.folder)) }))
+                        }
+                    }
+                },
+                confirmButton = {}, dismissButton = { TextButton({ folderPick = false }) { Text("Annuler") } })
+        }
+        if (monthsPick) AlertDialog(onDismissRequest = { monthsPick = false }, title = { Text("Non lues depuis…") },
+            text = {
+                Column {
+                    for (m in listOf(1, 3, 6, 12)) TextButton({
+                        monthsPick = false
+                        startSelection(BulkDelete.notPlayedSince(items.orEmpty().map { it.bulk() }, BulkDelete.monthsToDays(m), System.currentTimeMillis()))
+                    }, Modifier.fillMaxWidth()) { Text(if (m == 12) "12 mois (1 an)" else "$m mois", Modifier.fillMaxWidth()) }
+                }
+            },
+            confirmButton = {}, dismissButton = { TextButton({ monthsPick = false }) { Text("Annuler") } })
+        if (confirmBulk) {
+            val all = items.orEmpty().map { it.bulk() }
+            val chosen = items.orEmpty().filter { it.key() in selected }
+            AlertDialog(onDismissRequest = { confirmBulk = false }, title = { Text("Suppression définitive") },
+                text = { Text(BulkDelete.confirmText(BulkDelete.count(all, selected), BulkDelete.totalSize(all, selected))) },
+                // le choix sûr est à gauche, en premier : « Annuler » ; le geste destructeur est en rouge
+                dismissButton = { TextButton({ confirmBulk = false }) { Text("Annuler") } },
+                confirmButton = { TextButton({ confirmBulk = false; runBulk(chosen) }) { Text("Supprimer définitivement", color = MaterialTheme.colorScheme.error) } })
+        }
+        bulkProgress?.let { p ->
+            AlertDialog(onDismissRequest = {}, title = { Text("Suppression définitive") },
+                text = { Column(verticalArrangement = Arrangement.spacedBy(8.dp)) { Text(p); LinearProgressIndicator(Modifier.fillMaxWidth()) } },
+                confirmButton = {}, properties = DialogProperties(dismissOnBackPress = false, dismissOnClickOutside = false))
+        }
+        bulkResult?.let { r ->
+            AlertDialog(onDismissRequest = { bulkResult = null }, title = { Text("Suppression") }, text = { Text(r) },
+                confirmButton = { TextButton({ bulkResult = null }) { Text("OK") } })
+        }
         deleteFor?.let { i ->
             AlertDialog(onDismissRequest = { deleteFor = null }, title = { Text("Supprimer « ${i.title} » ?") },
                 text = { Text("${i.name} (${formatSize(i.size)}, ${i.volumeLabel}) sera effacé de la TV.") },
@@ -209,7 +350,7 @@ fun TvLibraryDialog(client: TvClient, onDismiss: () -> Unit, onDownload: ((TvLib
 }
 
 @Composable
-private fun LibCard(client: TvClient, i: TvLibItem, modifier: Modifier) {
+private fun LibCard(client: TvClient, i: TvLibItem, modifier: Modifier, check: Boolean? = null) {
     val k = TvThumbs.key(client.base, i)
     var img by remember(k) { mutableStateOf(TvThumbs.cached(k)) }
     LaunchedEffect(k, i.hasThumb) { if (img == null && i.type != MediaType.OTHER) img = TvThumbs.load(client, i) }
@@ -225,6 +366,9 @@ private fun LibCard(client: TvClient, i: TvLibItem, modifier: Modifier) {
             if (i.durationMs > 0) Badge(LibraryLogic.clock(i.durationMs), Color.Black.copy(alpha = 0.7f), Modifier.align(Alignment.BottomEnd).padding(bottom = 4.dp))
             val p = if (i.resumeMs > 0 && !i.watched) LibraryLogic.progress(i.resumeMs, i.durationMs) else 0f
             if (p > 0f) LinearProgressIndicator({ p }, Modifier.fillMaxWidth().height(4.dp).align(Alignment.BottomCenter))
+            if (check != null) Icon(if (check) Icons.Filled.CheckCircle else Icons.Filled.RadioButtonUnchecked, if (check) "Sélectionné" else "Non sélectionné",
+                Modifier.align(Alignment.BottomStart).padding(6.dp).size(28.dp).background(Color.Black.copy(alpha = 0.35f), RoundedCornerShape(14.dp)),
+                tint = if (check) cs.primary else Color.White)
         }
         Text(i.title, Modifier.padding(horizontal = 8.dp, vertical = 4.dp), maxLines = 2, overflow = TextOverflow.Ellipsis,
             style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium)

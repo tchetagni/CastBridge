@@ -29,6 +29,18 @@ class TvClient(val base: String, val pin: String? = null) {
     fun stop() = call("POST", "/api/stop")
     fun seek(posMs: Long) = call("POST", "/api/seek?pos=$posMs")
     fun delete(name: String, volume: String? = null) = call("POST", "/api/delete?name=${enc(name)}" + (volume?.let { "&volume=${enc(it)}" } ?: ""))
+    /** Suppression DÉFINITIVE en masse (`POST /api/delete/batch`) : rend l'identifiant du travail. 404 sur une TV qui n'a pas la route (l'appelant retombe sur [delete] fichier par fichier), 403 si un profil enfant est actif, 409 si un lot tourne déjà. */
+    fun deleteBatch(files: List<BulkDelete.Target>): String = postJson("/api/delete/batch", BulkDelete.bodyOf(files))
+    /** État du lot : `{"done","total","freed","skipped":[{"name","reason"}],"finished"}`. */
+    fun deleteBatchStatus(job: String): String = call("GET", "/api/delete/batch?job=${enc(job)}")
+
+    private fun postJson(path: String, body: String): String {
+        val c = open("POST", path)
+        val b = body.toByteArray(Charsets.UTF_8)
+        c.doOutput = true; c.setFixedLengthStreamingMode(b.size); c.setRequestProperty("Content-Type", "application/json; charset=utf-8")
+        c.outputStream.use { it.write(b) }
+        return read(c)
+    }
     fun sysinfo(): String = call("GET", "/api/sysinfo")
     /** Stored videos with thumbnail availability, duration, resume position and volume. */
     fun library(): String = call("GET", "/api/library")

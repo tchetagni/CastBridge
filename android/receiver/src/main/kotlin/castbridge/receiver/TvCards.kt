@@ -170,6 +170,11 @@ class MediaCard(ctx: Context, private val widthPx: Int = ViewGroup.LayoutParams.
     private val volume = badge(0xCC1B2542.toInt())
     private val watched = badge(0xE61E6B48.toInt()).apply { text = "VU" }
     private val duration = badge(0xCC000000.toInt())
+    /** Mode « Sélectionner plusieurs » : une case en bas à gauche de la vignette (cochée / à cocher). Cachée hors de ce mode. */
+    private val check = TextView(ctx).apply {
+        textSize = 26f; typeface = TvFonts.bold; gravity = Gravity.CENTER; visibility = View.GONE
+        val s = TvStyle.dp(ctx, 38); minimumWidth = s; minimumHeight = s
+    }
     private val progress = ProgressBar(ctx, null, android.R.attr.progressBarStyleHorizontal).apply {
         max = 1000; progressTintList = android.content.res.ColorStateList.valueOf(TvStyle.ACCENT)
     }
@@ -198,6 +203,7 @@ class MediaCard(ctx: Context, private val widthPx: Int = ViewGroup.LayoutParams.
         pic.addView(watched, FrameLayout.LayoutParams(-2, -2, Gravity.TOP or Gravity.END).apply { setMargins(0, b, b, 0) })
         pic.addView(duration, FrameLayout.LayoutParams(-2, -2, Gravity.BOTTOM or Gravity.END).apply { setMargins(0, 0, b, b + 4) })
         pic.addView(progress, FrameLayout.LayoutParams(-1, TvStyle.dp(ctx, 5), Gravity.BOTTOM))
+        pic.addView(check, FrameLayout.LayoutParams(-2, -2, Gravity.BOTTOM or Gravity.START).apply { setMargins(b, 0, 0, b + 4) })
         addView(pic, LayoutParams(-1, -2))
         addView(title, LayoutParams(-1, -2))
         addView(sub, LayoutParams(-1, -2))
@@ -222,6 +228,15 @@ class MediaCard(ctx: Context, private val widthPx: Int = ViewGroup.LayoutParams.
         val bmp = thumbs.cached(i)
         image.setImageBitmap(bmp); placeholder.visibility = if (bmp == null) View.VISIBLE else View.GONE
         if (bmp == null) thumbs.load(i) { b -> if (item == i) { image.setImageBitmap(b); placeholder.visibility = View.GONE; if (ResourceProfiles.peek().homeAnimations) { image.alpha = 0f; image.animate().alpha(1f).setDuration(200).start() } else image.alpha = 1f } }
+    }
+
+    /** null = pas de sélection en cours (case cachée) ; true / false = case cochée / vide. */
+    fun setSelection(on: Boolean?) {
+        if (on == null) { check.visibility = View.GONE; return }
+        check.visibility = View.VISIBLE
+        check.text = if (on) "✓" else ""
+        check.setTextColor(TvStyle.ON_ACCENT)
+        check.background = if (on) TvStyle.rounded(context, TvStyle.ACCENT, TvStyle.R_SM, Color.WHITE, 2) else TvStyle.rounded(context, 0x66000000, TvStyle.R_SM, Color.WHITE, 2)
     }
 
     private fun badge(color: Int) = TextView(context).apply {
