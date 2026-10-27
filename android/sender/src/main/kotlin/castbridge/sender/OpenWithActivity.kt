@@ -42,6 +42,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.lifecycleScope
+import castbridge.core.phone.CastAction
 import castbridge.core.phone.MediaKind
 import castbridge.core.trust.CopyAndPlay
 import castbridge.core.trust.PinCheck
@@ -148,10 +149,12 @@ class OpenWithActivity : ComponentActivity() {
                                 })
                             else if (choice.action != SendAction.NONE)
                                 Button({ openApp(choice.action) }, Modifier.fillMaxWidth()) { Text(choice.action.label) }
-                            // the three ways, most wanted first, each with its one-line explanation (castbridge.core.ux.SendWay: same words everywhere)
-                            Button({ copyAndPlay(uri, name, size, both, session, pinTv, pins) }, Modifier.fillMaxWidth(), enabled = both !is CopyAndPlay.Decision.Disabled) { Text(both.label) }
-                            // the reason it is limited, else what it does: the TV starts as soon as it has enough lead, this phone becomes its remote (R-08)
-                            Text(both.reason ?: castbridge.core.phone.CopyHandoff.BUTTON_HINT, style = MaterialTheme.typography.bodySmall)
+                            // Les deux façons de LIRE d'abord (la lecture précède la copie), puis ranger ; chacune avec sa ligne (castbridge.core.ux.SendWay).
+                            Button({ playDirect(uri, name, size, session, pinTv, pins) }, Modifier.fillMaxWidth(), enabled = both !is CopyAndPlay.Decision.Disabled) { Text("Lire en direct sur la TV") }
+                            Text(castbridge.core.ux.SendWay.LIVE.hint, style = MaterialTheme.typography.bodySmall)
+                            Button({ copyAndPlay(uri, name, size, both, session, pinTv, pins) }, Modifier.fillMaxWidth(), enabled = both !is CopyAndPlay.Decision.Disabled) { Text("Lire en copiant sur la TV") }
+                            // la lecture commence AVANT la fin du transfert (la TV lit dès qu'elle a assez d'avance, ce téléphone devient sa télécommande, R-08)
+                            Text(both.reason ?: "La lecture commence pendant la copie, avant la fin du transfert ; le fichier reste sur la TV et sur le téléphone.", style = MaterialTheme.typography.bodySmall)
                             OutlinedButton({ send(uri, name, move = false, choice, pinTv, pins) }, Modifier.fillMaxWidth(), enabled = choice.copyEnabled) { Text(castbridge.core.ux.SendWay.COPY.label) }
                             Text(castbridge.core.ux.SendWay.COPY.hint + " Suivez la copie dans la notification.", style = MaterialTheme.typography.bodySmall)
                             OutlinedButton({ send(uri, name, move = true, choice, pinTv, pins) }, Modifier.fillMaxWidth(), enabled = choice.moveEnabled) {
@@ -286,6 +289,26 @@ class OpenWithActivity : ComponentActivity() {
             val target = castTarget(session, pinTv, pins)
             val error: String? = if (target == null) "la TV n'est pas encore jointe en Wi-Fi" else runCatching {
                 CastSession.start(applicationContext, target, how.action, item)
+            }.exceptionOrNull()?.let { it.message ?: "erreur inattendue" }
+            if (error != null) {
+                Toast.makeText(this@OpenWithActivity, "Impossible de démarrer : $error", Toast.LENGTH_LONG).show()
+                return@launch
+            }
+            runCatching {
+                startActivity(Intent(this@OpenWithActivity, PlayerActivity::class.java).setAction(PlayerActivity.ACTION_REMOTE)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP))
+            }
+            finish()
+        }
+    }
+
+    /** « Lire en direct sur la TV » (CastAction.LIVE): stream from the phone, nothing kept on the TV; wakes CastBridge-TV like « Lire en copiant » (CastSession.live uses OpenTv.playOpeningTv). */
+    private fun playDirect(uri: Uri, name: String, size: Long, session: castbridge.core.trust.LinkSession?, pinTv: String?, pins: PinStore) {
+        lifecycleScope.launch {
+            val item = withContext(Dispatchers.IO) { Media.describe(this@OpenWithActivity, uri, intent.type) } ?: PlayItem(uri, name, intent.type, MediaKind.of(intent.type, name), size)
+            val target = castTarget(session, pinTv, pins)
+            val error: String? = if (target == null) "la TV n'est pas encore jointe en Wi-Fi" else runCatching {
+                CastSession.start(applicationContext, target, CastAction.LIVE, item)
             }.exceptionOrNull()?.let { it.message ?: "erreur inattendue" }
             if (error != null) {
                 Toast.makeText(this@OpenWithActivity, "Impossible de démarrer : $error", Toast.LENGTH_LONG).show()

@@ -131,7 +131,7 @@ object CastSession {
         val start = if (item.kind == MediaKind.IMAGE) 0 else Handoff.phoneToTv(phonePos, dur)
         when (target) {
             is CastTarget.Box -> try {
-                TvClient(target.tv.base, target.pin).playUrl(url, item.name, start)
+                castbridge.sender.OpenTv.playOpeningTv(ctx) { TvClient(target.tv.base, target.pin).playUrl(url, item.name, start) }
             } catch (e: TvClient.HttpError) {
                 throw CastFailure(when {
                     e.code == 404 -> "Cette TV CastBridge est trop ancienne pour la lecture en direct : mettez-la à jour (0.6.5), ou choisissez « Copier sur la TV et lire »."
