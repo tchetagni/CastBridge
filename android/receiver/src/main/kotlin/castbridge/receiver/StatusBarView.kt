@@ -131,16 +131,18 @@ class StatusBarView(private val act: Activity, private val box: LinearLayout, pr
         touched()
         when (code) {
             KeyEvent.KEYCODE_BACK -> { if (fold.expanded) rollUp() else leaveFocus(); true }
-            KeyEvent.KEYCODE_DPAD_DOWN -> { if (fold.expanded) chips[order.firstOrNull()]?.view?.requestFocus() else leaveFocus(); true }
-            KeyEvent.KEYCODE_DPAD_LEFT -> { if (!fold.expanded) leaveFocus(); true }
-            KeyEvent.KEYCODE_DPAD_UP, KeyEvent.KEYCODE_DPAD_RIGHT -> true
+            // DOWN collapsed: back on the ready chip, then what the home does from it (first row); unrolled: into the panel, never to the cards. LEFT: the ready chip. RIGHT unrolled: first chip.
+            KeyEvent.KEYCODE_DPAD_DOWN -> { if (fold.expanded) chips[order.firstOrNull()]?.view?.requestFocus() else { leaveFocus(); act.currentFocus?.let { c -> c.focusSearch(View.FOCUS_DOWN)?.takeIf { it !== c && !inBox(it) && it !== pill }?.requestFocus() } }; true }
+            KeyEvent.KEYCODE_DPAD_LEFT -> { leaveFocus(); true }
+            KeyEvent.KEYCODE_DPAD_RIGHT -> { if (fold.expanded) chips[order.firstOrNull()]?.view?.requestFocus(); true }
+            KeyEvent.KEYCODE_DPAD_UP -> true
             else -> false
         }
     }
 
     private fun inBox(v: View?): Boolean { var p: View? = v; while (p != null) { if (p === box) return true; p = p.parent as? View }; return false }
 
-    /** In the panel the D-pad moves among the chips only: a direction with no chip is eaten (the cards behind never take the focus); UP from the first row goes to the pill; BACK rolls up. */
+    /** In the panel the D-pad moves among the chips only: a direction with no chip is eaten (the cards behind never take the focus); UP from the first row, or LEFT from the first chip, goes back to the pill; BACK rolls up. */
     private fun keys() = View.OnKeyListener { v, code, e ->
         if (e.action != KeyEvent.ACTION_DOWN) return@OnKeyListener false
         touched()
@@ -151,7 +153,7 @@ class StatusBarView(private val act: Activity, private val box: LinearLayout, pr
             dir == 0 -> false
             else -> { val n = v.focusSearch(dir)
                 if (n != null && n !== v && inBox(n)) false
-                else { if (dir == View.FOCUS_UP) { pill.isFocusable = true; pill.requestFocus() }; true } }
+                else { if (dir == View.FOCUS_UP || (dir == View.FOCUS_LEFT && v === chips[order.firstOrNull()]?.view)) { pill.isFocusable = true; pill.requestFocus() }; true } }
         }
     }
 

@@ -1545,7 +1545,7 @@ class PlayerActivity : Activity(), TvService.Screen {
                 }
                 return true
             }
-            if (keyCode == KeyEvent.KEYCODE_DPAD_UP && home?.visible == true && currentFocus === home?.headerChip && statusBar?.focusFirst() == true) return true
+            if ((keyCode == KeyEvent.KEYCODE_DPAD_UP || keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) && home?.visible == true && currentFocus === home?.headerChip && statusBar?.focusFirst() == true) return true
             if (libScreen?.visible != true && keyCode in LIBRARY_KEYS) { showLibrary(); return true }
         }
         if (keyCode == KeyEvent.KEYCODE_MENU) { if (current != null && mp != null) panel.show() else showMenu(); return true }

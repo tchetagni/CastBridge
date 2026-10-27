@@ -108,7 +108,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
     private val grid = GridPanel(act, gridBox)
     private lateinit var contentBox: LinearLayout
     val visible get() = container.visibility == View.VISIBLE
-    /** The « ready · code » chip of the header: the status bar is reached with UP from it. */
+    /** The « ready · code » chip of the header: the status pill, just to its right, is reached with RIGHT (or UP) from it. */
     val headerChip: View get() = chip
 
     init {
