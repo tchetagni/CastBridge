@@ -12,7 +12,7 @@ Trois produits livrés ont chacun leur numéro : **CastBridge-TV** (`tv-<version
 - Téléphone 1.2.61-beta (91), branche `claude/cast-open-tv-direct` : (1) la lecture DIRECTE (`CastSession.live`, cible boîtier) réveille CastBridge-TV comme la copie, via `OpenTv.playOpeningTv` (409 needsForeground -> `POST /api/tv/open`, nouvel essai 5 s) ; (2) « Ouvrir avec » propose « Lire en direct sur la TV » puis « Lire en copiant sur la TV » EN PREMIER (la lecture précède la copie), puis copier / déplacer. Textes locaux à `OpenWithActivity` (aucun texte du noyau modifié).
 - CastBridge-TV 0.14.56-beta verrouillée (137 / 138) : binaire fonctionnellement inchangé (version seule), le lancement à distance existait déjà.
 
-Rien pour l'instant.
+- CastBridge-TV (à venir) : la bibliothèque lit le dossier de la clé USB une fois par liste, pas une fois par fichier (`FileStore.fileResolver`) ; accueil vide des minutes avec 172 fichiers sur une clé exFAT (propriétaire, 2026-10-27). Vérifié en JVM (`FileResolverTest`).
 
 ## CastBridge-TV
 

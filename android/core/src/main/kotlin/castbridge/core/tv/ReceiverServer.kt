@@ -257,12 +257,15 @@ class ReceiverServer(
      * Finished files of the real folders (not the system picker's), with the path the index keys them by; with [size], only the files of that size (from the
      * cached listing: a question never stats the whole library). Partial copies are never held files.
      */
-    private fun heldFiles(size: Long?): List<HeldFile> = listing().entries.filter { it.complete && (size == null || it.size == size) }.mapNotNull { e ->
+    private fun heldFiles(size: Long?): List<HeldFile> = listing().entries.filter { it.complete && (size == null || it.size == size) }.let { held ->
+      val resolvers = HashMap<String, (String) -> java.io.File>()      // un résolveur par volume : le dossier n'est lu qu'une fois par liste
+      held.mapNotNull { e ->
         val fs = volumes.store(e.v) as? FileStore ?: return@mapNotNull null
-        val f = fs.fileOf(e.name)
+        val f = resolvers.getOrPut(e.v.id) { fs.fileResolver() }(e.name)
         val rel = f.relativeToOrNull(fs.dir)?.invariantSeparatorsPath ?: return@mapNotNull null
         if (rel.startsWith("..")) return@mapNotNull null
         HeldFile(e.v.id, fs.dir, rel, e.name, e.folder, e.size)
+      }
     }
 
     /** The background hash runs only when nothing plays or buffers and nothing is being received or moved (R-06: « la lecture d'abord »). */
@@ -1712,8 +1715,9 @@ class ReceiverServer(
         val l = listing()
         val lib = library
         val ps = player.state()
+        val resolvers = HashMap<String, ((String) -> java.io.File)?>()      // un résolveur par volume : le dossier n'est lu qu'une fois par liste, pas une fois par fichier
         val files = l.entries.filter { it.complete }.map { e ->
-            val f = (volumes.store(e.v) as? FileStore)?.fileOf(e.name)
+            val f = resolvers.getOrPut(e.v.id) { (volumes.store(e.v) as? FileStore)?.fileResolver() }?.invoke(e.name)
             val m = lib?.meta(e.name, e.size, f) ?: FileMeta()
             LibraryItem(e.name, e.size, f?.lastModified() ?: 0L, e.v.id, e.v.label, e.v.kind, m, e.dup,
                 ps.state != "idle" && ps.name == e.name, folders?.folderOf(e.name).orEmpty().ifEmpty { e.folder })

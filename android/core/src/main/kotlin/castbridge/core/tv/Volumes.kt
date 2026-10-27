@@ -228,14 +228,27 @@ open class FileStore(override val volume: StorageVolume, private val free: () ->
     val dir: File get() = volume.dir
     override val progressive get() = true
 
-    /** The name as it exists on disk (FAT/exFAT/NTFS look names up case-insensitively). */
-    fun diskName(name: String): String {
-        if (!volume.fs.caseInsensitive || volume.kind == VolumeKind.INTERNAL) return name
-        val l = dir.list() ?: return name
-        l.firstOrNull { it.equals(name, ignoreCase = true) }?.let { return it }
-        l.firstOrNull { it.equals(name + Storage.PART, ignoreCase = true) }?.let { return it.dropLast(Storage.PART.length) }
-        return name
+    /** Contenu du dossier du volume (un seul appel système) ; point d'accroche des tests qui comptent les lectures. */
+    protected open fun listDisk(): Array<String>? = dir.list()
+
+    /**
+     * Résolveur de noms : lit le dossier UNE fois (volume insensible à la casse et non interne) puis répond sans toucher au disque pour la casse.
+     * Même règle que [diskName] : le nom exact (casse ignorée), sinon celui d'une copie partielle `.part`, sinon le nom tel quel.
+     */
+    private fun diskNames(): (String) -> String {
+        if (!volume.fs.caseInsensitive || volume.kind == VolumeKind.INTERNAL) return { it }
+        val l = listDisk() ?: return { it }
+        val whole = HashMap<String, String>(l.size * 2)
+        val partial = HashMap<String, String>()
+        for (n in l) {
+            whole.putIfAbsent(n.lowercase(), n)
+            if (n.endsWith(Storage.PART, ignoreCase = true)) partial.putIfAbsent(n.lowercase(), n.dropLast(Storage.PART.length))
+        }
+        return { name -> whole[name.lowercase()] ?: partial[(name + Storage.PART).lowercase()] ?: name }
     }
+
+    /** The name as it exists on disk (FAT/exFAT/NTFS look names up case-insensitively). */
+    fun diskName(name: String): String = diskNames()(name)
     /** Real sub-folders of the received files (docs/STORAGE.md, « Rangement à la réception »): which folder holds each file, and under which name the phone sent it. */
     val filing: FiledIndex by lazy { FiledIndex(dir) }
 
@@ -243,11 +256,18 @@ open class FileStore(override val volume: StorageVolume, private val free: () ->
      * The file called [name]: flat in the volume folder, or filed in a category folder (the name is the key, unique on the TV). A name that is not
      * there is the flat path (where a new file would go).
      */
-    fun fileOf(name: String): File {
-        val flat = File(dir, diskName(name))
-        if (flat.isFile) return flat
-        filing.locate(name)?.let { return File(dir, it) }
-        return flat
+    fun fileOf(name: String): File = fileResolver()(name)
+
+    /**
+     * Comme [fileOf] pour toute une liste : le dossier du volume n'est lu qu'UNE fois (sur une clé exFAT lente, un fichier = une lecture complète
+     * du dossier, des minutes pour 172 fichiers). À créer pour la durée d'un parcours : l'instantané ne suit pas les fichiers créés ensuite.
+     */
+    fun fileResolver(): (String) -> File {
+        val disk = diskNames()
+        return { name ->
+            val flat = File(dir, disk(name))
+            if (flat.isFile) flat else filing.locate(name)?.let { File(dir, it) } ?: flat
+        }
     }
 
     private fun f(name: String) = fileOf(name)
