@@ -164,6 +164,24 @@ object LangVisuals {
     /** The discreet mention next to a synthetic voice, null for a recorded one or any other media. */
     fun voiceNotice(m: MediaEntry): String? = if (m.kind == "audio" && m.synthetic) SYNTHETIC_VOICE_NOTICE else null
 
+    const val SYNTHETIC_VIDEO_NOTICE = "Vidéo synthétique · bêta"
+
+    /** A video of the unit with its media entry (kind `video` only: an unknown reference or another kind is left out, the unit then has simply no video). */
+    data class UnitClip(val ref: UnitVideo, val media: MediaEntry)
+    private fun clips(p: LangPack, u: LangUnit): List<UnitClip> = u.videos.mapNotNull { v -> p.media[v.video.removePrefix("m:")]?.takeIf { it.kind == "video" }?.let { UnitClip(v, it) } }
+
+    /** The videos whose button follows the vocabulary item [vocabId]. */
+    fun videosAfter(p: LangPack, u: LangUnit, vocabId: String): List<UnitClip> = clips(p, u).filter { it.ref.after == vocabId }
+
+    /** The videos with no (or an unknown) hook: their button closes the vocabulary list. */
+    fun videosAtEnd(p: LangPack, u: LangUnit): List<UnitClip> = clips(p, u).filter { c -> u.vocab.none { it.id == c.ref.after } }
+
+    /** « Voir la vidéo (muette) » : label, the button of a video. */
+    fun videoButton(c: UnitClip): String = "Voir la vidéo" + (if (c.media.silent) " (muette)" else "") + (c.ref.label?.let { " : $it" } ?: "")
+
+    /** The mention shown with a synthetic video, null for any other media. */
+    fun videoNotice(m: MediaEntry): String? = if (m.kind == "video" && m.synthetic) SYNTHETIC_VIDEO_NOTICE else null
+
     /** The commented correction to show in the feedback, or null when the exercise has none. */
     fun explanation(x: LangExercise): String? = x.explanation?.trim()?.takeIf { it.isNotEmpty() }
 

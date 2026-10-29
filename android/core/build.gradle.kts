@@ -83,8 +83,8 @@ val embedLanguesPacks by tasks.registering {
             val dir = languesContent.resolve(id)
             require(dir.resolve("langue.json").isFile) { "embedded.txt : pack « $id » introuvable dans content/langues" }
             for (n in listOf("langue.json", "media.json")) dir.resolve(n).takeIf { it.isFile }?.copyTo(root.resolve("$id/$n"), overwrite = true)
-            // illustrations (*.webp) and audio (*.opus) kept beside the pack (content/langues/<id>/media/): bundled as the fallback for the media twin, which no device receives yet
-            dir.resolve("media").takeIf { it.isDirectory }?.listFiles { f -> f.isFile && (f.extension == "webp" || f.extension == "opus") }?.forEach { it.copyTo(root.resolve("$id/media/${it.name}"), overwrite = true) }
+            // illustrations (*.webp), audio (*.opus) and silent videos (*.mp4) kept beside the pack (content/langues/<id>/media/): bundled as the fallback for the media twin, which no device receives yet
+            dir.resolve("media").takeIf { it.isDirectory }?.listFiles { f -> f.isFile && (f.extension == "webp" || f.extension == "opus" || f.extension == "mp4") }?.forEach { it.copyTo(root.resolve("$id/media/${it.name}"), overwrite = true) }
             val v = Regex("\"version\"\\s*:\\s*(\\d+)").find(dir.resolve("langue.json").readText())?.groupValues?.get(1) ?: "1"
             // licence tag = the explicit registry content/langues/lots.json (free = CC BY-SA 4.0, reserved = sealed/rented); in neither = untagged (never exported)
             val tag = when { regFree.contains("langues:$id") -> ",\"license\":\"CC-BY-SA-4.0\",\"family\":\"free\""; regReserved.contains("langues:$id") -> ",\"family\":\"reserved\""; else -> "" }

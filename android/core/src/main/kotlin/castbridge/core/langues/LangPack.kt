@@ -17,6 +17,11 @@ data class Dialogue(val id: String, val title: String, val lines: List<DialogueL
 data class GrammarNote(val id: String, val title: String, val md: String, val examples: List<Pair<String, String>>)
 data class Story(val id: String, val title: String, val paragraphs: List<DialogueLine>)
 data class Card(val id: String, val vocab: String, val image: String?)
+/**
+ * A short video of a unit (additive, optional, `videos` of a unit; an older reader ignores it): [video] = `m:<id>`, [after] = id of the vocabulary item the button follows
+ * (absent or unknown = after the whole vocabulary), [label] = what the button adds to « Voir la vidéo ».
+ */
+data class UnitVideo(val video: String, val after: String?, val label: String?)
 data class AnimRef(val id: String, val kind: String, val label: String)
 
 enum class LangExerciseKind(val key: String) {
@@ -40,6 +45,7 @@ data class LangUnit(
     val id: String, val title: String, val minutes: Int, val skills: List<LangSkill>, val prerequisites: List<String>,
     val vocab: List<VocabItem>, val dialogues: List<Dialogue>, val grammar: List<GrammarNote>, val exercises: List<LangExercise>,
     val stories: List<Story>, val cards: List<Card>, val animations: List<AnimRef>,
+    val videos: List<UnitVideo> = emptyList(),
 )
 
 data class MediaEntry(
@@ -47,12 +53,14 @@ data class MediaEntry(
     val author: String?, val source: String?, val url: String?, val engine: String?, val synthetic: Boolean, val lang: String?, val voiceLicense: String? = null,
     /** Text alternative of an image (additive, optional). */
     val alt: String? = null,
+    /** A video without any audio track (additive, optional, `silent` of media.json): it carries no voice, so no voice licence is asked of it. */
+    val silent: Boolean = false,
 )
 
 data class LangPack(val id: String, val version: Int, val parts: LangLots.Parts, val title: String, val state: String, val units: List<LangUnit>, val media: Map<String, MediaEntry>) {
     fun mediaRefs(): List<String> = units.flatMap { u ->
         u.vocab.flatMap { listOfNotNull(it.audio, it.image) } + u.dialogues.flatMap { d -> listOfNotNull(d.audio, d.video) + d.lines.mapNotNull { it.audio } } +
-            u.exercises.mapNotNull { it.audio } + u.stories.flatMap { s -> s.paragraphs.mapNotNull { it.audio } } + u.cards.mapNotNull { it.image }
+            u.exercises.mapNotNull { it.audio } + u.stories.flatMap { s -> s.paragraphs.mapNotNull { it.audio } } + u.cards.mapNotNull { it.image } + u.videos.map { it.video }
     }
 }
 
@@ -86,7 +94,7 @@ object LangPackJson {
     private fun media(m: Map<String, Any?>): MediaEntry {
         val id = m.req("id", "media.json")
         return MediaEntry(id, m.req("file", "media $id"), m.req("kind", "media $id"), (m["bytes"] as? Number)?.toLong() ?: throw ParseError("media $id : \"bytes\" manquant"),
-            m.int("durationMs"), m.req("license", "media $id"), m.str("author"), m.str("source"), m.str("url"), m.str("engine"), (m["synthetic"] as? Boolean) ?: false, m.str("lang"), m.str("voiceLicense"), m.str("alt")?.takeIf { it.isNotBlank() })
+            m.int("durationMs"), m.req("license", "media $id"), m.str("author"), m.str("source"), m.str("url"), m.str("engine"), (m["synthetic"] as? Boolean) ?: false, m.str("lang"), m.str("voiceLicense"), m.str("alt")?.takeIf { it.isNotBlank() }, (m["silent"] as? Boolean) ?: false)
     }
 
     private fun line(m: Map<String, Any?>, w: String) = DialogueLine(m.str("who") ?: "", m.req("text", w), m.str("reading"), m.req("tr", w), m.str("audio"))
@@ -100,7 +108,8 @@ object LangPackJson {
             m.l("exercises").map { exercise(it.o("$w : exercice")) },
             m.l("stories").map { s -> s.o("$w : histoire").let { x -> Story(x.req("id", w), x.req("title", w), x.l("paragraphs").map { p -> line(p.o(w), w) }) } },
             m.l("cards").map { c -> c.o("$w : carte").let { Card(it.req("id", w), it.req("vocab", w), it.str("image")) } },
-            m.l("animations").map { a -> a.o("$w : animation").let { AnimRef(it.req("id", w), it.req("kind", w), it.str("label") ?: "") } })
+            m.l("animations").map { a -> a.o("$w : animation").let { AnimRef(it.req("id", w), it.req("kind", w), it.str("label") ?: "") } },
+            m.l("videos").map { v -> v.o("$w : vidéo").let { UnitVideo(it.req("video", w), it.str("after"), it.str("label")?.takeIf { l -> l.isNotBlank() }) } })
     }
 
     private fun exercise(m: Map<String, Any?>): LangExercise {
@@ -126,8 +135,8 @@ object LangLicences {
     val allowedVoices = allowed + "GPL-3.0"
     private val needsAttribution = setOf("CC-BY-2.0", "CC-BY-3.0", "CC-BY-4.0", "CC-BY-SA-3.0", "CC-BY-SA-4.0")
     fun needsAttribution(l: String) = l in needsAttribution
-    /** A synthetic AUDIO / VIDEO carries a voice: its licence must be declared and free. A synthetic image has no voice, so no voice licence is asked of it. */
-    fun voiceLicenseRequired(m: MediaEntry) = m.synthetic && m.kind != "image"
+    /** A synthetic AUDIO, or a synthetic VIDEO that has a sound track, carries a voice: its licence must be declared and free. A synthetic image, or a silent video, has no voice, so none is asked. */
+    fun voiceLicenseRequired(m: MediaEntry) = m.synthetic && (m.kind == "audio" || (m.kind == "video" && !m.silent))
 }
 
 /** Validation of a parsed pack: returns French messages, empty = valid. Same spirit as `LessonValidator`. */
@@ -145,6 +154,10 @@ object LangValidator {
             u.dialogues.forEach { d -> uniq(d.id, w); if (d.lines.size < 2) e += "dialogue ${d.id} : au moins 2 répliques" }
             u.grammar.forEach { uniq(it.id, w) }; u.stories.forEach { uniq(it.id, w) }; u.cards.forEach { uniq(it.id, w) }
             val vocab = u.vocab.map { it.id }.toSet()
+            u.videos.forEach { v ->
+                if (p.media[v.video.removePrefix("m:")]?.kind.let { it != null && it != "video" }) e += "$w : « ${v.video} » n'est pas une vidéo"
+                if (v.after != null && v.after !in vocab) e += "$w : vidéo « ${v.video} » accrochée à un mot « ${v.after} » absent de l'unité"
+            }
             u.cards.forEach { if (it.vocab !in vocab) e += "carte ${it.id} : mot « ${it.vocab} » absent de l'unité" }
             for (x in u.exercises) {
                 uniq(x.id, w); val xw = "exercice ${x.id}"
@@ -170,6 +183,7 @@ object LangValidator {
             if (m.engine != null && !m.synthetic) e += "$w : audio produit par un moteur de synthèse ($) doit être marqué synthetic".replace("($)", "(${m.engine})")
             if (LangLicences.voiceLicenseRequired(m) && m.voiceLicense !in LangLicences.allowedVoices) e += "$w : licence de la voix « ${m.voiceLicense} » absente ou non libre"
             if (m.bytes <= 0) e += "$w : taille invalide"
+            if (m.silent && m.kind != "video") e += "$w : « silent » ne s'applique qu'à une vidéo"
             if (m.kind !in setOf("audio", "video", "image")) e += "$w : kind « ${m.kind} » inconnu"
         }
         return e

@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
@@ -66,6 +67,52 @@ private fun ListenButton(p: LangPack, ref: String?, text: String, notes: VoiceNo
     OutlinedButton({ failed = !Voice.play(ctx, p, m) }, Modifier.fillMaxWidth()) { Text(text) }
     if (failed) Text("Lecture impossible sur ce téléphone.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
     if (!notes.voice) LangVisuals.voiceNotice(m)?.let { notes.voice = true; Text(it, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant) }
+}
+
+/** The bundled copy of a video, written once to the cache (VideoView wants a file); null when the phone does not hold it. */
+private fun videoFile(ctx: android.content.Context, p: LangPack, m: MediaEntry): java.io.File? = runCatching {
+    val bytes = starter.media(p.parts.scope, m.file) ?: return@runCatching null
+    val dir = java.io.File(ctx.cacheDir, "langues-video/${p.parts.scope}").apply { mkdirs() }
+    java.io.File(dir, LangVisuals.fileName(m.file) ?: return@runCatching null).also { if (it.length() != bytes.size.toLong()) it.writeBytes(bytes) }
+}.getOrNull()
+
+/** « Voir la vidéo (muette) » : opens a full-screen player (pause / resume, close), with the synthetic mention; no file or a player error = one line « Vidéo non disponible ». */
+@Composable
+private fun VideoButton(p: LangPack, c: LangVisuals.UnitClip) {
+    val ctx = LocalContext.current
+    val file = remember(c.media.id) { videoFile(ctx, p, c.media) }
+    if (file == null) { Text("Vidéo non disponible.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant); return }
+    var open by remember(c.media.id) { mutableStateOf(false) }
+    var failed by remember(c.media.id) { mutableStateOf(false) }
+    OutlinedButton({ failed = false; open = true }, Modifier.fillMaxWidth()) { Text(LangVisuals.videoButton(c)) }
+    LangVisuals.videoNotice(c.media)?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant) }
+    if (failed) Text("Vidéo non disponible.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
+    if (open) VideoDialog(file, c.media, onError = { open = false; failed = true }, onClose = { open = false })
+}
+
+@Composable
+private fun VideoDialog(file: java.io.File, m: MediaEntry, onError: () -> Unit, onClose: () -> Unit) {
+    var view by remember { mutableStateOf<android.widget.VideoView?>(null) }
+    var paused by remember { mutableStateOf(false) }
+    Dialog(onDismissRequest = onClose, properties = DialogProperties(usePlatformDefaultWidth = false)) {
+        Surface(Modifier.fillMaxSize(), color = androidx.compose.ui.graphics.Color.Black) {
+            Column(Modifier.fillMaxSize(), horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally) {
+                AndroidView(factory = { c ->
+                    android.widget.VideoView(c).apply {
+                        setOnCompletionListener { onClose() }          // the video stops at its end and the lesson comes back
+                        setOnErrorListener { _, w, x -> android.util.Log.w("Langues", "lecture vidéo impossible : ${file.name} ($w, $x)"); onError(); true }
+                        setOnClickListener { if (isPlaying) { pause(); paused = true } else { start(); paused = false } }
+                        setVideoPath(file.path); start(); view = this
+                    }
+                }, modifier = Modifier.weight(1f).fillMaxWidth(), onRelease = { runCatching { it.stopPlayback() } })
+                LangVisuals.videoNotice(m)?.let { Text(it, color = androidx.compose.ui.graphics.Color.White, style = MaterialTheme.typography.bodySmall) }
+                Row(Modifier.fillMaxWidth().padding(12.dp), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                    OutlinedButton({ view?.let { v -> if (v.isPlaying) { v.pause(); paused = true } else { v.start(); paused = false } } }, Modifier.weight(1f)) { Text(if (paused) "Reprendre" else "Pause") }
+                    Button(onClose, Modifier.weight(1f)) { Text("Fermer") }
+                }
+            }
+        }
+    }
 }
 
 /** Starter packs + packs of the lots stored on the phone (a stored lot of the same name and at least as recent replaces the starter). */
@@ -123,7 +170,9 @@ private fun UnitPage(p: LangPack, u: LangUnit, onExercises: () -> Unit) {
             Image(bmp.asImageBitmap(), m.alt ?: v.gloss, Modifier.fillMaxWidth().heightIn(max = 260.dp), contentScale = ContentScale.Fit)
             LangVisuals.notice(m)?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant) }
         }
+        LangVisuals.videosAfter(p, u, v.id).forEach { VideoButton(p, it) }
     }
+    LangVisuals.videosAtEnd(p, u).forEach { VideoButton(p, it) }
     for (d in u.dialogues) {
         Text("Dialogue : ${d.title}", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary)
         for (x in d.lines) {

@@ -185,7 +185,7 @@ class EmbeddedLangSource(private val base: String = "/castbridge/langues/embedde
     /** Bytes of the starter resources, illustrations and sounds included (counts in the TV's 10 MB budget). */
     fun bytes(): Long = ids.sumOf { id ->
         listOf("langue.json", "media.json").sumOf { n -> res("$id/$n")?.use { it.readBytes().size.toLong() } ?: 0L } +
-            packs.firstOrNull { it.parts.scope == id }?.media?.values.orEmpty().filter { it.kind == "image" || it.kind == "audio" }.sumOf { m -> media(id, m.file)?.size?.toLong() ?: 0L }
+            packs.firstOrNull { it.parts.scope == id }?.media?.values.orEmpty().filter { it.kind == "image" || it.kind == "audio" || it.kind == "video" }.sumOf { m -> media(id, m.file)?.size?.toLong() ?: 0L }
     }
 
     companion object {

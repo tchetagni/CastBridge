@@ -11,6 +11,8 @@ import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
+import android.widget.FrameLayout
+import android.widget.VideoView
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
@@ -19,7 +21,7 @@ import castbridge.core.langues.*
 /**
  * « Langues » (docs/LANGUES.md): the smallest honest viewer. Languages and levels come from the installed `langues` lots; a pack opens
  * on its units (vocabulary, dialogues, grammar notes, stories as text), then the exercises of the unit, marked with [LangMarking].
- * D-pad only: every line is a focusable button. Illustrations (word images, with the synthetic mention), sounds (starter copy when no media lot is installed) and commented corrections are shown. Not done yet: video (the media lots are not on the TV), the
+ * D-pad only: every line is a focusable button. Illustrations (word images, with the synthetic mention), sounds and short silent videos (starter copy when no media lot is installed; full-screen player, OK = pause, BACK = back to the same button) and commented corrections are shown. Not done yet: the
  * « match » and « strokes » exercises, spaced repetition cards, placement test, progress saving, animations.
  */
 class LanguesActivity : Activity() {
@@ -27,6 +29,9 @@ class LanguesActivity : Activity() {
     private lateinit var body: LinearLayout
     private lateinit var scroll: ScrollView
     private var player: MediaPlayer? = null
+    private lateinit var root: FrameLayout
+    /** The full-screen video layer (null = none) and the button that opened it, which gets the focus back. */
+    private var videoLayer: FrameLayout? = null; private var videoView: VideoView? = null; private var videoOpener: android.view.View? = null
 
     /** Navigation stack: each entry redraws one screen. */
     private val stack = ArrayList<Runnable>()
@@ -40,12 +45,13 @@ class LanguesActivity : Activity() {
         scroll = ScrollView(this).apply {
             background = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(GamesColors.BG_TOP, GamesColors.BG)); isFillViewport = true; addView(body)
         }
-        setContentView(scroll)
+        root = FrameLayout(this).apply { addView(scroll, FrameLayout.LayoutParams(-1, -1)) }
+        setContentView(root)
         go { home() }
     }
 
     override fun onResume() { super.onResume(); LanguesHub.screen = this }
-    override fun onPause() { if (LanguesHub.screen === this) LanguesHub.screen = null; stopAudio(); super.onPause() }
+    override fun onPause() { if (LanguesHub.screen === this) LanguesHub.screen = null; stopAudio(); closeVideo(); super.onPause() }
     /** The screen is no longer visible (Home, another app): the download stops (a lot already installed stays; the next press resumes). */
     override fun onStop() { if (updating) cancelUpdate = true; super.onStop() }
 
@@ -60,7 +66,17 @@ class LanguesActivity : Activity() {
     private var reloadLater = false
 
     private fun go(screen: () -> Unit) { val r = Runnable { screen() }; stack.add(r); r.run() }
+    /** While a video plays: OK / play-pause toggle the pause, BACK closes it, every other key is swallowed (the lesson underneath keeps its focus untouched). */
+    override fun dispatchKeyEvent(e: KeyEvent): Boolean {
+        if (videoLayer == null) return super.dispatchKeyEvent(e)
+        if (e.keyCode == KeyEvent.KEYCODE_BACK) { if (e.action == KeyEvent.ACTION_UP) closeVideo(); return true }
+        if (e.action == KeyEvent.ACTION_DOWN && e.repeatCount == 0 && e.keyCode in setOf(KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER, KeyEvent.KEYCODE_NUMPAD_ENTER, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE, KeyEvent.KEYCODE_MEDIA_PLAY, KeyEvent.KEYCODE_MEDIA_PAUSE)) {
+            videoView?.let { v -> if (v.isPlaying) v.pause() else v.start() }
+        }
+        return true
+    }
     @Deprecated("Deprecated in Java") override fun onBackPressed() {
+        if (videoLayer != null) { closeVideo(); return }
         stopAudio()
         if (updating) cancelUpdate = true
         if (stack.size > 1) {
@@ -174,7 +190,11 @@ class LanguesActivity : Activity() {
         clear(u.title, "${u.minutes} min")
         if (u.vocab.isNotEmpty()) {
             heading("Vocabulaire")
-            for (v in u.vocab) { label("${v.term}" + (v.reading?.let { "   $it" } ?: "") + "   —   ${v.gloss}", 36); audioButton(p, v.audio, "Écouter : ${v.term}"); illustration(p, u, v) }
+            for (v in u.vocab) {
+                label("${v.term}" + (v.reading?.let { "   $it" } ?: "") + "   —   ${v.gloss}", 36); audioButton(p, v.audio, "Écouter : ${v.term}"); illustration(p, u, v)
+                LangVisuals.videosAfter(p, u, v.id).forEach { videoButton(p, it) }
+            }
+            LangVisuals.videosAtEnd(p, u).forEach { videoButton(p, it) }
         }
         for (d in u.dialogues) {
             heading("Dialogue : ${d.title}")
@@ -229,6 +249,47 @@ class LanguesActivity : Activity() {
             .onFailure { android.util.Log.w("Langues", "lecture audio impossible : ${f.name}", it) }.getOrNull()
     }
     private fun stopAudio() { runCatching { player?.release() }; player = null }
+
+    // ---------------------------------------------------------------- video (installed media lot, else the copy bundled with the starter; played full screen, stops at the end)
+    /** « Voir la vidéo (muette) » + the synthetic mention; a video the TV cannot read gives one line « Vidéo non disponible » (also shown if the player fails). */
+    private fun videoButton(p: LangPack, c: LangVisuals.UnitClip) {
+        val f = LanguesHub.videoFile(this, p, c.media)
+        if (f == null) { label("Vidéo non disponible.", 26, GamesColors.TEXT_MEDIUM, top = 6); return }
+        lateinit var b: Button; lateinit var unavailable: TextView
+        b = button(LangVisuals.videoButton(c)) { playVideo(f, c.media, b) { unavailable.visibility = android.view.View.VISIBLE } }
+        LangVisuals.videoNotice(c.media)?.let { label(it, 24, GamesColors.TEXT_MEDIUM, top = 4) }
+        unavailable = label("Vidéo non disponible.", 26, GamesColors.TEXT_MEDIUM, top = 4).also { it.visibility = android.view.View.GONE }
+    }
+    private var videoFailed: (() -> Unit)? = null
+
+    /** Opens the full-screen layer and starts [f]; [onFail] runs (after the layer is closed) when the player cannot read it. */
+    private fun playVideo(f: java.io.File, m: MediaEntry, opener: android.view.View, onFail: () -> Unit) {
+        closeVideo(); stopAudio()
+        runCatching {
+            val v = VideoView(this)
+            val note = dx.text(TextView(this).apply { text = (LangVisuals.videoNotice(m) ?: "") + "   ·   OK : pause / reprise   ·   RETOUR : revenir à la leçon" }, 26, GamesColors.TEXT_HIGH)
+            val layer = FrameLayout(this).apply {
+                setBackgroundColor(android.graphics.Color.BLACK); isClickable = true
+                addView(v, FrameLayout.LayoutParams(-1, -1, Gravity.CENTER))
+                addView(note, FrameLayout.LayoutParams(-2, -2, Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL).apply { bottomMargin = dx.px(24) })
+            }
+            v.setOnCompletionListener { closeVideo() }                       // the video stops at its end and the lesson comes back
+            v.setOnErrorListener { _, w, x -> android.util.Log.w("Langues", "lecture vidéo impossible : ${f.name} ($w, $x)"); closeVideo(failed = true); true }
+            v.setVideoPath(f.path)
+            videoLayer = layer; videoView = v; videoOpener = opener; videoFailed = onFail
+            root.addView(layer, FrameLayout.LayoutParams(-1, -1))
+            v.start()
+        }.onFailure { android.util.Log.w("Langues", "lecture vidéo impossible : ${f.name}", it); if (videoLayer == null) onFail() else closeVideo(failed = true) }
+    }
+
+    private fun closeVideo(failed: Boolean = false) {
+        val layer = videoLayer ?: return
+        runCatching { videoView?.stopPlayback() }
+        root.removeView(layer); videoLayer = null; videoView = null
+        val opener = videoOpener; videoOpener = null; val onFail = videoFailed; videoFailed = null
+        opener?.requestFocus()                                                // the same button as before: the lesson underneath was never redrawn
+        if (failed) onFail?.invoke()
+    }
 
     // ---------------------------------------------------------------- exercises
     private inner class Run(val p: LangPack, val u: LangUnit) {
