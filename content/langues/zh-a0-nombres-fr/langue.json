@@ -50,7 +50,8 @@
      "reading": "sān",
      "gloss": "trois",
      "pos": "num",
-     "audio": "m:zh-san"
+     "audio": "m:zh-san",
+     "image": "m:zh-a0-nombres-astra-trois"
     },
     {
      "id": "zh-a0-nombres-fr-v5",
@@ -157,8 +158,8 @@
    "grammar": [
     {
      "id": "zh-a0-nombres-fr-g1",
-     "title": "Compter sur les doigts",
-     "md": "De **一** (1) à **十** (10), chaque chiffre s'écrit d'un seul caractère. En Chine, on compte souvent sur une seule main avec des gestes précis de la main.",
+     "title": "Compter par petits groupes",
+     "md": "Commence par **一 yī, 二 èr, 三 sān**, puis ajoute **四 sì, 五 wǔ**. Reprends demain avec 6 à 10 et **零 líng** (zéro). Compte trois cahiers à l’atelier ou chez toi, sans apprendre le mot chinois « cahier ». La carte de 三 montre trois objets séparés. Les gestes de comptage varient selon les régions : ils ne remplacent pas le mot prononcé.",
      "examples": [
       {
        "text": "一二三",
@@ -169,107 +170,110 @@
     {
      "id": "zh-a0-nombres-fr-g2",
      "title": "L'âge avec 岁 (suì)",
-     "md": "Pour dire son âge, on ajoute **岁** (suì) après le nombre : **我十岁** (j'ai dix ans, littéralement « moi dix ans »).",
+     "md": "**我十岁 wǒ shí suì** = « J’ai dix ans ». **我 wǒ** = moi, **十 shí** = dix, **岁 suì** indique les années d’âge. **你几岁？ nǐ jǐ suì?** demande l’âge, surtout à un enfant. Joue le rôle d’un personnage de dix ans ; tu n’as pas à donner ton âge réel. Dans le dialogue, **谢谢 xièxie** réemploie « merci ».",
      "examples": [
       {
        "text": "我十岁",
        "tr": "J'ai dix ans"
       }
      ]
+    },
+    {
+     "id": "zh-a0-nombres-fr-u1-g-tons",
+     "title": "Un nombre, un ton",
+     "md": "En comptant isolément, **一** se lit **yī** au 1er ton. Son ton peut changer dans une phrase : à étudier plus tard. Compare **十 shí** (dix, 2e ton) et **是 shì** (être, 4e ton) : seul le ton change. **四 sì** (quatre) et **十 shí** (dix) diffèrent par le son initial ET par le ton ; ce n’est pas une paire minimale de tons.",
+     "examples": []
     }
    ],
    "exercises": [
     {
      "id": "zh-a0-nombres-fr-x1",
-     "kind": "dictation",
-     "prompt": "Écoute et écris le chiffre en caractères.",
-     "audio": "m:zh-san",
-     "answers": [
-      "三"
-     ]
+     "kind": "mcq",
+     "prompt": "Tu comptes trois cahiers. Quel nombre choisis-tu ?",
+     "choices": [
+      "二 èr",
+      "三 sān",
+      "五 wǔ"
+     ],
+     "correct": 1,
+     "explanation": "三 sān signifie trois : retrouve les trois cahiers sur la carte illustrée."
     },
     {
      "id": "zh-a0-nombres-fr-x2",
      "kind": "mcq",
-     "prompt": "Que veut dire 五 ?",
+     "prompt": "五 wǔ signifie…",
      "choices": [
       "trois",
       "cinq",
       "sept"
      ],
-     "correct": 1
+     "correct": 1,
+     "explanation": "五 wǔ = cinq, au 3e ton."
     },
     {
      "id": "zh-a0-nombres-fr-x3",
-     "kind": "match",
-     "prompt": "Associe chaque chiffre à sa valeur.",
-     "pairs": [
-      {
-       "a": "一",
-       "b": "un"
-      },
-      {
-       "a": "二",
-       "b": "deux"
-      },
-      {
-       "a": "三",
-       "b": "trois"
-      },
-      {
-       "a": "四",
-       "b": "quatre"
-      },
-      {
-       "a": "五",
-       "b": "cinq"
-      }
-     ]
+     "kind": "mcq",
+     "prompt": "Quelle suite compte de 1 à 3 ?",
+     "choices": [
+      "一 yī · 二 èr · 三 sān",
+      "三 sān · 二 èr · 一 yī"
+     ],
+     "correct": 0,
+     "explanation": "On commence par un, puis deux, puis trois."
     },
     {
      "id": "zh-a0-nombres-fr-x4",
-     "kind": "order",
-     "prompt": "Remets les mots dans l'ordre.",
-     "answers": [
-      "我十岁"
+     "kind": "mcq",
+     "prompt": "Un personnage a dix ans. Quelle phrase convient ?",
+     "choices": [
+      "我十岁。wǒ shí suì.",
+      "我三岁。wǒ sān suì."
      ],
-     "words": [
-      "我",
-      "十",
-      "岁"
-     ]
+     "correct": 0,
+     "explanation": "我 + nombre + 岁 permet ici de dire l’âge."
     },
     {
      "id": "zh-a0-nombres-fr-x5",
-     "kind": "truefalse",
-     "prompt": "« 十 » veut dire « dix ».",
-     "correct": 0
+     "kind": "mcq",
+     "prompt": "Compare 十 shí et 是 shì : lequel signifie dix ?",
+     "choices": [
+      "是 shì",
+      "十 shí"
+     ],
+     "correct": 1,
+     "explanation": "十 shí monte (2e ton) ; 是 shì descend (4e ton)."
     },
     {
      "id": "zh-a0-nombres-fr-x6",
-     "kind": "translate",
-     "prompt": "Traduis : huit.",
-     "answers": [
-      "八"
-     ]
+     "kind": "mcq",
+     "prompt": "Quel nombre vaut huit ?",
+     "choices": [
+      "八 bā",
+      "六 liù",
+      "九 jiǔ"
+     ],
+     "correct": 0,
+     "explanation": "八 bā = huit ; 六 liù = six ; 九 jiǔ = neuf."
     },
     {
      "id": "zh-a0-nombres-fr-x7",
      "kind": "mcq",
-     "prompt": "Combien font 二 + 三 ?",
+     "prompt": "Deux cahiers, puis trois autres : 二 + 三 = …",
      "choices": [
-      "四",
-      "五",
-      "六"
+      "四 sì",
+      "五 wǔ",
+      "六 liù"
      ],
-     "correct": 1
+     "correct": 1,
+     "explanation": "2 + 3 = 5, soit 五 wǔ. Le calcul sert à réemployer les mots."
     },
     {
      "id": "zh-a0-nombres-fr-x8",
      "kind": "speak",
-     "prompt": "Compte de 1 à 5 en chinois.",
-     "audio": "m:zh-nombres-count15",
-     "model": "yī, èr, sān, sì, wǔ"
+     "prompt": "Facultatif : compte de 1 à 5 sans micro, ou lis le modèle.",
+     "model": "一 yī · 二 èr · 三 sān · 四 sì · 五 wǔ. Fais une courte pause entre les nombres.",
+     "explanation": "Compare volontairement avec le modèle. Cette auto-évaluation ne certifie pas la prononciation.",
+     "audio": "m:zh-nombres-count15"
     }
    ],
    "stories": [],
@@ -288,7 +292,8 @@
     },
     {
      "id": "zh-a0-nombres-fr-c4",
-     "vocab": "zh-a0-nombres-fr-v4"
+     "vocab": "zh-a0-nombres-fr-v4",
+     "image": "m:zh-a0-nombres-astra-trois"
     },
     {
      "id": "zh-a0-nombres-fr-c5",

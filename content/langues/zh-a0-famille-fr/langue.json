@@ -27,7 +27,8 @@
      "reading": "jiā",
      "gloss": "famille, maison",
      "pos": "n",
-     "audio": "m:zh-jia"
+     "audio": "m:zh-jia",
+     "image": "m:zh-a0-famille-astra-scene"
     },
     {
      "id": "zh-a0-famille-fr-v2",
@@ -89,13 +90,13 @@
    "dialogues": [
     {
      "id": "zh-a0-famille-fr-d1",
-     "title": "Ma famille",
+     "title": "Présenter deux proches (personnages fictifs)",
      "lines": [
       {
        "who": "A",
        "text": "这是我爸爸。",
        "reading": "zhè shì wǒ bàba.",
-       "tr": "C'est mon papa."
+       "tr": "Voici mon papa."
       },
       {
        "who": "B",
@@ -107,35 +108,22 @@
        "who": "A",
        "text": "这是我妈妈。",
        "reading": "zhè shì wǒ māma.",
-       "tr": "C'est ma maman."
+       "tr": "Voici ma maman."
       },
       {
        "who": "B",
-       "text": "你弟弟呢？",
-       "reading": "nǐ dìdi ne?",
-       "tr": "Et ton petit frère ?"
-      },
-      {
-       "who": "A",
-       "text": "我弟弟很小。",
-       "reading": "wǒ dìdi hěn xiǎo.",
-       "tr": "Mon petit frère est tout petit."
-      },
-      {
-       "who": "B",
-       "text": "家很好！",
-       "reading": "jiā hěn hǎo!",
-       "tr": "Ta famille est chouette !"
+       "text": "你好！",
+       "reading": "nǐ hǎo!",
+       "tr": "Bonjour !"
       }
-     ],
-     "audio": "m:zh-famille-d1"
+     ]
     }
    ],
    "grammar": [
     {
      "id": "zh-a0-famille-fr-g1",
-     "title": "« 我 + nom » = mon / mes",
-     "md": "Le chinois n'a pas de mot pour « mon ». On place simplement **我** (je) devant le nom : **我爸爸** (mon papa), **我妈妈** (ma maman).",
+     "title": "Dire « mon papa », « ma maman »",
+     "md": "**我爸爸 wǒ bàba** = mon papa ; **我妈妈 wǒ māma** = ma maman. Avec les proches, on peut souvent omettre **的 de**, qui marque normalement la possession : **我的妈妈 wǒ de māma** est aussi possible. Ce n’est donc pas une règle pour tous les noms. Apprends d’abord 我, 爸爸, 妈妈 ; garde les mots de la fratrie pour une seconde séance.",
      "examples": [
       {
        "text": "我爸爸",
@@ -150,104 +138,103 @@
     {
      "id": "zh-a0-famille-fr-g2",
      "title": "« 这是… » = c'est…",
-     "md": "**这是** (zhè shì) signifie « c'est » : **这是我爸爸** (c'est mon papa).",
+     "md": "**这是 zhè shì** = « c’est / voici ». **这是我妈妈 zhè shì wǒ māma** = « Voici ma maman ». On réemploie **是 shì** (être) et **你好 nǐ hǎo** (bonjour). La scène représente une famille fictive parmi d’autres. Tu peux présenter ces personnages ; aucune information sur ta propre famille n’est demandée.",
      "examples": [
       {
        "text": "这是我爸爸",
        "tr": "C'est mon papa"
       }
      ]
+    },
+    {
+     "id": "zh-a0-famille-fr-u1-g-fratrie",
+     "title": "Plus âgé ou plus jeune que la personne qui parle",
+     "md": "**哥哥 gēge** = frère aîné ; **弟弟 dìdi** = frère cadet ; **姐姐 jiějie** = sœur aînée ; **妹妹 mèimei** = sœur cadette. « Grand » et « petit » indiquent ici l’âge relatif, pas la taille. Dans ces mots et dans **爸爸 bàba / 妈妈 māma**, la seconde syllabe est légère, au ton neutre dans le modèle étudié.",
+     "examples": []
     }
    ],
    "exercises": [
     {
      "id": "zh-a0-famille-fr-x1",
      "kind": "mcq",
-     "prompt": "Que veut dire 妈妈 ?",
+     "prompt": "妈妈 māma signifie…",
      "choices": [
       "papa",
       "maman",
-      "frère"
+      "frère aîné"
      ],
-     "correct": 1
+     "correct": 1,
+     "explanation": "妈妈 māma = maman : premier ton puis ton neutre."
     },
     {
      "id": "zh-a0-famille-fr-x2",
-     "kind": "match",
-     "prompt": "Associe chaque personne.",
-     "pairs": [
-      {
-       "a": "爸爸",
-       "b": "papa"
-      },
-      {
-       "a": "妈妈",
-       "b": "maman"
-      },
-      {
-       "a": "哥哥",
-       "b": "grand frère"
-      },
-      {
-       "a": "姐姐",
-       "b": "grande sœur"
-      },
-      {
-       "a": "弟弟",
-       "b": "petit frère"
-      }
-     ]
+     "kind": "mcq",
+     "prompt": "Un frère plus jeune que la personne qui parle est…",
+     "choices": [
+      "哥哥 gēge",
+      "弟弟 dìdi"
+     ],
+     "correct": 1,
+     "explanation": "弟弟 désigne le frère cadet ; 哥哥 le frère aîné."
     },
     {
      "id": "zh-a0-famille-fr-x3",
-     "kind": "truefalse",
-     "prompt": "« 我爸爸 » veut dire « mon papa ».",
-     "correct": 0
+     "kind": "mcq",
+     "prompt": "我爸爸 wǒ bàba signifie…",
+     "choices": [
+      "mon papa",
+      "mon frère aîné"
+     ],
+     "correct": 0,
+     "explanation": "我 wǒ + 爸爸 bàba : mon papa. 的 de peut être omis avec ce proche."
     },
     {
      "id": "zh-a0-famille-fr-x4",
-     "kind": "translate",
-     "prompt": "Traduis : maman.",
-     "answers": [
-      "妈妈"
-     ]
+     "kind": "mcq",
+     "prompt": "Une sœur plus âgée que la personne qui parle est…",
+     "choices": [
+      "妹妹 mèimei",
+      "姐姐 jiějie"
+     ],
+     "correct": 1,
+     "explanation": "姐姐 est la sœur aînée, quelle que soit sa taille."
     },
     {
      "id": "zh-a0-famille-fr-x5",
-     "kind": "dictation",
-     "prompt": "Écoute et écris en caractères.",
-     "audio": "m:zh-mama",
-     "answers": [
-      "妈妈"
-     ]
+     "kind": "mcq",
+     "prompt": "Dans bàba, la seconde syllabe se prononce…",
+     "choices": [
+      "courte et légère",
+      "avec un 4e ton aussi appuyé que la première"
+     ],
+     "correct": 0,
+     "explanation": "爸爸 bàba : 4e ton puis ton neutre dans le modèle étudié."
     },
     {
      "id": "zh-a0-famille-fr-x6",
-     "kind": "order",
-     "prompt": "Remets les mots dans l'ordre.",
-     "answers": [
-      "这是我爸爸"
+     "kind": "mcq",
+     "prompt": "Choisis « Voici mon papa ».",
+     "choices": [
+      "这是我爸爸。zhè shì wǒ bàba.",
+      "这是我妈妈。zhè shì wǒ māma."
      ],
-     "words": [
-      "这",
-      "是",
-      "我",
-      "爸爸"
-     ]
+     "correct": 0,
+     "explanation": "这是 = voici ; 我爸爸 = mon papa."
     },
     {
      "id": "zh-a0-famille-fr-x7",
      "kind": "speak",
-     "prompt": "Présente ta mère en chinois.",
-     "audio": "m:zh-mama",
-     "model": "这是我妈妈 (zhè shì wǒ māma)"
+     "prompt": "Facultatif : présente la maman du personnage fictif, sans micro. Sinon, lis le modèle.",
+     "model": "这是我妈妈。zhè shì wǒ māma. Voici ma maman. Le mot seul māma ne constitue pas le modèle audio de cette phrase.",
+     "explanation": "Compare volontairement avec le modèle. Cette auto-évaluation ne certifie pas la prononciation."
     }
    ],
    "stories": [],
    "cards": [
     {
      "id": "zh-a0-famille-fr-c1",
-     "vocab": "zh-a0-famille-fr-v1"
+     "vocab": "zh-a0-famille-fr-v1",
+     "image": "m:zh-a0-famille-astra-scene"
     },
     {
      "id": "zh-a0-famille-fr-c2",

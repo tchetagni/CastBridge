@@ -98,7 +98,7 @@
     {
      "id": "zh-a0-phonetique-fr-u1-g1",
      "title": "Le ton change le sens",
-     "md": "Le chinois est une langue à **tons** : la même syllabe **ma** change de sens selon la hauteur. Quatre tons + un ton neutre :\n- **1er** mā : haut et plat (55)\n- **2e** má : monte (35)\n- **3e** mǎ : descend puis remonte (214)\n- **4e** mà : descend (51)\n- **neutre** ma : court, sans contour.",
+     "md": "Une même syllabe peut changer de sens avec le ton. **mā** : haut et stable ; **má** : montant ; **mǎ** : bas, avec une remontée possible en isolation ; **mà** : descendant. Le 3e ton reste souvent bas dans une phrase. **ma** neutre est bref et léger ; sa hauteur dépend de ce qui précède. Commence par mā / mǎ, puis má / mà. Les caractères sont des repères : aucune copie de mémoire n’est demandée.",
      "examples": [
       {
        "text": "妈 mā",
@@ -109,89 +109,100 @@
        "tr": "cheval"
       }
      ]
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u1-g-parcours",
+     "title": "Deux petites séances",
+     "md": "Séance 1 : observe les courbes et compare **妈 mā** (maman) / **马 mǎ** (cheval). Séance 2 : compare **麻 má** (chanvre) / **骂 mà** (gronder). Ces mots servent à montrer le contraste de tons ; inutile de tous les employer aujourd’hui. Le schéma représente la hauteur de la voix, pas son volume. Sans audio validé, les exercices vérifient la lecture des signes, pas l’écoute.",
+     "examples": []
     }
    ],
    "exercises": [
     {
      "id": "zh-a0-phonetique-fr-u1-x1",
      "kind": "mcq",
-     "prompt": "« 马 (mǎ) » veut dire ?",
+     "prompt": "Compare 妈 mā et 马 mǎ. Quel mot signifie « cheval » ?",
      "choices": [
-      "maman",
-      "cheval",
-      "gronder"
+      "妈 mā",
+      "马 mǎ"
      ],
-     "correct": 1
+     "correct": 1,
+     "explanation": "La syllabe est la même ; le ton et le caractère distinguent ces mots."
     },
     {
      "id": "zh-a0-phonetique-fr-u1-x2",
-     "kind": "match",
-     "prompt": "Associe chaque caractère à son sens.",
-     "pairs": [
-      {
-       "a": "妈",
-       "b": "maman"
-      },
-      {
-       "a": "马",
-       "b": "cheval"
-      },
-      {
-       "a": "骂",
-       "b": "gronder"
-      },
-      {
-       "a": "麻",
-       "b": "chanvre"
-      }
-     ]
+     "kind": "mcq",
+     "prompt": "Quel contour correspond à mā (1er ton) ?",
+     "choices": [
+      "haut et stable",
+      "montant",
+      "descendant"
+     ],
+     "correct": 0,
+     "explanation": "Le trait horizontal au-dessus de a rappelle le ton stable."
     },
     {
      "id": "zh-a0-phonetique-fr-u1-x3",
-     "kind": "dictation",
-     "prompt": "Écoute : quel caractère entends-tu ?",
-     "audio": "m:zh-ma3",
-     "answers": [
-      "马"
-     ]
+     "kind": "mcq",
+     "prompt": "Quel signe repère le 3e ton de « cheval » ?",
+     "choices": [
+      "má",
+      "mǎ"
+     ],
+     "correct": 1,
+     "explanation": "mǎ porte le 3e ton. Cette question est une lecture de pinyin, pas une dictée."
     },
     {
      "id": "zh-a0-phonetique-fr-u1-x4",
      "kind": "speak",
-     "prompt": "Dis « mā » (1er ton, haut et plat), puis compare.",
-     "audio": "m:zh-ma1",
-     "model": "mā — ton 1 (55, haut plat)"
+     "prompt": "Facultatif : prononce mā sans forcer la voix, ou lis le modèle.",
+     "model": "妈 mā : hauteur stable, confortable ; ne crie pas.",
+     "explanation": "Compare volontairement avec le modèle. Cette auto-évaluation ne certifie pas la prononciation.",
+     "audio": "m:zh-ma1"
     },
     {
      "id": "zh-a0-phonetique-fr-u1-x5",
-     "kind": "truefalse",
-     "prompt": "Le 3e ton descend puis remonte.",
-     "correct": 0
+     "kind": "mcq",
+     "prompt": "Dans une phrase, le 3e ton…",
+     "choices": [
+      "reste souvent bas, sans remontée complète",
+      "doit toujours remonter fortement"
+     ],
+     "correct": 0,
+     "explanation": "La courbe complète est un repère en isolation, pas une obligation à chaque syllabe."
     },
     {
      "id": "zh-a0-phonetique-fr-u1-x6",
      "kind": "mcq",
-     "prompt": "Quel mot porte le 4e ton (descendant) ?",
+     "prompt": "Compare má et mà : lequel descend (4e ton) ?",
      "choices": [
-      "妈",
-      "麻",
-      "骂"
+      "má",
+      "mà"
      ],
-     "correct": 2
+     "correct": 1,
+     "explanation": "L’accent descendant de mà rappelle la chute de hauteur."
     },
     {
      "id": "zh-a0-phonetique-fr-u1-x7",
-     "kind": "translate",
-     "prompt": "Traduis : cheval.",
-     "answers": [
-      "马"
-     ]
+     "kind": "mcq",
+     "prompt": "Dans 你好吗 nǐ hǎo ma, le dernier ma…",
+     "choices": [
+      "est court et léger",
+      "porte le 1er ton mā"
+     ],
+     "correct": 0,
+     "explanation": "Le ton neutre de 吗 ma n’est pas le 1er ton de 妈 mā."
     },
     {
      "id": "zh-a0-phonetique-fr-u1-x8",
-     "kind": "write",
-     "prompt": "Écris « maman » en caractères.",
-     "model": "妈"
+     "kind": "mcq",
+     "prompt": "Dans 妈妈 māma (maman), la seconde syllabe est…",
+     "choices": [
+      "neutre : ma",
+      "au 3e ton : mǎ"
+     ],
+     "correct": 0,
+     "explanation": "Réemploi dans Famille : māma, premier ton puis syllabe légère."
     }
    ],
    "stories": [],
@@ -330,8 +341,8 @@
    "grammar": [
     {
      "id": "zh-a0-phonetique-fr-u2-g1",
-     "title": "zh / ch / sh : la langue se recourbe",
-     "md": "Pour **zh**, **ch**, **sh**, on **recourbe la langue** vers l'arrière (rétroflexes). **ch** ajoute un souffle (aspiré), **sh** non.",
+     "title": "Comparer zh et ch sans forcer",
+     "md": "Pour **zh / ch / sh**, la pointe de la langue se place vers l’arrière de la zone derrière les dents du haut, sans forcer ni toucher le fond de la bouche. Compare **知 zhī** et **吃 chī**, tous deux au 1er ton : **ch** a un souffle plus net après le départ du son. **sh** est un frottement continu ; ce n’est pas simplement « ch sans souffle ».",
      "examples": [
       {
        "text": "知 zhī",
@@ -346,7 +357,7 @@
     {
      "id": "zh-a0-phonetique-fr-u2-g2",
      "title": "x, q et la voyelle ü",
-     "md": "**x** et **q** se disent langue plate, proche du palais. La voyelle **ü** (comme dans **鱼** yú, **绿** lǜ) arrondit les lèvres : on l'écrit **u** après y, j, q, x.",
+     "md": "Le pinyin ne se lit pas comme le français : **x** n’est pas « ks », **q** n’est pas « k ». Dans **x / q**, l’avant de la langue se rapproche du palais et la pointe reste près des dents du bas ; **q** commence par une fermeture puis un souffle. Pour **ü**, pars du « u » français de « tu », lèvres arrondies : **鱼 yú**, **绿 lǜ**. Après j, q, x et dans yu, les deux points sont omis.",
      "examples": [
       {
        "text": "鱼 yú",
@@ -357,93 +368,100 @@
        "tr": "vert"
       }
      ]
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u2-g-charge",
+     "title": "Reconnaître avant de tout mémoriser",
+     "md": "Aujourd’hui, concentre-toi sur **zhī / chī**, puis **yú**. Les autres mots sont des repères à revoir. Tu retrouveras **是 shì** (être) et **七 qī** (sept) dans les autres unités. Un modèle audio validé et un retour humain restent nécessaires pour vérifier l’articulation.",
+     "examples": []
     }
    ],
    "exercises": [
     {
      "id": "zh-a0-phonetique-fr-u2-x1",
      "kind": "mcq",
-     "prompt": "Quel caractère contient le son « ch » ?",
+     "prompt": "Quel mot commence par ch ?",
      "choices": [
-      "知",
-      "吃",
-      "西"
+      "知 zhī",
+      "吃 chī",
+      "西 xī"
      ],
-     "correct": 1
+     "correct": 1,
+     "explanation": "Le pinyin montre ch au début de chī."
     },
     {
      "id": "zh-a0-phonetique-fr-u2-x2",
-     "kind": "match",
-     "prompt": "Associe le son au caractère.",
-     "pairs": [
-      {
-       "a": "知",
-       "b": "zh"
-      },
-      {
-       "a": "吃",
-       "b": "ch"
-      },
-      {
-       "a": "是",
-       "b": "sh"
-      },
-      {
-       "a": "西",
-       "b": "x"
-      },
-      {
-       "a": "七",
-       "b": "q"
-      }
-     ]
+     "kind": "mcq",
+     "prompt": "Compare zhī et chī : quel son a un souffle initial plus net ?",
+     "choices": [
+      "zh dans zhī",
+      "ch dans chī"
+     ],
+     "correct": 1,
+     "explanation": "Le contraste d’aspiration se compare au même ton : ici le 1er."
     },
     {
      "id": "zh-a0-phonetique-fr-u2-x3",
-     "kind": "dictation",
-     "prompt": "Écoute : quel caractère entends-tu ?",
-     "audio": "m:zh-chi",
-     "answers": [
-      "吃"
-     ]
+     "kind": "mcq",
+     "prompt": "Quel pinyin correspond à 吃 (manger) ?",
+     "choices": [
+      "chī",
+      "zhī"
+     ],
+     "correct": 0,
+     "explanation": "吃 se lit chī. Garde le ton stable en comparant les consonnes."
     },
     {
      "id": "zh-a0-phonetique-fr-u2-x4",
      "kind": "speak",
-     "prompt": "Dis « chī » (rétroflexe aspiré).",
-     "audio": "m:zh-chi",
-     "model": "chī (rétroflexe + souffle)"
+     "prompt": "Facultatif : essaie chī, sans micro ; sinon lis le modèle.",
+     "model": "吃 chī : départ suivi d’un souffle, puis 1er ton stable. Ne force pas la langue.",
+     "explanation": "Compare volontairement avec le modèle. Cette auto-évaluation ne certifie pas la prononciation.",
+     "audio": "m:zh-chi"
     },
     {
      "id": "zh-a0-phonetique-fr-u2-x5",
-     "kind": "truefalse",
-     "prompt": "« 是 (shì) » a un son rétroflexe (langue recourbée).",
-     "correct": 0
+     "kind": "mcq",
+     "prompt": "Le x du pinyin xī se lit-il comme « ks » en français ?",
+     "choices": [
+      "Oui",
+      "Non"
+     ],
+     "correct": 1,
+     "explanation": "Le pinyin est un système de notation propre au mandarin."
     },
     {
      "id": "zh-a0-phonetique-fr-u2-x6",
-     "kind": "translate",
-     "prompt": "Traduis : poisson.",
-     "answers": [
-      "鱼"
-     ]
+     "kind": "mcq",
+     "prompt": "Dans 鱼 yú, la voyelle correspond à…",
+     "choices": [
+      "ü, proche du u français de « tu »",
+      "ou, comme dans « tout »"
+     ],
+     "correct": 0,
+     "explanation": "Dans yu, les deux points de ü ne s’écrivent pas."
     },
     {
      "id": "zh-a0-phonetique-fr-u2-x7",
      "kind": "mcq",
-     "prompt": "Quel son est aspiré (souffle) ?",
+     "prompt": "Quel mot déjà rencontré signifie « être » ?",
      "choices": [
-      "zh",
-      "ch",
-      "sh"
+      "是 shì",
+      "七 qī"
      ],
-     "correct": 1
+     "correct": 0,
+     "explanation": "是 shì = être ; 七 qī = sept. Tu retrouveras 七 dans les nombres."
     },
     {
      "id": "zh-a0-phonetique-fr-u2-x8",
-     "kind": "write",
-     "prompt": "Écris « manger » en caractères.",
-     "model": "吃"
+     "kind": "mcq",
+     "prompt": "Quel pinyin montre explicitement les deux points de ü ?",
+     "choices": [
+      "lǜ",
+      "yú"
+     ],
+     "correct": 0,
+     "explanation": "Dans lǜ, les points restent visibles ; dans yú, la même voyelle s’écrit sans les points."
     }
    ],
    "stories": [],

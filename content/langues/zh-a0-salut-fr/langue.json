@@ -27,7 +27,8 @@
      "reading": "nǐ hǎo",
      "gloss": "bonjour",
      "pos": "interj",
-     "audio": "m:zh-nihao"
+     "audio": "m:zh-nihao",
+     "image": "m:zh-a0-salut-astra-rencontre"
     },
     {
      "id": "zh-a0-salut-fr-v2",
@@ -49,7 +50,7 @@
      "id": "zh-a0-salut-fr-v4",
      "term": "请",
      "reading": "qǐng",
-     "gloss": "s'il te plaît",
+     "gloss": "s'il te/vous plaît (devant une demande)",
      "pos": "interj",
      "audio": "m:zh-qing"
     },
@@ -65,7 +66,7 @@
      "id": "zh-a0-salut-fr-v6",
      "term": "是",
      "reading": "shì",
-     "gloss": "oui (être)",
+     "gloss": "être (sert aussi à confirmer selon la question)",
      "pos": "v",
      "audio": "m:zh-shi"
     },
@@ -73,7 +74,7 @@
      "id": "zh-a0-salut-fr-v7",
      "term": "不",
      "reading": "bù",
-     "gloss": "non",
+     "gloss": "ne… pas (négation)",
      "pos": "adv",
      "audio": "m:zh-bu"
     },
@@ -157,8 +158,8 @@
    "grammar": [
     {
      "id": "zh-a0-salut-fr-g1",
-     "title": "Pas de conjugaison, pas d'article",
-     "md": "Le chinois ne conjugue pas les verbes et n'utilise pas d'articles. L'ordre des mots suffit : **你好** (littéralement « toi bien ») veut dire « bonjour ». Un même mot sert pour tout le monde.",
+     "title": "Trois formules pour commencer",
+     "md": "Apprends d’abord **你好 nǐ hǎo** (bonjour), **谢谢 xièxie** (merci), **再见 zàijiàn** (au revoir). À Douala, à Yaoundé ou ailleurs, imagine un atelier de chinois : tu arrives, on te prête un cahier, puis tu pars. Les autres mots sont à découvrir ensuite. Lis le pinyin ; tu n’as pas à écrire les caractères de mémoire.",
      "examples": [
       {
        "text": "你好",
@@ -172,118 +173,135 @@
     },
     {
      "id": "zh-a0-salut-fr-g2",
-     "title": "La particule 吗 forme la question",
-     "md": "On ajoute **吗** (ma) en fin de phrase pour poser une question oui/non : **你好吗 ?** (comment vas-tu ?). La réponse reprend le mot clé : **好** (bien).",
+     "title": "Une question avec 吗 ma",
+     "md": "**你好吗？ nǐ hǎo ma?** signifie « Comment vas-tu ? », littéralement « Vas-tu bien ? ». **吗 ma**, léger et sans accent, marque une question oui/non. C’est un exemple pour apprendre ; ce n’est pas une formule à répéter à chaque rencontre. Dans le dialogue : **我 wǒ** = moi, **也 yě** = aussi, **你呢 nǐ ne** = et toi ? Apprends ces groupes sans analyser toute la phrase.",
      "examples": [
       {
        "text": "你好吗？",
        "tr": "Comment vas-tu ?"
       }
      ]
+    },
+    {
+     "id": "zh-a0-salut-fr-u1-g-tons",
+     "title": "Les accents font partie du mot",
+     "md": "Le pinyin aide à lire les sons : ses accents indiquent les tons, pas les accents du français. On écrit **nǐ hǎo** ; dans cette suite de deux 3es tons, le premier se prononce comme un 2e ton : **ní hǎo**. Dans **xièxie**, la première syllabe descend ; la seconde est courte et légère. Écoute si un modèle validé est disponible ; le texte seul ne vérifie pas ton oreille.",
+     "examples": []
+    },
+    {
+     "id": "zh-a0-salut-fr-u1-g-negation",
+     "title": "Être et ne… pas",
+     "md": "**是 shì** signifie « être » ; **不 bù** sert à nier. Ce ne sont pas des réponses universelles pour « oui » et « non ». Pour l’instant, reconnais ces deux mots. Les réponses complètes seront travaillées plus tard.",
+     "examples": []
     }
    ],
    "exercises": [
     {
      "id": "zh-a0-salut-fr-x1",
-     "kind": "dictation",
-     "prompt": "Écoute et écris en caractères.",
-     "audio": "m:zh-xiexie",
-     "answers": [
-      "谢谢"
-     ]
+     "kind": "mcq",
+     "prompt": "Tu arrives à un atelier de chinois. Que dis-tu ?",
+     "choices": [
+      "你好 — nǐ hǎo",
+      "再见 — zàijiàn"
+     ],
+     "correct": 0,
+     "explanation": "你好 sert à saluer ; 再见 sert à prendre congé."
     },
     {
      "id": "zh-a0-salut-fr-x2",
      "kind": "mcq",
-     "prompt": "Que veut dire 再见 ?",
+     "prompt": "再见 zàijiàn signifie…",
      "choices": [
       "bonjour",
       "merci",
       "au revoir"
      ],
-     "correct": 2
+     "correct": 2,
+     "explanation": "Réemploie 再见 au moment de partir."
     },
     {
      "id": "zh-a0-salut-fr-x3",
-     "kind": "match",
-     "prompt": "Associe chaque mot à son sens.",
-     "pairs": [
-      {
-       "a": "你好",
-       "b": "bonjour"
-      },
-      {
-       "a": "谢谢",
-       "b": "merci"
-      },
-      {
-       "a": "再见",
-       "b": "au revoir"
-      },
-      {
-       "a": "是",
-       "b": "oui"
-      },
-      {
-       "a": "不",
-       "b": "non"
-      }
-     ]
+     "kind": "mcq",
+     "prompt": "On te prête un cahier. Quelle formule convient ?",
+     "choices": [
+      "谢谢 — xièxie",
+      "你好 — nǐ hǎo",
+      "再见 — zàijiàn"
+     ],
+     "correct": 0,
+     "explanation": "谢谢 remercie la personne qui t’aide."
     },
     {
      "id": "zh-a0-salut-fr-x4",
      "kind": "speak",
-     "prompt": "Dis « merci » en chinois, puis compare avec l'enregistrement.",
-     "audio": "m:zh-xiexie",
-     "model": "xièxie (4e ton + ton neutre)"
+     "prompt": "Si tu le souhaites, dis « merci », sans micro. Sinon, lis le modèle.",
+     "model": "谢谢 xièxie : xiè descend (4e ton), xie est bref et léger (neutre).",
+     "explanation": "Compare volontairement avec le modèle. Cette auto-évaluation ne certifie pas la prononciation.",
+     "audio": "m:zh-xiexie"
     },
     {
      "id": "zh-a0-salut-fr-x5",
-     "kind": "order",
-     "prompt": "Remets les mots dans l'ordre.",
-     "answers": [
-      "我很好"
+     "kind": "mcq",
+     "prompt": "Dans 我很好 wǒ hěn hǎo, quel mot signifie « moi / je » ?",
+     "choices": [
+      "好 hǎo",
+      "我 wǒ",
+      "很 hěn"
      ],
-     "words": [
-      "我",
-      "很",
-      "好"
-     ]
+     "correct": 1,
+     "explanation": "我 wǒ désigne la personne qui parle. Retrouve-le dans l’unité Famille."
     },
     {
      "id": "zh-a0-salut-fr-x6",
-     "kind": "truefalse",
-     "prompt": "« 你好吗 ? » veut dire « Comment vas-tu ? ».",
-     "correct": 0
+     "kind": "mcq",
+     "prompt": "Dans 你好吗 nǐ hǎo ma, ma est…",
+     "choices": [
+      "un ton haut et long",
+      "une syllabe courte et légère"
+     ],
+     "correct": 1,
+     "explanation": "吗 ma porte le ton neutre : aucun accent en pinyin."
     },
     {
      "id": "zh-a0-salut-fr-x7",
-     "kind": "cloze",
-     "prompt": "Complète : 你好__ ? (particule de question).",
-     "answers": [
-      "吗"
-     ]
+     "kind": "mcq",
+     "prompt": "Quelle phrase pose la question « Comment vas-tu ? » ?",
+     "choices": [
+      "你好吗？ — nǐ hǎo ma?",
+      "你好！ — nǐ hǎo!"
+     ],
+     "correct": 0,
+     "explanation": "吗 ma transforme ici la formule en question."
     },
     {
      "id": "zh-a0-salut-fr-x8",
-     "kind": "translate",
-     "prompt": "Traduis : merci.",
-     "answers": [
-      "谢谢"
-     ]
+     "kind": "mcq",
+     "prompt": "Quel pinyin correspond à 谢谢 (merci) ?",
+     "choices": [
+      "xièxiè",
+      "xièxie"
+     ],
+     "correct": 1,
+     "explanation": "Le second xie est neutre dans le modèle de mandarin standard étudié."
     },
     {
      "id": "zh-a0-salut-fr-x9",
-     "kind": "write",
-     "prompt": "Écris « bonjour » en caractères.",
-     "model": "你好"
+     "kind": "mcq",
+     "prompt": "On écrit nǐ hǎo. Comment se prononce le premier ton dans cette suite ?",
+     "choices": [
+      "Il monte, comme un 2e ton.",
+      "Il reste haut et plat."
+     ],
+     "correct": 0,
+     "explanation": "Deux 3es tons se suivent : le premier devient montant à l’oral. L’écriture pédagogique nǐ hǎo est conservée."
     }
    ],
    "stories": [],
    "cards": [
     {
      "id": "zh-a0-salut-fr-c1",
-     "vocab": "zh-a0-salut-fr-v1"
+     "vocab": "zh-a0-salut-fr-v1",
+     "image": "m:zh-a0-salut-astra-rencontre"
     },
     {
      "id": "zh-a0-salut-fr-c2",
