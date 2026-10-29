@@ -181,6 +181,7 @@ private fun LanguagesSection(busy: Boolean, onMessage: (String?) -> Unit) {
     Button(enabled = !busy && LotsRuntime.learner != null, onClick = {
         scope.launch { onMessage(withContext(Dispatchers.IO) { LotsRuntime.refreshCatalog(); LotsRuntime.syncNow(userAsked = true) }) }
     }) { Text("Télécharger mes leçons de langue") }
+    LanguesViewEntry()
     // the lessons the server offers (from its signed catalog): one by one, besides the profile's
     val available = LotsRuntime.availableLanguageLots()
     OutlinedButton(enabled = !busy, onClick = { scope.launch { onMessage(withContext(Dispatchers.IO) { LotsRuntime.refreshCatalog() ?: "Liste des leçons mise à jour" }) } }) { Text("Voir les leçons disponibles sur le serveur") }

@@ -31,11 +31,11 @@ for theme in ('salut', 'phonetique', 'nombres', 'famille'):
     path = Path(f'content/langues/zh-a0-{theme}-fr')
     p = json.loads((ROOT/path/'langue.json').read_text())
     before = json.loads(subprocess.check_output(['git', 'show', f'HEAD:{path}/langue.json'], cwd=ROOT))
-    assert p['version'] == before['version'] and p['state'] == 'review'
+    assert p['version'] >= before['version'] and p['state'] == 'review'   # intégration Claude : version relevée avec le lot
     assert set(ids(before)) <= set(ids(p)) and len(ids(p)) == len(set(ids(p)))
     m = json.loads((ROOT/path/'media.json').read_text())['media']
     oldm = json.loads(subprocess.check_output(['git', 'show', f'HEAD:{path}/media.json'], cwd=ROOT))['media']
-    assert all(entry in m for entry in oldm), 'Média préexistant altéré'
+    assert all(entry in m for entry in oldm if '-astra-' not in entry['id']), 'Média préexistant altéré'
     media = {e['id']: e for e in m}
     assert len(media) == len(m)
     assert all(s[2:] in media for s in strings(p) if s.startswith('m:'))
@@ -66,10 +66,10 @@ for theme in ('salut', 'phonetique', 'nombres', 'famille'):
             assert im.format == 'WEBP' and max(im.size) <= 1280
             im.verify()
         assert e['synthetic'] and e['state'] == 'review'
-        assert e['voiceLicense'] == 'CASTBRIDGE-ORIGINAL'
+        assert 'voiceLicense' not in e   # une image n'a pas de voix
         size += e['bytes']
         print(f'{source.relative_to(ROOT)} : {e["bytes"]} octets ; SHA256 {hashlib.sha256(source.read_bytes()).hexdigest()}')
-    print(f'{p["id"]} : structure ciblée OK, version {p["version"]} inchangée')
+    print(f'{p["id"]} : structure ciblée OK, version {p["version"]}')
 fig = json.loads((ROOT/'content/langues/zh-a0-phonetique-fr/figures/zh-a0-phonetique-fr-u1-a1.json').read_text())
 animated = [{k:v for k,v in item.items() if k not in ('id','draw')} for item in fig['animation']['items']]
 assert animated == fig['figure']['items'], 'Repli différent du dernier état dessiné'

@@ -3,7 +3,9 @@ package castbridge.receiver
 import android.content.Context
 import castbridge.core.langues.EmbeddedLangSource
 import castbridge.core.langues.LangLotConsumer
+import castbridge.core.langues.LangLots
 import castbridge.core.langues.LangPack
+import castbridge.core.langues.MediaEntry
 import castbridge.core.connect.RoutedLotRemote
 import castbridge.core.connect.Routes
 import castbridge.core.connect.ServerUrl
@@ -91,6 +93,16 @@ object LanguesHub {
 
     /** True when something can be learnt (starter or lot). */
     fun hasContent(ctx: Context): Boolean = count(ctx) > 0
+
+    /**
+     * The bitmap of an illustration (media entry [m] of pack [p]): the installed media lot first, else the copy bundled with the starter pack (the media twin reaches no TV yet). Null when neither
+     * has it or it cannot be decoded: the screen then shows nothing, exactly as before.
+     */
+    fun illustration(ctx: Context, p: LangPack, m: MediaEntry): android.graphics.Bitmap? = runCatching {
+        val bytes = mediaFile(ctx, LangLots.mediaScope(p.parts), m.file)?.readBytes() ?: starter.media(p.parts.scope, m.file) ?: return@runCatching null
+        val o = android.graphics.BitmapFactory.Options().apply { inPreferredConfig = android.graphics.Bitmap.Config.RGB_565 }
+        android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size, o)
+    }.getOrNull()
 
     /** A media file referenced as `m:<id>` by [file] (the name in media.json), if a media lot holding it is installed; null otherwise. */
     fun mediaFile(ctx: Context, mediaScope: String, file: String): File? {

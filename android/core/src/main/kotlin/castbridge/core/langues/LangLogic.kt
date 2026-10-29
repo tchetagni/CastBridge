@@ -139,3 +139,26 @@ data class LangSkillGraph(val lang: Lang, val nodes: List<LangSkillNode>) {
         }
     }
 }
+
+/**
+ * What a lesson screen shows besides the text (TV and phone share these rules; the screens only draw). Pure. Everything is optional: no image, no explanation = the screen is exactly what it was.
+ * An image is attached to a vocabulary item either directly (`vocab.image`) or through a card of the unit (`cards[].image`); only a media entry of kind `image` counts.
+ */
+object LangVisuals {
+    const val SYNTHETIC_NOTICE = "Illustration synthétique · bêta"
+
+    /** The image entry to show with [v], or null (no reference, reference unknown, or not an image). */
+    fun image(p: LangPack, u: LangUnit, v: VocabItem): MediaEntry? {
+        val ref = v.image ?: u.cards.firstOrNull { it.vocab == v.id && it.image != null }?.image ?: return null
+        return p.media[ref.removePrefix("m:")]?.takeIf { it.kind == "image" }
+    }
+
+    /** The discreet mention under a synthetic illustration, null for any other media. */
+    fun notice(m: MediaEntry): String? = if (m.kind == "image" && m.synthetic) SYNTHETIC_NOTICE else null
+
+    /** The commented correction to show in the feedback, or null when the exercise has none. */
+    fun explanation(x: LangExercise): String? = x.explanation?.trim()?.takeIf { it.isNotEmpty() }
+
+    /** Name of the image inside a pack's `media/` folder (the manifest says `images/<name>`, the folder is flat); null for an unsafe name. */
+    fun fileName(file: String): String? = file.substringAfterLast('/').takeIf { it.isNotEmpty() && it != ".." && !it.contains('\\') && !file.contains("..") }
+}

@@ -83,8 +83,11 @@ class LanguesTest {
         assertFailsWith<LangPackJson.ParseError> { LangPackJson.parse(emptyMap()) }
     }
     @Test fun unknownExerciseKindIsAParseError() {
-        val src = content.resolve("zh-a0-salut-fr/langue.json").readText().replace("\"dictation\"", "\"karaoke\"")
-        assertContains(assertFailsWith<LangPackJson.ParseError> { LangPackJson.parse(mapOf("langue.json" to src)) }.message!!, "karaoke")
+        // independent fixture (the real packs no longer hold a dictation): a known kind parses, the same pack with an unknown kind is refused
+        fun src(kind: String) = """{"format":1,"type":"langue","id":"zh-a1-test-fr","version":1,"target":"zh","level":"A1","theme":"test","source":"fr","title":"t","state":"review",
+               "units":[{"id":"zh-a1-test-fr-u1","title":"u","exercises":[{"id":"zh-a1-test-fr-x1","kind":"$kind","prompt":"p","answers":["a"],"audio":"m:a"}]}]}"""
+        assertEquals(LangExerciseKind.DICTATION, LangPackJson.parse(mapOf("langue.json" to src("dictation"))).units.single().exercises.single().kind)
+        assertContains(assertFailsWith<LangPackJson.ParseError> { LangPackJson.parse(mapOf("langue.json" to src("karaoke"))) }.message!!, "karaoke")
     }
     @Test fun existingLearnPacksAreNotLanguagePacks() {
         // backward compatibility: a « learn » pack.json never parses as a language pack, and its folder is not under content/langues
@@ -105,8 +108,10 @@ class LanguesTest {
             """{"id":"zh-a1-test-fr-x4","kind":"mcq","prompt":"p","choices":["a","b","c"],"correct":0,"wrongWhy":["x",3,"z"]}""")
         assertNull(odd[0].explanation); assertEquals(emptyList(), odd[0].wrongWhy)
         assertEquals(listOf("x", "", "z"), odd[1].wrongWhy)
-        // the bundled sample pack, written before these fields existed, reads exactly as before
-        assertTrue(samplePack().units.flatMap { it.exercises }.all { it.explanation == null && it.wrongWhy.isEmpty() })
+        // a pack written before these fields existed (independent fixture, not the bundled packs, which now carry explanations) reads exactly as before
+        val legacy = parse("""{"id":"zh-a1-test-fr-x5","kind":"truefalse","prompt":"p","correct":1}""", """{"id":"zh-a1-test-fr-x6","kind":"cloze","prompt":"p","answers":["a"]}""")
+        assertTrue(legacy.all { it.explanation == null && it.wrongWhy.isEmpty() })
+        assertEquals(listOf(1, null), legacy.map { it.correct })
     }
 
     // ---- marking ----

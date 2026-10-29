@@ -19,7 +19,7 @@ import castbridge.core.langues.*
 /**
  * « Langues » (docs/LANGUES.md): the smallest honest viewer. Languages and levels come from the installed `langues` lots; a pack opens
  * on its units (vocabulary, dialogues, grammar notes, stories as text), then the exercises of the unit, marked with [LangMarking].
- * D-pad only: every line is a focusable button. Not done yet: media (audio / video / images: the media lots are not on the TV), the
+ * D-pad only: every line is a focusable button. Illustrations (word images, with the synthetic mention) and commented corrections are shown. Not done yet: audio / video (the media lots are not on the TV), the
  * « match » and « strokes » exercises, spaced repetition cards, placement test, progress saving, animations.
  */
 class LanguesActivity : Activity() {
@@ -174,7 +174,7 @@ class LanguesActivity : Activity() {
         clear(u.title, "${u.minutes} min")
         if (u.vocab.isNotEmpty()) {
             heading("Vocabulaire")
-            for (v in u.vocab) label("${v.term}" + (v.reading?.let { "   $it" } ?: "") + "   —   ${v.gloss}", 36)
+            for (v in u.vocab) { label("${v.term}" + (v.reading?.let { "   $it" } ?: "") + "   —   ${v.gloss}", 36); illustration(p, u, v) }
         }
         for (d in u.dialogues) {
             heading("Dialogue : ${d.title}")
@@ -193,6 +193,17 @@ class LanguesActivity : Activity() {
         else label("Pas d'exercice dans cette unité.", 30, GamesColors.TEXT_MEDIUM, top = 30)
         button("Retour") { onBackPressed() }
         focusFirst()
+    }
+
+    /** The illustration of a word, when its image is available (installed media lot, else bundled with the starter): shown under the word, never focusable, with the synthetic mention. */
+    private fun illustration(p: LangPack, u: LangUnit, v: VocabItem) {
+        val m = LangVisuals.image(p, u, v) ?: return
+        val bmp = LanguesHub.illustration(this, p, m) ?: return
+        body.addView(android.widget.ImageView(this).apply {
+            setImageBitmap(bmp); scaleType = android.widget.ImageView.ScaleType.FIT_START; adjustViewBounds = true; isFocusable = false
+            contentDescription = m.alt ?: v.gloss
+        }, LinearLayout.LayoutParams(dx.px(720), dx.px(480)).apply { topMargin = dx.px(10) })
+        LangVisuals.notice(m)?.let { label(it, 24, GamesColors.TEXT_MEDIUM, top = 4) }
     }
 
     /** Restricted Markdown of the notes → plain text (the TV shows no formatting). */
@@ -230,12 +241,12 @@ class LanguesActivity : Activity() {
                 }
                 LangExerciseKind.SPEAK, LangExerciseKind.WRITE -> {
                     lateinit var b: Button
-                    b = button("Voir la réponse modèle") { body.removeView(b); label("Modèle : ${x.model}", 34, GamesColors.SUCCESS, top = 24); selfAssess(x) }
+                    b = button("Voir la réponse modèle") { body.removeView(b); label("Modèle : ${x.model}", 34, GamesColors.SUCCESS, top = 24); explain(x); selfAssess(x) }
                 }
                 LangExerciseKind.MATCH -> {
                     label("Associez, dans la tête, chaque mot à son équivalent, puis vérifiez.", 28, GamesColors.TEXT_MEDIUM)
                     lateinit var b: Button
-                    b = button("Voir les paires") { body.removeView(b); x.pairs.forEach { (l, r) -> label("$l   =   $r", 34, GamesColors.SUCCESS) }; selfAssess(x) }
+                    b = button("Voir les paires") { body.removeView(b); x.pairs.forEach { (l, r) -> label("$l   =   $r", 34, GamesColors.SUCCESS) }; explain(x); selfAssess(x) }
                 }
                 else -> typed(x)
             }
@@ -255,6 +266,9 @@ class LanguesActivity : Activity() {
             button("Vérifier", primary = true) { check() }
         }
 
+        /** The commented correction, when the exercise has one (nothing is drawn otherwise). */
+        private fun explain(x: LangExercise) { LangVisuals.explanation(x)?.let { label("Explication : $it", 30, GamesColors.TEXT_MEDIUM, top = 22) } }
+
         private fun selfAssess(x: LangExercise) {
             label("Votre réponse était-elle juste ?", 30, GamesColors.TEXT_MEDIUM, top = 24)
             button("Oui") { graded++; right++; i++; show() }
@@ -270,6 +284,7 @@ class LanguesActivity : Activity() {
                 if (expected != null) label("Réponse attendue : $expected", 36)
                 if (typed.isNotBlank() && x.answers.any { LangMarking.sameIgnoringTones(it, typed) }) label("Presque : les tons (accents) comptent.", 30, GamesColors.TEXT_MEDIUM)
             }
+            explain(x)
             button("Suivant", primary = true) { i++; show() }
             focusFirst()
         }
