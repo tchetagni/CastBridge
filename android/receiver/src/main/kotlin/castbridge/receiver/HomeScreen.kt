@@ -80,6 +80,11 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
     private val zoom = SlowZoom(bg)
     private val heroTitle = TextView(act).apply { setTextColor(Color.WHITE); textSize = 34f; typeface = TvFonts.bold; maxLines = 1; ellipsize = TextUtils.TruncateAt.END }
     private val heroSub = TextView(act).apply { setTextColor(TvStyle.TEXT2); textSize = TvStyle.Type.BODY; maxLines = 2 }
+    private val keyHint = TextView(act).apply {
+        text = "← → Choisir   ·   OK Ouvrir   ·   ↓ Vos vidéos"
+        textSize = TvStyle.Type.CAPTION; setTextColor(TvStyle.TEXT2)
+        setPadding(dp(8), dp(6), dp(8), dp(12))
+    }
     private val chip = TextView(act).apply {
         setTextColor(Color.WHITE); textSize = TvStyle.Type.CAPTION; isFocusable = true; isClickable = true
         maxLines = 2; ellipsize = android.text.TextUtils.TruncateAt.END      // the live reception line (name · % · speed · transport · phone) never pushes the clock away
@@ -127,19 +132,22 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         top.addView(TextClock(act).apply { format24Hour = "HH:mm"; format12Hour = "HH:mm"; textSize = 30f; setTextColor(Color.WHITE) })
         content.addView(top)
         content.addView(signalRow, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(8) })   // the status bar is a pill in the header now: the full width is free
-        content.addView(heroTitle, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(26) })
+        content.addView(heroTitle, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(12) })
         // Fixed height: a one- or two-line description never pushes the rows around.
         heroSub.minLines = 2
         content.addView(heroSub, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(4); bottomMargin = dp(6) })
         content.addView(scroll, LinearLayout.LayoutParams(-1, 0, 1f))
+        content.addView(keyHint, LinearLayout.LayoutParams(-1, -2))
         root.addView(content, FrameLayout.LayoutParams(-1, -1))
         contentBox = content
         root.addView(gridBox, FrameLayout.LayoutParams(-1, -1))                       // la grille d'un groupe recouvre l'accueil
         container.addView(root, FrameLayout.LayoutParams(-1, -1))
         // OK on the chip: the cause and the action are the first lines of « Connexion & réglages »; the code is revealed for 10 s
         chip.setOnClickListener { revealUntil = System.currentTimeMillis() + 10_000; refreshStatus(force = true); if (signal != null) api.openSettings() }
-        chip.setOnFocusChangeListener { _, has -> signal?.takeIf { has }?.let { heroTitle.text = it.text; heroSub.text = it.action ?: castbridge.core.ux.TvSignal.LEGEND } }
-        TvStyle.focusZoom(chip)
+        TvStyle.focusZoom(chip) { has -> if (has) {
+            keyHint.text = "OK Connexion et code   ·   → État de la TV   ·   ↓ Accueil"
+            signal?.let { heroTitle.text = it.text; heroSub.text = it.action ?: castbridge.core.ux.TvSignal.LEGEND }
+        } }
     }
 
     private val tick = object : Runnable { override fun run() { if (visible && !paused) { reload(); refreshTools(); main.postDelayed(this, 4000) } } }
@@ -267,7 +275,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
             heroSub.text = "Vos vidéos et vos fichiers apparaissent dans un instant."
         } else if (items.isEmpty() && !loading) {
             heroTitle.text = "Bienvenue sur CastBridge"
-            heroSub.text = "Pour relier votre téléphone sans code : « Ajouter un téléphone », ci-dessous. Ensuite, envoyez une vidéo depuis l'app CastBridge : elle apparaîtra ici, prête à regarder, même sans réseau."
+            heroSub.text = "Ouvrez « Téléphones et réseau », puis « Ajouter un téléphone ». Envoyez ensuite une vidéo depuis CastBridge sur votre téléphone."
             bg.setImageBitmap(null)
         } else if (lastFocused == null) {
             val first = wanted.firstOrNull()?.second?.firstOrNull()
@@ -309,9 +317,8 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
     private var toolsSig = ""
 
     private fun tools(): View {
-        val w = dp(170)
         val box = LinearLayout(act).apply { orientation = LinearLayout.HORIZONTAL; setPadding(dp(4), dp(8), 0, 0); clipChildren = false }
-        val title = TextView(act).apply { text = "Outils et fonctions"; setTextColor(TvStyle.TEXT2); textSize = 20f; typeface = TvFonts.bold; setPadding(dp(14), dp(4), 0, 0) }
+        val title = TextView(act).apply { text = "Votre espace"; setTextColor(TvStyle.TEXT2); textSize = 20f; typeface = TvFonts.bold; setPadding(dp(14), dp(4), 0, 0) }
         fillTools(box)
         return LinearLayout(act).apply {
             orientation = LinearLayout.VERTICAL; clipChildren = false
@@ -322,7 +329,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
     }
 
     private fun fillTools(box: LinearLayout) {
-        val w = dp(170)
+        val w = dp(HomeGroupStyle.HOME_WIDTH_DP)
         val list = api.tools().ifEmpty {
             listOf(HomeTool(R.drawable.ic_cb_bibliotheque, "Bibliothèque", "Toutes vos vidéos et vos fichiers, en grille.", null, false, id = "library") { api.openLibrary() },
                 HomeTool(R.drawable.ic_cb_reglages, "Connexion & réglages", "Code, adresse, Bluetooth, stockage…", null, false, id = "settings") { api.openSettings() },
@@ -338,14 +345,14 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
             val v: View = when (e) {
                 is castbridge.core.tv.home.HomeEntry.Direct -> {
                     val t = toolsById.getValue(e.id)
-                    IconTile(act, t, w).also { v ->
+                    IconTile(act, t, w, HomeGroupStyle.HOME_LABEL_SP, TvStyle.Type.CAPTION, 40, dp(HomeGroupStyle.HOME_HEIGHT_DP)).also { v ->
                         v.setOnClickListener { opened = castbridge.core.ux.TvHomeFocus.Opened.TOOL; openedTool = index; t.action() }
-                        v.setOnFocusChangeListener { _, has -> if (has) { heroTitle.text = t.label; heroSub.text = t.description + (t.status?.let { "  —  $it" } ?: "") } }
+                        TvStyle.focusZoom(v) { has -> if (has) { heroTitle.text = t.label; heroSub.text = t.description + (t.status?.let { "  —  $it" } ?: ""); keyHint.text = "← → Choisir   ·   OK Ouvrir   ·   ↓ Vos vidéos" } }
                     }
                 }
                 is castbridge.core.tv.home.HomeEntry.Group -> GroupTile(act, e).also { v ->
                     v.setOnClickListener { opened = castbridge.core.ux.TvHomeFocus.Opened.TOOL; openedTool = index; openGrid(e.id) }
-                    v.setOnFocusChangeListener { _, has -> if (has) { heroTitle.text = e.label; heroSub.text = e.tiles.joinToString(" · ") { it.label } + "  —  " + e.summary } }
+                    TvStyle.focusZoom(v) { has -> if (has) { heroTitle.text = e.label; heroSub.text = e.tiles.joinToString(" · ") { it.label }; keyHint.text = "← → Choisir   ·   OK Voir le groupe   ·   ↓ Vos vidéos" } }
                 }
             }
             box.addView(v)
@@ -408,6 +415,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
     private fun describe(i: LibraryItem) {
         lastFocused = i
         heroTitle.text = i.title
+        keyHint.text = "← → Choisir   ·   OK Lire   ·   Appui long OK / MENU Options"
         val m = i.meta
         heroSub.text = listOfNotNull(
             if (m.resumeMs > 0 && !m.watched) "Reprendre à ${LibraryLogic.clock(m.resumeMs)}" else if (m.watched) "Déjà vu" else null,

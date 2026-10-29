@@ -20,6 +20,9 @@ import castbridge.core.tv.home.HomeKey
 object HomeGroupStyle {
     const val LABEL_SP = 28f
     const val STATUS_SP = 20f
+    const val HOME_WIDTH_DP = 208
+    const val HOME_HEIGHT_DP = 176
+    const val HOME_LABEL_SP = 23f
     /** Icône du bouton de groupe (la logique ne connaît pas les ressources). */
     fun icon(groupId: String) = when (groupId) {
         castbridge.core.tv.home.HomeGroups.MEDIA -> R.drawable.ic_cb_bibliotheque
@@ -34,7 +37,8 @@ object HomeGroupStyle {
 class GroupTile(ctx: android.content.Context, val entry: HomeEntry.Group) : IconTile(
     ctx,
     HomeTool(HomeGroupStyle.icon(entry.id), entry.label, entry.tiles.joinToString(" · ") { it.label }, entry.summary, entry.on, entry.warn, entry.id) {},
-    TvStyle.dp(ctx, 236), HomeGroupStyle.LABEL_SP, HomeGroupStyle.STATUS_SP, 60, TvStyle.dp(ctx, 232), ringIdle = true,
+    TvStyle.dp(ctx, HomeGroupStyle.HOME_WIDTH_DP), HomeGroupStyle.HOME_LABEL_SP, TvStyle.Type.CAPTION,
+    40, TvStyle.dp(ctx, HomeGroupStyle.HOME_HEIGHT_DP), ringIdle = true,
 )
 
 /** Une tuile d'outil, en grande taille, pour la grille. */
@@ -70,8 +74,7 @@ class GridPanel(private val act: Activity, private val container: FrameLayout) {
                 if (t == null) { row.addView(View(act), LinearLayout.LayoutParams(0, 1, 1f)); continue }
                 val index = made.size
                 val v = GridTile(act, t).also { made.add(it) }
-                v.setOnFocusChangeListener { view, has ->
-                    view.animate().scaleX(if (has) 1.06f else 1f).scaleY(if (has) 1.06f else 1f).setDuration(120).start()
+                TvStyle.focusZoom(v) { has ->
                     if (has) { focusedTileId = t.id; desc.text = t.description + (t.status?.let { "  —  $it" } ?: "") }
                 }
                 v.setOnClickListener { onOpen(index) }

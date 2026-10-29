@@ -36,6 +36,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -306,6 +307,57 @@ fun TvHome(onAdvanced: () -> Unit, onBluetooth: () -> Unit = onAdvanced) {
         TransferQueueCard(showNotificationHint = !sendCardShown)      // R-52 : le même texte une seule fois à l'écran (la carte d'envoi le porte quand elle est là)
         TextButton(onClick = { RecentCopiesActivity.open(ctx) }) { Text("Dernières copies") }
 
+        val now = info?.takeIf { it.playing != null && it.state != "idle" }
+        // Now playing
+        AnimatedVisibility(now != null) {
+            now?.let { n ->
+                Card(Modifier.fillMaxWidth().clickable { showPlayer = true }, colors = CardDefaults.cardColors(containerColor = cs.primaryContainer)) {
+                    Row(Modifier.padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Filled.Tv, null, tint = cs.primary)
+                        Column(Modifier.weight(1f).padding(horizontal = 12.dp)) {
+                            Text("Sur la TV", style = MaterialTheme.typography.labelMedium, color = cs.primary)
+                            Text(LibraryLogic.title(n.playing!!), maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.titleMedium)
+                            if (n.dur > 0) LinearProgressIndicator({ n.pos.toFloat() / n.dur }, Modifier.fillMaxWidth().padding(top = 6.dp))
+                        }
+                        IconButton({ RemoteActivity.open(ctx) }) { Icon(cbv(R.drawable.ic_cb_telecommande), "Télécommande") }
+                        IconButton({ cmd { if (n.state == "playing") pause() else resume() } }) { Icon(if (n.state == "playing") cbv(R.drawable.ic_cb_pause) else cbv(R.drawable.ic_cb_lecture), "Lecture / pause") }
+                    }
+                }
+            }
+        }
+
+        // Frequent actions come before library housekeeping and connection diagnostics.
+        Text("Que voulez-vous faire ?", style = MaterialTheme.typography.titleMedium)
+        fun pickFor(move: Boolean) {
+            if (!castbridge.core.ux.HomeNotices.canPick(session != null, tvName)) { msg = castbridge.core.ux.HomeNotices.pickBlocked(TvLinkManager.saved.list().size); return }
+            moveNext = move; pick.launch(arrayOf("video/*", "audio/*"))
+        }
+        TaskPair(
+            first = { m -> Task(cbv(R.drawable.ic_cb_envoyer), castbridge.core.ux.SendWay.COPY.label, castbridge.core.ux.SendWays.HOME_COPY_HINT, m) { PhoneConnect.feature("send"); pickFor(move = false) } },
+            second = { m -> Task(cbv(R.drawable.ic_cb_deplacer_vers_tv), castbridge.core.ux.SendWay.MOVE.label, castbridge.core.ux.SendWays.HOME_MOVE_HINT, m) { PhoneConnect.feature("move"); pickFor(move = true) } },
+        )
+        TaskPair(
+            first = { m -> Task(Icons.Filled.PlayCircle, "Regarder sur la TV", if (now != null) "Lecture en cours" else "Choisir une vidéo", m) {
+                PhoneConnect.feature("watch_on_tv")
+                when { client == null -> msg = castbridge.core.ux.HomeNotices.needsTv("Regarder sur la TV"); now != null -> showPlayer = true; else -> showLibrary = true }
+            } },
+            second = { m -> Task(cbv(R.drawable.ic_cb_telecommande), "Télécommande", "Flèches, OK, volume, clavier", m) { PhoneConnect.feature("remote"); RemoteActivity.open(ctx) } },
+        )
+        TaskPair(
+            first = { m -> Task(cbv(R.drawable.ic_cb_bibliotheque), "Bibliothèque de la TV", "${items.size} fichier(s)", m) { PhoneConnect.feature("tv_library"); if (client == null) msg = castbridge.core.ux.HomeNotices.needsTv("Bibliothèque de la TV") else showLibrary = true } },
+            second = { m -> Task(Icons.Filled.SwapVert, "Échanger des fichiers", "Dans les deux sens", m) { PhoneConnect.feature("file_exchange"); if (client == null) msg = castbridge.core.ux.HomeNotices.needsTv("Échanger des fichiers") else showExchange = true } },
+        )
+
+        // Continue watching
+        val resume = LibrarySections.build(items).firstOrNull { it.id == LibrarySections.RESUME }?.items.orEmpty()
+            .ifEmpty { LibraryLogic.sortNewestFirst(items.filter { it.type != castbridge.core.tv.MediaType.OTHER }, { it.mtime }, { it.name }).take(8) }
+        if (resume.isNotEmpty() && client != null) {
+            Text(if (resume.any { it.resumeMs > 0 && !it.watched }) "Reprendre sur la TV" else "Récemment ajoutés", style = MaterialTheme.typography.titleMedium)
+            LazyRow(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                items(resume, key = { "${it.volume}:${it.name}" }) { i -> Poster(client, i) { cmd { play(i.name, if (i.watched) 0 else i.resumeMs) } } }
+            }
+        }
+
         // Series in « Titre / Saison » folders (virtual: nothing moves), automatic after each send, or on demand with a confirmation and an undo
         var autoClass by remember { mutableStateOf(SeriesClassifying.auto(ctx)) }
         var confirmPlan by remember { mutableStateOf<List<castbridge.core.library.agent.SeriesClassifier.Move>?>(null) }
@@ -356,57 +408,6 @@ fun TvHome(onAdvanced: () -> Unit, onBluetooth: () -> Unit = onAdvanced) {
             )
         }
 
-        // Now playing
-        val now = info?.takeIf { it.playing != null && it.state != "idle" }
-        AnimatedVisibility(now != null) {
-            now?.let { n ->
-                Card(Modifier.fillMaxWidth().clickable { showPlayer = true }, colors = CardDefaults.cardColors(containerColor = cs.primaryContainer)) {
-                    Row(Modifier.padding(14.dp), verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Filled.Tv, null, tint = cs.primary)
-                        Column(Modifier.weight(1f).padding(horizontal = 12.dp)) {
-                            Text("Sur la TV", style = MaterialTheme.typography.labelMedium, color = cs.primary)
-                            Text(LibraryLogic.title(n.playing!!), maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.titleMedium)
-                            if (n.dur > 0) LinearProgressIndicator({ n.pos.toFloat() / n.dur }, Modifier.fillMaxWidth().padding(top = 6.dp))
-                        }
-                        IconButton({ RemoteActivity.open(ctx) }) { Icon(cbv(R.drawable.ic_cb_telecommande), "Télécommande") }
-                        IconButton({ cmd { if (n.state == "playing") pause() else resume() } }) { Icon(if (n.state == "playing") cbv(R.drawable.ic_cb_pause) else cbv(R.drawable.ic_cb_lecture), "Lecture / pause") }
-                    }
-                }
-            }
-        }
-
-        // Tasks
-        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            // files with nowhere to go are refused BEFORE the picker, with the reason (they used to be picked then dropped in silence)
-            fun pickFor(move: Boolean) {
-                if (!castbridge.core.ux.HomeNotices.canPick(session != null, tvName)) { msg = castbridge.core.ux.HomeNotices.pickBlocked(TvLinkManager.saved.list().size); return }
-                moveNext = move; pick.launch(arrayOf("video/*", "audio/*"))
-            }
-            Task(cbv(R.drawable.ic_cb_envoyer), castbridge.core.ux.SendWay.COPY.label, castbridge.core.ux.SendWays.HOME_COPY_HINT, Modifier.weight(1f)) { PhoneConnect.feature("send"); pickFor(move = false) }
-            Task(cbv(R.drawable.ic_cb_deplacer_vers_tv), castbridge.core.ux.SendWay.MOVE.label, castbridge.core.ux.SendWays.HOME_MOVE_HINT, Modifier.weight(1f)) { PhoneConnect.feature("move"); pickFor(move = true) }
-        }
-        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            Task(Icons.Filled.PlayCircle, "Regarder sur la TV", if (now != null) "Lecture en cours" else "Choisir une vidéo", Modifier.weight(1f)) {
-                PhoneConnect.feature("watch_on_tv")
-                when { client == null -> msg = castbridge.core.ux.HomeNotices.needsTv("Regarder sur la TV"); now != null -> showPlayer = true; else -> showLibrary = true }
-            }
-            Task(cbv(R.drawable.ic_cb_telecommande), "Télécommande", "Flèches, OK, volume, clavier", Modifier.weight(1f)) { PhoneConnect.feature("remote"); RemoteActivity.open(ctx) }
-        }
-        Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            Task(cbv(R.drawable.ic_cb_bibliotheque), "Bibliothèque de la TV", "${items.size} fichier(s)", Modifier.weight(1f)) { PhoneConnect.feature("tv_library"); if (client == null) msg = castbridge.core.ux.HomeNotices.needsTv("Bibliothèque de la TV") else showLibrary = true }
-            Task(Icons.Filled.SwapVert, "Échanger des fichiers", "Dans les deux sens", Modifier.weight(1f)) { PhoneConnect.feature("file_exchange"); if (client == null) msg = castbridge.core.ux.HomeNotices.needsTv("Échanger des fichiers") else showExchange = true }
-        }
-
-        // Continue watching
-        val resume = LibrarySections.build(items).firstOrNull { it.id == LibrarySections.RESUME }?.items.orEmpty()
-            .ifEmpty { LibraryLogic.sortNewestFirst(items.filter { it.type != castbridge.core.tv.MediaType.OTHER }, { it.mtime }, { it.name }).take(8) }
-        if (resume.isNotEmpty() && client != null) {
-            Text(if (resume.any { it.resumeMs > 0 && !it.watched }) "Reprendre sur la TV" else "Récemment ajoutés", style = MaterialTheme.typography.titleMedium)
-            LazyRow(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                items(resume, key = { "${it.volume}:${it.name}" }) { i -> Poster(client, i) { cmd { play(i.name, if (i.watched) 0 else i.resumeMs) } } }
-            }
-        }
-
         // R-14 (owner 2026-10-03): the explicit « Wi-Fi Direct » button, with its cause when it cannot start (castbridge.core.link.WdManualView)
         WdManualCard(tv = session?.tv ?: TvLinkManager.savedFor(tvName), session = session, credential = session?.credential ?: pin,
             onPair = { adding = true }, onEnterCode = { wizard = true })
@@ -440,13 +441,31 @@ fun TvHome(onAdvanced: () -> Unit, onBluetooth: () -> Unit = onAdvanced) {
 }
 
 @Composable
+private fun TaskPair(first: @Composable (Modifier) -> Unit, second: @Composable (Modifier) -> Unit) {
+    val fontScale = LocalDensity.current.fontScale
+    BoxWithConstraints(Modifier.fillMaxWidth()) {
+        if (maxWidth < 360.dp || fontScale > 1.2f) {
+            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                first(Modifier.fillMaxWidth())
+                second(Modifier.fillMaxWidth())
+            }
+        } else {
+            Row(Modifier.height(IntrinsicSize.Min), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                first(Modifier.weight(1f).fillMaxHeight())
+                second(Modifier.weight(1f).fillMaxHeight())
+            }
+        }
+    }
+}
+
+@Composable
 private fun Task(icon: ImageVector, title: String, sub: String, modifier: Modifier, onClick: () -> Unit) {
     val cs = MaterialTheme.colorScheme
-    ElevatedCard(modifier.clickable(onClick = onClick), shape = RoundedCornerShape(20.dp)) {
-        Column(Modifier.padding(18.dp).fillMaxWidth()) {
-            Box(Modifier.size(52.dp).clip(RoundedCornerShape(16.dp)).background(Brush.linearGradient(listOf(MaterialTheme.colorScheme.surfaceVariant, MaterialTheme.colorScheme.surface))),
-                contentAlignment = Alignment.Center) { Icon(icon, null, tint = Color.White, modifier = Modifier.size(30.dp)) }
-            Spacer(Modifier.height(14.dp))
+    ElevatedCard(onClick = onClick, modifier = modifier, shape = RoundedCornerShape(16.dp)) {
+        Column(Modifier.padding(16.dp).fillMaxWidth()) {
+            Box(Modifier.size(40.dp).clip(RoundedCornerShape(16.dp)).background(Brush.linearGradient(listOf(MaterialTheme.colorScheme.surfaceVariant, MaterialTheme.colorScheme.surface))),
+                contentAlignment = Alignment.Center) { Icon(icon, null, tint = cs.primary, modifier = Modifier.size(26.dp)) }
+            Spacer(Modifier.height(10.dp))
             Text(title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
             Text(sub, style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
         }
