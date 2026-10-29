@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!-- Android exige la position pour LIRE le nom du Wi-Fi du téléphone ; demandée seulement par un appui sur « Voir le Wi-Fi de ce téléphone », jamais en arrière-plan, jamais gardée ni envoyée -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- Android exige la position pour LIRE le nom du Wi-Fi du téléphone ; demandée seulement par un appui sur « Voir le Wi-Fi de ce téléphone », jamais en arrière-plan, jamais gardée ni envoyée ;
+         ownerlib la déclare avec maxSdkVersion="30" et la fusion des manifestes le reportait ici : sur Android 12 et plus FINE n'était jamais accordable, le nom restait « <unknown ssid> » -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" tools:remove="android:maxSdkVersion" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />

@@ -800,6 +800,8 @@ class PlayerActivity : Activity(), TvService.Screen {
             // « Seul le Bluetooth » (docs/agent-reports/auto-wifi-direct.md): the automatic Wi-Fi Direct group needs it; same « Appareils à proximité » group as
             // BLUETOOTH_CONNECT (one answer for both), neverForLocation. Nothing starts a group until a trusted phone asks.
             if (Build.VERSION.SDK_INT >= 33) add(Manifest.permission.NEARBY_WIFI_DEVICES)
+            // Position (FINE + COARSE, exigées ensemble depuis Android 12) : Android ne donne le nom du Wi-Fi qu'avec elle ; refusée, la puce d'accueil n'affiche simplement aucun nom.
+            if (Build.VERSION.SDK_INT >= 23) { add(Manifest.permission.ACCESS_FINE_LOCATION); add(Manifest.permission.ACCESS_COARSE_LOCATION) }
         }.filter { checkSelfPermission(it) != PackageManager.PERMISSION_GRANTED }
         if (wanted.isEmpty()) svc?.onPermissionsReady()
         else runCatching { requestPermissions(wanted.toTypedArray(), REQ_PERMS) }.onFailure { svc?.onPermissionsReady() }

@@ -28,7 +28,10 @@
     <!-- Wi-Fi Direct group: NEARBY_WIFI_DEVICES on 33+, fine location on 29-32 (runtime, opt-in from the MENU) -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.NEARBY_WIFI_DEVICES" android:usesPermissionFlags="neverForLocation" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" android:maxSdkVersion="32" />
+    <!-- Sans limite de version : sur Android 13 et plus FINE ne sert pas au Wi-Fi Direct (NEARBY_WIFI_DEVICES) mais à LIRE le nom du Wi-Fi de la puce d'accueil (« <unknown ssid> » sans elle, TV Android 14).
+         COARSE est exigée avec FINE depuis Android 12. Demandées au lancement, refus toléré : la puce n'affiche alors aucun nom. -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-feature android:name="android.hardware.wifi.direct" android:required="false" />
     <!-- Downloads (aria2): keep downloading with the screen off -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
