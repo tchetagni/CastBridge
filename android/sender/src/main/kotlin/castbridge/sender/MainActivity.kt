@@ -103,7 +103,10 @@ class MainActivity : ComponentActivity() {
         var settings by rememberSaveable { mutableStateOf(false) }
         val home = castbridge.core.ux.PhoneTabs.index(castbridge.core.ux.PhoneTabs.Tab.HOME)
         // screen_time per tab (ids of EventCatalog: the "CastBridge TV" tab is the app's home); the Parental tab is never reported
-        LaunchedEffect(tab, settings) { if (!settings) castbridge.core.ux.PhoneTabs.at(tab).screen?.let { PhoneConnect.screens.enter(it) } }
+        LaunchedEffect(tab, settings) {
+            val screen = castbridge.core.ux.PhoneTabs.at(tab).screen
+            if (settings || tab == 6 || screen == null) PhoneConnect.screens.leave() else PhoneConnect.screens.enter(screen)
+        }
         fun select(i: Int) {
             if (i != tab) castbridge.core.ux.PhoneTabs.at(i).feature?.let { PhoneConnect.feature(it, "tile") }
             tab = i

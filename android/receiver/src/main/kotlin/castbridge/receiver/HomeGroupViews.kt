@@ -37,7 +37,7 @@ object HomeGroupStyle {
 /** Bouton de groupe : une grande tuile (icône + nom + résumé), contour discret pour la distinguer d'une tuile d'outil. */
 class GroupTile(ctx: android.content.Context, val entry: HomeEntry.Group, width: Int = TvStyle.dp(ctx, HomeGroupStyle.HOME_WIDTH_DP), height: Int = TvStyle.dp(ctx, HomeGroupStyle.HOME_HEIGHT_DP)) : IconTile(
     ctx,
-    HomeTool(HomeGroupStyle.icon(entry.id), entry.label, entry.tiles.joinToString(" · ") { it.label }, entry.summary, entry.on, entry.warn, entry.id) {},
+    HomeTool(HomeGroupStyle.icon(entry.id), entry.label, entry.tiles.joinToString(" · ") { it.label }, entry.summary, false, false, entry.id) {},
     width, HomeGroupStyle.HOME_LABEL_SP, TvStyle.Type.CAPTION,
     40, height, ringIdle = true,
 )

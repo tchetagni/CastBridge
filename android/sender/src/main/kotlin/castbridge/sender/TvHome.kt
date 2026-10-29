@@ -421,14 +421,19 @@ fun TvHome(onAdvanced: () -> Unit, onBluetooth: () -> Unit = onAdvanced) {
                     Text(if (waiting != null) "$waiting\nLa copie attend avant de poursuivre. Vous pouvez consulter les détails dans la file ci-dessous." else listOf(eta(total - sent, shownAvg), if (shownAvg > 0) "${formatSize(shownAvg)}/s" else "").filter { it.isNotEmpty() }.joinToString("  ·  "),
                         style = MaterialTheme.typography.bodyMedium, color = cs.onSurfaceVariant)
                     var confirmCancel by remember { mutableStateOf(false) }
-                    TextButton(onClick = { confirmCancel = true }) { Text("Annuler la copie", color = cs.error) }
+                    var cancelItemId by remember { mutableStateOf<Long?>(null) }
+                    TextButton(onClick = {
+                        cancelItemId = TransferQueue.items.value.firstOrNull { it.status == castbridge.core.tv.QueueStatus.RUNNING }?.id
+                        confirmCancel = true
+                    }) { Text("Annuler la copie", color = cs.error) }
                     if (confirmCancel) AlertDialog(onDismissRequest = { confirmCancel = false },
                         title = { Text("Annuler cette copie ?") }, text = { Text("Les fichiers d’origine restent sur le téléphone. Les autres fichiers de la file ne sont pas annulés.") },
                         confirmButton = { TextButton(onClick = {
                             confirmCancel = false
-                            val active = TransferQueue.items.value.firstOrNull { it.status == castbridge.core.tv.QueueStatus.RUNNING }
-                            if (active != null) TransferQueue.cancel(ctx, active.id)
-                            else if (btActive) BtUploadService.cancel(ctx) else UploadService.cancel(ctx)
+                            val id = cancelItemId
+                            if (id != null) TransferQueue.cancel(ctx, id)
+                            else if (btActive && BtUploadService.state.value == b) BtUploadService.cancel(ctx)
+                            else if (!btActive && UploadService.state.value == u) UploadService.cancel(ctx)
                         }) { Text("Annuler la copie") } },
                         dismissButton = { TextButton(onClick = { confirmCancel = false }) { Text("Continuer") } })
                 }
@@ -441,7 +446,7 @@ fun TvHome(onAdvanced: () -> Unit, onBluetooth: () -> Unit = onAdvanced) {
         TransferQueueCard(showNotificationHint = !sendCardShown)      // R-52 : le même texte une seule fois à l'écran (la carte d'envoi le porte quand elle est là)
         TextButton(onClick = { RecentCopiesActivity.open(ctx) }) { Text("Dernières copies") }
 
-        val now = info?.takeIf { it.playing != null && it.state != "idle" }
+        val now = info?.takeIf { reachable && it.playing != null && it.state != "idle" }
         // Now playing
         AnimatedVisibility(now != null) {
             now?.let { n ->

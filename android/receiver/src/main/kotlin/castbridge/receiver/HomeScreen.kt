@@ -340,7 +340,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
 
     private fun fillTools(box: GridLayout) {
         val available = act.resources.displayMetrics.widthPixels - dp(136)
-        val w = ((available - dp(48)) / 4).coerceAtLeast(dp(140))
+        val w = ((available - dp(64)) / 4).coerceAtLeast(dp(140))
         val list = api.tools().ifEmpty {
             listOf(HomeTool(R.drawable.ic_cb_bibliotheque, "Bibliothèque", "Toutes vos vidéos et vos fichiers, en grille.", null, false, id = "library") { api.openLibrary() },
                 HomeTool(R.drawable.ic_cb_reglages, "Connexion & réglages", "Code, adresse, Bluetooth, stockage…", null, false, id = "settings") { api.openSettings() },
@@ -383,7 +383,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
                 height = dp(if (isMore) 52 else HomeGroupStyle.HOME_HEIGHT_DP)
                 columnSpec = GridLayout.spec(if (isMore) 0 else ordinary % 4, if (isMore) 4 else 1)
                 rowSpec = GridLayout.spec(if (isMore) (ordinary + 3) / 4 else ordinary / 4)
-                setMargins(dp(4), dp(8), dp(4), dp(8))
+                setMargins(dp(8), dp(8), dp(8), dp(8))
             })
         }
         focusedId?.let { id -> box.getChildAt(entries.indexOfFirst { it.id == id }.coerceAtLeast(0))?.requestFocus() }
