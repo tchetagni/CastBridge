@@ -19,9 +19,8 @@ def text(im,xy,s,size=32,fill=INK,center=False,zh=False):
     d.text(xy,s,font=f,fill=fill)
 def base(title):
     im=Image.new('RGB',(W,H),BG)
-    text(im,(42,23),title,30)
+    text(im,(42,13),title,38)
     ImageDraw.Draw(im).line((42,69,812,69), fill=TEAL,width=3)
-    text(im,(42,438),'MANDARIN A0  •  VIDÉO MUETTE',18)
     return im
 salut=Image.open(ROOT/'sources/zh-a0-salut-astra-rencontre.webp').convert('RGB')
 famille=Image.open(ROOT/'sources/zh-a0-famille-astra-scene.webp').convert('RGB')
@@ -37,7 +36,7 @@ def greetings(t):
     text(im,(653,145),hz,62,center=True,zh=True)
     text(im,(653,227),py,38,center=True)
     text(im,(653,292),fr,30,center=True)
-    text(im,(653,373),f'{k+1} / 3',22,center=True)
+    text(im,(653,373),f'{k+1} / 3',36,center=True)
     return im
 TONES=[('1er ton','mā',[5,5]),('2e ton','má',[3,5]),('3e ton isolé','mǎ',[2,1,4]),('4e ton','mà',[5,1])]
 def tones(t):
@@ -45,28 +44,29 @@ def tones(t):
     if k==4:
         text(im,(427,103),'Ton neutre : ma',44,center=True)
         text(im,(427,181),'Bref, sans contour fixe',36,center=True)
-        text(im,(427,237),'Sa hauteur dépend du ton précédent.',29,center=True)
+        text(im,(427,237),'Sa hauteur dépend du ton précédent.',37,center=True)
         text(im,(427,307),'Exemple : nǐ hǎo ma ?',36,center=True)
-        text(im,(427,373),'Pas de « cinquième courbe » universelle.',26,center=True)
+        text(im,(427,373),'Pas de « cinquième courbe » universelle.',37,center=True)
         return im
     label,py,levels=TONES[k]
-    text(im,(628,135),label,33,center=True)
-    text(im,(628,197),py,68,center=True)
-    text(im,(628,303),'Écouter plus tard,',25,center=True)
-    text(im,(628,338),'puis imiter.',25,center=True)
+    text(im,(628,125),label,33,center=True)
+    text(im,(628,180),py,68,center=True)
+    text(im,(628,272),'Écouter plus tard,',37,center=True)
+    text(im,(628,316),'puis imiter.',37,center=True)
     d=ImageDraw.Draw(im)
     for level in range(1,6):
-        y=365-(level-1)*58
+        y=335-(level-1)*50
         d.line((110,y,435,y),fill='#c8c9b8',width=2)
-        text(im,(72,y-14),str(level),24)
-    pts=[(120+i*300/(len(levels)-1),365-(v-1)*58) for i,v in enumerate(levels)]
+        text(im,(66,y-21),str(level),37)
+    pts=[(120+i*300/(len(levels)-1),335-(v-1)*50) for i,v in enumerate(levels)]
     progress=min(1,max(0,(local-.4)/1.65))
     for i in range(len(pts)-1):
         p=min(1,max(0,progress*(len(pts)-1)-i))
         if p:
             a,b=pts[i],pts[i+1]; end=(a[0]+(b[0]-a[0])*p,a[1]+(b[1]-a[1])*p)
             d.line((a,end),fill=TEAL,width=10); d.ellipse((end[0]-7,end[1]-7,end[0]+7,end[1]+7),fill=RUST)
-    text(im,(427,398),'Schéma isolé ; en phrase, le 3e ton reste souvent bas.',23,center=True)
+    text(im,(427,372),'Schéma isolé ;',37,center=True)
+    text(im,(427,414),'en phrase, le 3e ton reste souvent bas.',37,center=True)
     return im
 NUMS=[('一','yī'),('二','èr'),('三','sān'),('四','sì'),('五','wǔ'),('六','liù'),('七','qī'),('八','bā'),('九','jiǔ'),('十','shí')]
 def count(t,start):
@@ -81,20 +81,20 @@ def count(t,start):
     text(im,(670,102),str(n),74,center=True)
     text(im,(670,199),hz,62,center=True,zh=True)
     text(im,(670,285),py,46,center=True)
-    text(im,(427,394),'Un cahier de plus à chaque étape.',25,center=True)
+    text(im,(427,396),'Un cahier de plus à chaque étape.',37,center=True)
     return im
 FAMILY=[('爸爸','bàba','Papa'),('妈妈','māma','Maman'),('哥哥','gēge','Frère aîné'),('姐姐','jiějie','Sœur aînée'),('弟弟','dìdi','Frère cadet'),('妹妹','mèimei','Sœur cadette')]
 def family(t):
     k=min(int(t/3),5); hz,py,fr=FAMILY[k]; im=base('Les mots de la famille')
     picture(im,famille,(42,103,390,260),min(1,t/.5))
-    text(im,(237,378),'Une famille fictive',23,center=True)
+    text(im,(237,372),'Une famille fictive',37,center=True)
     text(im,(628,100),hz,62,center=True,zh=True)
     text(im,(628,184),py,40,center=True)
     text(im,(628,249),fr,32,center=True)
     if k>=2:
-        text(im,(628,310),'Plus âgé(e) que moi' if k<4 else 'Plus jeune que moi',25,center=True)
-    else: text(im,(628,310),'Deux syllabes',25,center=True)
-    text(im,(628,365),'2e syllabe : ton neutre',23,center=True)
+        text(im,(628,310),'Plus âgé(e) que moi' if k<4 else 'Plus jeune que moi',36,center=True)
+    else: text(im,(628,310),'Deux syllabes',36,center=True)
+    text(im,(600,376),'2e syllabe : ton neutre',36,center=True)
     return im
 SPECS=[('salutations',9,greetings),('tons',18,tones),('nombres-1-5',15,lambda t:count(t,1)),('nombres-6-10',15,lambda t:count(t,6)),('famille',18,family)]
 def main():
