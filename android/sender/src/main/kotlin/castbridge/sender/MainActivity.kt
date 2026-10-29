@@ -122,6 +122,9 @@ class MainActivity : ComponentActivity() {
             topBar = {
                 Column {
                     TopAppBar(
+                        navigationIcon = {
+                            if (tab in listOf(0, 2, 4, 5)) IconButton({ select(6) }) { Icon(Icons.Filled.ArrowBack, "Retour à Découvrir") }
+                        },
                         title = {
                             // hidden entry (nothing on screen mentions it): 7 taps on the logo then a long press. Only reacts if this build carries the owner's hash.
                             val seq = remember { castbridge.core.owner.TapSequence() }
@@ -146,27 +149,35 @@ class MainActivity : ComponentActivity() {
                         },
                         colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.surface),
                     )
-                    // scrollable: four tabs never squeeze or wrap their labels on a narrow phone
-                    ScrollableTabRow(selectedTabIndex = tab, containerColor = MaterialTheme.colorScheme.surface, edgePadding = 0.dp) {
-                        val ic = Modifier.size(20.dp)
-                        LeadingIconTab(tab == 0, onClick = { select(0) }, text = { Text(castbridge.core.ux.PhoneTabs.Tab.DLNA.label, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) }, icon = { CbIcon(R.drawable.ic_cb_caster, null, ic) })
-                        LeadingIconTab(tab == 1, onClick = { select(1) }, text = { Text(castbridge.core.ux.PhoneTabs.Tab.HOME.label, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) }, icon = { CbIcon(R.drawable.ic_cb_recevoir_du_telephone, null, ic) })
-                        LeadingIconTab(tab == 2, onClick = { select(2) }, text = { Text(castbridge.core.ux.PhoneTabs.Tab.GAMES.label, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) }, icon = { CbIcon(R.drawable.ic_cb_quiz, null, ic) })
-                        LeadingIconTab(tab == 3, onClick = { select(3) }, text = { Text(castbridge.core.ux.PhoneTabs.Tab.PHONE.label, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) }, icon = { CbIcon(R.drawable.ic_cb_sur_le_telephone, null, ic) })
-                        LeadingIconTab(tab == 4, onClick = { select(4) }, text = { Text(castbridge.core.ux.PhoneTabs.Tab.LEARN.label, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) }, icon = { CbIcon(R.drawable.ic_cb_apprendre, null, ic) })
-                        LeadingIconTab(tab == 5, onClick = { select(5) }, text = { Text(castbridge.core.ux.PhoneTabs.Tab.PARENTAL.label, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) }, icon = { Icon(Icons.Filled.Lock, null, ic) })
+
+                }
+            },
+            bottomBar = {
+                Column {
+                    castbridge.sender.player.CastMiniBar()
+                    NavigationBar(containerColor = MaterialTheme.colorScheme.surface) {
+                        NavigationBarItem(selected = !settings && tab == home, onClick = { settings = false; select(home) },
+                            icon = { Icon(Icons.Filled.Tv, null) }, label = { Text("Ma TV", maxLines = 1) })
+                        NavigationBarItem(selected = !settings && tab == 3, onClick = { settings = false; select(3) },
+                            icon = { Icon(Icons.Filled.Folder, null) }, label = { Text("Fichiers", maxLines = 1) })
+                        NavigationBarItem(selected = !settings && tab != home && tab != 3, onClick = { settings = false; select(6) },
+                            icon = { Icon(Icons.Filled.Explore, null) }, label = { Text("Découvrir", maxLines = 1) })
+                        NavigationBarItem(selected = settings, onClick = { settings = true },
+                            icon = { CbIcon(R.drawable.ic_cb_reglages, null) }, label = { Text("Réglages", maxLines = 1) })
                     }
                 }
             },
-            bottomBar = { castbridge.sender.player.CastMiniBar(Modifier.navigationBarsPadding()) },
         ) { pad ->
             Column(Modifier.padding(pad).fillMaxSize()) {
                 // sub-brand wordmark (branding/logo) above the Apprendre tab; the Jeux tab shows its own cards
                 if (castbridge.core.ux.QueueGlances.stripVisible(onHome = tab == home, glance = glance)) glance?.let { g -> QueueStrip(g) { select(home) } }
                 if (castbridge.core.ux.BtGatewayView.stripVisible(onHome = tab == home, glance = gwGlance)) gwGlance?.let { g -> GatewayStrip(g) { select(home) } }
                 if (tab == 4) SubBrandHeader(R.drawable.logo_apprendre_horizontal, "Apprendre")
-                Box(Modifier.weight(1f).fillMaxWidth()) { when (tab) { 0 -> App(); 1 -> TvHub(); 2 -> GamesScreen(); 3 -> castbridge.sender.player.PhoneLibraryScreen(); 5 -> ParentalTab(); else -> LearnScreen() } }
+                Box(Modifier.weight(1f).fillMaxWidth()) { when (tab) { 0 -> App(); 1 -> TvHub(); 2 -> GamesScreen(); 3 -> castbridge.sender.player.PhoneLibraryScreen(); 5 -> ParentalTab(); 4 -> LearnScreen(); else -> DiscoverScreen { select(it) } } }
             }
+        }
+        androidx.activity.compose.BackHandler(enabled = !settings && tab != home) {
+            select(if (tab in listOf(0, 2, 4, 5)) 6 else home)
         }
         MoveHandler()
         AutoWifiDirectAsker()       // R-14: the one just-in-time request of the automatic Wi-Fi Direct (permission, or the Wi-Fi panel)

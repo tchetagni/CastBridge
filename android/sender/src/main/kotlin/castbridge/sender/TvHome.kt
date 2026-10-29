@@ -158,7 +158,8 @@ fun TvHome(onAdvanced: () -> Unit, onBluetooth: () -> Unit = onAdvanced) {
     var showSettings by remember { mutableStateOf(false) }
 
     LaunchedEffect(client?.base, client?.pin) {
-        var n = 0
+        reachable = false
+        info = null
         var linked = false
         while (client != null) {
             val seenAs = session?.tv?.let { it.mdns ?: it.name } ?: tvName
@@ -185,15 +186,32 @@ fun TvHome(onAdvanced: () -> Unit, onBluetooth: () -> Unit = onAdvanced) {
                 if (castbridge.core.trust.HomeTvMatch.refuseOn401(match)) tvName?.let { k -> client.pin?.let { pins.refused(k, it) } }
                 msg = castbridge.core.ux.HomeNotices.error(castbridge.core.trust.CredentialDecision.PIN_CHANGED); wizard = true; break
             }
-            if (n++ % 5 == 0) withContext(Dispatchers.IO) { runCatching { items = TvLibraryParser.parse(client.library()) } }
             delay(2000)
         }
     }
-    var moveNext by remember { mutableStateOf(false) }       // the next picked file is moved (deleted from the phone once on the TV)
+    // A slow USB scan must never hold up the connection indicator. Discard data from the previous TV.
+    LaunchedEffect(client?.base, client?.pin) {
+        items = emptyList()
+        while (client != null) {
+            val fresh = withContext(Dispatchers.IO) { runCatching { TvLibraryParser.parse(client.library()) }.getOrNull() }
+            if (fresh != null) items = fresh
+            delay(10_000)
+        }
+    }
+    var moveNext by rememberSaveable { mutableStateOf(false) }       // the next picked file is moved (deleted from the phone once on the TV)
+    var pendingFiles by rememberSaveable { mutableStateOf(arrayListOf<String>()) }
+    var playAfterCopy by rememberSaveable { mutableStateOf(false) }
+    var extraTools by rememberSaveable { mutableStateOf(false) }
     val pick = rememberLauncherForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) { uris ->
-        if (uris.isEmpty()) return@rememberLauncherForActivityResult
+        playAfterCopy = false
+        pendingFiles = ArrayList(uris.map { it.toString() })
+    }
+    fun enqueueSelected() {
+        val uris = pendingFiles.map(Uri::parse)
+        if (uris.isEmpty()) return
         // the link dropped while the picker was open: say it (the files used to be dropped without a word)
-        if (!castbridge.core.ux.HomeNotices.canPick(session != null, tvName)) { msg = castbridge.core.ux.HomeNotices.pickBlocked(TvLinkManager.saved.list().size); return@rememberLauncherForActivityResult }
+        if (!castbridge.core.ux.HomeNotices.canPick(session != null, tvName)) { msg = castbridge.core.ux.HomeNotices.pickBlocked(TvLinkManager.saved.list().size); return }
+        pendingFiles = arrayListOf()
         val move = moveNext; moveNext = false
         var queued = 0
         var refused: String? = null
@@ -207,10 +225,10 @@ fun TvHome(onAdvanced: () -> Unit, onBluetooth: () -> Unit = onAdvanced) {
             // R-09: the code path goes through the queue as well (a second file used to be dropped, several files refused)
             var last: TransferQueue.Ticket? = null
             if (session != null) {
-                runCatching { last = TransferQueue.add(ctx, uri, name, size, move, autoPlay = uris.size == 1, progressive = progressive); queued++ }
+                runCatching { last = TransferQueue.add(ctx, uri, name, size, move, autoPlay = playAfterCopy && uris.size == 1, progressive = progressive && playAfterCopy); queued++ }
                     .onFailure { refused = "Impossible de mettre l'envoi en file : ${it.message}" }
             } else {
-                runCatching { last = TransferQueue.add(ctx, uri, name, size, move, autoPlay = uris.size == 1, progressive = progressive, tvName = tvName!!, credential = pin); queued++ }
+                runCatching { last = TransferQueue.add(ctx, uri, name, size, move, autoPlay = playAfterCopy && uris.size == 1, progressive = progressive && playAfterCopy, tvName = tvName!!, credential = pin); queued++ }
                     .onFailure { refused = "Impossible de mettre l'envoi en file : ${it.message}" }
             }
             if (uris.size == 1) last?.takeIf { it.queued }?.let { msg = castbridge.core.ux.HomeNotices.info(it.text) }
@@ -230,8 +248,11 @@ fun TvHome(onAdvanced: () -> Unit, onBluetooth: () -> Unit = onAdvanced) {
     val cs = MaterialTheme.colorScheme
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp).animateContentSize(), verticalArrangement = Arrangement.spacedBy(14.dp)) {
         // « Ouvrir sur la TV » (OpenTv.kt) : CastBridge-TV passe devant l'application qui est à l'écran de la TV ; déjà devant, le bouton ouvre la télécommande
-        OpenTvButton(onAlready = { RemoteActivity.open(ctx) })
-        // The TV
+        Text("Ma TV", style = MaterialTheme.typography.headlineLarge)
+        Text("Vos fichiers et votre télécommande, au même endroit.", style = MaterialTheme.typography.bodyMedium, color = cs.onSurfaceVariant)
+        // The connection has its own stable surface; technical maintenance stays below the primary actions.
+        Card(Modifier.fillMaxWidth(), shape = RoundedCornerShape(20.dp)) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
         if (TvLinkManager.saved.list().isNotEmpty()) {
             TvLinkStatus(link, onAdd = { adding = true }, onManage = { managing = true })
             if (reachable) info?.let { Text("${formatSize(it.free)} libres sur la TV", style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant) }
@@ -245,14 +266,17 @@ fun TvHome(onAdvanced: () -> Unit, onBluetooth: () -> Unit = onAdvanced) {
                 Text(tvName?.removePrefix("CastBridge TV ")?.ifBlank { "Ma TV" } ?: "Ma TV", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
                 Text(if (reachable) "Connectée" + (if (fallback.viaBluetooth) " par Bluetooth" else "") + (info?.let { " · ${formatSize(it.free)} libres" } ?: "")
                     else if (ambiguous) "Votre TV n'est plus à son adresse, ou une autre TV du même modèle est là : touchez « Changer » pour la choisir (son code est gardé)."
-                    else sig?.title ?: "Recherche de la TV… (même Wi-Fi, app CastBridge TV installée)",
+                    else sig?.title ?: "Recherche de la TV…",
                     style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
             }
             TextButton(onClick = { wizard = true }) { Text("Changer") }
         }
 
+        }
+        }
+
         // Wi-Fi absent: the honest state (orange Bluetooth / red neither) and the « Passerelle Bluetooth » button, right under the TV
-        if (!reachable || fallback.signal != null) BtGatewayHomeBlock(fallback.signal, reachable, onAddTv = { adding = true }, onChoose = onBluetooth)
+        if (extraTools && (!reachable || fallback.signal != null)) BtGatewayHomeBlock(fallback.signal, reachable, onAddTv = { adding = true }, onChoose = onBluetooth)
 
         // The message line: right under the TV, where it is seen (it used to sit below the posters, out of sight)
         msg?.let { n ->
@@ -261,6 +285,24 @@ fun TvHome(onAdvanced: () -> Unit, onBluetooth: () -> Unit = onAdvanced) {
                 IconButton({ msg = null }) { Icon(Icons.Filled.Close, "Fermer le message") }
             }
         }
+
+        fun pickFor(move: Boolean) {
+            if (!castbridge.core.ux.HomeNotices.canPick(session != null, tvName)) { msg = castbridge.core.ux.HomeNotices.pickBlocked(TvLinkManager.saved.list().size); return }
+            moveNext = move; pick.launch(arrayOf("video/*", "audio/*"))
+        }
+        Button(onClick = { PhoneConnect.feature("send"); pickFor(move = false) },
+            modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp), shape = RoundedCornerShape(16.dp)) {
+            Icon(cbv(R.drawable.ic_cb_envoyer), null)
+            Spacer(Modifier.width(12.dp))
+            Text("Envoyer des fichiers", style = MaterialTheme.typography.titleMedium)
+        }
+        TaskPair(
+            first = { m -> Task(cbv(R.drawable.ic_cb_telecommande), "Télécommande", "Piloter la TV", m) { PhoneConnect.feature("remote"); RemoteActivity.open(ctx) } },
+            second = { m -> Task(cbv(R.drawable.ic_cb_bibliotheque), "Bibliothèque TV", if (reachable) "Vos vidéos et fichiers" else "En attente de connexion", m) {
+                PhoneConnect.feature("tv_library")
+                if (client == null) msg = castbridge.core.ux.HomeNotices.needsTv("Bibliothèque de la TV") else showLibrary = true
+            } },
+        )
 
         // Big progress while sending
         val u = upload
@@ -290,13 +332,24 @@ fun TvHome(onAdvanced: () -> Unit, onBluetooth: () -> Unit = onAdvanced) {
             ElevatedCard(Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     NotificationHintRow()           // R-52 : Android jette les notifications de CastBridge ⇒ le dire ici, avec « Autoriser » (rien quand tout va bien)
-                    Text("Envoi vers la TV", style = MaterialTheme.typography.labelLarge, color = cs.primary)
+                    Text(if (waiting != null) "Copie en attente" else "Copie en cours", style = MaterialTheme.typography.labelLarge, color = if (waiting != null) Cb.warning else Cb.info)
                     Text(name as String, style = MaterialTheme.typography.titleMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                    Text("${sent * 100 / total.coerceAtLeast(1)} %", fontSize = 44.sp, fontWeight = FontWeight.Bold)
-                    LinearProgressIndicator({ sent.toFloat() / total.coerceAtLeast(1) }, Modifier.fillMaxWidth().height(8.dp).clip(RoundedCornerShape(4.dp)))
-                    Text(if (waiting != null) "En pause : $waiting — reprise automatique" else listOf(eta(total - sent, shownAvg), if (shownAvg > 0) "${formatSize(shownAvg)}/s" else "").filter { it.isNotEmpty() }.joinToString("  ·  "),
+                    Text("${(sent.toDouble() * 100 / total.coerceAtLeast(1)).toInt().coerceIn(0, 100)} %", fontSize = 44.sp, fontWeight = FontWeight.Bold)
+                    LinearProgressIndicator({ (sent.toFloat() / total.coerceAtLeast(1)).coerceIn(0f, 1f) }, Modifier.fillMaxWidth().height(8.dp).clip(RoundedCornerShape(4.dp)), color = if (waiting != null) Cb.warning else Cb.info)
+                    Text("${formatSize(sent)} sur ${formatSize(total)}", style = MaterialTheme.typography.bodyMedium)
+                    Text(if (waiting != null) "$waiting\nLa copie attend avant de poursuivre. Vous pouvez consulter les détails dans la file ci-dessous." else listOf(eta(total - sent, shownAvg), if (shownAvg > 0) "${formatSize(shownAvg)}/s" else "").filter { it.isNotEmpty() }.joinToString("  ·  "),
                         style = MaterialTheme.typography.bodyMedium, color = cs.onSurfaceVariant)
-                    TextButton(onClick = { if (btActive) BtUploadService.cancel(ctx) else UploadService.cancel(ctx) }) { Text("Annuler l'envoi") }
+                    var confirmCancel by remember { mutableStateOf(false) }
+                    TextButton(onClick = { confirmCancel = true }) { Text("Annuler la copie", color = cs.error) }
+                    if (confirmCancel) AlertDialog(onDismissRequest = { confirmCancel = false },
+                        title = { Text("Annuler cette copie ?") }, text = { Text("Les fichiers d’origine restent sur le téléphone. Les autres fichiers de la file ne sont pas annulés.") },
+                        confirmButton = { TextButton(onClick = {
+                            confirmCancel = false
+                            val active = TransferQueue.items.value.firstOrNull { it.status == castbridge.core.tv.QueueStatus.RUNNING }
+                            if (active != null) TransferQueue.cancel(ctx, active.id)
+                            else if (btActive) BtUploadService.cancel(ctx) else UploadService.cancel(ctx)
+                        }) { Text("Annuler la copie") } },
+                        dismissButton = { TextButton(onClick = { confirmCancel = false }) { Text("Continuer") } })
                 }
             }
         }
@@ -326,28 +379,6 @@ fun TvHome(onAdvanced: () -> Unit, onBluetooth: () -> Unit = onAdvanced) {
             }
         }
 
-        // Frequent actions come before library housekeeping and connection diagnostics.
-        Text("Que voulez-vous faire ?", style = MaterialTheme.typography.titleMedium)
-        fun pickFor(move: Boolean) {
-            if (!castbridge.core.ux.HomeNotices.canPick(session != null, tvName)) { msg = castbridge.core.ux.HomeNotices.pickBlocked(TvLinkManager.saved.list().size); return }
-            moveNext = move; pick.launch(arrayOf("video/*", "audio/*"))
-        }
-        TaskPair(
-            first = { m -> Task(cbv(R.drawable.ic_cb_envoyer), castbridge.core.ux.SendWay.COPY.label, castbridge.core.ux.SendWays.HOME_COPY_HINT, m) { PhoneConnect.feature("send"); pickFor(move = false) } },
-            second = { m -> Task(cbv(R.drawable.ic_cb_deplacer_vers_tv), castbridge.core.ux.SendWay.MOVE.label, castbridge.core.ux.SendWays.HOME_MOVE_HINT, m) { PhoneConnect.feature("move"); pickFor(move = true) } },
-        )
-        TaskPair(
-            first = { m -> Task(Icons.Filled.PlayCircle, "Regarder sur la TV", if (now != null) "Lecture en cours" else "Choisir une vidéo", m) {
-                PhoneConnect.feature("watch_on_tv")
-                when { client == null -> msg = castbridge.core.ux.HomeNotices.needsTv("Regarder sur la TV"); now != null -> showPlayer = true; else -> showLibrary = true }
-            } },
-            second = { m -> Task(cbv(R.drawable.ic_cb_telecommande), "Télécommande", "Flèches, OK, volume, clavier", m) { PhoneConnect.feature("remote"); RemoteActivity.open(ctx) } },
-        )
-        TaskPair(
-            first = { m -> Task(cbv(R.drawable.ic_cb_bibliotheque), "Bibliothèque de la TV", "${items.size} fichier(s)", m) { PhoneConnect.feature("tv_library"); if (client == null) msg = castbridge.core.ux.HomeNotices.needsTv("Bibliothèque de la TV") else showLibrary = true } },
-            second = { m -> Task(Icons.Filled.SwapVert, "Échanger des fichiers", "Dans les deux sens", m) { PhoneConnect.feature("file_exchange"); if (client == null) msg = castbridge.core.ux.HomeNotices.needsTv("Échanger des fichiers") else showExchange = true } },
-        )
-
         // Continue watching
         val resume = LibrarySections.build(items).firstOrNull { it.id == LibrarySections.RESUME }?.items.orEmpty()
             .ifEmpty { LibraryLogic.sortNewestFirst(items.filter { it.type != castbridge.core.tv.MediaType.OTHER }, { it.mtime }, { it.name }).take(8) }
@@ -358,6 +389,16 @@ fun TvHome(onAdvanced: () -> Unit, onBluetooth: () -> Unit = onAdvanced) {
             }
         }
 
+        TextButton(onClick = { extraTools = !extraTools }) {
+            Text(if (extraTools) "Masquer les autres actions" else "Autres actions et connexion")
+            Icon(if (extraTools) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore, null)
+        }
+        if (extraTools) {
+        OpenTvButton(onAlready = { RemoteActivity.open(ctx) })
+        TaskPair(
+            first = { m -> Task(cbv(R.drawable.ic_cb_deplacer_vers_tv), castbridge.core.ux.SendWay.MOVE.label, castbridge.core.ux.SendWays.HOME_MOVE_HINT, m) { PhoneConnect.feature("move"); pickFor(move = true) } },
+            second = { m -> Task(Icons.Filled.SwapVert, "Échanger des fichiers", "Téléphone et TV", m) { if (client == null) msg = castbridge.core.ux.HomeNotices.needsTv("Échanger des fichiers") else showExchange = true } },
+        )
         // Series in « Titre / Saison » folders (virtual: nothing moves), automatic after each send, or on demand with a confirmation and an undo
         var autoClass by remember { mutableStateOf(SeriesClassifying.auto(ctx)) }
         var confirmPlan by remember { mutableStateOf<List<castbridge.core.library.agent.SeriesClassifier.Move>?>(null) }
@@ -423,8 +464,33 @@ fun TvHome(onAdvanced: () -> Unit, onBluetooth: () -> Unit = onAdvanced) {
             supportingContent = { Text("Adresse manuelle, Bluetooth, Wi-Fi Direct, passerelle SSH, stockage de la TV, installation d'applications") },
             trailingContent = { Icon(Icons.Filled.ChevronRight, null) },
             colors = ListItemDefaults.colors(containerColor = Color.Transparent))
+        }
     }
 
+    if (pendingFiles.isNotEmpty()) AlertDialog(
+        onDismissRequest = { pendingFiles = arrayListOf() },
+        title = { Text(if (moveNext) "Déplacer vers la TV" else "Envoyer à la TV") },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                Text(session?.tv?.name ?: tvName ?: "Votre TV", style = MaterialTheme.typography.titleMedium)
+                Text("${pendingFiles.size} fichier(s) sélectionné(s)")
+                Text("Destination : selon le réglage de stockage de la TV.")
+                if (reachable) info?.let { Text("${formatSize(it.free)} libres actuellement. L’espace sera vérifié au démarrage.", style = MaterialTheme.typography.bodySmall) }
+                if (moveNext) Text("Les originaux seront supprimés du téléphone après vérification de la copie sur la TV.", color = cs.error)
+                if (pendingFiles.size == 1) {
+                    Text("Après la copie", style = MaterialTheme.typography.titleSmall)
+                    listOf(false to "Garder dans la bibliothèque", true to "Lire sur la TV").forEach { (play, label) ->
+                        Row(Modifier.fillMaxWidth().clickable { playAfterCopy = play }.heightIn(min = 48.dp), verticalAlignment = Alignment.CenterVertically) {
+                            RadioButton(selected = playAfterCopy == play, onClick = { playAfterCopy = play })
+                            Text(label, Modifier.weight(1f))
+                        }
+                    }
+                }
+            }
+        },
+        confirmButton = { TextButton(onClick = { enqueueSelected() }) { Text(if (moveNext) "Déplacer" else "Commencer la copie") } },
+        dismissButton = { TextButton(onClick = { pendingFiles = arrayListOf() }) { Text("Retour") } },
+    )
     if (showLibrary && client != null) TvLibraryDialog(client, onDismiss = { showLibrary = false },
         onDownload = { i -> DownloadService.start(ctx, client.base, client.pin, i.name, i.size); showLibrary = false; showExchange = true })
     if (showExchange && client != null) TvTransferDialog(client, onDismiss = { showExchange = false })
@@ -498,18 +564,34 @@ private fun FirstConnection(tvs: List<Tv>, onRetry: () -> Unit, onAdvanced: () -
     var error by remember { mutableStateOf<String?>(null) }
     var checking by remember { mutableStateOf(false) }
     val cs = MaterialTheme.colorScheme
-    Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(24.dp), verticalArrangement = Arrangement.spacedBy(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally) {
-        Icon(Icons.Filled.Tv, null, Modifier.size(72.dp), tint = cs.primary)
-        notice?.let { Text(it, color = cs.error, textAlign = TextAlign.Center) }
+    var showHelp by rememberSaveable { mutableStateOf(false) }
+    Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(24.dp), verticalArrangement = Arrangement.spacedBy(20.dp)) {
+        Box(Modifier.size(72.dp).clip(RoundedCornerShape(22.dp)).background(cs.surfaceVariant), contentAlignment = Alignment.Center) {
+            Icon(Icons.Filled.Tv, null, Modifier.size(40.dp), tint = cs.primary)
+        }
+        notice?.let { Text(it, color = cs.error) }
         val c = chosen
         if (c == null) {
-            Text("Trouvons votre TV", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.SemiBold)
-            Button(onClick = onAddTv, modifier = Modifier.fillMaxWidth(0.9f)) { Icon(Icons.Filled.Bluetooth, null); Spacer(Modifier.width(8.dp)); Text("Ajouter ma TV (Bluetooth, sans code)") }
-            gateway()
-            Text("La façon la plus simple : pas d'adresse, pas de code à saisir. Sinon, avec le code de la TV :", textAlign = TextAlign.Center, color = cs.onSurfaceVariant)
-            Text("Ouvrez l'app CastBridge TV sur la TV. Le téléphone et la TV doivent être sur le même Wi-Fi.", textAlign = TextAlign.Center, color = cs.onSurfaceVariant)
-            if (tvs.isEmpty()) { CircularProgressIndicator(); Text("Recherche…", color = cs.onSurfaceVariant) }
+            Text("Votre téléphone.\nVotre TV.", style = MaterialTheme.typography.headlineLarge)
+            Text("Reliez-les une fois pour envoyer vos vidéos et piloter la TV.", style = MaterialTheme.typography.bodyLarge, color = cs.onSurfaceVariant)
+            Card(Modifier.fillMaxWidth()) {
+                Column(Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    Text("1. Ouvrez CastBridge sur la TV", style = MaterialTheme.typography.titleMedium)
+                    Text("2. Choisissez Recevoir", style = MaterialTheme.typography.titleMedium)
+                    Text("3. Ajoutez-la ici", style = MaterialTheme.typography.titleMedium)
+                }
+            }
+            Button(onClick = onAddTv, modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp), shape = RoundedCornerShape(16.dp)) {
+                Icon(Icons.Filled.Add, null); Spacer(Modifier.width(8.dp)); Text("Ajouter ma TV")
+            }
+            Text("Association Bluetooth, sans code à saisir.", style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
+            HorizontalDivider()
+            Text("Ou se connecter en Wi-Fi", style = MaterialTheme.typography.titleMedium)
+            Text("Placez les deux appareils sur le même réseau, puis choisissez votre TV.", style = MaterialTheme.typography.bodyMedium, color = cs.onSurfaceVariant)
+            if (tvs.isEmpty()) Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                Icon(Icons.Filled.Search, null, tint = cs.onSurfaceVariant)
+                Text("Aucune TV détectée pour le moment.", style = MaterialTheme.typography.bodyMedium, color = cs.onSurfaceVariant)
+            }
             tvs.forEach { t ->
                 // R-10: the user chose the TV; a code already kept for that exact name is offered (hidden), confirmed by « Se connecter »
                 ElevatedCard(Modifier.fillMaxWidth().clickable { chosen = t; error = null; code = kept(t).takeIf { Pin.isValidFormat(it) }.orEmpty() }) {
@@ -521,10 +603,15 @@ private fun FirstConnection(tvs: List<Tv>, onRetry: () -> Unit, onAdvanced: () -
                 }
             }
             TextButton(onClick = onRetry) { Text("Chercher à nouveau") }
-            TextButton(onClick = onAdvanced) { Text("Ma TV n'apparaît pas (adresse manuelle, Bluetooth, sans box)") }
+            TextButton(onClick = { showHelp = !showHelp }) { Text("Ma TV n’apparaît pas") }
+            if (showHelp) {
+                Text("Vérifiez que CastBridge-TV est ouvert. Vous pouvez aussi connecter les appareils sans box Wi-Fi.", style = MaterialTheme.typography.bodyMedium)
+                gateway()
+                OutlinedButton(onClick = onAdvanced) { Text("Autres moyens de connexion") }
+            }
         } else {
             Text("Saisissez le code de la TV", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.SemiBold)
-            Text("Il est affiché sur la TV : écran d'accueil, en haut (touche OK sur « code » pour l'afficher en entier), ou MENU > Connexion & réglages. " +
+            Text("Sur la TV, ouvrez Recevoir, puis Code PIN. Vous le trouverez aussi dans Connexion et réglages. " +
                 "Vous ne le saisirez qu'une fois.", textAlign = TextAlign.Center, color = cs.onSurfaceVariant)
             OutlinedTextField(code, { v -> code = v.filter { it.isDigit() }.take(Pin.LENGTH); error = null }, singleLine = true,
                 textStyle = MaterialTheme.typography.headlineMedium.copy(textAlign = TextAlign.Center, letterSpacing = 8.sp),
@@ -560,7 +647,7 @@ fun TransferQueueCard(showNotificationHint: Boolean = true) {
     val note by TransferQueue.note.collectAsState()
     val wdLine by AutoWifiDirect.line.collectAsState()
     // R-12: a file not copied because the TV already holds the same content stays shown with its line and « Copier quand même » (once)
-    val shownQueue = queue.filter { it.status == castbridge.core.tv.QueueStatus.WAITING || it.status == castbridge.core.tv.QueueStatus.RUNNING || it.status == castbridge.core.tv.QueueStatus.FAILED ||
+    val shownQueue = queue.filter { it.status == castbridge.core.tv.QueueStatus.WAITING || (showNotificationHint && it.status == castbridge.core.tv.QueueStatus.RUNNING) || it.status == castbridge.core.tv.QueueStatus.FAILED ||
         (it.status == castbridge.core.tv.QueueStatus.DONE && it.note != null) }
     val order = castbridge.core.tv.QueueRules.runOrder(queue)
     AnimatedVisibility(shownQueue.isNotEmpty()) {

@@ -13,6 +13,7 @@ import android.view.Gravity
 import android.view.KeyEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.GridLayout
 import android.widget.FrameLayout
 import android.widget.HorizontalScrollView
 import android.widget.ImageView
@@ -77,7 +78,15 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
     private var lastItems: List<LibraryItem>? = null
     private val dp = { v: Int -> TvStyle.dp(act, v) }
     private val bg = ImageView(act).apply { scaleType = ImageView.ScaleType.CENTER_CROP; alpha = 0.5f }
+    // A quiet static background keeps the focus and media thumbnails legible, with no idle animation.
     private val zoom = SlowZoom(bg)
+    private val reception = TextView(act).apply {
+        textSize = TvStyle.Type.BODY; setTextColor(TvStyle.INFO); maxLines = 3
+        setPadding(TvStyle.dp(act, 18), TvStyle.dp(act, 12), TvStyle.dp(act, 18), TvStyle.dp(act, 12))
+        background = TvStyle.rounded(act, TvStyle.CARD, TvStyle.R_LG)
+        visibility = View.GONE
+        accessibilityLiveRegion = View.ACCESSIBILITY_LIVE_REGION_POLITE
+    }
     private val heroTitle = TextView(act).apply { setTextColor(Color.WHITE); textSize = 34f; typeface = TvFonts.bold; maxLines = 1; ellipsize = TextUtils.TruncateAt.END }
     private val heroSub = TextView(act).apply { setTextColor(TvStyle.TEXT2); textSize = TvStyle.Type.BODY; maxLines = 2 }
     private val keyHint = TextView(act).apply {
@@ -118,7 +127,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
 
     init {
         val root = FrameLayout(act).apply { setBackgroundColor(TvStyle.BG) }
-        root.addView(bg, FrameLayout.LayoutParams(-1, -1))
+        bg.visibility = View.GONE
         // Legibility: dark from the left and from the bottom, over the picture.
         root.addView(View(act).apply { background = GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, intArrayOf(0xF00A0F1E.toInt(), 0x800A0F1E.toInt(), 0x300A0F1E)) }, FrameLayout.LayoutParams(-1, -1))
         root.addView(View(act).apply { background = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(0x000A0F1E, 0xC00A0F1E.toInt(), TvStyle.BG)) }, FrameLayout.LayoutParams(-1, -1))
@@ -159,7 +168,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         val early = toolsRow == null
         if (early) { apply(emptyList(), 0, true, loading = true); loadQuick() }
         reload(focusFirst = !early)
-        if (!paused) { zoom.start(); main.removeCallbacks(tick); main.postDelayed(tick, 4000) }
+        if (!paused) { main.removeCallbacks(tick); main.postDelayed(tick, 4000) }
     }
 
     fun hide() { container.fadeTo(false); zoom.stop(); main.removeCallbacks(tick); main.removeCallbacks(chipLater) }
@@ -173,7 +182,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         if (!paused) return
         paused = false
         if (!visible) return
-        zoom.start(); main.removeCallbacks(tick); reload(); refreshTools(); main.postDelayed(tick, 4000)
+        main.removeCallbacks(tick); reload(); refreshTools(); main.postDelayed(tick, 4000)
     }
 
     fun release() { hide(); io.shutdownNow(); quickIo.shutdownNow() }
@@ -198,11 +207,13 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         val wait = chipPace.admit(android.os.SystemClock.uptimeMillis())
         if (wait > 0 && !force) { main.removeCallbacks(chipLater); main.postDelayed(chipLater, wait); return }
         val (ready, code, receiving) = api.status()
+        reception.visibility = if (receiving.isNullOrBlank()) View.GONE else View.VISIBLE
+        if (reception.text.toString() != receiving.orEmpty()) reception.text = receiving.orEmpty()
         val shown = if (System.currentTimeMillis() < revealUntil || code.length < 4) code else code.take(2) + "••••"
         val sig = runCatching { api.signal() }.getOrNull().also { signal = it }
         if (sig == null) { val t = (receiving ?: "● $ready") + "   ·   code $shown"; if (chipGate.changed(t)) chip.text = t; return }
         // never hide a red state behind a transfer line; otherwise a transfer in progress tells more than « Prêt »
-        val head = if (sig.level == castbridge.core.ux.SignalLevel.RED || receiving == null) sig.text else receiving
+        val head = sig.text
         val text = "$head   ·   code $shown"
         // redraw only when the text or the signal facts really changed (R-11: no 60 Hz repaint of an idle home)
         if (chipGate.changed("$text|$sig")) {
@@ -271,11 +282,11 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         for ((title, list) in wanted) rows[title]?.let { (h, a) -> h.text = "$title  ·  ${list.size}"; if (!a.set(list)) deferred = true }
         if (deferred) signature = 0                                                     // une rangée tient le focus : sa nouvelle liste est appliquée au prochain passage
         if (loading && wanted.isEmpty()) {
-            heroTitle.text = "Lecture de la bibliothèque…"
-            heroSub.text = "Vos vidéos et vos fichiers apparaissent dans un instant."
+            heroTitle.text = "Votre TV, simplement."
+            heroSub.text = "Choisissez une activité. Vos vidéos se chargent en arrière-plan."
         } else if (items.isEmpty() && !loading) {
             heroTitle.text = "Bienvenue sur CastBridge"
-            heroSub.text = "Ouvrez « Téléphones et réseau », puis « Ajouter un téléphone ». Envoyez ensuite une vidéo depuis CastBridge sur votre téléphone."
+            heroSub.text = "Choisissez « Recevoir » pour connecter votre téléphone et envoyer votre première vidéo."
             bg.setImageBitmap(null)
         } else if (lastFocused == null) {
             val first = wanted.firstOrNull()?.second?.firstOrNull()
@@ -317,47 +328,65 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
     private var toolsSig = ""
 
     private fun tools(): View {
-        val box = LinearLayout(act).apply { orientation = LinearLayout.HORIZONTAL; setPadding(dp(4), dp(8), 0, 0); clipChildren = false }
-        val title = TextView(act).apply { text = "Votre espace"; setTextColor(TvStyle.TEXT2); textSize = 20f; typeface = TvFonts.bold; setPadding(dp(14), dp(4), 0, 0) }
+        val box = GridLayout(act).apply { columnCount = 4; clipChildren = false; setPadding(dp(8), dp(8), dp(8), dp(8)) }
         fillTools(box)
         return LinearLayout(act).apply {
             orientation = LinearLayout.VERTICAL; clipChildren = false
-            addView(title)
-            addView(HorizontalScrollView(act).apply { isHorizontalScrollBarEnabled = false; clipChildren = false; addView(box) })
+            addView(box, LinearLayout.LayoutParams(-1, -2))
+            addView(reception, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(12); bottomMargin = dp(8) })
             tag = box
         }
     }
 
-    private fun fillTools(box: LinearLayout) {
-        val w = dp(HomeGroupStyle.HOME_WIDTH_DP)
+    private fun fillTools(box: GridLayout) {
+        val available = act.resources.displayMetrics.widthPixels - dp(136)
+        val w = ((available - dp(48)) / 4).coerceAtLeast(dp(140))
         val list = api.tools().ifEmpty {
             listOf(HomeTool(R.drawable.ic_cb_bibliotheque, "Bibliothèque", "Toutes vos vidéos et vos fichiers, en grille.", null, false, id = "library") { api.openLibrary() },
                 HomeTool(R.drawable.ic_cb_reglages, "Connexion & réglages", "Code, adresse, Bluetooth, stockage…", null, false, id = "settings") { api.openSettings() },
                 HomeTool(R.drawable.ic_cb_aide, "Aide", "Comment envoyer une vidéo depuis le téléphone.", null, false, id = "help") { api.openHelp() })
         }
         toolsSig = list.joinToString("|") { "${it.label}:${it.status}:${it.on}" }
-        val focusedIndex = (0 until box.childCount).firstOrNull { box.getChildAt(it).hasFocus() }
+        val focusedId = (0 until box.childCount).firstOrNull { box.getChildAt(it).hasFocus() }?.let { entries.getOrNull(it)?.id }
         // the tools are grouped (castbridge.core.tv.home.HomeGroups): one big button per group, the quick-access tiles stay direct
         toolsById = list.associateBy { it.id.ifEmpty { it.label } }
-        entries = castbridge.core.tv.home.HomeGroups.layout(list.map { castbridge.core.tv.home.HomeTileInfo(it.id.ifEmpty { it.label }, it.label, it.status, it.on, it.warn) })
+        entries = castbridge.core.tv.home.HomeDashboard.layout(list.map { castbridge.core.tv.home.HomeTileInfo(it.id.ifEmpty { it.label }, it.label, it.status, it.on, it.warn) })
         box.removeAllViews()
         entries.forEachIndexed { index, e ->
-            val v: View = when (e) {
+            val isMore = e.id == castbridge.core.tv.home.HomeDashboard.MORE
+            val v: View = if (isMore) TextView(act).apply {
+                text = "Connexion et réglages  ›"; textSize = TvStyle.Type.BODY; setTextColor(TvStyle.TEXT2)
+                gravity = Gravity.CENTER_VERTICAL or Gravity.END; setPadding(dp(16), 0, dp(16), 0)
+                isFocusable = true; isClickable = true
+                background = android.graphics.drawable.StateListDrawable().apply {
+                    addState(intArrayOf(android.R.attr.state_focused), TvStyle.rounded(act, TvStyle.CARD_FOCUS, TvStyle.R_MD, TvStyle.RING, 3))
+                    addState(intArrayOf(), TvStyle.rounded(act, TvStyle.BG, TvStyle.R_MD))
+                }
+                setOnClickListener { opened = castbridge.core.ux.TvHomeFocus.Opened.TOOL; openedTool = index; openGrid(e.id) }
+                TvStyle.focusZoom(this) { has -> if (has) { heroSub.text = "Téléphones, stockage, téléchargements, aide et réglages"; keyHint.text = "OK Ouvrir   ·   ↑ Activités   ·   ↓ Vos vidéos" } }
+            } else when (e) {
                 is castbridge.core.tv.home.HomeEntry.Direct -> {
                     val t = toolsById.getValue(e.id)
                     IconTile(act, t, w, HomeGroupStyle.HOME_LABEL_SP, TvStyle.Type.CAPTION, 40, dp(HomeGroupStyle.HOME_HEIGHT_DP)).also { v ->
                         v.setOnClickListener { opened = castbridge.core.ux.TvHomeFocus.Opened.TOOL; openedTool = index; t.action() }
-                        TvStyle.focusZoom(v) { has -> if (has) { heroTitle.text = t.label; heroSub.text = t.description + (t.status?.let { "  —  $it" } ?: ""); keyHint.text = "← → Choisir   ·   OK Ouvrir   ·   ↓ Vos vidéos" } }
+                        TvStyle.focusZoom(v) { has -> if (has) { heroTitle.text = "Votre TV, simplement."; heroSub.text = t.description + (t.status?.let { "  —  $it" } ?: ""); keyHint.text = "← → Choisir   ·   OK Ouvrir   ·   ↓ Vos vidéos" } }
                     }
                 }
-                is castbridge.core.tv.home.HomeEntry.Group -> GroupTile(act, e).also { v ->
+                is castbridge.core.tv.home.HomeEntry.Group -> GroupTile(act, e, if (isMore) available else w, dp(if (isMore) 88 else HomeGroupStyle.HOME_HEIGHT_DP)).also { v ->
                     v.setOnClickListener { opened = castbridge.core.ux.TvHomeFocus.Opened.TOOL; openedTool = index; openGrid(e.id) }
-                    TvStyle.focusZoom(v) { has -> if (has) { heroTitle.text = e.label; heroSub.text = e.tiles.joinToString(" · ") { it.label }; keyHint.text = "← → Choisir   ·   OK Voir le groupe   ·   ↓ Vos vidéos" } }
+                    TvStyle.focusZoom(v) { has -> if (has) { heroTitle.text = "Votre TV, simplement."; heroSub.text = e.summary; keyHint.text = "← → Choisir   ·   OK Voir le groupe   ·   ↓ Vos vidéos" } }
                 }
             }
-            box.addView(v)
+            val ordinary = entries.take(index).count { it.id != castbridge.core.tv.home.HomeDashboard.MORE }
+            box.addView(v, GridLayout.LayoutParams().apply {
+                width = if (isMore) available else w
+                height = dp(if (isMore) 52 else HomeGroupStyle.HOME_HEIGHT_DP)
+                columnSpec = GridLayout.spec(if (isMore) 0 else ordinary % 4, if (isMore) 4 else 1)
+                rowSpec = GridLayout.spec(if (isMore) (ordinary + 3) / 4 else ordinary / 4)
+                setMargins(dp(4), dp(8), dp(4), dp(8))
+            })
         }
-        focusedIndex?.let { i -> box.getChildAt(minOf(i, box.childCount - 1))?.requestFocus() }
+        focusedId?.let { id -> box.getChildAt(entries.indexOfFirst { it.id == id }.coerceAtLeast(0))?.requestFocus() }
         // statuses changed under an open grid: redraw it on the same tile; a group that vanished closes it
         nav = castbridge.core.tv.home.HomeNav.reconcile(nav, entries, grid.focusedTileId)
         if (nav is castbridge.core.tv.home.HomeNavState.Open) showGrid() else if (grid.visible) hideGrid()
@@ -406,7 +435,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
 
     /** Statuses change (Bluetooth ready, Internet via the phone, SSH on…): refresh the tiles in place. */
     private fun refreshTools() {
-        val box = (toolsRow?.tag as? LinearLayout) ?: return
+        val box = (toolsRow?.tag as? GridLayout) ?: return
         val sig = api.tools().joinToString("|") { "${it.label}:${it.status}:${it.on}" }
         if (sig != toolsSig) fillTools(box)
     }
@@ -422,8 +451,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
             m.durationMs.takeIf { it > 0 }?.let { LibraryLogic.clock(it) },
             when (i.volumeKind) { VolumeKind.INTERNAL -> "sur la TV"; VolumeKind.SAF -> "dossier choisi"; else -> "sur la clé USB" },
         ).joinToString("   ·   ")
-        val b = thumbs.cached(i)
-        if (b != null) crossfade(b) else thumbs.load(i) { if (lastFocused == i) crossfade(it) }
+
     }
 
     private fun crossfade(b: Bitmap) {

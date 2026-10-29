@@ -80,7 +80,8 @@ fun TvLinkStatus(link: LinkUi, onAdd: () -> Unit, onManage: () -> Unit, modifier
         LinkAction.REMOVE_BOND -> startIt(Intent(Settings.ACTION_BLUETOOTH_SETTINGS))      // the documented way: removeBond() is unreliable on Android 14
         LinkAction.NONE -> {}
     }
-    Row(modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+    Column(modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
         Box(Modifier.size(12.dp).clip(RoundedCornerShape(6.dp)).background(dot))
         Spacer(Modifier.width(10.dp))
         Column(Modifier.weight(1f)) {
@@ -88,7 +89,8 @@ fun TvLinkStatus(link: LinkUi, onAdd: () -> Unit, onManage: () -> Unit, modifier
             Text(view.detail, style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
             view.hint?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = WARN) }
         }
-        Column(horizontalAlignment = Alignment.End) {
+        }
+        Column {
             if (view.action != LinkAction.NONE) Button(onClick = { act(view.action) }) { Text(view.action.label) }
             Row {
                 TextButton(onClick = onManage) { Text("Mes TV") }

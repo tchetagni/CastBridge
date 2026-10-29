@@ -25,6 +25,7 @@ object HomeGroupStyle {
     const val HOME_LABEL_SP = 23f
     /** Icône du bouton de groupe (la logique ne connaît pas les ressources). */
     fun icon(groupId: String) = when (groupId) {
+        castbridge.core.tv.home.HomeDashboard.RECEIVE -> R.drawable.ic_cb_recevoir_du_telephone
         castbridge.core.tv.home.HomeGroups.MEDIA -> R.drawable.ic_cb_bibliotheque
         castbridge.core.tv.home.HomeGroups.LEARN -> R.drawable.ic_cb_apprendre
         castbridge.core.tv.home.HomeGroups.GAMES -> R.drawable.ic_t_games
@@ -34,11 +35,11 @@ object HomeGroupStyle {
 }
 
 /** Bouton de groupe : une grande tuile (icône + nom + résumé), contour discret pour la distinguer d'une tuile d'outil. */
-class GroupTile(ctx: android.content.Context, val entry: HomeEntry.Group) : IconTile(
+class GroupTile(ctx: android.content.Context, val entry: HomeEntry.Group, width: Int = TvStyle.dp(ctx, HomeGroupStyle.HOME_WIDTH_DP), height: Int = TvStyle.dp(ctx, HomeGroupStyle.HOME_HEIGHT_DP)) : IconTile(
     ctx,
     HomeTool(HomeGroupStyle.icon(entry.id), entry.label, entry.tiles.joinToString(" · ") { it.label }, entry.summary, entry.on, entry.warn, entry.id) {},
-    TvStyle.dp(ctx, HomeGroupStyle.HOME_WIDTH_DP), HomeGroupStyle.HOME_LABEL_SP, TvStyle.Type.CAPTION,
-    40, TvStyle.dp(ctx, HomeGroupStyle.HOME_HEIGHT_DP), ringIdle = true,
+    width, HomeGroupStyle.HOME_LABEL_SP, TvStyle.Type.CAPTION,
+    40, height, ringIdle = true,
 )
 
 /** Une tuile d'outil, en grande taille, pour la grille. */

@@ -30,10 +30,10 @@ enum class ThemeMode { DARK, LIGHT, SYSTEM }
 object ThemePrefs {
     private const val FILE = "castbridge_ui"
     private const val KEY = "theme"
-    var mode by mutableStateOf(ThemeMode.DARK); private set
+    var mode by mutableStateOf(ThemeMode.LIGHT); private set
 
     fun load(ctx: Context) {
-        mode = runCatching { ThemeMode.valueOf(ctx.getSharedPreferences(FILE, Context.MODE_PRIVATE).getString(KEY, null) ?: "DARK") }.getOrDefault(ThemeMode.DARK)
+        mode = runCatching { ThemeMode.valueOf(ctx.getSharedPreferences(FILE, Context.MODE_PRIVATE).getString(KEY, null) ?: "LIGHT") }.getOrDefault(ThemeMode.LIGHT)
     }
 
     fun set(ctx: Context, m: ThemeMode) {
