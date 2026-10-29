@@ -19,7 +19,7 @@ import castbridge.core.langues.*
 /**
  * « Langues » (docs/LANGUES.md): the smallest honest viewer. Languages and levels come from the installed `langues` lots; a pack opens
  * on its units (vocabulary, dialogues, grammar notes, stories as text), then the exercises of the unit, marked with [LangMarking].
- * D-pad only: every line is a focusable button. Illustrations (word images, with the synthetic mention) and commented corrections are shown. Not done yet: audio / video (the media lots are not on the TV), the
+ * D-pad only: every line is a focusable button. Illustrations (word images, with the synthetic mention), sounds (starter copy when no media lot is installed) and commented corrections are shown. Not done yet: video (the media lots are not on the TV), the
  * « match » and « strokes » exercises, spaced repetition cards, placement test, progress saving, animations.
  */
 class LanguesActivity : Activity() {
@@ -73,7 +73,7 @@ class LanguesActivity : Activity() {
 
     // ---------------------------------------------------------------- building blocks
     private fun clear(title: String, sub: String? = null) {
-        body.removeAllViews()
+        body.removeAllViews(); voiceNoticed = false; missingNoticed = false
         body.addView(dx.text(TextView(this).apply { text = title }, 64, GamesColors.TEXT_HIGH, true))
         if (sub != null) body.addView(dx.text(TextView(this).apply { text = sub; setLineSpacing(0f, 1.2f) }, 30, GamesColors.TEXT_MEDIUM), LinearLayout.LayoutParams(-1, -2).apply { topMargin = dx.px(8) })
         scroll.scrollTo(0, 0)
@@ -174,13 +174,14 @@ class LanguesActivity : Activity() {
         clear(u.title, "${u.minutes} min")
         if (u.vocab.isNotEmpty()) {
             heading("Vocabulaire")
-            for (v in u.vocab) { label("${v.term}" + (v.reading?.let { "   $it" } ?: "") + "   —   ${v.gloss}", 36); illustration(p, u, v) }
+            for (v in u.vocab) { label("${v.term}" + (v.reading?.let { "   $it" } ?: "") + "   —   ${v.gloss}", 36); audioButton(p, v.audio, "Écouter : ${v.term}"); illustration(p, u, v) }
         }
         for (d in u.dialogues) {
             heading("Dialogue : ${d.title}")
             for (x in d.lines) {
                 label((if (x.who.isNotBlank()) "${x.who} : " else "") + x.text + (x.reading?.let { "   ($it)" } ?: ""), 34)
                 label(x.translation, 28, GamesColors.TEXT_MEDIUM, top = 2)
+                audioButton(p, x.audio, "Écouter cette phrase")
             }
             audioButton(p, d.audio, "Écouter le dialogue")
         }
@@ -209,17 +210,23 @@ class LanguesActivity : Activity() {
     /** Restricted Markdown of the notes → plain text (the TV shows no formatting). */
     private fun plain(md: String) = md.replace("**", "").replace("*", "").replace("`", "")
 
-    // ---------------------------------------------------------------- audio (only when a media lot holding it is on the TV)
+    // ---------------------------------------------------------------- audio (installed media lot, else the copy bundled with the starter)
+    private var voiceNoticed = false; private var missingNoticed = false
     private fun audioButton(p: LangPack, ref: String?, text: String) {
         if (ref == null) return
-        val e = p.media[ref.removePrefix("m:")]
-        val f = e?.let { LanguesHub.mediaFile(this, LangLots.mediaScope(p.parts), it.file) }
-        if (f == null) label("Audio non disponible sur la TV (lot média absent).", 26, GamesColors.TEXT_MEDIUM, top = 6)
-        else button(text) { play(f) }
+        val e = LangVisuals.audio(p, ref) ?: return
+        val f = LanguesHub.audioFile(this, p, e)
+        if (f == null) { if (!missingNoticed) { missingNoticed = true; label("Audio non disponible sur la TV.", 26, GamesColors.TEXT_MEDIUM, top = 6) } }
+        else {
+            button(text) { play(f) }
+            // one discreet mention per screen, under the first sound
+            if (!voiceNoticed) LangVisuals.voiceNotice(e)?.let { voiceNoticed = true; label(it, 24, GamesColors.TEXT_MEDIUM, top = 4) }
+        }
     }
     private fun play(f: java.io.File) {
         stopAudio()
-        player = runCatching { MediaPlayer().apply { setDataSource(f.path); prepare(); start(); setOnCompletionListener { stopAudio() } } }.getOrNull()
+        player = runCatching { MediaPlayer().apply { setDataSource(f.path); prepare(); start(); setOnCompletionListener { stopAudio() } } }
+            .onFailure { android.util.Log.w("Langues", "lecture audio impossible : ${f.name}", it) }.getOrNull()
     }
     private fun stopAudio() { runCatching { player?.release() }; player = null }
 

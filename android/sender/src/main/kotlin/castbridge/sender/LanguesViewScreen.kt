@@ -12,6 +12,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
@@ -19,8 +20,8 @@ import castbridge.core.langues.*
 import castbridge.core.lots.LotId
 
 /**
- * « Voir les leçons » (Langues): the phone reads the lessons it holds (bundled starter + downloaded lots): units, words with their illustration when available,
- * exercises with the commented correction. Same rules as the TV screen ([LangVisuals], [LangMarking]); without image or explanation nothing more is drawn.
+ * « Voir les leçons » (Langues): the phone reads the lessons it holds (bundled starter + downloaded lots): units, words with their illustration and their sound when available,
+ * exercises with the commented correction and their sound. Same rules as the TV screen ([LangVisuals], [LangMarking]); without image or explanation nothing more is drawn.
  */
 @Composable
 fun LanguesViewEntry(modifier: Modifier = Modifier) {
@@ -30,6 +31,42 @@ fun LanguesViewEntry(modifier: Modifier = Modifier) {
 }
 
 private val starter by lazy { EmbeddedLangSource() }
+
+/** The sound player of the lesson screen (one sound at a time). The bundled copy is written once to the cache, MediaPlayer wants a file. */
+private object Voice {
+    private var player: android.media.MediaPlayer? = null
+    fun stop() { runCatching { player?.release() }; player = null }
+    /** True when the sound could be started. */
+    fun play(ctx: android.content.Context, p: LangPack, m: MediaEntry): Boolean {
+        stop()
+        return runCatching {
+            val bytes = starter.media(p.parts.scope, m.file) ?: return false
+            val dir = java.io.File(ctx.cacheDir, "langues-audio/${p.parts.scope}").apply { mkdirs() }
+            val f = java.io.File(dir, LangVisuals.fileName(m.file) ?: return false).also { if (it.length() != bytes.size.toLong()) it.writeBytes(bytes) }
+            player = android.media.MediaPlayer().apply { setDataSource(f.path); prepare(); start(); setOnCompletionListener { stop() } }
+            true
+        }.onFailure { android.util.Log.w("Langues", "lecture audio impossible : ${m.file}", it); stop() }.getOrDefault(false)
+    }
+    fun available(p: LangPack, m: MediaEntry) = starter.media(p.parts.scope, m.file) != null
+}
+
+/** What was already said on the current page: the synthetic-voice mention and the « audio not available » line appear once per page. */
+private class VoiceNotes { var voice = false; var missing = false }
+
+/** « Écouter » button of a sound referenced by [ref] (nothing when there is none); a sound the phone does not hold gives one discreet line instead. */
+@Composable
+private fun ListenButton(p: LangPack, ref: String?, text: String, notes: VoiceNotes) {
+    val m = LangVisuals.audio(p, ref) ?: return
+    val ctx = LocalContext.current
+    if (!Voice.available(p, m)) {
+        if (!notes.missing) { notes.missing = true; Text("Audio non disponible.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant) }
+        return
+    }
+    var failed by remember(m.id) { mutableStateOf(false) }
+    OutlinedButton({ failed = !Voice.play(ctx, p, m) }, Modifier.fillMaxWidth()) { Text(text) }
+    if (failed) Text("Lecture impossible sur ce téléphone.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
+    if (!notes.voice) LangVisuals.voiceNotice(m)?.let { notes.voice = true; Text(it, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant) }
+}
 
 /** Starter packs + packs of the lots stored on the phone (a stored lot of the same name and at least as recent replaces the starter). */
 private fun heldPacks(): List<LangPack> {
@@ -48,6 +85,7 @@ fun LanguesViewScreen(onClose: () -> Unit) {
     var running by remember { mutableStateOf(false) }
     val back = { when { running -> running = false; unit != null -> unit = null; pack != null -> pack = null; else -> onClose() } }
     BackHandler { back() }
+    DisposableEffect(Unit) { onDispose { Voice.stop() } }
     Dialog(onDismissRequest = { back() }, properties = DialogProperties(usePlatformDefaultWidth = false)) {
         Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
             Column(Modifier.fillMaxSize()) {
@@ -73,9 +111,12 @@ fun LanguesViewScreen(onClose: () -> Unit) {
 
 @Composable
 private fun UnitPage(p: LangPack, u: LangUnit, onExercises: () -> Unit) {
+    DisposableEffect(u.id) { onDispose { Voice.stop() } }
+    val notes = remember(u.id) { VoiceNotes() }.also { it.voice = false; it.missing = false }
     if (u.vocab.isNotEmpty()) Text("Vocabulaire", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary)
     for (v in u.vocab) {
         Text(v.term + (v.reading?.let { "   $it" } ?: "") + "   —   ${v.gloss}", style = MaterialTheme.typography.bodyLarge)
+        ListenButton(p, v.audio, "Écouter : ${v.term}", notes)
         val m = LangVisuals.image(p, u, v)
         val bmp = remember(m?.id) { m?.let { e -> starter.media(p.parts.scope, e.file)?.let { b -> runCatching { android.graphics.BitmapFactory.decodeByteArray(b, 0, b.size) }.getOrNull() } } }
         if (m != null && bmp != null) {
@@ -88,7 +129,9 @@ private fun UnitPage(p: LangPack, u: LangUnit, onExercises: () -> Unit) {
         for (x in d.lines) {
             Text((if (x.who.isNotBlank()) "${x.who} : " else "") + x.text + (x.reading?.let { "   ($it)" } ?: ""))
             Text(x.translation, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            ListenButton(p, x.audio, "Écouter cette phrase", notes)
         }
+        ListenButton(p, d.audio, "Écouter le dialogue", notes)
     }
     for (g in u.grammar) {
         Text("Grammaire : ${g.title}", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary)
@@ -100,6 +143,7 @@ private fun UnitPage(p: LangPack, u: LangUnit, onExercises: () -> Unit) {
 
 @Composable
 private fun Exercises(p: LangPack, u: LangUnit, onDone: () -> Unit) {
+    DisposableEffect(u.id) { onDispose { Voice.stop() } }
     var i by remember { mutableIntStateOf(0) }
     var right by remember { mutableIntStateOf(0) }
     var graded by remember { mutableIntStateOf(0) }
@@ -115,6 +159,7 @@ private fun Exercises(p: LangPack, u: LangUnit, onDone: () -> Unit) {
     fun next() { verdict = null; i++ }
     Text("Exercice ${i + 1} / ${u.exercises.size}  ·  ${LangCatalog.kindLabel(x.kind)}", style = MaterialTheme.typography.labelLarge)
     Text(x.prompt, style = MaterialTheme.typography.titleMedium)
+    ListenButton(p, x.audio, "Écouter", remember(i) { VoiceNotes() })
     val v = verdict
     if (v != null) {
         Text(if (v) "Bonne réponse" else "Pas tout à fait", style = MaterialTheme.typography.titleLarge, color = if (v) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error)

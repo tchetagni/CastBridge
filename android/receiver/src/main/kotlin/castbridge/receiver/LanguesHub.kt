@@ -104,6 +104,17 @@ object LanguesHub {
         android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size, o)
     }.getOrNull()
 
+    /**
+     * The playable file of a sound (media entry [m] of pack [p]): the installed media lot first, else the copy bundled with the starter pack, written once to the cache because
+     * MediaPlayer wants a file (a size check re-writes a damaged copy). Null when neither has it: the screen then says the audio is not available.
+     */
+    fun audioFile(ctx: Context, p: LangPack, m: MediaEntry): File? = runCatching {
+        mediaFile(ctx, LangLots.mediaScope(p.parts), m.file)?.let { return@runCatching it }
+        val bytes = starter.media(p.parts.scope, m.file) ?: return@runCatching null
+        val dir = File(ctx.cacheDir, "langues-audio/${p.parts.scope}").apply { mkdirs() }
+        File(dir, castbridge.core.langues.LangVisuals.fileName(m.file) ?: return@runCatching null).also { if (it.length() != bytes.size.toLong()) it.writeBytes(bytes) }
+    }.getOrNull()
+
     /** A media file referenced as `m:<id>` by [file] (the name in media.json), if a media lot holding it is installed; null otherwise. */
     fun mediaFile(ctx: Context, mediaScope: String, file: String): File? {
         init(ctx)

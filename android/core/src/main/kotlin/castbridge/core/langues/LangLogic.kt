@@ -156,6 +156,14 @@ object LangVisuals {
     /** The discreet mention under a synthetic illustration, null for any other media. */
     fun notice(m: MediaEntry): String? = if (m.kind == "image" && m.synthetic) SYNTHETIC_NOTICE else null
 
+    const val SYNTHETIC_VOICE_NOTICE = "Voix synthétique · bêta"
+
+    /** The audio entry behind a reference `m:<id>` (vocabulary, dialogue, dialogue line, exercise), or null (no reference, unknown, or not an audio). */
+    fun audio(p: LangPack, ref: String?): MediaEntry? = ref?.let { p.media[it.removePrefix("m:")] }?.takeIf { it.kind == "audio" }
+
+    /** The discreet mention next to a synthetic voice, null for a recorded one or any other media. */
+    fun voiceNotice(m: MediaEntry): String? = if (m.kind == "audio" && m.synthetic) SYNTHETIC_VOICE_NOTICE else null
+
     /** The commented correction to show in the feedback, or null when the exercise has none. */
     fun explanation(x: LangExercise): String? = x.explanation?.trim()?.takeIf { it.isNotEmpty() }
 

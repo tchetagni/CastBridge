@@ -175,17 +175,17 @@ class EmbeddedLangSource(private val base: String = "/castbridge/langues/embedde
         }
     }
 
-    /** A media file bundled with a starter pack (`<id>/media/<name>`, e.g. an illustration), or null. [file] is the name in media.json (`images/x.webp`). */
+    /** A media file bundled with a starter pack (`<id>/media/<name>`, an illustration or a sound), or null. [file] is the name in media.json (`images/x.webp`, `audio/x.opus`). */
     fun media(id: String, file: String): ByteArray? {
         if (id !in ids) return null
         val n = LangVisuals.fileName(file) ?: return null
         return res("$id/media/$n")?.use { it.readBytes() }
     }
 
-    /** Bytes of the starter resources, illustrations included (counts in the TV's 10 MB budget). */
+    /** Bytes of the starter resources, illustrations and sounds included (counts in the TV's 10 MB budget). */
     fun bytes(): Long = ids.sumOf { id ->
         listOf("langue.json", "media.json").sumOf { n -> res("$id/$n")?.use { it.readBytes().size.toLong() } ?: 0L } +
-            packs.firstOrNull { it.parts.scope == id }?.media?.values.orEmpty().filter { it.kind == "image" }.sumOf { m -> media(id, m.file)?.size?.toLong() ?: 0L }
+            packs.firstOrNull { it.parts.scope == id }?.media?.values.orEmpty().filter { it.kind == "image" || it.kind == "audio" }.sumOf { m -> media(id, m.file)?.size?.toLong() ?: 0L }
     }
 
     companion object {
