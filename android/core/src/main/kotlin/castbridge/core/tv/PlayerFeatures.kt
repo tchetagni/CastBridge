@@ -289,7 +289,12 @@ object SubtitleFinder {
  * "Play the folder / the selection one after the other", with repeat. Pure: the server asks it what comes next when a file
  * ends (or on next/previous).
  */
-class Playlist(val items: List<String>, start: Int = 0, var repeat: Repeat = Repeat.OFF) {
+class Playlist(items: List<String>, start: Int = 0, var repeat: Repeat = Repeat.OFF) {
+    private val list = items.toMutableList()
+    val items: List<String> get() = list
+    /** Index of the last item queued by [insertNext] (-1 = none): the next « à la suite » goes behind it, not at +1 again. */
+    private var queuedAt = -1
+
     enum class Repeat { OFF, ALL, ONE; val label get() = name.lowercase(Locale.ROOT)
         companion object { fun of(s: String?) = values().firstOrNull { it.label == s?.lowercase(Locale.ROOT) } } }
 
@@ -314,4 +319,68 @@ class Playlist(val items: List<String>, start: Int = 0, var repeat: Repeat = Rep
 
     /** Keeps the list consistent when a file was deleted or renamed. */
     fun contains(name: String) = items.any { it == name }
+
+    /**
+     * « Lire à la suite »: puts [name] right after the current item, or behind the ones already queued this way (arrival order, never all at +1).
+     * A copy of [name] further down the list is moved there; one before the current item (already played) stays. Returns its index.
+     */
+    fun insertNext(name: String): Int {
+        var i = list.size - 1
+        while (i > index) { if (list[i] == name) { list.removeAt(i); if (i <= queuedAt) queuedAt-- }; i-- }
+        val at = (maxOf(index, queuedAt) + 1).coerceAtMost(list.size)
+        list.add(at, name)
+        queuedAt = at
+        return at
+    }
+}
+
+/** What the TV does with a file that arrived with « lire à la suite ». Pure: the server applies the answer. */
+object PlayNext {
+    enum class Kind {
+        /** Nothing plays: the file starts at once (no list). */
+        START_NOW,
+        /** Something plays: the file was put in the list after it. */
+        QUEUED,
+        /** The file is the one playing: nothing to do. */
+        ALREADY_PLAYING
+    }
+    class Result(val kind: Kind, val playlist: Playlist?)
+
+    /**
+     * [playlist] = the running list (or null), [playing] = the name the player has open (null = nothing plays), [name] = the arrived file.
+     * Without a list the one that plays becomes a two-item list [playing, name]; a list that does not hold [playing] is stale and replaced the same way.
+     */
+    fun apply(playlist: Playlist?, playing: String?, name: String): Result = when {
+        playing == null -> Result(Kind.START_NOW, null)
+        playing == name -> Result(Kind.ALREADY_PLAYING, playlist?.takeIf { it.current == playing })
+        playlist != null && playlist.current == playing -> { playlist.insertNext(name); Result(Kind.QUEUED, playlist) }
+        else -> Result(Kind.QUEUED, Playlist(listOf(playing), 0).also { it.insertNext(name) })
+    }
+
+    /** The phone's decision from the HTTP status of the TV's answer to the registration (null = no answer). 404/405/501 = an older TV without the route. */
+    const val LABEL = "Copier et lire à la suite"
+    const val HINT = "Copié sur la TV, puis lu juste après la vidéo en cours ; tout de suite si rien ne joue."
+    const val TV_TOO_OLD = "Cette TV ne gère pas encore la lecture à la suite : mettez à jour CastBridge-TV. En attendant, « Copier sur la TV » garde la vidéo sur la TV."
+    const val CHILD = "Un profil enfant est actif sur la TV : la lecture à la suite est refusée. « Copier sur la TV » garde la vidéo sur la TV."
+    const val BLUETOOTH_ONLY = "La lecture à la suite demande le Wi-Fi : la liaison Bluetooth seule ne suffit pas."
+    const val STARTED = "Copie lancée : la vidéo sera lue juste après celle en cours (tout de suite si rien ne joue). Voir la notification."
+    fun refused(status: Int) = "La TV n'a pas accepté la lecture à la suite (erreur $status). « Copier sur la TV » garde la vidéo sur la TV."
+
+    /** Same states as « Copier sur la TV », except over Bluetooth alone: the mark travels over HTTP. */
+    fun available(copyEnabled: Boolean, ipRoute: Boolean) = copyEnabled && ipRoute
+
+    /** The sentence to show for a status that is not [Support.SUPPORTED] (null status = the TV did not answer: the caller says the network cause). */
+    fun failureText(httpStatus: Int?): String? = when (support(httpStatus)) {
+        Support.SUPPORTED, Support.UNREACHABLE -> null
+        Support.TV_TOO_OLD -> TV_TOO_OLD
+        Support.REFUSED -> if (httpStatus == 403) CHILD else refused(httpStatus!!)
+    }
+
+    enum class Support { SUPPORTED, TV_TOO_OLD, REFUSED, UNREACHABLE }
+    fun support(httpStatus: Int?): Support = when (httpStatus) {
+        null -> Support.UNREACHABLE
+        200 -> Support.SUPPORTED
+        404, 405, 501 -> Support.TV_TOO_OLD
+        else -> Support.REFUSED
+    }
 }

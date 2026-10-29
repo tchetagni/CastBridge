@@ -186,6 +186,11 @@ class OpenWithActivity : ComponentActivity() {
                             Button({ copyAndPlay(uri, name, size, both, session, pinTv, pins) }, Modifier.fillMaxWidth(), enabled = both !is CopyAndPlay.Decision.Disabled) { Text("Lire en copiant sur la TV") }
                             // la lecture commence AVANT la fin du transfert (la TV lit dès qu'elle a assez d'avance, ce téléphone devient sa télécommande, R-08)
                             Text(both.reason ?: "La lecture commence pendant la copie, avant la fin du transfert ; le fichier reste sur la TV et sur le téléphone.", style = MaterialTheme.typography.bodySmall)
+                            // « Copier et lire à la suite »: la TV décide (file de lecture de la TV), même si le téléphone s'éloigne pendant la copie
+                            val ipRoute = session == null || session.base != null
+                            OutlinedButton({ copyThenPlayNext(uri, name, size, choice, session, pinTv, pins) }, Modifier.fillMaxWidth(),
+                                enabled = castbridge.core.tv.PlayNext.available(choice.copyEnabled, ipRoute) && kind != MediaKind.OTHER) { Text(castbridge.core.tv.PlayNext.LABEL) }
+                            Text(if (ipRoute) castbridge.core.tv.PlayNext.HINT else castbridge.core.tv.PlayNext.BLUETOOTH_ONLY, style = MaterialTheme.typography.bodySmall)
                             OutlinedButton({ send(uri, name, move = false, choice, pinTv, pins) }, Modifier.fillMaxWidth(), enabled = choice.copyEnabled) { Text(castbridge.core.ux.SendWay.COPY.label) }
                             Text(castbridge.core.ux.SendWay.COPY.hint + " Suivez la copie dans la notification.", style = MaterialTheme.typography.bodySmall)
                             OutlinedButton({ send(uri, name, move = true, choice, pinTv, pins) }, Modifier.fillMaxWidth(), enabled = choice.moveEnabled) {
@@ -318,7 +323,30 @@ class OpenWithActivity : ComponentActivity() {
     }
 
     private fun sent(what: String, t: TransferQueue.Ticket) =
-        if (t.queued) "$what vers la TV : ${t.text}. Voir la notification." else "$what vers la TV en arrière-plan : voir la notification."
+        if (playNextSent) castbridge.core.tv.PlayNext.STARTED
+        else if (t.queued) "$what vers la TV : ${t.text}. Voir la notification." else "$what vers la TV en arrière-plan : voir la notification."
+
+    /** Set once the TV accepted the « lire à la suite » mark: the copy's toast then says what will happen to the video. */
+    @Volatile private var playNextSent = false
+
+    /**
+     * « Copier et lire à la suite »: the TV is told first (POST /api/playnext, name + size), then the file leaves by the usual queue and notification. The TV plays it
+     * after the current video (or at once when nothing plays) when the copy is verified, even if this phone is gone by then. An older TV answers 404: said, nothing is sent.
+     */
+    private fun copyThenPlayNext(uri: Uri, name: String, size: Long, choice: SendChoice, session: castbridge.core.trust.LinkSession?, pinTv: String?, pins: PinStore) {
+        lifecycleScope.launch {
+            val target = castTarget(session, pinTv, pins) as? CastTarget.Box
+            if (target == null) { failure.value = castbridge.core.ux.OpenWithCause.unreachable(causeFacts(pinTv)); return@launch }
+            val total = if (size > 0) size else withContext(Dispatchers.IO) { describe(this@OpenWithActivity, uri).second }
+            val sentName = name
+            val r = withContext(Dispatchers.IO) { runCatching { TvClient(target.tv.base, target.pin).playNext(sentName, total) } }
+            val status = if (r.isSuccess) 200 else (r.exceptionOrNull() as? TvClient.HttpError)?.code
+            castbridge.core.tv.PlayNext.failureText(status)?.let { failure.value = castbridge.core.ux.OpenWithCause.Cause(it, castbridge.core.ux.OpenWithCause.Fix.NONE); return@launch }
+            if (castbridge.core.tv.PlayNext.support(status) == castbridge.core.tv.PlayNext.Support.UNREACHABLE) { failure.value = castbridge.core.ux.OpenWithCause.unreachable(causeFacts(pinTv)); return@launch }
+            playNextSent = true
+            send(uri, name, move = false, choice, pinTv, pins)
+        }
+    }
 
     /**
      * « Copier sur la TV et lire »: the existing cast action ([CastAction.COPY], or LIVE when [how] degrades it for a trial TV), started through

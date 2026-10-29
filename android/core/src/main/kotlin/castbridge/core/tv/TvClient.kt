@@ -21,6 +21,8 @@ class TvClient(val base: String, val pin: String? = null) {
     /** GET /api/have (R-12): a finished file of [size] bytes (and of that SHA-256) on the TV? An older TV answers 404 (HttpError): treat as unknown. */
     fun have(size: Long, sha256: String? = null, fresh: Boolean = false): String =
         call("GET", "/api/have?size=$size" + (sha256?.let { "&sha256=$it" } ?: "") + if (fresh) "&fresh=1" else "")
+    /** « Copier et lire à la suite »: marks the copy of [name] ([size] bytes) to be played next on the TV, whenever it ends. [HttpError] 404/405 = an older TV without the route ([PlayNext.support]). */
+    fun playNext(name: String, size: Long): String = call("POST", "/api/playnext?name=${enc(name)}&size=$size")
     fun play(name: String, posMs: Long = 0) = call("POST", "/api/play?name=${enc(name)}&pos=$posMs")
     /** Plays an http(s) link on the TV (nothing stored). 404 on a TV older than this route. */
     fun playUrl(url: String, title: String, posMs: Long = 0) = call("POST", "/api/playurl?url=${enc(url)}&title=${enc(title)}&pos=$posMs")

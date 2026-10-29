@@ -33,7 +33,7 @@ class TrialRoutesTest {
         "/api/parental/apps/rules/set", "/api/parental/reports/config/get", "/api/parental/reports/config/set", "/api/parental/reports/recipients/add",
         "/api/parental/reports/recipients/remove", "/api/parental/reports/now")
     private val denied = listOf(
-        "/api/play", "/api/playlist", "/api/library", "/api/library/organize", "/api/library/organize/apply", "/api/library/watched", "/api/thumb", "/api/part", "/api/reset", "/api/reception/cancel", "/api/delete", "/api/rename", "/api/folders", "/api/folders/set",
+        "/api/play", "/api/playlist", "/api/library", "/api/library/organize", "/api/library/organize/apply", "/api/library/watched", "/api/thumb", "/api/part", "/api/reset", "/api/reception/cancel", "/api/delete", "/api/delete/batch", "/api/rename", "/api/folders", "/api/folders/set",
         "/api/storage", "/api/storage/move", "/api/storage/target", "/api/storage/saf/pick", "/api/transfer/start", "/api/transfer/caps", "/api/upload", "/upload/film.mp4",
         "/api/trash", "/api/trash/put", "/api/downloads", "/api/downloads/add", "/api/downloads/upload", "/api/dl", "/api/usb", "/api/usb/import", "/api/ssh", "/api/ssh/enable",
         "/api/ssh/key", "/api/apk", "/api/apk/install", "/api/update", "/api/update/install", "/api/server/install", "/api/server/erase", "/api/screenshot", "/api/devsettings",
@@ -42,7 +42,7 @@ class TrialRoutesTest {
         "/quiz/api/hello", "/quiz/api/join", "/quiz/api/leave", "/quiz/api/state", "/upload/",
         "/api/downloads/about", "/api/downloads/accept", "/api/downloads/clear", "/api/downloads/files", "/api/downloads/options", "/api/downloads/pause", "/api/downloads/pauseall",
         "/api/downloads/peers", "/api/downloads/priority", "/api/downloads/remove", "/api/downloads/resume", "/api/downloads/resumeall", "/api/downloads/select", "/api/downloads/settings",
-        "/api/folders/rename", "/api/library/watched", "/api/playlist", "/api/ssh/disable", "/api/ssh/key/remove",
+        "/api/folders/rename", "/api/library/watched", "/api/playlist", "/api/playnext", "/api/ssh/disable", "/api/ssh/key/remove",
         "/api/storage/check", "/api/have", "/api/storage/move/cancel", "/api/storage/open-settings", "/api/storage/rescan", "/api/trash/empty", "/api/trash/purge", "/api/trash/restore",
         "/api/transfer/begin", "/api/transfer/chunk", "/api/transfer/state", "/api/transfer/finish", "/api/transfer/abort",
         "/api/server/check-update", "/api/server/quiz-sync", "/api/chess", "/api/chess/open", "/api/games/room", "/api/games/journals", "/quiz", "/quiz/api/join", "/chess", "/chess/api/state", "/stream/film.mp4", "/stream/",

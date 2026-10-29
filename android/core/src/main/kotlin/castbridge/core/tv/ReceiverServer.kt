@@ -707,6 +707,47 @@ class ReceiverServer(
         return startPlaying(pl.current!!, 0)
     }
 
+    // ---- « Copier et lire à la suite »: the TV decides, the phone may be gone ----
+
+    /** Names (lowercase, as the phone sends them) whose copy must be played next once received, with the time they were asked. In memory: a restart forgets them (the copy is then simply kept). */
+    private val playNextPending = java.util.concurrent.ConcurrentHashMap<String, Long>()
+
+    /** The verified final file [final] of the copy the phone named [original] is there: if it was marked « à la suite », queue it (or start it if nothing plays). */
+    private fun playNextArrived(original: String, final: String) {
+        val t = playNextPending.remove(original.lowercase()) ?: return
+        if (System.currentTimeMillis() - t > PLAYNEXT_TTL_MS) return
+        runCatching { playNextNow(final) }
+    }
+
+    /** Puts [name] (a finished file) after what plays, or plays it at once when nothing does; the rule itself is [PlayNext.apply]. */
+    @Synchronized private fun playNextNow(name: String): PlayNext.Kind {
+        val ps = player.state()
+        val playing = if (ps.state == "idle" || ps.name == null) null else if (isPlaying(name)) name else ps.name
+        val r = PlayNext.apply(playlist, playing, name)
+        when (r.kind) {
+            PlayNext.Kind.START_NOW -> { playlist = null; growingName = null; startPlaying(name, 0) }
+            PlayNext.Kind.QUEUED -> { playlist = r.playlist; onNotice("À suivre : ${name.substringAfterLast('/')}") }
+            PlayNext.Kind.ALREADY_PLAYING -> {}
+        }
+        return r.kind
+    }
+
+    /** POST /api/playnext?name=&size= : « the copy of [name] ([size] bytes) is to be played next ». Already there: applied now; otherwise at the end of its reception. */
+    private fun playNextRegister(name: String, size: Long?): Response {
+        if (size == null || size <= 0) return bad("size required")
+        if (contentFlags?.childActive() == true)
+            return json(Response.Status.FORBIDDEN, """{"error":"child active","message":"Un profil enfant est actif : la lecture à la suite est refusée."}""")
+        val now = System.currentTimeMillis()
+        playNextPending.entries.removeIf { now - it.value > PLAYNEXT_TTL_MS }
+        val hit = findFinalOrOrigin(name, size)?.takeIf { it.size == size }
+        if (hit != null) {
+            val k = playNextNow(hit.name)
+            return ok("""{"queued":true,"pending":false,"now":${k == PlayNext.Kind.START_NOW}}""")
+        }
+        playNextPending[name.lowercase()] = now
+        return ok("""{"queued":true,"pending":true}""")
+    }
+
     /** Repeat mode of the running playlist; false when there is none. */
     fun setRepeat(r: Playlist.Repeat): Boolean { val pl = playlist ?: return false; pl.repeat = r; return true }
 
@@ -918,6 +959,7 @@ class ReceiverServer(
                 if (!playAll(names, p["start"]?.toIntOrNull() ?: 0, rep)) return json(Response.Status.NOT_FOUND, """{"error":"not found"}""")
                 ok(info())
             }
+            path == "/api/playnext" -> named(p) { playNextRegister(it, p["size"]?.toLongOrNull()) }
             path == "/api/player/next" || path == "/api/player/prev" ->
                 if (playlistStep(if (path.endsWith("next")) 1 else -1)) ok(info()) else json(Response.Status.CONFLICT, """{"error":"no playlist"}""")
             path == "/api/player/repeat" -> {
@@ -1110,7 +1152,7 @@ class ReceiverServer(
         val target = p["target"]?.takeIf { it.isNotEmpty() } ?: cfg.target
         if (!StoragePolicy.isValidTarget(target, volumes.volumes() + volumes.missingVolumes())) return bad("bad target")
         if (p["filing"] == "0") noFiling += name.lowercase() else noFiling -= name.lowercase()     // R-13: the phone's « classer dans des dossiers » option, per send
-        findFinalOrOrigin(name, total)?.let { if (it.size == total) return ok(sizeChecked(partJson(name, total))) }
+        findFinalOrOrigin(name, total)?.let { if (it.size == total) { playNextArrived(name, it.name); return ok(sizeChecked(partJson(name, total))) } }
         // A finished file of that very name but another size is another file: never "done", never replaced silently (the phone says so to the user).
         if (findFinal(name)?.let { it.size != total } == true) return nameTaken(name, total)
         synchronized(FileLocks.of(LOCK_ROOT, name)) {
@@ -1229,6 +1271,7 @@ class ReceiverServer(
                         val filed = try { fileReceived(v, st, o.name, name, total) } catch (e: IOException) { null }
                         progress.finish(pid, filed?.name)
                         onNotice(receivedNotice(name, filed)); contentIndex.poke()
+                        playNextArrived(name, filed?.name ?: v.storedName(name))
                     } else {
                         progress.interrupted(pid)             // the stream ended short (clean close): the phone resumes, the sweep does not have to wait for it
                     }
@@ -1285,7 +1328,7 @@ class ReceiverServer(
                 // discard=1: the bench's "network alone" run (bytes are hashed and dropped, nothing is stored)
                 val r = if (p["discard"] == "1") transfers.beginDiscard(m) else transfers.begin(m) { mf -> allocateTransfer(mf, target, viaPhone(p["target"])) }
                 return when (r) {
-                    is castbridge.core.xfer.TransferHost.Begin.AlreadyThere -> ok("""{"done":true,"name":${q(name)}}""")
+                    is castbridge.core.xfer.TransferHost.Begin.AlreadyThere -> { findFinalOrOrigin(name, size)?.let { playNextArrived(name, it.name) }; ok("""{"done":true,"name":${q(name)}}""") }
                     is castbridge.core.xfer.TransferHost.Begin.Refused ->
                         json(status(r.http), """{"error":${q(r.message)},"message":${q(humanRefusal(r.message))}}""")
                     is castbridge.core.xfer.TransferHost.Begin.Ok -> {
@@ -1449,6 +1492,7 @@ class ReceiverServer(
                         val filed = try { fileReceived(v, st, sess.diskName, name, sess.manifest.size) } catch (e: IOException) { null }
                         progress.finish("x:" + sess.manifest.id, filed?.name)
                         onNotice(receivedNotice(name, filed)); contentIndex.poke()
+                        playNextArrived(name, filed?.name ?: v.storedName(name))
                         invalidate()
                         ok("""{"done":true,"name":${q(name)},"volume":${q(v.id)}${if (filed != null) ",\"folder\":${q(filed.folder)},\"finalName\":${q(filed.name)}" else ""}}""")
                     }
@@ -2327,6 +2371,8 @@ class ReceiverServer(
         val BODY_OPTIONAL: Set<String> = setOf("/api/tv/open")
         /** A partial copy written less than this long ago (or being written) is busy: /api/reset refuses to drop it. */
         const val PART_BUSY_MS = 60_000L
+        /** How long a « lire à la suite » mark waits for its copy to finish (a copy that never ends must not queue a later, unrelated one of that name). */
+        const val PLAYNEXT_TTL_MS = 6L * 3600_000L
         /** After the owner cancels a copy on the TV, that name is refused this long (R-51): the phone resumes by itself and must not bring the copy back at once. */
         const val TV_CANCEL_REFUSE_MS = 10 * 60_000L
         /** Why the reception progress says the copy ended (« Réception interrompue : annulée sur la TV »). */
