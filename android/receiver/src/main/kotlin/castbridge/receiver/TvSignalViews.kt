@@ -72,6 +72,12 @@ object TvSignalViews {
         }
     }
 
+    /** Le nom du Wi-Fi de la TV (null = inconnu ou « <unknown ssid> »), dit au téléphone dans `/api/info` (champ `wifi`). */
+    @Suppress("DEPRECATION")
+    fun wifiName(ctx: Context): String? = runCatching {
+        ctx.applicationContext.getSystemService(WifiManager::class.java)?.connectionInfo?.ssid?.trim('"')?.takeIf { it.isNotBlank() && !it.startsWith("<unknown") }
+    }.getOrNull()
+
     /** Relevé des faits de la TV (mince : aucune décision ici, tout est décidé par [TvSignal.of]). */
     @Suppress("DEPRECATION")
     fun facts(ctx: Context, svc: TvService?, listening: Boolean): TvFacts {

@@ -1894,7 +1894,9 @@ class ReceiverServer(
         val free = pv?.let { volumes.free(it) } ?: 0
         val used = pv?.let { l.used[it.id] } ?: 0
         val quota = pv?.let { quotaOf(it, used) } ?: 0
+        val wifi = runCatching { device?.wifiName() }.getOrNull()?.takeIf { it.isNotBlank() }
         return """{"files":${l.filesJson},"free":$free,"used":$used,"quota":$quota,"target":${q(cfg.target)},"volumes":${volumesJson(l)},""" +
+            (wifi?.let { """"wifi":${q(it)},""" } ?: "") +
             """"player":{"state":${q(ps.state)},"name":${ps.name?.let(::q) ?: "null"},"pos":${ps.posMs},"dur":${ps.durMs}},"playlist":${playlistJson()},""" +
             """"playbackPriority":${playback.json()},"rejections":${rejectionsJson()}}"""
     }

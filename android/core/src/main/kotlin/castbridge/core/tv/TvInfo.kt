@@ -15,6 +15,8 @@ object TvDedupe {
 data class TvInfo(
     val files: List<TvFile>, val free: Long, val used: Long, val quota: Long,
     val state: String, val playing: String?, val pos: Long, val dur: Long,
+    /** The Wi-Fi name the TV is on (additive `wifi` field, absent on an older TV or when unknown). */
+    val wifi: String? = null,
 ) {
     /** The file called [name], or the one the TV renamed on reception that was sent as [name]. */
     fun file(name: String?) = files.firstOrNull { it.name == name } ?: name?.let { n -> files.firstOrNull { it.origin == n && it.complete } }
@@ -32,7 +34,8 @@ data class TvInfo(
             val player = j.substringAfter("\"player\":", "{}")
             return TvInfo(files, TvClient.num(j, "free") ?: 0, TvClient.num(j, "used") ?: 0, TvClient.num(j, "quota") ?: 0,
                 TvClient.str(player, "state") ?: "idle", TvClient.str(player, "name"),
-                TvClient.num(player, "pos") ?: 0, TvClient.num(player, "dur") ?: 0)
+                TvClient.num(player, "pos") ?: 0, TvClient.num(player, "dur") ?: 0,
+                TvClient.str(j.substringBefore("\"player\":"), "wifi")?.takeIf { it.isNotBlank() })
         }
     }
 }

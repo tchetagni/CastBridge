@@ -79,7 +79,9 @@ data class Indicator(val kind: IndicatorKind, val level: SignalLevel, val text: 
 }
 
 /** Résultat unique : la puce de l'accueil ([level], [text], [action]) et la rangée d'indicateurs ([indicators]). Aucun autre code ne choisit une couleur. */
-data class TvSignalView(val level: SignalLevel, val text: String, val action: String?, val indicators: List<Indicator>) {
+data class TvSignalView(val level: SignalLevel, val text: String, val action: String?, val indicators: List<Indicator>,
+    /** Ce que la puce de l'accueil dit du réseau (« Wi-Fi Maison », « Câble réseau »), null = rien à dire ([NetworkNames.tvPart]). */
+    val network: String? = null) {
     fun indicator(k: IndicatorKind) = indicators.first { it.kind == k }
 }
 
@@ -123,7 +125,7 @@ object TvSignal {
         if (f.pinRotating) raise(SignalLevel.ORANGE, "Le code de la TV va changer", "Regardez le nouveau code : MENU > Connexion & réglages")
 
         val reception = Indicator(IndicatorKind.RECEPTION, level, text, action)
-        return TvSignalView(level, text, action, listOf(reception, network, bt, internet, storage))
+        return TvSignalView(level, text, action, listOf(reception, network, bt, internet, storage), NetworkNames.tvPart(f, text))
     }
 
     private fun network(f: TvFacts, btWorks: Boolean): Indicator = when {

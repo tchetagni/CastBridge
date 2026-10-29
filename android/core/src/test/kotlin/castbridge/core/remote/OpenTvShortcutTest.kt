@@ -64,8 +64,10 @@ class OpenTvShortcutTest {
         val permissions = Regex("""<uses-permission android:name="([^"]+)"""").findAll(phoneManifest).map { it.groupValues[1] }.toSet()
         // « SYSTEM_ALERT_WINDOW côté TV seulement » ; HDMI-CEC and the like are not even possible without system rights
         for (p in listOf("android.permission.SYSTEM_ALERT_WINDOW", "android.permission.USE_FULL_SCREEN_INTENT", "android.permission.REORDER_TASKS", "android.permission.WRITE_SETTINGS",
-            "android.permission.REQUEST_COMPANION_RUN_IN_BACKGROUND", "android.permission.ACCESS_FINE_LOCATION", "android.permission.READ_CONTACTS", "android.permission.RECORD_AUDIO"))
+            "android.permission.REQUEST_COMPANION_RUN_IN_BACKGROUND", "android.permission.READ_CONTACTS", "android.permission.RECORD_AUDIO"))
             assertFalse(p in permissions, "the phone must not declare $p")
+        // the one position permission is the owner's choice of 2026-10-29 (« Voir le Wi-Fi de ce téléphone »): only the foreground pair, never in the background
+        assertFalse("android.permission.ACCESS_BACKGROUND_LOCATION" in permissions)
     }
 
     @Test fun theTvCanSeeWhetherTheOverlayScreenExistsOnThisBox() {

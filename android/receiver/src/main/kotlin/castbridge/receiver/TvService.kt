@@ -1293,6 +1293,8 @@ class TvService : Service(), Device {
         )
     }
 
+    override fun wifiName(): String? = TvSignalViews.wifiName(this)
+
     private val audio by lazy { getSystemService(AudioManager::class.java) }
 
     override fun volume(): Int? = runCatching {

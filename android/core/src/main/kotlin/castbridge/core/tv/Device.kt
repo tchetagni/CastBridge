@@ -44,6 +44,8 @@ interface Device {
     fun setVolume(pct: Int)
     /** Restarts the CastBridge TV app (not the TV). Called after the HTTP response was sent. */
     fun restartApp()
+    /** Name of the Wi-Fi the TV is on (shown by the phone's home), null = unknown / cable. Default: not said. */
+    fun wifiName(): String? = null
 }
 
 data class ApiReply(val status: Int, val json: String, val bytes: ByteArray? = null, val mime: String = "application/json") {

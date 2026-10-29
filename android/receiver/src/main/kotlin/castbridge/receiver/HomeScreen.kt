@@ -214,7 +214,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         if (sig == null) { val t = (receiving ?: "● $ready") + "   ·   code $shown"; if (chipGate.changed(t)) chip.text = t; return }
         // never hide a red state behind a transfer line; otherwise a transfer in progress tells more than « Prêt »
         val head = sig.text
-        val text = "$head   ·   code $shown"
+        val text = castbridge.core.ux.NetworkNames.chip(head, sig.network, shown)       // « Prêt à recevoir   ·   Wi-Fi Maison   ·   code 12•••• »
         // redraw only when the text or the signal facts really changed (R-11: no 60 Hz repaint of an idle home)
         if (chipGate.changed("$text|$sig")) {
             chip.text = text

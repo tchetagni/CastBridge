@@ -71,7 +71,85 @@ internal class HomeTv(ctx: Context) {
     var name: String? get() = sp.getString("tv", null); set(v) { PinIo.save(sp) { it.putString("tv", v) } }
     /** Last address the home TV answered at with its name (R-10: tells « X (2) » of the same TV from the other TV of the same model). */
     var host: String? get() = sp.getString("host", null); set(v) { PinIo.save(sp) { it.putString("host", v) } }
+    /** The Wi-Fi name the TV last said (`wifi` of /api/info): lets the home say « pas sur le Wi-Fi de la TV » while the TV cannot be reached. */
+    var wifi: String? get() = sp.getString("wifi", null); set(v) { PinIo.save(sp) { if (v == null) it.remove("wifi") else it.putString("wifi", v) } }
 }
+
+/** The one discreet line under the TV state (castbridge.core.ux.NetworkNames): names, verdict, and the link that asks for the permission / opens the settings. */
+@Composable
+internal fun WifiLine(tvWifi: String?, tvHost: String?) {
+    val ctx = LocalContext.current
+    val cs = MaterialTheme.colorScheme
+    val sp = remember { ctx.getSharedPreferences("castbridge_home", Context.MODE_PRIVATE) }
+    var tick by remember { mutableIntStateOf(0) }                       // bumped after the system answer / when coming back from the settings
+    val lifecycle = androidx.lifecycle.compose.LocalLifecycleOwner.current.lifecycle
+    DisposableEffect(lifecycle) {
+        val o = androidx.lifecycle.LifecycleEventObserver { _, e -> if (e == androidx.lifecycle.Lifecycle.Event.ON_RESUME) tick++ }
+        lifecycle.addObserver(o); onDispose { lifecycle.removeObserver(o) }
+    }
+    var explain by remember { mutableStateOf(false) }
+    val ask = rememberLauncherForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { tick++ }
+    val state by produceState<Triple<Pair<String, Int>?, String?, Int>>(Triple(null, null, -1), tick) {
+        while (true) {
+            value = withContext(Dispatchers.IO) { Triple(phoneWifiAddress(ctx), phoneWifiName(ctx), tick) }
+            delay(4000)
+        }
+    }
+    val granted = ctx.checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION) == android.content.pm.PackageManager.PERMISSION_GRANTED
+    val asked = sp.getBoolean("loc_asked", false)
+    var a: android.content.Context = ctx; while (a is android.content.ContextWrapper && a !is android.app.Activity) a = a.baseContext
+    val rationale = (a as? android.app.Activity)?.shouldShowRequestPermissionRationale(android.Manifest.permission.ACCESS_FINE_LOCATION) == true
+    val access = when {
+        granted -> castbridge.core.ux.NetworkNames.LocationAccess.GRANTED
+        asked && !rationale -> castbridge.core.ux.NetworkNames.LocationAccess.BLOCKED       // refused for good: only the app settings can give it
+        else -> castbridge.core.ux.NetworkNames.LocationAccess.CAN_ASK
+    }
+    val lan = state.first
+    val line = castbridge.core.ux.NetworkNames.phoneLine(tvWifi, castbridge.core.ux.NetworkNames.sameSubnet(lan?.first, lan?.second ?: 0, tvHost),
+        access, state.second.takeIf { granted }, onWifi = lan != null) ?: return
+    fun start(i: Intent) { runCatching { ctx.startActivity(i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) } }
+    line.text?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = if (line.warn) Cb.warning else cs.onSurfaceVariant) }
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        line.linkText?.let { t ->
+            TextButton(onClick = {
+                when (line.action) {
+                    castbridge.core.ux.NetworkNames.NetAction.ASK_PERMISSION -> explain = true
+                    castbridge.core.ux.NetworkNames.NetAction.OPEN_APP_SETTINGS -> start(Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:${ctx.packageName}")))
+                    castbridge.core.ux.NetworkNames.NetAction.OPEN_LOCATION_SETTINGS -> start(Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+                    null -> {}
+                }
+            }, contentPadding = PaddingValues(horizontal = 0.dp, vertical = 0.dp)) { Text(t, style = MaterialTheme.typography.bodySmall) }
+        }
+        if (line.changeWifi) TextButton(onClick = { start(changeWifiIntent()) }) { Text("Changer de Wi-Fi", style = MaterialTheme.typography.bodySmall) }
+    }
+    if (explain) AlertDialog(onDismissRequest = { explain = false }, title = { Text("Voir le Wi-Fi de ce téléphone") },
+        text = { Text(castbridge.core.ux.NetworkNames.WHY_LOCATION) },
+        confirmButton = { TextButton(onClick = {
+            explain = false; sp.edit().putBoolean("loc_asked", true).apply()
+            ask.launch(arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION))
+        }) { Text("Continuer") } },
+        dismissButton = { TextButton(onClick = { explain = false }) { Text("Pas maintenant") } })
+}
+
+/** Wi-Fi choice: the system panel on Android 10+, else the Wi-Fi settings. */
+internal fun changeWifiIntent(): Intent =
+    if (android.os.Build.VERSION.SDK_INT >= 29) Intent(android.provider.Settings.Panel.ACTION_WIFI) else Intent(android.provider.Settings.ACTION_WIFI_SETTINGS)
+
+/** The name of the Wi-Fi this phone is on, null without the location permission / with the location off (« <unknown ssid> »). */
+@Suppress("DEPRECATION")
+internal fun phoneWifiName(ctx: Context): String? = runCatching {
+    castbridge.core.ux.NetworkNames.cleanSsid(ctx.applicationContext.getSystemService(android.net.wifi.WifiManager::class.java)?.connectionInfo?.ssid)
+}.getOrNull()
+
+/** This phone's IPv4 address and prefix on its active Wi-Fi network (LinkProperties: no permission, no SSID), null = not on Wi-Fi. */
+internal fun phoneWifiAddress(ctx: Context): Pair<String, Int>? = runCatching {
+    val cm = ctx.getSystemService(android.net.ConnectivityManager::class.java)
+    cm.allNetworks.firstNotNullOfOrNull { n ->
+        if (cm.getNetworkCapabilities(n)?.hasTransport(android.net.NetworkCapabilities.TRANSPORT_WIFI) != true) null
+        else cm.getLinkProperties(n)?.linkAddresses?.firstOrNull { it.address is java.net.Inet4Address && !it.address.isLoopbackAddress }
+            ?.let { it.address.hostAddress!! to it.prefixLength }
+    }
+}.getOrNull()
 
 /**
  * « Ouvrir avec CastBridge » asks the main screen to open on the CastBridge TV tab, on « Ajouter ma TV » or on the code entry
@@ -167,6 +245,7 @@ fun TvHome(onAdvanced: () -> Unit, onBluetooth: () -> Unit = onAdvanced) {
                 // R-19: where this screen shows « Connectée » is where the upload looks too (the screen and the upload say the same thing)
                 .also { if (it.isSuccess && seenAs != null) UploadService.tvSeenAt(ctx, seenAs, client.base) } }
             reachable = r.isSuccess; info = r.getOrNull() ?: info
+            r.getOrNull()?.let { if (home.wifi != it.wifi) home.wifi = it.wifi }          // an older TV (or a cable) says nothing: the line then stays silent
             if (r.isSuccess && msg == castbridge.core.ux.HomeNotices.info("Reconnexion à la TV…")) msg = null      // reconnected: the line goes away by itself
             // R-10: the code was accepted at this address: every screen key of this TV (its address, a « (2) » name) finds the same code next time
             if (r.isSuccess && !linked && session == null && tv != null && tvName != null && !TvAuth.isToken(client.pin) && !castbridge.core.trust.PinBook.isLoopback(tv.host)) {
@@ -272,6 +351,8 @@ fun TvHome(onAdvanced: () -> Unit, onBluetooth: () -> Unit = onAdvanced) {
             TextButton(onClick = { wizard = true }) { Text("Changer") }
         }
 
+        // Which Wi-Fi: the TV says its network name; the phone's own name needs the location permission (asked only by a tap here); « the same » = names when both known, else the subnet
+        WifiLine(info?.wifi ?: home.wifi, home.host ?: tv?.host)
         }
         }
 

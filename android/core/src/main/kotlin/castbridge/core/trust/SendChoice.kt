@@ -54,6 +54,10 @@ data class SendFacts(
     val refusal: RefusalRecord? = null, val nowMs: Long = 0,
     /** The name the code path finds the saved default TV by (mDNS name, else its name): where a code typed in the dialog goes when no code-path TV is known. */
     val defaultPinKey: String? = null,
+    /** How long the trusted link has been « connecting » (0 = not). Past [castbridge.core.ux.OpenWithCause.CHECK_LIMIT_MS] the code path is tried and the cause said. */
+    val linkPendingMs: Long = 0,
+    /** Why the TV is not reached (castbridge.core.ux.OpenWithCause.unreachable), written in the dialog; null = the old generic words. */
+    val cause: String? = null,
 )
 
 /** What the dialog draws. [note]: the one explanation line (why « Déplacer » waits, what is wrong), or null. */
@@ -97,7 +101,10 @@ object SendChoices {
         val view = if (forgotten) null else LinkStart.view(f.savedCount, f.defaultName, f.stepView)
         if (view != null) {
             if (f.defaultName == null) return SendChoice(SendRoute.NONE, view.title + " : " + view.detail, false, false, null, SendAction.OPEN_APP)
-            if (transient(view.state)) return SendChoice(SendRoute.QUEUE, view.title, true, false, MOVE_WAITS, SendAction.NONE)
+            val stuck = f.linkPendingMs > castbridge.core.ux.OpenWithCause.CHECK_LIMIT_MS
+            // « Vérification… » is bounded: stuck link + a kept code → the code path (it is checked by address too), else the cause is said next to the wait
+            if (transient(view.state) && !(stuck && f.pinTvName != null && f.pinStored))
+                return SendChoice(SendRoute.QUEUE, view.title, true, false, if (stuck && f.cause != null) f.cause + " " + MOVE_WAITS else MOVE_WAITS, SendAction.NONE)
             // the loop does not retry by itself (the TV forgot the phone, Bluetooth off, pairing to redo…): say it, one action, no dead queue
             if (f.pinTvName == null || !f.pinStored)
                 return SendChoice(SendRoute.NONE, view.title + " : " + view.detail, false, false, null, SendAction.OPEN_APP)
@@ -112,7 +119,7 @@ object SendChoices {
         return when (f.pinCheck) {
             PinCheck.OK -> SendChoice(SendRoute.PIN_UPLOAD, "TV : $name", true, true, null, SendAction.NONE)        // (handled above; kept for completeness)
             PinCheck.UNKNOWN -> SendChoice(SendRoute.PIN_UPLOAD, "Vérification de la liaison avec $name…", true, false, MOVE_WAITS, SendAction.NONE)
-            PinCheck.UNREACHABLE -> SendChoice(SendRoute.PIN_UPLOAD, "$name ne répond pas pour le moment (même Wi-Fi ? CastBridge-TV ouvert ?).", true, false, MOVE_WAITS, SendAction.NONE)
+            PinCheck.UNREACHABLE -> SendChoice(SendRoute.PIN_UPLOAD, f.cause ?: "$name ne répond pas pour le moment (même Wi-Fi ? CastBridge-TV ouvert ?).", true, false, MOVE_WAITS, SendAction.NONE)
             PinCheck.REJECTED -> SendChoice(SendRoute.NONE, "Le code PIN de $name a changé ou n'est pas le bon : saisissez le code affiché sur la TV.", false, false, null, SendAction.ENTER_PIN)
             PinCheck.LOCKED -> SendChoice(SendRoute.NONE, "$name est verrouillée une minute après trop d'essais de code : réessayez ensuite avec le bon code.", false, false, null, SendAction.ENTER_PIN)
         }

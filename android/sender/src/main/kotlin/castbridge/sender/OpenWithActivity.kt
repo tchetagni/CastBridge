@@ -78,6 +78,24 @@ class OpenWithActivity : ComponentActivity() {
     /** Bumped when a code was just kept (the dialog recomputes its choice) / when the window leaves the screen (the typed digits are wiped). */
     private val pinRev = MutableStateFlow(0)
     private val wipeTick = MutableStateFlow(0)
+    /** Why the start failed, written IN the window with one action (castbridge.core.ux.OpenWithCause); never only a Toast. */
+    private val failure = MutableStateFlow<castbridge.core.ux.OpenWithCause.Cause?>(null)
+    private val nowTick = MutableStateFlow(0L)
+
+    /** Where this phone stands, for [castbridge.core.ux.OpenWithCause]: its Wi-Fi address (and name when the location permission allows), the TV's last address and Wi-Fi name. */
+    private fun causeFacts(pinTv: String?): castbridge.core.ux.OpenWithCause.Facts {
+        val home = HomeTv(this)
+        val lan = phoneWifiAddress(this)
+        val name = SendChoices.display(pinTv ?: home.name ?: TvLinkManager.saved.default()?.name ?: "TV")
+        return castbridge.core.ux.OpenWithCause.Facts(name, tvHost = home.host ?: pinTvFound?.host, tvWifi = home.wifi, phoneIp = lan?.first, phonePrefix = lan?.second ?: 0,
+            phoneSsid = if (checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION) == android.content.pm.PackageManager.PERMISSION_GRANTED) phoneWifiName(this) else null)
+    }
+
+    /** The TV by the last address it answered at (the home screen's), for when mDNS does not find it by name. */
+    private fun knownTv(tvName: String?): Tv? {
+        val host = HomeTv(this).host?.takeIf { it.isNotBlank() && !castbridge.core.trust.PinBook.isLoopback(it) } ?: return null
+        return Tv(tvName ?: "TV", host, castbridge.core.tv.ReceiverServer.PORT)
+    }
 
     /** R-22: what to do once the (single, first-use) media permission question is answered, whatever the answer. */
     private var afterMediaPermission: (() -> Unit)? = null
@@ -101,7 +119,9 @@ class OpenWithActivity : ComponentActivity() {
         val pinTv = HomeTv(this).name
         val pinCheck = MutableStateFlow(PinCheck.UNKNOWN)
         // the TV said « je ne vous reconnais plus » a moment ago: the code path is verified too (it is what can still work)
-        if (pinTv != null && (TvLinkManager.saved.list().isEmpty() || SendChoices.untrusted(refusalFacts())) && TvAuth.isUsable(pins.get(pinTv))) checkPinTv(pinTv, pins.get(pinTv), pinCheck)
+        // (also when a trusted TV is saved: its link may be stuck while the TV answers by its address; the code path is then what works)
+        if (pinTv != null && TvAuth.isUsable(pins.get(pinTv))) checkPinTv(pinTv, pins.get(pinTv), pinCheck)
+        lifecycleScope.launch { while (isActive) { nowTick.value = System.currentTimeMillis(); delay(1000) } }
         // the last attempt to copy THIS file failed a moment ago: its cause and what to do, again on the next opening (never lost with the notification)
         val lastFailure = runCatching { CopyReport.journal(this).lastFailureFor(name, 30 * 60_000L)?.text }.getOrNull()
         setContent {
@@ -110,6 +130,8 @@ class OpenWithActivity : ComponentActivity() {
                 val check by pinCheck.collectAsState()
                 val rev by pinRev.collectAsState()
                 val wipe by wipeTick.collectAsState()
+                val now by nowTick.collectAsState()
+                val fail by failure.collectAsState()
                 val session = (link as? LinkUi.Connected)?.session
                 val facts = SendFacts(
                     savedCount = TvLinkManager.saved.list().size, defaultName = TvLinkManager.saved.default()?.name,
@@ -117,7 +139,9 @@ class OpenWithActivity : ComponentActivity() {
                     session = session != null, sessionName = session?.tv?.name, btOnly = session != null && session.base == null,
                     pinTvName = pinTv, pinStored = rev >= 0 && pinTv != null && TvAuth.isUsable(pins.get(pinTv)), pinCheck = check,
                     refusal = rev.let { latestRefusal() }, nowMs = System.currentTimeMillis(),
-                    defaultPinKey = TvLinkManager.saved.default()?.let { it.mdns ?: it.name })
+                    defaultPinKey = TvLinkManager.saved.default()?.let { it.mdns ?: it.name },
+                    linkPendingMs = if (now >= 0) TvLinkManager.pendingForMs() else 0,
+                    cause = if (check == PinCheck.UNREACHABLE || TvLinkManager.pendingForMs() > castbridge.core.ux.OpenWithCause.CHECK_LIMIT_MS) castbridge.core.ux.OpenWithCause.unreachable(causeFacts(pinTv)).text else null)
                 val choice = SendChoices.decide(facts)
                 // « Copier sur la TV et lire »: every state decision is CopyAndPlay's (this build does not learn the TV edition: UNKNOWN, the TV judges the copy)
                 val both = CopyAndPlay.decide(CopyAndPlay.Facts(CopyAndPlay.linkOf(facts, choice), ipRoute = session == null || session.base != null,
@@ -131,6 +155,13 @@ class OpenWithActivity : ComponentActivity() {
                             // the TV refused this phone: the cause and what to do, ON the phone (never only a Toast)
                             choice.banner?.let { Text(it, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.error) }
                             if (choice.banner == null) lastFailure?.let { Text("Dernière tentative : $it", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.error) }
+                            fail?.let { f ->
+                                Text(f.text, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.error)
+                                if (f.fix != castbridge.core.ux.OpenWithCause.Fix.NONE) OutlinedButton({
+                                    failure.value = null
+                                    if (f.fix == castbridge.core.ux.OpenWithCause.Fix.CHANGE_WIFI) startActivity(changeWifiIntent()) else { TvLinkManager.retryNow(); recheck(pinTv, pins, pinCheck) }
+                                }, Modifier.fillMaxWidth()) { Text(f.fix.label) }
+                            }
                             Text(choice.status, style = MaterialTheme.typography.bodyMedium)
                             choice.note?.let { Text(it, style = MaterialTheme.typography.bodySmall) }
                             androidx.compose.foundation.layout.Spacer(Modifier.height(8.dp))
@@ -187,6 +218,11 @@ class OpenWithActivity : ComponentActivity() {
             try {
                 var tried: String? = null
                 var waited = 0
+                // the address the TV last answered at, tried first (mDNS may never find it: a stale address just fails here, the search by name goes on)
+                knownTv(tvName)?.let { k ->
+                    val r = withContext(Dispatchers.IO) { runCatching { TvClient(k.base, credential).info() } }
+                    if (r.isSuccess) { pinTvFound = k; out.value = PinCheck.OK; return@launch }
+                }
                 while (isActive) {
                     // (tvs is shared WhileSubscribed: read it by subscribing, never through .value)
                     val tv = withTimeoutOrNull(1000) { discovery.tvs.first { l -> l.any { it.name == tvName && it.base != tried } } }?.firstOrNull { it.name == tvName }
@@ -204,7 +240,7 @@ class OpenWithActivity : ComponentActivity() {
                         }
                         if (out.value != PinCheck.UNREACHABLE) break
                         delay(2000)
-                    } else if (++waited == 8 && out.value == PinCheck.UNKNOWN) out.value = PinCheck.UNREACHABLE
+                    } else if (++waited == 10 && out.value == PinCheck.UNKNOWN) out.value = PinCheck.UNREACHABLE      // ≈ 10 s: then a verdict (the search goes on)
                 }
             } finally { discovery.stop() }
         }
@@ -214,11 +250,16 @@ class OpenWithActivity : ComponentActivity() {
      * The one check of a typed code: the TV of the code path is found by its name, then the same authenticated request as the home screen
      * ([TvClient.info]); sent once per call, the lock-out and the counters stay the TV's ([TvAuthReply]). Never logs the code.
      */
+    /** « Réessayer » : the code path is checked again (a new search, a new request). */
+    private fun recheck(pinTv: String?, pins: PinStore, out: MutableStateFlow<PinCheck>) {
+        if (pinTv != null && TvAuth.isUsable(pins.get(pinTv))) { out.value = PinCheck.UNKNOWN; checkPinTv(pinTv, pins.get(pinTv), out) }
+    }
+
     private suspend fun verifyPin(tvName: String, code: String): PinVerdict {
         val discovery = TvDiscovery(this)
         discovery.start()
         try {
-            val tv = withTimeoutOrNull(8000) { discovery.tvs.first { l -> l.any { it.name == tvName } } }?.firstOrNull { it.name == tvName } ?: return PinVerdict.Unreachable
+            val tv = withTimeoutOrNull(8000) { discovery.tvs.first { l -> l.any { it.name == tvName } } }?.firstOrNull { it.name == tvName } ?: knownTv(tvName) ?: return PinVerdict.Unreachable
             pinTvFound = tv
             val r = withContext(Dispatchers.IO) { runCatching { TvClient(tv.base, code).info() } }
             if (r.isSuccess) return PinVerdict.Ok
@@ -287,11 +328,12 @@ class OpenWithActivity : ComponentActivity() {
         lifecycleScope.launch {
             val item = withContext(Dispatchers.IO) { Media.describe(this@OpenWithActivity, uri, intent.type) } ?: PlayItem(uri, name, intent.type, MediaKind.of(intent.type, name), size)
             val target = castTarget(session, pinTv, pins)
-            val error: String? = if (target == null) "la TV n'est pas encore jointe en Wi-Fi" else runCatching {
+            if (target == null) { failure.value = castbridge.core.ux.OpenWithCause.unreachable(causeFacts(pinTv)); return@launch }
+            val error: String? = runCatching {
                 CastSession.start(applicationContext, target, how.action, item)
             }.exceptionOrNull()?.let { it.message ?: "erreur inattendue" }
             if (error != null) {
-                Toast.makeText(this@OpenWithActivity, "Impossible de démarrer : $error", Toast.LENGTH_LONG).show()
+                failure.value = castbridge.core.ux.OpenWithCause.startFailure(causeFacts(pinTv), error)
                 return@launch
             }
             runCatching {
@@ -307,11 +349,12 @@ class OpenWithActivity : ComponentActivity() {
         lifecycleScope.launch {
             val item = withContext(Dispatchers.IO) { Media.describe(this@OpenWithActivity, uri, intent.type) } ?: PlayItem(uri, name, intent.type, MediaKind.of(intent.type, name), size)
             val target = castTarget(session, pinTv, pins)
-            val error: String? = if (target == null) "la TV n'est pas encore jointe en Wi-Fi" else runCatching {
+            if (target == null) { failure.value = castbridge.core.ux.OpenWithCause.unreachable(causeFacts(pinTv)); return@launch }
+            val error: String? = runCatching {
                 CastSession.start(applicationContext, target, CastAction.LIVE, item)
             }.exceptionOrNull()?.let { it.message ?: "erreur inattendue" }
             if (error != null) {
-                Toast.makeText(this@OpenWithActivity, "Impossible de démarrer : $error", Toast.LENGTH_LONG).show()
+                failure.value = castbridge.core.ux.OpenWithCause.startFailure(causeFacts(pinTv), error)
                 return@launch
             }
             runCatching {
@@ -330,7 +373,7 @@ class OpenWithActivity : ComponentActivity() {
             val host = u.host ?: return null
             return CastTarget.Box(Tv(session.tv.name, host, if (u.port > 0) u.port else 80), session.credential)
         }
-        val tv = pinTvFound ?: return null
+        val tv = pinTvFound ?: knownTv(pinTv) ?: return null
         return CastTarget.Box(tv, pins.get(pinTv))
     }
 
