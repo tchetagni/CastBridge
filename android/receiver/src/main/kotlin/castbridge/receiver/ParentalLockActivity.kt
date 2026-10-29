@@ -36,7 +36,7 @@ class ParentalLockActivity : Activity() {
             setBackgroundColor(TvStyle.BG)
         }
         root.addView(ParentalUi.text(this, "Accès protégé", 36f, TvStyle.ACCENT, true).apply { gravity = Gravity.CENTER })
-        root.addView(ParentalUi.text(this, reason, 26f, Color.WHITE).apply {
+        root.addView(ParentalUi.text(this, reason, 26f, TvStyle.TEXT).apply {
             gravity = Gravity.CENTER; setPadding(0, TvStyle.dp(this@ParentalLockActivity, 16), 0, TvStyle.dp(this@ParentalLockActivity, 28))
         })
         val column = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; layoutParams = LinearLayout.LayoutParams(TvStyle.dp(this@ParentalLockActivity, 520), ViewGroup.LayoutParams.WRAP_CONTENT) }

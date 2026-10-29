@@ -12,23 +12,41 @@ import kotlin.math.roundToInt
  * before the rest of the TV app is migrated. Brand colors of each game come from the same file (quizDesMillions, echecs).
  */
 object GamesColors {
-    const val BG = 0xFF0A0F1E.toInt()            // color.dark.background
-    const val BG_TOP = 0xFF10182E.toInt()        // backgroundElevated
-    const val SURFACE = 0xFF151D37.toInt()
-    const val SURFACE_HIGH = 0xFF1B2542.toInt()
-    const val OUTLINE = 0xFF2A3550.toInt()
-    const val TEXT_HIGH = 0xFFF4F6FB.toInt()
-    const val TEXT_MEDIUM = 0xFFB7C0D4.toInt()
-    const val PRIMARY = 0xFFF5B025.toInt()
-    const val ON_PRIMARY = 0xFF171204.toInt()
-    const val FOCUS_RING = 0xFFFFE1A6.toInt()
-    const val SUCCESS = 0xFF35C08A.toInt()
-    const val ERROR = 0xFFFF6B6B.toInt()
-    const val INFO = 0xFF6CB6FF.toInt()
+    // Menus des jeux et des Langues : suivent le thème de la TV (TvStyle, clair par défaut).
+    val BG get() = TvStyle.BG
+    val BG_TOP get() = TvStyle.BG_ELEVATED
+    val SURFACE get() = TvStyle.CARD
+    val SURFACE_HIGH get() = TvStyle.CARD_FOCUS
+    val OUTLINE get() = TvStyle.OUTLINE
+    val TEXT_HIGH get() = TvStyle.TEXT
+    val TEXT_MEDIUM get() = TvStyle.TEXT2
+    val PRIMARY get() = TvStyle.ACCENT
+    val ON_PRIMARY get() = TvStyle.ON_ACCENT
+    val FOCUS_RING get() = TvStyle.RING
+    val SUCCESS get() = TvStyle.GOOD_TEXT
+    val ERROR get() = TvStyle.ERROR
+    val INFO get() = TvStyle.INFO
     const val QUIZ = 0xFFFF5C39.toInt()          // brand.quizDesMillions.primary
     const val CHESS = 0xFF2FA96B.toInt()         // brand.echecs.primary
     const val SUDOKU = 0xFF6CB6FF.toInt()        // no brand entry yet: semantic.info
     const val CARDS = 0xFFB48CFF.toInt()         // card games (Bataille, Fap-Fap, Agraham Tia): no brand entry yet, a violet apart from the three above
+
+    /** Tables de jeu (cartes, Sudoku) : toujours sombres, quel que soit le thème, comme les plateaux d'échecs et du Quiz. */
+    object Dark {
+        const val BG = 0xFF0A0F1E.toInt()            // color.dark.background
+        const val BG_TOP = 0xFF10182E.toInt()        // backgroundElevated
+        const val SURFACE = 0xFF151D37.toInt()
+        const val SURFACE_HIGH = 0xFF1B2542.toInt()
+        const val OUTLINE = 0xFF2A3550.toInt()
+        const val TEXT_HIGH = 0xFFF4F6FB.toInt()
+        const val TEXT_MEDIUM = 0xFFB7C0D4.toInt()
+        const val PRIMARY = 0xFFF5B025.toInt()
+        const val ON_PRIMARY = 0xFF171204.toInt()
+        const val FOCUS_RING = 0xFFFFE1A6.toInt()
+        const val SUCCESS = 0xFF35C08A.toInt()
+        const val ERROR = 0xFFFF6B6B.toInt()
+        const val INFO = 0xFF6CB6FF.toInt()
+    }
 }
 
 /**
@@ -55,7 +73,7 @@ class Dx(ctx: Context) {
 
     /** Card background: a focus ring (charter focusRing) when focused, a thin outline otherwise. */
     fun focusable(fill: Int, focusFill: Int, radius: Int) = StateListDrawable().apply {
-        addState(intArrayOf(android.R.attr.state_focused), rounded(focusFill, radius, GamesColors.FOCUS_RING, 6))
+        addState(intArrayOf(android.R.attr.state_focused), rounded(focusFill, radius, GamesColors.FOCUS_RING, if (TvStyle.RING_DP > 3) 8 else 6))
         addState(intArrayOf(), rounded(fill, radius, GamesColors.OUTLINE, 2))
     }
 }

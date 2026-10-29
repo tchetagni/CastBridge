@@ -53,7 +53,7 @@ class SupervisionSetupActivity : Activity() {
 
     private fun note(s: String) = content.addView(ParentalUi.text(this, s, ParentalUi.SMALL_SP, TvStyle.MUTED).apply { setPadding(TvStyle.dp(this@SupervisionSetupActivity, 6), TvStyle.dp(this@SupervisionSetupActivity, 4), 0, TvStyle.dp(this@SupervisionSetupActivity, 6)) })
     private fun step(title: String, value: String?, onClick: () -> Unit) = content.addView(ParentalUi.row(this, title, value, onClick))
-    private fun adb(cmd: String) = content.addView(ParentalUi.text(this, cmd, 17f, 0xFF8BC34A.toInt()).apply {
+    private fun adb(cmd: String) = content.addView(ParentalUi.text(this, cmd, 17f, TvStyle.GOOD_TEXT).apply {
         setTextIsSelectable(true); typeface = android.graphics.Typeface.MONOSPACE; setPadding(TvStyle.dp(this@SupervisionSetupActivity, 6), 0, 0, TvStyle.dp(this@SupervisionSetupActivity, 8))
     })
 
@@ -61,7 +61,7 @@ class SupervisionSetupActivity : Activity() {
         val info = ParentalHub.supervisionInfo()
         val setup = ParentalHub.setupMap()
         status.text = info.state.label + (info.detail?.let { " — $it" } ?: "")
-        status.setTextColor(when (info.state) { SupervisionState.ACTIVE -> 0xFF8BC34A.toInt(); SupervisionState.OFF -> TvStyle.MUTED; else -> 0xFFFFB74D.toInt() })
+        status.setTextColor(when (info.state) { SupervisionState.ACTIVE -> TvStyle.GOOD_TEXT; SupervisionState.OFF -> TvStyle.MUTED; else -> TvStyle.WARN })
         content.removeAllViews()
         val e = ParentalHub.engine
         val on = e.appSettings().supervise

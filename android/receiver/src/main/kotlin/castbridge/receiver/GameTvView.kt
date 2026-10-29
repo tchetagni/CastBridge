@@ -48,7 +48,7 @@ class GameTvView(ctx: Context, val st: GameTvState) : View(ctx) {
 
     override fun onDraw(c: Canvas) {
         val l = layout
-        fill.shader = LinearGradient(0f, 0f, 0f, height.toFloat(), GamesColors.BG_TOP, GamesColors.BG, Shader.TileMode.CLAMP)
+        fill.shader = LinearGradient(0f, 0f, 0f, height.toFloat(), GamesColors.Dark.BG_TOP, GamesColors.Dark.BG, Shader.TileMode.CLAMP)
         c.drawRect(0f, 0f, width.toFloat(), height.toFloat(), fill)
         fill.shader = null
         when (st.screen) {
@@ -63,7 +63,7 @@ class GameTvView(ctx: Context, val st: GameTvState) : View(ctx) {
 
     // ------------------------------------------------------------------ helpers
 
-    private fun textSize(px: Float, bold: Boolean = false, color: Int = GamesColors.TEXT_HIGH) {
+    private fun textSize(px: Float, bold: Boolean = false, color: Int = GamesColors.Dark.TEXT_HIGH) {
         text.textSize = px; text.color = color; text.typeface = if (bold) TvFonts.bold else TvFonts.body; text.textAlign = Paint.Align.LEFT; text.letterSpacing = 0f
     }
 
@@ -90,7 +90,7 @@ class GameTvView(ctx: Context, val st: GameTvState) : View(ctx) {
         return out.take(maxLines).mapIndexed { i, t -> if (i == maxLines - 1) TextUtils.ellipsize(t, text, maxW, TextUtils.TruncateAt.END).toString() else t }
     }
 
-    private fun panel(c: Canvas, b: Box, radius: Float, color: Int = GamesColors.SURFACE, border: Int = GamesColors.OUTLINE, borderW: Float = layout.u * 0.25f) {
+    private fun panel(c: Canvas, b: Box, radius: Float, color: Int = GamesColors.Dark.SURFACE, border: Int = GamesColors.Dark.OUTLINE, borderW: Float = layout.u * 0.25f) {
         rect.set(b.l, b.t, b.r, b.b)
         fill.color = color; c.drawRoundRect(rect, radius, radius, fill)
         stroke.color = border; stroke.strokeWidth = borderW; c.drawRoundRect(rect, radius, radius, stroke)
@@ -105,8 +105,8 @@ class GameTvView(ctx: Context, val st: GameTvState) : View(ctx) {
         val s = st.s
         val seats = s.list("seats")
         val table = s.sub("table")
-        textSize(l.titleText, true, GamesColors.PRIMARY); line(c, st.title, l.title.l, l.title.t, l.title.w)
-        textSize(l.subText, false, GamesColors.TEXT_MEDIUM); line(c, "Salle ${s["code"] ?: ""}", l.room.r, l.room.t + (l.room.h - l.subText) / 2, l.room.w, Paint.Align.RIGHT)
+        textSize(l.titleText, true, GamesColors.Dark.PRIMARY); line(c, st.title, l.title.l, l.title.t, l.title.w)
+        textSize(l.subText, false, GamesColors.Dark.TEXT_MEDIUM); line(c, "Salle ${s["code"] ?: ""}", l.room.r, l.room.t + (l.room.h - l.subText) / 2, l.room.w, Paint.Align.RIGHT)
         val playing = s["stage"] == "PLAYING"
         seats.getOrNull(0)?.let { drawSeat(c, l, l.leftSeat, it, table, playing) }
         seats.getOrNull(1)?.let { drawSeat(c, l, l.rightSeat, it, table, playing) }
@@ -116,9 +116,9 @@ class GameTvView(ctx: Context, val st: GameTvState) : View(ctx) {
         val result = s.sub("result")
         if (result != null) lines += result["text"] as? String ?: "" else lines += statusLine(seats, playing)
         table?.sub("last")?.let { r -> val w = seatName(seats, r["winner"] as? String); lines += (if (r["battle"] == true) "Bataille ! " else "") + "$w gagne la levée (${r["won"]} cartes)" }
-        textSize(l.statusText, true, if (result != null) GamesColors.PRIMARY else GamesColors.TEXT_HIGH)
-        lines.take(2).forEachIndexed { i, t -> line(c, t, width / 2f, l.status.t + i * l.statusText * 1.3f, l.status.w, Paint.Align.CENTER); if (i == 0) textSize(l.statusText, false, GamesColors.TEXT_MEDIUM) }
-        textSize(l.hintText, false, GamesColors.TEXT_MEDIUM)
+        textSize(l.statusText, true, if (result != null) GamesColors.Dark.PRIMARY else GamesColors.Dark.TEXT_HIGH)
+        lines.take(2).forEachIndexed { i, t -> line(c, t, width / 2f, l.status.t + i * l.statusText * 1.3f, l.status.w, Paint.Align.CENTER); if (i == 0) textSize(l.statusText, false, GamesColors.Dark.TEXT_MEDIUM) }
+        textSize(l.hintText, false, GamesColors.Dark.TEXT_MEDIUM)
         val hint = st.footer ?: ""
         wrap(hint, l.hints.w, 2).forEachIndexed { i, t -> line(c, t, width / 2f, l.hints.t + i * l.hintText * 1.35f, l.hints.w, Paint.Align.CENTER) }
     }
@@ -133,19 +133,19 @@ class GameTvView(ctx: Context, val st: GameTvState) : View(ctx) {
 
     private fun drawSeat(c: Canvas, l: GameTvLayout, b: Box, seat: Map<String, Any?>, table: Map<String, Any?>?, playing: Boolean) {
         val toMove = playing && seat["toMove"] == true
-        panel(c, b, l.u * 1.6f, if (toMove) GamesColors.SURFACE_HIGH else GamesColors.SURFACE, if (toMove) GamesColors.PRIMARY else GamesColors.OUTLINE, if (toMove) l.u * 0.5f else l.u * 0.25f)
+        panel(c, b, l.u * 1.6f, if (toMove) GamesColors.Dark.SURFACE_HIGH else GamesColors.Dark.SURFACE, if (toMove) GamesColors.Dark.PRIMARY else GamesColors.Dark.OUTLINE, if (toMove) l.u * 0.5f else l.u * 0.25f)
         val pad = l.u * 1.5f
         val inner = b.w - 2 * pad
         var y = b.t + l.u
-        textSize(l.nameText, true, GamesColors.TEXT_HIGH); line(c, seat["name"] as? String ?: "", b.l + pad, y, inner); y += l.nameText * 1.25f
+        textSize(l.nameText, true, GamesColors.Dark.TEXT_HIGH); line(c, seat["name"] as? String ?: "", b.l + pad, y, inner); y += l.nameText * 1.25f
         val kind = when (seat["kind"]) { "PHONE" -> "Téléphone"; "REMOTE" -> "Télécommande"; else -> "Ordinateur" }
-        textSize(l.subText, false, GamesColors.TEXT_MEDIUM); line(c, kind + if (seat["me"] == true) " · vous" else "", b.l + pad, y, inner); y += l.subText * 1.25f + l.u
+        textSize(l.subText, false, GamesColors.Dark.TEXT_MEDIUM); line(c, kind + if (seat["me"] == true) " · vous" else "", b.l + pad, y, inner); y += l.subText * 1.25f + l.u
         // the pile: the back of a card and the number of cards (nobody sees the content of a pile)
         val count = ((seat["id"] as? String)?.let { table?.sub("piles")?.get(it) } as? Number)?.toInt()
         val back = Box(b.l + (b.w - l.cardBackH / GameTvLayout.CARD_RATIO) / 2, y, b.l + (b.w + l.cardBackH / GameTvLayout.CARD_RATIO) / 2, y + l.cardBackH)
         if (count != null && count > 0) drawCard(c, l, back, null)
         y += l.cardBackH + l.u
-        if (count != null) { textSize(l.countText, true, GamesColors.TEXT_HIGH); line(c, "$count carte${if (count > 1) "s" else ""}", b.l + b.w / 2, y, inner, Paint.Align.CENTER) }
+        if (count != null) { textSize(l.countText, true, GamesColors.Dark.TEXT_HIGH); line(c, "$count carte${if (count > 1) "s" else ""}", b.l + b.w / 2, y, inner, Paint.Align.CENTER) }
         y += l.countText * 1.3f
         val away = seat["kind"] == "PHONE" && seat["connected"] == false && seat["playerId"] != null
         val tag = when {
@@ -154,20 +154,20 @@ class GameTvView(ctx: Context, val st: GameTvState) : View(ctx) {
             toMove -> if (seat["me"] == true) "À vous" else "Réfléchit…"
             else -> ""
         }
-        if (tag.isNotEmpty()) { textSize(l.subText, true, if (away) GamesColors.ERROR else GamesColors.PRIMARY); line(c, tag, b.l + b.w / 2, y, inner, Paint.Align.CENTER) }
+        if (tag.isNotEmpty()) { textSize(l.subText, true, if (away) GamesColors.Dark.ERROR else GamesColors.Dark.PRIMARY); line(c, tag, b.l + b.w / 2, y, inner, Paint.Align.CENTER) }
     }
 
     private fun drawTable(c: Canvas, l: GameTvLayout, table: Map<String, Any?>?, seats: List<Map<String, Any?>>) {
         val cards = table?.list("table").orEmpty().takeLast(GameTvLayout.TABLE_ROWS * GameTvLayout.TABLE_COLUMNS)
         if (cards.isEmpty()) {
-            textSize(l.subText, false, GamesColors.TEXT_MEDIUM)
+            textSize(l.subText, false, GamesColors.Dark.TEXT_MEDIUM)
             line(c, if (st.s["stage"] == "PLAYING") "La table est vide" else "", l.table.l + l.table.w / 2, l.table.t + l.table.h / 2 - l.subText, l.table.w, Paint.Align.CENTER)
             return
         }
         cards.forEachIndexed { i, p ->
             val cell = l.tableCell(i / GameTvLayout.TABLE_COLUMNS, i % GameTvLayout.TABLE_COLUMNS)
             drawCard(c, l, Box(cell.l, cell.t, cell.r, cell.t + l.cardH), if (p["up"] == true) p["card"] as? String else null)
-            textSize(l.cardLabelText, false, GamesColors.TEXT_MEDIUM)
+            textSize(l.cardLabelText, false, GamesColors.Dark.TEXT_MEDIUM)
             line(c, seatName(seats, p["player"] as? String), (cell.l + cell.r) / 2, cell.t + l.cardH + l.u * 0.3f, cell.w + l.cardGap, Paint.Align.CENTER)
         }
     }
@@ -220,7 +220,7 @@ class GameTvView(ctx: Context, val st: GameTvState) : View(ctx) {
             codes.forEachIndexed { i, code -> drawCard(c, l, Box((width - total) / 2 + i * (w + l.u * 2), y, (width - total) / 2 + i * (w + l.u * 2) + w, y + h), code) }
         }
         st.footer?.let { f ->
-            textSize(l.hintText, false, GamesColors.TEXT_MEDIUM)
+            textSize(l.hintText, false, GamesColors.Dark.TEXT_MEDIUM)
             val top = menuBox?.b?.plus(l.u) ?: (height - l.margin - l.hintText * 1.4f)
             if (top + l.hintText * 1.3f < y - l.u) line(c, f, width / 2f, top, width - 2 * l.margin, Paint.Align.CENTER)
         }
@@ -231,22 +231,22 @@ class GameTvView(ctx: Context, val st: GameTvState) : View(ctx) {
         val qrBox = l.lobbyQr
         lb.qr?.let { drawQr(c, it, qrBox) } ?: run {
             panel(c, qrBox, l.u * 2)
-            textSize(l.subText, false, GamesColors.TEXT_MEDIUM)
+            textSize(l.subText, false, GamesColors.Dark.TEXT_MEDIUM)
             wrap("Pas de réseau local : les téléphones ne peuvent pas rejoindre.", qrBox.w - 4 * l.u, 4).forEachIndexed { i, t -> line(c, t, qrBox.l + 2 * l.u, qrBox.t + 2 * l.u + i * l.subText * 1.3f, qrBox.w - 4 * l.u) }
         }
-        textSize(l.subText, false, GamesColors.TEXT_MEDIUM)
+        textSize(l.subText, false, GamesColors.Dark.TEXT_MEDIUM)
         line(c, "Scannez ce code avec le téléphone", (qrBox.l + qrBox.r) / 2, qrBox.b + l.u * 1.5f, qrBox.w + 2 * l.margin, Paint.Align.CENTER)
         val info = l.lobbyInfo
         var y = info.t
-        textSize(l.titleText, true, GamesColors.PRIMARY); line(c, lb.title, info.l, y, info.w); y += l.titleText * 1.4f
-        textSize(l.subText, false, GamesColors.TEXT_MEDIUM); line(c, "Code de la partie", info.l, y, info.w); y += l.subText * 1.3f
-        textSize(l.titleText * 1.6f, true, GamesColors.TEXT_HIGH); text.letterSpacing = 0.25f; line(c, lb.code, info.l, y, info.w); text.letterSpacing = 0f; y += l.titleText * 1.6f * 1.25f
-        lb.url?.let { textSize(l.subText, false, GamesColors.TEXT_MEDIUM); line(c, it, info.l, y, info.w); y += l.subText * 1.5f }
+        textSize(l.titleText, true, GamesColors.Dark.PRIMARY); line(c, lb.title, info.l, y, info.w); y += l.titleText * 1.4f
+        textSize(l.subText, false, GamesColors.Dark.TEXT_MEDIUM); line(c, "Code de la partie", info.l, y, info.w); y += l.subText * 1.3f
+        textSize(l.titleText * 1.6f, true, GamesColors.Dark.TEXT_HIGH); text.letterSpacing = 0.25f; line(c, lb.code, info.l, y, info.w); text.letterSpacing = 0f; y += l.titleText * 1.6f * 1.25f
+        lb.url?.let { textSize(l.subText, false, GamesColors.Dark.TEXT_MEDIUM); line(c, it, info.l, y, info.w); y += l.subText * 1.5f }
         for ((t, ok) in lb.lines) {
-            textSize(l.statusText, ok, if (ok) GamesColors.TEXT_HIGH else GamesColors.TEXT_MEDIUM)
+            textSize(l.statusText, ok, if (ok) GamesColors.Dark.TEXT_HIGH else GamesColors.Dark.TEXT_MEDIUM)
             line(c, (if (ok) "●  " else "○  ") + t, info.l, y, info.w); y += l.statusText * 1.4f
         }
-        lb.note?.let { textSize(l.subText, false, GamesColors.PRIMARY); wrap(it, info.w, 2).forEach { t -> line(c, t, info.l, y, info.w); y += l.subText * 1.3f } }
+        lb.note?.let { textSize(l.subText, false, GamesColors.Dark.PRIMARY); wrap(it, info.w, 2).forEach { t -> line(c, t, info.l, y, info.w); y += l.subText * 1.3f } }
     }
 
     private fun drawQr(c: Canvas, q: QrCode, b: Box) {
@@ -277,16 +277,16 @@ class GameTvView(ctx: Context, val st: GameTvState) : View(ctx) {
         val rows = if (lobbyInline) List(m.items.size) { i -> Box(box.l + 3 * l.u, box.t + l.u + i * l.menuRow, box.r, box.t + l.u + (i + 1) * l.menuRow - 0.8f * l.u) }
             else l.menuRows(box, m.items.size, m.subtitle != null)
         if (!lobbyInline) {
-            panel(c, box, l.u * 2.2f, 0xF0151D37.toInt(), GamesColors.OUTLINE, l.u * 0.3f)
-            textSize(l.titleText, true, GamesColors.PRIMARY)
+            panel(c, box, l.u * 2.2f, 0xF0151D37.toInt(), GamesColors.Dark.OUTLINE, l.u * 0.3f)
+            textSize(l.titleText, true, GamesColors.Dark.PRIMARY)
             line(c, m.title, (box.l + box.r) / 2, box.t + 2 * l.u, box.w - 6 * l.u, Paint.Align.CENTER)
-            m.subtitle?.let { textSize(l.subText, false, GamesColors.TEXT_MEDIUM); line(c, it, (box.l + box.r) / 2, box.t + 2 * l.u + l.titleText * 1.5f, box.w - 6 * l.u, Paint.Align.CENTER) }
+            m.subtitle?.let { textSize(l.subText, false, GamesColors.Dark.TEXT_MEDIUM); line(c, it, (box.l + box.r) / 2, box.t + 2 * l.u + l.titleText * 1.5f, box.w - 6 * l.u, Paint.Align.CENTER) }
         }
         for ((i, it) in m.items.withIndex()) {
             val r = rows[i]
             val focused = i == m.focus
-            if (focused) { rect.set(r.l - l.u, r.t, r.r + l.u, r.b); fill.color = GamesColors.PRIMARY; c.drawRoundRect(rect, l.u * 1.2f, l.u * 1.2f, fill) }
-            val color = when { !it.enabled -> GamesColors.OUTLINE; focused -> GamesColors.ON_PRIMARY; else -> GamesColors.TEXT_HIGH }
+            if (focused) { rect.set(r.l - l.u, r.t, r.r + l.u, r.b); fill.color = GamesColors.Dark.PRIMARY; c.drawRoundRect(rect, l.u * 1.2f, l.u * 1.2f, fill) }
+            val color = when { !it.enabled -> GamesColors.Dark.OUTLINE; focused -> GamesColors.Dark.ON_PRIMARY; else -> GamesColors.Dark.TEXT_HIGH }
             val ty = r.t + (r.h - l.menuText * 1.2f) / 2
             val v = it.value?.invoke()
             textSize(l.menuText, focused, color)
@@ -302,13 +302,13 @@ class GameTvView(ctx: Context, val st: GameTvState) : View(ctx) {
     }
 
     private fun drawToast(c: Canvas, l: GameTvLayout, msg: String) {
-        textSize(l.statusText, true, GamesColors.TEXT_HIGH)
+        textSize(l.statusText, true, GamesColors.Dark.TEXT_HIGH)
         val maxW = width - 8 * l.margin
         val lines = wrap(msg, maxW, 2)
         val w = (lines.maxOfOrNull { text.measureText(it) } ?: 0f) + 6 * l.u
         val h = lines.size * l.statusText * 1.3f + 3 * l.u
         val box = Box((width - w) / 2, height - l.margin - h - l.u * 8, (width + w) / 2, height - l.margin - l.u * 8)
-        panel(c, box, l.u * 1.5f, 0xF0151D37.toInt(), GamesColors.PRIMARY)
+        panel(c, box, l.u * 1.5f, 0xF0151D37.toInt(), GamesColors.Dark.PRIMARY)
         lines.forEachIndexed { i, t -> line(c, t, width / 2f, box.t + 1.5f * l.u + i * l.statusText * 1.3f, maxW, Paint.Align.CENTER) }
     }
 }

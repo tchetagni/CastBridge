@@ -46,8 +46,8 @@ class CopyBadgeView(private val act: Activity, parent: FrameLayout) {
         shownKey = key
         val tone = when {
             m.tone == CopyBadge.Tone.SLOWED -> ORANGE
-            m.percent == 100 -> TvStyle.GOOD
-            else -> TvStyle.ACCENT
+            m.percent == 100 -> TvStyle.Dark.GOOD
+            else -> TvStyle.Dark.ACCENT
         }
         box.background = GradientDrawable().apply { setColor(PlayerIcons.PILL_ALPHA shl 24); cornerRadius = dp(16).toFloat(); setStroke(dp(1), tone) }
         arrow.setTextColor(tone)

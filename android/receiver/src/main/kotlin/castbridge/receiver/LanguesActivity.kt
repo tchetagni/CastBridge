@@ -267,7 +267,7 @@ class LanguesActivity : Activity() {
         closeVideo(); stopAudio()
         runCatching {
             val v = VideoView(this)
-            val note = dx.text(TextView(this).apply { text = (LangVisuals.videoNotice(m) ?: "") + "   ·   OK : pause / reprise   ·   RETOUR : revenir à la leçon" }, 26, GamesColors.TEXT_HIGH)
+            val note = dx.text(TextView(this).apply { text = (LangVisuals.videoNotice(m) ?: "") + "   ·   OK : pause / reprise   ·   RETOUR : revenir à la leçon" }, 26, GamesColors.Dark.TEXT_HIGH)   // sur la vidéo : texte clair, fond noir, quel que soit le thème
             val layer = FrameLayout(this).apply {
                 setBackgroundColor(android.graphics.Color.BLACK); isClickable = true
                 addView(v, FrameLayout.LayoutParams(-1, -1, Gravity.CENTER))

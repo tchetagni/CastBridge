@@ -115,7 +115,7 @@ class ServerActivity : Activity() {
     private fun title(s: String) {
         if (leftCol.childCount == 0) leftCol.addView(TvStyle.logo(this, R.drawable.logo_castbridge_tv_horizontal_compact, 56).apply {
             contentDescription = "CastBridge TV"; (layoutParams as LinearLayout.LayoutParams).bottomMargin = dp(8) })
-        leftCol.addView(TextView(this).apply { text = s; textSize = 28f; typeface = TvFonts.bold; setTextColor(Color.WHITE) })
+        leftCol.addView(TextView(this).apply { text = s; textSize = 28f; typeface = TvFonts.bold; setTextColor(TvStyle.TEXT) })
     }
     private fun para(s: String, head: String? = null) {
         if (head != null) leftCol.addView(TextView(this).apply { text = head; textSize = TvStyle.Type.BODY; typeface = TvFonts.bold; setTextColor(TvStyle.ACCENT); setPadding(0, dp(14), 0, 0) })
@@ -124,18 +124,18 @@ class ServerActivity : Activity() {
     private fun fact(k: String, v: String, onClick: (() -> Unit)? = null) {
         leftCol.addView(TextView(this).apply { text = k; textSize = TvStyle.Type.CAPTION; setTextColor(TvStyle.MUTED); setPadding(0, dp(12), 0, 0) })
         leftCol.addView(TextView(this).apply {
-            text = v; textSize = 19f; setTextColor(Color.WHITE)
+            text = v; textSize = 19f; setTextColor(TvStyle.TEXT)
             if (onClick != null) { isFocusable = true; isClickable = true; setOnClickListener { onClick() }; background = focusBg() }
         })
     }
     private fun action(label: String, f: () -> Unit) {
         rightCol.addView(TextView(this).apply {
-            text = label; textSize = TvStyle.Type.BODY; setTextColor(Color.WHITE); isFocusable = true; isClickable = true
+            text = label; textSize = TvStyle.Type.BODY; setTextColor(TvStyle.TEXT); isFocusable = true; isClickable = true
             setPadding(dp(18), dp(12), dp(18), dp(12)); background = focusBg(); setOnClickListener { f() }
         }, LinearLayout.LayoutParams(-1, -2).apply { bottomMargin = dp(6) })
     }
     private fun focusBg() = StateListDrawable().apply {
-        addState(intArrayOf(android.R.attr.state_focused), TvStyle.rounded(this@ServerActivity, TvStyle.CARD_FOCUS, TvStyle.R_MD, TvStyle.RING, 3))
+        addState(intArrayOf(android.R.attr.state_focused), TvStyle.rounded(this@ServerActivity, TvStyle.CARD_FOCUS, TvStyle.R_MD, TvStyle.RING, TvStyle.RING_DP))
         addState(intArrayOf(), TvStyle.rounded(this@ServerActivity, 0x00000000, TvStyle.R_MD))
     }
     private fun progress(done: Long, total: Long) {
@@ -281,8 +281,8 @@ class ServerActivity : Activity() {
             val text = runCatching { myData() }.fold({ pretty(it) }, { "Impossible d'obtenir vos données : ${it.message}" })
             main.post {
                 if (isFinishing) return@post
-                val tv = TextView(this@ServerActivity).apply { this.text = text; typeface = Typeface.MONOSPACE; textSize = TvStyle.Type.CAPTION; setTextColor(TvStyle.TEXT); setPadding(dp(20), dp(16), dp(20), dp(16)) }
-                AlertDialog.Builder(this@ServerActivity).setTitle("Mes données").setView(ScrollView(this@ServerActivity).apply { addView(tv); setBackgroundColor(TvStyle.BG_ELEVATED) })
+                val tv = TextView(this@ServerActivity).apply { this.text = text; typeface = Typeface.MONOSPACE; textSize = TvStyle.Type.CAPTION; setTextColor(TvStyle.Dark.TEXT); setPadding(dp(20), dp(16), dp(20), dp(16)) }
+                AlertDialog.Builder(this@ServerActivity).setTitle("Mes données").setView(ScrollView(this@ServerActivity).apply { addView(tv); setBackgroundColor(TvStyle.Dark.BG_ELEVATED) })
                     .setPositiveButton("Fermer", null).show()
             }
         }

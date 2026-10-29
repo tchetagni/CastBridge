@@ -87,7 +87,7 @@ class SudokuActivity : Activity() {
 
     private fun buildUi() {
         val root = FrameLayout(this).apply {
-            background = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(GamesColors.BG_TOP, GamesColors.BG))
+            background = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(GamesColors.Dark.BG_TOP, GamesColors.Dark.BG))
         }
         val row = LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL
@@ -101,20 +101,20 @@ class SudokuActivity : Activity() {
             dx.text(TextView(this).apply { maxLines = 1; ellipsize = TextUtils.TruncateAt.END }, size, color, bold).also {
                 info.addView(it, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dx.px(top) })
             }
-        line(64, GamesColors.TEXT_HIGH, true).text = "Sudoku"
+        line(64, GamesColors.Dark.TEXT_HIGH, true).text = "Sudoku"
         tvLevel = line(40, GamesColors.SUDOKU, true, 8)
-        line(28, GamesColors.TEXT_MEDIUM, false, 44).text = "Temps"
-        tvTime = line(96, GamesColors.TEXT_HIGH, true, 4)
-        tvFilled = line(34, GamesColors.TEXT_HIGH, false, 36)
-        tvHints = line(34, GamesColors.TEXT_HIGH, false, 12)
-        tvMode = line(34, GamesColors.TEXT_HIGH, false, 12)
-        tvBest = line(34, GamesColors.TEXT_MEDIUM, false, 12)
-        tvMessage = dx.text(TextView(this).apply { maxLines = 2; ellipsize = TextUtils.TruncateAt.END; minLines = 2 }, 32, GamesColors.PRIMARY, true)
+        line(28, GamesColors.Dark.TEXT_MEDIUM, false, 44).text = "Temps"
+        tvTime = line(96, GamesColors.Dark.TEXT_HIGH, true, 4)
+        tvFilled = line(34, GamesColors.Dark.TEXT_HIGH, false, 36)
+        tvHints = line(34, GamesColors.Dark.TEXT_HIGH, false, 12)
+        tvMode = line(34, GamesColors.Dark.TEXT_HIGH, false, 12)
+        tvBest = line(34, GamesColors.Dark.TEXT_MEDIUM, false, 12)
+        tvMessage = dx.text(TextView(this).apply { maxLines = 2; ellipsize = TextUtils.TruncateAt.END; minLines = 2 }, 32, GamesColors.Dark.PRIMARY, true)
         info.addView(tvMessage, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dx.px(28) })
         info.addView(View(this), LinearLayout.LayoutParams(1, 0, 1f))
-        line(26, GamesColors.TEXT_MEDIUM).text = "OK : choisir un chiffre"
-        line(26, GamesColors.TEXT_MEDIUM, false, 6).text = "Touches 1 à 9 : saisir  ·  0 : effacer"
-        line(26, GamesColors.TEXT_MEDIUM, false, 6).text = "Retour : menu (partie sauvegardée)"
+        line(26, GamesColors.Dark.TEXT_MEDIUM).text = "OK : choisir un chiffre"
+        line(26, GamesColors.Dark.TEXT_MEDIUM, false, 6).text = "Touches 1 à 9 : saisir  ·  0 : effacer"
+        line(26, GamesColors.Dark.TEXT_MEDIUM, false, 6).text = "Retour : menu (partie sauvegardée)"
         row.addView(info, LinearLayout.LayoutParams(0, -1, 1f))
         root.addView(row, FrameLayout.LayoutParams(-1, -1))
 
@@ -154,11 +154,11 @@ class SudokuActivity : Activity() {
         val panel = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL; gravity = Gravity.CENTER_HORIZONTAL
             setPadding(dx.px(56), dx.px(44), dx.px(56), dx.px(48))
-            background = dx.rounded(GamesColors.SURFACE, 36, GamesColors.OUTLINE, 2)
+            background = dx.rounded(GamesColors.Dark.SURFACE, 36, GamesColors.Dark.OUTLINE, 2)
         }
-        panel.addView(dx.text(TextView(this).apply { text = title; gravity = Gravity.CENTER; maxLines = 1; ellipsize = TextUtils.TruncateAt.END }, 52, GamesColors.TEXT_HIGH, true),
+        panel.addView(dx.text(TextView(this).apply { text = title; gravity = Gravity.CENTER; maxLines = 1; ellipsize = TextUtils.TruncateAt.END }, 52, GamesColors.Dark.TEXT_HIGH, true),
             LinearLayout.LayoutParams(-1, -2))
-        if (subtitle != null) panel.addView(dx.text(TextView(this).apply { text = subtitle; gravity = Gravity.CENTER; maxLines = 2; ellipsize = TextUtils.TruncateAt.END }, 30, GamesColors.TEXT_MEDIUM),
+        if (subtitle != null) panel.addView(dx.text(TextView(this).apply { text = subtitle; gravity = Gravity.CENTER; maxLines = 2; ellipsize = TextUtils.TruncateAt.END }, 30, GamesColors.Dark.TEXT_MEDIUM),
             LinearLayout.LayoutParams(-1, -2).apply { topMargin = dx.px(10) })
         val body = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
         panel.addView(body, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dx.px(28) })
@@ -173,9 +173,9 @@ class SudokuActivity : Activity() {
         val b = dx.text(TextView(this).apply {
             this.text = text; isFocusable = true; isFocusableInTouchMode = true; isClickable = true; maxLines = 1; ellipsize = TextUtils.TruncateAt.END
             gravity = Gravity.CENTER_VERTICAL; setPadding(dx.px(32), 0, dx.px(32), 0)
-            background = dx.focusable(GamesColors.SURFACE_HIGH, GamesColors.BG_TOP, 22)
+            background = dx.focusable(GamesColors.Dark.SURFACE_HIGH, GamesColors.Dark.BG_TOP, 22)
             setOnClickListener { onClick() }
-        }, 36, if (enabled) GamesColors.TEXT_HIGH else GamesColors.TEXT_MEDIUM, true)
+        }, 36, if (enabled) GamesColors.Dark.TEXT_HIGH else GamesColors.Dark.TEXT_MEDIUM, true)
         parent.addView(b, LinearLayout.LayoutParams(-1, dx.px(96)).apply { topMargin = dx.px(14) })
         return b
     }
@@ -219,9 +219,9 @@ class SudokuActivity : Activity() {
                         val t = dx.text(TextView(this).apply {
                             text = if (notesMode && g.hasNote(cursor, v)) "$v ✓" else "$v"; gravity = Gravity.CENTER
                             isFocusable = true; isFocusableInTouchMode = true; isClickable = true
-                            background = dx.focusable(GamesColors.SURFACE_HIGH, GamesColors.BG_TOP, 22)
+                            background = dx.focusable(GamesColors.Dark.SURFACE_HIGH, GamesColors.Dark.BG_TOP, 22)
                             setOnClickListener { enter(v) }
-                        }, 60, if (done) GamesColors.OUTLINE else GamesColors.TEXT_HIGH, true)
+                        }, 60, if (done) GamesColors.Dark.OUTLINE else GamesColors.Dark.TEXT_HIGH, true)
                         line.addView(t, LinearLayout.LayoutParams(0, dx.px(120), 1f).apply { if (c > 0) leftMargin = dx.px(14) })
                     }
                     body.addView(line, LinearLayout.LayoutParams(-1, -2).apply { if (r > 0) topMargin = dx.px(14) })
@@ -443,8 +443,8 @@ class SudokuActivity : Activity() {
                     i == cur -> 0xFF3B4F86.toInt()
                     g != null && curDigit != 0 && g.board[i] == curDigit -> 0xFF2C4A6B.toInt()
                     r == cur / 9 || col == cur % 9 || (r / 3 == cur / 9 / 3 && col / 3 == cur % 9 / 3) -> 0xFF1E2A4A.toInt()
-                    (r / 3 + col / 3) % 2 == 0 -> GamesColors.SURFACE
-                    else -> GamesColors.SURFACE_HIGH
+                    (r / 3 + col / 3) % 2 == 0 -> GamesColors.Dark.SURFACE
+                    else -> GamesColors.Dark.SURFACE_HIGH
                 }
                 c.drawRect(col * cell, r * cell, (col + 1) * cell, (r + 1) * cell, fill)
                 if (i in wrong) { fill.color = 0x66FF6B6B; c.drawRect(col * cell, r * cell, (col + 1) * cell, (r + 1) * cell, fill) }
@@ -453,11 +453,11 @@ class SudokuActivity : Activity() {
             for (i in 0..9) {
                 val thick = i % 3 == 0
                 line.strokeWidth = if (thick) dx.pxf(5f) else dx.pxf(2f)
-                line.color = if (thick) 0xFF8B98B8.toInt() else GamesColors.OUTLINE
+                line.color = if (thick) 0xFF8B98B8.toInt() else GamesColors.Dark.OUTLINE
                 c.drawLine(0f, i * cell, side, i * cell, line); c.drawLine(i * cell, 0f, i * cell, side, line)
             }
             // cursor ring (charter focus ring)
-            line.strokeWidth = dx.pxf(7f); line.color = GamesColors.FOCUS_RING
+            line.strokeWidth = dx.pxf(7f); line.color = GamesColors.Dark.FOCUS_RING
             val cx = (cur % 9) * cell; val cy = (cur / 9) * cell
             val m = line.strokeWidth / 2
             c.drawRect(cx + m, cy + m, cx + cell - m, cy + cell - m, line)
@@ -469,10 +469,10 @@ class SudokuActivity : Activity() {
                 if (v != 0) {
                     text.textSize = cell * 0.62f
                     text.typeface = if (g.isGiven(i)) Typeface.DEFAULT_BOLD else Typeface.DEFAULT
-                    text.color = when { i in wrong || i in conflicts -> GamesColors.ERROR; g.isGiven(i) -> GamesColors.TEXT_HIGH; else -> GamesColors.PRIMARY }
+                    text.color = when { i in wrong || i in conflicts -> GamesColors.Dark.ERROR; g.isGiven(i) -> GamesColors.Dark.TEXT_HIGH; else -> GamesColors.Dark.PRIMARY }
                     c.drawText(v.toString(), x + cell / 2, y + cell / 2 - (text.ascent() + text.descent()) / 2, text)
                 } else if (g.notes[i] != 0) {
-                    text.textSize = cell * 0.28f; text.typeface = Typeface.DEFAULT; text.color = GamesColors.TEXT_MEDIUM
+                    text.textSize = cell * 0.28f; text.typeface = Typeface.DEFAULT; text.color = GamesColors.Dark.TEXT_MEDIUM
                     for (d in 1..9) if (g.hasNote(i, d)) {
                         val nx = x + ((d - 1) % 3 + 0.5f) * cell / 3f; val ny = y + ((d - 1) / 3 + 0.5f) * cell / 3f
                         c.drawText(d.toString(), nx, ny - (text.ascent() + text.descent()) / 2, text)

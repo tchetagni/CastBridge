@@ -66,7 +66,7 @@ class ParentalActivity : Activity() {
             isFillViewport = false; addView(content, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
             layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f)
         }
-        statusView = ParentalUi.text(this, "", ParentalUi.SMALL_SP, 0xFF8BC34A.toInt(), true).apply { visibility = android.view.View.GONE }
+        statusView = ParentalUi.text(this, "", ParentalUi.SMALL_SP, TvStyle.GOOD_TEXT, true).apply { visibility = android.view.View.GONE }
         root.addView(titleView); root.addView(subtitleView); root.addView(scroll); root.addView(statusView)
         root.addView(ParentalUi.text(this, "OK : choisir   ·   HAUT / BAS : naviguer   ·   RETOUR : revenir", 16f, TvStyle.MUTED).apply { setPadding(0, TvStyle.dp(this@ParentalActivity, 8), 0, 0) })
         setContentView(root)

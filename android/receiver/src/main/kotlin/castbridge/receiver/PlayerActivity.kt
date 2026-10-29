@@ -201,8 +201,8 @@ class PlayerActivity : Activity(), TvService.Screen {
      * Until they are accepted the TV works as before but the remote-assistance tunnel does not start.
      */
     private fun showTermsDialog() {
-        val tv = TextView(this).apply { text = castbridge.core.tunnel.TunnelTerms.TEXT; textSize = TvStyle.Type.CAPTION; setTextColor(TvStyle.TEXT); setPadding(32, 24, 32, 24) }
-        val sv = android.widget.ScrollView(this).apply { addView(tv); setBackgroundColor(TvStyle.BG_ELEVATED) }
+        val tv = TextView(this).apply { text = castbridge.core.tunnel.TunnelTerms.TEXT; textSize = TvStyle.Type.CAPTION; setTextColor(TvStyle.Dark.TEXT); setPadding(32, 24, 32, 24) }
+        val sv = android.widget.ScrollView(this).apply { addView(tv); setBackgroundColor(TvStyle.Dark.BG_ELEVATED) }
         AlertDialog.Builder(this).setTitle(castbridge.core.tunnel.TunnelTerms.TITLE + " (" + castbridge.core.tunnel.TunnelTerms.VERSION + ")").setView(sv)
             .setPositiveButton(castbridge.core.tunnel.TunnelTerms.ACCEPT_BUTTON) { _, _ ->
                 flash(if (TunnelHub.acceptTerms(this)) "Conditions acceptées." else "Impossible d'enregistrer l'acceptation : réessayez depuis le menu.")
@@ -219,9 +219,9 @@ class PlayerActivity : Activity(), TvService.Screen {
             append("\n\nJournal local (connexions, déconnexions, experts connectés) :\n")
             append(if (lines.isEmpty()) castbridge.core.tunnel.TunnelText.EMPTY_JOURNAL else lines.asReversed().joinToString("\n"))
         }
-        val tv = TextView(this).apply { typeface = android.graphics.Typeface.MONOSPACE; textSize = TvStyle.Type.CAPTION; setTextColor(TvStyle.TEXT); setPadding(32, 24, 32, 24); this.text = text }
+        val tv = TextView(this).apply { typeface = android.graphics.Typeface.MONOSPACE; textSize = TvStyle.Type.CAPTION; setTextColor(TvStyle.Dark.TEXT); setPadding(32, 24, 32, 24); this.text = text }
         val b = AlertDialog.Builder(this).setTitle("À propos : " + castbridge.core.tunnel.TunnelText.TITLE)
-            .setView(android.widget.ScrollView(this).apply { addView(tv); setBackgroundColor(TvStyle.BG_ELEVATED) })
+            .setView(android.widget.ScrollView(this).apply { addView(tv); setBackgroundColor(TvStyle.Dark.BG_ELEVATED) })
             .setPositiveButton("Fermer", null)
             .setNeutralButton("Lire les conditions…") { _, _ -> showTermsDialog() }
         // relay-R1 : une demande EXPLICITE d'assistance sans Internet par la TV elle-même : un téléphone synchronisé ouvre un tuyau (jamais en tâche de fond : le tunnel permanent ne réveille aucun téléphone).
@@ -909,6 +909,8 @@ class PlayerActivity : Activity(), TvService.Screen {
         val items = mutableListOf<Pair<String, () -> Unit>>()
         // R-52 : tant qu'Android jette les notifications de CastBridge-TV (copies reçues, demandes du téléphone), la ligne qui les rend est la PREMIÈRE du MENU
         if (!s.notificationsAllowed()) items += NotificationAccessPolicy.LINE to { fixNotifications() }
+        // Affichage : thème Clair (défaut, comme le téléphone) ou Sombre ; persistant, appliqué tout de suite en recréant l'écran (le lecteur reste sombre dans les deux cas)
+        items += "Thème : ${TvStyle.theme.label} (passer en ${TvStyle.theme.other.label})" to { TvStyle.save(this, TvStyle.theme.other); recreate() }
         if (current == null) items += "Toute la bibliothèque" to { showLibrary() }
         items += copyCancelItems(partialsSeen)          // R-51 : « Copie : annuler « Film » (42 %, interrompue) », seulement quand la TV garde une copie en partie
         items += "Quiz culture générale (jouer avec les téléphones)" to { startActivity(Intent(this, QuizActivity::class.java)) }
@@ -1037,10 +1039,10 @@ class PlayerActivity : Activity(), TvService.Screen {
     fun showDiag(host: String) {
         diagDialog?.dismiss()
         val tv = TextView(this).apply {
-            typeface = android.graphics.Typeface.MONOSPACE; textSize = TvStyle.Type.CAPTION; setTextColor(TvStyle.TEXT)
+            typeface = android.graphics.Typeface.MONOSPACE; textSize = TvStyle.Type.CAPTION; setTextColor(TvStyle.Dark.TEXT)
             setPadding(32, 24, 32, 24); text = ""
         }
-        val sv = android.widget.ScrollView(this).apply { addView(tv); setBackgroundColor(TvStyle.BG_ELEVATED) }
+        val sv = android.widget.ScrollView(this).apply { addView(tv); setBackgroundColor(TvStyle.Dark.BG_ELEVATED) }
         diagView = tv
         diagDialog = AlertDialog.Builder(this).setTitle("Test Internet : $host").setView(sv)
             .setPositiveButton("Fermer", null).show()

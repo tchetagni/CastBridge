@@ -246,7 +246,7 @@ class DownloadsActivity : Activity() {
     private fun focusableBox(v: View) {
         v.isFocusable = true; v.isClickable = true
         v.background = StateListDrawable().apply {
-            addState(intArrayOf(android.R.attr.state_focused), GradientDrawable().apply { setColor(TvStyle.CARD_FOCUS); setStroke(dp(3), TvStyle.RING); cornerRadius = dp(TvStyle.R_MD).toFloat() })
+            addState(intArrayOf(android.R.attr.state_focused), GradientDrawable().apply { setColor(TvStyle.CARD_FOCUS); setStroke(dp(TvStyle.RING_DP), TvStyle.RING); cornerRadius = dp(TvStyle.R_MD).toFloat() })
             addState(intArrayOf(), GradientDrawable().apply { setColor(TvStyle.CARD); cornerRadius = dp(TvStyle.R_MD).toFloat() })
         }
         if (v is TextView) v.setPadding(dp(16), dp(10), dp(16), dp(10))

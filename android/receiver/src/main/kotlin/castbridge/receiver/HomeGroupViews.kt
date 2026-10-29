@@ -61,8 +61,8 @@ class GridPanel(private val act: Activity, private val container: FrameLayout) {
         container.removeAllViews()
         val dm = act.resources.displayMetrics
         val padX = (dm.widthPixels * 0.05f).toInt(); val padY = (dm.heightPixels * 0.05f).toInt()
-        val root = LinearLayout(act).apply { orientation = LinearLayout.VERTICAL; setBackgroundColor(0xF20A0F1E.toInt()); setPadding(padX, padY, padX, padY) }
-        root.addView(TextView(act).apply { text = title; textSize = 34f; typeface = TvFonts.bold; setTextColor(Color.WHITE) })
+        val root = LinearLayout(act).apply { orientation = LinearLayout.VERTICAL; setBackgroundColor(TvStyle.alpha(TvStyle.BG, 0xFC)); setPadding(padX, padY, padX, padY) }
+        root.addView(TextView(act).apply { text = title; textSize = 34f; typeface = TvFonts.bold; setTextColor(TvStyle.TEXT) })
         val hint = TextView(act).apply { text = "OK : ouvrir   ·   RETOUR : fermer le groupe"; textSize = TvStyle.Type.BODY; setTextColor(TvStyle.TEXT2); setPadding(0, dp(2), 0, dp(10)) }
         root.addView(hint)
         val desc = TextView(act).apply { textSize = TvStyle.Type.BODY; setTextColor(TvStyle.TEXT2); minLines = 2; maxLines = 2 }

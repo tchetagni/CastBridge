@@ -35,23 +35,52 @@ import java.util.concurrent.Executors
  */
 object TvStyle {
     private val T = castbridge.core.brand.BrandTokens
-    const val BG = castbridge.core.brand.BrandTokens.Dark.BACKGROUND
-    const val BG_ELEVATED = castbridge.core.brand.BrandTokens.Dark.BACKGROUND_ELEVATED
-    const val CARD = castbridge.core.brand.BrandTokens.Dark.SURFACE
-    const val CARD_FOCUS = castbridge.core.brand.BrandTokens.Dark.SURFACE_HIGH
-    const val OUTLINE = castbridge.core.brand.BrandTokens.Dark.OUTLINE
-    const val TEXT = castbridge.core.brand.BrandTokens.Dark.TEXT_HIGH
-    const val TEXT2 = castbridge.core.brand.BrandTokens.Dark.TEXT_MEDIUM
-    const val TEXT3 = castbridge.core.brand.BrandTokens.Dark.TEXT_LOW
-    /** Primary: gold. Used for accents, selection and progress (the focus ring is [RING]). */
-    const val ACCENT = castbridge.core.brand.BrandTokens.Dark.PRIMARY
-    const val ON_ACCENT = castbridge.core.brand.BrandTokens.Dark.ON_PRIMARY
-    const val RING = castbridge.core.brand.BrandTokens.Dark.FOCUS_RING
-    const val MUTED = castbridge.core.brand.BrandTokens.Dark.TEXT_MEDIUM
-    const val GOOD = castbridge.core.brand.BrandTokens.Dark.SECONDARY
-    const val GOOD_TEXT = castbridge.core.brand.BrandTokens.Semantic.SUCCESS_DARK
-    const val ERROR = castbridge.core.brand.BrandTokens.Semantic.ERROR_DARK
-    const val INFO = castbridge.core.brand.BrandTokens.Semantic.INFO_DARK
+    /** Thème choisi (réglage « Thème », défaut clair) : lu à chaque création d'écran, donc appliqué en revenant à l'accueil ou en recréant l'activité. */
+    @Volatile var theme: castbridge.core.ux.TvTheme = castbridge.core.ux.TvTheme.DEFAULT
+        set(v) { field = v; pal = castbridge.core.ux.TvThemeRules.palette(v) }
+    @Volatile private var pal: castbridge.core.ux.TvPalette = castbridge.core.ux.TvThemeRules.palette(castbridge.core.ux.TvTheme.DEFAULT)
+    fun load(ctx: Context) { theme = castbridge.core.ux.TvTheme.parse(TvPrefs(ctx).getString(castbridge.core.ux.TvTheme.PREF)) }
+    fun save(ctx: Context, t: castbridge.core.ux.TvTheme) { TvPrefs(ctx).putString(castbridge.core.ux.TvTheme.PREF, t.key); theme = t }
+
+    val BG get() = pal.bg
+    val BG_ELEVATED get() = pal.bgElevated
+    val CARD get() = pal.card
+    val CARD_FOCUS get() = pal.cardFocus
+    val OUTLINE get() = pal.outline
+    val TEXT get() = pal.text
+    val TEXT2 get() = pal.text2
+    val TEXT3 get() = pal.text3
+    /** Primary: gold (dark amber on the light theme). Used for accents, selection and progress (the focus ring is [RING]). */
+    val ACCENT get() = pal.accent
+    val ON_ACCENT get() = pal.onAccent
+    val RING get() = pal.ring
+    /** Épaisseur de l'anneau de focus (dp) : 3 en sombre, 4 en clair. */
+    val RING_DP get() = pal.ringDp
+    val MUTED get() = pal.text2
+    val GOOD get() = pal.good
+    val GOOD_TEXT get() = pal.goodText
+    val WARN get() = pal.warn
+    val ERROR get() = pal.error
+    val INFO get() = pal.info
+    /** Couleur d'une pastille de signalétique : vert / orange / rouge / noir (anneau), lisible sur le fond du thème. */
+    fun signal(level: castbridge.core.ux.SignalLevel): Int = when (level) {
+        castbridge.core.ux.SignalLevel.GREEN -> pal.sigGreen; castbridge.core.ux.SignalLevel.ORANGE -> pal.sigOrange
+        castbridge.core.ux.SignalLevel.RED -> pal.sigRed; castbridge.core.ux.SignalLevel.BLACK -> pal.sigBlackOutline
+    }
+    val SIGNAL_BLACK_FILL get() = pal.sigBlackFill
+    val SIGNAL_BLACK_OUTLINE get() = pal.sigBlackOutline
+
+    /**
+     * Palette TOUJOURS sombre, quel que soit le thème : le lecteur vidéo et ses commandes, les écrans plein écran des mini-vidéos, les superpositions posées
+     * sur une image ou une vidéo. Un fond clair derrière une vidéo est proscrit (castbridge.core.ux.TvPlace.alwaysDark).
+     */
+    object Dark {
+        private val p = castbridge.core.ux.TvThemeRules.palette(castbridge.core.ux.TvTheme.DARK, castbridge.core.ux.TvPlace.PLAYER)
+        val BG = p.bg; val BG_ELEVATED = p.bgElevated; val CARD = p.card; val CARD_FOCUS = p.cardFocus; val OUTLINE = p.outline
+        val TEXT = p.text; val TEXT2 = p.text2; val TEXT3 = p.text3; val ACCENT = p.accent; val ON_ACCENT = p.onAccent
+        val RING = p.ring; val RING_DP = p.ringDp; val MUTED = p.text2; val GOOD = p.good; val GOOD_TEXT = p.goodText
+        val WARN = p.warn; val ERROR = p.error; val INFO = p.info
+    }
 
     /** Corner radii (dp): sm 8, md 12, lg 16, xl 24. */
     const val R_SM = castbridge.core.brand.BrandTokens.RADIUS_SM_DP
@@ -87,9 +116,14 @@ object TvStyle {
 
     /** A logo of the charte (VectorDrawable of branding/logo), [heightDp] high, width from its own aspect ratio. */
     fun logo(ctx: Context, res: Int, heightDp: Int) = ImageView(ctx).apply {
-        setImageResource(res); adjustViewBounds = true; scaleType = ImageView.ScaleType.FIT_START
+        // thème clair : variante « <nom>_light » du logo si elle existe (le « Cast » blanc serait invisible sur fond clair)
+        val light = if (theme == castbridge.core.ux.TvTheme.LIGHT) ctx.resources.getIdentifier(ctx.resources.getResourceEntryName(res) + "_light", "drawable", ctx.packageName) else 0
+        setImageResource(if (light != 0) light else res); adjustViewBounds = true; scaleType = ImageView.ScaleType.FIT_START
         layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dp(ctx, heightDp))
     }
+
+    /** [c] avec l'opacité [a] (0..255). */
+    fun alpha(c: Int, a: Int) = (c and 0xFFFFFF) or (a shl 24)
 
     fun dp(ctx: Context, v: Int) = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, v.toFloat(), ctx.resources.displayMetrics).toInt()
 
@@ -100,16 +134,16 @@ object TvStyle {
     /** The focus look of the charte: ring (3 dp #FFE1A6) on [fill], the ring is drawn by the state drawable of the view. */
     fun focusable(ctx: Context, fill: Int, radiusDp: Int = R_MD, focusFill: Int = CARD_FOCUS): android.graphics.drawable.StateListDrawable =
         StateListDrawable().apply {
-            addState(intArrayOf(android.R.attr.state_focused), rounded(ctx, focusFill, radiusDp, RING, T.FOCUS_RING_WIDTH_DP))
+            addState(intArrayOf(android.R.attr.state_focused), rounded(ctx, focusFill, radiusDp, RING, RING_DP))
             addState(intArrayOf(), rounded(ctx, fill, radiusDp))
         }
 
     /** A charte button (surface-high fill, ring on focus, scale 1.04) for the classic android.widget.Button of the secondary screens. */
-    fun styleButton(b: android.widget.Button) = b.apply {
-        isAllCaps = false; typeface = TvFonts.bold; setTextColor(TEXT); textSize = Type.BUTTON
+    fun styleButton(b: android.widget.Button, dark: Boolean = false) = b.apply {   // dark = true : commandes du lecteur, toujours sombres
+        isAllCaps = false; typeface = TvFonts.bold; setTextColor(if (dark) Dark.TEXT else TEXT); textSize = Type.BUTTON
         background = StateListDrawable().apply {
-            addState(intArrayOf(android.R.attr.state_focused), rounded(context, CARD_FOCUS, R_MD, RING, T.FOCUS_RING_WIDTH_DP))
-            addState(intArrayOf(), rounded(context, CARD, R_MD, OUTLINE, 1))
+            addState(intArrayOf(android.R.attr.state_focused), if (dark) rounded(context, Dark.CARD_FOCUS, R_MD, Dark.RING, Dark.RING_DP) else rounded(context, CARD_FOCUS, R_MD, RING, RING_DP))
+            addState(intArrayOf(), if (dark) rounded(context, Dark.CARD, R_MD, Dark.OUTLINE, 1) else rounded(context, CARD, R_MD, OUTLINE, 1))
         }
         setPadding(dp(context, 20), dp(context, 10), dp(context, 20), dp(context, 10)); stateListAnimator = null
         focusZoom(this)
@@ -119,7 +153,7 @@ object TvStyle {
     fun focusZoom(v: View, scale: Float = T.FOCUS_SCALE, onFocus: (Boolean) -> Unit = {}) {
         v.setOnFocusChangeListener { view, has ->
             if (!ResourceProfiles.peek().homeAnimations) { onFocus(has); return@setOnFocusChangeListener }   // TV à faibles ressources : le cadre bleu suffit, ni zoom ni animation
-            view.animate().scaleX(if (has) scale else 1f).scaleY(if (has) scale else 1f).translationZ(if (has) dp(view.context, 12).toFloat() else 0f)
+            view.animate().scaleX(if (has) scale else 1f).scaleY(if (has) scale else 1f).translationZ(if (has && theme == castbridge.core.ux.TvTheme.DARK) dp(view.context, 12).toFloat() else 0f)   // l'ombre portée ferait une bande grise sur fond clair : le zoom et l'anneau suffisent
                 .setDuration(FAST.toLong()).setInterpolator(easing()).start()
             onFocus(has)
         }
@@ -166,7 +200,8 @@ class TvThumbs(private val cacheBytes: Int = 4 * 1024 * 1024, private val fetch:
  */
 class MediaCard(ctx: Context, private val widthPx: Int = ViewGroup.LayoutParams.MATCH_PARENT) : LinearLayout(ctx) {
     val image = ImageView(ctx).apply { scaleType = ImageView.ScaleType.CENTER_CROP }
-    private val placeholder = TextView(ctx).apply { setTextColor(0x66FFFFFF); textSize = 34f; gravity = Gravity.CENTER }
+    private val placeholder = TextView(ctx).apply { setTextColor(TvStyle.TEXT3); textSize = 34f; gravity = Gravity.CENTER }
+    // pastilles posées sur la vignette (image) : sombres exprès, quel que soit le thème
     private val volume = badge(0xCC1B2542.toInt())
     private val watched = badge(0xE61E6B48.toInt()).apply { text = "VU" }
     private val duration = badge(0xCC000000.toInt())
@@ -179,7 +214,7 @@ class MediaCard(ctx: Context, private val widthPx: Int = ViewGroup.LayoutParams.
         max = 1000; progressTintList = android.content.res.ColorStateList.valueOf(TvStyle.ACCENT)
     }
     val title = TextView(ctx).apply {
-        setTextColor(Color.WHITE); textSize = TvStyle.Type.BODY; maxLines = 2; ellipsize = TextUtils.TruncateAt.END
+        setTextColor(TvStyle.TEXT); textSize = TvStyle.Type.BODY; maxLines = 2; ellipsize = TextUtils.TruncateAt.END
         setPadding(TvStyle.dp(ctx, 10), TvStyle.dp(ctx, 8), TvStyle.dp(ctx, 10), 0)
     }
     private val sub = TextView(ctx).apply { setTextColor(TvStyle.MUTED); textSize = TvStyle.Type.CAPTION; maxLines = 1; setPadding(TvStyle.dp(ctx, 10), TvStyle.dp(ctx, 2), TvStyle.dp(ctx, 10), TvStyle.dp(ctx, 10)) }
@@ -192,7 +227,7 @@ class MediaCard(ctx: Context, private val widthPx: Int = ViewGroup.LayoutParams.
         val m = TvStyle.dp(ctx, 10)
         layoutParams = ViewGroup.MarginLayoutParams(widthPx, ViewGroup.LayoutParams.WRAP_CONTENT).apply { setMargins(m, m, m, m) }
         background = StateListDrawable().apply {
-            addState(intArrayOf(android.R.attr.state_focused), TvStyle.rounded(ctx, TvStyle.CARD_FOCUS, TvStyle.R_MD, TvStyle.RING, 3))
+            addState(intArrayOf(android.R.attr.state_focused), TvStyle.rounded(ctx, TvStyle.CARD_FOCUS, TvStyle.R_MD, TvStyle.RING, TvStyle.RING_DP))
             addState(intArrayOf(), TvStyle.rounded(ctx, TvStyle.CARD, TvStyle.R_MD))
         }
         val pic = Aspect169(ctx)
@@ -261,11 +296,11 @@ class ToolTile(ctx: Context, glyph: String, label: String, widthPx: Int) : Linea
         val m = TvStyle.dp(ctx, 10)
         layoutParams = ViewGroup.MarginLayoutParams(widthPx, widthPx * 9 / 16 + TvStyle.dp(ctx, 58)).apply { setMargins(m, m, m, m) }
         background = StateListDrawable().apply {
-            addState(intArrayOf(android.R.attr.state_focused), TvStyle.rounded(ctx, TvStyle.CARD_FOCUS, TvStyle.R_MD, TvStyle.RING, 3))
-            addState(intArrayOf(), TvStyle.rounded(ctx, 0xCC151D37.toInt(), TvStyle.R_MD))
+            addState(intArrayOf(android.R.attr.state_focused), TvStyle.rounded(ctx, TvStyle.CARD_FOCUS, TvStyle.R_MD, TvStyle.RING, TvStyle.RING_DP))
+            addState(intArrayOf(), TvStyle.rounded(ctx, TvStyle.CARD, TvStyle.R_MD))
         }
         addView(TextView(ctx).apply { text = glyph; textSize = 40f; setTextColor(TvStyle.ACCENT); gravity = Gravity.CENTER })
-        addView(TextView(ctx).apply { text = label; textSize = TvStyle.Type.BODY; setTextColor(Color.WHITE); gravity = Gravity.CENTER; setPadding(m, m / 2, m, 0) })
+        addView(TextView(ctx).apply { text = label; textSize = TvStyle.Type.BODY; setTextColor(TvStyle.TEXT); gravity = Gravity.CENTER; setPadding(m, m / 2, m, 0) })
         TvStyle.focusZoom(this)
     }
 }
@@ -282,19 +317,19 @@ open class IconTile(ctx: Context, tool: HomeTool, widthPx: Int, labelSp: Float =
         val m = TvStyle.dp(ctx, 10)
         layoutParams = ViewGroup.MarginLayoutParams(widthPx, if (heightPx > 0) heightPx else widthPx * 3 / 4 + TvStyle.dp(ctx, 40)).apply { setMargins(m, m, m, m) }
         background = StateListDrawable().apply {
-            addState(intArrayOf(android.R.attr.state_focused), TvStyle.rounded(ctx, TvStyle.CARD_FOCUS, TvStyle.R_LG, TvStyle.RING, 3))
-            addState(intArrayOf(), if (ringIdle) TvStyle.rounded(ctx, 0xCC1B2547.toInt(), TvStyle.R_LG, 0x66FFE1A6, 2) else TvStyle.rounded(ctx, 0xCC151D37.toInt(), TvStyle.R_LG))
+            addState(intArrayOf(android.R.attr.state_focused), TvStyle.rounded(ctx, TvStyle.CARD_FOCUS, TvStyle.R_LG, TvStyle.RING, TvStyle.RING_DP))
+            addState(intArrayOf(), if (ringIdle) TvStyle.rounded(ctx, TvStyle.CARD, TvStyle.R_LG, (TvStyle.RING and 0xFFFFFF) or 0x99000000.toInt(), 2) else TvStyle.rounded(ctx, TvStyle.CARD, TvStyle.R_LG))
         }
         val size = TvStyle.dp(ctx, iconDp)
         addView(android.widget.ImageView(ctx).apply {
             setImageResource(tool.icon)
             imageTintList = android.content.res.ColorStateList.valueOf(if (tool.on) TvStyle.ACCENT else TvStyle.TEXT2)
         }, LayoutParams(size, size))
-        addView(TextView(ctx).apply { text = tool.label; textSize = labelSp; setTextColor(Color.WHITE); gravity = Gravity.CENTER; maxLines = 2; setPadding(m, m / 2, m, 0) })
+        addView(TextView(ctx).apply { text = tool.label; textSize = labelSp; setTextColor(TvStyle.TEXT); gravity = Gravity.CENTER; maxLines = 2; setPadding(m, m / 2, m, 0) })
         tool.status?.let { st ->
             addView(TextView(ctx).apply {
                 text = (if (tool.warn) "▲ " else if (tool.on) "● " else "") + st; textSize = statusSp; gravity = Gravity.CENTER; maxLines = 1; ellipsize = android.text.TextUtils.TruncateAt.END
-                setTextColor(if (tool.warn) castbridge.core.ux.SignalColors.ORANGE else if (tool.on) TvStyle.GOOD_TEXT else TvStyle.TEXT3)
+                setTextColor(if (tool.warn) TvStyle.WARN else if (tool.on) TvStyle.GOOD_TEXT else TvStyle.TEXT3)
             })
         }
         TvStyle.focusZoom(this)
@@ -306,7 +341,7 @@ class Banner(private val parent: FrameLayout) {
     private val main = Handler(Looper.getMainLooper())
     private val ctx = parent.context
     private val view = TextView(ctx).apply {
-        setTextColor(Color.WHITE); textSize = 19f; gravity = Gravity.CENTER
+        setTextColor(Color.WHITE); textSize = 19f; gravity = Gravity.CENTER      // bandeau posé sur l'écran ou la vidéo : reste sombre exprès
         val p = TvStyle.dp(ctx, 14); setPadding(p * 2, p, p * 2, p)
         background = TvStyle.rounded(ctx, 0xE6151D37.toInt(), TvStyle.R_XL, TvStyle.ACCENT, 1)
         visibility = View.GONE; elevation = TvStyle.dp(ctx, 16).toFloat()

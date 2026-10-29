@@ -27,12 +27,12 @@ import castbridge.core.ux.TvSignalView
 /** Pastille de signalétique dessinée (cercle / triangle / carré / anneau) : la forme porte le sens même sans les couleurs, et ne dépend d'aucune police. */
 class SignalDrawable(private val level: SignalLevel, private val px: Int) : Drawable() {
     private val fill = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val line = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.STROKE; strokeWidth = px / 7f; color = SignalColors.BLACK_OUTLINE }
+    private val line = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.STROKE; strokeWidth = px / 7f; color = TvStyle.SIGNAL_BLACK_OUTLINE }
     override fun getIntrinsicWidth() = px
     override fun getIntrinsicHeight() = px
     override fun draw(c: Canvas) {
         val r = RectF(bounds).apply { inset(px / 8f, px / 8f) }
-        fill.color = if (level == SignalLevel.BLACK) SignalColors.BLACK_FILL else SignalColors.of(level)
+        fill.color = if (level == SignalLevel.BLACK) TvStyle.SIGNAL_BLACK_FILL else TvStyle.signal(level)
         when (level.shape) {
             Shape.CIRCLE -> c.drawOval(r, fill)
             Shape.SQUARE -> c.drawRoundRect(r, px / 6f, px / 6f, fill)
@@ -52,7 +52,7 @@ object TvSignalViews {
     fun style(t: TextView, level: SignalLevel, sizeDp: Int = 14) {
         t.setCompoundDrawablesRelativeWithIntrinsicBounds(drawable(t.context, level, sizeDp), null, null, null)
         t.compoundDrawablePadding = TvStyle.dp(t.context, 8)
-        t.setTextColor(SignalColors.TEXT)
+        t.setTextColor(TvStyle.TEXT)
     }
 
     /** La rangée d'indicateurs (hors Réception : la puce) et, sous elle, l'action unique quand la puce n'est pas verte. */
@@ -68,7 +68,7 @@ object TvSignalViews {
                     LayoutParams(0, -2, 1f).apply { rightMargin = TvStyle.dp(context, 12) })
             }
             if (v.level == SignalLevel.GREEN || v.action == null) action.visibility = GONE
-            else { action.visibility = VISIBLE; action.text = v.action; action.setTextColor(SignalColors.of(v.level)) }
+            else { action.visibility = VISIBLE; action.text = v.action; action.setTextColor(TvStyle.signal(v.level)) }
         }
     }
 

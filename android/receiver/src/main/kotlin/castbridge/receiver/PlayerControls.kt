@@ -44,7 +44,7 @@ class PlayerControls(private val act: Activity, parent: FrameLayout, private val
     private fun dp(v: Int) = TvStyle.dp(act, v)
 
     private fun button(label: String, icon: Int, run: () -> Unit) = Button(act).apply {
-        TvStyle.styleButton(this)
+        TvStyle.styleButton(this, dark = true)
         text = label; textSize = PlayerIcons.TEXT_SP.toFloat(); setSingleLine(true)
         setIcon(this, icon)
         compoundDrawablePadding = dp(4)
@@ -137,7 +137,7 @@ object IconLegend {
     fun show(act: Activity, diagLine: String, technical: () -> Unit) {
         fun dp(v: Int) = TvStyle.dp(act, v)
         val list = LinearLayout(act).apply { orientation = LinearLayout.VERTICAL; setPadding(dp(24), dp(16), dp(24), dp(8)) }
-        list.addView(TextView(act).apply { text = diagLine; textSize = 20f; setTextColor(TvStyle.TEXT) })
+        list.addView(TextView(act).apply { text = diagLine; textSize = 20f; setTextColor(TvStyle.Dark.TEXT) })
         for (e in PlayerIcons.legend()) {
             val glyph = android.widget.ImageView(act)
             val kind = e.kind
@@ -158,12 +158,12 @@ object IconLegend {
             val head = LinearLayout(act).apply {
                 orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL
                 addView(glyph, LinearLayout.LayoutParams(dp(PlayerIcons.ICON_DP), dp(PlayerIcons.ICON_DP)).apply { rightMargin = dp(14) })
-                addView(TextView(act).apply { text = e.label; textSize = PlayerIcons.TEXT_SP.toFloat() * 0.75f; typeface = TvFonts.bold; setTextColor(TvStyle.TEXT) })
+                addView(TextView(act).apply { text = e.label; textSize = PlayerIcons.TEXT_SP.toFloat() * 0.75f; typeface = TvFonts.bold; setTextColor(TvStyle.Dark.TEXT) })
             }
             list.addView(head, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(14) })
-            list.addView(TextView(act).apply { text = e.meaning; textSize = 18f; setTextColor(TvStyle.TEXT2) }, LinearLayout.LayoutParams(-1, -2).apply { leftMargin = dp(PlayerIcons.ICON_DP + 14) })
+            list.addView(TextView(act).apply { text = e.meaning; textSize = 18f; setTextColor(TvStyle.Dark.TEXT2) }, LinearLayout.LayoutParams(-1, -2).apply { leftMargin = dp(PlayerIcons.ICON_DP + 14) })
         }
-        val sv = android.widget.ScrollView(act).apply { addView(list); setBackgroundColor(TvStyle.BG_ELEVATED) }
+        val sv = android.widget.ScrollView(act).apply { addView(list); setBackgroundColor(TvStyle.Dark.BG_ELEVATED) }
         android.app.AlertDialog.Builder(act).setTitle("Légende des icônes").setView(sv)
             .setPositiveButton("Fermer", null).setNeutralButton("Infos techniques") { _, _ -> technical() }.show()
     }

@@ -87,7 +87,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         visibility = View.GONE
         accessibilityLiveRegion = View.ACCESSIBILITY_LIVE_REGION_POLITE
     }
-    private val heroTitle = TextView(act).apply { setTextColor(Color.WHITE); textSize = 34f; typeface = TvFonts.bold; maxLines = 1; ellipsize = TextUtils.TruncateAt.END }
+    private val heroTitle = TextView(act).apply { setTextColor(TvStyle.TEXT); textSize = 34f; typeface = TvFonts.bold; maxLines = 1; ellipsize = TextUtils.TruncateAt.END }
     private val heroSub = TextView(act).apply { setTextColor(TvStyle.TEXT2); textSize = TvStyle.Type.BODY; maxLines = 2 }
     private val keyHint = TextView(act).apply {
         text = "← → Choisir   ·   OK Ouvrir   ·   ↓ Vos vidéos"
@@ -95,9 +95,9 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         setPadding(dp(8), dp(6), dp(8), dp(12))
     }
     private val chip = TextView(act).apply {
-        setTextColor(Color.WHITE); textSize = TvStyle.Type.CAPTION; isFocusable = true; isClickable = true
+        setTextColor(TvStyle.TEXT); textSize = TvStyle.Type.CAPTION; isFocusable = true; isClickable = true
         maxLines = 2; ellipsize = android.text.TextUtils.TruncateAt.END      // the live reception line (name · % · speed · transport · phone) never pushes the clock away
-        setPadding(dp(14), dp(6), dp(14), dp(6)); background = TvStyle.rounded(act, 0x99000000.toInt(), TvStyle.R_XL)
+        setPadding(dp(14), dp(6), dp(14), dp(6)); background = TvStyle.rounded(act, TvStyle.CARD, TvStyle.R_XL, TvStyle.OUTLINE, 1)
     }
     private val signalRow = TvSignalViews.Row(act)
     private var signal: castbridge.core.ux.TvSignalView? = null
@@ -128,9 +128,9 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
     init {
         val root = FrameLayout(act).apply { setBackgroundColor(TvStyle.BG) }
         bg.visibility = View.GONE
-        // Legibility: dark from the left and from the bottom, over the picture.
-        root.addView(View(act).apply { background = GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, intArrayOf(0xF00A0F1E.toInt(), 0x800A0F1E.toInt(), 0x300A0F1E)) }, FrameLayout.LayoutParams(-1, -1))
-        root.addView(View(act).apply { background = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(0x000A0F1E, 0xC00A0F1E.toInt(), TvStyle.BG)) }, FrameLayout.LayoutParams(-1, -1))
+        // Legibility: fond du thème (sombre ou clair) fondu depuis la gauche et le bas, au-dessus de l'image de fond.
+        root.addView(View(act).apply { background = GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, intArrayOf(TvStyle.alpha(TvStyle.BG, 0xF0), TvStyle.alpha(TvStyle.BG, 0x80), TvStyle.alpha(TvStyle.BG, 0x30))) }, FrameLayout.LayoutParams(-1, -1))
+        root.addView(View(act).apply { background = GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(TvStyle.alpha(TvStyle.BG, 0x00), TvStyle.alpha(TvStyle.BG, 0xC0), TvStyle.BG)) }, FrameLayout.LayoutParams(-1, -1))
         // clipChildren = true: Android clips each child to ITS OWN bounds only when the PARENT asks for it. Without it the
         // scroll area drew its scrolled-out rows over the title (texts piled up while scrolling on 720p TVs).
         val content = LinearLayout(act).apply { orientation = LinearLayout.VERTICAL; setPadding(dp(56), dp(28), dp(40), 0); clipChildren = true }
@@ -138,7 +138,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         top.addView(TvStyle.logo(act, R.drawable.logo_castbridge_tv_horizontal_compact, 56).apply { contentDescription = "CastBridge TV" })
         top.addView(View(act), LinearLayout.LayoutParams(0, 1, 1f))
         top.addView(chip, LinearLayout.LayoutParams(-2, -2).apply { rightMargin = dp(20 + 100) })   // 100 dp kept for the status pill (collapsed status bar, StatusBarView) beside the clock
-        top.addView(TextClock(act).apply { format24Hour = "HH:mm"; format12Hour = "HH:mm"; textSize = 30f; setTextColor(Color.WHITE) })
+        top.addView(TextClock(act).apply { format24Hour = "HH:mm"; format12Hour = "HH:mm"; textSize = 30f; setTextColor(TvStyle.TEXT) })
         content.addView(top)
         content.addView(signalRow, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(8) })   // the status bar is a pill in the header now: the full width is free
         content.addView(heroTitle, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(12) })
@@ -266,7 +266,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
             } else while (rowsBox.childCount > 1) rowsBox.removeViewAt(1)
             rows.clear()
             for ((title, _) in wanted) {
-                val h = TextView(act).apply { setTextColor(Color.WHITE); textSize = 21f; typeface = TvFonts.bold; setPadding(dp(10), dp(14), 0, 0) }
+                val h = TextView(act).apply { setTextColor(TvStyle.TEXT); textSize = 21f; typeface = TvFonts.bold; setPadding(dp(10), dp(14), 0, 0) }
                 val a = RowAdapter(title)
                 val rv = RecyclerView(act).apply {
                     layoutManager = LinearLayoutManager(act, LinearLayoutManager.HORIZONTAL, false)
@@ -359,7 +359,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
                 gravity = Gravity.CENTER_VERTICAL or Gravity.END; setPadding(dp(16), 0, dp(16), 0)
                 isFocusable = true; isClickable = true
                 background = android.graphics.drawable.StateListDrawable().apply {
-                    addState(intArrayOf(android.R.attr.state_focused), TvStyle.rounded(act, TvStyle.CARD_FOCUS, TvStyle.R_MD, TvStyle.RING, 3))
+                    addState(intArrayOf(android.R.attr.state_focused), TvStyle.rounded(act, TvStyle.CARD_FOCUS, TvStyle.R_MD, TvStyle.RING, TvStyle.RING_DP))
                     addState(intArrayOf(), TvStyle.rounded(act, TvStyle.BG, TvStyle.R_MD))
                 }
                 setOnClickListener { opened = castbridge.core.ux.TvHomeFocus.Opened.TOOL; openedTool = index; openGrid(e.id) }
@@ -520,20 +520,20 @@ class SettingsPanel(private val act: Activity, private val container: FrameLayou
         left.addView(TvStyle.logo(act, R.drawable.logo_castbridge_tv_horizontal_compact, 56).apply { contentDescription = "CastBridge TV"
             (layoutParams as LinearLayout.LayoutParams).bottomMargin = dp(4) })
         left.addView(TextView(act).apply { text = "À propos · version ${BuildConfig.VERSION_NAME} · code ${BuildConfig.VERSION_CODE}"; textSize = TvStyle.Type.CAPTION; setTextColor(TvStyle.MUTED); setPadding(0, 0, 0, dp(8)) })
-        left.addView(TextView(act).apply { text = "Connexion & réglages"; textSize = 30f; typeface = TvFonts.bold; setTextColor(Color.WHITE) })
+        left.addView(TextView(act).apply { text = "Connexion & réglages"; textSize = 30f; typeface = TvFonts.bold; setTextColor(TvStyle.TEXT) })
         for ((k, v) in info) {
             left.addView(TextView(act).apply { text = k; textSize = TvStyle.Type.CAPTION; setTextColor(TvStyle.MUTED); setPadding(0, dp(14), 0, 0) })
-            left.addView(TextView(act).apply { text = v; textSize = 19f; setTextColor(Color.WHITE) })
+            left.addView(TextView(act).apply { text = v; textSize = 19f; setTextColor(TvStyle.TEXT) })
         }
         root.addView(ScrollView(act).apply { addView(left) }, LinearLayout.LayoutParams(0, -1, 1f))
         val right = LinearLayout(act).apply { orientation = LinearLayout.VERTICAL; setPadding(dp(30), dp(50), 0, 0) }
         var first: View? = null
         for ((label, f) in actions) {
             val b = TextView(act).apply {
-                text = label; textSize = TvStyle.Type.BODY; setTextColor(Color.WHITE); isFocusable = true; isClickable = true
+                text = label; textSize = TvStyle.Type.BODY; setTextColor(TvStyle.TEXT); isFocusable = true; isClickable = true
                 setPadding(dp(18), dp(12), dp(18), dp(12))
                 background = android.graphics.drawable.StateListDrawable().apply {
-                    addState(intArrayOf(android.R.attr.state_focused), TvStyle.rounded(act, TvStyle.CARD_FOCUS, TvStyle.R_MD, TvStyle.RING, 3))
+                    addState(intArrayOf(android.R.attr.state_focused), TvStyle.rounded(act, TvStyle.CARD_FOCUS, TvStyle.R_MD, TvStyle.RING, TvStyle.RING_DP))
                     addState(intArrayOf(), TvStyle.rounded(act, 0x00000000, TvStyle.R_MD))
                 }
                 setOnClickListener { f() }

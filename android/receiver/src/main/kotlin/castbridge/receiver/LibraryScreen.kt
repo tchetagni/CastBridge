@@ -66,7 +66,7 @@ class LibraryScreen(
         setTextColor(TvStyle.ACCENT); textSize = TvStyle.Type.BODY; typeface = TvFonts.bold; isFocusable = true; isClickable = true; visibility = View.GONE
         setPadding(TvStyle.dp(act, 12), TvStyle.dp(act, 8), TvStyle.dp(act, 12), TvStyle.dp(act, 8))
         background = android.graphics.drawable.StateListDrawable().apply {
-            addState(intArrayOf(android.R.attr.state_focused), TvStyle.rounded(act, TvStyle.CARD_FOCUS, TvStyle.R_MD, TvStyle.RING, 3))
+            addState(intArrayOf(android.R.attr.state_focused), TvStyle.rounded(act, TvStyle.CARD_FOCUS, TvStyle.R_MD, TvStyle.RING, TvStyle.RING_DP))
             addState(intArrayOf(), TvStyle.rounded(act, 0x00000000, TvStyle.R_MD))
         }
     }
@@ -85,13 +85,13 @@ class LibraryScreen(
         this.text = text; setTextColor(color); textSize = TvStyle.Type.BODY; typeface = TvFonts.bold; isFocusable = true; isClickable = true
         setPadding(TvStyle.dp(act, 12), TvStyle.dp(act, 8), TvStyle.dp(act, 12), TvStyle.dp(act, 8))
         background = android.graphics.drawable.StateListDrawable().apply {
-            addState(intArrayOf(android.R.attr.state_focused), TvStyle.rounded(act, TvStyle.CARD_FOCUS, TvStyle.R_MD, TvStyle.RING, 3))
+            addState(intArrayOf(android.R.attr.state_focused), TvStyle.rounded(act, TvStyle.CARD_FOCUS, TvStyle.R_MD, TvStyle.RING, TvStyle.RING_DP))
             addState(intArrayOf(), TvStyle.rounded(act, 0x00000000, TvStyle.R_MD))
         }
         setOnClickListener { onClick() }
     }
     private val bulkEntry = chip("Supprimer en masse…") { bulkMenu() }.apply { visibility = View.GONE }
-    private val selTitle = TextView(act).apply { setTextColor(Color.WHITE); textSize = TvStyle.Type.SUBTITLE; typeface = TvFonts.bold; setPadding(0, 0, TvStyle.dp(act, 24), 0) }
+    private val selTitle = TextView(act).apply { setTextColor(TvStyle.TEXT); textSize = TvStyle.Type.SUBTITLE; typeface = TvFonts.bold; setPadding(0, 0, TvStyle.dp(act, 24), 0) }
     private val selDelete = chip("Supprimer définitivement", TvStyle.ERROR) { confirmBulk() }
     private val selAll = chip("Tout sélectionner") { toggleAll() }
     private val selCancel = chip("Annuler") { leaveSelection() }
@@ -118,7 +118,7 @@ class LibraryScreen(
             setBackgroundColor(TvStyle.BG)
             setPadding(TvStyle.dp(act, 48), TvStyle.dp(act, 28), TvStyle.dp(act, 48), 0)
         }
-        root.addView(TextView(act).apply { text = "Bibliothèque"; setTextColor(Color.WHITE); textSize = 30f; typeface = TvFonts.bold })
+        root.addView(TextView(act).apply { text = "Bibliothèque"; setTextColor(TvStyle.TEXT); textSize = 30f; typeface = TvFonts.bold })
         header = TextView(act).apply { setTextColor(TvStyle.MUTED); textSize = TvStyle.Type.CAPTION; setPadding(0, TvStyle.dp(act, 4), 0, TvStyle.dp(act, 8)) }
         root.addView(header)
         root.addView(keyAction)

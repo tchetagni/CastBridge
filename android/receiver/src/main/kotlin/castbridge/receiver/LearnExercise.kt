@@ -224,7 +224,7 @@ class ExerciseView(
         box.addView(st.text((if (ok) "✓  " + t("Bonne réponse !", "Correct!") else "✗  " + t("Pas tout à fait…", "Not quite…")) + mark,
             30f, if (ok) LearnStyle.GOOD else LearnStyle.BAD, true), box.lp(bottom = st.px(6)))
         if (!ok && c.kind != ExerciseKind.OPEN) box.addView(st.text(t("Réponse : ", "Answer: ") + Markdown.plain(Marking.rightAnswer(c, lang)), 25f, Color.WHITE, true), box.lp(bottom = st.px(6)))
-        if (c.explanation.isNotBlank()) box.addView(st.text(st.md(c.explanation), 23f, TvStyle.TEXT), box.lp(bottom = st.px(6)))
+        if (c.explanation.isNotBlank()) box.addView(st.text(st.md(c.explanation), 23f, TvStyle.Dark.TEXT), box.lp(bottom = st.px(6)))
         val top = if (x.kind == ExerciseKind.PROBLEM && part == x.parts.size - 1) x else c
         top.method?.let { box.addView(st.text(st.md("**" + t("Méthode", "Method") + " :** " + it), 21f, LearnStyle.MUTED), box.lp(bottom = st.px(4))) }
         if (top.mistakes.isNotEmpty()) box.addView(st.text(st.md("**" + t("Erreurs fréquentes", "Frequent mistakes") + " :**\n" + top.mistakes.joinToString("\n") { "- $it" }), 21f, LearnStyle.MUTED), box.lp(bottom = st.px(4)))

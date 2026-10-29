@@ -524,9 +524,9 @@ class PlayerPanel(private val act: Activity, private val api: Api) {
 class ProgressOverlay(private val act: Activity, parent: FrameLayout) {
     private val main = Handler(Looper.getMainLooper())
     private val title = TextView(act).apply { setTextColor(Color.WHITE); textSize = 24f; typeface = TvFonts.bold; maxLines = 1 }
-    private val time = TextView(act).apply { setTextColor(TvStyle.TEXT2); textSize = TvStyle.Type.BODY }
+    private val time = TextView(act).apply { setTextColor(TvStyle.Dark.TEXT2); textSize = TvStyle.Type.BODY }
     private val bar = ProgressBar(act, null, android.R.attr.progressBarStyleHorizontal).apply {
-        max = 1000; progressTintList = android.content.res.ColorStateList.valueOf(TvStyle.ACCENT)
+        max = 1000; progressTintList = android.content.res.ColorStateList.valueOf(TvStyle.Dark.ACCENT)
         secondaryProgressTintList = android.content.res.ColorStateList.valueOf(0x88FFFFFF.toInt())
     }
     private val box = LinearLayout(act).apply {

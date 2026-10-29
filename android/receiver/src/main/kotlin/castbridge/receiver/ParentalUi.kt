@@ -26,7 +26,7 @@ object ParentalUi {
 
     fun duration(sec: Long): String = if (sec >= 120) "${(sec + 59) / 60} minutes" else "$sec secondes"
 
-    fun text(ctx: Context, s: String, sp: Float = BODY_SP, color: Int = Color.WHITE, bold: Boolean = false) = TextView(ctx).apply {
+    fun text(ctx: Context, s: String, sp: Float = BODY_SP, color: Int = TvStyle.TEXT, bold: Boolean = false) = TextView(ctx).apply {
         text = s; textSize = sp; setTextColor(color); if (bold) typeface = Typeface.DEFAULT_BOLD
         layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
     }
@@ -37,7 +37,7 @@ object ParentalUi {
         typeface = Typeface.DEFAULT_BOLD
         fun paint(f: Boolean) {
             background = if (f) TvStyle.rounded(ctx, TvStyle.ACCENT, 10) else TvStyle.rounded(ctx, TvStyle.CARD, 10, TvStyle.MUTED, 1)
-            setTextColor(if (f) 0xFF0E1116.toInt() else Color.WHITE)
+            setTextColor(if (f) TvStyle.ON_ACCENT else TvStyle.TEXT)
         }
         paint(false)
         setOnFocusChangeListener { _, f -> paint(f) }
@@ -52,7 +52,7 @@ object ParentalUi {
         orientation = LinearLayout.VERTICAL; isFocusable = true; isFocusableInTouchMode = true; isClickable = true
         val pad = TvStyle.dp(ctx, 14)
         setPadding(pad, pad, pad, pad)
-        addView(text(ctx, title, BODY_SP, Color.WHITE, true))
+        addView(text(ctx, title, BODY_SP, TvStyle.TEXT, true))
         if (!value.isNullOrEmpty()) addView(text(ctx, value, SMALL_SP, TvStyle.MUTED))
         fun paint(f: Boolean) { background = if (f) TvStyle.rounded(ctx, TvStyle.CARD_FOCUS, 10, TvStyle.ACCENT, 2) else TvStyle.rounded(ctx, TvStyle.CARD, 10) }
         paint(false)
@@ -73,7 +73,7 @@ object ParentalUi {
             orientation = LinearLayout.VERTICAL; gravity = Gravity.CENTER_HORIZONTAL
             val p = TvStyle.dp(ctx, 20); setPadding(p, p, p, p); setBackgroundColor(TvStyle.BG)
         }
-        root.addView(text(ctx, title, 26f, Color.WHITE, true).apply { gravity = Gravity.CENTER })
+        root.addView(text(ctx, title, 26f, TvStyle.TEXT, true).apply { gravity = Gravity.CENTER })
         val msg = text(ctx, hint, SMALL_SP, TvStyle.MUTED).apply { gravity = Gravity.CENTER }
         root.addView(msg)
         val dots = text(ctx, "", 40f, TvStyle.ACCENT, true).apply { gravity = Gravity.CENTER; minHeight = TvStyle.dp(ctx, 56) }
@@ -86,14 +86,14 @@ object ParentalUi {
         fun submit() {
             if (busy) return
             val pin = digits.toString()
-            if (pin.isEmpty()) { msg.text = "Tapez votre code avec les chiffres ci-dessous."; msg.setTextColor(0xFFFFB74D.toInt()); return }
+            if (pin.isEmpty()) { msg.text = "Tapez votre code avec les chiffres ci-dessous."; msg.setTextColor(TvStyle.WARN); return }
             busy = true; msg.text = "Vérification…"; msg.setTextColor(TvStyle.MUTED)
             Thread {
                 val err = runCatching { check(pin) }.getOrElse { "Erreur : ${it.message}" }
                 a.runOnUiThread {
                     busy = false
                     if (err == null) { dialog.dismiss(); onOk(pin) }
-                    else { digits.setLength(0); refresh(); msg.text = err; msg.setTextColor(0xFFFF8A80.toInt()) }
+                    else { digits.setLength(0); refresh(); msg.text = err; msg.setTextColor(TvStyle.ERROR) }
                 }
             }.start()
         }
