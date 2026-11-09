@@ -641,3 +641,9 @@ Démarrage automatique après redémarrage de la TV (signal de démarrage sur Ga
 - Régression : les actions de l'accueil cachaient le logo (entrée propriétaire). Barre d'accueil = logo (geste caché inchangé) + Réglages + menu « ⋮ » (Activer la TV, Demande d'appareil, Locations, Contrôle parental).
 - Règle pure `core/ux/AppBarBudget` + libellés `UxLabels` (testés par `AppBarBudgetTest`) : 2 actions visibles au plus, étiquette texte <= 14 caractères, sinon menu. Ajouter une action = l'ajouter dans `UxLabels.BARS`.
 - Passe largeur 360 dp : menus de débordement (Télécommande, Bibliothèque de la TV), `FlowRow` pour les rangées de boutons à libellés longs, `maxLines = 1` + ellipsis sur titres, onglets et boutons segmentés. Non vérifié sur appareil (pas de capture, pas d'APK, pas de version).
+
+## 2026-11-09 — Nouvelle clé de console (S21+) et TV 0.14.70
+- Le S21+ portait CastBridge 1.2.71 **simple** (sans console) : variante super-admin construite (`-Pcastbridge.superAdmin=true`, Java 21) et installée par-dessus (`adb install -r`, ADB Wi-Fi).
+- À sa première ouverture, la console a créé un **nouveau coffre** : kid `b4e315d1d6decdb7` (inconnu des TV). Le propriétaire l'a ajouté à `~/.castbridge-signing/activation-trusted-keys.txt` (sauvegarde `.bak-2026-11-09`).
+- CastBridge-TV **0.14.70-beta verrouillée (166)** construite avec ce fichier (kid b4e315 et 3447e186 vérifiés dans le dex), signée release.jks, déposée par SSH Dev dans `/sdcard/Download` et `/storage/883F-EEB4/Download` de la TV, et dans le Download du S21+ avec SHA256SUMS. Aucun autre changement de code depuis 0.14.69.
+- Suite : installer 0.14.70 sur la TV, puis activer en production illimitée depuis la console de CastBridge.
