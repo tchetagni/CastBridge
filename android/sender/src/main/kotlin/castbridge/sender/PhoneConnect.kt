@@ -39,6 +39,7 @@ class CastBridgeApp : Application() {
         ThemePrefs.load(this)
         PhoneConnect.init(this)
         TvLinkManager.init(this)
+        runCatching { LanRoute.start(this) }                  // copie sans Internet : les sockets vers la TV (IPv4 privée) sortent par le Wi-Fi même si le mobile devient le réseau par défaut
         runCatching { ParentalInbox.schedule(this) }          // reports of the parental control: polls only if this phone is a designated recipient
         runCatching { LotsRuntime.init(this); LotsRuntime.schedule(this) }   // « Données » (docs/LOTS.md): background sync + deferred delivery to the TV
         runCatching { OrdersRuntime.init(this); OrdersRuntime.schedule(this) }   // ordres différés (docs/ORDRES.md): le téléphone messager, en tâche de fond

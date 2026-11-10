@@ -44,7 +44,7 @@ class DownloadsClient(val base: String, private val pin: String?) {
     fun play(name: String) { call("POST", "/api/play?name=${enc(name)}") }
 
     private fun call(method: String, path: String, body: ByteArray? = null): String {
-        val c = URL(base + path).openConnection() as HttpURLConnection
+        val c = castbridge.core.net.BoundRoute.open(java.net.URL(base + path)) as HttpURLConnection
         try {
             c.requestMethod = method; c.connectTimeout = 4000; c.readTimeout = 15_000   // adding a link probes its size (up to ~6 s)
             castbridge.core.trust.TvCredential.apply(c, pin)

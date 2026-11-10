@@ -73,7 +73,7 @@ class AndroidLinkEnv(private val ctx: Context, private val foregroundNow: () -> 
 
     /** Does this address answer like a CastBridge TV? (short timeout: the phone may simply be on another network). */
     override fun probe(base: String): Boolean = runCatching {
-        val c = URL("$base/api/hello").openConnection() as HttpURLConnection
+        val c = castbridge.core.net.BoundRoute.open(java.net.URL("$base/api/hello")) as HttpURLConnection
         try {
             val slow = if (base.startsWith("http://127.0.0.1")) 10_000 else 1200       // through the Bluetooth gateway: connecting the RFCOMM link takes seconds
             c.connectTimeout = slow; c.readTimeout = slow
@@ -83,7 +83,7 @@ class AndroidLinkEnv(private val ctx: Context, private val foregroundNow: () -> 
 
     /** GET /api/info with the token: any answer but "bad token" means the TV is there and accepts it (a bad token is not a wrong PIN: nothing is counted). */
     override fun check(base: String, token: String): TokenCheck = try {
-        val c = URL("$base/api/info").openConnection() as HttpURLConnection
+        val c = castbridge.core.net.BoundRoute.open(java.net.URL("$base/api/info")) as HttpURLConnection
         try {
             c.connectTimeout = 1500; c.readTimeout = 1500
             TvCredential.apply(c, token)

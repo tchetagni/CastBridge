@@ -76,7 +76,7 @@ internal fun bondedDevices(ctx: Context): List<BondedDevice> = runCatching {
 
 /** GET <base>/api/hello (no code needed): does a CastBridge TV answer there? */
 private fun answers(base: String): Boolean = runCatching {
-    (URL("$base/api/hello").openConnection() as HttpURLConnection).run {
+    (castbridge.core.net.BoundRoute.open(java.net.URL("$base/api/hello")) as HttpURLConnection).run {
         connectTimeout = 2500; readTimeout = 4000
         try { responseCode == 200 && inputStream.bufferedReader().use { it.readText() }.contains("castbridge-tv") } finally { disconnect() }
     }

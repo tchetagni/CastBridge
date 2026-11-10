@@ -50,7 +50,7 @@ interface ChessTransport {
 internal object HttpJson {
     fun call(method: String, url: String, body: String? = null, headers: Map<String, String> = emptyMap(),
              readTimeoutMs: Int = 10_000, connectTimeoutMs: Int = 5_000): Pair<Int, String> {
-        val c = URL(url).openConnection() as HttpURLConnection
+        val c = castbridge.core.net.BoundRoute.open(java.net.URL(url)) as HttpURLConnection
         try {
             c.requestMethod = method
             c.connectTimeout = connectTimeoutMs; c.readTimeout = readTimeoutMs

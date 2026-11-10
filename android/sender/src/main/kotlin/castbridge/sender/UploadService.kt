@@ -337,7 +337,7 @@ class UploadService : Service() {
      */
     private fun watchNetwork(disc: TvDiscovery?) {
         val cm = getSystemService(ConnectivityManager::class.java) ?: return
-        val filter = castbridge.core.tv.NetworkChangeFilter(runCatching { netKey(cm.getLinkProperties(cm.activeNetwork)) }.getOrNull())
+        val filter = castbridge.core.tv.NetworkChangeFilter(runCatching { netKey(cm.getLinkProperties(LanRoute.wifiNetwork() ?: cm.activeNetwork)) }.getOrNull())
         val handler = android.os.Handler(android.os.Looper.getMainLooper())
         fun event(key: String?) {
             filter.onEvent(System.currentTimeMillis(), key)
@@ -348,7 +348,8 @@ class UploadService : Service() {
             override fun onLinkPropertiesChanged(network: Network, lp: android.net.LinkProperties) { event(netKey(lp)) }
             override fun onLost(network: Network) { event(null) }
         }
-        runCatching { cm.registerDefaultNetworkCallback(cb); netCallback = cb }
+        // on suit le Wi-Fi (même sans Internet), pas le réseau par défaut : la bascule du défaut vers le mobile ne vide plus la liste des TV en pleine copie
+        runCatching { cm.registerNetworkCallback(LanRoute.request(), cb); netCallback = cb }
     }
 
     /** The phone's identity on a network: its interface and IPv4 addresses (a new DHCP lease, another network = another key). */

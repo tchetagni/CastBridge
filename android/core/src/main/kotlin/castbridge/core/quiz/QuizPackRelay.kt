@@ -86,7 +86,7 @@ interface TvPackEndpoint {
 }
 
 class HttpTvPackEndpoint(private val base: String, private val pin: String?) : TvPackEndpoint {
-    private fun open(method: String, path: String) = (URL(base.trimEnd('/') + path).openConnection() as HttpURLConnection).apply {
+    private fun open(method: String, path: String) = (castbridge.core.net.BoundRoute.open(java.net.URL(base.trimEnd('/') + path)) as HttpURLConnection).apply {
         requestMethod = method; connectTimeout = 8_000; readTimeout = 30_000
         castbridge.core.trust.TvCredential.apply(this, pin)
     }

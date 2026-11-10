@@ -162,7 +162,7 @@ private fun chessStatus(base: String, pin: String): ChessStatus? {
         return ChessStatus(j["open"] == true, j["code"] as? String)
     }
     return runCatching {
-        val c = java.net.URL("$base/chess/api/hello").openConnection() as java.net.HttpURLConnection
+        val c = castbridge.core.net.BoundRoute.open(java.net.URL("$base/chess/api/hello")) as java.net.HttpURLConnection
         c.connectTimeout = 3000; c.readTimeout = 3000
         val j = Json.obj(c.inputStream.use { String(it.readBytes()) })
         ChessStatus(j["open"] == true, null)

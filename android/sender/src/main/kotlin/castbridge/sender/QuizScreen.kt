@@ -187,7 +187,7 @@ private fun roomStatus(base: String, pin: String): RoomStatus? {
         return RoomStatus(j["open"] == true, j["code"] as? String)
     }
     return runCatching {
-        val c = URL("$base/quiz/api/hello").openConnection() as HttpURLConnection
+        val c = castbridge.core.net.BoundRoute.open(java.net.URL("$base/quiz/api/hello")) as HttpURLConnection
         c.connectTimeout = 3000; c.readTimeout = 3000
         val j = Json.obj(c.inputStream.use { String(it.readBytes()) })
         RoomStatus(j["open"] == true, null)

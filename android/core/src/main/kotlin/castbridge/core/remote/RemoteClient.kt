@@ -134,7 +134,7 @@ class HttpRemoteTransport(
         val s = Socket()
         try {
             s.tcpNoDelay = true
-            s.connect(InetSocketAddress(host, port), connectTimeoutMs)
+            castbridge.core.net.BoundRoute.bind(host, s); s.connect(InetSocketAddress(host, port), connectTimeoutMs)
             s.soTimeout = readTimeoutMs
         } catch (e: IOException) { runCatching { s.close() }; throw e }
         sock = s; input = BufferedInputStream(s.getInputStream(), 8192); output = s.getOutputStream(); opened++

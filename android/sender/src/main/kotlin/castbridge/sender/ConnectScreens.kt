@@ -312,7 +312,7 @@ private fun homeTvName(ctx: Context): String? = ctx.getSharedPreferences("castbr
 
 /** PIN-protected call to the TV's /api/server routes (same header as TvClient). */
 private fun tvCall(base: String, pin: String, method: String, path: String): String {
-    val c = URL(base + path).openConnection() as HttpURLConnection
+    val c = castbridge.core.net.BoundRoute.open(java.net.URL(base + path)) as HttpURLConnection
     try {
         c.requestMethod = method; c.connectTimeout = 4000; c.readTimeout = 30_000
         castbridge.core.trust.TvCredential.apply(c, pin)

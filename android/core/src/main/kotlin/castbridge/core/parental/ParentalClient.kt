@@ -89,7 +89,7 @@ class ParentalClient(private val base: String, private val tvPin: String) {
     private fun call(method: String, route: String, body: String?): String = callPath(method, ParentalApi.ROOT + route, body)
 
     private fun callPath(method: String, path: String, body: String?): String {
-        val c = URL(base + path).openConnection() as HttpURLConnection
+        val c = castbridge.core.net.BoundRoute.open(java.net.URL(base + path)) as HttpURLConnection
         try {
             c.requestMethod = method; c.connectTimeout = 4000; c.readTimeout = 15_000
             // a trusted phone presents its token (X-CB-Token), anybody else the TV's PIN (X-CB-Pin): TvAuth says which header

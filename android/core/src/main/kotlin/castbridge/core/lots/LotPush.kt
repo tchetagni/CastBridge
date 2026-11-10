@@ -106,7 +106,7 @@ class HttpLotTransport(private val base: String, private val pin: String?, overr
     private class Answer(val code: Int, val body: String)
 
     private fun call(method: String, path: String, body: ByteArray? = null): Answer {
-        val c = URL(base.trimEnd('/') + path).openConnection() as HttpURLConnection
+        val c = castbridge.core.net.BoundRoute.open(java.net.URL(base.trimEnd('/') + path)) as HttpURLConnection
         try {
             c.requestMethod = method; c.connectTimeout = timeoutMs; c.readTimeout = timeoutMs * 4
             castbridge.core.trust.TvCredential.apply(c, pin)   // the one place that builds the header; never logged, never in the URL

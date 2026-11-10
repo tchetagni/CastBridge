@@ -33,13 +33,57 @@ object BoundRoute {
         return binding != null && host != null && host.startsWith(p)
     }
 
+    // Repli « réseau local » : le Wi-Fi de la maison sans Internet validé (Android bascule alors le réseau PAR DÉFAUT sur le mobile : un socket non lié
+    // vers l'IP de la TV partirait par le mobile et échouerait). Priorité au groupe Wi-Fi Direct ; ce repli ne concerne que les IPv4 privées couvertes par le Wi-Fi.
+    @Volatile private var lan: Binding? = null
+    @Volatile private var lanCovers: (String) -> Boolean = { false }
+
+    /** [covers] : l'hôte est-il sur un sous-réseau du Wi-Fi courant ? (évalué à chaque connexion, le Wi-Fi peut changer de sous-réseau). */
+    @Synchronized fun setLan(b: Binding, covers: (String) -> Boolean) { lan = b; lanCovers = covers }
+    @Synchronized fun releaseLan(b: Binding) { if (lan === b) { lan = null; lanCovers = { false } } }
+    @Synchronized fun clearLan() { lan = null; lanCovers = { false } }
+
+    fun lanApplies(host: String?): Boolean = lan != null && host != null && LanAddress.isPrivate(host) && lanCovers(host)
+
     fun open(url: URL): URLConnection {
         val b = binding
-        return if (b != null && applies(url.host)) b.open(url) else url.openConnection()
+        if (b != null && applies(url.host)) return b.open(url)
+        val l = lan
+        return if (l != null && lanApplies(url.host)) l.open(url) else url.openConnection()
     }
 
     fun bind(host: String, s: Socket) {
         val b = binding
-        if (b != null && applies(host)) b.bind(s)
+        if (b != null && applies(host)) { b.bind(s); return }
+        val l = lan
+        if (l != null && lanApplies(host)) l.bind(s)
+    }
+}
+
+/** Décisions pures sur les adresses IPv4 littérales (aucune résolution DNS). */
+object LanAddress {
+    private fun parse(host: String): IntArray? {
+        val p = host.split('.')
+        if (p.size != 4) return null
+        val v = IntArray(4)
+        for (i in 0..3) { v[i] = p[i].toIntOrNull()?.takeIf { it in 0..255 && p[i].length <= 3 } ?: return null }
+        return v
+    }
+
+    /** 10/8, 172.16/12, 192.168/16, 169.254/16. */
+    fun isPrivate(host: String): Boolean {
+        val v = parse(host) ?: return false
+        return v[0] == 10 || (v[0] == 172 && v[1] in 16..31) || (v[0] == 192 && v[1] == 168) || (v[0] == 169 && v[1] == 254)
+    }
+
+    private fun toInt(v: IntArray) = (v[0] shl 24) or (v[1] shl 16) or (v[2] shl 8) or v[3]
+
+    /** [host] est dans le sous-réseau de [localAddress]/[prefixLength] (tous deux IPv4 littérales). */
+    fun inSubnet(host: String, localAddress: String, prefixLength: Int): Boolean {
+        val h = parse(host) ?: return false
+        val l = parse(localAddress) ?: return false
+        if (prefixLength !in 0..32) return false
+        val mask = if (prefixLength == 0) 0 else -1 shl (32 - prefixLength)
+        return (toInt(h) and mask) == (toInt(l) and mask)
     }
 }

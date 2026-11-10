@@ -136,7 +136,7 @@ class BtUploadService : Service() {
 
     /** A TV address answers (same network as the phone)? */
     private fun reachable(base: String): Boolean = runCatching {
-        val c = java.net.URL("$base/api/hello").openConnection() as java.net.HttpURLConnection
+        val c = castbridge.core.net.BoundRoute.open(java.net.URL("$base/api/hello")) as java.net.HttpURLConnection
         c.connectTimeout = 1500; c.readTimeout = 1500
         c.responseCode == 200 && c.inputStream.use { it.readBytes() }.decodeToString().contains("castbridge-tv")
     }.getOrDefault(false)
