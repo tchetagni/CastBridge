@@ -647,3 +647,8 @@ Démarrage automatique après redémarrage de la TV (signal de démarrage sur Ga
 - À sa première ouverture, la console a créé un **nouveau coffre** : kid `b4e315d1d6decdb7` (inconnu des TV). Le propriétaire l'a ajouté à `~/.castbridge-signing/activation-trusted-keys.txt` (sauvegarde `.bak-2026-11-09`).
 - CastBridge-TV **0.14.70-beta verrouillée (166)** construite avec ce fichier (kid b4e315 et 3447e186 vérifiés dans le dex), signée release.jks, déposée par SSH Dev dans `/sdcard/Download` et `/storage/883F-EEB4/Download` de la TV, et dans le Download du S21+ avec SHA256SUMS. Aucun autre changement de code depuis 0.14.69.
 - Suite : installer 0.14.70 sur la TV, puis activer en production illimitée depuis la console de CastBridge.
+
+## 2026-11-10 — Copie locale sans Internet (CastBridge 1.2.72-beta, 102)
+- Défaut : Wi-Fi sans Internet → le téléphone bascule le réseau par défaut sur les données mobiles ; les sockets vers la TV partaient par la 4G et `UploadService.watchNetwork` (réseau par défaut) vidait la liste des TV en pleine copie.
+- Correctif (branche `claude/lan-copy-no-internet`, 540a8a30) : repli « réseau local » de `BoundRoute` (adresse privée sur le sous-réseau du Wi-Fi → `Network.bindSocket`/`openConnection` du Wi-Fi, `LanRoute` côté téléphone), appels téléphone→TV passés par `BoundRoute`, surveillance du Wi-Fi au lieu du réseau par défaut. Tests `castbridge.core.net.*` : 12/12 ; `:sender` compilé.
+- CastBridge 1.2.72-beta console installée sur le S21+ ; simple + console + SHA256SUMS dans son Download (vérifiés). **Non essayé en réel** : copie avec box sans Internet et données mobiles actives. Upnp et sockets propres de la passerelle non reroutés.
